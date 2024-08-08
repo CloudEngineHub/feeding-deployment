@@ -5,20 +5,43 @@ from pybullet_helpers.camera import create_gui_connection
 from pybullet_helpers.utils import create_pybullet_block
 import numpy as np
 import time
+from pathlib import Path
 
 import pybullet as p
 
 
 def _main():
     seed = 0
+
     collision_region_orientation = (1.0, 0.0, 0.0, 0.0)
-    collision_region_position = (0.5, 0.25, 0.25)
-    collision_region_half_extents = (0.25, 0.25, 0.5)
-    collision_region_good_rgba = (0.0, 1.0, 0.0, 0.5)
-    collision_region_bad_rgba = (1.0, 0.0, 0.0, 0.5)
+    collision_region_position = (0.75, 0.0, 0.0)
+    collision_region_half_extents = (0.5, 0.5, 1.0)
+    collision_region_good_rgba = (0.0, 1.0, 0.0, 0.25)
+    collision_region_bad_rgba = (1.0, 0.0, 0.0, 0.25)
+
+    wheelchair_position = (0.5, -0.5, -0.25)
+    wheelchair_orientation = (0.0, 0.0, 0.0, 1.0)
 
     physics_client_id = create_gui_connection()
+
+    # Create robot.
     robot = create_pybullet_robot("kinova-gen3", physics_client_id)
+
+    # Create wheelchair.
+    wheelchair_urdf_path = (
+        Path(__file__).parent / "assets" / "urdf" / "wheelchair" / "wheelchair.urdf"
+    )
+    wheelchair_id = p.loadURDF(
+        str(wheelchair_urdf_path), useFixedBase=True, physicsClientId=physics_client_id
+    )
+    p.resetBasePositionAndOrientation(
+        wheelchair_id,
+        wheelchair_position,
+        wheelchair_orientation,
+        physicsClientId=physics_client_id,
+    )
+
+    # Create collision area.
     collision_region_id = create_pybullet_block(
         collision_region_good_rgba,
         half_extents=collision_region_half_extents,
