@@ -2,7 +2,7 @@
 
 from pybullet_helpers.robots import create_pybullet_robot
 from pybullet_helpers.robots.single_arm import SingleArmPyBulletRobot
-from pybullet_helpers.geometry import Pose, get_pose, multiply_poses
+from pybullet_helpers.geometry import Pose, get_pose, multiply_poses, Quaternion
 from pybullet_helpers.joint import JointPositions
 from pybullet_helpers.ikfast.utils import ikfast_inverse_kinematics
 from pybullet_helpers.camera import create_gui_connection
@@ -12,6 +12,7 @@ from pybullet_helpers.gui import visualize_pose
 from itertools import islice
 import numpy as np
 from pathlib import Path
+from scipy.spatial.transform import Rotation as R
 
 import pybullet as p
 
@@ -43,7 +44,7 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
     collision_region1_rgba = (1.0, 0.0, 0.0, 0.25)
 
     collision_region2_orientation = (0.0, 0.0, 0.0, 1.0)
-    collision_region2_position = (0.075, 0.55, 0.05)
+    collision_region2_position = (-0.075, 0.55, 0.05)
     collision_region2_half_extents = (0.05, 0.05, 0.05)
     collision_region2_rgba = (1.0, 0.0, 0.0, 0.25)
 
@@ -186,8 +187,6 @@ def collision_free_ik(robot: SingleArmPyBulletRobot, end_effector_pose: Pose, co
         candidate.insert(first_finger_idx, robot.open_fingers)
         candidate.insert(second_finger_idx, robot.open_fingers)
 
-        # TODO verify that candidate is successful (or is that already validated?)
-
         robot.set_joints(candidate)
 
         has_collision = False
@@ -217,7 +216,7 @@ def _sample_grasp(cup_pose: Pose, rng: np.random.Generator) -> Pose:
 
     # Move the grasp away from the cup in the opposite direction of angle.
     translation_distance = -0.2
-    translation_vector = (translation_distance * np.sin(angle), 0.0, translation_distance * np.cos(angle))
+    translation_vector = (0.0, 0.0, translation_distance * np.cos(angle))
     tf = Pose(translation_vector, (0.0, 0.0, 0.0, 1.0))
     grasp = multiply_poses(grasp, tf)
 
