@@ -224,10 +224,12 @@ def _sample_grasp(cup_pose: Pose, rng: np.random.Generator) -> Pose:
 
 
 def _main():
+    seed = 0
 
     robot, cup_id, table_id, other_collision_ids = _initialize_scene()
     collision_ids = {cup_id, table_id} | other_collision_ids
     physics_client_id = robot.physics_client_id
+    robot_initial_joints = robot.get_joint_positions()
     
     # Use the table pose as a frame of reference.
     table_frame = get_pose(table_id, physics_client_id)
@@ -244,22 +246,30 @@ def _main():
 
     # Find target joint positions using inverse kinematics.
     max_grasp_candidates = 1000
-    rng = np.random.default_rng(0)
+    rng = np.random.default_rng(seed)
     for _ in range(max_grasp_candidates):
-        import time; time.sleep(0.1)
         candidate = _sample_grasp(cup_pose, rng)
         target_joint_positions = collision_free_ik(robot, candidate, collision_ids)
         if target_joint_positions is not None:
             robot.set_joints(target_joint_positions)
-            print("Succeeded!!")
+            print("IK succeeded!")
             break
     else:
-        print("Failed :(")
+        print("IK failed :(")
+        return
 
     # TODO: run motion planning.
+    robot.set_joints(robot_initial_joints)
+    plan = run_motion_planning(robot, robot_initial_joints, target_joint_positions,
+                        collision_ids, seed, physics_client_id)
+    if plan is None:
+        print("Motion planning failed :(")
+        return
+    print("Motion planning succeeded!")
 
-    while True:
-        p.stepSimulation(physicsClientId=physics_client_id)
+    for state in plan:
+        robot.set_joints(state)
+        
 
 
 if __name__ == "__main__":
