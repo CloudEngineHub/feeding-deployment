@@ -1,19 +1,19 @@
 """Script to develop cup manipulation skills in simulation."""
 
 from pybullet_helpers.robots import create_pybullet_robot
-from pybullet_helpers.robots.single_arm import SingleArmPyBulletRobot
-from pybullet_helpers.geometry import Pose, get_pose, multiply_poses, Pose3D
-from pybullet_helpers.joint import JointPositions
-from pybullet_helpers.ikfast.utils import ikfast_inverse_kinematics
-from pybullet_helpers.camera import create_gui_connection
+from pybullet_helpers.robots.single_arm import SingleArmPyBulletRobot, SingleArmTwoFingerGripperPyBulletRobot
+from pybullet_helpers.inverse_kinematics import sample_collision_free_inverse_kinematics
+from pybullet_helpers.ikfast.utils import get_ikfast_joints
+from pybullet_helpers.geometry import Pose, get_pose, multiply_poses
+from pybullet_helpers.joint import JointPositions, get_jointwise_difference, get_joint_info
+from pybullet_helpers.camera import create_gui_connection, capture_image
 from pybullet_helpers.utils import create_pybullet_cylinder, create_pybullet_block
 from pybullet_helpers.motion_planning import run_motion_planning
 from pybullet_helpers.gui import visualize_pose
-from itertools import islice
 import numpy as np
 from pathlib import Path
-from tomsutils.structs import Image
 import imageio.v2 as iio
+from tqdm import tqdm
 
 import pybullet as p
 
@@ -161,49 +161,6 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
     return robot, cup_id, table_id, collision_region_ids
 
 
-def collision_free_ik(robot: SingleArmPyBulletRobot, end_effector_pose: Pose, collision_ids: set[int]) -> JointPositions | None:
-    """Find an IK solution that results in no collisions between the robot
-    and the collision_ids."""
-    
-    # TODO: move this function into pybullet-helpers.
-    # TODO move out these hyperparameters
-    # TODO handle no solutions possible
-    max_time: float = 0.05
-    max_attempts: int = 1000000000
-    max_candidates: int = 10
-    max_distance: float = np.inf
-    norm: float = np.inf
-    rng = np.random.default_rng(0)
-
-    physics_client_id = robot.physics_client_id
-
-    generator = ikfast_inverse_kinematics(robot, end_effector_pose, max_time, max_distance, max_attempts, norm, rng)
-    generator = islice(generator, max_candidates)
-
-    for candidate in generator:
-        # TODO refactor to avoid this...
-        first_finger_idx, second_finger_idx = sorted(
-            [robot.left_finger_joint_idx, robot.right_finger_joint_idx]
-        )
-        candidate.insert(first_finger_idx, robot.open_fingers)
-        candidate.insert(second_finger_idx, robot.open_fingers)
-
-        robot.set_joints(candidate)
-
-        has_collision = False
-        p.performCollisionDetection(physicsClientId=physics_client_id)
-        for body in collision_ids:
-            if p.getContactPoints(
-                robot.robot_id, body, physicsClientId=physics_client_id
-            ):
-                has_collision = True
-                break
-        if not has_collision:
-            return candidate
-        
-    return None
-
-
 def _sample_grasp(cup_pose: Pose, rng: np.random.Generator) -> Pose:
     # Pose of grasping the center of the cup.
     default_cup_pregrasp_transform = Pose((0.0, 0.0, 0.0), (0, np.sqrt(2) / 2, np.sqrt(2) / 2, 0))
@@ -224,42 +181,38 @@ def _sample_grasp(cup_pose: Pose, rng: np.random.Generator) -> Pose:
     return grasp
 
 
-def get_image(physics_client_id: int,
-                camera_distance: float = 1.5,
-                camera_yaw: float = 0,
-                camera_pitch: float = -15,
-                camera_target: Pose3D = (0, 0, 0.5),
-                image_width: int = 1674,
-                image_height: int = 900,
-) -> Image:
-    """TODO: add to pybullet-helpers."""
-    view_matrix = p.computeViewMatrixFromYawPitchRoll(
-        cameraTargetPosition=camera_target,
-        distance=camera_distance,
-        yaw=camera_yaw,
-        pitch=camera_pitch,
-        roll=0,
-        upAxisIndex=2,
-        physicsClientId=physics_client_id)
+def _score_motion_plan(robot: SingleArmPyBulletRobot,
+                       motion_plan: list[JointPositions],
+                       joint_geometric_scalar: float = 0.9) -> float:
+    """Lower is better."""
+    # TODO move to pybullet-helpers
+    # TODO don't assume ikfast and clean this up...
+    joint_infos, _ = get_ikfast_joints(robot)
 
-    proj_matrix = p.computeProjectionMatrixFOV(
-        fov=60,
-        aspect=float(image_width / image_height),
-        nearVal=0.1,
-        farVal=100.0,
-        physicsClientId=physics_client_id)
+    if isinstance(robot, SingleArmTwoFingerGripperPyBulletRobot):
+        first_finger_idx, second_finger_idx = sorted(
+            [robot.left_finger_joint_idx, robot.right_finger_joint_idx]
+        )
+        first_finger_joint_info = get_joint_info(robot.robot_id, first_finger_idx, robot.physics_client_id)
+        second_finger_joint_info = get_joint_info(robot.robot_id, second_finger_idx, robot.physics_client_id)
+        joint_infos.insert(first_finger_idx, first_finger_joint_info)
+        joint_infos.insert(second_finger_idx, second_finger_joint_info)
 
-    (_, _, px, _,
-        _) = p.getCameraImage(width=image_width,
-                            height=image_height,
-                            viewMatrix=view_matrix,
-                            projectionMatrix=proj_matrix,
-                            renderer=p.ER_BULLET_HARDWARE_OPENGL,
-                            physicsClientId=physics_client_id)
 
-    rgb_array = np.array(px).reshape((image_height, image_width, 4))
-    rgb_array = rgb_array[:, :, :3]
-    return rgb_array
+    score = 0.0
+
+    weights = [1.0]
+    num_joints = len(motion_plan[0])
+    for i in range(num_joints - 1):
+        weights.append(weights[-1] * joint_geometric_scalar)
+
+    for t in range(len(motion_plan) - 1):
+        q1, q2 = motion_plan[t], motion_plan[t + 1]
+        diff = get_jointwise_difference(joint_infos, q2, q1)
+        dist = np.abs(diff)
+        score += np.sum(weights * dist)
+
+    return score
 
 
 def _main():
@@ -281,35 +234,39 @@ def _main():
 
     # Find target end effector pose relative to the cup.
     cup_pose = get_pose(cup_id, physics_client_id)
-    # p.removeBody(cup_id, physicsClientId=physics_client_id)  # TODO
 
-    # Find target joint positions using inverse kinematics.
-    max_grasp_candidates = 1000
+    # Find a number of possible target joint positions.
+    max_grasp_candidates = 10
+    max_ik_candidates_per_grasp = 100
     rng = np.random.default_rng(seed)
+    all_target_joint_positions = []
     for _ in range(max_grasp_candidates):
-        candidate = _sample_grasp(cup_pose, rng)
-        target_joint_positions = collision_free_ik(robot, candidate, collision_ids)
-        if target_joint_positions is not None:
-            robot.set_joints(target_joint_positions)
-            print("IK succeeded!")
-            break
-    else:
-        print("IK failed :(")
-        return
+        candidate_grasp = _sample_grasp(cup_pose, rng)
+        for candidate_joints in sample_collision_free_inverse_kinematics(robot, candidate_grasp, collision_ids, max_candidates = max_ik_candidates_per_grasp):
+            robot.set_joints(candidate_joints)
+            all_target_joint_positions.append(candidate_joints)
 
-    # TODO: run motion planning.
-    robot.set_joints(robot_initial_joints)
-    plan = run_motion_planning(robot, robot_initial_joints, target_joint_positions,
-                        collision_ids, seed, physics_client_id)
-    if plan is None:
-        print("Motion planning failed :(")
-        return
-    print("Motion planning succeeded!")
+    print(f"Found {len(all_target_joint_positions)} candidate joint positions.")
+    
+    # Motion plan to each.
+    print("Starting motion planning...")
+    all_motion_plans = []
+    for target_joint_positions in tqdm(all_target_joint_positions):
+        robot.set_joints(robot_initial_joints)
+        plan = run_motion_planning(robot, robot_initial_joints, target_joint_positions,
+                            collision_ids, seed, physics_client_id)
+        if plan is not None:
+            all_motion_plans.append(plan)
+
+    print(f"Found {len(all_motion_plans)} motion plans.")
+
+    # Choose the best motion plan.
+    plan = min(all_motion_plans, key=lambda v: _score_motion_plan(robot, v))
 
     imgs = []
     for state in plan:
         robot.set_joints(state)
-        img = get_image(physics_client_id, camera_yaw=180, camera_distance=2.5,
+        img = capture_image(physics_client_id, camera_yaw=180, camera_distance=2.5,
                         camera_pitch=-35)
         imgs.append(img)
 
