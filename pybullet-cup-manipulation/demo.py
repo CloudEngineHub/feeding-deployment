@@ -2,7 +2,7 @@
 
 from pybullet_helpers.robots import create_pybullet_robot
 from pybullet_helpers.robots.single_arm import SingleArmPyBulletRobot
-from pybullet_helpers.geometry import Pose, get_pose, multiply_poses, Quaternion
+from pybullet_helpers.geometry import Pose, get_pose, multiply_poses, Pose3D
 from pybullet_helpers.joint import JointPositions
 from pybullet_helpers.ikfast.utils import ikfast_inverse_kinematics
 from pybullet_helpers.camera import create_gui_connection
@@ -12,7 +12,8 @@ from pybullet_helpers.gui import visualize_pose
 from itertools import islice
 import numpy as np
 from pathlib import Path
-from scipy.spatial.transform import Rotation as R
+from tomsutils.structs import Image
+import imageio.v2 as iio
 
 import pybullet as p
 
@@ -62,7 +63,7 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
     cup_position = (0.0, 0.75, cup_length / 2)
     cup_orientation = (0.0, 0.0, 0.0, 1.0)
 
-    physics_client_id = create_gui_connection(camera_pitch=180)
+    physics_client_id = create_gui_connection(camera_yaw=180)
     p.setGravity(0.0, 0.0, 0.0, physicsClientId=physics_client_id)
 
     # Create robot.
@@ -223,6 +224,44 @@ def _sample_grasp(cup_pose: Pose, rng: np.random.Generator) -> Pose:
     return grasp
 
 
+def get_image(physics_client_id: int,
+                camera_distance: float = 1.5,
+                camera_yaw: float = 0,
+                camera_pitch: float = -15,
+                camera_target: Pose3D = (0, 0, 0.5),
+                image_width: int = 1674,
+                image_height: int = 900,
+) -> Image:
+    """TODO: add to pybullet-helpers."""
+    view_matrix = p.computeViewMatrixFromYawPitchRoll(
+        cameraTargetPosition=camera_target,
+        distance=camera_distance,
+        yaw=camera_yaw,
+        pitch=camera_pitch,
+        roll=0,
+        upAxisIndex=2,
+        physicsClientId=physics_client_id)
+
+    proj_matrix = p.computeProjectionMatrixFOV(
+        fov=60,
+        aspect=float(image_width / image_height),
+        nearVal=0.1,
+        farVal=100.0,
+        physicsClientId=physics_client_id)
+
+    (_, _, px, _,
+        _) = p.getCameraImage(width=image_width,
+                            height=image_height,
+                            viewMatrix=view_matrix,
+                            projectionMatrix=proj_matrix,
+                            renderer=p.ER_BULLET_HARDWARE_OPENGL,
+                            physicsClientId=physics_client_id)
+
+    rgb_array = np.array(px).reshape((image_height, image_width, 4))
+    rgb_array = rgb_array[:, :, :3]
+    return rgb_array
+
+
 def _main():
     seed = 0
 
@@ -267,8 +306,14 @@ def _main():
         return
     print("Motion planning succeeded!")
 
+    imgs = []
     for state in plan:
         robot.set_joints(state)
+        img = get_image(physics_client_id, camera_yaw=180, camera_distance=2.5,
+                        camera_pitch=-35)
+        imgs.append(img)
+
+    iio.mimsave("motion_planning_example.mp4", imgs, fps=20)
         
 
 
