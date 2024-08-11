@@ -3,23 +3,26 @@
 from pybullet_helpers.robots import create_pybullet_robot
 from pybullet_helpers.robots.single_arm import (
     SingleArmPyBulletRobot,
-    SingleArmTwoFingerGripperPyBulletRobot,
 )
 from pybullet_helpers.inverse_kinematics import sample_collision_free_inverse_kinematics
-from pybullet_helpers.ikfast.utils import get_ikfast_joints
 from pybullet_helpers.geometry import Pose, get_pose, multiply_poses
 from pybullet_helpers.joint import (
     JointPositions,
     get_jointwise_difference,
-    get_joint_info,
+    get_joint_infos,
 )
 from pybullet_helpers.camera import capture_image
 from pybullet_helpers.utils import create_pybullet_cylinder, create_pybullet_block
-from pybullet_helpers.motion_planning import run_motion_planning
+from pybullet_helpers.motion_planning import (
+    run_motion_planning,
+    get_joint_positions_distance,
+    select_shortest_motion_plan,
+)
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
 from pybullet_helpers.geometry import matrix_from_quat
 from pybullet_helpers.math_utils import get_poses_facing_line
 import numpy as np
+from functools import partial
 from pathlib import Path
 import imageio.v2 as iio
 from tqdm import tqdm
@@ -189,43 +192,31 @@ def _sample_grasp(
     return grasp_pose
 
 
-def _score_motion_plan(
+def _select_smoothest_motion_plan(
     robot: SingleArmPyBulletRobot,
-    motion_plan: list[JointPositions],
+    motion_plans: list[list[JointPositions]],
     joint_geometric_scalar: float = 0.9,
 ) -> float:
     """Lower is better."""
-    # TODO move to pybullet-helpers
-    # TODO don't assume ikfast and clean this up...
-    joint_infos, _ = get_ikfast_joints(robot)
 
-    if isinstance(robot, SingleArmTwoFingerGripperPyBulletRobot):
-        first_finger_idx, second_finger_idx = sorted(
-            [robot.left_finger_joint_idx, robot.right_finger_joint_idx]
-        )
-        first_finger_joint_info = get_joint_info(
-            robot.robot_id, first_finger_idx, robot.physics_client_id
-        )
-        second_finger_joint_info = get_joint_info(
-            robot.robot_id, second_finger_idx, robot.physics_client_id
-        )
-        joint_infos.insert(first_finger_idx, first_finger_joint_info)
-        joint_infos.insert(second_finger_idx, second_finger_joint_info)
-
-    score = 0.0
-
+    # Geometric weighting so the base moves less than the end effector, etc.
     weights = [1.0]
-    num_joints = len(motion_plan[0])
-    for i in range(num_joints - 1):
+    num_joints = len(robot.arm_joints)
+    for _ in range(num_joints - 1):
         weights.append(weights[-1] * joint_geometric_scalar)
 
-    for t in range(len(motion_plan) - 1):
-        q1, q2 = motion_plan[t], motion_plan[t + 1]
-        diff = get_jointwise_difference(joint_infos, q2, q1)
-        dist = np.abs(diff)
-        score += np.sum(weights * dist)
+    joint_infos = get_joint_infos(
+        robot.robot_id, robot.arm_joints, robot.physics_client_id
+    )
+    dist_fn = partial(
+        get_joint_positions_distance,
+        robot,
+        joint_infos,
+        metric="weighted_joints",
+        weights=weights,
+    )
 
-    return score
+    return select_shortest_motion_plan(motion_plans, dist_fn)
 
 
 def _main():
@@ -285,7 +276,7 @@ def _main():
     print(f"Found {len(all_motion_plans)} motion plans.")
 
     # Choose the best motion plan.
-    plan = min(all_motion_plans, key=lambda v: _score_motion_plan(robot, v))
+    plan = _select_smoothest_motion_plan(robot, all_motion_plans)
 
     imgs = []
     for state in plan:
