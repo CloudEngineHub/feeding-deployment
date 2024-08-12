@@ -8,7 +8,7 @@ from pybullet_helpers.inverse_kinematics import (
     sample_collision_free_inverse_kinematics,
     inverse_kinematics,
 )
-from pybullet_helpers.geometry import Pose, get_pose, multiply_poses
+from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
 from pybullet_helpers.joint import (
     JointPositions,
@@ -31,14 +31,16 @@ from pathlib import Path
 import imageio.v2 as iio
 from tqdm import tqdm
 from numpy.typing import NDArray
+from tomsutils.structs import Image
 
 import pybullet as p
 
 
-def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int]]:
+def _initialize_scene(
+    robot_base_pose: Pose, wheelchair_pose: Pose
+) -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int]]:
     """Returns robot, cup ID, table ID, other collision IDs."""
 
-    robot_base_pose = Pose((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0))
     robot_home_joints = [
         np.pi / 2,
         -np.pi / 4,
@@ -66,8 +68,8 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
     collision_region2_half_extents = (0.05, 0.05, 0.05)
     collision_region2_rgba = (1.0, 0.0, 0.0, 0.25)
 
-    wheelchair_position = (-0.5, 0.0, -0.25)
-    wheelchair_orientation = (0.0, 0.0, 1.0, 0.0)
+    wheelchair_position = wheelchair_pose.position
+    wheelchair_orientation = wheelchair_pose.orientation
 
     table_rgba = (0.5, 0.5, 0.5, 1.0)
     table_half_extents = (0.75, 0.25, 0.5)
@@ -238,7 +240,7 @@ def _smooth_motion_plan(
     seed: int,
     held_object: int | None = None,
     base_link_to_held_obj: NDArray | None = None,
-    max_ik_candidates_per_target_pose: int = 5,
+    max_ik_candidates_per_target_pose: int = 50,
 ) -> list[JointPositions]:
 
     robot_initial_joints = robot.get_joint_positions()
@@ -286,11 +288,67 @@ def _smooth_motion_plan(
     return plan
 
 
+def _capture_image(
+    physics_client_id: int,
+    base_position: Pose3D,
+    head_position: Pose3D,
+) -> Image:
+
+    outer_size = 900
+    inner_size = outer_size // 3
+    pad_size = outer_size // 50
+    border_size = pad_size // 3
+
+    outer_image = capture_image(
+        physics_client_id,
+        camera_target=base_position,
+        camera_yaw=180,
+        camera_distance=2.5,
+        camera_pitch=-20,
+        image_height=outer_size,
+        image_width=outer_size,
+    )
+
+    inner_image = capture_image(
+        physics_client_id,
+        camera_target=head_position,
+        camera_yaw=0,
+        camera_distance=1.0,
+        camera_pitch=-20,
+        image_height=inner_size,
+        image_width=inner_size,
+    )
+
+    combined_image = outer_image.copy()
+
+    frame_size = pad_size + border_size
+    combined_image[
+        pad_size : inner_size + frame_size, pad_size : inner_size + frame_size
+    ] = 200.0
+
+    combined_image[
+        pad_size : inner_size + pad_size, pad_size : inner_size + pad_size
+    ] = inner_image
+
+    return combined_image.astype(np.uint8)
+
+
 def _main():
     seed = 0
     pregrasp_distance = 0.05
+    make_video = True
 
-    robot, cup_id, table_id, other_collision_ids = _initialize_scene()
+    robot_base_pose = Pose((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0))
+    wheelchair_pose = Pose((-0.5, 0.0, -0.25), (0.0, 0.0, 1.0, 0.0))
+    wheelchair_relative_head_pose = Pose((0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0))
+    wheelchair_center_pose = Pose(wheelchair_pose.position, robot_base_pose.orientation)
+    wheelchair_head_pose = multiply_poses(
+        wheelchair_center_pose, wheelchair_relative_head_pose
+    )
+
+    robot, cup_id, table_id, other_collision_ids = _initialize_scene(
+        robot_base_pose, wheelchair_pose
+    )
     collision_ids = {cup_id, table_id} | other_collision_ids
     physics_client_id = robot.physics_client_id
 
@@ -331,36 +389,26 @@ def _main():
     imgs = []
     for state in plan:
         robot.set_joints(state)
-        img = capture_image(
-            physics_client_id,
-            camera_target=(0.0, 0.0, 0.0),
-            camera_yaw=180,
-            camera_distance=2.5,
-            camera_pitch=-20,
-            image_height=900,
-            image_width=900,
-        )
-        imgs.append(img)
+        if make_video:
+            img = _capture_image(
+                physics_client_id,
+                robot_base_pose.position,
+                wheelchair_head_pose.position,
+            )
+            imgs.append(img)
 
     # Move to grasp.
     num_waypoints = 5
     tf = Pose((0.0, 0.0, pregrasp_distance / (num_waypoints - 1)), (0.0, 0.0, 0.0, 1.0))
     for _ in range(num_waypoints):
         _move_end_effector(robot, tf)
-        visualize_pose(
-            get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
-            physics_client_id,
-        )
-        img = capture_image(
-            physics_client_id,
-            camera_target=(0.0, 0.0, 0.0),
-            camera_yaw=180,
-            camera_distance=2.5,
-            camera_pitch=-20,
-            image_height=900,
-            image_width=900,
-        )
-        imgs.append(img)
+        if make_video:
+            img = _capture_image(
+                physics_client_id,
+                robot_base_pose.position,
+                wheelchair_head_pose.position,
+            )
+            imgs.append(img)
 
     # Simulate grasping by faking a constraint with the held object.
     held_obj_id = cup_id
@@ -372,9 +420,10 @@ def _main():
         world_from_end_effector.invert(), world_from_held_object
     )
 
-    # Pick up the cup to demonstrate that we can.
-    cup_transform = Pose((-0.1, 0.0, 0.2), (0.0, 0.0, 0.0, 1.0))
-    new_cup_pose = multiply_poses(cup_pose, cup_transform)
+    # Move to staging pose.
+    staging_relative_orientation = p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
+    staging_relative_pose = Pose((0.0, 0.5, 0.0), staging_relative_orientation)
+    new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
     fingers_to_cup = multiply_poses(
         cup_pose.invert(),
         get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
@@ -397,19 +446,16 @@ def _main():
         set_robot_joints_with_held_object(
             robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
         )
-        img = capture_image(
-            physics_client_id,
-            camera_target=(0.0, 0.0, 0.0),
-            camera_yaw=180,
-            camera_distance=2.5,
-            camera_pitch=-20,
-            image_height=900,
-            image_width=900,
-        )
+        if make_video:
+            img = _capture_image(
+                physics_client_id,
+                robot_base_pose.position,
+                wheelchair_head_pose.position,
+            )
+            imgs.append(img)
 
-        imgs.append(img)
-
-    iio.mimsave("motion_planning_example.mp4", imgs, fps=20)
+    if make_video:
+        iio.mimsave("motion_planning_example.mp4", imgs, fps=20)
 
 
 if __name__ == "__main__":
