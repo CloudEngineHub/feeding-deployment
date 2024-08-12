@@ -20,7 +20,7 @@ if __name__ == "__main__":
     tf_utils = utils.TFUtils()
 
     # Move to a default start pose.
-    x, y, z = 0.3, 0.25, 0.25
+    x, y, z = 0.6, 0.05, 0.35
     default_tool_rot = Rotation.from_euler('xyz', [90, 0, 90], degrees=True)
 
     # Set by looking at the robot.
@@ -29,13 +29,15 @@ if __name__ == "__main__":
 
     start_pose = Pose(position=Point(x, y, z), orientation=Quaternion(*default_tool_rot.as_quat()))
     robot_controller.move_to_pose(start_pose)
+    input("Press enter to start motion planning.")
 
     # Get the initial joints.
     initial_joint_msg = rospy.wait_for_message('/robot_joint_states', JointState)
     assert initial_joint_msg.name == ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5", "joint_6", "joint_7", "finger_joint"]
     finger_val = initial_joint_msg.position[-1]
     initial_joints = tuple(initial_joint_msg.position[:7]) + (finger_val, finger_val)
-    joint_space_plan = generate_trajectory(initial_joints, robot_base_pose=robot_base_pose)
+    joint_space_plan = generate_trajectory(initial_joints, robot_base_pose=robot_base_pose, seed=1)
+    input("Press enter to start the trajectory.")
 
     for joint_positions in joint_space_plan:
         robot_controller.set_joint_position(joint_positions[:8])

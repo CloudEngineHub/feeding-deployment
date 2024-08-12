@@ -45,7 +45,7 @@ def _initialize_scene(
 
     robot_holder_rgba = (0.5, 0.5, 0.5, 1.0)
     robot_holder_half_extents = (0.25, 0.25, 0.5)
-    robot_holder_position = (0.0, 0.0, -0.5)
+    robot_holder_position = (0.0, 0.0, -0.5 - 0.05)
     robot_holder_orientation = (0.0, 0.0, 0.0, 1.0)
 
     collision_region1_orientation = (0.0, 0.0, 0.0, 1.0)
@@ -92,7 +92,7 @@ def _initialize_scene(
         home_joint_positions=robot_initial_joints,
     )
 
-    # Create a base for visualization purposes.
+    # Create a base.
     robot_holder_id = create_pybullet_block(
         robot_holder_rgba,
         half_extents=robot_holder_half_extents,
@@ -121,7 +121,7 @@ def _initialize_scene(
         wheelchair_orientation,
         physicsClientId=physics_client_id,
     )
-    collision_region_ids = {wheelchair_id}
+    collision_region_ids = {wheelchair_id, robot_holder_id}
 
     # Create cup.
     cup_collision_id = p.createCollisionShape(
@@ -268,7 +268,7 @@ def _smooth_motion_plan(
     seed: int,
     held_object: int | None = None,
     base_link_to_held_obj: NDArray | None = None,
-    max_ik_candidates_per_target_pose: int = 100,
+    max_ik_candidates_per_target_pose: int = 25,
 ) -> list[JointPositions]:
 
     robot_initial_joints = robot.get_joint_positions()
@@ -370,7 +370,7 @@ def generate_trajectory(
         (0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0)
     ),
     pregrasp_distance: float = 0.075,
-    max_num_grasps: int = 25,
+    max_num_grasps: int = 5,
     num_grasp_waypoints: int = 5,
     staging_relative_pose=Pose(
         (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
@@ -378,6 +378,8 @@ def generate_trajectory(
     seed: int = 0,
     make_video: bool = True,
 ) -> list[JointPositions]:
+    
+    print(robot_initial_joints)
 
     wheelchair_center_pose = Pose(wheelchair_pose.position, robot_base_pose.orientation)
     wheelchair_head_pose = multiply_poses(
@@ -486,54 +488,54 @@ def generate_trajectory(
         )
         imgs.append(img)
 
-    # Move to staging pose.
-    new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
-    fingers_to_cup = multiply_poses(
-        cup_pose.invert(),
-        get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
-    )
-    new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
-    visualize_pose(new_fingers_pose, physics_client_id)
+    # # Move to staging pose.
+    # new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
+    # fingers_to_cup = multiply_poses(
+    #     cup_pose.invert(),
+    #     get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
+    # )
+    # new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
+    # visualize_pose(new_fingers_pose, physics_client_id)
 
-    new_collision_ids = collision_ids - {held_obj_id}
-    plan = _smooth_motion_plan(
-        [new_fingers_pose],
-        robot,
-        new_collision_ids,
-        finger_from_end_effector,
-        seed,
-        held_object=held_obj_id,
-        base_link_to_held_obj=base_link_to_held_obj,
-    )
+    # new_collision_ids = collision_ids - {held_obj_id}
+    # plan = _smooth_motion_plan(
+    #     [new_fingers_pose],
+    #     robot,
+    #     new_collision_ids,
+    #     finger_from_end_effector,
+    #     seed,
+    #     held_object=held_obj_id,
+    #     base_link_to_held_obj=base_link_to_held_obj,
+    # )
 
-    # Execute the motion plan.
-    for state in plan:
-        set_robot_joints_with_held_object(
-            robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
-        )
-        all_joint_positions.append(state)
-        if make_video:
-            img = _capture_image(
-                physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
-            )
-            imgs.append(img)
+    # # Execute the motion plan.
+    # for state in plan:
+    #     set_robot_joints_with_held_object(
+    #         robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
+    #     )
+    #     all_joint_positions.append(state)
+    #     if make_video:
+    #         img = _capture_image(
+    #             physics_client_id,
+    #             robot_base_pose.position,
+    #             wheelchair_head_pose.position,
+    #         )
+    #         imgs.append(img)
 
-    if make_video:
-        iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
+    # if make_video:
+    #     iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
 
-        # Replay the whole trajectory.
-        imgs = []
-        for state in all_joint_positions:
-            robot.set_joints(state)
-            img = _capture_image(
-                physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
-            )
-            imgs.append(img)
-        iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
+    #     # Replay the whole trajectory.
+    #     imgs = []
+    #     for state in all_joint_positions:
+    #         robot.set_joints(state)
+    #         img = _capture_image(
+    #             physics_client_id,
+    #             robot_base_pose.position,
+    #             wheelchair_head_pose.position,
+    #         )
+    #         imgs.append(img)
+    #     iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
 
     p.disconnect(physics_client_id)
 
@@ -541,15 +543,20 @@ def generate_trajectory(
 
 
 if __name__ == "__main__":
-    robot_initial_joints = [
-        np.pi / 2,
-        -np.pi / 4,
-        -np.pi / 2,
-        0.0,
-        np.pi / 2,
-        -np.pi / 2,
-        np.pi / 2,
-        0.0,
-        0.0,
-    ]
-    all_joint_positions = generate_trajectory(robot_initial_joints)
+    # robot_initial_joints = [
+    #     np.pi / 2,
+    #     -np.pi / 4,
+    #     -np.pi / 2,
+    #     0.0,
+    #     np.pi / 2,
+    #     -np.pi / 2,
+    #     np.pi / 2,
+    #     0.0,
+    #     0.0,
+    # ]
+    from scipy.spatial.transform import Rotation
+
+    quat = tuple(Rotation.from_euler('xyz', [0, 0, 90], degrees=True).as_quat())
+    robot_base_pose = Pose((0.0, 0.0, 0.0), quat)
+    robot_initial_joints = (2.80374963034063, 5.737339549099201, 3.3692055751078134, 2.2763574480856223, 3.002470982456817, 1.2413268146451608, 1.505290153988054, 0.5973799438476562, 0.5973799438476562)
+    all_joint_positions = generate_trajectory(robot_initial_joints, robot_base_pose)
