@@ -57,8 +57,8 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
     robot_holder_orientation = (0.0, 0.0, 0.0, 1.0)
 
     collision_region1_orientation = (0.0, 0.0, 0.0, 1.0)
-    collision_region1_position = (-0.75, -0.3, 0.0)
-    collision_region1_half_extents = (0.5, 0.75, 1.0)
+    collision_region1_position = (-0.75, -0.4, -0.25)
+    collision_region1_half_extents = (0.5, 0.5, 0.25)
     collision_region1_rgba = (1.0, 0.0, 0.0, 0.25)
 
     collision_region2_orientation = (0.0, 0.0, 0.0, 1.0)
@@ -105,7 +105,6 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
         physicsClientId=physics_client_id,
     )
 
-    # Create wheelchair for visualization purposes only.
     wheelchair_urdf_path = (
         Path(__file__).parent.parent
         / "assets"
@@ -122,6 +121,7 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
         wheelchair_orientation,
         physicsClientId=physics_client_id,
     )
+    collision_region_ids = {wheelchair_id}
 
     # Create cup.
     cup_id = create_pybullet_cylinder(
@@ -149,21 +149,20 @@ def _initialize_scene() -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int
         physicsClientId=physics_client_id,
     )
 
-    # Create collision areas.
-    collision_region_ids = set()
+    # Create additional collision areas.
 
-    collision_region_id1 = create_pybullet_block(
-        collision_region1_rgba,
-        half_extents=collision_region1_half_extents,
-        physics_client_id=physics_client_id,
-    )
-    p.resetBasePositionAndOrientation(
-        collision_region_id1,
-        collision_region1_position,
-        collision_region1_orientation,
-        physicsClientId=physics_client_id,
-    )
-    collision_region_ids.add(collision_region_id1)
+    # collision_region_id1 = create_pybullet_block(
+    #     collision_region1_rgba,
+    #     half_extents=collision_region1_half_extents,
+    #     physics_client_id=physics_client_id,
+    # )
+    # p.resetBasePositionAndOrientation(
+    #     collision_region_id1,
+    #     collision_region1_position,
+    #     collision_region1_orientation,
+    #     physicsClientId=physics_client_id,
+    # )
+    # collision_region_ids.add(collision_region_id1)
 
     # collision_region_id2 = create_pybullet_block(
     #     collision_region2_rgba,
@@ -294,7 +293,6 @@ def _main():
     robot, cup_id, table_id, other_collision_ids = _initialize_scene()
     collision_ids = {cup_id, table_id} | other_collision_ids
     physics_client_id = robot.physics_client_id
-    robot_initial_joints = robot.get_joint_positions()
 
     # Commands will be in end effector space, but grasp planning will be in
     # finger frame space.
@@ -335,9 +333,11 @@ def _main():
         robot.set_joints(state)
         img = capture_image(
             physics_client_id,
+            camera_target=(0.0, 0.0, 0.0),
             camera_yaw=180,
             camera_distance=2.5,
             camera_pitch=-20,
+            image_height=900,
             image_width=900,
         )
         imgs.append(img)
@@ -353,9 +353,11 @@ def _main():
         )
         img = capture_image(
             physics_client_id,
+            camera_target=(0.0, 0.0, 0.0),
             camera_yaw=180,
             camera_distance=2.5,
             camera_pitch=-20,
+            image_height=900,
             image_width=900,
         )
         imgs.append(img)
@@ -397,11 +399,14 @@ def _main():
         )
         img = capture_image(
             physics_client_id,
+            camera_target=(0.0, 0.0, 0.0),
             camera_yaw=180,
             camera_distance=2.5,
             camera_pitch=-20,
+            image_height=900,
             image_width=900,
         )
+
         imgs.append(img)
 
     iio.mimsave("motion_planning_example.mp4", imgs, fps=20)
