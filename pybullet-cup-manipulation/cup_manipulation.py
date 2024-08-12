@@ -15,7 +15,7 @@ from pybullet_helpers.joint import (
     get_joint_infos,
 )
 from pybullet_helpers.camera import capture_image
-from pybullet_helpers.utils import create_pybullet_cylinder, create_pybullet_block
+from pybullet_helpers.utils import create_pybullet_block
 from pybullet_helpers.motion_planning import (
     run_motion_planning,
     get_joint_positions_distance,
@@ -38,21 +38,10 @@ import pybullet as p
 
 
 def _initialize_scene(
+    robot_initial_joints: list[JointPositions],
     robot_base_pose: Pose, wheelchair_pose: Pose
 ) -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int]]:
     """Returns robot, cup ID, table ID, other collision IDs."""
-
-    robot_home_joints = [
-        np.pi / 2,
-        -np.pi / 4,
-        -np.pi / 2,
-        0.0,
-        np.pi / 2,
-        -np.pi / 2,
-        np.pi / 2,
-        0.0,
-        0.0,
-    ]
 
     robot_holder_rgba = (0.5, 0.5, 0.5, 1.0)
     robot_holder_half_extents = (0.25, 0.25, 0.5)
@@ -100,7 +89,7 @@ def _initialize_scene(
         physics_client_id,
         base_pose=robot_base_pose,
         control_mode="reset",
-        home_joint_positions=robot_home_joints,
+        home_joint_positions=robot_initial_joints,
     )
 
     # Create a base for visualization purposes.
@@ -373,7 +362,8 @@ def _capture_image(
 
 
 @lru_cache(maxsize=None)
-def _generate_trajectory(
+def generate_trajectory(
+    robot_initial_joints: list[JointPositions],
     robot_base_pose: Pose = Pose((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)),
     wheelchair_pose: Pose = Pose((-0.5, 0.0, -0.25), (0.0, 0.0, 1.0, 0.0)),
     wheelchair_relative_head_pose: Pose = Pose(
@@ -394,7 +384,7 @@ def _generate_trajectory(
     )
 
     robot, cup_id, table_id, other_collision_ids = _initialize_scene(
-        robot_base_pose, wheelchair_pose
+        robot_initial_joints, robot_base_pose, wheelchair_pose
     )
     collision_ids = {cup_id, table_id} | other_collision_ids
     physics_client_id = robot.physics_client_id
@@ -551,4 +541,15 @@ def _generate_trajectory(
 
 
 if __name__ == "__main__":
-    all_joint_positions = _generate_trajectory()
+    robot_initial_joints = [
+        np.pi / 2,
+        -np.pi / 4,
+        -np.pi / 2,
+        0.0,
+        np.pi / 2,
+        -np.pi / 2,
+        np.pi / 2,
+        0.0,
+        0.0,
+    ]
+    all_joint_positions = generate_trajectory(robot_initial_joints)

@@ -2,8 +2,10 @@ import rospy
 
 import sys
 sys.path.append('../../../FLAIR/bite_acquisition/scripts')
+sys.path.append('../../pybullet-cup-manipulation')
 
 from robot_controller.kinova_controller import KinovaRobotController
+from cup_manipulation import generate_trajectory
 from geometry_msgs.msg import Pose, Point, Quaternion
 from scipy.spatial.transform import Rotation
 from sensor_msgs.msg import JointState
@@ -23,12 +25,19 @@ if __name__ == "__main__":
     start_pose = Pose(position=Point(x, y, z), orientation=Quaternion(*default_tool_rot.as_quat()))
     robot_controller.move_to_pose(start_pose)
 
+    # Get the initial joints.
+    initial_joint_msg = rospy.wait_for_message('/robot_joint_states', JointState)
+    assert initial_joint_msg.name == ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5", "joint_6", "joint_7", "finger_joint"]
+    finger_val = initial_joint_msg.position[-1]
+    initial_joints = tuple(initial_joint_msg.position[:7]) + (finger_val, finger_val)
+    joint_space_plan = generate_trajectory(initial_joints)
+
     # Try to close the grippers.
-    joint_state_msg = rospy.wait_for_message('/robot_joint_states', JointState)
-    closed_finger_joints = np.copy(joint_state_msg.position)
-    finger_idx = joint_state_msg.name.index("finger_joint")
-    closed_finger_joints[finger_idx] = 0.5  # TODO figure out how to get gripper joint limits
-    robot_controller.set_joint_position(closed_finger_joints)
+    # joint_state_msg = rospy.wait_for_message('/robot_joint_states', JointState)
+    # closed_finger_joints = np.copy(joint_state_msg.position)
+    # finger_idx = joint_state_msg.name.index("finger_joint")
+    # closed_finger_joints[finger_idx] = 0.5  # TODO figure out how to get gripper joint limits
+    # robot_controller.set_joint_position(closed_finger_joints)
    
    
     # # Detect the aruco marker and transform it into the tool frame.
