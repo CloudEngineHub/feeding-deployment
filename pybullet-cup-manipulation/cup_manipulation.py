@@ -3,6 +3,7 @@
 from pybullet_helpers.inverse_kinematics import (
     set_robot_joints_with_held_object,
     end_effector_transform_to_joints,
+    sample_joints_from_task_space_bounds,
 )
 from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
@@ -23,6 +24,7 @@ from scene import (
 from utils import make_cup_manipulation_video
 
 import pybullet as p
+import numpy as np
 
 
 @lru_cache(maxsize=None)
@@ -132,12 +134,56 @@ def generate_trajectory(
         scene_description.wheelchair_head_pose, scene_description.staging_relative_pose
     )
     cup_pose = get_pose(scene.cup_id, physics_client_id)
+    current_fingers_pose = get_link_pose(robot.robot_id, finger_frame_id, physics_client_id)
     fingers_to_cup = multiply_poses(
         cup_pose.invert(),
-        get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
+        current_fingers_pose,
     )
     new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
     visualize_pose(new_fingers_pose, physics_client_id)
+
+    # Prevent spilling.
+    rng = np.random.default_rng(seed)
+    # Determine reasonable task space bounds by drawing a box around the end
+    # effector and the target and then expanding it by quite a bit.
+    xs = [current_fingers_pose.position[0], new_fingers_pose.position[0]]
+    ys = [current_fingers_pose.position[1], new_fingers_pose.position[1]]
+    zs = [current_fingers_pose.position[2], new_fingers_pose.position[2]]
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys), max(ys)
+    min_z, max_z = min(zs), max(zs)
+    scale_x, scale_y, scale_z = max_x - min_x, max_y - min_y, max_z - max_z
+    scale_factor = 1.5
+    min_x -= scale_factor * scale_x
+    max_x += scale_factor * scale_x
+    min_y -= scale_factor * scale_y
+    max_y += scale_factor * scale_y
+    min_z -= scale_factor * scale_z
+    max_z += scale_factor * scale_z
+    # Constrain the roll to be close to the current.
+    current_roll = p.getEulerFromQuaternion(current_fingers_pose.orientation)[0]
+    new_roll = p.getEulerFromQuaternion(new_fingers_pose.orientation)[0]
+    assert np.isclose(current_roll, new_roll)
+    min_roll = current_roll - 1e-6
+    max_roll = current_roll + 1e-6
+    min_pitch, max_pitch = -np.pi, np.pi
+    min_yaw, max_yaw = -np.pi, np.pi
+
+    def _sample_fn(_current_joint_positions: JointPositions) -> JointPositions:
+        del _current_joint_positions  # not used
+        return sample_joints_from_task_space_bounds(rng, robot,
+                                             min_x=min_x,
+                                             max_x=max_x,
+                                             min_y=min_y,
+                                             max_y=max_y,
+                                             min_z=min_z,
+                                             max_z=max_z,
+                                             min_roll=min_roll,
+                                             max_roll=max_roll,
+                                             min_pitch=min_pitch,
+                                             max_pitch=max_pitch,
+                                             min_yaw=min_yaw,
+                                             max_yaw=max_yaw)
 
     new_collision_ids = collision_ids - {held_obj_id}
     plan = run_smooth_motion_planning_to_pose(
@@ -149,6 +195,7 @@ def generate_trajectory(
         held_object=held_obj_id,
         base_link_to_held_obj=base_link_to_held_obj,
         max_time=max_motion_plan_time,
+        sampling_fn=_sample_fn,
     )
 
     # Execute the motion plan.
@@ -183,7 +230,7 @@ if __name__ == "__main__":
     #     (0.0, 0.0, 0.0), scene_rotation
     # )
 
-    generate_trajectory(scene_description, max_motion_plan_time=1)
+    generate_trajectory(scene_description, seed=0, max_motion_plan_time=20)
 
     # from scipy.spatial.transform import Rotation
 

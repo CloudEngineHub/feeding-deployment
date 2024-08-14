@@ -19,6 +19,7 @@ from scene import (
 import pybullet as p
 
 
+
 def make_cup_manipulation_video(
     scene: CupManipulationSceneIDs,
     scene_description: CupManipulationSceneDescription,
