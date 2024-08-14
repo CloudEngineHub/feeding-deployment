@@ -374,7 +374,7 @@ def generate_trajectory(
     # Move the frame to the bottom right hand corner of the table so we can see it.
     dims = p.getVisualShapeData(table_id, physicsClientId=physics_client_id)[0][3]
     offset = Pose((dims[0] / 2, -dims[1] / 2, dims[2] / 2))
-    table_frame = multiply_poses(offset, table_frame)
+    table_frame = multiply_poses(table_frame, offset)
 
     visualize_pose(table_frame, physics_client_id)
 
