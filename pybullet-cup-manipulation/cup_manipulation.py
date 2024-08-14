@@ -34,153 +34,9 @@ from numpy.typing import NDArray
 from tomsutils.structs import Image
 from functools import lru_cache
 
+from scene import create_cup_manipulation_scene, CupManipulationSceneDescription
+
 import pybullet as p
-
-
-def _initialize_scene(
-    robot_initial_joints: list[JointPositions],
-    robot_base_pose: Pose,
-    wheelchair_pose: Pose,
-    scene_rotation: Quaternion = (0.0, 0.0, 0.0, 1.0),
-) -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int]]:
-    """Returns robot, cup ID, table ID, other collision IDs."""
-
-    robot_base_pose = rotate_about_point(
-        robot_base_pose.position, scene_rotation, robot_base_pose
-    )
-    wheelchair_pose = rotate_about_point(
-        robot_base_pose.position, scene_rotation, wheelchair_pose
-    )
-
-    robot_holder_rgba = (0.5, 0.5, 0.5, 1.0)
-    robot_holder_half_extents = (0.25, 0.25, 0.5)
-    robot_holder_pose = Pose((0.0, 0.0, -0.5 - 0.05))
-    robot_holder_pose = rotate_about_point(
-        robot_base_pose.position, scene_rotation, robot_holder_pose
-    )
-
-    table_rgba = (0.5, 0.5, 0.5, 1.0)
-    table_half_extents = (0.75, 0.25, 0.5)
-    table_pose = Pose((-0.5, 0.75, -0.5))
-    table_pose = rotate_about_point(
-        robot_base_pose.position, scene_rotation, table_pose
-    )
-
-    cup_rgba = (0.0, 0.0, 1.0, 1.0)
-    cup_radius = 0.03
-    cup_length = 0.15
-    cup_pose = Pose((0.0, 0.75, cup_length / 2))
-    cup_pose = rotate_about_point(robot_base_pose.position, scene_rotation, cup_pose)
-    cup_handle_half_extents = (cup_radius, cup_radius, cup_radius)
-    cup_handle_rgba = (0.7, 0.2, 0.5, 1.0)
-    cup_handle_relative_pose = Pose(
-        (
-            0.0,
-            -cup_radius - cup_handle_half_extents[1] / 2,
-            cup_length / 4,
-        )
-    )
-
-    physics_client_id = create_gui_connection(camera_yaw=180)
-    p.setGravity(0.0, 0.0, 0.0, physicsClientId=physics_client_id)
-
-    # Create robot.
-    robot = create_pybullet_robot(
-        "kinova-gen3",
-        physics_client_id,
-        base_pose=robot_base_pose,
-        control_mode="reset",
-        home_joint_positions=robot_initial_joints,
-    )
-
-    # Create a base.
-    robot_holder_id = create_pybullet_block(
-        robot_holder_rgba,
-        half_extents=robot_holder_half_extents,
-        physics_client_id=physics_client_id,
-    )
-    p.resetBasePositionAndOrientation(
-        robot_holder_id,
-        robot_holder_pose.position,
-        robot_holder_pose.orientation,
-        physicsClientId=physics_client_id,
-    )
-
-    wheelchair_urdf_path = (
-        Path(__file__).parent.parent
-        / "assets"
-        / "urdf"
-        / "wheelchair"
-        / "wheelchair.urdf"
-    )
-    wheelchair_id = p.loadURDF(
-        str(wheelchair_urdf_path), useFixedBase=True, physicsClientId=physics_client_id
-    )
-    p.resetBasePositionAndOrientation(
-        wheelchair_id,
-        wheelchair_pose.position,
-        wheelchair_pose.orientation,
-        physicsClientId=physics_client_id,
-    )
-    collision_region_ids = {wheelchair_id, robot_holder_id}
-
-    # Create cup.
-    cup_collision_id = p.createCollisionShape(
-        p.GEOM_CYLINDER,
-        radius=cup_radius,
-        height=cup_length,
-        physicsClientId=physics_client_id,
-    )
-    cup_visual_id = p.createVisualShape(
-        p.GEOM_CYLINDER,
-        radius=cup_radius,
-        length=cup_length,
-        rgbaColor=cup_rgba,
-        physicsClientId=physics_client_id,
-    )
-    cup_handle_collision_id = p.createCollisionShape(
-        p.GEOM_BOX,
-        halfExtents=cup_handle_half_extents,
-        physicsClientId=physics_client_id,
-    )
-    cup_handle_visual_id = p.createVisualShape(
-        p.GEOM_BOX,
-        halfExtents=cup_handle_half_extents,
-        rgbaColor=cup_handle_rgba,
-        physicsClientId=physics_client_id,
-    )
-    cup_id = p.createMultiBody(
-        baseMass=-1,
-        baseCollisionShapeIndex=cup_collision_id,
-        baseVisualShapeIndex=cup_visual_id,
-        basePosition=cup_pose.position,
-        baseOrientation=cup_pose.orientation,
-        linkMasses=[-1],
-        linkCollisionShapeIndices=[cup_handle_collision_id],
-        linkVisualShapeIndices=[cup_handle_visual_id],
-        linkPositions=[cup_handle_relative_pose.position],
-        linkOrientations=[cup_handle_relative_pose.orientation],
-        linkInertialFramePositions=[(0.0, 0.0, 0.0)],
-        linkInertialFrameOrientations=[(0.0, 0.0, 0.0, 1.0)],
-        linkParentIndices=[0],
-        linkJointTypes=[p.JOINT_FIXED],
-        linkJointAxis=[(0.0, 0.0, 1.0)],
-        physicsClientId=physics_client_id,
-    )
-
-    table_id = create_pybullet_block(
-        table_rgba,
-        half_extents=table_half_extents,
-        physics_client_id=physics_client_id,
-    )
-    p.resetBasePositionAndOrientation(
-        table_id,
-        table_pose.position,
-        table_pose.orientation,
-        physicsClientId=physics_client_id,
-    )
-
-    return robot, cup_id, table_id, collision_region_ids
 
 
 def _sample_grasp(
@@ -336,36 +192,24 @@ def _capture_image(
 
 @lru_cache(maxsize=None)
 def generate_trajectory(
-    robot_initial_joints: list[JointPositions],
-    robot_base_pose: Pose = Pose((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)),
-    wheelchair_pose: Pose = Pose((-0.5, 0.0, -0.25), (0.0, 0.0, 1.0, 0.0)),
-    wheelchair_relative_head_pose: Pose = Pose(
-        (0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0)
-    ),
+    scene_description: CupManipulationSceneDescription,
     pregrasp_distance: float = 0.075,
     max_num_grasps: int = 5,
     num_grasp_waypoints: int = 5,
-    staging_relative_pose=Pose(
-        (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
-    ),
     seed: int = 0,
     make_video: bool = True,
-    scene_rotation: Quaternion = (0.0, 0.0, 0.0, 1.0),
 ) -> list[JointPositions]:
 
-    wheelchair_center_pose = Pose(wheelchair_pose.position, robot_base_pose.orientation)
-    wheelchair_center_pose = rotate_about_point(
-        robot_base_pose.position, scene_rotation, wheelchair_center_pose
-    )
-    wheelchair_head_pose = multiply_poses(
-        wheelchair_center_pose, wheelchair_relative_head_pose
-    )
+    physics_client_id = create_gui_connection(camera_yaw=180)
+    scene = create_cup_manipulation_scene(physics_client_id, scene_description)
+    robot = scene.robot
 
-    robot, cup_id, table_id, other_collision_ids = _initialize_scene(
-        robot_initial_joints, robot_base_pose, wheelchair_pose, scene_rotation
-    )
-    collision_ids = {cup_id, table_id} | other_collision_ids
-    physics_client_id = robot.physics_client_id
+    collision_ids = {
+        scene.cup_id,
+        scene.table_id,
+        scene.robot_holder_id,
+        scene.wheelchair_id,
+    }
     all_joint_positions = [robot.get_joint_positions()]
 
     # Close the fingers.
@@ -381,9 +225,9 @@ def generate_trajectory(
     )
 
     # Use the table pose as a frame of reference.
-    table_frame = get_pose(table_id, physics_client_id)
+    table_frame = get_pose(scene.table_id, physics_client_id)
     # Move the frame to the bottom right hand corner of the table so we can see it.
-    dims = p.getVisualShapeData(table_id, physicsClientId=physics_client_id)[0][3]
+    dims = p.getVisualShapeData(scene.table_id, physicsClientId=physics_client_id)[0][3]
     offset = Pose((dims[0] / 2, -dims[1] / 2, dims[2] / 2))
     table_frame = multiply_poses(table_frame, offset)
 
@@ -391,7 +235,7 @@ def generate_trajectory(
 
     # Find target finger frame pose relative to the cup handle.
     cup_handle_link_id = 0
-    cup_pose = get_link_pose(cup_id, cup_handle_link_id, physics_client_id)
+    cup_pose = get_link_pose(scene.cup_id, cup_handle_link_id, physics_client_id)
 
     rng = np.random.default_rng(seed)
     target_poses = [
@@ -413,8 +257,8 @@ def generate_trajectory(
         if make_video:
             img = _capture_image(
                 physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
+                scene_description.robot_base_pose.position,
+                scene_description.wheelchair_head_pose.position,
             )
             imgs.append(img)
 
@@ -429,8 +273,8 @@ def generate_trajectory(
         if make_video:
             img = _capture_image(
                 physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
+                scene_description.robot_base_pose.position,
+                scene_description.wheelchair_head_pose.position,
             )
             imgs.append(img)
 
@@ -439,7 +283,7 @@ def generate_trajectory(
     all_joint_positions.append(robot.get_joint_positions())
 
     # Simulate grasping by faking a constraint with the held object.
-    held_obj_id = cup_id
+    held_obj_id = scene.cup_id
     world_from_end_effector = get_link_pose(
         robot.robot_id, robot.end_effector_id, physics_client_id
     )
@@ -458,13 +302,15 @@ def generate_trajectory(
     if make_video:
         img = _capture_image(
             physics_client_id,
-            robot_base_pose.position,
-            wheelchair_head_pose.position,
+            scene_description.robot_base_pose.position,
+            scene_description.wheelchair_head_pose.position,
         )
         imgs.append(img)
 
     # Move to staging pose.
-    new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
+    new_cup_pose = multiply_poses(
+        scene_description.wheelchair_head_pose, scene_description.staging_relative_pose
+    )
     fingers_to_cup = multiply_poses(
         cup_pose.invert(),
         get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
@@ -492,8 +338,8 @@ def generate_trajectory(
         if make_video:
             img = _capture_image(
                 physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
+                scene_description.robot_base_pose.position,
+                scene_description.wheelchair_head_pose.position,
             )
             imgs.append(img)
 
@@ -506,8 +352,8 @@ def generate_trajectory(
             robot.set_joints(state)
             img = _capture_image(
                 physics_client_id,
-                robot_base_pose.position,
-                wheelchair_head_pose.position,
+                scene_description.robot_base_pose.position,
+                scene_description.wheelchair_head_pose.position,
             )
             imgs.append(img)
         iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
@@ -518,21 +364,14 @@ def generate_trajectory(
 
 
 if __name__ == "__main__":
-    robot_initial_joints = (
-        np.pi / 2,
-        -np.pi / 4,
-        -np.pi / 2,
-        0.0,
-        np.pi / 2,
-        -np.pi / 2,
-        np.pi / 2,
-        0.0,
-        0.0,
-    )
     scene_rotation = tuple(
         p.getQuaternionFromEuler((np.pi / 8, -np.pi / 4, -np.pi / 2))
     )
-    generate_trajectory(robot_initial_joints, scene_rotation=scene_rotation)
+    scene_description = CupManipulationSceneDescription()
+    scene_description = scene_description.rotate_about_point(
+        (0.0, 0.0, 0.0), scene_rotation
+    )
+    generate_trajectory(scene_description)
 
     # from scipy.spatial.transform import Rotation
 
