@@ -6,6 +6,7 @@ import numpy.typing as npt
 import time
 from std_msgs.msg import Bool
 
+
 class EStop:
 
     PYAUDIO_STREAM_TROUBLESHOOTING = (
@@ -21,7 +22,7 @@ class EStop:
     )
 
     def __init__(self):
-        
+
         self.start_time = time.time()
         self.prev_data_arr = None
         self.detection_time = None
@@ -51,7 +52,7 @@ class EStop:
             )
 
         self.stop_controller_pub = rospy.Publisher("/estop", Bool, queue_size=1)
-        
+
     def close(self):
         # Close the audio stream
         if self.stream is not None:
@@ -62,7 +63,7 @@ class EStop:
     def __audio_callback(
         self, data: bytes, frame_count: int, time_info: dict, status: int
     ) -> Tuple[bytes, int]:
-        
+
         # Skip the first few seconds of data, to avoid initial noise
         if time.time() - self.start_time < 2:
             return (data, pyaudio.paContinue)
@@ -90,7 +91,7 @@ class EStop:
 
         # print("In audio callback: ", data_arr)
         return (data, pyaudio.paContinue)
-    
+
     @staticmethod
     def rising_edge_detector(
         curr_data_arr: npt.NDArray,
@@ -139,7 +140,7 @@ class EStop:
             return prev_value < threshold
         # If no point is above the threshold, there is no rising edge
         return False
-    
+
     @staticmethod
     def falling_edge_detector(
         curr_data_arr: npt.NDArray,
@@ -172,6 +173,7 @@ class EStop:
             None if prev_data_arr is None else -prev_data_arr,
             -threshold,
         )
+
 
 if __name__ == "__main__":
     rospy.init_node("estop")

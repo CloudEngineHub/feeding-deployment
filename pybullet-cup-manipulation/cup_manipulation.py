@@ -5,7 +5,7 @@ from pybullet_helpers.inverse_kinematics import (
     end_effector_transform_to_joints,
     sample_joints_from_task_space_bounds,
 )
-from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
+from pybullet_helpers.geometry import Pose, get_pose, multiply_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
 from pybullet_helpers.joint import (
     JointPositions,
