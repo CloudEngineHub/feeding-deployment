@@ -1,11 +1,8 @@
 """Script to develop cup manipulation skills in simulation."""
 
-from pybullet_helpers.robots.single_arm import (
-    SingleArmPyBulletRobot,
-)
 from pybullet_helpers.inverse_kinematics import (
-    inverse_kinematics,
     set_robot_joints_with_held_object,
+    end_effector_transform_to_joints,
 )
 from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
@@ -25,13 +22,6 @@ from functools import lru_cache
 from scene import create_cup_manipulation_scene, CupManipulationSceneDescription
 
 import pybullet as p
-
-
-def _move_end_effector(robot: SingleArmPyBulletRobot, tf: Pose) -> None:
-    # TODO: put back into pybullet-helpers
-    current_end_effector_pose = robot.get_end_effector_pose()
-    next_end_effector_pose = multiply_poses(current_end_effector_pose, tf)
-    return inverse_kinematics(robot, next_end_effector_pose, set_joints=False)
 
 
 def _capture_image(
@@ -67,13 +57,14 @@ def _capture_image(
 
     combined_image = outer_image.copy()
 
-    frame_size = pad_size + border_size
     combined_image[
-        pad_size : inner_size + frame_size, pad_size : inner_size + frame_size
+        pad_size : inner_size + 2 * border_size + pad_size,
+        pad_size : inner_size + 2 * border_size + pad_size,
     ] = 200.0
 
     combined_image[
-        pad_size : inner_size + pad_size, pad_size : inner_size + pad_size
+        pad_size + border_size : inner_size + pad_size + border_size,
+        pad_size + border_size : inner_size + pad_size + border_size,
     ] = inner_image
 
     return combined_image.astype(np.uint8)
@@ -157,7 +148,7 @@ def generate_trajectory(
         (0.0, 0.0, 0.0, 1.0),
     )
     for _ in range(num_grasp_waypoints):
-        joints = _move_end_effector(robot, tf)
+        joints = end_effector_transform_to_joints(robot, tf)
         robot.set_joints(joints)
         all_joint_positions.append(joints)
         if make_video:
@@ -184,7 +175,7 @@ def generate_trajectory(
 
     # Move off the table so that the cup is no longer in collision with the table.
     tf = Pose((0.0, -0.01, 0.0), (0.0, 0.0, 0.0, 1.0))
-    joints = _move_end_effector(robot, tf)
+    joints = end_effector_transform_to_joints(robot, tf)
     set_robot_joints_with_held_object(
         robot, physics_client_id, held_obj_id, base_link_to_held_obj, joints
     )
@@ -238,18 +229,6 @@ def generate_trajectory(
     if make_video:
         iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
 
-        # Replay the whole trajectory.
-        imgs = []
-        for state in all_joint_positions:
-            robot.set_joints(state)
-            img = _capture_image(
-                physics_client_id,
-                scene_description.robot_base_pose.position,
-                scene_description.wheelchair_head_pose.position,
-            )
-            imgs.append(img)
-        iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
-
     p.disconnect(physics_client_id)
 
     return all_joint_positions
@@ -265,7 +244,7 @@ if __name__ == "__main__":
     #     (0.0, 0.0, 0.0), scene_rotation
     # )
 
-    generate_trajectory(scene_description, max_motion_plan_time=5)
+    generate_trajectory(scene_description, max_motion_plan_time=1)
 
     # from scipy.spatial.transform import Rotation
 
