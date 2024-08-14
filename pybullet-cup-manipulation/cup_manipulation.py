@@ -9,65 +9,20 @@ from pybullet_helpers.link import get_relative_link_pose, get_link_pose
 from pybullet_helpers.joint import (
     JointPositions,
 )
-from pybullet_helpers.camera import capture_image
 from pybullet_helpers.motion_planning import (
     run_smooth_motion_planning_to_pose,
 )
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
-import numpy as np
-import imageio.v2 as iio
-from tomsutils.structs import Image
 from functools import lru_cache
+from pathlib import Path
 
-from scene import create_cup_manipulation_scene, CupManipulationSceneDescription
+from scene import (
+    create_cup_manipulation_scene,
+    CupManipulationSceneDescription,
+)
+from utils import make_cup_manipulation_video
 
 import pybullet as p
-
-
-def _capture_image(
-    physics_client_id: int,
-    base_position: Pose3D,
-    head_position: Pose3D,
-) -> Image:
-
-    outer_size = 900
-    inner_size = outer_size // 3
-    pad_size = outer_size // 50
-    border_size = pad_size // 3
-
-    outer_image = capture_image(
-        physics_client_id,
-        camera_target=base_position,
-        camera_yaw=180,
-        camera_distance=2.5,
-        camera_pitch=-20,
-        image_height=outer_size,
-        image_width=outer_size,
-    )
-
-    inner_image = capture_image(
-        physics_client_id,
-        camera_target=head_position,
-        camera_yaw=0,
-        camera_distance=1.0,
-        camera_pitch=-20,
-        image_height=inner_size,
-        image_width=inner_size,
-    )
-
-    combined_image = outer_image.copy()
-
-    combined_image[
-        pad_size : inner_size + 2 * border_size + pad_size,
-        pad_size : inner_size + 2 * border_size + pad_size,
-    ] = 200.0
-
-    combined_image[
-        pad_size + border_size : inner_size + pad_size + border_size,
-        pad_size + border_size : inner_size + pad_size + border_size,
-    ] = inner_image
-
-    return combined_image.astype(np.uint8)
 
 
 @lru_cache(maxsize=None)
@@ -77,6 +32,7 @@ def generate_trajectory(
     num_grasp_waypoints: int = 5,
     seed: int = 0,
     make_video: bool = True,
+    video_outfile: Path = Path("generated_trajectory.mp4"),
 ) -> list[JointPositions]:
 
     physics_client_id = create_gui_connection(camera_yaw=180)
@@ -90,10 +46,12 @@ def generate_trajectory(
         scene.wheelchair_id,
     }
     all_joint_positions = [robot.get_joint_positions()]
+    all_held_object_infos = [None]
 
     # Close the fingers.
     robot.close_fingers()
     all_joint_positions.append(robot.get_joint_positions())
+    all_held_object_infos.append(None)
 
     # Commands will be in end effector space, but grasp planning will be in
     # finger frame space.
@@ -118,8 +76,6 @@ def generate_trajectory(
     )
     cup_grasp = multiply_poses(cup_handle_pose, scene_description.cup_grasp_transform)
 
-    visualize_pose(cup_grasp, physics_client_id)
-
     plan = run_smooth_motion_planning_to_pose(
         cup_grasp,
         robot,
@@ -130,17 +86,10 @@ def generate_trajectory(
     )
 
     # Execute the motion plan.
-    imgs = []
     for state in plan:
         robot.set_joints(state)
         all_joint_positions.append(state)
-        if make_video:
-            img = _capture_image(
-                physics_client_id,
-                scene_description.robot_base_pose.position,
-                scene_description.wheelchair_head_pose.position,
-            )
-            imgs.append(img)
+        all_held_object_infos.append(None)
 
     # Move to grasp.
     tf = Pose(
@@ -151,17 +100,12 @@ def generate_trajectory(
         joints = end_effector_transform_to_joints(robot, tf)
         robot.set_joints(joints)
         all_joint_positions.append(joints)
-        if make_video:
-            img = _capture_image(
-                physics_client_id,
-                scene_description.robot_base_pose.position,
-                scene_description.wheelchair_head_pose.position,
-            )
-            imgs.append(img)
+        all_held_object_infos.append(None)
 
     # Open the fingers to create a constraint inside the mounted holder.
     robot.open_fingers()
     all_joint_positions.append(robot.get_joint_positions())
+    all_held_object_infos.append(None)
 
     # Simulate grasping by faking a constraint with the held object.
     held_obj_id = scene.cup_id
@@ -180,13 +124,7 @@ def generate_trajectory(
         robot, physics_client_id, held_obj_id, base_link_to_held_obj, joints
     )
     all_joint_positions.append(joints)
-    if make_video:
-        img = _capture_image(
-            physics_client_id,
-            scene_description.robot_base_pose.position,
-            scene_description.wheelchair_head_pose.position,
-        )
-        imgs.append(img)
+    all_held_object_infos.append((held_obj_id, base_link_to_held_obj))
 
     # Move to staging pose.
     new_cup_pose = multiply_poses(
@@ -218,20 +156,20 @@ def generate_trajectory(
             robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
         )
         all_joint_positions.append(state)
-        if make_video:
-            img = _capture_image(
-                physics_client_id,
-                scene_description.robot_base_pose.position,
-                scene_description.wheelchair_head_pose.position,
-            )
-            imgs.append(img)
+        all_held_object_infos.append((held_obj_id, base_link_to_held_obj))
 
     if make_video:
-        iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
+        make_cup_manipulation_video(
+            scene,
+            scene_description,
+            all_joint_positions,
+            all_held_object_infos,
+            video_outfile,
+        )
 
     p.disconnect(physics_client_id)
 
-    return all_joint_positions
+    return all_joint_positions, all_held_object_infos
 
 
 if __name__ == "__main__":

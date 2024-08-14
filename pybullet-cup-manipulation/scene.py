@@ -11,6 +11,7 @@ from pybullet_helpers.math_utils import rotate_about_point
 
 from pathlib import Path
 import pybullet as p
+from typing import Any
 import numpy as np
 
 
@@ -96,6 +97,21 @@ class CupManipulationSceneDescription:
             wheelchair_center_pose, self.wheelchair_relative_head_pose
         )
 
+    @property
+    def camera_kwargs(self) -> dict[str, Any]:
+        """Derived kwargs for taking images."""
+        base_position = self.robot_base_pose.position
+        head_position = self.wheelchair_head_pose.position
+        return dict(
+            outer_camera_target=base_position,
+            outer_camera_yaw=180,
+            outer_camera_distance=2.5,
+            inner_camera_target=head_position,
+            inner_camera_yaw=0,
+            inner_camera_distance=1.0,
+            inner_camera_pitch=-20,
+        )
+
     def rotate_about_point(
         self, point: Pose3D, rotation: Quaternion
     ) -> CupManipulationSceneDescription:
@@ -128,6 +144,19 @@ class CupManipulationSceneIDs:
     table_id: int
     cup_id: int
     cup_handle_link_id: int
+
+    def reset(self, scene_description: CupManipulationSceneDescription):
+        """Reset the scene from a description."""
+        # Reset the robot.
+        self.robot.set_joints(scene_description.initial_joints)
+
+        # Reset the cup.
+        p.resetBasePositionAndOrientation(
+            self.cup_id,
+            scene_description.cup_pose.position,
+            scene_description.cup_pose.orientation,
+            physicsClientId=self.physics_client_id,
+        )
 
 
 def create_cup_manipulation_scene(
