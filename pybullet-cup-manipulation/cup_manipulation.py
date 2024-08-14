@@ -8,7 +8,7 @@ from pybullet_helpers.inverse_kinematics import (
     sample_collision_free_inverse_kinematics,
     inverse_kinematics,
 )
-from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
+from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses, Quaternion
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
 from pybullet_helpers.joint import (
     JointPositions,
@@ -24,7 +24,7 @@ from pybullet_helpers.motion_planning import (
 )
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
 from pybullet_helpers.geometry import matrix_from_quat
-from pybullet_helpers.math_utils import get_poses_facing_line
+from pybullet_helpers.math_utils import get_poses_facing_line, rotate_about_point
 import numpy as np
 from functools import partial
 from pathlib import Path
@@ -39,46 +39,36 @@ import pybullet as p
 
 def _initialize_scene(
     robot_initial_joints: list[JointPositions],
-    robot_base_pose: Pose, wheelchair_pose: Pose
+    robot_base_pose: Pose, wheelchair_pose: Pose,
+    scene_rotation: Quaternion = (0.0, 0.0, 0.0, 1.0),
 ) -> tuple[SingleArmPyBulletRobot, Pose, int, int, set[int]]:
     """Returns robot, cup ID, table ID, other collision IDs."""
 
+    robot_base_pose = rotate_about_point(robot_base_pose.position, scene_rotation, robot_base_pose)
+    wheelchair_pose = rotate_about_point(robot_base_pose.position, scene_rotation, wheelchair_pose)
+
     robot_holder_rgba = (0.5, 0.5, 0.5, 1.0)
     robot_holder_half_extents = (0.25, 0.25, 0.5)
-    robot_holder_position = (0.0, 0.0, -0.5 - 0.05)
-    robot_holder_orientation = (0.0, 0.0, 0.0, 1.0)
-
-    collision_region1_orientation = (0.0, 0.0, 0.0, 1.0)
-    collision_region1_position = (-0.75, -0.4, -0.25)
-    collision_region1_half_extents = (0.5, 0.5, 0.25)
-    collision_region1_rgba = (1.0, 0.0, 0.0, 0.25)
-
-    collision_region2_orientation = (0.0, 0.0, 0.0, 1.0)
-    collision_region2_position = (-0.075, 0.55, 0.05)
-    collision_region2_half_extents = (0.05, 0.05, 0.05)
-    collision_region2_rgba = (1.0, 0.0, 0.0, 0.25)
-
-    wheelchair_position = wheelchair_pose.position
-    wheelchair_orientation = wheelchair_pose.orientation
+    robot_holder_pose = Pose((0.0, 0.0, -0.5 - 0.05))
+    robot_holder_pose = rotate_about_point(robot_base_pose.position, scene_rotation, robot_holder_pose)
 
     table_rgba = (0.5, 0.5, 0.5, 1.0)
     table_half_extents = (0.75, 0.25, 0.5)
-    table_position = (-0.5, 0.75, -0.5)
-    table_orientation = (0.0, 0.0, 0.0, 1.0)
+    table_pose = Pose((-0.5, 0.75, -0.5))
+    table_pose = rotate_about_point(robot_base_pose.position, scene_rotation, table_pose)
 
     cup_rgba = (0.0, 0.0, 1.0, 1.0)
     cup_radius = 0.03
     cup_length = 0.15
-    cup_position = (0.0, 0.75, cup_length / 2)
-    cup_orientation = (0.0, 0.0, 0.0, 1.0)
+    cup_pose = Pose((0.0, 0.75, cup_length / 2))
+    cup_pose = rotate_about_point(robot_base_pose.position, scene_rotation, cup_pose)
     cup_handle_half_extents = (cup_radius, cup_radius, cup_radius)
     cup_handle_rgba = (0.7, 0.2, 0.5, 1.0)
-    cup_handle_relative_position = (
+    cup_handle_relative_pose = Pose((
         0.0,
         -cup_radius - cup_handle_half_extents[1] / 2,
         cup_length / 4,
-    )
-    cup_handle_relative_orientation = (0.0, 0.0, 0.0, 1.0)
+    ))
 
     physics_client_id = create_gui_connection(camera_yaw=180)
     p.setGravity(0.0, 0.0, 0.0, physicsClientId=physics_client_id)
@@ -100,8 +90,8 @@ def _initialize_scene(
     )
     p.resetBasePositionAndOrientation(
         robot_holder_id,
-        robot_holder_position,
-        robot_holder_orientation,
+        robot_holder_pose.position,
+        robot_holder_pose.orientation,
         physicsClientId=physics_client_id,
     )
 
@@ -117,8 +107,8 @@ def _initialize_scene(
     )
     p.resetBasePositionAndOrientation(
         wheelchair_id,
-        wheelchair_position,
-        wheelchair_orientation,
+        wheelchair_pose.position,
+        wheelchair_pose.orientation,
         physicsClientId=physics_client_id,
     )
     collision_region_ids = {wheelchair_id, robot_holder_id}
@@ -152,13 +142,13 @@ def _initialize_scene(
         baseMass=-1,
         baseCollisionShapeIndex=cup_collision_id,
         baseVisualShapeIndex=cup_visual_id,
-        basePosition=cup_position,
-        baseOrientation=cup_orientation,
+        basePosition=cup_pose.position,
+        baseOrientation=cup_pose.orientation,
         linkMasses=[-1],
         linkCollisionShapeIndices=[cup_handle_collision_id],
         linkVisualShapeIndices=[cup_handle_visual_id],
-        linkPositions=[cup_handle_relative_position],
-        linkOrientations=[cup_handle_relative_orientation],
+        linkPositions=[cup_handle_relative_pose.position],
+        linkOrientations=[cup_handle_relative_pose.orientation],
         linkInertialFramePositions=[(0.0, 0.0, 0.0)],
         linkInertialFrameOrientations=[(0.0, 0.0, 0.0, 1.0)],
         linkParentIndices=[0],
@@ -174,38 +164,10 @@ def _initialize_scene(
     )
     p.resetBasePositionAndOrientation(
         table_id,
-        table_position,
-        table_orientation,
+        table_pose.position,
+        table_pose.orientation,
         physicsClientId=physics_client_id,
     )
-
-    # Create additional collision areas.
-
-    # collision_region_id1 = create_pybullet_block(
-    #     collision_region1_rgba,
-    #     half_extents=collision_region1_half_extents,
-    #     physics_client_id=physics_client_id,
-    # )
-    # p.resetBasePositionAndOrientation(
-    #     collision_region_id1,
-    #     collision_region1_position,
-    #     collision_region1_orientation,
-    #     physicsClientId=physics_client_id,
-    # )
-    # collision_region_ids.add(collision_region_id1)
-
-    # collision_region_id2 = create_pybullet_block(
-    #     collision_region2_rgba,
-    #     half_extents=collision_region2_half_extents,
-    #     physics_client_id=physics_client_id,
-    # )
-    # p.resetBasePositionAndOrientation(
-    #     collision_region_id2,
-    #     collision_region2_position,
-    #     collision_region2_orientation,
-    #     physicsClientId=physics_client_id,
-    # )
-    # collision_region_ids.add(collision_region_id2)
 
     return robot, cup_id, table_id, collision_region_ids
 
@@ -377,6 +339,7 @@ def generate_trajectory(
     ),
     seed: int = 0,
     make_video: bool = True,
+    scene_rotation: Quaternion = (0.0, 0.0, 0.0, 1.0),
 ) -> list[JointPositions]:
     
     print(robot_initial_joints)
@@ -387,7 +350,8 @@ def generate_trajectory(
     )
 
     robot, cup_id, table_id, other_collision_ids = _initialize_scene(
-        robot_initial_joints, robot_base_pose, wheelchair_pose
+        robot_initial_joints, robot_base_pose, wheelchair_pose,
+        scene_rotation
     )
     collision_ids = {cup_id, table_id} | other_collision_ids
     physics_client_id = robot.physics_client_id
@@ -488,54 +452,54 @@ def generate_trajectory(
         )
         imgs.append(img)
 
-    # # Move to staging pose.
-    # new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
-    # fingers_to_cup = multiply_poses(
-    #     cup_pose.invert(),
-    #     get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
-    # )
-    # new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
-    # visualize_pose(new_fingers_pose, physics_client_id)
+    # Move to staging pose.
+    new_cup_pose = multiply_poses(wheelchair_head_pose, staging_relative_pose)
+    fingers_to_cup = multiply_poses(
+        cup_pose.invert(),
+        get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
+    )
+    new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
+    visualize_pose(new_fingers_pose, physics_client_id)
 
-    # new_collision_ids = collision_ids - {held_obj_id}
-    # plan = _smooth_motion_plan(
-    #     [new_fingers_pose],
-    #     robot,
-    #     new_collision_ids,
-    #     finger_from_end_effector,
-    #     seed,
-    #     held_object=held_obj_id,
-    #     base_link_to_held_obj=base_link_to_held_obj,
-    # )
+    new_collision_ids = collision_ids - {held_obj_id}
+    plan = _smooth_motion_plan(
+        [new_fingers_pose],
+        robot,
+        new_collision_ids,
+        finger_from_end_effector,
+        seed,
+        held_object=held_obj_id,
+        base_link_to_held_obj=base_link_to_held_obj,
+    )
 
-    # # Execute the motion plan.
-    # for state in plan:
-    #     set_robot_joints_with_held_object(
-    #         robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
-    #     )
-    #     all_joint_positions.append(state)
-    #     if make_video:
-    #         img = _capture_image(
-    #             physics_client_id,
-    #             robot_base_pose.position,
-    #             wheelchair_head_pose.position,
-    #         )
-    #         imgs.append(img)
+    # Execute the motion plan.
+    for state in plan:
+        set_robot_joints_with_held_object(
+            robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
+        )
+        all_joint_positions.append(state)
+        if make_video:
+            img = _capture_image(
+                physics_client_id,
+                robot_base_pose.position,
+                wheelchair_head_pose.position,
+            )
+            imgs.append(img)
 
-    # if make_video:
-    #     iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
+    if make_video:
+        iio.mimsave("generated_trajectory.mp4", imgs, fps=20)
 
-    #     # Replay the whole trajectory.
-    #     imgs = []
-    #     for state in all_joint_positions:
-    #         robot.set_joints(state)
-    #         img = _capture_image(
-    #             physics_client_id,
-    #             robot_base_pose.position,
-    #             wheelchair_head_pose.position,
-    #         )
-    #         imgs.append(img)
-    #     iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
+        # Replay the whole trajectory.
+        imgs = []
+        for state in all_joint_positions:
+            robot.set_joints(state)
+            img = _capture_image(
+                physics_client_id,
+                robot_base_pose.position,
+                wheelchair_head_pose.position,
+            )
+            imgs.append(img)
+        iio.mimsave("replayed_trajectory.mp4", imgs, fps=20)
 
     p.disconnect(physics_client_id)
 
@@ -543,20 +507,23 @@ def generate_trajectory(
 
 
 if __name__ == "__main__":
-    # robot_initial_joints = [
-    #     np.pi / 2,
-    #     -np.pi / 4,
-    #     -np.pi / 2,
-    #     0.0,
-    #     np.pi / 2,
-    #     -np.pi / 2,
-    #     np.pi / 2,
-    #     0.0,
-    #     0.0,
-    # ]
-    from scipy.spatial.transform import Rotation
+    robot_initial_joints = (
+        np.pi / 2,
+        -np.pi / 4,
+        -np.pi / 2,
+        0.0,
+        np.pi / 2,
+        -np.pi / 2,
+        np.pi / 2,
+        0.0,
+        0.0,
+    )
+    scene_rotation = tuple(p.getQuaternionFromEuler((np.pi / 8, -np.pi / 4, -np.pi / 2)))
+    generate_trajectory(robot_initial_joints, scene_rotation=scene_rotation)
 
-    quat = tuple(Rotation.from_euler('xyz', [0, 0, 90], degrees=True).as_quat())
-    robot_base_pose = Pose((0.0, 0.0, 0.0), quat)
-    robot_initial_joints = (2.80374963034063, 5.737339549099201, 3.3692055751078134, 2.2763574480856223, 3.002470982456817, 1.2413268146451608, 1.505290153988054, 0.5973799438476562, 0.5973799438476562)
-    all_joint_positions = generate_trajectory(robot_initial_joints, robot_base_pose)
+    # from scipy.spatial.transform import Rotation
+
+    # quat = tuple(Rotation.from_euler('xyz', [0, 0, 90], degrees=True).as_quat())
+    # robot_base_pose = Pose((0.0, 0.0, 0.0), quat)
+    # robot_initial_joints = (2.80374963034063, 5.737339549099201, 3.3692055751078134, 2.2763574480856223, 3.002470982456817, 1.2413268146451608, 1.505290153988054, 0.5973799438476562, 0.5973799438476562)
+    # all_joint_positions = generate_trajectory(robot_initial_joints, robot_base_pose)
