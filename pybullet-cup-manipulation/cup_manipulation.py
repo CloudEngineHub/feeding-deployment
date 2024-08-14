@@ -1,33 +1,31 @@
 """Script to develop cup manipulation skills in simulation."""
 
-from pybullet_helpers.robots import create_pybullet_robot
 from pybullet_helpers.robots.single_arm import (
     SingleArmPyBulletRobot,
 )
 from pybullet_helpers.inverse_kinematics import (
     sample_collision_free_inverse_kinematics,
     inverse_kinematics,
+    set_robot_joints_with_held_object,
 )
-from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses, Quaternion
+from pybullet_helpers.geometry import Pose, Pose3D, get_pose, multiply_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
 from pybullet_helpers.joint import (
     JointPositions,
     get_joint_infos,
 )
 from pybullet_helpers.camera import capture_image
-from pybullet_helpers.utils import create_pybullet_block
 from pybullet_helpers.motion_planning import (
     run_motion_planning,
     get_joint_positions_distance,
     select_shortest_motion_plan,
-    set_robot_joints_with_held_object,
+    run_smooth_motion_planning_to_pose,
 )
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
 from pybullet_helpers.geometry import matrix_from_quat
-from pybullet_helpers.math_utils import get_poses_facing_line, rotate_about_point
+from pybullet_helpers.math_utils import get_poses_facing_line
 import numpy as np
 from functools import partial
-from pathlib import Path
 import imageio.v2 as iio
 from tqdm import tqdm
 from numpy.typing import NDArray
@@ -55,31 +53,31 @@ def _sample_grasp(
     return grasp_pose
 
 
-def _select_smoothest_motion_plan(
-    robot: SingleArmPyBulletRobot,
-    motion_plans: list[list[JointPositions]],
-    joint_geometric_scalar: float = 0.9,
-) -> float:
-    """Lower is better."""
+# def _select_smoothest_motion_plan(
+#     robot: SingleArmPyBulletRobot,
+#     motion_plans: list[list[JointPositions]],
+#     joint_geometric_scalar: float = 0.9,
+# ) -> float:
+#     """Lower is better."""
 
-    # Geometric weighting so the base moves less than the end effector, etc.
-    weights = [1.0]
-    num_joints = len(robot.arm_joints)
-    for _ in range(num_joints - 1):
-        weights.append(weights[-1] * joint_geometric_scalar)
+#     # Geometric weighting so the base moves less than the end effector, etc.
+#     weights = [1.0]
+#     num_joints = len(robot.arm_joints)
+#     for _ in range(num_joints - 1):
+#         weights.append(weights[-1] * joint_geometric_scalar)
 
-    joint_infos = get_joint_infos(
-        robot.robot_id, robot.arm_joints, robot.physics_client_id
-    )
-    dist_fn = partial(
-        get_joint_positions_distance,
-        robot,
-        joint_infos,
-        metric="weighted_joints",
-        weights=weights,
-    )
+#     joint_infos = get_joint_infos(
+#         robot.robot_id, robot.arm_joints, robot.physics_client_id
+#     )
+#     dist_fn = partial(
+#         get_joint_positions_distance,
+#         robot,
+#         joint_infos,
+#         metric="weighted_joints",
+#         weights=weights,
+#     )
 
-    return select_shortest_motion_plan(motion_plans, dist_fn)
+#     return select_shortest_motion_plan(motion_plans, dist_fn)
 
 
 def _move_end_effector(robot: SingleArmPyBulletRobot, tf: Pose) -> None:
@@ -89,60 +87,60 @@ def _move_end_effector(robot: SingleArmPyBulletRobot, tf: Pose) -> None:
     return inverse_kinematics(robot, next_end_effector_pose, set_joints=False)
 
 
-def _smooth_motion_plan(
-    target_poses: list[Pose],
-    robot: SingleArmPyBulletRobot,
-    collision_ids: set[int],
-    plan_frame_from_end_effector_frame: Pose,
-    seed: int,
-    held_object: int | None = None,
-    base_link_to_held_obj: NDArray | None = None,
-    max_ik_candidates_per_target_pose: int = 25,
-) -> list[JointPositions]:
+# def _smooth_motion_plan(
+#     target_poses: list[Pose],
+#     robot: SingleArmPyBulletRobot,
+#     collision_ids: set[int],
+#     plan_frame_from_end_effector_frame: Pose,
+#     seed: int,
+#     held_object: int | None = None,
+#     base_link_to_held_obj: NDArray | None = None,
+#     max_ik_candidates_per_target_pose: int = 25,
+# ) -> list[JointPositions]:
 
-    robot_initial_joints = robot.get_joint_positions()
+#     robot_initial_joints = robot.get_joint_positions()
 
-    # Find a number of possible target joint positions.
-    all_target_joint_positions = []
-    for target_pose in target_poses:
-        end_effector_pose = multiply_poses(
-            target_pose, plan_frame_from_end_effector_frame
-        )
-        for candidate_joints in sample_collision_free_inverse_kinematics(
-            robot,
-            end_effector_pose,
-            collision_ids,
-            max_candidates=max_ik_candidates_per_target_pose,
-        ):
-            robot.set_joints(candidate_joints)
-            all_target_joint_positions.append(candidate_joints)
+#     # Find a number of possible target joint positions.
+#     all_target_joint_positions = []
+#     for target_pose in target_poses:
+#         end_effector_pose = multiply_poses(
+#             target_pose, plan_frame_from_end_effector_frame
+#         )
+#         for candidate_joints in sample_collision_free_inverse_kinematics(
+#             robot,
+#             end_effector_pose,
+#             collision_ids,
+#             max_candidates=max_ik_candidates_per_target_pose,
+#         ):
+#             robot.set_joints(candidate_joints)
+#             all_target_joint_positions.append(candidate_joints)
 
-    print(f"Found {len(all_target_joint_positions)} candidate joint positions.")
+#     print(f"Found {len(all_target_joint_positions)} candidate joint positions.")
 
-    # Motion plan to each.
-    print("Starting motion planning...")
-    all_motion_plans = []
-    for target_joint_positions in tqdm(all_target_joint_positions):
-        robot.set_joints(robot_initial_joints)
-        plan = run_motion_planning(
-            robot,
-            robot_initial_joints,
-            target_joint_positions,
-            collision_ids,
-            seed,
-            robot.physics_client_id,
-            held_object=held_object,
-            base_link_to_held_obj=base_link_to_held_obj,
-        )
-        if plan is not None:
-            all_motion_plans.append(plan)
+#     # Motion plan to each.
+#     print("Starting motion planning...")
+#     all_motion_plans = []
+#     for target_joint_positions in tqdm(all_target_joint_positions):
+#         robot.set_joints(robot_initial_joints)
+#         plan = run_motion_planning(
+#             robot,
+#             robot_initial_joints,
+#             target_joint_positions,
+#             collision_ids,
+#             seed,
+#             robot.physics_client_id,
+#             held_object=held_object,
+#             base_link_to_held_obj=base_link_to_held_obj,
+#         )
+#         if plan is not None:
+#             all_motion_plans.append(plan)
 
-    print(f"Found {len(all_motion_plans)} motion plans.")
+#     print(f"Found {len(all_motion_plans)} motion plans.")
 
-    # Choose the best motion plan.
-    plan = _select_smoothest_motion_plan(robot, all_motion_plans)
+#     # Choose the best motion plan.
+#     plan = _select_smoothest_motion_plan(robot, all_motion_plans)
 
-    return plan
+#     return plan
 
 
 def _capture_image(
@@ -194,7 +192,7 @@ def _capture_image(
 def generate_trajectory(
     scene_description: CupManipulationSceneDescription,
     pregrasp_distance: float = 0.075,
-    max_num_grasps: int = 5,
+    max_motion_plan_time: int = 10,
     num_grasp_waypoints: int = 5,
     seed: int = 0,
     make_video: bool = True,
@@ -238,15 +236,14 @@ def generate_trajectory(
     cup_pose = get_link_pose(scene.cup_id, cup_handle_link_id, physics_client_id)
 
     rng = np.random.default_rng(seed)
-    target_poses = [
-        _sample_grasp(cup_pose, rng, pregrasp_distance) for _ in range(max_num_grasps)
-    ]
-    plan = _smooth_motion_plan(
-        target_poses,
+    pose_sampler = lambda : _sample_grasp(cup_pose, rng, pregrasp_distance)
+    plan = run_smooth_motion_planning_to_pose(
+        pose_sampler,
         robot,
         collision_ids,
         finger_from_end_effector,
         seed,
+        max_time=max_motion_plan_time,
     )
 
     # Execute the motion plan.
@@ -319,14 +316,15 @@ def generate_trajectory(
     visualize_pose(new_fingers_pose, physics_client_id)
 
     new_collision_ids = collision_ids - {held_obj_id}
-    plan = _smooth_motion_plan(
-        [new_fingers_pose],
+    plan = run_smooth_motion_planning_to_pose(
+        new_fingers_pose,
         robot,
         new_collision_ids,
         finger_from_end_effector,
         seed,
         held_object=held_obj_id,
         base_link_to_held_obj=base_link_to_held_obj,
+        max_time=max_motion_plan_time,
     )
 
     # Execute the motion plan.
@@ -364,13 +362,15 @@ def generate_trajectory(
 
 
 if __name__ == "__main__":
-    scene_rotation = tuple(
-        p.getQuaternionFromEuler((np.pi / 8, -np.pi / 4, -np.pi / 2))
-    )
     scene_description = CupManipulationSceneDescription()
-    scene_description = scene_description.rotate_about_point(
-        (0.0, 0.0, 0.0), scene_rotation
-    )
+
+    # scene_rotation = tuple(
+    #     p.getQuaternionFromEuler((np.pi / 8, -np.pi / 4, -np.pi / 2))
+    # )
+    # scene_description = scene_description.rotate_about_point(
+    #     (0.0, 0.0, 0.0), scene_rotation
+    # )
+
     generate_trajectory(scene_description)
 
     # from scipy.spatial.transform import Rotation
