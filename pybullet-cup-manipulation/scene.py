@@ -72,6 +72,11 @@ class CupManipulationSceneDescription:
             cup_length / 4,
         )
     )
+    cup_grasp_distance: float = 0.075
+    cup_grasp_transform: Pose = Pose(
+        (0.0, -cup_grasp_distance, 0.0),
+        p.getQuaternionFromEuler((np.pi / 2, np.pi, np.pi)),
+    )
 
     # Staging pose (where the drinking motion planning should finish).
     # This is relative to the wheelchair head.
@@ -122,6 +127,7 @@ class CupManipulationSceneIDs:
     wheelchair_id: int
     table_id: int
     cup_id: int
+    cup_handle_link_id: int
 
 
 def create_cup_manipulation_scene(
@@ -207,6 +213,7 @@ def create_cup_manipulation_scene(
         linkJointAxis=[(0.0, 0.0, 1.0)],
         physicsClientId=physics_client_id,
     )
+    cup_handle_link_id = 0
 
     # Create a table.
     table_id = create_pybullet_block(
@@ -222,5 +229,11 @@ def create_cup_manipulation_scene(
     )
 
     return CupManipulationSceneIDs(
-        physics_client_id, robot, robot_holder_id, wheelchair_id, table_id, cup_id
+        physics_client_id,
+        robot,
+        robot_holder_id,
+        wheelchair_id,
+        table_id,
+        cup_id,
+        cup_handle_link_id,
     )

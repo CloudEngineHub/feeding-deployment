@@ -17,8 +17,6 @@ from pybullet_helpers.motion_planning import (
     run_smooth_motion_planning_to_pose,
 )
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
-from pybullet_helpers.geometry import matrix_from_quat
-from pybullet_helpers.math_utils import get_poses_facing_line
 import numpy as np
 import imageio.v2 as iio
 from tomsutils.structs import Image
@@ -27,22 +25,6 @@ from functools import lru_cache
 from scene import create_cup_manipulation_scene, CupManipulationSceneDescription
 
 import pybullet as p
-
-
-def _sample_grasp(
-    cup_pose: Pose, rng: np.random.Generator, translation_distance: float = 0.2
-) -> Pose:
-
-    cup_point = cup_pose.position
-    cup_matrix = matrix_from_quat(cup_pose.orientation)
-    cup_z_axis = cup_matrix[:, 2]
-    angle_offset = rng.uniform(-np.pi, np.pi)
-
-    grasp_pose = get_poses_facing_line(
-        cup_z_axis, cup_point, translation_distance, 1, angle_offset=angle_offset
-    )[0]
-
-    return grasp_pose
 
 
 def _move_end_effector(robot: SingleArmPyBulletRobot, tf: Pose) -> None:
@@ -100,7 +82,6 @@ def _capture_image(
 @lru_cache(maxsize=None)
 def generate_trajectory(
     scene_description: CupManipulationSceneDescription,
-    pregrasp_distance: float = 0.075,
     max_motion_plan_time: int = 10,
     num_grasp_waypoints: int = 5,
     seed: int = 0,
@@ -141,13 +122,15 @@ def generate_trajectory(
     visualize_pose(table_frame, physics_client_id)
 
     # Find target finger frame pose relative to the cup handle.
-    cup_handle_link_id = 0
-    cup_pose = get_link_pose(scene.cup_id, cup_handle_link_id, physics_client_id)
+    cup_handle_pose = get_link_pose(
+        scene.cup_id, scene.cup_handle_link_id, physics_client_id
+    )
+    cup_grasp = multiply_poses(cup_handle_pose, scene_description.cup_grasp_transform)
 
-    rng = np.random.default_rng(seed)
-    pose_sampler = lambda: _sample_grasp(cup_pose, rng, pregrasp_distance)
+    visualize_pose(cup_grasp, physics_client_id)
+
     plan = run_smooth_motion_planning_to_pose(
-        pose_sampler,
+        cup_grasp,
         robot,
         collision_ids,
         finger_from_end_effector,
@@ -170,7 +153,8 @@ def generate_trajectory(
 
     # Move to grasp.
     tf = Pose(
-        (0.0, 0.0, pregrasp_distance / (num_grasp_waypoints - 1)), (0.0, 0.0, 0.0, 1.0)
+        (0.0, 0.0, scene_description.cup_grasp_distance / (num_grasp_waypoints - 1)),
+        (0.0, 0.0, 0.0, 1.0),
     )
     for _ in range(num_grasp_waypoints):
         joints = _move_end_effector(robot, tf)
@@ -217,6 +201,7 @@ def generate_trajectory(
     new_cup_pose = multiply_poses(
         scene_description.wheelchair_head_pose, scene_description.staging_relative_pose
     )
+    cup_pose = get_pose(scene.cup_id, physics_client_id)
     fingers_to_cup = multiply_poses(
         cup_pose.invert(),
         get_link_pose(robot.robot_id, finger_frame_id, physics_client_id),
@@ -280,7 +265,7 @@ if __name__ == "__main__":
     #     (0.0, 0.0, 0.0), scene_rotation
     # )
 
-    generate_trajectory(scene_description)
+    generate_trajectory(scene_description, max_motion_plan_time=5)
 
     # from scipy.spatial.transform import Rotation
 
