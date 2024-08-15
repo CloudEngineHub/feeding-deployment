@@ -106,6 +106,11 @@ class CupManipulationSceneDescription:
         )
 
     @property
+    def cup_staging_pose(self) -> Pose:
+        """Target pose for the cup before transfer."""
+        return multiply_poses(self.wheelchair_head_pose, self.staging_relative_pose)
+
+    @property
     def camera_kwargs(self) -> dict[str, Any]:
         """Derived kwargs for taking images."""
         base_position = self.robot_base_pose.position

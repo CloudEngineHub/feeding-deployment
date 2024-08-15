@@ -131,9 +131,7 @@ def generate_trajectory(
     all_held_cup_tfs.append(base_link_to_held_obj)
 
     # Move to staging pose.
-    new_cup_pose = multiply_poses(
-        scene_description.wheelchair_head_pose, scene_description.staging_relative_pose
-    )
+    new_cup_pose = scene_description.cup_staging_pose
     cup_pose = get_pose(scene.cup_id, physics_client_id)
     current_fingers_pose = get_link_pose(
         robot.robot_id, finger_frame_id, physics_client_id
@@ -144,6 +142,7 @@ def generate_trajectory(
     )
     new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
     visualize_pose(new_fingers_pose, physics_client_id)
+
     new_collision_ids = collision_ids - {held_obj_id}
 
     new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
