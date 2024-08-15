@@ -6,7 +6,7 @@ from pybullet_helpers.inverse_kinematics import (
 )
 from pybullet_helpers.geometry import Pose, get_pose, multiply_poses, interpolate_poses
 from pybullet_helpers.link import get_relative_link_pose, get_link_pose
-from pybullet_helpers.joint import get_joint_infos
+from pybullet_helpers.joint import get_joint_infos, get_jointwise_difference
 from pybullet_helpers.motion_planning import (
     run_smooth_motion_planning_to_pose,
     smoothly_follow_end_effector_path,
@@ -14,6 +14,8 @@ from pybullet_helpers.motion_planning import (
 )
 from pybullet_helpers.math_utils import geometric_sequence
 from pybullet_helpers.gui import visualize_pose, create_gui_connection
+from pybullet_helpers.trajectory import concatenate_trajectories, TrajectorySegment, iter_traj_with_max_distance
+
 from functools import lru_cache
 from pathlib import Path
 
@@ -189,39 +191,64 @@ def generate_trajectory(
         all_held_cup_tfs.append(base_link_to_held_obj)
 
     # Try to move closer to the mouth for bite transfer. (TODO remove... this is a quick test)
-    transfer_relative_pose: Pose = Pose(
-        (-0.1, 0.0, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
-    )
-    cup_transfer_pose = multiply_poses(scene_description.wheelchair_head_pose, transfer_relative_pose)
-    current_end_effector_pose = robot.get_end_effector_pose()
-    new_fingers_pose = multiply_poses(cup_transfer_pose, fingers_to_cup)
-    visualize_pose(new_fingers_pose, physics_client_id)
+    # transfer_relative_pose: Pose = Pose(
+    #     (-0.5, 0.1, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
+    # )
+    # cup_transfer_pose = multiply_poses(scene_description.wheelchair_head_pose, transfer_relative_pose)
+    # current_end_effector_pose = robot.get_end_effector_pose()
+    # new_fingers_pose = multiply_poses(cup_transfer_pose, fingers_to_cup)
+    # visualize_pose(new_fingers_pose, physics_client_id)
 
-    new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
-    interpolated_poses = list(
-        interpolate_poses(
-            current_end_effector_pose,
-            new_end_effector_pose,
-            num_interp=5,  # NOTE
-        )
-    )
-    plan = smoothly_follow_end_effector_path(
-        robot,
-        interpolated_poses,
-        robot.get_joint_positions(),
-        new_collision_ids,
-        joint_distance_fn,
-        max_time=1.0,  # NOTE
-    )
-    # Execute the plan.
-    for state in plan:
-        set_robot_joints_with_held_object(
-            robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
-        )
-        all_joint_positions.append(state)
-        all_held_cup_tfs.append(base_link_to_held_obj)    
+    # new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
+    # interpolated_poses = list(
+    #     interpolate_poses(
+    #         current_end_effector_pose,
+    #         new_end_effector_pose,
+    #         num_interp=10,  # NOTE
+    #     )
+    # )
+    # plan = smoothly_follow_end_effector_path(
+    #     robot,
+    #     interpolated_poses,
+    #     robot.get_joint_positions(),
+    #     new_collision_ids,
+    #     joint_distance_fn,
+    #     max_time=max_motion_plan_time,
+    # )
+    # # Execute the plan.
+    # for state in plan:
+    #     set_robot_joints_with_held_object(
+    #         robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
+    #     )
+    #     all_joint_positions.append(state)
+    #     all_held_cup_tfs.append(base_link_to_held_obj)
 
-    return CupManipulationTrajectory(all_joint_positions, all_held_cup_tfs)
+    # TODO move out.
+    def joint_interpolate_fn(q1, q2, t):
+        dists_arr = np.array(get_jointwise_difference(joint_infos, q2, q1))
+        joint_arr = np.array(q1)
+        joint_arr_i = joint_arr + t * dists_arr
+        return list(joint_arr_i)
+
+    # Create a continuous-time trajectory.
+    distances = []
+    for pt1, pt2 in zip(all_joint_positions[:-1], all_joint_positions[1:], strict=True):
+        dist = joint_distance_fn(pt1, pt2)
+        distances.append(dist)
+    # Use distances as times.
+    segments = []
+    for t in range(len(all_joint_positions) - 1):
+        start = all_joint_positions[t]
+        end = all_joint_positions[t+1]
+        dt = distances[t]
+        seg = TrajectorySegment(start, end, dt, interpolate_fn=joint_interpolate_fn, distance_fn=joint_distance_fn)
+        segments.append(seg)
+    continuous_time_trajectory = concatenate_trajectories(segments)
+    max_distance = 0.25  # TODO move out
+    remapped_joint_positions = list(iter_traj_with_max_distance(continuous_time_trajectory, max_distance))
+    remapped_held_cup_tfs = [None] * len(remapped_joint_positions)  # TODO
+
+    return CupManipulationTrajectory(remapped_joint_positions, remapped_held_cup_tfs)
 
 
 if __name__ == "__main__":
