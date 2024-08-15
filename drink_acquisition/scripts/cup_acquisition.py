@@ -6,7 +6,7 @@ sys.path.append("../../../FLAIR/bite_acquisition/scripts")
 sys.path.append("../../pybullet-cup-manipulation")
 
 from robot_controller.kinova_controller import KinovaRobotController
-from cup_manipulation import generate_trajectory
+# from cup_manipulation import generate_trajectory
 from scene import (
     create_cup_manipulation_scene,
     CupManipulationSceneDescription,
@@ -62,3 +62,7 @@ if __name__ == "__main__":
     scene = create_cup_manipulation_scene(physics_client_id, scene_description)
     while True:
         p.stepSimulation(physics_client_id)
+        joint_msg = rospy.wait_for_message("/robot_joint_states", JointState)
+        joint_positions = tuple(joint_msg.position[:7]) + (joint_msg.position[-1], joint_msg.position[-1])
+        print("Joint positions:", joint_positions)
+        scene.robot.set_joints(joint_positions)

@@ -9,6 +9,8 @@ from pybullet_helpers.robots.single_arm import SingleArmTwoFingerGripperPyBullet
 from pybullet_helpers.utils import create_pybullet_block
 from pybullet_helpers.math_utils import rotate_about_point
 
+from scipy.spatial.transform import Rotation
+
 from pathlib import Path
 import pybullet as p
 from typing import Any
@@ -32,7 +34,7 @@ class CupManipulationSceneDescription:
         0.0,
         0.0,
     )
-    robot_base_pose: Pose = Pose((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0))
+    robot_base_pose: Pose = Pose((0.0, 0.0, 0.0), Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat())
 
     # Robot holder (vention stand).
     robot_holder_pose: Pose = Pose((0.0, 0.0, -0.5 - 0.05))
