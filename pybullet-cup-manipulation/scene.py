@@ -34,7 +34,10 @@ class CupManipulationSceneDescription:
         0.0,
         0.0,
     )
-    robot_base_pose: Pose = Pose((0.0, 0.0, 0.0), Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat())
+    robot_base_pose: Pose = Pose(
+        (0.0, 0.0, 0.0),
+        tuple(Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()),
+    )
 
     # Robot holder (vention stand).
     robot_holder_pose: Pose = Pose((0.0, 0.0, -0.5 - 0.05))
@@ -90,10 +93,13 @@ class CupManipulationSceneDescription:
     @property
     def wheelchair_head_pose(self) -> Pose:
         """Derived from wheelchair base and relative pose."""
-        # Use the robot base pose orientation instead of the wheelchair b/c
-        # the wheelchair is strangely oriented in its URDF.
+        # The wheelchair is weirdly flipped in the URDF, so correct for that.
+        flip_tf = Pose(
+            (0.0, 0.0, 0.0), tuple(p.getQuaternionFromEuler((0.0, 0.0, np.pi)))
+        )
+        flipped_wheelchair_pose = multiply_poses(self.wheelchair_pose, flip_tf)
         wheelchair_center_pose = Pose(
-            self.wheelchair_pose.position, self.robot_base_pose.orientation
+            flipped_wheelchair_pose.position, flipped_wheelchair_pose.orientation
         )
         return multiply_poses(
             wheelchair_center_pose, self.wheelchair_relative_head_pose
