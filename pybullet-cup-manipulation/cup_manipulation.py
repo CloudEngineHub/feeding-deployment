@@ -188,6 +188,39 @@ def generate_trajectory(
         all_joint_positions.append(state)
         all_held_cup_tfs.append(base_link_to_held_obj)
 
+    # Try to move closer to the mouth for bite transfer. (TODO remove... this is a quick test)
+    transfer_relative_pose: Pose = Pose(
+        (-0.1, 0.0, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
+    )
+    cup_transfer_pose = multiply_poses(scene_description.wheelchair_head_pose, transfer_relative_pose)
+    current_end_effector_pose = robot.get_end_effector_pose()
+    new_fingers_pose = multiply_poses(cup_transfer_pose, fingers_to_cup)
+    visualize_pose(new_fingers_pose, physics_client_id)
+
+    new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
+    interpolated_poses = list(
+        interpolate_poses(
+            current_end_effector_pose,
+            new_end_effector_pose,
+            num_interp=5,  # NOTE
+        )
+    )
+    plan = smoothly_follow_end_effector_path(
+        robot,
+        interpolated_poses,
+        robot.get_joint_positions(),
+        new_collision_ids,
+        joint_distance_fn,
+        max_time=1.0,  # NOTE
+    )
+    # Execute the plan.
+    for state in plan:
+        set_robot_joints_with_held_object(
+            robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
+        )
+        all_joint_positions.append(state)
+        all_held_cup_tfs.append(base_link_to_held_obj)    
+
     return CupManipulationTrajectory(all_joint_positions, all_held_cup_tfs)
 
 
