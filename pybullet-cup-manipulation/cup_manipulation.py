@@ -45,6 +45,7 @@ def generate_trajectory(
     num_grasp_waypoints: int = 5,
     seed: int = 0,
     num_drink_transfer_end_effector_interp: int = 25,
+    max_joint_space_distance=0.1,
 ) -> CupManipulationTrajectory:
 
     physics_client_id = scene.physics_client_id
@@ -211,7 +212,7 @@ def generate_trajectory(
         all_joint_positions.append(state)
         all_held_cup_tfs.append(base_link_to_held_obj)
 
-    # Try to move closer to the mouth for bite transfer. (TODO remove... this is a quick test)
+    # Try to move closer to the mouth for bite transfer.
     # transfer_relative_pose: Pose = Pose(
     #     (-0.5, 0.1, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
     # )
@@ -265,9 +266,10 @@ def generate_trajectory(
         )
         segments.append(seg)
     continuous_time_trajectory = concatenate_trajectories(segments)
-    max_distance = 0.1  # TODO move out
     remapped_joint_positions = list(
-        iter_traj_with_max_distance(continuous_time_trajectory, max_distance)
+        iter_traj_with_max_distance(
+            continuous_time_trajectory, max_joint_space_distance
+        )
     )
 
     # Remap the cup states.
