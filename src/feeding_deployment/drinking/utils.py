@@ -98,7 +98,7 @@ def make_cup_manipulation_video(
             scene.physics_client_id, **scene_description.camera_kwargs
         )
         imgs.append(img)
-    iio.mimsave(outfile, imgs, fps=fps)
+    iio.mimsave(outfile, imgs, fps=fps)  # type: ignore
     print(f"Wrote out to {outfile}")
     if cup_target_id is not None:
         p.removeBody(cup_target_id, physicsClientId=physics_client_id)
