@@ -23,7 +23,7 @@ class CupManipulationSceneDescription:
 
     # Robot.
     robot_name: str = "kinova-gen3"
-    initial_joints: tuple[JointPositions] = (
+    initial_joints: JointPositions = [
         np.pi / 2,
         -np.pi / 4,
         -np.pi / 2,
@@ -33,7 +33,7 @@ class CupManipulationSceneDescription:
         np.pi / 2,
         0.0,
         0.0,
-    )
+    ]
     robot_base_pose: Pose = Pose(
         (0.0, 0.0, 0.0),
         tuple(Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()),
@@ -136,7 +136,7 @@ class CupManipulationSceneDescription:
             "table_pose",
             "cup_pose",
         }
-        pose_dict = {
+        pose_dict: dict[str, Any] = {
             k: rotate_about_point(point, rotation, getattr(self, k))
             for k in pose_fields
         }
@@ -202,6 +202,7 @@ def create_cup_manipulation_scene(
         control_mode="reset",
         home_joint_positions=scene_description.initial_joints,
     )
+    assert isinstance(robot, SingleArmTwoFingerGripperPyBulletRobot)
 
     # Create a holder.
     robot_holder_id = create_pybullet_block(

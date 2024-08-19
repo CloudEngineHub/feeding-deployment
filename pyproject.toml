@@ -51,5 +51,6 @@ exclude = ["venv/*"]
 module = [
     "pybullet.*",
     "pyaudio.*",
+    "scipy.*",
 ]
 ignore_missing_imports = true
