@@ -114,6 +114,12 @@ def _get_plan_to_grasp_cup(
     assert plan is not None
     held_obj_tfs: list[Pose | None] = [None] * len(plan)
 
+    # Open the fingers.
+    robot.set_joints(plan[-1])
+    robot.open_fingers()
+    plan.append(robot.get_joint_positions())
+    held_obj_tfs.append(None)
+
     # Simulate grasping by faking a constraint with the held object.
     robot.set_joints(plan[-1])
     world_from_end_effector = get_link_pose(

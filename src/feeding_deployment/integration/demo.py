@@ -24,8 +24,8 @@ def _main():
     arm = KinovaArm()
     arm.retract()
     time.sleep(1.0)  # make sure arm stabilizes
-    q, gripper_pos = arm.get_state()
-    joint_state = q.tolist() + [gripper_pos, gripper_pos]
+    q, _ = arm.get_state()
+    joint_state = q.tolist() + [0.0, 0.0]
 
     # Create the scene and generate a trajectory.
     scene_description = CupManipulationSceneDescription(initial_joints=joint_state)
