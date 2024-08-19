@@ -143,6 +143,7 @@ def _get_move_cup_to_staging_plan(
     max_motion_plan_time: float,
     base_link_to_held_obj: Pose,
 ) -> CupManipulationTrajectory:
+
     # Assumes that _get_plan_to_grasp_cup() was just called.
     robot = scene.robot
     physics_client_id = scene.physics_client_id
@@ -187,6 +188,73 @@ def _get_move_cup_to_staging_plan(
     )
 
     return CupManipulationTrajectory(plan, [base_link_to_held_obj] * len(plan))
+
+
+def _remap_trajectory_to_constant_distance(
+    traj: CupManipulationTrajectory,
+    scene: CupManipulationSceneIDs,
+    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
+    max_joint_space_distance: float,
+) -> CupManipulationTrajectory:
+
+    robot = scene.robot
+    joint_infos = get_joint_infos(
+        robot.robot_id, robot.arm_joints, robot.physics_client_id
+    )
+
+    # Create a continuous-time trajectory.
+    joint_interpolate_fn = partial(interpolate_joints, joint_infos)
+    distances = []
+    for pt1, pt2 in zip(traj.joint_states[:-1], traj.joint_states[1:], strict=True):
+        dist = _joint_distance_fn(pt1, pt2)
+        distances.append(dist)
+    # Use distances as times.
+    joint_segments = []
+    for t in range(len(traj.joint_states) - 1):
+        joint_seg = TrajectorySegment(
+            traj.joint_states[t],
+            traj.joint_states[t + 1],
+            distances[t],
+            interpolate_fn=joint_interpolate_fn,
+            distance_fn=_joint_distance_fn,
+        )
+        joint_segments.append(joint_seg)
+    continuous_time_trajectory = concatenate_trajectories(joint_segments)
+    remapped_joint_positions = list(
+        iter_traj_with_max_distance(
+            continuous_time_trajectory, max_joint_space_distance
+        )
+    )
+
+    # Remap the cup states.
+    def _cup_interpolate_fn(q1: Pose | None, q2: Pose | None, t: float) -> Pose | None:
+        del q2, t  # unused
+        return q1
+
+    def _cup_distance_fn(q1: Pose | None, q2: Pose | None) -> float:
+        raise NotImplementedError
+
+    cup_segments = []
+    for t in range(len(traj.held_cup_transforms) - 1):
+        cup_seg = TrajectorySegment(
+            traj.held_cup_transforms[t],
+            traj.held_cup_transforms[t + 1],
+            distances[t],
+            interpolate_fn=_cup_interpolate_fn,
+            distance_fn=_cup_distance_fn,
+        )
+        cup_segments.append(cup_seg)
+    continuous_time_cup_trajectory = concatenate_trajectories(cup_segments)
+
+    ts = np.linspace(
+        0,
+        continuous_time_trajectory.duration,
+        num=len(remapped_joint_positions),
+        endpoint=True,
+    )
+    remapped_held_cup_tfs = [continuous_time_cup_trajectory(t) for t in ts]
+
+    return CupManipulationTrajectory(remapped_joint_positions, remapped_held_cup_tfs)
 
 
 def generate_trajectory(
@@ -249,62 +317,10 @@ def generate_trajectory(
     )
     plan.extend(move_cup_to_staging_plan)
 
-    return plan
-
-    # TODO
-    # # Create a continuous-time trajectory.
-    # joint_interpolate_fn = partial(interpolate_joints, joint_infos)
-    # distances = []
-    # for pt1, pt2 in zip(all_joint_positions[:-1], all_joint_positions[1:], strict=True):
-    #     dist = _joint_distance_fn(pt1, pt2)
-    #     distances.append(dist)
-    # # Use distances as times.
-    # joint_segments = []
-    # for t in range(len(all_joint_positions) - 1):
-    #     joint_seg = TrajectorySegment(
-    #         all_joint_positions[t],
-    #         all_joint_positions[t + 1],
-    #         distances[t],
-    #         interpolate_fn=joint_interpolate_fn,
-    #         distance_fn=_joint_distance_fn,
-    #     )
-    #     joint_segments.append(joint_seg)
-    # continuous_time_trajectory = concatenate_trajectories(joint_segments)
-    # remapped_joint_positions = list(
-    #     iter_traj_with_max_distance(
-    #         continuous_time_trajectory, max_joint_space_distance
-    #     )
-    # )
-
-    # # Remap the cup states.
-    # def _cup_interpolate_fn(q1: Pose | None, q2: Pose | None, t: float) -> Pose | None:
-    #     del q2, t  # unused
-    #     return q1
-
-    # def _cup_distance_fn(q1: Pose | None, q2: Pose | None) -> float:
-    #     raise NotImplementedError
-
-    # cup_segments = []
-    # for t in range(len(all_held_cup_tfs) - 1):
-    #     cup_seg = TrajectorySegment(
-    #         all_held_cup_tfs[t],
-    #         all_held_cup_tfs[t + 1],
-    #         distances[t],
-    #         interpolate_fn=_cup_interpolate_fn,
-    #         distance_fn=_cup_distance_fn,
-    #     )
-    #     cup_segments.append(cup_seg)
-    # continuous_time_cup_trajectory = concatenate_trajectories(cup_segments)
-
-    # ts = np.linspace(
-    #     0,
-    #     continuous_time_trajectory.duration,
-    #     num=len(remapped_joint_positions),
-    #     endpoint=True,
-    # )
-    # remapped_held_cup_tfs = [continuous_time_cup_trajectory(t) for t in ts]
-
-    # return CupManipulationTrajectory(remapped_joint_positions, remapped_held_cup_tfs)
+    # Remap the trajectory.
+    return _remap_trajectory_to_constant_distance(
+        plan, scene, _joint_distance_fn, max_joint_space_distance
+    )
 
 
 def _main(seed: int, max_motion_plan_time: float, force_rerun: bool) -> None:
