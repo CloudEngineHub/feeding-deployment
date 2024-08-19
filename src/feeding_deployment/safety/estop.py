@@ -1,13 +1,16 @@
+"""Soft E-stop with a button."""
+
 import time
 
 import numpy as np
 import numpy.typing as npt
 import pyaudio
-import rospy  # type: ignore
-from std_msgs.msg import Bool  # type: ignore
+import rospy  # type: ignore  # pylint: disable=import-error
+from std_msgs.msg import Bool  # type: ignore  # pylint: disable=import-error
 
 
 class EStop:
+    """Soft E-stop with a button."""
 
     PYAUDIO_STREAM_TROUBLESHOOTING = (
         "The Pyaudio stream not opening error is often caused by another process using "
@@ -53,7 +56,7 @@ class EStop:
         self.stop_controller_pub = rospy.Publisher("/estop", Bool, queue_size=1)
 
     def close(self) -> None:
-        # Close the audio stream
+        """Close the audio stream."""
         if self.stream is not None:
             self.stream.stop_stream()
             self.stream.close()
@@ -62,6 +65,7 @@ class EStop:
     def __audio_callback(
         self, data: bytes, frame_count: int, time_info: dict, status: int
     ) -> tuple[bytes, int]:
+        del frame_count, time_info, status  # unused
 
         # Skip the first few seconds of data, to avoid initial noise
         if time.time() - self.start_time < 2:
