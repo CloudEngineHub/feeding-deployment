@@ -1,11 +1,10 @@
 import time
-from typing import List, Optional, Tuple, Union
 
 import numpy as np
 import numpy.typing as npt
 import pyaudio
-import rospy
-from std_msgs.msg import Bool
+import rospy  # type: ignore
+from std_msgs.msg import Bool  # type: ignore
 
 
 class EStop:
@@ -22,11 +21,11 @@ class EStop:
         "Note that until this is addressed, the e-stop button will not be working."
     )
 
-    def __init__(self):
+    def __init__(self) -> None:
 
         self.start_time = time.time()
-        self.prev_data_arr = None
-        self.detection_time = None
+        self.prev_data_arr: npt.NDArray | None = None
+        self.detection_time: float | None = None
         self.max_threshold = 10000
         self.min_threshold = -10000
 
@@ -43,18 +42,17 @@ class EStop:
                 stream_callback=self.__audio_callback,
             )
         except OSError as exc:
-            self._node.get_logger().error(
+            raise RuntimeError(
                 (
                     f"Error opening audio device {0}. "
                     f"{EStop.PYAUDIO_STREAM_TROUBLESHOOTING}\n\n"
-                    f"Excpetion: {exc}"
+                    f"Exception: {exc}"
                 ),
-                throttle_duration_sec=1,
             )
 
         self.stop_controller_pub = rospy.Publisher("/estop", Bool, queue_size=1)
 
-    def close(self):
+    def close(self)-> None:
         # Close the audio stream
         if self.stream is not None:
             self.stream.stop_stream()
@@ -63,7 +61,7 @@ class EStop:
 
     def __audio_callback(
         self, data: bytes, frame_count: int, time_info: dict, status: int
-    ) -> Tuple[bytes, int]:
+    ) -> tuple[bytes, int]:
 
         # Skip the first few seconds of data, to avoid initial noise
         if time.time() - self.start_time < 2:
@@ -96,8 +94,8 @@ class EStop:
     @staticmethod
     def rising_edge_detector(
         curr_data_arr: npt.NDArray,
-        prev_data_arr: Optional[npt.NDArray],
-        threshold: Union[int, float],
+        prev_data_arr: npt.NDArray | None,
+        threshold: int | float,
     ) -> bool:
         """Detects whether there is a rising edge in `curr_data_arr` that
         exceeds `threshold`. In other words, this function returns True if
@@ -144,8 +142,8 @@ class EStop:
     @staticmethod
     def falling_edge_detector(
         curr_data_arr: npt.NDArray,
-        prev_data_arr: Optional[npt.NDArray],
-        threshold: Union[int, float],
+        prev_data_arr: npt.NDArray | None,
+        threshold: int | float,
     ) -> bool:
         """Detects whether there is a falling edge in `curr_data_arr` that
         exceeds `threshold`. In other words, this function returns True if

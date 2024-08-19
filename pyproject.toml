@@ -10,6 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
    "pybullet_helpers@git+https://github.com/tomsilver/pybullet-helpers.git",
+   "pyaudio",
 ]
 
 [project.optional-dependencies]
@@ -49,5 +50,6 @@ exclude = ["venv/*"]
 [[tool.mypy.overrides]]
 module = [
     "pybullet.*",
+    "pyaudio.*",
 ]
 ignore_missing_imports = true

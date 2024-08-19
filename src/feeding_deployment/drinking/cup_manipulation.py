@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import pybullet as p
-from cup_manipulation_utils import (
+from feeding_deployment.drinking.utils import (
     CupManipulationTrajectory,
     make_cup_manipulation_video,
 )
@@ -29,7 +29,7 @@ from pybullet_helpers.trajectory import (
     concatenate_trajectories,
     iter_traj_with_max_distance,
 )
-from scene import (
+from feeding_deployment.drinking.scene import (
     CupManipulationSceneDescription,
     CupManipulationSceneIDs,
     create_cup_manipulation_scene,
