@@ -1,3 +1,5 @@
+# Author: Jimmy Wu, adapted by Rajat Kumar Jenamani for Emprise Lab
+
 import math
 import os
 import subprocess
@@ -16,6 +18,10 @@ from kortex_api.SessionManager import SessionManager
 from kortex_api.TCPTransport import TCPTransport
 from kortex_api.UDPTransport import UDPTransport
 from scipy.spatial.transform import Rotation as R
+
+# Rajat ToDo: Move all ROS stuff to a separate interface
+import rospy
+from std_msgs.msg import Bool
 
 # for joint space compliant control
 from joint_compliant_controller import *
@@ -62,9 +68,13 @@ class DeviceConnection:
         self.transport.disconnect()
 
 class KinovaArm:
-    ACTION_TIMEOUT_DURATION = 20
+    ACTION_TIMEOUT_DURATION = 60
 
     def __init__(self):
+        rospy.init_node("kinova_controller", anonymous=True)
+
+        self.estop_sub = rospy.Subscriber("/estop", Bool, self.estop_callback, queue_size=10)
+
         # Check whether arm is connected
         try:
             subprocess.run(['ping', '-c', '1',  '192.168.1.10'], check=True, timeout=1, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -103,6 +113,9 @@ class KinovaArm:
         self.send_options = RouterClientSendOptions()
         self.send_options.timeout_ms = 3
 
+        # clear faults
+        self.clear_faults()
+
         # Command and feedback setup
         self.base_command = BaseCyclic_pb2.Command()
         for _ in range(self.actuator_count):
@@ -139,7 +152,8 @@ class KinovaArm:
         self.gripper_pos = 0
 
         # Pinocchio setup (only used in low-level servoing mode)
-        self.model = pin.buildModelFromUrdf('gen3_robotiq_2f_85.urdf')
+        self.file_path = os.path.dirname(os.path.realpath(__file__))
+        self.model = pin.buildModelFromUrdf(os.path.join(self.file_path, 'gen3_robotiq_2f_85.urdf'))
         self.data = self.model.createData()
         self.q_pin = np.zeros(self.model.nq)
         self.tool_frame_id = self.model.getFrameId('tool_frame')
@@ -158,7 +172,14 @@ class KinovaArm:
             Base_pb2.NotificationOptions()
         )
 
+    def estop_callback(self, msg):
+        if msg.data:
+            self.apply_emergency_stop()
+            # kill ros node
+            rospy.signal_shutdown("Emergency stop")
+
     def disconnect(self):
+        self.base.Unsubscribe(self.notification_handle) # Rajat ToDo: Check if this is necessary before switching to low-level servoing mode
         self.tcp_connection.__exit__()
         self.udp_connection.__exit__()
         os.remove(self.lock_file)
@@ -210,6 +231,64 @@ class KinovaArm:
     def zero(self):
         self._execute_reference_action('Zero')
 
+    def get_state(self):
+
+        assert not self.cyclic_running, 'Arm must be in high-level servoing mode' # Rajat ToDo: Combine this with self.update_state()
+        
+        base_feedback = self.base_cyclic.RefreshFeedback()
+
+        q, dq, tau = np.zeros(self.actuator_count), np.zeros(self.actuator_count), np.zeros(self.actuator_count)
+        # Robot state
+        for i in range(self.actuator_count):
+            q[i] = math.radians(base_feedback.actuators[i].position)
+            if q[i] > np.pi:
+                q[i] -= 2 * np.pi
+            dq[i] = math.radians(base_feedback.actuators[i].velocity)
+            tau[i] = -base_feedback.actuators[i].torque
+        
+        gripper_pos = base_feedback.interconnect.gripper_feedback.motor[0].position / 100.0
+
+        # return q, dq, tau, gripper_pos
+        return q, gripper_pos
+
+    def move_angular_trajectory(self, trajectory_joint_angles, blocking=True):
+
+        assert not self.cyclic_running, 'Arm must be in high-level servoing mode'
+        assert len(trajectory_joint_angles) > 0, 'Invalid trajectory'
+        assert len(trajectory_joint_angles[0]) == self.actuator_count, 'Invalid number of joint angles'
+
+        jointPoses = [[math.degrees(angle) for angle in jointPose] for jointPose in trajectory_joint_angles]
+        
+        waypoints = Base_pb2.WaypointList()    
+        waypoints.duration = 0.0
+        waypoints.use_optimal_blending = False
+
+        index = 0
+        for jointPose in jointPoses:
+            waypoint = waypoints.waypoints.add()
+            waypoint.name = "waypoint_" + str(index)
+            waypoint.angular_waypoint.angles.extend(jointPose)
+            waypoint.angular_waypoint.duration = 0.5
+            index = index + 1 
+
+        result = self.base.ValidateWaypointList(waypoints)
+        if(len(result.trajectory_error_report.trajectory_error_elements) == 0):
+            print("Reaching angular pose trajectory...")
+
+            self.end_or_abort_event.clear()
+            self.base.ExecuteWaypointTrajectory(waypoints)
+
+            if blocking:
+                print("Waiting for trajectory to finish ...")
+                finished = self.end_or_abort_event.wait(KinovaArm.ACTION_TIMEOUT_DURATION)
+                if finished:
+                    print("Angular movement completed")
+                else:
+                    print("Timeout on action notification wait")
+        else:
+            print("Error found in trajectory") 
+            print(result.trajectory_error_report)
+
     def move_angular(self, joint_angles, blocking=True):
 
         assert not self.cyclic_running, 'Arm must be in high-level servoing mode'
@@ -220,7 +299,7 @@ class KinovaArm:
         for i in range(self.actuator_count):
             joint_angle = action.reach_joint_angles.joint_angles.joint_angles.add()
             joint_angle.joint_identifier = i
-            joint_angle.value = joint_angles[i]
+            joint_angle.value = math.degrees(joint_angles[i])
         self.end_or_abort_event.clear()
         self.base.ExecuteAction(action)
         if blocking:
@@ -236,9 +315,9 @@ class KinovaArm:
         cartesian_pose.x = xyz[0]
         cartesian_pose.y = xyz[1]
         cartesian_pose.z = xyz[2]
-        cartesian_pose.theta_x = theta_xyz[0]
-        cartesian_pose.theta_y = theta_xyz[1]
-        cartesian_pose.theta_z = theta_xyz[2]
+        cartesian_pose.theta_x = math.degrees(theta_xyz[0])
+        cartesian_pose.theta_y = math.degrees(theta_xyz[1])
+        cartesian_pose.theta_z = math.degrees(theta_xyz[2])
         self.end_or_abort_event.clear()
         self.base.ExecuteAction(action)
         if blocking:
@@ -570,43 +649,46 @@ def main():
     arm = KinovaArm()
     try:
 
-        arm.zero_torque_offsets()
+        # arm.zero_torque_offsets()
         arm.retract()
-
-        home_pos = [
-            2.2912759438800285,
-            0.7308686750765581,
-            2.082994642398784,
-            4.109475142253324,
-            0.2853091081120964,
-            5.818345985240578,
-            5.988186420599291,
-        ]
-        home_pos = [math.degrees(angle) for angle in home_pos]
-
-        infront_mount_position = [0.0, -0.17, 0.15]
-        infront_mount_orientation = R.from_quat([0.7071068, -0.7071068, 0, 0]).as_euler('xyz', degrees=True)
-        
-        input("Press Enter to move to home pos")
-        arm.move_angular(home_pos)
-
-        input("Press Enter to move to infront mount pose")
-        arm.move_cartesian(infront_mount_position, infront_mount_orientation)
-
-        input("Press Enter to move to home config")
-        arm.home()
-        
-        input("Press Enter to start gravity compensation")
-        arm.switch_to_gravity_compensation_mode()
-
-        input("Press Enter to move to home config")
         arm.home()
 
-        input("Press Enter to start joint compliant mode")
-        arm.switch_to_joint_compliant_mode()
+        # home_pos = [
+        #     2.2912759438800285,
+        #     0.7308686750765581,
+        #     2.082994642398784,
+        #     4.109475142253324,
+        #     0.2853091081120964,
+        #     5.818345985240578,
+        #     5.988186420599291,
+        # ]
+        # home_pos = [math.degrees(angle) for angle in home_pos]
 
-        input("Press Enter to move to retract config")
-        arm.retract()
+        # infront_mount_position = [0.0, -0.17, 0.15]
+        # infront_mount_orientation = R.from_quat([0.7071068, -0.7071068, 0, 0]).as_euler('xyz', degrees=True)
+        
+        # input("Press Enter to move to home pos")
+        # arm.move_angular(home_pos)
+
+        # input("Press Enter to move to infront mount pose")
+        # arm.move_cartesian(infront_mount_position, infront_mount_orientation)
+
+        # input("Press Enter to move to home config")
+        # arm.home()
+        
+        # input("Press Enter to start gravity compensation")
+        # arm.switch_to_gravity_compensation_mode()
+
+        # input("Press Enter to move to home config")
+        # arm.home()
+
+        # input("Press Enter to start joint compliant mode")
+        # arm.switch_to_joint_compliant_mode()
+
+        # input("Press Enter to move to retract config")
+        # arm.retract()
+
+        # arm.move_angular_trajectory([])
 
     finally:
         arm.disconnect()

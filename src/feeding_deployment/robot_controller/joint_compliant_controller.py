@@ -1,5 +1,4 @@
-# Author: Jimmy Wu
-# Date: June 2024
+# Author: Jimmy Wu, adapted by Rajat Kumar Jenamani for Emprise Lab
 
 # References:
 # - https://github.com/empriselab/gen3_compliant_controllers/blob/main/src/JointSpaceCompliantController.cpp
