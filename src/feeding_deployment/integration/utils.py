@@ -23,7 +23,7 @@ def cup_manipulation_trajectory_to_kinova_commands(
         assert np.isclose(joint_state[7], joint_state[8])
         gripper = joint_state[8]
         if last_gripper is None or not np.isclose(gripper, last_gripper):
-            if last_gripper >= 0:
+            if last_gripper is None or last_gripper >= 0:
                 cmds.append(CloseGripperCommand())
             else:
                 cmds.append(OpenGripperCommand())
