@@ -44,7 +44,7 @@ def generate_trajectory(
     num_grasp_waypoints: int = 5,
     seed: int = 0,
     num_drink_transfer_end_effector_interp: int = 25,
-    max_joint_space_distance=0.1,
+    max_joint_space_distance: float = 0.1,
 ) -> CupManipulationTrajectory:
     """Run planning to create a cup manipulation trajectory."""
 
