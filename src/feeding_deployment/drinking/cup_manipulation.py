@@ -114,6 +114,7 @@ def _get_plan_to_grasp_cup(
     held_obj_tfs: list[Pose | None] = [None] * len(plan)
 
     # Simulate grasping by faking a constraint with the held object.
+    robot.set_joints(plan[-1])
     world_from_end_effector = get_link_pose(
         robot.robot_id, robot.end_effector_id, physics_client_id
     )
@@ -294,6 +295,7 @@ def generate_trajectory(
         scene, scene_description, seed, max_motion_plan_time
     )
     plan.extend(pregrasp_cup_plan)
+    robot.set_joints(plan.joint_states[-1])
 
     grasp_cup_plan = _get_plan_to_grasp_cup(
         scene,
@@ -303,6 +305,7 @@ def generate_trajectory(
         max_motion_plan_time,
     )
     plan.extend(grasp_cup_plan)
+    robot.set_joints(plan.joint_states[-1])
 
     # Move to staging pose.
     base_link_to_held_obj = grasp_cup_plan.held_cup_transforms[-1]
@@ -316,6 +319,7 @@ def generate_trajectory(
         base_link_to_held_obj,
     )
     plan.extend(move_cup_to_staging_plan)
+    robot.set_joints(plan.joint_states[-1])
 
     # Remap the trajectory.
     return _remap_trajectory_to_constant_distance(
