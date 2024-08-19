@@ -18,7 +18,7 @@ from pybullet_helpers.joint import (
     JointPositions,
 )
 
-from feeding_deployment.drinking.cup_manipulation_scene import (
+from feeding_deployment.drinking.scene import (
     CupManipulationSceneDescription,
     CupManipulationSceneIDs,
 )

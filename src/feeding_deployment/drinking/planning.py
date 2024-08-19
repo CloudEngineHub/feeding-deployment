@@ -27,7 +27,7 @@ from pybullet_helpers.trajectory import (
     iter_traj_with_max_distance,
 )
 
-from feeding_deployment.drinking.cup_manipulation_scene import (
+from feeding_deployment.drinking.scene import (
     CupManipulationSceneDescription,
     CupManipulationSceneIDs,
     create_cup_manipulation_scene,
