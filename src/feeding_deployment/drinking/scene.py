@@ -185,9 +185,6 @@ class CupManipulationSceneDescription:
             else:
                 field_close = mine == theirs
             if not field_close:
-                import ipdb
-
-                ipdb.set_trace()
                 return False
         return True
 
