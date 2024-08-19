@@ -178,6 +178,17 @@ class CupManipulationSceneIDs:
     cup_id: int
     cup_handle_link_id: int
 
+    def get_collision_ids(self, include_cup: bool = True) -> set[int]:
+        """Return all collision IDs."""
+        collision_ids = {
+            self.table_id,
+            self.robot_holder_id,
+            self.wheelchair_id,
+        }
+        if include_cup:
+            collision_ids.add(self.cup_id)
+        return collision_ids
+
     def reset(self, scene_description: CupManipulationSceneDescription):
         """Reset the scene from a description."""
         # Reset the robot.

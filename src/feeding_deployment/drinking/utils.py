@@ -1,6 +1,8 @@
 """Utilities for cup manipulation."""
 
-from dataclasses import dataclass
+from __future__ import annotations
+
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import imageio.v2 as iio
@@ -24,11 +26,16 @@ from feeding_deployment.drinking.cup_manipulation_scene import (
 class CupManipulationTrajectory:
     """A trajectory for cup manipulation."""
 
-    joint_states: list[JointPositions]
-    held_cup_transforms: list[Pose | None]
+    joint_states: list[JointPositions] = field(default_factory=lambda: [])
+    held_cup_transforms: list[Pose | None] = field(default_factory=lambda: [])
 
     def __post_init__(self) -> None:
         assert len(self.joint_states) == len(self.held_cup_transforms)
+
+    def extend(self, other: CupManipulationTrajectory) -> None:
+        """Extend this trajectory in-place."""
+        self.joint_states.extend(other.joint_states)
+        self.held_cup_transforms.extend(other.held_cup_transforms)
 
 
 def make_cup_manipulation_video(

@@ -3,11 +3,12 @@
 import pickle
 from functools import partial
 from pathlib import Path
+from typing import Callable
 
 import numpy as np
 import pybullet as p
 from pybullet_helpers.geometry import Pose, get_pose, interpolate_poses, multiply_poses
-from pybullet_helpers.gui import create_gui_connection, visualize_pose
+from pybullet_helpers.gui import create_gui_connection
 from pybullet_helpers.inverse_kinematics import (
     end_effector_transform_to_joints,
     set_robot_joints_with_held_object,
@@ -37,48 +38,17 @@ from feeding_deployment.drinking.utils import (
 )
 
 
-def generate_trajectory(
+def _get_plan_to_pregrasp_cup(
     scene: CupManipulationSceneIDs,
     scene_description: CupManipulationSceneDescription,
-    max_motion_plan_time: float = 10.0,
-    num_grasp_waypoints: int = 5,
-    seed: int = 0,
-    num_drink_transfer_end_effector_interp: int = 25,
-    max_joint_space_distance: float = 0.1,
+    seed: int,
+    max_motion_plan_time: float,
 ) -> CupManipulationTrajectory:
-    """Run planning to create a cup manipulation trajectory."""
 
-    physics_client_id = scene.physics_client_id
     robot = scene.robot
-
-    weights = geometric_sequence(0.9, len(robot.arm_joint_names))
-    joint_infos = get_joint_infos(
-        robot.robot_id, robot.arm_joints, robot.physics_client_id
-    )
-
-    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
-        return get_joint_positions_distance(
-            robot,
-            joint_infos,
-            pt1,
-            pt2,
-            metric="weighted_joints",
-            weights=weights,
-        )
-
-    collision_ids = {
-        scene.cup_id,
-        scene.table_id,
-        scene.robot_holder_id,
-        scene.wheelchair_id,
-    }
-    all_joint_positions = [robot.get_joint_positions()]
-    all_held_cup_tfs: list[Pose | None] = [None]
-
-    # Close the fingers.
-    robot.close_fingers()
-    all_joint_positions.append(robot.get_joint_positions())
-    all_held_cup_tfs.append(None)
+    physics_client_id = scene.physics_client_id
+    assert physics_client_id == robot.physics_client_id
+    collision_ids = scene.get_collision_ids()
 
     # Commands will be in end effector space, but grasp planning will be in
     # finger frame space.
@@ -87,15 +57,6 @@ def generate_trajectory(
     finger_from_end_effector = get_relative_link_pose(
         robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
     )
-
-    # Use the table pose as a frame of reference.
-    table_frame = get_pose(scene.table_id, physics_client_id)
-    # Move the frame to the bottom right hand corner of the table so we can see it.
-    dims = p.getVisualShapeData(scene.table_id, physicsClientId=physics_client_id)[0][3]
-    offset = Pose((dims[0] / 2, -dims[1] / 2, dims[2] / 2))
-    table_frame = multiply_poses(table_frame, offset)
-
-    visualize_pose(table_frame, physics_client_id)
 
     # Find target finger frame pose relative to the cup handle.
     cup_handle_pose = get_link_pose(
@@ -112,16 +73,22 @@ def generate_trajectory(
         max_time=max_motion_plan_time,
     )
     assert plan is not None
+    return CupManipulationTrajectory(plan, [None] * len(plan))
 
-    # Execute the motion plan.
-    for state in plan:
-        robot.set_joints(state)
-        all_joint_positions.append(state)
-        all_held_cup_tfs.append(None)
 
-    # Move to grasp.
-    held_obj_id = scene.cup_id
-    new_collision_ids = collision_ids - {held_obj_id}
+def _get_plan_to_grasp_cup(
+    scene: CupManipulationSceneIDs,
+    scene_description: CupManipulationSceneDescription,
+    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
+    num_grasp_waypoints: int,
+    max_motion_plan_time: float,
+) -> CupManipulationTrajectory:
+
+    # Assumes that _get_plan_to_pregrasp_cup() was just called.
+    robot = scene.robot
+    physics_client_id = scene.physics_client_id
+    collision_ids = scene.get_collision_ids(include_cup=False)
+
     tf = Pose(
         (0.0, 0.0, scene_description.cup_grasp_distance),
         (0.0, 0.0, 0.0, 1.0),
@@ -139,27 +106,18 @@ def generate_trajectory(
         robot,
         interpolated_poses,
         robot.get_joint_positions(),
-        new_collision_ids,
+        collision_ids,
         _joint_distance_fn,
         max_time=max_motion_plan_time,
     )
-
-    # Execute the plan.
-    for state in plan:
-        robot.set_joints(state)
-        all_joint_positions.append(state)
-        all_held_cup_tfs.append(None)
-
-    # Open the fingers to create a constraint inside the mounted holder.
-    robot.open_fingers()
-    all_joint_positions.append(robot.get_joint_positions())
-    all_held_cup_tfs.append(None)
+    assert plan is not None
+    held_obj_tfs: list[Pose | None] = [None] * len(plan)
 
     # Simulate grasping by faking a constraint with the held object.
     world_from_end_effector = get_link_pose(
         robot.robot_id, robot.end_effector_id, physics_client_id
     )
-    world_from_held_object = get_pose(held_obj_id, physics_client_id)
+    world_from_held_object = get_pose(scene.cup_id, physics_client_id)
     base_link_to_held_obj = multiply_poses(
         world_from_end_effector.invert(), world_from_held_object
     )
@@ -168,12 +126,34 @@ def generate_trajectory(
     tf = Pose((0.0, -0.01, 0.0), (0.0, 0.0, 0.0, 1.0))
     joints = end_effector_transform_to_joints(robot, tf)
     set_robot_joints_with_held_object(
-        robot, physics_client_id, held_obj_id, base_link_to_held_obj, joints
+        robot, physics_client_id, scene.cup_id, base_link_to_held_obj, joints
     )
-    all_joint_positions.append(joints)
-    all_held_cup_tfs.append(base_link_to_held_obj)
 
-    # Move to staging pose.
+    plan.append(joints)
+    held_obj_tfs.append(base_link_to_held_obj)
+
+    return CupManipulationTrajectory(plan, held_obj_tfs)
+
+
+def _get_move_cup_to_staging_plan(
+    scene: CupManipulationSceneIDs,
+    scene_description: CupManipulationSceneDescription,
+    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
+    num_drink_transfer_end_effector_interp: int,
+    max_motion_plan_time: float,
+    base_link_to_held_obj: Pose,
+) -> CupManipulationTrajectory:
+    # Assumes that _get_plan_to_grasp_cup() was just called.
+    robot = scene.robot
+    physics_client_id = scene.physics_client_id
+    collision_ids = scene.get_collision_ids(include_cup=False)
+
+    finger_frame_id = robot.link_from_name("finger_tip")
+    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
+    finger_from_end_effector = get_relative_link_pose(
+        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
+    )
+
     new_cup_pose = scene_description.cup_staging_pose
     cup_pose = get_pose(scene.cup_id, physics_client_id)
     current_fingers_pose = get_link_pose(
@@ -184,7 +164,6 @@ def generate_trajectory(
         current_fingers_pose,
     )
     new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
-    visualize_pose(new_fingers_pose, physics_client_id)
     new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
 
     # Prevent spilling: interpolate in end effector space and then follow.
@@ -200,72 +179,132 @@ def generate_trajectory(
         robot,
         interpolated_poses,
         robot.get_joint_positions(),
-        new_collision_ids,
+        collision_ids,
         _joint_distance_fn,
         max_time=max_motion_plan_time,
+        held_object=scene.cup_id,
+        base_link_to_held_obj=base_link_to_held_obj,
     )
 
-    # Execute the plan.
-    for state in plan:
-        set_robot_joints_with_held_object(
-            robot, physics_client_id, held_obj_id, base_link_to_held_obj, state
-        )
-        all_joint_positions.append(state)
-        all_held_cup_tfs.append(base_link_to_held_obj)
+    return CupManipulationTrajectory(plan, [base_link_to_held_obj] * len(plan))
 
-    # Create a continuous-time trajectory.
-    joint_interpolate_fn = partial(interpolate_joints, joint_infos)
-    distances = []
-    for pt1, pt2 in zip(all_joint_positions[:-1], all_joint_positions[1:], strict=True):
-        dist = _joint_distance_fn(pt1, pt2)
-        distances.append(dist)
-    # Use distances as times.
-    joint_segments = []
-    for t in range(len(all_joint_positions) - 1):
-        joint_seg = TrajectorySegment(
-            all_joint_positions[t],
-            all_joint_positions[t + 1],
-            distances[t],
-            interpolate_fn=joint_interpolate_fn,
-            distance_fn=_joint_distance_fn,
-        )
-        joint_segments.append(joint_seg)
-    continuous_time_trajectory = concatenate_trajectories(joint_segments)
-    remapped_joint_positions = list(
-        iter_traj_with_max_distance(
-            continuous_time_trajectory, max_joint_space_distance
-        )
+
+def generate_trajectory(
+    scene: CupManipulationSceneIDs,
+    scene_description: CupManipulationSceneDescription,
+    max_motion_plan_time: float = 10.0,
+    num_grasp_waypoints: int = 5,
+    seed: int = 0,
+    num_drink_transfer_end_effector_interp: int = 25,
+    max_joint_space_distance: float = 0.1,
+) -> CupManipulationTrajectory:
+    """Run planning to create a cup manipulation trajectory."""
+
+    plan = CupManipulationTrajectory()
+
+    robot = scene.robot
+    physics_client_id = scene.physics_client_id
+    assert robot.physics_client_id == physics_client_id
+
+    # Create joint distance function.
+    weights = geometric_sequence(0.9, len(robot.arm_joint_names))
+    joint_infos = get_joint_infos(
+        robot.robot_id, robot.arm_joints, robot.physics_client_id
     )
 
-    # Remap the cup states.
-    def _cup_interpolate_fn(q1: Pose | None, q2: Pose | None, t: float) -> Pose | None:
-        del q2, t  # unused
-        return q1
-
-    def _cup_distance_fn(q1: Pose | None, q2: Pose | None) -> float:
-        raise NotImplementedError
-
-    cup_segments = []
-    for t in range(len(all_held_cup_tfs) - 1):
-        cup_seg = TrajectorySegment(
-            all_held_cup_tfs[t],
-            all_held_cup_tfs[t + 1],
-            distances[t],
-            interpolate_fn=_cup_interpolate_fn,
-            distance_fn=_cup_distance_fn,
+    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
+        return get_joint_positions_distance(
+            robot,
+            joint_infos,
+            pt1,
+            pt2,
+            metric="weighted_joints",
+            weights=weights,
         )
-        cup_segments.append(cup_seg)
-    continuous_time_cup_trajectory = concatenate_trajectories(cup_segments)
 
-    ts = np.linspace(
-        0,
-        continuous_time_trajectory.duration,
-        num=len(remapped_joint_positions),
-        endpoint=True,
+    pregrasp_cup_plan = _get_plan_to_pregrasp_cup(
+        scene, scene_description, seed, max_motion_plan_time
     )
-    remapped_held_cup_tfs = [continuous_time_cup_trajectory(t) for t in ts]
+    plan.extend(pregrasp_cup_plan)
 
-    return CupManipulationTrajectory(remapped_joint_positions, remapped_held_cup_tfs)
+    grasp_cup_plan = _get_plan_to_grasp_cup(
+        scene,
+        scene_description,
+        _joint_distance_fn,
+        num_grasp_waypoints,
+        max_motion_plan_time,
+    )
+    plan.extend(grasp_cup_plan)
+
+    # Move to staging pose.
+    base_link_to_held_obj = grasp_cup_plan.held_cup_transforms[-1]
+    assert isinstance(base_link_to_held_obj, Pose)
+    move_cup_to_staging_plan = _get_move_cup_to_staging_plan(
+        scene,
+        scene_description,
+        _joint_distance_fn,
+        num_drink_transfer_end_effector_interp,
+        max_motion_plan_time,
+        base_link_to_held_obj,
+    )
+    plan.extend(move_cup_to_staging_plan)
+
+    return plan
+
+    # TODO
+    # # Create a continuous-time trajectory.
+    # joint_interpolate_fn = partial(interpolate_joints, joint_infos)
+    # distances = []
+    # for pt1, pt2 in zip(all_joint_positions[:-1], all_joint_positions[1:], strict=True):
+    #     dist = _joint_distance_fn(pt1, pt2)
+    #     distances.append(dist)
+    # # Use distances as times.
+    # joint_segments = []
+    # for t in range(len(all_joint_positions) - 1):
+    #     joint_seg = TrajectorySegment(
+    #         all_joint_positions[t],
+    #         all_joint_positions[t + 1],
+    #         distances[t],
+    #         interpolate_fn=joint_interpolate_fn,
+    #         distance_fn=_joint_distance_fn,
+    #     )
+    #     joint_segments.append(joint_seg)
+    # continuous_time_trajectory = concatenate_trajectories(joint_segments)
+    # remapped_joint_positions = list(
+    #     iter_traj_with_max_distance(
+    #         continuous_time_trajectory, max_joint_space_distance
+    #     )
+    # )
+
+    # # Remap the cup states.
+    # def _cup_interpolate_fn(q1: Pose | None, q2: Pose | None, t: float) -> Pose | None:
+    #     del q2, t  # unused
+    #     return q1
+
+    # def _cup_distance_fn(q1: Pose | None, q2: Pose | None) -> float:
+    #     raise NotImplementedError
+
+    # cup_segments = []
+    # for t in range(len(all_held_cup_tfs) - 1):
+    #     cup_seg = TrajectorySegment(
+    #         all_held_cup_tfs[t],
+    #         all_held_cup_tfs[t + 1],
+    #         distances[t],
+    #         interpolate_fn=_cup_interpolate_fn,
+    #         distance_fn=_cup_distance_fn,
+    #     )
+    #     cup_segments.append(cup_seg)
+    # continuous_time_cup_trajectory = concatenate_trajectories(cup_segments)
+
+    # ts = np.linspace(
+    #     0,
+    #     continuous_time_trajectory.duration,
+    #     num=len(remapped_joint_positions),
+    #     endpoint=True,
+    # )
+    # remapped_held_cup_tfs = [continuous_time_cup_trajectory(t) for t in ts]
+
+    # return CupManipulationTrajectory(remapped_joint_positions, remapped_held_cup_tfs)
 
 
 def _main(seed: int, max_motion_plan_time: float, force_rerun: bool) -> None:
