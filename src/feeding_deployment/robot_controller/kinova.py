@@ -24,7 +24,7 @@ import rospy
 from std_msgs.msg import Bool
 
 # for joint space compliant control
-from joint_compliant_controller import *
+from feeding_deployment.robot_controller.joint_compliant_controller import JointCompliantController
 
 class DeviceConnection:
     IP_ADDRESS = '192.168.1.10'

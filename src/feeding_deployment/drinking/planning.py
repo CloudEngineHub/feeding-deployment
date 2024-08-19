@@ -4,6 +4,7 @@ import pickle
 from functools import partial
 from pathlib import Path
 from typing import Callable
+import os
 
 import numpy as np
 import pybullet as p
@@ -271,7 +272,7 @@ def generate_trajectory(
     """Run planning to create a cup manipulation trajectory."""
 
     saved_traj_dir = Path(__file__).parent / "saved_trajs"
-    assert saved_traj_dir.exists()
+    os.makedirs(saved_traj_dir, exist_ok=True)
     saved_traj_files = list(saved_traj_dir.glob("*.traj"))
     if not saved_traj_files:
         next_file_id = 0
