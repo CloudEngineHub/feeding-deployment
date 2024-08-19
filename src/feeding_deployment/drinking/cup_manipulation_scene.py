@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, fields, replace
+from dataclasses import dataclass, field, fields, replace
 from pathlib import Path
 from typing import Any
 
@@ -23,17 +23,19 @@ class CupManipulationSceneDescription:
 
     # Robot.
     robot_name: str = "kinova-gen3"
-    initial_joints: JointPositions = [
-        np.pi / 2,
-        -np.pi / 4,
-        -np.pi / 2,
-        0.0,
-        np.pi / 2,
-        -np.pi / 2,
-        np.pi / 2,
-        0.0,
-        0.0,
-    ]
+    initial_joints: JointPositions = field(
+        default_factory=lambda: [
+            np.pi / 2,
+            -np.pi / 4,
+            -np.pi / 2,
+            0.0,
+            np.pi / 2,
+            -np.pi / 2,
+            np.pi / 2,
+            0.0,
+            0.0,
+        ]
+    )
     robot_base_pose: Pose = Pose(
         (0.0, 0.0, 0.0),
         tuple(Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()),
@@ -149,8 +151,8 @@ class CupManipulationSceneDescription:
         """Compare this scene description to another."""
         if not isinstance(other, CupManipulationSceneDescription):
             return False
-        for field in fields(self):
-            mine, theirs = getattr(self, field.name), getattr(other, field.name)
+        for fld in fields(self):
+            mine, theirs = getattr(self, fld.name), getattr(other, fld.name)
             if hasattr(mine, "allclose"):
                 field_close = mine.allclose(theirs, atol=atol)
             elif isinstance(mine, (tuple, list)):
