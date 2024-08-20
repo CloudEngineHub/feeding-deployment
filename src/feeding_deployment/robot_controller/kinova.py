@@ -9,9 +9,10 @@ from dataclasses import dataclass
 
 import numpy as np
 import pinocchio as pin
+import queue
 
 # Rajat ToDo: Move all ROS stuff to a separate interface
-import rospy
+# import rospy
 from kortex_api.autogen.client_stubs.ActuatorConfigClientRpc import ActuatorConfigClient
 from kortex_api.autogen.client_stubs.BaseClientRpc import BaseClient
 from kortex_api.autogen.client_stubs.BaseCyclicClientRpc import BaseCyclicClient
@@ -37,6 +38,7 @@ from std_msgs.msg import Bool
 # for joint space compliant control
 from feeding_deployment.robot_controller.joint_compliant_controller import (
     JointCompliantController,
+    command_loop_retract,
 )
 
 
@@ -113,11 +115,11 @@ class KinovaArm:
     ACTION_TIMEOUT_DURATION = 60
 
     def __init__(self):
-        rospy.init_node("kinova_controller", anonymous=True)
+        # rospy.init_node("kinova_controller", anonymous=True)
 
-        self.estop_sub = rospy.Subscriber(
-            "/estop", Bool, self.estop_callback, queue_size=10
-        )
+        # self.estop_sub = rospy.Subscriber(
+        #     "/estop", Bool, self.estop_callback, queue_size=10
+        # )
 
         # Check whether arm is connected
         try:
@@ -236,13 +238,16 @@ class KinovaArm:
             Base_pb2.NotificationOptions(),
         )
 
-    def estop_callback(self, msg):
-        if msg.data:
-            self.apply_emergency_stop()
-            # kill ros node
-            rospy.signal_shutdown("Emergency stop")
+    # def estop_callback(self, msg):
+    #     if msg.data:
+    #         self.apply_emergency_stop()
+    #         # kill ros node
+    #         rospy.signal_shutdown("Emergency stop")
 
     def disconnect(self):
+        if self.cyclic_running:
+            self.stop_cyclic()
+
         self.base.Unsubscribe(
             self.notification_handle
         )  # Rajat ToDo: Check if this is necessary before switching to low-level servoing mode
@@ -784,25 +789,20 @@ class KinovaArm:
         except KeyboardInterrupt:
             self.stop_cyclic()
 
-    def switch_to_joint_compliant_mode(self):
+    def switch_to_joint_compliant_mode(self, command_queue):
 
-        command_queue = queue.Queue(1)
         controller = JointCompliantController(command_queue)
-        stop_event = threading.Event()
-        thread = threading.Thread(
-            target=command_loop_retract, args=(command_queue, stop_event), daemon=True
-        )
-        # thread = threading.Thread(target=command_loop_circle, args=(arm, command_queue, stop_event), daemon=True)
-        thread.start()
         self.init_cyclic(controller.control_callback)
-        try:
-            while self.cyclic_running:
-                time.sleep(0.01)
-        except KeyboardInterrupt:
-            stop_event.set()
-            thread.join()
-            time.sleep(0.5)  # Wait for arm to stop moving
+        while not self.cyclic_running:
+            time.sleep(0.01)
+        
+        print("Arm is in joint compliant mode")
+
+    def switch_out_of_joint_compliant_mode(self):
+        if self.cyclic_running:
             self.stop_cyclic()
+        else:
+            print("Not switching as arm is not in joint compliant mode")
 
     def execute_command(self, cmd: KinovaCommand) -> None:
 
@@ -823,7 +823,7 @@ def main():
     try:
 
         # arm.zero_torque_offsets()
-        arm.retract()
+        # arm.retract()
         arm.home()
 
         # home_pos = [
@@ -856,10 +856,11 @@ def main():
         # arm.home()
 
         # input("Press Enter to start joint compliant mode")
-        # arm.switch_to_joint_compliant_mode()
+        command_queue = queue.Queue(1)
+        arm.switch_to_joint_compliant_mode(command_queue)
 
-        # input("Press Enter to move to retract config")
-        # arm.retract()
+        input("Press Enter to move to retract config")
+        arm.retract()
 
         # arm.move_angular_trajectory([])
 
