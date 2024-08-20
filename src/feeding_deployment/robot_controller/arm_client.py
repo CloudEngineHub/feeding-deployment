@@ -21,7 +21,7 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.kinova import KinovaArm
-from sensor_msgs.msg import JointState
+# from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
 
