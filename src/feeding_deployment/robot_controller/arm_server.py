@@ -23,27 +23,46 @@ class Arm:
         self.command_queue = queue.Queue(1)
         self.controller = None
 
+    def get_state(self):
+        arm_pos, gripper_pos = self.arm.get_state()
+        return arm_pos, gripper_pos
+    
     def reset(self):
         # Go to home position
         self.arm.home()
 
+    def switch_to_joint_compliant_mode(self):
         # switch to joint compliant mode
         self.arm.switch_to_joint_compliant_mode(self.command_queue)
 
-    def get_state(self):
-        arm_pos, arm_quat = self.arm.get_tool_pose()
-        if arm_quat[3] < 0.0:  # Enforce quaternion uniqueness
-            np.negative(arm_quat, out=arm_quat)
-        state = {
-            'arm_pos': arm_pos,
-            'arm_quat': arm_quat,
-            'gripper_pos': np.array([self.arm.gripper_pos]),
-        }
-        return state
+    def switch_out_of_joint_compliant_mode(self):
+        # switch out of joint compliant mode
+        self.arm.switch_out_of_joint_compliant_mode()
     
-    def execute_action(self, command_pos):
+    def compliant_joint_pos_command(self, command_pos):
+        print(f"Received compliant joint pos command: {command_pos}")
         gripper_pos = 0
         self.command_queue.put((command_pos, gripper_pos))
+
+    def joint_pos_command(self, command_pos):
+        print(f"Received joint pos command: {command_pos}")
+        self.arm.move_angular(command_pos)
+
+    def cartesian_pose_command(self, xyz, theta_xyz):
+        print(f"Received cartesian pose command: {xyz}, {theta_xyz}")
+        self.arm.move_cartesian(xyz, theta_xyz)
+
+    def gripper_pos_command(self, gripper_pos):
+        print(f"Received gripper pos command: {gripper_pos}")
+        self.arm._gripper_position_command(gripper_pos)
+
+    def open_gripper(self):
+        print("Received open gripper command")
+        self.arm.open_gripper()
+
+    def close_gripper(self):
+        print("Received close gripper command")
+        self.arm.close_gripper()
 
     def close(self):
         self.arm.disconnect()

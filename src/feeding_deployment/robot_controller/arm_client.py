@@ -23,28 +23,46 @@ class Arm:
         self.command_queue = queue.Queue(1)
         self.controller = None
 
+    def get_state(self):
+        arm_pos, gripper_pos = self.arm.get_state()
+        return arm_pos, gripper_pos
+    
     def reset(self):
         # Go to home position
         self.arm.home()
 
+    def switch_to_joint_compliant_mode(self):
         # switch to joint compliant mode
         self.arm.switch_to_joint_compliant_mode(self.command_queue)
 
-    def get_state(self):
-        arm_pos, arm_quat = self.arm.get_tool_pose()
-        if arm_quat[3] < 0.0:  # Enforce quaternion uniqueness
-            np.negative(arm_quat, out=arm_quat)
-        state = {
-            'arm_pos': arm_pos,
-            'arm_quat': arm_quat,
-            'gripper_pos': np.array([self.arm.gripper_pos]),
-        }
-        return state
+    def switch_out_of_joint_compliant_mode(self):
+        # switch out of joint compliant mode
+        self.arm.switch_out_of_joint_compliant_mode()
     
-    def execute_action(self, command_pos):
-        print(f"Received command: {command_pos}")
+    def compliant_set_joint_position(self, command_pos):
+        print(f"Received compliant joint pos command: {command_pos}")
         gripper_pos = 0
         self.command_queue.put((command_pos, gripper_pos))
+
+    def set_joint_position(self, command_pos):
+        print(f"Received joint pos command: {command_pos}")
+        self.arm.move_angular(command_pos)
+
+    def set_ee_pose(self, xyz, theta_xyz):
+        print(f"Received cartesian pose command: {xyz}, {theta_xyz}")
+        self.arm.move_cartesian(xyz, theta_xyz)
+
+    def set_gripper(self, gripper_pos):
+        print(f"Received gripper pos command: {gripper_pos}")
+        self.arm._gripper_position_command(gripper_pos)
+
+    def open_gripper(self):
+        print("Received open gripper command")
+        self.arm.open_gripper()
+
+    def close_gripper(self):
+        print("Received close gripper command")
+        self.arm.close_gripper()
 
     def close(self):
         self.arm.disconnect()
@@ -55,7 +73,7 @@ class ArmManager(MPBaseManager):
 ArmManager.register('Arm', Arm)
 
 if __name__ == '__main__':
-    hostname = 'localhost'
+    hostname = '192.168.1.3'
     # manager = ArmManager(address=(hostname, ARM_RPC_PORT), authkey=RPC_AUTHKEY)
     # server = manager.get_server()
     # print(f'Arm manager server started at {hostname}:{ARM_RPC_PORT}')
@@ -69,10 +87,104 @@ if __name__ == '__main__':
     try:
         arm.reset()
         print("Current Arm State:", arm.get_state())
-        input("Press Enter to set arm pos...")
-        next_pos = [0.0, 0.26179939, 3.14159265, -2.26892803, 0.0, 0.95993109, 1.8]
-        arm.execute_action(next_pos)
-        input("Press Enter to exit...")
+        
+        home_pos = [
+            2.2912759438800285,
+            0.7308686750765581,
+            2.082994642398784,
+            4.109475142253324,
+            0.2853091081120964,
+            5.818345985240578,
+            5.988186420599291,
+        ]
+
+        inside_mount_pose = (np.array([-0.147, -0.17, 0.07]), np.array([0.7071068, -0.7071068, 0, 0]))
+
+        outside_mount_pose = (np.array([-0.147, -0.29, 0.07]), np.array([0.7071068, -0.7071068, 0, 0]))
+
+        outside_mount_joint_states = [
+            2.6266411620509817,
+            0.6992626121546339,
+            2.306749708761716,
+            4.053362604401464,
+            0.9559379448584164,
+            5.655628973165609,
+            5.80065247559031,
+        ]
+        
+        above_mount_pose = (np.array([-0.147, -0.17, 0.15]), np.array([0.7071068, -0.7071068, 0, 0]))
+
+        above_mount_joint_states = [
+            3.300153003835367,
+            0.39120874346320217,
+            1.8613410764520344,
+            3.862447510072517,
+            0.6143839397882825,
+            5.583536137192727,
+            6.276739392077158,
+        ]
+
+        infront_mount_pose = (np.array([0.0, -0.17, 0.15]), np.array([0.7071068, -0.7071068, 0, 0]))
+
+        infront_mount_joint_states = [
+            2.835106221647441, 
+            0.18716812654374576, 
+            1.7554270267415284, 
+            -2.5582927305707517, 
+            0.3492644556371586, 
+            -0.5794207625752312, 
+            -0.3984099643402903,
+        ]
+
+        input("Press enter to move to home joint pos...")
+        next_pos = home_pos.copy()
+        arm.set_joint_position(next_pos)
+
+        input("Press enter to move to outside mount joint pos...")
+        next_pos = outside_mount_joint_states.copy()
+        arm.set_joint_position(next_pos)
+
+        input("Press enter to move to inside mount pose...")
+        arm.set_ee_pose(inside_mount_pose)
+
+        input("Press enter to release the utensil...")
+        arm.set_gripper(1.0)
+
+        input("Press enter to move up...")
+        arm.set_ee_pose(above_mount_pose)
+
+        input("Press enter to move forward...")
+        arm.set_ee_pose(infront_mount_pose)
+
+        input("Press enter to move to home joint pos...")
+        next_pos = home_pos.copy()
+        arm.set_joint_position(next_pos)
+
+        input("Press enter to move to infront mount joint pos...")
+        next_pos = infront_mount_joint_states.copy()
+        arm.set_joint_position(next_pos)
+
+        input("Press enter to move to above mount joint states...")
+        next_pos = above_mount_joint_states.copy()
+        arm.set_joint_position(next_pos)
+
+        input("Press enter to inside mount pose...")
+        arm.set_ee_pose(inside_mount_pose)
+
+        input("Press enter to grab the utensil...")
+        arm.set_gripper(0.5)
+
+        input("Press enter to move to outside mount pose...")
+        arm.set_ee_pose(outside_mount_pose)
+
+        input("Press enter to move to home joint pos...")
+        next_pos = home_pos.copy()
+        arm.set_joint_position(next_pos)
+        
+        # input("Press Enter to set arm pos...")
+        # next_pos = [0.0, 0.26179939, 3.14159265, -2.26892803, 0.0, 0.95993109, 1.8]
+        # arm.execute_action(next_pos)
+        # input("Press Enter to exit...")
         # while True:
             # time.sleep(1)   
         # for i in range(50):

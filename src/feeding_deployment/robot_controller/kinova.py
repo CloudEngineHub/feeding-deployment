@@ -33,7 +33,7 @@ from kortex_api.TCPTransport import TCPTransport
 from kortex_api.UDPTransport import UDPTransport
 from numpy.typing import NDArray
 from scipy.spatial.transform import Rotation as R
-from std_msgs.msg import Bool
+# from std_msgs.msg import Bool
 
 # for joint space compliant control
 from feeding_deployment.robot_controller.joint_compliant_controller import (
