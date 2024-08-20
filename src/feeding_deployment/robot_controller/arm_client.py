@@ -17,7 +17,7 @@ from numpy.typing import NDArray
 # from constants import RPC_AUTHKEY, ARM_RPC_PORT
 RPC_AUTHKEY = b"secret-key"
 ARM_RPC_PORT = 5000
-import rospy
+# import rospy
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.kinova import KinovaArm
