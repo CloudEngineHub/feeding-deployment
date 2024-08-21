@@ -142,6 +142,7 @@ def _get_plan_to_grasp_cup(
 
     return CupManipulationTrajectory(plan, held_obj_tfs)
 
+
 def _get_move_utensil_to_transfer_plan(
     forque_target_pose: Pose,
     scene: CupManipulationSceneIDs,
@@ -166,13 +167,17 @@ def _get_move_utensil_to_transfer_plan(
     )
     # Rajat ToDo: switch to forque_target_pose orientation
     current_end_effector_pose = robot.get_end_effector_pose()
-    current_fingers_pose = get_link_pose(robot.robot_id, finger_frame_id, physics_client_id)
+    current_fingers_pose = get_link_pose(
+        robot.robot_id, finger_frame_id, physics_client_id
+    )
     # new_fingers_pose = multiply_poses(bite_transfer_pose, fingers_to_bite)
     bite_transfer_fingers_pose: Pose = Pose(
         forque_target_pose.position, current_fingers_pose.orientation
     )
 
-    new_end_effector_pose = multiply_poses(bite_transfer_fingers_pose, finger_from_end_effector)
+    new_end_effector_pose = multiply_poses(
+        bite_transfer_fingers_pose, finger_from_end_effector
+    )
     interpolated_poses = list(
         interpolate_poses(
             current_end_effector_pose,
@@ -199,6 +204,7 @@ def _get_move_utensil_to_transfer_plan(
     input("Press enter to continue")
 
     return CupManipulationTrajectory(plan, held_obj_tfs)
+
 
 def _get_move_cup_to_staging_plan(
     scene: CupManipulationSceneIDs,
@@ -412,13 +418,14 @@ def generate_trajectory(
     plan = _remap_trajectory_to_constant_distance(
         plan, scene, _joint_distance_fn, max_joint_space_distance
     )
-    
+
     # Save the trajectory.
     with open(next_filepath, "wb") as wfp:
         pickle.dump((scene_description, plan), wfp)
     print(f"Dumped trajectory to {next_filepath}")
 
     return plan
+
 
 # Rajat ToDo: hacked version of the above function to generate a trajectory for bite transfer
 def generate_bite_transfer_trajectory(

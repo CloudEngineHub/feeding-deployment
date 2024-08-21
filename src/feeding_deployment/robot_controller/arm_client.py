@@ -21,6 +21,7 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.kinova import KinovaArm
+
 # from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
@@ -144,6 +145,7 @@ if __name__ == "__main__":
     try:
         import rospy
         from sensor_msgs.msg import JointState
+
         rospy.init_node("arm_client", anonymous=True)
 
         # publish joint states

@@ -1,13 +1,15 @@
 """Demonstrate the full drinking pipeline."""
 
-import time
-import threading
-from scipy.spatial.transform import Rotation as R
 import pickle
+import threading
+import time
 
 import pybullet as p
-from pybullet_helpers.gui import create_gui_connection
+import rospy
 from pybullet_helpers.geometry import Pose, Pose3D, Quaternion, multiply_poses
+from pybullet_helpers.gui import create_gui_connection
+from scipy.spatial.transform import Rotation as R
+from sensor_msgs.msg import JointState
 
 from feeding_deployment.drinking.planning import generate_bite_transfer_trajectory
 from feeding_deployment.drinking.scene import (
@@ -17,6 +19,7 @@ from feeding_deployment.drinking.scene import (
 from feeding_deployment.drinking.utils import (
     make_cup_manipulation_video,
 )
+from feeding_deployment.head_perception.ros_wrapper import HeadPerceptionROSWrapper
 from feeding_deployment.integration.utils import (
     cup_manipulation_trajectory_to_kinova_commands,
 )
@@ -27,11 +30,8 @@ from feeding_deployment.robot_controller.arm_client import (
     ArmManager,
 )
 
-from feeding_deployment.head_perception.ros_wrapper import HeadPerceptionROSWrapper
-
-import rospy
-from sensor_msgs.msg import JointState
 OFFLINE = True
+
 
 def publish_joint_states(arm):
 
@@ -58,6 +58,7 @@ def publish_joint_states(arm):
         joint_states_pub.publish(joint_state_msg)
         time.sleep(0.01)
 
+
 def _main():
 
     if not OFFLINE:
@@ -73,10 +74,9 @@ def _main():
         joint_state_thread = threading.Thread(target=publish_joint_states, args=(arm,))
         joint_state_thread.start()
 
-
         # before_transfer_pose = [-2.7611776687351686, -1.1868025860674232, -1.701402540342344, -1.8118757886810117, 0.2697561974117632, -0.09096026703165627, 2.4944170781413106]
         # arm.set_joint_position(before_transfer_pose)
-        
+
         # arm.retract()
         time.sleep(1.0)  # make sure arm stabilizes
         q, gripper_position = arm.get_state()
@@ -100,7 +100,11 @@ def _main():
         joint_state = pickle.load(open("joint_state.pkl", "rb"))
 
     forque_target_pose: Pose = Pose(
-        (forque_target_transform[0, 3], forque_target_transform[1, 3], forque_target_transform[2, 3]),
+        (
+            forque_target_transform[0, 3],
+            forque_target_transform[1, 3],
+            forque_target_transform[2, 3],
+        ),
         R.from_matrix(forque_target_transform[:3, :3]).as_quat(),
     )
 
@@ -110,8 +114,12 @@ def _main():
     scene = create_cup_manipulation_scene(physics_client_id, scene_description)
 
     # premultiply forque_target_pose by the robot base pose to get the target pose in the pybullet frame
-    forque_target_pose = multiply_poses(scene_description.robot_base_pose, forque_target_pose)
-    traj = generate_bite_transfer_trajectory(forque_target_pose, scene, scene_description)
+    forque_target_pose = multiply_poses(
+        scene_description.robot_base_pose, forque_target_pose
+    )
+    traj = generate_bite_transfer_trajectory(
+        forque_target_pose, scene, scene_description
+    )
 
     video_outfile = "last.mp4"
     make_cup_manipulation_video(scene, scene_description, traj, video_outfile)

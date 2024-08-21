@@ -1,7 +1,7 @@
 """Demonstrate the full drinking pipeline."""
 
-import time
 import pickle
+import time
 
 import pybullet as p
 from pybullet_helpers.gui import create_gui_connection
@@ -23,6 +23,7 @@ from feeding_deployment.robot_controller.arm_client import (
     RPC_AUTHKEY,
     ArmManager,
 )
+
 OFFLINE = True
 
 
