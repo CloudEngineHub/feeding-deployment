@@ -26,6 +26,10 @@ from pybullet_helpers.trajectory import (
 )
 
 
+###############################################################################
+#                           Assisted Drinking                                 #
+###############################################################################
+
 def _get_plan_to_pregrasp_cup(
     sim: FeedingDeploymentPyBulletSimulator,
     seed: int,
@@ -127,11 +131,67 @@ def _get_plan_to_move_grasp_cup_from_pregrasp_position(
     return sim_states
 
 
+def _get_move_cup_to_staging_plan(
+    sim: FeedingDeploymentPyBulletSimulator,
+    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
+    num_drink_transfer_end_effector_interp: int,
+    max_motion_plan_time: float,
+    base_link_to_held_obj: Pose,
+) -> list[FeedingDeploymentSimulatorState]:
+
+    # Assumes that _get_plan_to_grasp_cup() was just called.
+    robot = sim.robot
+    physics_client_id = sim.physics_client_id
+    collision_ids = sim.get_collision_ids(include_cup=False)
+
+    finger_frame_id = robot.link_from_name("finger_tip")
+    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
+    finger_from_end_effector = get_relative_link_pose(
+        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
+    )
+
+    new_cup_pose = sim.scene_description.cup_staging_pose
+    cup_pose = get_pose(sim.cup_id, physics_client_id)
+    current_fingers_pose = get_link_pose(
+        robot.robot_id, finger_frame_id, physics_client_id
+    )
+    fingers_to_cup = multiply_poses(
+        cup_pose.invert(),
+        current_fingers_pose,
+    )
+    new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
+    new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
+
+    # Prevent spilling: interpolate in end effector space and then follow.
+    current_end_effector_pose = robot.get_end_effector_pose()
+    interpolated_poses = list(
+        interpolate_poses(
+            current_end_effector_pose,
+            new_end_effector_pose,
+            num_interp=num_drink_transfer_end_effector_interp,
+        )
+    )
+    plan = smoothly_follow_end_effector_path(
+        robot,
+        interpolated_poses,
+        robot.get_joint_positions(),
+        collision_ids,
+        _joint_distance_fn,
+        max_time=max_motion_plan_time,
+        held_object=sim.cup_id,
+        base_link_to_held_obj=base_link_to_held_obj,
+    )
+    sim_states = [FeedingDeploymentSimulatorState(joints, cup_pose=None, held_object="cup", held_object_tf=base_link_to_held_obj)
+                  for joints in plan]
+    return sim_states
+
+
 def get_plan_to_grasp_cup(
     sim: FeedingDeploymentPyBulletSimulator,
     seed: int = 0,
     max_motion_plan_time: float = 10.,
     num_grasp_waypoints: int = 5,
+    num_drink_transfer_end_effector_interp: int = 25,
 ) -> list[FeedingDeploymentSimulatorState]:
     """Make a plan to grasp the cup from the current simulator state."""
 
@@ -163,63 +223,23 @@ def get_plan_to_grasp_cup(
     plan.extend(grasp_cup_plan)
     sim.robot.set_joints(plan[-1].robot_joints)
 
+    base_link_to_held_obj = plan[-1].held_object_tf
+    assert isinstance(base_link_to_held_obj, Pose)
+    move_cup_to_staging_plan = _get_move_cup_to_staging_plan(
+        sim,
+        _joint_distance_fn,
+        num_drink_transfer_end_effector_interp,
+        max_motion_plan_time,
+        base_link_to_held_obj,
+    )
+    plan.extend(move_cup_to_staging_plan)
+
     return plan
 
 
-# TODO add
-# def _get_move_cup_to_staging_plan(
-#     scene: CupManipulationSceneIDs,
-#     scene_description: CupManipulationSceneDescription,
-#     _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
-#     num_drink_transfer_end_effector_interp: int,
-#     max_motion_plan_time: float,
-#     base_link_to_held_obj: Pose,
-# ) -> CupManipulationTrajectory:
-
-#     # Assumes that _get_plan_to_grasp_cup() was just called.
-#     robot = scene.robot
-#     physics_client_id = scene.physics_client_id
-#     collision_ids = scene.get_collision_ids(include_cup=False)
-
-#     finger_frame_id = robot.link_from_name("finger_tip")
-#     end_effector_link_id = robot.link_from_name(robot.tool_link_name)
-#     finger_from_end_effector = get_relative_link_pose(
-#         robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
-#     )
-
-#     new_cup_pose = scene_description.cup_staging_pose
-#     cup_pose = get_pose(scene.cup_id, physics_client_id)
-#     current_fingers_pose = get_link_pose(
-#         robot.robot_id, finger_frame_id, physics_client_id
-#     )
-#     fingers_to_cup = multiply_poses(
-#         cup_pose.invert(),
-#         current_fingers_pose,
-#     )
-#     new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
-#     new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
-
-#     # Prevent spilling: interpolate in end effector space and then follow.
-#     current_end_effector_pose = robot.get_end_effector_pose()
-#     interpolated_poses = list(
-#         interpolate_poses(
-#             current_end_effector_pose,
-#             new_end_effector_pose,
-#             num_interp=num_drink_transfer_end_effector_interp,
-#         )
-#     )
-#     plan = smoothly_follow_end_effector_path(
-#         robot,
-#         interpolated_poses,
-#         robot.get_joint_positions(),
-#         collision_ids,
-#         _joint_distance_fn,
-#         max_time=max_motion_plan_time,
-#         held_object=scene.cup_id,
-#         base_link_to_held_obj=base_link_to_held_obj,
-#     )
-
-#     return CupManipulationTrajectory(plan, [base_link_to_held_obj] * len(plan))
+###############################################################################
+#                           General Functions                                 #
+###############################################################################
 
 
 def remap_trajectory_to_constant_distance(
