@@ -40,13 +40,17 @@ def _main() -> None:
     plan_hlas = pddl_plan_to_hla_plan(plan_ops, hlas)
 
     for hla, objects in plan_hlas:
+        # Turn into a low-level plan that can be simulated.
+        sim_traj = hla.get_simulated_trajectory(objects, sim)
+        # Optionally make a video of the simulated trajectory.
+        # TODO
         # Get commands to execute on the robot.
-        robot_commands = hla.get_robot_commands(objects, sim)
-        # Execute the commands.
-        for robot_command in robot_commands:
-            arm.execute_command(robot_command)
-        # Update the simulator.
-        hla.update_simulator(objects, sim)
+        # robot_commands = hla.get_robot_commands(objects, sim_traj, sim)
+        # # Execute the commands.
+        # for robot_command in robot_commands:
+        #     arm.execute_command(robot_command)
+        # Make sure the simulator is in sync with the world.
+        sim.sync(sim_traj[-1])
 
 
 if __name__ == "__main__":
