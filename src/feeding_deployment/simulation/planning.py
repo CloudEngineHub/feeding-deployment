@@ -265,13 +265,30 @@ def get_plan_to_grasp_cup(
 def get_bite_transfer_plan(
     forque_target_pose: Pose,
     sim: FeedingDeploymentPyBulletSimulator,
-    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
-    max_motion_plan_time: float,
+    max_motion_plan_time: float = 10.0,
 ) -> list[FeedingDeploymentSimulatorState]:
+    """Plan to transfer a bite, assuming we're already prepared to do so."""
 
     robot = sim.robot
     physics_client_id = sim.physics_client_id
     collision_ids = sim.get_collision_ids()
+
+    # Create joint distance function.
+    # TODO refactor to avoid copying this function so many places
+    weights = geometric_sequence(0.9, len(sim.robot.arm_joint_names))
+    joint_infos = get_joint_infos(
+        sim.robot.robot_id, sim.robot.arm_joints, sim.physics_client_id
+    )
+
+    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
+        return get_joint_positions_distance(
+            sim.robot,
+            joint_infos,
+            pt1,
+            pt2,
+            metric="weighted_joints",
+            weights=weights,
+        )
 
     finger_frame_id = robot.link_from_name("finger_tip")
     end_effector_link_id = robot.link_from_name(robot.tool_link_name)

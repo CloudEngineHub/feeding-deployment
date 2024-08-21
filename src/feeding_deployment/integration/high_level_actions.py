@@ -11,9 +11,11 @@ from relational_structs import (
     Type,
 )
 
+from feeding_deployment.integration.perception_interface import PerceptionInterface
 from feeding_deployment.integration.utils import simulated_trajectory_to_kinova_commands
 from feeding_deployment.robot_controller.arm_client import Arm, KinovaCommand
 from feeding_deployment.simulation.planning import (
+    get_bite_transfer_plan,
     get_plan_to_grasp_cup,
     remap_trajectory_to_constant_distance,
 )
@@ -36,7 +38,7 @@ class HighLevelAction(abc.ABC):
         self,
         sim: FeedingDeploymentPyBulletSimulator,
         robot_interface: Arm,
-        perception_interface,
+        perception_interface: PerceptionInterface,
     ) -> None:
         self._sim = sim
         self._robot_interface = robot_interface
@@ -138,6 +140,15 @@ class TransferToolHLA(HighLevelAction):
         # TODO
         assert len(objects) == 1
         tool = objects[0]
+        if tool.name == "utensil":
+            forque_target_pose = (
+                self._perception_interface.get_head_perception_forque_target_pose()
+            )
+            nominal_plan = get_bite_transfer_plan(forque_target_pose, self._sim)
+            remapped_plan = remap_trajectory_to_constant_distance(
+                nominal_plan, self._sim
+            )
+            return remapped_plan
         print(f"TransferTool not yet implemented for {tool}")
         return []
 
