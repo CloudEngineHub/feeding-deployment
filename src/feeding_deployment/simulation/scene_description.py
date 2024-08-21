@@ -155,33 +155,36 @@ class SceneDescription:
         if not isinstance(other, SceneDescription):
             return False
 
-        # TODO fix...
-        physics_client_id = p.connect(p.DIRECT)
-        scene = create_pybullet_scene_from_description(physics_client_id, self)
-        robot = scene.robot
-        joint_infos = get_joint_infos(
-            robot.robot_id, robot.arm_joints, robot.physics_client_id
-        )
-        diff = get_jointwise_difference(
-            joint_infos, self.initial_joints, other.initial_joints
-        )
-        close = np.allclose(diff, 0, atol=atol)
-        p.disconnect(physics_client_id)
-        if not close:
-            return False
+        # TODO need to refactor to avoid calling a function that no longer
+        # exists (create_pybullet_scene_from_description).
+        return False
 
-        for fld in fields(self):
-            if fld.name == "initial_joints":
-                continue  # handled above
-            mine, theirs = getattr(self, fld.name), getattr(other, fld.name)
-            if hasattr(mine, "allclose"):
-                field_close = mine.allclose(theirs, atol=atol)
-            elif isinstance(mine, (tuple, list)):
-                field_close = np.allclose(mine, theirs, atol=atol)
-            elif isinstance(mine, (float, int)):
-                field_close = np.isclose(mine, theirs, atol=atol)
-            else:
-                field_close = mine == theirs
-            if not field_close:
-                return False
-        return True
+        # physics_client_id = p.connect(p.DIRECT)
+        # scene = create_pybullet_scene_from_description(physics_client_id, self)
+        # robot = scene.robot
+        # joint_infos = get_joint_infos(
+        #     robot.robot_id, robot.arm_joints, robot.physics_client_id
+        # )
+        # diff = get_jointwise_difference(
+        #     joint_infos, self.initial_joints, other.initial_joints
+        # )
+        # close = np.allclose(diff, 0, atol=atol)
+        # p.disconnect(physics_client_id)
+        # if not close:
+        #     return False
+
+        # for fld in fields(self):
+        #     if fld.name == "initial_joints":
+        #         continue  # handled above
+        #     mine, theirs = getattr(self, fld.name), getattr(other, fld.name)
+        #     if hasattr(mine, "allclose"):
+        #         field_close = mine.allclose(theirs, atol=atol)
+        #     elif isinstance(mine, (tuple, list)):
+        #         field_close = np.allclose(mine, theirs, atol=atol)
+        #     elif isinstance(mine, (float, int)):
+        #         field_close = np.isclose(mine, theirs, atol=atol)
+        #     else:
+        #         field_close = mine == theirs
+        #     if not field_close:
+        #         return False
+        # return True
