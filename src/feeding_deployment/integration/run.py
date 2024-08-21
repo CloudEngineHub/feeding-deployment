@@ -6,6 +6,8 @@ from relational_structs.utils import parse_pddl_plan
 from tomsutils.pddl_planning import run_pyperplan_planning
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 from feeding_deployment.simulation.scene_description import SceneDescription
+from feeding_deployment.simulation.video import make_simulation_video
+from pathlib import Path
 
 
 def _main() -> None:
@@ -42,8 +44,9 @@ def _main() -> None:
     for hla, objects in plan_hlas:
         # Turn into a low-level plan that can be simulated.
         sim_traj = hla.get_simulated_trajectory(objects, sim)
-        # Optionally make a video of the simulated trajectory.
-        # TODO
+        # Make a video of the simulated trajectory.
+        outfile = Path(__file__).parent / "last.mp4"
+        make_simulation_video(sim, sim_traj, outfile)
         # Get commands to execute on the robot.
         # robot_commands = hla.get_robot_commands(objects, sim_traj, sim)
         # # Execute the commands.
