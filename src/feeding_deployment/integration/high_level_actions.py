@@ -4,6 +4,9 @@ import abc
 
 from relational_structs import LiftedOperator, Predicate, Type, Object, LiftedAtom, GroundOperator
 from feeding_deployment.robot_controller.arm_client import KinovaCommand
+from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
+from feeding_deployment.simulation.planning import get_plan_to_grasp_cup
 
 # Define some predicates that can be used for sequencing the high-level actions.
 tool_type = Type("tool")  # utensil, cup, or wiping tool
@@ -25,17 +28,16 @@ class HighLevelAction(abc.ABC):
         """Create a planning operator for this HLA."""
 
     @abc.abstractmethod
-    def get_robot_commands(self, objects: tuple[Object], sim) -> list[KinovaCommand]:
+    def get_robot_commands(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator, sim_traj: list[FeedingDeploymentSimulatorState]) -> list[KinovaCommand]:
         """Return a list of commands to send to the robot to execute this.
         
         TODO: add type for sim.
         """
 
     @abc.abstractmethod
-    def update_simulator(self, objects: tuple[Object], sim) -> None:
+    def get_simulated_trajectory(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator) -> list[FeedingDeploymentSimulatorState]:
         """Update the given simulator assuming that the action was executed.
         
-        TODO: add typing for sim
         TODO; add argument for any sensory inputs
         """
 
@@ -54,11 +56,15 @@ class PickToolHLA(HighLevelAction):
                                         add_effects={Holding([tool])},
                                         delete_effects={LiftedAtom(GripperFree, [])})
     
-    def get_robot_commands(self, objects: tuple[Object], sim) -> list[KinovaCommand]:
+    def get_robot_commands(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator, sim_traj: list[FeedingDeploymentSimulatorState]) -> list[KinovaCommand]:
         import ipdb; ipdb.set_trace()
 
-    def update_simulator(self, objects: tuple[Object], sim) -> None:
-        import ipdb; ipdb.set_trace()
+    def get_simulated_trajectory(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator) -> list[FeedingDeploymentSimulatorState]:
+        assert len(objects) == 1
+        tool = objects[0]
+        if tool.name == "cup":
+            return get_plan_to_grasp_cup(sim, max_motion_plan_time=1.0)  # TODO
+        raise NotImplementedError("TODO")
 
 
     
@@ -76,10 +82,10 @@ class StowToolHLA(HighLevelAction):
                                 add_effects={LiftedAtom(GripperFree, [])},
                                 delete_effects={Holding([tool])})
     
-    def get_robot_commands(self, objects: tuple[Object], sim) -> list[KinovaCommand]:
+    def get_robot_commands(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator, sim_traj: list[FeedingDeploymentSimulatorState]) -> list[KinovaCommand]:
         import ipdb; ipdb.set_trace()
 
-    def update_simulator(self, objects: tuple[Object], sim) -> None:
+    def get_simulated_trajectory(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator) -> list[FeedingDeploymentSimulatorState]:
         import ipdb; ipdb.set_trace()
 
 
@@ -97,10 +103,10 @@ class TransferToolHLA(HighLevelAction):
                                 add_effects={LiftedAtom(ToolTransferDone, [tool])},
                                 delete_effects=set())
 
-    def get_robot_commands(self, objects: tuple[Object], sim) -> list[KinovaCommand]:
+    def get_robot_commands(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator, sim_traj: list[FeedingDeploymentSimulatorState]) -> list[KinovaCommand]:
         import ipdb; ipdb.set_trace()
 
-    def update_simulator(self, objects: tuple[Object], sim) -> None:
+    def get_simulated_trajectory(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator) -> list[FeedingDeploymentSimulatorState]:
         import ipdb; ipdb.set_trace()
 
 
@@ -118,10 +124,10 @@ class PrepareToolHLA(HighLevelAction):
                             add_effects={ToolPrepared([tool])},
                             delete_effects=set())
 
-    def get_robot_commands(self, objects: tuple[Object], sim) -> list[KinovaCommand]:
+    def get_robot_commands(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator, sim_traj: list[FeedingDeploymentSimulatorState]) -> list[KinovaCommand]:
         import ipdb; ipdb.set_trace()
 
-    def update_simulator(self, objects: tuple[Object], sim) -> None:
+    def get_simulated_trajectory(self, objects: tuple[Object], sim: FeedingDeploymentPyBulletSimulator) -> list[FeedingDeploymentSimulatorState]:
         import ipdb; ipdb.set_trace()
 
 
