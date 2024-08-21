@@ -18,7 +18,10 @@ from sensor_msgs.msg import CameraInfo, Image, PointCloud2, PointField
 from std_msgs.msg import Bool, Float64, Float64MultiArray, String
 from visualization_msgs.msg import Marker, MarkerArray
 
-from feeding_deployment.head_perception.deca_perception import RECORD_GOAL_POSE, HeadPerception
+from feeding_deployment.head_perception.deca_perception import (
+    RECORD_GOAL_POSE,
+    HeadPerception,
+)
 
 VISUALIZE_DATA = False
 

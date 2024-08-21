@@ -1,8 +1,9 @@
 """Defines the state of a feeding deployment simulated environment."""
 
 from dataclasses import dataclass
-from pybullet_helpers.joint import JointPositions
+
 from pybullet_helpers.geometry import Pose
+from pybullet_helpers.joint import JointPositions
 
 
 @dataclass(frozen=True)

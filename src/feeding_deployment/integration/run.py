@@ -1,15 +1,27 @@
 """The main entry point for running the integrated system."""
 
-from feeding_deployment.integration.high_level_actions import tool_type, ToolPrepared, GripperFree, Holding, ToolTransferDone, PickToolHLA, StowToolHLA, PrepareToolHLA, TransferToolHLA, pddl_plan_to_hla_plan
-from relational_structs import PDDLDomain, PDDLProblem, Predicate, LiftedAtom
+from pathlib import Path
+
+from relational_structs import LiftedAtom, Object, PDDLDomain, PDDLProblem, Predicate
 from relational_structs.utils import parse_pddl_plan
 from tomsutils.pddl_planning import run_pyperplan_planning
-from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
-from feeding_deployment.simulation.scene_description import SceneDescription
-from feeding_deployment.simulation.video import make_simulation_video
+
+from feeding_deployment.integration.high_level_actions import (
+    GripperFree,
+    Holding,
+    PickToolHLA,
+    PrepareToolHLA,
+    StowToolHLA,
+    ToolPrepared,
+    ToolTransferDone,
+    TransferToolHLA,
+    pddl_plan_to_hla_plan,
+    tool_type,
+)
 from feeding_deployment.robot_controller.arm_client import Arm
-from pathlib import Path
-import logging
+from feeding_deployment.simulation.scene_description import SceneDescription
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
+from feeding_deployment.simulation.video import make_simulation_video
 
 
 def _main(run_on_robot: bool, make_videos: bool) -> None:
@@ -18,7 +30,7 @@ def _main(run_on_robot: bool, make_videos: bool) -> None:
     # Initialize the simulator.
     scene_description = SceneDescription()
     sim = FeedingDeploymentPyBulletSimulator(scene_description)
-    
+
     if run_on_robot:
         arm = Arm()
 
@@ -30,11 +42,15 @@ def _main(run_on_robot: bool, make_videos: bool) -> None:
     domain = PDDLDomain("AssistedFeeding", operators, predicates, types)
 
     # TODO automate?
-    cup = tool_type("cup")
-    wiper = tool_type("wiper")
-    utensil = tool_type("utensil")
+    cup = Object("cup", tool_type)
+    wiper = Object("wiper", tool_type)
+    utensil = Object("utensil", tool_type)
     all_objects = {cup, wiper, utensil}
-    current_atoms = {LiftedAtom(GripperFree, []), ToolPrepared([wiper]), ToolPrepared([cup])}
+    current_atoms = {
+        LiftedAtom(GripperFree, []),
+        ToolPrepared([wiper]),
+        ToolPrepared([cup]),
+    }
 
     # TODO update this once the interface is ready.
     goal_queue = [
@@ -48,8 +64,13 @@ def _main(run_on_robot: bool, make_videos: bool) -> None:
         print("Working towards new goal:", goal_atoms)
 
         # Plan a sequence of high-level actions to execute.
-        problem = PDDLProblem(domain.name, "AssistedFeeding", all_objects, current_atoms, goal_atoms)
-        plan_strs = run_pyperplan_planning(str(domain), str(problem), heuristic="lmcut", search="astar")
+        problem = PDDLProblem(
+            domain.name, "AssistedFeeding", all_objects, current_atoms, goal_atoms
+        )
+        plan_strs = run_pyperplan_planning(
+            str(domain), str(problem), heuristic="lmcut", search="astar"
+        )
+        assert plan_strs is not None
         print("Found plan:", plan_strs)
 
         plan_ops = parse_pddl_plan(plan_strs, domain, problem)

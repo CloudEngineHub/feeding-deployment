@@ -52,7 +52,7 @@ warn_unreachable = true
 exclude = [
     "venv/*",
     "src/feeding_deployment/robot_controller/*",
-    "src/feeding_deployment/integration/*",
+    "src/feeding_deployment/head_perception/*",
 ]
 
 [[tool.mypy.overrides]]

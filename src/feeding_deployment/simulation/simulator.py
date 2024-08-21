@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 import pybullet as p
-from pybullet_helpers.robots import create_pybullet_robot
-from pybullet_helpers.robots.single_arm import SingleArmTwoFingerGripperPyBulletRobot
-from pybullet_helpers.utils import create_pybullet_block
-from feeding_deployment.simulation.scene_description import SceneDescription
 from pybullet_helpers.gui import create_gui_connection
-from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 from pybullet_helpers.inverse_kinematics import (
     set_robot_joints_with_held_object,
 )
+from pybullet_helpers.robots import create_pybullet_robot
+from pybullet_helpers.robots.single_arm import SingleArmTwoFingerGripperPyBulletRobot
+from pybullet_helpers.utils import create_pybullet_block
+
+from feeding_deployment.simulation.scene_description import SceneDescription
+from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
+
 
 class FeedingDeploymentPyBulletSimulator:
     """A PyBullet-based simulator for the feeding deployment environment."""
@@ -23,13 +25,15 @@ class FeedingDeploymentPyBulletSimulator:
         self.physics_client_id = create_gui_connection(camera_yaw=180)
 
         # Create robot.
-        self.robot: SingleArmTwoFingerGripperPyBulletRobot = create_pybullet_robot(
+        robot = create_pybullet_robot(
             scene_description.robot_name,
             self.physics_client_id,
             base_pose=scene_description.robot_base_pose,
             control_mode="reset",
             home_joint_positions=scene_description.initial_joints,
         )
+        assert isinstance(robot, SingleArmTwoFingerGripperPyBulletRobot)
+        self.robot = robot
 
         # Create a holder (vention stand).
         self.robot_holder_id = create_pybullet_block(
@@ -129,7 +133,7 @@ class FeedingDeploymentPyBulletSimulator:
         if self._held_object_name == "cup":
             collision_ids.remove(self.cup_id)
         return collision_ids
-    
+
     def sync(self, state: FeedingDeploymentSimulatorState) -> None:
         """Sync the simulator to a given state."""
         self.robot.set_joints(state.robot_joints)
@@ -143,7 +147,9 @@ class FeedingDeploymentPyBulletSimulator:
         else:
             assert state.held_object == "cup"
             set_robot_joints_with_held_object(
-                self.robot, self.physics_client_id, self.cup_id,
-                state.held_object_tf, state.robot_joints,
+                self.robot,
+                self.physics_client_id,
+                self.cup_id,
+                state.held_object_tf,
+                state.robot_joints,
             )
-

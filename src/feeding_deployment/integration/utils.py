@@ -2,13 +2,13 @@
 
 import numpy as np
 
-from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 from feeding_deployment.robot_controller.arm_client import (
     CloseGripperCommand,
     JointTrajectoryCommand,
     KinovaCommand,
     OpenGripperCommand,
 )
+from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 
 
 def simulated_trajectory_to_kinova_commands(

@@ -15,9 +15,6 @@ from pybullet_helpers.joint import (
     get_jointwise_difference,
 )
 from pybullet_helpers.math_utils import rotate_about_point
-from pybullet_helpers.robots import create_pybullet_robot
-from pybullet_helpers.robots.single_arm import SingleArmTwoFingerGripperPyBulletRobot
-from pybullet_helpers.utils import create_pybullet_block
 from scipy.spatial.transform import Rotation
 
 
@@ -42,7 +39,9 @@ class SceneDescription:
     )
     robot_base_pose: Pose = Pose(
         (0.0, 0.0, 0.0),
-        tuple(Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()), # Rajat ToDo: Base sure robot-base orientation is 0,0,0
+        tuple(
+            Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()
+        ),  # Rajat ToDo: Base sure robot-base orientation is 0,0,0
     )
 
     # Robot holder (vention stand).

@@ -7,7 +7,11 @@ from pathlib import Path
 import imageio.v2 as iio
 from pybullet_helpers.camera import capture_superimposed_image
 
-from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator, FeedingDeploymentSimulatorState
+from feeding_deployment.simulation.simulator import (
+    FeedingDeploymentPyBulletSimulator,
+    FeedingDeploymentSimulatorState,
+)
+
 
 def make_simulation_video(
     sim: FeedingDeploymentPyBulletSimulator,
@@ -25,4 +29,3 @@ def make_simulation_video(
         imgs.append(img)
     iio.mimsave(outfile, imgs, fps=fps)  # type: ignore
     print(f"Wrote out to {outfile}")
-

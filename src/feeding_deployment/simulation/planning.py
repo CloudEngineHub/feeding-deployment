@@ -2,34 +2,36 @@
 
 from __future__ import annotations
 
-from typing import Callable
-from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
-from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
-from pybullet_helpers.joint import JointPositions, get_joint_infos, interpolate_joints
-from pybullet_helpers.geometry import Pose, multiply_poses, interpolate_poses, get_pose
+import logging
 from functools import partial
+from typing import Callable
+
+from pybullet_helpers.geometry import Pose, get_pose, interpolate_poses, multiply_poses
+from pybullet_helpers.inverse_kinematics import (
+    end_effector_transform_to_joints,
+    set_robot_joints_with_held_object,
+)
+from pybullet_helpers.joint import JointPositions, get_joint_infos, interpolate_joints
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose
+from pybullet_helpers.math_utils import geometric_sequence
 from pybullet_helpers.motion_planning import (
     get_joint_positions_distance,
     run_smooth_motion_planning_to_pose,
     smoothly_follow_end_effector_path,
 )
-from pybullet_helpers.inverse_kinematics import (
-    end_effector_transform_to_joints,
-    set_robot_joints_with_held_object,
-)
-from pybullet_helpers.math_utils import geometric_sequence
 from pybullet_helpers.trajectory import (
     TrajectorySegment,
     concatenate_trajectories,
     iter_traj_with_max_distance,
 )
-import logging
 
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
+from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 
 ###############################################################################
 #                           Assisted Drinking                                 #
 ###############################################################################
+
 
 def _get_plan_to_pregrasp_cup(
     sim: FeedingDeploymentPyBulletSimulator,
@@ -54,7 +56,9 @@ def _get_plan_to_pregrasp_cup(
     cup_handle_pose = get_link_pose(
         sim.cup_id, sim.cup_handle_link_id, physics_client_id
     )
-    cup_grasp = multiply_poses(cup_handle_pose, sim.scene_description.cup_grasp_transform)
+    cup_grasp = multiply_poses(
+        cup_handle_pose, sim.scene_description.cup_grasp_transform
+    )
 
     plan = run_smooth_motion_planning_to_pose(
         cup_grasp,
@@ -108,7 +112,9 @@ def _get_plan_to_move_grasp_cup_from_pregrasp_position(
     # Open the fingers.
     robot.set_joints(plan[-1])
     robot.open_fingers()
-    sim_states.append(FeedingDeploymentSimulatorState(robot.get_joint_positions(), cup_pose))
+    sim_states.append(
+        FeedingDeploymentSimulatorState(robot.get_joint_positions(), cup_pose)
+    )
 
     # Simulate grasping by faking a constraint with the held object.
     robot.set_joints(plan[-1])
@@ -126,7 +132,9 @@ def _get_plan_to_move_grasp_cup_from_pregrasp_position(
     set_robot_joints_with_held_object(
         robot, physics_client_id, sim.cup_id, base_link_to_held_obj, joints
     )
-    sim_state = FeedingDeploymentSimulatorState(joints, cup_pose=None, held_object="cup", held_object_tf=base_link_to_held_obj)
+    sim_state = FeedingDeploymentSimulatorState(
+        joints, cup_pose=None, held_object="cup", held_object_tf=base_link_to_held_obj
+    )
     sim_states.append(sim_state)
 
     return sim_states
@@ -182,15 +190,22 @@ def _get_move_cup_to_staging_plan(
         held_object=sim.cup_id,
         base_link_to_held_obj=base_link_to_held_obj,
     )
-    sim_states = [FeedingDeploymentSimulatorState(joints, cup_pose=None, held_object="cup", held_object_tf=base_link_to_held_obj)
-                  for joints in plan]
+    sim_states = [
+        FeedingDeploymentSimulatorState(
+            joints,
+            cup_pose=None,
+            held_object="cup",
+            held_object_tf=base_link_to_held_obj,
+        )
+        for joints in plan
+    ]
     return sim_states
 
 
 def get_plan_to_grasp_cup(
     sim: FeedingDeploymentPyBulletSimulator,
     seed: int = 0,
-    max_motion_plan_time: float = 10.,
+    max_motion_plan_time: float = 10.0,
     num_grasp_waypoints: int = 5,
     num_drink_transfer_end_effector_interp: int = 25,
 ) -> list[FeedingDeploymentSimulatorState]:
@@ -241,7 +256,6 @@ def get_plan_to_grasp_cup(
     return plan
 
 
-
 ###############################################################################
 #                           General Functions                                 #
 ###############################################################################
@@ -252,7 +266,6 @@ def remap_trajectory_to_constant_distance(
     sim: FeedingDeploymentPyBulletSimulator,
     max_joint_space_distance: float = 0.1,
 ) -> list[FeedingDeploymentSimulatorState]:
-
     """Remap a trajectory so that joint waypoints have constant distance."""
 
     robot = sim.robot
@@ -274,16 +287,28 @@ def remap_trajectory_to_constant_distance(
         )
 
     # Create a continuous-time trajectory.
-    def _interpolate_fn(s0: FeedingDeploymentSimulatorState, s1: FeedingDeploymentSimulatorState, t: float) -> FeedingDeploymentSimulatorState:
+    def _interpolate_fn(
+        s0: FeedingDeploymentSimulatorState,
+        s1: FeedingDeploymentSimulatorState,
+        t: float,
+    ) -> FeedingDeploymentSimulatorState:
         # Interpolate the robot joints.
-        robot_joints = interpolate_joints(joint_infos, s0.robot_joints, s1.robot_joints, t)
+        robot_joints = interpolate_joints(
+            joint_infos, s0.robot_joints, s1.robot_joints, t
+        )
         # Interpolate the cup poses. # TODO need to refactor interpolate_poses
         cup_pose = s0.cup_pose
         # Snap the other quantities to s0.
-        return FeedingDeploymentSimulatorState(robot_joints, cup_pose, held_object=s0.held_object, held_object_tf=s0.held_object_tf)
+        return FeedingDeploymentSimulatorState(
+            robot_joints,
+            cup_pose,
+            held_object=s0.held_object,
+            held_object_tf=s0.held_object_tf,
+        )
 
-
-    def _distance_fn(s0: FeedingDeploymentSimulatorState, s1: FeedingDeploymentSimulatorState) -> float:
+    def _distance_fn(
+        s0: FeedingDeploymentSimulatorState, s1: FeedingDeploymentSimulatorState
+    ) -> float:
         return _joint_distance_fn(s0.robot_joints, s1.robot_joints)
 
     # Use distances as times.
@@ -296,7 +321,7 @@ def remap_trajectory_to_constant_distance(
     for t in range(len(traj) - 1):
         seg = TrajectorySegment(
             traj[t],
-            traj[t+1],
+            traj[t + 1],
             distances[t],
             interpolate_fn=_interpolate_fn,
             distance_fn=_distance_fn,

@@ -41,7 +41,6 @@ from feeding_deployment.robot_controller.joint_compliant_controller import (
 # from std_msgs.msg import Bool
 
 
-
 class DeviceConnection:
     IP_ADDRESS = "192.168.1.10"
     TCP_PORT = 10000
