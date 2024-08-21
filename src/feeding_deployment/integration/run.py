@@ -1,6 +1,7 @@
 """The main entry point for running the integrated system."""
 
 from pathlib import Path
+from typing import Any
 
 from relational_structs import LiftedAtom, Object, PDDLDomain, PDDLProblem, Predicate
 from relational_structs.utils import parse_pddl_plan
@@ -23,7 +24,6 @@ from feeding_deployment.robot_controller.arm_client import (
     ARM_RPC_PORT,
     NUC_HOSTNAME,
     RPC_AUTHKEY,
-    Arm,
     ArmManager,
 )
 from feeding_deployment.simulation.scene_description import SceneDescription
@@ -37,10 +37,6 @@ HLAS = {PickToolHLA, StowToolHLA, PrepareToolHLA, TransferToolHLA}
 def _main(run_on_robot: bool, make_videos: bool) -> None:
     """The main entry point for running the integrated system."""
 
-    # Initialize the simulator.
-    scene_description = SceneDescription()
-    sim = FeedingDeploymentPyBulletSimulator(scene_description)
-
     # Initialize the interface to the robot.
     if run_on_robot:
         manager = ArmManager(address=(NUC_HOSTNAME, ARM_RPC_PORT), authkey=RPC_AUTHKEY)
@@ -51,6 +47,13 @@ def _main(run_on_robot: bool, make_videos: bool) -> None:
 
     # Initialize the perceiver (e.g., get joint states or human head poses).
     perception_interface = PerceptionInterface(robot_interface)
+
+    # Initialize the simulator.
+    kwargs: dict[str, Any] = {}
+    if run_on_robot:
+        kwargs["initial_joints"] = perception_interface.get_robot_joints()
+    scene_description = SceneDescription(**kwargs)
+    sim = FeedingDeploymentPyBulletSimulator(scene_description)
 
     # Create a domain for high-level planning.
     hlas = {cls(sim, robot_interface, perception_interface) for cls in HLAS}
