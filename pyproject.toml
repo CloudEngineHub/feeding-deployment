@@ -12,6 +12,9 @@ dependencies = [
    "pybullet_helpers@git+https://github.com/tomsilver/pybullet-helpers.git",
    "pyaudio",
    "imageio[ffmpeg]",
+   "pin",
+   "ruckig",
+   "relational_structs@git+https://github.com/tomsilver/relational-structs.git",
 ]
 
 [project.optional-dependencies]
