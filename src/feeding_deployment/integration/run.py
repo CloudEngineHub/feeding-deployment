@@ -48,8 +48,9 @@ def _main() -> None:
         outfile = Path(__file__).parent / "last.mp4"
         make_simulation_video(sim, sim_traj, outfile)
         # Get commands to execute on the robot.
-        # robot_commands = hla.get_robot_commands(objects, sim_traj, sim)
-        # # Execute the commands.
+        robot_commands = hla.get_robot_commands(objects, sim, sim_traj)
+        # TODO enable
+        # Execute the commands.
         # for robot_command in robot_commands:
         #     arm.execute_command(robot_command)
         # Make sure the simulator is in sync with the world.
