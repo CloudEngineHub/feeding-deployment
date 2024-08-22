@@ -122,6 +122,7 @@ class FeedingDeploymentPyBulletSimulator:
 
         # Track held objects.
         self.held_object_name: str | None = None
+        self.held_object_id: int | None = None
         self.held_object_tf: Pose | None = None
 
     def get_collision_ids(self) -> set[int]:
@@ -147,10 +148,12 @@ class FeedingDeploymentPyBulletSimulator:
                 physicsClientId=self.physics_client_id,
             )
             self.held_object_name = None
+            self.held_object_id = None
             self.held_object_tf = None
         else:
             assert state.held_object == "cup"
             self.held_object_name = state.held_object
+            self.held_object_id = self.cup_id
             self.held_object_tf = state.held_object_tf
             set_robot_joints_with_held_object(
                 self.robot,
