@@ -21,6 +21,7 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.kinova import KinovaArm
+
 # from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
@@ -62,14 +63,23 @@ class Arm:
 
     def reset(self):
         # Go to home position
+        print("Moving to home position")
         self.arm.home()
 
     def switch_to_joint_compliant_mode(self):
+
+        # clear command queue
+        print("Clearing command queue")
+        while not self.command_queue.empty():
+            self.command_queue.get()
+
         # switch to joint compliant mode
+        print("Switching to joint compliant mode")
         self.arm.switch_to_joint_compliant_mode(self.command_queue)
 
     def switch_out_of_joint_compliant_mode(self):
         # switch out of joint compliant mode
+        print("Switching out of joint compliant mode")
         self.arm.switch_out_of_joint_compliant_mode()
 
     def compliant_set_joint_position(self, command_pos):
@@ -87,9 +97,9 @@ class Arm:
         )
         self.arm.move_angular_trajectory(trajectory_command)
 
-    def set_ee_pose(self, xyz, theta_xyz):
-        print(f"Received cartesian pose command: {xyz}, {theta_xyz}")
-        self.arm.move_cartesian(xyz, theta_xyz)
+    def set_ee_pose(self, xyz, xyz_quat):
+        print(f"Received cartesian pose command: {xyz}, {xyz_quat}")
+        self.arm.move_cartesian(xyz, xyz_quat)
 
     def set_gripper(self, gripper_pos):
         print(f"Received gripper pos command: {gripper_pos}")
@@ -104,10 +114,15 @@ class Arm:
         self.arm.close_gripper()
 
     def close(self):
+        print("Closing arm connection")
         self.arm.disconnect()
 
     def retract(self):
         self.arm.retract()
+
+    def stop(self):
+        print("Stopping arm")
+        self.arm.stop()
 
     def execute_command(self, cmd: KinovaCommand) -> None:
 
@@ -144,32 +159,53 @@ if __name__ == "__main__":
     try:
         import rospy
         from sensor_msgs.msg import JointState
+        from std_msgs.msg import Bool
+
         rospy.init_node("arm_client", anonymous=True)
+        
+        def emergency_stop_callback(msg):
+            arm.stop()
 
-        # publish joint states
-        joint_states_pub = rospy.Publisher("/joint_states", JointState, queue_size=10)
+        rospy.Subscriber("/estop", Bool, emergency_stop_callback)
 
-        while not rospy.is_shutdown():
-            arm_pos, gripper_pos = arm.get_state()
-            joint_state_msg = JointState()
-            joint_state_msg.header.stamp = rospy.Time.now()
-            joint_state_msg.name = [
-                "joint_1",
-                "joint_2",
-                "joint_3",
-                "joint_4",
-                "joint_5",
-                "joint_6",
-                "joint_7",
-                "finger_joint",
-            ]
-            joint_state_msg.position = arm_pos.tolist() + [gripper_pos]
-            joint_state_msg.velocity = [0.0] * 8
-            joint_state_msg.effort = [0.0] * 8
-            joint_states_pub.publish(joint_state_msg)
-            time.sleep(0.01)
+        # # publish joint states
+        # joint_states_pub = rospy.Publisher("/joint_states", JointState, queue_size=10)
 
-        # arm.reset()
+        # while not rospy.is_shutdown():
+        #     arm_pos, gripper_pos = arm.get_state()
+        #     joint_state_msg = JointState()
+        #     joint_state_msg.header.stamp = rospy.Time.now()
+        #     joint_state_msg.name = [
+        #         "joint_1",
+        #         "joint_2",
+        #         "joint_3",
+        #         "joint_4",
+        #         "joint_5",
+        #         "joint_6",
+        #         "joint_7",
+        #         "finger_joint",
+        #     ]
+        #     joint_state_msg.position = arm_pos.tolist() + [gripper_pos]
+        #     joint_state_msg.velocity = [0.0] * 8
+        #     joint_state_msg.effort = [0.0] * 8
+        #     joint_states_pub.publish(joint_state_msg)
+        #     time.sleep(0.01)
+
+        input("Press Enter to retract the arm...")
+        arm.retract()
+
+        input("Press Enter to move to home position...")
+        arm.reset()
+
+        input("Press Enter to switch to joint compliant mode...")
+        arm.switch_to_joint_compliant_mode()
+
+        input("Press Enter to move to joint compliant position...")
+        arm.compliant_set_joint_position([0.0, 0.26179939, 3.14159265, -2.26892803, 0.0, 0.95993109, 1.9])
+
+        input("Press Enter to switch out of joint compliant mode...")
+        arm.switch_out_of_joint_compliant_mode()
+
         # print("Current Arm State:", arm.get_state())
 
         # home_pos = [
@@ -281,5 +317,12 @@ if __name__ == "__main__":
         #     state = arm.get_state()
         #     state['arm_quat'][0] = 3
         #     time.sleep(POLICY_CONTROL_PERIOD)
+    except (EOFError, ConnectionRefusedError, BrokenPipeError) as e:
+        print(f"Server connection lost: {e}")
+    except KeyboardInterrupt:
+        print("Client interrupted, shutting down...")
     finally:
-        arm.close()
+        try:
+            arm.close()  # Ensure the arm is disconnected properly
+        except Exception as e:
+            print(f"Error during client shutdown: {e}")
