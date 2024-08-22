@@ -51,23 +51,19 @@ def get_plan_to_grasp_cup(
     sim_states: list[FeedingDeploymentSimulatorState] = []
 
     # Move to pregrasp.
-    cup_handle_pose = get_link_pose(
-        sim.cup_id, sim.cup_handle_link_id, sim.physics_client_id
-    )
-    cup_pregrasp_pose = multiply_poses(
-        cup_handle_pose, sim.scene_description.cup_pregrasp_transform
-    )
     sim_states.extend(
         _get_motion_plan_for_robot_finger_tip(
-            cup_pregrasp_pose, sim, seed, max_motion_plan_time
+            sim.scene_description.cup_pregrasp_pose, sim, seed, max_motion_plan_time
         )
     )
 
     # Move to grasp.
-    cup_grasp_pose = Pose(cup_handle_pose.position, cup_pregrasp_pose.orientation)
     sim_states.extend(
         _get_interpolated_plan_for_robot_finger_tip(
-            cup_grasp_pose, sim, num_grasp_waypoints, max_motion_plan_time
+            sim.scene_description.cup_grasp_pose,
+            sim,
+            num_grasp_waypoints,
+            max_motion_plan_time,
         )
     )
 
@@ -80,30 +76,21 @@ def get_plan_to_grasp_cup(
     sim_states.extend(_plan_to_sim_state_trajectory([joints], sim))
 
     # Move to prestow.
-    cup_prestow_pose = multiply_poses(
-        cup_handle_pose, sim.scene_description.cup_prestow_relative_pose
-    )
     sim_states.extend(
         _get_interpolated_plan_for_robot_finger_tip(
-            cup_prestow_pose, sim, num_prestow_waypoints, max_motion_plan_time
+            sim.scene_description.cup_prestow_pose,
+            sim,
+            num_prestow_waypoints,
+            max_motion_plan_time,
         )
     )
-
     # Move to staging.
-    finger_frame_id = sim.robot.link_from_name("finger_tip")
-    new_cup_pose = sim.scene_description.cup_staging_pose
-    cup_pose = get_pose(sim.cup_id, sim.physics_client_id)
-    current_fingers_pose = get_link_pose(
-        sim.robot.robot_id, finger_frame_id, sim.physics_client_id
-    )
-    fingers_to_cup = multiply_poses(
-        cup_pose.invert(),
-        current_fingers_pose,
-    )
-    fingers_staging_pose = multiply_poses(new_cup_pose, fingers_to_cup)
     sim_states.extend(
         _get_interpolated_plan_for_robot_finger_tip(
-            fingers_staging_pose, sim, num_staging_interp, max_motion_plan_time
+            sim.scene_description.cup_staging_pose,
+            sim,
+            num_staging_interp,
+            max_motion_plan_time,
         )
     )
 
