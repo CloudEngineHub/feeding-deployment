@@ -95,6 +95,9 @@ class SceneDescription:
         (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2))
     )
 
+    # Relative pose for moving the cup out of its holder.
+    cup_prestow_relative_pose: Pose = Pose((0.0, 0.0, 0.1))
+
     @property
     def wheelchair_head_pose(self) -> Pose:
         """Derived from wheelchair base and relative pose."""
@@ -114,6 +117,11 @@ class SceneDescription:
     def cup_staging_pose(self) -> Pose:
         """Target pose for the cup before transfer."""
         return multiply_poses(self.wheelchair_head_pose, self.staging_relative_pose)
+
+    @property
+    def cup_prestow_pose(self) -> Pose:
+        """Assume cup is initially at stow pose."""
+        return multiply_poses(self.cup_pose, self.cup_prestow_relative_pose)
 
     @property
     def camera_kwargs(self) -> dict[str, Any]:
