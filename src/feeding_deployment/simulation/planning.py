@@ -18,6 +18,7 @@ from pybullet_helpers.motion_planning import (
     run_smooth_motion_planning_to_pose,
     smoothly_follow_end_effector_path,
 )
+from pybullet_helpers.robots import SingleArmPyBulletRobot
 from pybullet_helpers.trajectory import (
     TrajectorySegment,
     concatenate_trajectories,
@@ -32,227 +33,132 @@ from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 ###############################################################################
 
 
-def _get_plan_to_pregrasp_cup(
-    sim: FeedingDeploymentPyBulletSimulator,
-    seed: int,
-    max_motion_plan_time: float,
-) -> list[FeedingDeploymentSimulatorState]:
-
-    robot = sim.robot
-    physics_client_id = sim.physics_client_id
-    assert physics_client_id == robot.physics_client_id
-    collision_ids = sim.get_collision_ids()
-
-    # Commands will be in end effector space, but grasp planning will be in
-    # finger frame space.
-    finger_frame_id = robot.link_from_name("finger_tip")
-    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
-    finger_from_end_effector = get_relative_link_pose(
-        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
-    )
-
-    # Find target finger frame pose relative to the cup handle.
-    cup_handle_pose = get_link_pose(
-        sim.cup_id, sim.cup_handle_link_id, physics_client_id
-    )
-    cup_grasp = multiply_poses(
-        cup_handle_pose, sim.scene_description.cup_grasp_transform
-    )
-
-    plan = run_smooth_motion_planning_to_pose(
-        cup_grasp,
-        robot,
-        collision_ids,
-        finger_from_end_effector,
-        seed,
-        max_time=max_motion_plan_time,
-    )
-    assert plan is not None
-    cup_pose = get_pose(sim.cup_id, physics_client_id)
-    return [FeedingDeploymentSimulatorState(joints, cup_pose) for joints in plan]
-
-
-def _get_plan_to_move_grasp_cup_from_pregrasp_position(
-    sim: FeedingDeploymentPyBulletSimulator,
-    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
-    num_grasp_waypoints: int,
-    max_motion_plan_time: float,
-) -> list[FeedingDeploymentSimulatorState]:
-
-    # Assumes that _get_plan_to_pregrasp_cup() was just called.
-    robot = sim.robot
-    physics_client_id = sim.physics_client_id
-    collision_ids = sim.get_collision_ids()
-    cup_pose = get_pose(sim.cup_id, physics_client_id)
-
-    tf = Pose(
-        (0.0, 0.0, sim.scene_description.cup_grasp_distance),
-        (0.0, 0.0, 0.0, 1.0),
-    )
-    current_end_effector_pose = robot.get_end_effector_pose()
-    new_end_effector_pose = multiply_poses(current_end_effector_pose, tf)
-    interpolated_poses = list(
-        interpolate_poses(
-            current_end_effector_pose,
-            new_end_effector_pose,
-            num_interp=num_grasp_waypoints,
-        )
-    )
-    plan = smoothly_follow_end_effector_path(
-        robot,
-        interpolated_poses,
-        robot.get_joint_positions(),
-        collision_ids,
-        _joint_distance_fn,
-        max_time=max_motion_plan_time,
-    )
-    sim_states = [FeedingDeploymentSimulatorState(joints, cup_pose) for joints in plan]
-
-    # Open the fingers.
-    robot.set_joints(plan[-1])
-    robot.open_fingers()
-    sim_states.append(
-        FeedingDeploymentSimulatorState(robot.get_joint_positions(), cup_pose)
-    )
-
-    # Simulate grasping by faking a constraint with the held object.
-    robot.set_joints(plan[-1])
-    world_from_end_effector = get_link_pose(
-        robot.robot_id, robot.end_effector_id, physics_client_id
-    )
-    world_from_held_object = get_pose(sim.cup_id, physics_client_id)
-    base_link_to_held_obj = multiply_poses(
-        world_from_end_effector.invert(), world_from_held_object
-    )
-
-    # Move off the table so that the cup is no longer in collision with the table.
-    tf = Pose((0.0, -0.1, 0.0), (0.0, 0.0, 0.0, 1.0))
-    joints = end_effector_transform_to_joints(robot, tf)
-    set_robot_joints_with_held_object(
-        robot, physics_client_id, sim.cup_id, base_link_to_held_obj, joints
-    )
-    sim_state = FeedingDeploymentSimulatorState(
-        joints, cup_pose=None, held_object="cup", held_object_tf=base_link_to_held_obj
-    )
-    sim_states.append(sim_state)
-
-    return sim_states
-
-
-def _get_move_cup_to_staging_plan(
-    sim: FeedingDeploymentPyBulletSimulator,
-    _joint_distance_fn: Callable[[JointPositions, JointPositions], float],
-    num_drink_transfer_end_effector_interp: int,
-    max_motion_plan_time: float,
-    base_link_to_held_obj: Pose,
-) -> list[FeedingDeploymentSimulatorState]:
-
-    # Assumes that _get_plan_to_grasp_cup() was just called.
-    robot = sim.robot
-    physics_client_id = sim.physics_client_id
-    collision_ids = sim.get_collision_ids()
-
-    finger_frame_id = robot.link_from_name("finger_tip")
-    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
-    finger_from_end_effector = get_relative_link_pose(
-        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
-    )
-
-    new_cup_pose = sim.scene_description.cup_staging_pose
-    cup_pose = get_pose(sim.cup_id, physics_client_id)
-    current_fingers_pose = get_link_pose(
-        robot.robot_id, finger_frame_id, physics_client_id
-    )
-    fingers_to_cup = multiply_poses(
-        cup_pose.invert(),
-        current_fingers_pose,
-    )
-    new_fingers_pose = multiply_poses(new_cup_pose, fingers_to_cup)
-    new_end_effector_pose = multiply_poses(new_fingers_pose, finger_from_end_effector)
-
-    # Prevent spilling: interpolate in end effector space and then follow.
-    current_end_effector_pose = robot.get_end_effector_pose()
-    interpolated_poses = list(
-        interpolate_poses(
-            current_end_effector_pose,
-            new_end_effector_pose,
-            num_interp=num_drink_transfer_end_effector_interp,
-        )
-    )
-    plan = smoothly_follow_end_effector_path(
-        robot,
-        interpolated_poses,
-        robot.get_joint_positions(),
-        collision_ids,
-        _joint_distance_fn,
-        max_time=max_motion_plan_time,
-        held_object=sim.cup_id,
-        base_link_to_held_obj=base_link_to_held_obj,
-    )
-    sim_states = [
-        FeedingDeploymentSimulatorState(
-            joints,
-            cup_pose=None,
-            held_object="cup",
-            held_object_tf=base_link_to_held_obj,
-        )
-        for joints in plan
-    ]
-    return sim_states
-
-
 def get_plan_to_grasp_cup(
     sim: FeedingDeploymentPyBulletSimulator,
     seed: int = 0,
     max_motion_plan_time: float = 10.0,
     num_grasp_waypoints: int = 5,
-    num_drink_transfer_end_effector_interp: int = 25,
+    num_prestow_waypoints: int = 3,
+    num_staging_interp: int = 25,
 ) -> list[FeedingDeploymentSimulatorState]:
     """Make a plan to grasp the cup from the current simulator state."""
+
+    assert sim.held_object_name is None
 
     # Quiet IKfast warnings.
     logging.disable(logging.ERROR)
 
-    # Create joint distance function.
-    weights = geometric_sequence(0.9, len(sim.robot.arm_joint_names))
-    joint_infos = get_joint_infos(
-        sim.robot.robot_id, sim.robot.arm_joints, sim.physics_client_id
-    )
+    sim_states: list[FeedingDeploymentSimulatorState] = []
 
-    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
-        return get_joint_positions_distance(
-            sim.robot,
-            joint_infos,
-            pt1,
-            pt2,
-            metric="weighted_joints",
-            weights=weights,
+    # Move to pregrasp.
+    sim_states.extend(
+        _get_motion_plan_for_robot_finger_tip(
+            sim.scene_description.cup_pregrasp_pose, sim, seed, max_motion_plan_time
         )
-
-    plan = _get_plan_to_pregrasp_cup(sim, seed, max_motion_plan_time)
-    sim.robot.set_joints(plan[-1].robot_joints)
-
-    grasp_cup_plan = _get_plan_to_move_grasp_cup_from_pregrasp_position(
-        sim,
-        _joint_distance_fn,
-        num_grasp_waypoints,
-        max_motion_plan_time,
     )
-    plan.extend(grasp_cup_plan)
-    sim.robot.set_joints(plan[-1].robot_joints)
 
-    base_link_to_held_obj = plan[-1].held_object_tf
-    assert isinstance(base_link_to_held_obj, Pose)
-    move_cup_to_staging_plan = _get_move_cup_to_staging_plan(
-        sim,
-        _joint_distance_fn,
-        num_drink_transfer_end_effector_interp,
-        max_motion_plan_time,
-        base_link_to_held_obj,
+    # Move to grasp.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.cup_grasp_pose,
+            sim,
+            num_grasp_waypoints,
+            max_motion_plan_time,
+        )
     )
-    plan.extend(move_cup_to_staging_plan)
 
-    return plan
+    # Execute the grasp.
+    sim_states.extend(_get_plan_to_execute_grasp(sim, "cup"))
+
+    # Move slightly so that the cup is no longer in collision with the table.
+    tf = Pose((0.0, -0.01, 0.0), (0.0, 0.0, 0.0, 1.0))
+    joints = end_effector_transform_to_joints(sim.robot, tf)
+    sim_states.extend(_plan_to_sim_state_trajectory([joints], sim))
+
+    # Move to prestow.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.cup_prestow_pose,
+            sim,
+            num_prestow_waypoints,
+            max_motion_plan_time,
+        )
+    )
+    # Move to staging.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.cup_staging_pose,
+            sim,
+            num_staging_interp,
+            max_motion_plan_time,
+        )
+    )
+
+    return sim_states
+
+
+def get_plan_to_stow_cup(
+    sim: FeedingDeploymentPyBulletSimulator,
+    seed: int = 0,
+    max_motion_plan_time: float = 10.0,
+    num_grasp_waypoints: int = 5,
+    num_prestow_waypoints: int = 25,
+) -> list[FeedingDeploymentSimulatorState]:
+    """Make a plan to stow the cup from the current simulator state."""
+
+    # Quiet IKfast warnings.
+    logging.disable(logging.ERROR)
+
+    sim_states: list[FeedingDeploymentSimulatorState] = []
+
+    # Move to prestow.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.cup_prestow_pose,
+            sim,
+            num_prestow_waypoints,
+            max_motion_plan_time,
+        )
+    )
+
+    # Move to slightly above the release point to avoid table collisions.
+    tf = Pose((0.0, -0.01, 0.0), (0.0, 0.0, 0.0, 1.0))
+    slightly_above_release_pose = multiply_poses(
+        sim.scene_description.cup_grasp_pose, tf
+    )
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            slightly_above_release_pose,
+            sim,
+            num_grasp_waypoints,
+            max_motion_plan_time,
+        )
+    )
+
+    # Move down directly to release.
+    tf = Pose((0.0, 0.01, 0.0), (0.0, 0.0, 0.0, 1.0))
+    joints = end_effector_transform_to_joints(sim.robot, tf)
+    sim_states.extend(_plan_to_sim_state_trajectory([joints], sim))
+
+    # Close to grasp.
+    sim_states.extend(_get_plan_to_execute_ungrasp(sim))
+
+    # Retract to avoid collision checking issues.
+    tf = Pose((0.0, 0.0, -0.025), (0.0, 0.0, 0.0, 1.0))
+    joints = end_effector_transform_to_joints(sim.robot, tf)
+    sim_states.extend(_plan_to_sim_state_trajectory([joints], sim))
+
+    # Move to pregrasp.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.cup_pregrasp_pose,
+            sim,
+            num_grasp_waypoints,
+            max_motion_plan_time,
+        )
+    )
+
+    return sim_states
 
 
 ###############################################################################
@@ -272,21 +178,7 @@ def get_bite_transfer_plan(
     collision_ids = sim.get_collision_ids()
 
     # Create joint distance function.
-    # TODO refactor to avoid copying this function so many places
-    weights = geometric_sequence(0.9, len(sim.robot.arm_joint_names))
-    joint_infos = get_joint_infos(
-        sim.robot.robot_id, sim.robot.arm_joints, sim.physics_client_id
-    )
-
-    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
-        return get_joint_positions_distance(
-            sim.robot,
-            joint_infos,
-            pt1,
-            pt2,
-            metric="weighted_joints",
-            weights=weights,
-        )
+    _joint_distance_fn = _create_joint_distance_fn(sim.robot)
 
     finger_frame_id = robot.link_from_name("finger_tip")
     end_effector_link_id = robot.link_from_name(robot.tool_link_name)
@@ -332,6 +224,159 @@ def get_bite_transfer_plan(
 ###############################################################################
 
 
+def _get_motion_plan_for_robot_finger_tip(
+    target_pose: Pose,
+    sim: FeedingDeploymentPyBulletSimulator,
+    seed: int,
+    max_motion_plan_time: float,
+) -> list[FeedingDeploymentSimulatorState]:
+
+    # Commands will be in end effector space, but grasp planning will be in
+    # finger frame space.
+    robot = sim.robot
+    physics_client_id = sim.physics_client_id
+    finger_frame_id = robot.link_from_name("finger_tip")
+    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
+    finger_from_end_effector = get_relative_link_pose(
+        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
+    )
+
+    # Run motion planning.
+    plan = run_smooth_motion_planning_to_pose(
+        target_pose,
+        robot,
+        sim.get_collision_ids(),
+        finger_from_end_effector,
+        seed,
+        max_time=max_motion_plan_time,
+        held_object=sim.held_object_id,
+        base_link_to_held_obj=sim.held_object_tf,
+    )
+    assert plan is not None
+    return _plan_to_sim_state_trajectory(plan, sim)
+
+
+def _plan_to_sim_state_trajectory(
+    plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator
+) -> list[FeedingDeploymentSimulatorState]:
+    # Read out the simulator states from the plan.
+    cup_pose: Pose | None = None
+    if sim.held_object_name != "cup":
+        cup_pose = get_pose(sim.cup_id, sim.physics_client_id)
+    sim_states: list[FeedingDeploymentSimulatorState] = []
+    for joints in plan:
+        sim_state = FeedingDeploymentSimulatorState(
+            joints,
+            cup_pose=cup_pose,
+            held_object=sim.held_object_name,
+            held_object_tf=sim.held_object_tf,
+        )
+        sim_states.append(sim_state)
+    # Sync simulator to end of plan.
+    sim.sync(sim_states[-1])
+    return sim_states
+
+
+def _get_interpolated_plan_for_robot_finger_tip(
+    target_pose: Pose,
+    sim: FeedingDeploymentPyBulletSimulator,
+    num_interp_waypoints: int,
+    max_motion_plan_time: float,
+) -> list[FeedingDeploymentSimulatorState]:
+
+    # Commands will be in end effector space, but grasp planning will be in
+    # finger frame space.
+    robot = sim.robot
+    physics_client_id = sim.physics_client_id
+    finger_frame_id = robot.link_from_name("finger_tip")
+    end_effector_link_id = robot.link_from_name(robot.tool_link_name)
+    finger_from_end_effector = get_relative_link_pose(
+        robot.robot_id, end_effector_link_id, finger_frame_id, physics_client_id
+    )
+
+    target_end_effector_pose = multiply_poses(target_pose, finger_from_end_effector)
+    current_end_effector_pose = robot.get_end_effector_pose()
+
+    interpolated_poses = list(
+        interpolate_poses(
+            current_end_effector_pose,
+            target_end_effector_pose,
+            num_interp=num_interp_waypoints,
+        )
+    )
+
+    _joint_distance_fn = _create_joint_distance_fn(robot)
+
+    plan = smoothly_follow_end_effector_path(
+        robot,
+        interpolated_poses,
+        robot.get_joint_positions(),
+        sim.get_collision_ids(),
+        _joint_distance_fn,
+        max_time=max_motion_plan_time,
+        held_object=sim.held_object_id,
+        base_link_to_held_obj=sim.held_object_tf,
+    )
+    return _plan_to_sim_state_trajectory(plan, sim)
+
+
+def _get_plan_to_execute_grasp(
+    sim: FeedingDeploymentPyBulletSimulator, object_name: str
+) -> list[FeedingDeploymentSimulatorState]:
+
+    # Simulate grasping by faking a constraint with the held object.
+    robot = sim.robot
+    physics_client_id = sim.physics_client_id
+    robot.open_fingers()
+    world_from_end_effector = get_link_pose(
+        robot.robot_id, robot.end_effector_id, physics_client_id
+    )
+    world_from_held_object = get_pose(sim.cup_id, physics_client_id)
+    base_link_to_held_obj = multiply_poses(
+        world_from_end_effector.invert(), world_from_held_object
+    )
+    sim.held_object_name = object_name
+    sim.held_object_tf = base_link_to_held_obj
+    if object_name == "cup":
+        sim.held_object_id = sim.cup_id
+    else:
+        raise NotImplementedError("TODO")
+    return _plan_to_sim_state_trajectory([robot.get_joint_positions()], sim)
+
+
+def _get_plan_to_execute_ungrasp(
+    sim: FeedingDeploymentPyBulletSimulator,
+) -> list[FeedingDeploymentSimulatorState]:
+    robot = sim.robot
+    robot.close_fingers()
+    sim.held_object_name = None
+    sim.held_object_tf = None
+    sim.held_object_id = None
+    return _plan_to_sim_state_trajectory([robot.get_joint_positions()], sim)
+
+
+def _create_joint_distance_fn(
+    robot: SingleArmPyBulletRobot,
+) -> Callable[[JointPositions, JointPositions], float]:
+
+    weights = geometric_sequence(0.9, len(robot.arm_joint_names))
+    joint_infos = get_joint_infos(
+        robot.robot_id, robot.arm_joints, robot.physics_client_id
+    )
+
+    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
+        return get_joint_positions_distance(
+            robot,
+            joint_infos,
+            pt1,
+            pt2,
+            metric="weighted_joints",
+            weights=weights,
+        )
+
+    return _joint_distance_fn
+
+
 def remap_trajectory_to_constant_distance(
     traj: list[FeedingDeploymentSimulatorState],
     sim: FeedingDeploymentPyBulletSimulator,
@@ -343,19 +388,7 @@ def remap_trajectory_to_constant_distance(
     joint_infos = get_joint_infos(
         robot.robot_id, robot.arm_joints, robot.physics_client_id
     )
-
-    # Create joint distance function.
-    weights = geometric_sequence(0.9, len(robot.arm_joint_names))
-
-    def _joint_distance_fn(pt1: JointPositions, pt2: JointPositions) -> float:
-        return get_joint_positions_distance(
-            sim.robot,
-            joint_infos,
-            pt1,
-            pt2,
-            metric="weighted_joints",
-            weights=weights,
-        )
+    _joint_distance_fn = _create_joint_distance_fn(robot)
 
     # Create a continuous-time trajectory.
     def _interpolate_fn(

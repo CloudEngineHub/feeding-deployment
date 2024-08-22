@@ -83,10 +83,20 @@ class SceneDescription:
             cup_length / 4,
         )
     )
-    cup_grasp_distance: float = 0.075
+    cup_grasp_fingers_orientation: Quaternion = p.getQuaternionFromEuler(
+        (np.pi / 2, np.pi, np.pi)
+    )
+    cup_pregrasp_transform: Pose = Pose(
+        (0.0, -0.075, 0.0),
+        cup_grasp_fingers_orientation,
+    )
     cup_grasp_transform: Pose = Pose(
-        (0.0, -cup_grasp_distance, 0.0),
-        p.getQuaternionFromEuler((np.pi / 2, np.pi, np.pi)),
+        (0.0, -0.025, 0.0),
+        cup_grasp_fingers_orientation,
+    )
+    cup_prestow_transform: Pose = Pose(
+        (0.0, -0.025, 0.1),
+        cup_grasp_fingers_orientation,
     )
 
     # Staging pose (where the drinking motion planning should finish).
@@ -111,9 +121,31 @@ class SceneDescription:
         )
 
     @property
+    def cup_pregrasp_pose(self) -> Pose:
+        """Pose for the finger tip to pregrasp the cup."""
+        return multiply_poses(self.cup_pose, self.cup_pregrasp_transform)
+
+    @property
+    def cup_grasp_pose(self) -> Pose:
+        """Pose for the finger tip to grasp the cup."""
+        return multiply_poses(self.cup_pose, self.cup_grasp_transform)
+
+    @property
+    def cup_prestow_pose(self) -> Pose:
+        """Pose for the finger tip to prestow the cup."""
+        return multiply_poses(
+            self.cup_pose,
+            self.cup_prestow_transform,
+        )
+
+    @property
     def cup_staging_pose(self) -> Pose:
-        """Target pose for the cup before transfer."""
-        return multiply_poses(self.wheelchair_head_pose, self.staging_relative_pose)
+        """Pose for the finger tip before cup transfer."""
+        target_cup_pose = multiply_poses(
+            self.wheelchair_head_pose, self.staging_relative_pose
+        )
+        fingers_to_cup = self.cup_grasp_transform
+        return multiply_poses(target_cup_pose, fingers_to_cup)
 
     @property
     def camera_kwargs(self) -> dict[str, Any]:
