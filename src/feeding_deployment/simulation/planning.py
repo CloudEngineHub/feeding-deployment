@@ -169,7 +169,6 @@ def get_plan_to_transfer_cup(
             sim,
             num_grasp_waypoints,
             max_motion_plan_time,
-            exclude_collision_ids={sim.cup_id},
         )
     )
 
@@ -289,6 +288,33 @@ def get_plan_to_stow_wiper(
             num_grasp_waypoints,
             max_motion_plan_time,
             exclude_collision_ids={sim.wiper_id},
+        )
+    )
+
+    return sim_states
+
+
+def get_plan_to_transfer_wiper(
+    sim: FeedingDeploymentPyBulletSimulator,
+    max_motion_plan_time: float = 10.0,
+    num_grasp_waypoints: int = 5,
+) -> list[FeedingDeploymentSimulatorState]:
+    """Make a plan to transfer the wiper, assuming it's near staging."""
+
+    assert sim.held_object_name == "wiper"
+
+    # Quiet IKfast warnings.
+    logging.disable(logging.ERROR)
+
+    sim_states: list[FeedingDeploymentSimulatorState] = []
+
+    # Move to transfer.
+    sim_states.extend(
+        _get_interpolated_plan_for_robot_finger_tip(
+            sim.scene_description.wiper_transfer_pose,
+            sim,
+            num_grasp_waypoints,
+            max_motion_plan_time,
         )
     )
 
