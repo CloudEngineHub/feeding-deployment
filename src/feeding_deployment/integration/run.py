@@ -1,6 +1,5 @@
 """The main entry point for running the integrated system."""
 
-from pathlib import Path
 from typing import Any
 
 from relational_structs import LiftedAtom, Object, PDDLDomain, PDDLProblem, Predicate
@@ -9,6 +8,7 @@ from tomsutils.pddl_planning import run_pyperplan_planning
 
 from feeding_deployment.integration.high_level_actions import (
     GripperFree,
+    GroundHighLevelAction,
     Holding,
     PickToolHLA,
     PrepareToolHLA,
@@ -59,8 +59,9 @@ def _main(
     # Create skills for high-level planning.
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
     hlas = {
-        cls(sim, robot_interface, perception_interface, hla_hyperparams) for cls in HLAS  # type: ignore
+        cls(sim, robot_interface, perception_interface, hla_hyperparams, run_on_robot, make_videos) for cls in HLAS  # type: ignore
     }
+    hla_name_to_hla = {hla.get_name(): hla for hla in hlas}
     operators = {hla.get_operator() for hla in hlas}
     predicates: set[Predicate] = {ToolPrepared, GripperFree, Holding, ToolTransferDone}
     types = {tool_type}
@@ -76,17 +77,19 @@ def _main(
     }
 
     # TODO update this once the user interface is ready.
-    goal_queue = [
-        ("Assist Drinking", {ToolTransferDone([cup])}),
-        ("Assist Feeding", {ToolTransferDone([utensil])}),
-        ("Assist Wiping", {ToolTransferDone([wiper])}),
+    TransferTool = hla_name_to_hla["TransferTool"]
+    user_command_queue = [
+        GroundHighLevelAction(TransferTool, (cup,)),
+        GroundHighLevelAction(TransferTool, (utensil,), {"mask": "TODO"}),
+        GroundHighLevelAction(TransferTool, (wiper,)),
     ]
 
-    while goal_queue:
-        goal_str, goal_atoms = goal_queue.pop(0)
-        print("Working towards new goal:", goal_str)
+    while user_command_queue:
+        user_command = user_command_queue.pop(0)
+        print(f"Working towards new command: {user_command}")
 
-        # Plan a sequence of high-level actions to execute.
+        # Plan to the preconditions of the HLA.
+        goal_atoms = user_command.get_preconditions()
         problem = PDDLProblem(
             domain.name, "AssistedFeeding", all_objects, current_atoms, goal_atoms
         )
@@ -100,13 +103,14 @@ def _main(
             print(f"{i}. {op.short_str}")
         plan_hlas = pddl_plan_to_hla_plan(plan_ops, hlas)
 
-        for (hla, object_params), operator in zip(plan_hlas, plan_ops, strict=True):
-            print(f"Refining {operator.short_str}")
+        for ground_hla in plan_hlas:
+            print(f"Refining {ground_hla}")
+            operator = ground_hla.get_operator()
 
             assert operator.preconditions.issubset(current_atoms)
 
             # Execute the high-level plan in simulation
-            sim_traj = hla.execute_action(run_on_robot, make_videos, object_params)
+            sim_traj = ground_hla.execute_action()
 
             # Make sure the states are in sync.
             if sim_traj:

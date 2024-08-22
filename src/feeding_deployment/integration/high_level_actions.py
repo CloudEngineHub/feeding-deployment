@@ -1,10 +1,12 @@
 """High-level actions that we can simulate and execute."""
 
 import abc
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from relational_structs import (
+    GroundAtom,
     GroundOperator,
     LiftedAtom,
     LiftedOperator,
@@ -44,11 +46,19 @@ class HighLevelAction(abc.ABC):
         robot_interface: Arm,
         perception_interface: PerceptionInterface,
         hla_hyperparams: dict[str, Any],
+        run_on_robot: bool,
+        make_videos: bool,
     ) -> None:
         self._sim = sim
         self._robot_interface = robot_interface
         self._perception_interface = perception_interface
         self._hla_hyperparams = hla_hyperparams
+        self._run_on_robot = run_on_robot
+        self._make_videos = make_videos
+
+    @abc.abstractmethod
+    def get_name(self) -> str:
+        """Get a human-readable name for this HLA."""
 
     @abc.abstractmethod
     def get_operator(self) -> LiftedOperator:
@@ -56,31 +66,63 @@ class HighLevelAction(abc.ABC):
 
     @abc.abstractmethod
     def execute_action(
-        self, run_on_robot, make_videos, objects: tuple[Object, ...]
-    ) -> None:
-        """Plan and execute the action on the robot."""
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> list[FeedingDeploymentSimulatorState]:
+        """Execute the action on the robot and return simulated trajectory."""
 
 
-# Define a high-level action that follows a planning and then execution pipeline.
+@dataclass(frozen=True)
+class GroundHighLevelAction:
+    """A high-level action with objects and parameters specified.
+
+    For example, the parameters for bite acquisition might include the
+    preferred food item. These parameters can be populated automatically
+    or set by the user.
+    """
+
+    hla: HighLevelAction  # want this to be executed
+    objects: tuple[Object, ...]  # for grounding the high-level action
+    params: dict = field(default_factory=lambda: {})  # see docstring
+
+    def __str__(self) -> str:
+        return f"{self.hla.get_name()}[{self.objects}]"
+
+    def get_operator(self) -> GroundOperator:
+        """Get the operator for this ground HLA."""
+        return self.hla.get_operator().ground(self.objects)
+
+    def get_preconditions(self) -> set[GroundAtom]:
+        """Get the preconditions for executing this command."""
+        return self.get_operator().preconditions
+
+    def execute_action(self) -> list[FeedingDeploymentSimulatorState]:
+        """Execute the command."""
+        return self.hla.execute_action(self.objects, self.params)
+
+
 class PlanExecuteHighLevelAction(HighLevelAction):
     """Base class for high-level actions that follow planning and then
     execution pipeline."""
 
     def execute_action(
-        self, run_on_robot, make_videos, objects: tuple[Object, ...]
-    ) -> None:
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> list[FeedingDeploymentSimulatorState]:
         """Default implementation uses get_simulated_trajectory,
         get_robot_commands, and execute_robot_commands in sequence, but
         subclasses can override to modify their execution."""
-        sim_traj = self.get_simulated_trajectory(objects)
+        sim_traj = self.get_simulated_trajectory(objects, params)
 
         # Optionally make a video of the simulated trajectory.
-        if make_videos:
+        if self._make_videos:
             outfile = Path(__file__).parent / "last.mp4"
             make_simulation_video(self._sim, sim_traj, outfile)
 
-        robot_commands = self.get_robot_commands(objects, sim_traj)
-        if run_on_robot:
+        robot_commands = self.get_robot_commands(objects, params, sim_traj)
+        if self._run_on_robot:
             self.execute_robot_commands(robot_commands)
         return sim_traj
 
@@ -88,17 +130,19 @@ class PlanExecuteHighLevelAction(HighLevelAction):
     def get_simulated_trajectory(
         self,
         objects: tuple[Object, ...],
+        params: dict[str, Any],
     ) -> list[FeedingDeploymentSimulatorState]:
         """Update the given simulator assuming that the action was executed."""
 
     def get_robot_commands(
         self,
         objects: tuple[Object, ...],
+        params: dict[str, Any],
         sim_traj: list[FeedingDeploymentSimulatorState],
     ) -> list[KinovaCommand]:
         """Default implementation follows sim_traj exactly, but subclasses can
         override to modify their execution."""
-        del objects  # not used
+        del objects, params  # not used
         return simulated_trajectory_to_kinova_commands(sim_traj)
 
     def execute_robot_commands(self, robot_commands: list[KinovaCommand]) -> None:
@@ -110,10 +154,13 @@ class PlanExecuteHighLevelAction(HighLevelAction):
 class PickToolHLA(PlanExecuteHighLevelAction):
     """Pick up a tool (utensil, drink, or wipe)."""
 
+    def get_name(self) -> str:
+        return "PickTool"
+
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
         return LiftedOperator(
-            "PickTool",
+            self.get_name(),
             parameters=[tool],
             preconditions={LiftedAtom(GripperFree, [])},
             add_effects={Holding([tool])},
@@ -123,6 +170,7 @@ class PickToolHLA(PlanExecuteHighLevelAction):
     def get_simulated_trajectory(
         self,
         objects: tuple[Object, ...],
+        params: dict[str, Any],
     ) -> list[FeedingDeploymentSimulatorState]:
         assert len(objects) == 1
         tool = objects[0]
@@ -143,10 +191,13 @@ class PickToolHLA(PlanExecuteHighLevelAction):
 class StowToolHLA(PlanExecuteHighLevelAction):
     """Stow a tool (utensil, drink, or wipe)."""
 
+    def get_name(self) -> str:
+        return "StowTool"
+
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
         return LiftedOperator(
-            "StowTool",
+            self.get_name(),
             parameters=[tool],
             preconditions={Holding([tool])},
             add_effects={LiftedAtom(GripperFree, [])},
@@ -156,6 +207,7 @@ class StowToolHLA(PlanExecuteHighLevelAction):
     def get_simulated_trajectory(
         self,
         objects: tuple[Object, ...],
+        params: dict[str, Any],
     ) -> list[FeedingDeploymentSimulatorState]:
         # TODO
         assert len(objects) == 1
@@ -167,10 +219,13 @@ class StowToolHLA(PlanExecuteHighLevelAction):
 class TransferToolHLA(PlanExecuteHighLevelAction):
     """Wipe, or transfer drink, or transfer bite."""
 
+    def get_name(self) -> str:
+        return "TransferTool"
+
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
         return LiftedOperator(
-            "TransferTool",
+            self.get_name(),
             parameters=[tool],
             preconditions={Holding([tool]), ToolPrepared([tool])},
             add_effects={LiftedAtom(ToolTransferDone, [tool])},
@@ -180,6 +235,7 @@ class TransferToolHLA(PlanExecuteHighLevelAction):
     def get_simulated_trajectory(
         self,
         objects: tuple[Object, ...],
+        params: dict[str, Any],
     ) -> list[FeedingDeploymentSimulatorState]:
         # TODO
         assert len(objects) == 1
@@ -204,21 +260,18 @@ class TransferToolHLA(PlanExecuteHighLevelAction):
 class PrepareToolHLA(HighLevelAction):
     """Bite acquisition; other tools are always prepared."""
 
-    def __init__(
-        self,
-        sim: FeedingDeploymentPyBulletSimulator,
-        robot_interface: Arm,
-        perception_interface: PerceptionInterface,
-        hla_hyperparams: dict[str, Any],
-    ) -> None:
-        super().__init__(sim, robot_interface, perception_interface, hla_hyperparams)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
         # Rajat todo: how do I initialize FLAIR just for the utensil tool?
+
+    def get_name(self) -> str:
+        return "PrepareTool"
 
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
         return LiftedOperator(
-            "PrepareTool",
+            self.get_name(),
             parameters=[tool],
             preconditions={Holding([tool])},
             add_effects={ToolPrepared([tool])},
@@ -226,8 +279,10 @@ class PrepareToolHLA(HighLevelAction):
         )
 
     def execute_action(
-        self, run_on_robot, make_videos, objects: tuple[Object, ...]
-    ) -> None:
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> list[FeedingDeploymentSimulatorState]:
         assert len(objects) == 1
         tool = objects[0]
         if tool.name == "utensil":
@@ -236,15 +291,18 @@ class PrepareToolHLA(HighLevelAction):
         else:
             # Other tools are always prepared
             pass
+        return []
 
 
 def pddl_plan_to_hla_plan(
     pddl_plan: list[GroundOperator], hlas: set[HighLevelAction]
-) -> list[tuple[HighLevelAction, tuple[Object, ...]]]:
+) -> list[GroundHighLevelAction]:
     """Convert a PDDL plan into a sequence of HLA and objects."""
     hla_plan = []
     op_to_hla = {hla.get_operator(): hla for hla in hlas}
     for ground_operator in pddl_plan:
         hla = op_to_hla[ground_operator.parent]
-        hla_plan.append((hla, tuple(ground_operator.parameters)))
+        objects = tuple(ground_operator.parameters)
+        ground_hla = GroundHighLevelAction(hla, objects)
+        hla_plan.append(ground_hla)
     return hla_plan
