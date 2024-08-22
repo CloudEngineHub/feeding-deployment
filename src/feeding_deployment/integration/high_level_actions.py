@@ -9,7 +9,13 @@ from typing import Any
 FLAIR_PATH = "/home/isacc/deployment_ws/src/FLAIR/bite_acquisition/scripts"
 import sys
 sys.path.append(FLAIR_PATH)
-from skill_library import SkillLibrary
+try:
+    from skill_library import SkillLibrary
+    FLAIR_IMPORTED = True
+except ModuleNotFoundError:
+    FLAIR_IMPORTED = False
+    pass
+
 
 from relational_structs import (
     GroundAtom,
@@ -282,7 +288,8 @@ class PrepareToolHLA(HighLevelAction):
 
         # Rajat todo: how do I initialize FLAIR just for the utensil tool?
         print("Initializing Acquisition Skill Library")
-        self.acquisition_skill_library = SkillLibrary(self._robot_interface)
+        if FLAIR_IMPORTED:
+            self.acquisition_skill_library = SkillLibrary(self._robot_interface)
 
     def get_name(self) -> str:
         return "PrepareTool"
@@ -304,10 +311,9 @@ class PrepareToolHLA(HighLevelAction):
     ) -> list[FeedingDeploymentSimulatorState]:
         assert len(objects) == 1
         tool = objects[0]
-        if tool.name == "utensil":
+        if tool.name == "utensil" and FLAIR_IMPORTED:
             # Do Bite Acquisition
             print("Doing Bite Acquisition")
-            
             self.acquisition_skill_library.reset()
             camera_color_data, camera_info_data, camera_depth_data, _ = self._perception_interface.get_camera_data()
             self.acquisition_skill_library.skewering_skill(camera_color_data, camera_depth_data, camera_info_data)
