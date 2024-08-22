@@ -131,7 +131,6 @@ def _main(
     if make_videos:
         outfile = Path(__file__).parent / "full.mp4"
         make_simulation_video(sim, full_simulated_traj, outfile)
-        print(f"Wrote out to {outfile}")
 
 
 if __name__ == "__main__":
