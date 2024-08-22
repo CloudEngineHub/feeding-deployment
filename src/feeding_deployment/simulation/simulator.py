@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pybullet as p
+from pybullet_helpers.geometry import Pose
 from pybullet_helpers.gui import create_gui_connection
 from pybullet_helpers.inverse_kinematics import (
     set_robot_joints_with_held_object,
@@ -120,7 +121,9 @@ class FeedingDeploymentPyBulletSimulator:
         )
 
         # Track held objects.
-        self._held_object_name: str | None = None
+        self.held_object_name: str | None = None
+        self.held_object_id: int | None = None
+        self.held_object_tf: Pose | None = None
 
     def get_collision_ids(self) -> set[int]:
         """Return all collision IDs."""
@@ -130,7 +133,7 @@ class FeedingDeploymentPyBulletSimulator:
             self._wheelchair_id,
             self.cup_id,
         }
-        if self._held_object_name == "cup":
+        if self.held_object_name == "cup":
             collision_ids.remove(self.cup_id)
         return collision_ids
 
@@ -144,8 +147,14 @@ class FeedingDeploymentPyBulletSimulator:
                 state.cup_pose.orientation,
                 physicsClientId=self.physics_client_id,
             )
+            self.held_object_name = None
+            self.held_object_id = None
+            self.held_object_tf = None
         else:
             assert state.held_object == "cup"
+            self.held_object_name = state.held_object
+            self.held_object_id = self.cup_id
+            self.held_object_tf = state.held_object_tf
             set_robot_joints_with_held_object(
                 self.robot,
                 self.physics_client_id,

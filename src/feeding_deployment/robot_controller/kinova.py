@@ -13,11 +13,17 @@ import pinocchio as pin
 # Rajat ToDo: Move all ROS stuff to a separate interface
 # import rospy
 try:
-    from kortex_api.autogen.client_stubs.ActuatorConfigClientRpc import ActuatorConfigClient
+    from kortex_api.autogen.client_stubs.ActuatorConfigClientRpc import (
+        ActuatorConfigClient,
+    )
     from kortex_api.autogen.client_stubs.BaseClientRpc import BaseClient
     from kortex_api.autogen.client_stubs.BaseCyclicClientRpc import BaseCyclicClient
-    from kortex_api.autogen.client_stubs.ControlConfigClientRpc import ControlConfigClient
-    from kortex_api.autogen.client_stubs.DeviceManagerClientRpc import DeviceManagerClient
+    from kortex_api.autogen.client_stubs.ControlConfigClientRpc import (
+        ControlConfigClient,
+    )
+    from kortex_api.autogen.client_stubs.DeviceManagerClientRpc import (
+        DeviceManagerClient,
+    )
     from kortex_api.autogen.messages import (
         ActuatorConfig_pb2,
         ActuatorCyclic_pb2,
