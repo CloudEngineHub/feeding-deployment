@@ -42,6 +42,7 @@ from feeding_deployment.simulation.planning import (
     get_plan_to_stow_utensil,
     get_plan_to_stow_wiper,
     get_plan_to_transfer_cup,
+    get_plan_to_transfer_wiper,
     remap_trajectory_to_constant_distance,
 )
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
@@ -280,6 +281,11 @@ class TransferToolHLA(PlanExecuteHighLevelAction):
         tool = objects[0]
         if tool.name == "cup":
             nominal_plan = get_plan_to_transfer_cup(
+                self._sim,
+                max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
+            )
+        elif tool.name == "wiper":
+            nominal_plan = get_plan_to_transfer_wiper(
                 self._sim,
                 max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
             )

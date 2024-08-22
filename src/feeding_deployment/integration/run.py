@@ -3,7 +3,14 @@
 from pathlib import Path
 from typing import Any
 
-from relational_structs import LiftedAtom, Object, PDDLDomain, PDDLProblem, Predicate
+from relational_structs import (
+    GroundAtom,
+    LiftedAtom,
+    Object,
+    PDDLDomain,
+    PDDLProblem,
+    Predicate,
+)
 from relational_structs.utils import parse_pddl_plan
 from tomsutils.pddl_planning import run_pyperplan_planning
 
@@ -83,10 +90,11 @@ def _main(
 
     # TODO update this once the user interface is ready.
     TransferTool = hla_name_to_hla["TransferTool"]
-    user_command_queue = [
+    user_command_queue: list[GroundHighLevelAction | set[GroundAtom]] = [
         GroundHighLevelAction(TransferTool, (cup,)),
         GroundHighLevelAction(TransferTool, (utensil,), {"mask": "TODO"}),
         GroundHighLevelAction(TransferTool, (wiper,)),
+        {LiftedAtom(GripperFree, [])},  # reset at the end
     ]
 
     full_simulated_traj: list[FeedingDeploymentSimulatorState] = []
@@ -96,7 +104,10 @@ def _main(
         print(f"Working towards new command: {user_command}")
 
         # Plan to the preconditions of the HLA.
-        goal_atoms = user_command.get_preconditions()
+        if isinstance(user_command, GroundHighLevelAction):
+            goal_atoms = user_command.get_preconditions()
+        else:
+            goal_atoms = user_command
         problem = PDDLProblem(
             domain.name, "AssistedFeeding", all_objects, current_atoms, goal_atoms
         )
@@ -109,8 +120,9 @@ def _main(
         for i, op in enumerate(plan_ops):
             print(f"{i}. {op.short_str}")
         plan_hlas = pddl_plan_to_hla_plan(plan_ops, hlas)
-        # Append the user command to the plan.
-        plan_hlas.append(user_command)
+        # Append the user command to the plan if it's an action.
+        if isinstance(user_command, GroundHighLevelAction):
+            plan_hlas.append(user_command)
 
         for ground_hla in plan_hlas:
             print(f"Refining {ground_hla}")
@@ -127,8 +139,6 @@ def _main(
                 sim.sync(sim_traj[-1])
             current_atoms -= operator.delete_effects
             current_atoms |= operator.add_effects
-
-        input("User command accomplished, press enter to continue")
 
     if make_videos:
         outfile = Path(__file__).parent / "full.mp4"

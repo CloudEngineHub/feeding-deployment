@@ -134,6 +134,10 @@ class SceneDescription:
     wiper_staging_transform: Pose = Pose(
         (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((-np.pi / 2, np.pi, np.pi / 2))
     )
+    wiper_transfer_transform: Pose = Pose(
+        (-0.1, 0.35, 0.0),
+        p.getQuaternionFromEuler((-np.pi / 2, np.pi, np.pi / 2)),
+    )
 
     # Utensil.
     utensil_pose: Pose = Pose(
@@ -239,6 +243,15 @@ class SceneDescription:
         """Pose for the finger tip before wiper transfer."""
         target_wiper_pose = multiply_poses(
             self.wheelchair_head_pose, self.wiper_staging_transform
+        )
+        fingers_to_wiper = self.wiper_grasp_transform
+        return multiply_poses(target_wiper_pose, fingers_to_wiper)
+
+    @property
+    def wiper_transfer_pose(self) -> Pose:
+        """Pose for the finger tip for wiper transfer."""
+        target_wiper_pose = multiply_poses(
+            self.wheelchair_head_pose, self.wiper_transfer_transform
         )
         fingers_to_wiper = self.wiper_grasp_transform
         return multiply_poses(target_wiper_pose, fingers_to_wiper)
