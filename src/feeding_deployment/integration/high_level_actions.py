@@ -21,8 +21,8 @@ from feeding_deployment.integration.utils import simulated_trajectory_to_kinova_
 from feeding_deployment.robot_controller.arm_client import Arm, KinovaCommand
 from feeding_deployment.simulation.planning import (
     get_bite_transfer_plan,
-    get_plan_to_stow_cup,
     get_plan_to_grasp_cup,
+    get_plan_to_stow_cup,
     remap_trajectory_to_constant_distance,
 )
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator

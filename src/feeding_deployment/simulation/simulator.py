@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pybullet as p
+from pybullet_helpers.geometry import Pose
 from pybullet_helpers.gui import create_gui_connection
 from pybullet_helpers.inverse_kinematics import (
     set_robot_joints_with_held_object,
@@ -10,7 +11,6 @@ from pybullet_helpers.inverse_kinematics import (
 from pybullet_helpers.robots import create_pybullet_robot
 from pybullet_helpers.robots.single_arm import SingleArmTwoFingerGripperPyBulletRobot
 from pybullet_helpers.utils import create_pybullet_block
-from pybullet_helpers.geometry import Pose
 
 from feeding_deployment.simulation.scene_description import SceneDescription
 from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
