@@ -97,7 +97,9 @@ class SceneDescription:
         (0.0, 0.05, -0.025),
         cup_grasp_fingers_orientation,
     )
-    # This is relative to the wheelchair head.
+    # Transform between the cup and its tip (i.e. end of the straw).
+    cup_tip_transform: Pose = Pose((0.1, 0.1, -0.075))
+    # NOTE: these transforms are between the cup_tip and the wheelchair head.
     cup_staging_transform: Pose = Pose(
         (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((-np.pi / 2, np.pi, np.pi / 2))
     )
@@ -130,7 +132,9 @@ class SceneDescription:
         (0.0, 0.0, -0.2),
         wiper_grasp_fingers_orientation,
     )
-    # This is relative to the wheelchair head.
+    # Transform between the wiper and its tip (i.e. the wipe).
+    wiper_tip_transform: Pose = Pose((0.1, 0.0, -0.075))
+    # NOTE: these transforms are between the wiper_tip and the wheelchair head.
     wiper_staging_transform: Pose = Pose(
         (-0.1, 0.5, 0.0), p.getQuaternionFromEuler((-np.pi / 2, np.pi, np.pi / 2))
     )
@@ -164,7 +168,9 @@ class SceneDescription:
         wiper_grasp_fingers_orientation,
     )
     utensil_corner_waypoint_transform: Pose = Pose((0.1, -0.4, -0.3))
-    # This is relative to the wheelchair head.
+    # Transform between the utensil and its tip (i.e. fork tip).
+    utensil_tip_transform: Pose = Pose((0.225, 0.0, -0.075))
+    # NOTE: these transforms are between the utensil_tip and the wheelchair head.
     utensil_staging_transform: Pose = Pose(
         (0.0, 0.75, 0.0), p.getQuaternionFromEuler((-np.pi / 2, np.pi, np.pi / 2))
     )
@@ -208,8 +214,9 @@ class SceneDescription:
         target_cup_pose = multiply_poses(
             self.wheelchair_head_pose, self.cup_staging_transform
         )
+        cup_to_tip = self.cup_tip_transform
         fingers_to_cup = self.cup_grasp_transform
-        return multiply_poses(target_cup_pose, fingers_to_cup)
+        return multiply_poses(target_cup_pose, cup_to_tip, fingers_to_cup)
 
     @property
     def cup_transfer_pose(self) -> Pose:
@@ -218,8 +225,9 @@ class SceneDescription:
             self.wheelchair_head_pose,
             self.cup_transfer_transform,
         )
+        cup_to_tip = self.cup_tip_transform
         fingers_to_cup = self.cup_grasp_transform
-        return multiply_poses(target_cup_pose, fingers_to_cup)
+        return multiply_poses(target_cup_pose, cup_to_tip, fingers_to_cup)
 
     @property
     def wiper_pregrasp_pose(self) -> Pose:
@@ -245,8 +253,9 @@ class SceneDescription:
         target_wiper_pose = multiply_poses(
             self.wheelchair_head_pose, self.wiper_staging_transform
         )
+        wiper_to_tip = self.wiper_tip_transform
         fingers_to_wiper = self.wiper_grasp_transform
-        return multiply_poses(target_wiper_pose, fingers_to_wiper)
+        return multiply_poses(target_wiper_pose, wiper_to_tip, fingers_to_wiper)
 
     @property
     def wiper_transfer_pose(self) -> Pose:
@@ -254,8 +263,9 @@ class SceneDescription:
         target_wiper_pose = multiply_poses(
             self.wheelchair_head_pose, self.wiper_transfer_transform
         )
+        wiper_to_tip = self.wiper_tip_transform
         fingers_to_wiper = self.wiper_grasp_transform
-        return multiply_poses(target_wiper_pose, fingers_to_wiper)
+        return multiply_poses(target_wiper_pose, wiper_to_tip, fingers_to_wiper)
 
     @property
     def utensil_pregrasp_pose(self) -> Pose:
@@ -289,8 +299,9 @@ class SceneDescription:
         target_utensil_pose = multiply_poses(
             self.wheelchair_head_pose, self.utensil_staging_transform
         )
+        utensil_to_tip = self.utensil_tip_transform
         fingers_to_utensil = self.utensil_grasp_transform
-        return multiply_poses(target_utensil_pose, fingers_to_utensil)
+        return multiply_poses(target_utensil_pose, utensil_to_tip, fingers_to_utensil)
 
     @property
     def camera_kwargs(self) -> dict[str, Any]:
