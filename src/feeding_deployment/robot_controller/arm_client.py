@@ -20,7 +20,10 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.command_interface import KinovaCommand
-from feeding_deployment.robot_controller.kinova import KinovaArm
+try:
+    from feeding_deployment.robot_controller.kinova import KinovaArm
+except ImportError:
+    print("KinovaArm import failed, continuing without executing arm commands on real robot")
 
 # from sensor_msgs.msg import JointState
 

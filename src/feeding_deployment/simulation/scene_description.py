@@ -89,19 +89,18 @@ class SceneDescription:
     )
     robot_base_pose: Pose = Pose(
         (0.0, 0.0, 0.0),
-        tuple(
-            Rotation.from_euler("xyz", [0, 0, 90], degrees=True).as_quat()
-        ),  # Rajat ToDo: Base sure robot-base orientation is 0,0,0
+        (0.0, 0.0, 0.0, 1.0),
     )
 
     # Robot holder (vention stand).
-    robot_holder_pose: Pose = Pose((0.0, 0.0, -0.55))
+    # robot_holder_pose: Pose = Pose((0.0, 0.0, -0.261))
+    robot_holder_pose: Pose = Pose((0.0, 0.0, -0.28))
     robot_holder_rgba: tuple[float, float, float, float] = (0.5, 0.5, 0.5, 1.0)
-    robot_holder_half_extents: tuple[float, float, float] = (0.25, 0.25, 0.5)
+    robot_holder_half_extents: tuple[float, float, float] = (0.18, 0.12, 0.26)
 
     # Wheelchair.
-    wheelchair_pose: Pose = Pose((-0.5, 0.0, -0.25), (0.0, 0.0, 1.0, 0.0))
-    wheelchair_relative_head_pose: Pose = Pose((0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0))
+    wheelchair_pose: Pose = Pose((0.2, 0.5, -0.25), tuple(p.getQuaternionFromEuler((0.0, 0.0, np.pi/2))))
+    wheelchair_relative_head_pose: Pose = Pose((0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0)) # Rajat ToDo: Fix this
     wheelchair_urdf_path: Path = (
         Path(__file__).parent.parent
         / "assets"
@@ -111,14 +110,14 @@ class SceneDescription:
     )
 
     # Conservative bounding box around the wheel chair.
-    conservative_bb_pose: Pose = Pose((-0.75, -0.5, -0.25))
+    conservative_bb_pose: Pose = Pose((-0.4, 0.7, -0.25))
     conservative_bb_rgba: tuple[float, float, float, float] = (0.9, 0.1, 0.1, 0.5)
     conservative_bb_half_extents: tuple[float, float, float] = (0.4, 0.4, 1.0)
 
     # Table.
-    table_pose: Pose = Pose((-0.5, 0.75, -0.29))
+    table_pose: Pose = Pose((0.5, 0.75, -0.175))
     table_rgba: tuple[float, float, float, float] = (0.5, 0.5, 0.5, 1.0)
-    table_half_extents: tuple[float, float, float] = (0.75, 0.25, 0.5)
+    table_half_extents: tuple[float, float, float] = (0.25, 0.4, 0.345)
 
     # Cup.
     cup_pose: Pose = Pose(
