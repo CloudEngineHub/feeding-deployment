@@ -40,15 +40,28 @@ class SceneDescription:
         (-0.147, -0.17, 0.07),
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
+    utensil_inside_mount_pos: JointPositions = field(
+        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0] # Rajat ToDo: Add the joint positions for the utensil inside mount
+    )
 
     utensil_outside_mount: Pose = Pose(
         (-0.147, -0.29, 0.07),
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
+    utensil_outside_mount_pos: JointPositions = field(
+        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0] # Rajat ToDo: Add the joint positions for the utensil outside mount
+    )
 
     utensil_above_mount: Pose = Pose(
         (-0.147, -0.17, 0.15),
         (0.7071068, -0.7071068, 0.0, 0.0),
+    )
+    utensil_above_mount_pos: JointPositions = field(
+        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0] # Rajat ToDo: Add the joint positions for the utensil above mount
+    )
+
+    utensil_neutral_pos: JointPositions = field(
+        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0] # Rajat ToDo: Add the joint positions for the utensil neutral position
     )
 
     above_plate_pos: JointPositions = field(

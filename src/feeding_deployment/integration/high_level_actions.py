@@ -4,6 +4,7 @@ import abc
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+import numpy as np
 
 # Rajat ToDo: Remove this hacky addition
 FLAIR_PATH = "/home/isacc/deployment_ws/src/FLAIR/bite_acquisition/scripts"
@@ -32,7 +33,8 @@ from relational_structs import (
 
 from feeding_deployment.integration.perception_interface import PerceptionInterface
 from feeding_deployment.integration.utils import simulated_trajectory_to_kinova_commands
-from feeding_deployment.robot_controller.arm_client import Arm, KinovaCommand
+from feeding_deployment.robot_controller.arm_client import Arm
+from feeding_deployment.robot_controller.command_interface import KinovaCommand, CartesianCommand, JointCommand, OpenGripperCommand, CloseGripperCommand
 from feeding_deployment.simulation.planning import (
     get_bite_transfer_plan,
     get_plan_to_grasp_cup,
@@ -43,7 +45,9 @@ from feeding_deployment.simulation.planning import (
     get_plan_to_stow_wiper,
     get_plan_to_transfer_cup,
     get_plan_to_transfer_wiper,
+    _get_motion_plan_for_robot_finger_tip,
     remap_trajectory_to_constant_distance,
+    _get_plan_to_execute_grasp,
 )
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
@@ -55,6 +59,10 @@ Holding = Predicate("Holding", [tool_type])  # holding tool
 ToolTransferDone = Predicate("ToolTransferDone", [tool_type])  # wiped, drank, or ate
 ToolPrepared = Predicate("ToolPrepared", [tool_type])  # e.g., bite acquired
 
+# Feeding:
+# - Bite acquisition: move_joint(above_plate) -> move_ee(pickup food) -> move_joint(above plate) 
+# - Bite transfer: move_joint(transfer_pos) -> plan_to_pose(infront_mouth) -> plan_to_pose(inside_mouth) -> plan_to_pose(infront_mouth) -> plan_to_pose(transfer_pos)
+# - Stow utensil: move_joint(utensil neutral) -> move_joint(outside mount) -> move_ee(inside mount) -> move_ee(above mount)
 
 # Define high-level actions.
 class HighLevelAction(abc.ABC):
@@ -90,6 +98,12 @@ class HighLevelAction(abc.ABC):
     ) -> list[FeedingDeploymentSimulatorState]:
         """Execute the action on the robot and return simulated trajectory."""
 
+    # Rajat ToDo: Ask Tom if this is bad practice
+    def execute_robot_commands(self, robot_commands: list[KinovaCommand]) -> None:
+        """Execute the given commands on the robot."""
+        for robot_command in robot_commands:
+            self._robot_interface.execute_command(robot_command)
+
 
 @dataclass(frozen=True)
 class GroundHighLevelAction:
@@ -120,51 +134,7 @@ class GroundHighLevelAction:
         """Execute the command."""
         return self.hla.execute_action(self.objects, self.params)
 
-
-class PlanExecuteHighLevelAction(HighLevelAction):
-    """Base class for high-level actions that follow planning and then
-    execution pipeline."""
-
-    def execute_action(
-        self,
-        objects: tuple[Object, ...],
-        params: dict[str, Any],
-    ) -> list[FeedingDeploymentSimulatorState]:
-        """Default implementation uses get_simulated_trajectory,
-        get_robot_commands, and execute_robot_commands in sequence, but
-        subclasses can override to modify their execution."""
-        sim_traj = self.get_simulated_trajectory(objects, params)
-        robot_commands = self.get_robot_commands(objects, params, sim_traj)
-        if self._run_on_robot:
-            self.execute_robot_commands(robot_commands)
-        return sim_traj
-
-    @abc.abstractmethod
-    def get_simulated_trajectory(
-        self,
-        objects: tuple[Object, ...],
-        params: dict[str, Any],
-    ) -> list[FeedingDeploymentSimulatorState]:
-        """Update the given simulator assuming that the action was executed."""
-
-    def get_robot_commands(
-        self,
-        objects: tuple[Object, ...],
-        params: dict[str, Any],
-        sim_traj: list[FeedingDeploymentSimulatorState],
-    ) -> list[KinovaCommand]:
-        """Default implementation follows sim_traj exactly, but subclasses can
-        override to modify their execution."""
-        del objects, params  # not used
-        return simulated_trajectory_to_kinova_commands(sim_traj)
-
-    def execute_robot_commands(self, robot_commands: list[KinovaCommand]) -> None:
-        """Execute the given commands on the robot."""
-        for robot_command in robot_commands:
-            self._robot_interface.execute_command(robot_command)
-
-
-class PickToolHLA(PlanExecuteHighLevelAction):
+class PickToolHLA(HighLevelAction):
     """Pick up a tool (utensil, drink, or wipe)."""
 
     def get_name(self) -> str:
@@ -179,54 +149,90 @@ class PickToolHLA(PlanExecuteHighLevelAction):
             add_effects={Holding([tool])},
             delete_effects={LiftedAtom(GripperFree, [])},
         )
-
-    def get_simulated_trajectory(
+    
+    def execute_action(
         self,
         objects: tuple[Object, ...],
         params: dict[str, Any],
     ) -> list[FeedingDeploymentSimulatorState]:
         assert len(objects) == 1
         tool = objects[0]
-        if tool.name == "cup":
-            nominal_plan = get_plan_to_grasp_cup(
-                self._sim,
-                max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
-            )
-        elif tool.name == "wiper":
-            nominal_plan = get_plan_to_grasp_wiper(
-                self._sim,
-                max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
-            )
-        elif tool.name == "utensil":
-            # grasp_utensil_plan = 
 
-            # collision_ids = sim.get_collision_ids()
-            # if exclude_collision_ids is not None:
-            #     collision_ids -= exclude_collision_ids
+        if tool.name == "utensil":
+            
+            assert self._sim.held_object_name is None
+            sim_states: list[FeedingDeploymentSimulatorState] = []
+            robot_commands = []
 
-            # plan = run_smooth_motion_planning_to_pose(
-            #     target_pose,
-            #     robot,
-            #     collision_ids,
-            #     finger_from_end_effector,
-            #     seed,
-            #     max_time=max_motion_plan_time,
-            #     held_object=sim.held_object_id,
-            #     base_link_to_held_obj=sim.held_object_tf,
-            # )
+            # - Pick up utensil:  ->  ->  ->  -> move_joint(above plate)
+            
+            # plan_to_pose(outside mount)
+            plan_to_outside_mount_pos = _get_motion_plan_for_robot_finger_tip(
+                    target_pose=self._sim.scene_description.utensil_pregrasp_pose,
+                    sim=self._sim,
+                    seed=0,
+                    max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"]
+                )
+            remapped_plan = remap_trajectory_to_constant_distance(plan_to_outside_mount_pos, self._sim)
+            sim_states.extend(remapped_plan)
+            robot_commands.extend(simulated_trajectory_to_kinova_commands(remapped_plan))
 
-            nominal_plan = get_plan_to_grasp_utensil(
-                self._sim,
-                max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
-            )
+            # move_ee(inside mount)
+            robot_commands.append(CartesianCommand(
+                pos=self._sim.scene_description.utensil_inside_mount[0],
+                quat=self._sim.scene_description.utensil_inside_mount[1]
+            ))
+
+            # only for sim: teleport to inside mount position
+            self._sim.robot.set_joints(self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
+            sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0]),
+                cup_pose=self._sim.scene_description.cup_pose,
+                wiper_pose=self._sim.scene_description.wiper_pose,
+                utensil_pose=self._sim.scene_description.utensil_inside_mount))
+
+            # open grippers
+            robot_commands.append(OpenGripperCommand())
+
+            # only for sim: set held object
+            sim_states.extend(_get_plan_to_execute_grasp(self._sim, "utensil"))
+
+            # move_ee(outside mount)
+            robot_commands.append(CartesianCommand(
+                pos=self._sim.scene_description.utensil_outside_mount[0],
+                quat=self._sim.scene_description.utensil_outside_mount[1]
+            ))
+
+            # only for sim: teleport to outside mount position
+            self._sim.robot.set_joints(self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
+            sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0]),
+                cup_pose=self._sim.scene_description.cup_pose,
+                wiper_pose=self._sim.scene_description.wiper_pose,
+                held_object="utensil",
+                held_object_tf=sim_states[-1].held_object_tf))
+            
+            # move_joint(utensil neutral)
+            robot_commands.append(JointCommand(
+                pos=self._sim.scene_description.utensil_neutral_pos
+            ))
+            
+            # only for sim: teleport to utensil neutral position
+            self._sim.robot.set_joints(self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
+            sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0]),
+                cup_pose=self._sim.scene_description.cup_pose,
+                wiper_pose=self._sim.scene_description.wiper_pose,
+                held_object="utensil",
+                held_object_tf=sim_states[-1].held_object_tf))
+            
+            if self._run_on_robot:
+                self.execute_robot_commands(robot_commands)
+
+            return sim_states
+
         else:
             print(f"PickTool not yet implemented for {tool}")
             return []
-        remapped_plan = remap_trajectory_to_constant_distance(nominal_plan, self._sim)
-        return remapped_plan
 
-
-class StowToolHLA(PlanExecuteHighLevelAction):
+class StowToolHLA(HighLevelAction):
     """Stow a tool (utensil, drink, or wipe)."""
 
     def get_name(self) -> str:
@@ -270,9 +276,19 @@ class StowToolHLA(PlanExecuteHighLevelAction):
             return []
         remapped_plan = remap_trajectory_to_constant_distance(nominal_plan, self._sim)
         return remapped_plan
+    
+    def execute_action(
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> list[FeedingDeploymentSimulatorState]:
+        assert len(objects) == 1
+        tool = objects[0]
+
+        print("Not implemented yet")
 
 
-class TransferToolHLA(PlanExecuteHighLevelAction):
+class TransferToolHLA(HighLevelAction):
     """Wipe, or transfer drink, or transfer bite."""
 
     def get_name(self) -> str:
@@ -324,6 +340,16 @@ class TransferToolHLA(PlanExecuteHighLevelAction):
             return []
         remapped_plan = remap_trajectory_to_constant_distance(nominal_plan, self._sim)
         return remapped_plan
+    
+    def execute_action(
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> list[FeedingDeploymentSimulatorState]:
+        assert len(objects) == 1
+        tool = objects[0]
+
+        print("Not implemented yet")
 
 
 class PrepareToolHLA(HighLevelAction):

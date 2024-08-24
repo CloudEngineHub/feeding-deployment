@@ -133,7 +133,9 @@ def _main(
 
             # Execute the high-level plan in simulation
             sim_traj = ground_hla.execute_action()
-            full_simulated_traj.extend(sim_traj)
+
+            if sim_traj:
+                full_simulated_traj.extend(sim_traj)
 
             # Make sure the states are in sync.
             if sim_traj:
