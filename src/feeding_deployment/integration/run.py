@@ -66,6 +66,9 @@ def _main(
     if run_on_robot:
         kwargs["initial_joints"] = perception_interface.get_robot_joints()
         print(f"Initial joint state: {kwargs['initial_joints']}")
+    else:
+        kwargs["initial_joints"] = [0.0] * 9
+        print("Running in simulation mode.")
     scene_description = SceneDescription(**kwargs)
     sim = FeedingDeploymentPyBulletSimulator(scene_description)
 

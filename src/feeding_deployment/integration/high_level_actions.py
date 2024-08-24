@@ -49,7 +49,15 @@ from feeding_deployment.simulation.planning import (
     _get_motion_plan_for_robot_finger_tip,
     remap_trajectory_to_constant_distance,
     _get_plan_to_execute_grasp,
+    _plan_to_sim_state_trajectory,
 )
+from pybullet_helpers.motion_planning import (
+    run_motion_planning,
+    get_joint_positions_distance,
+    run_smooth_motion_planning_to_pose,
+    smoothly_follow_end_effector_path,
+)
+from pybullet_helpers.geometry import Pose
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 
@@ -166,17 +174,25 @@ class PickToolHLA(HighLevelAction):
             robot_commands = []
 
             # - Pick up utensil:  ->  ->  ->  -> move_joint(above plate)
+            # input("Press Enter to continue...")
             
             # plan_to_pose(outside mount)
-            plan_to_outside_mount_pos = _get_motion_plan_for_robot_finger_tip(
-                    target_pose=self._sim.scene_description.utensil_pregrasp_pose,
-                    sim=self._sim,
-                    seed=0,
-                    max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"]
-                )
+            plan = run_smooth_motion_planning_to_pose(
+                target_pose = self._sim.scene_description.utensil_outside_mount,
+                robot = self._sim.robot,
+                collision_ids = self._sim.get_collision_ids(),
+                plan_frame_from_end_effector_frame = Pose.identity(),
+                seed = 0,
+                held_object = self._sim.held_object_id,
+                base_link_to_held_obj = self._sim.held_object_tf,
+                max_time = self._hla_hyperparams["max_motion_planning_time"],
+            )
+            plan_to_outside_mount_pos = _plan_to_sim_state_trajectory(plan, self._sim)
             remapped_plan = remap_trajectory_to_constant_distance(plan_to_outside_mount_pos, self._sim)
             sim_states.extend(remapped_plan)
             robot_commands.extend(simulated_trajectory_to_kinova_commands(remapped_plan))
+
+            # input("Press Enter to continue...")
 
             # move_ee(inside mount)
             robot_commands.append(CartesianCommand(
@@ -185,17 +201,20 @@ class PickToolHLA(HighLevelAction):
             ))
 
             # only for sim: teleport to inside mount position
-            self._sim.robot.set_joints(self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
             sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0]),
                 cup_pose=self._sim.scene_description.cup_pose,
                 wiper_pose=self._sim.scene_description.wiper_pose,
                 utensil_pose=self._sim.scene_description.utensil_inside_mount))
+            self._sim.sync(sim_states[-1])
+            
+            # input("Press Enter to continue...")
 
             # open grippers
             robot_commands.append(OpenGripperCommand())
 
             # only for sim: set held object
             sim_states.extend(_get_plan_to_execute_grasp(self._sim, "utensil"))
+            # input("Press Enter to continue...")
 
             # move_ee(outside mount)
             robot_commands.append(CartesianCommand(
@@ -204,12 +223,13 @@ class PickToolHLA(HighLevelAction):
             ))
 
             # only for sim: teleport to outside mount position
-            self._sim.robot.set_joints(self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
             sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0]),
                 cup_pose=self._sim.scene_description.cup_pose,
                 wiper_pose=self._sim.scene_description.wiper_pose,
                 held_object="utensil",
                 held_object_tf=sim_states[-1].held_object_tf))
+            self._sim.sync(sim_states[-1])
+            # input("Press Enter to continue...")
             
             # move_joint(utensil neutral)
             robot_commands.append(JointCommand(
@@ -217,12 +237,23 @@ class PickToolHLA(HighLevelAction):
             ))
             
             # only for sim: teleport to utensil neutral position
-            self._sim.robot.set_joints(self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0]) # last two joints are for the gripper (Rajat ToDo: remove hacky addition)
-            sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0]),
-                cup_pose=self._sim.scene_description.cup_pose,
-                wiper_pose=self._sim.scene_description.wiper_pose,
-                held_object="utensil",
-                held_object_tf=sim_states[-1].held_object_tf))
+            plan = run_motion_planning(robot = self._sim.robot,
+                initial_positions = sim_states[-1].robot_joints,
+                target_positions = self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0],
+                collision_bodies = self._sim.get_collision_ids(),
+                seed = 0,
+                physics_client_id = self._sim.physics_client_id
+            )
+            sim_states.extend(_plan_to_sim_state_trajectory(plan, self._sim))
+            
+
+            # sim_states.append(FeedingDeploymentSimulatorState(robot_joints=(self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0]),
+            #     cup_pose=self._sim.scene_description.cup_pose,
+            #     wiper_pose=self._sim.scene_description.wiper_pose,
+            #     held_object="utensil",
+            #     held_object_tf=sim_states[-1].held_object_tf))
+            # self._sim.sync(sim_states[-1])
+            # input("Press Enter to continue...")
             
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
