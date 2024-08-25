@@ -179,7 +179,7 @@ class PickToolHLA(HighLevelAction):
             sim_states: list[FeedingDeploymentSimulatorState] = []
             robot_commands = []
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
@@ -205,7 +205,7 @@ class PickToolHLA(HighLevelAction):
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
             sim_states.extend(plan)
             robot_commands.extend(commands)
             
@@ -242,14 +242,15 @@ class StowToolHLA(HighLevelAction):
         assert len(objects) == 1
         tool = objects[0]
 
-        assert len(objects) == 1
-        tool = objects[0]
-
         if tool.name == "utensil":
             
             assert self._sim.held_object_name == "utensil"
             sim_states: list[FeedingDeploymentSimulatorState] = []
             robot_commands = []
+
+            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
+            sim_states.extend(plan)
+            robot_commands.extend(commands) 
 
             plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0])
             sim_states.extend(plan)
@@ -273,7 +274,7 @@ class StowToolHLA(HighLevelAction):
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_neutral_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
             sim_states.extend(plan)
             robot_commands.extend(commands)
             
@@ -348,6 +349,18 @@ class TransferToolHLA(HighLevelAction):
         assert len(objects) == 1
         tool = objects[0]
 
+        if tool.name == "utensil":
+            assert self._sim.held_object_name == "utensil"
+
+            plan, robot_commands = move_to_joint_positions(self._sim, self._sim.scene_description.before_transfer_pos + [0.0, 0.0])
+            sim_states = plan
+            if self._run_on_robot:
+                self.execute_robot_commands(robot_commands)
+
+            # Rajat ToDo: Implement the rest of bite transfer
+
+            return sim_states
+
         print("Not implemented yet")
 
 
@@ -382,16 +395,26 @@ class PrepareToolHLA(HighLevelAction):
     ) -> list[FeedingDeploymentSimulatorState]:
         assert len(objects) == 1
         tool = objects[0]
-        if tool.name == "utensil" and FLAIR_IMPORTED:
-            # Do Bite Acquisition
-            print("Doing Bite Acquisition")
-            self.acquisition_skill_library.reset()
-            camera_color_data, camera_info_data, camera_depth_data, _ = (
-                self._perception_interface.get_camera_data()
-            )
-            self.acquisition_skill_library.skewering_skill(
-                camera_color_data, camera_depth_data, camera_info_data
-            )
+
+        if tool.name == "utensil":
+
+            assert self._sim.held_object_name == "utensil"
+
+            plan, robot_commands = move_to_joint_positions(self._sim, self._sim.scene_description.above_plate_pos + [0.0, 0.0])
+            sim_states = plan
+            if self._run_on_robot:
+                self.execute_robot_commands(robot_commands)
+
+            if FLAIR_IMPORTED:
+                # Do Bite Acquisition
+                print("Doing Bite Acquisition")
+                self.acquisition_skill_library.reset()
+                camera_color_data, camera_info_data, camera_depth_data, _ = (
+                    self._perception_interface.get_camera_data()
+                )
+                self.acquisition_skill_library.skewering_skill(
+                    camera_color_data, camera_depth_data, camera_info_data
+                )
 
             # skill_library.scooping_skill(camera_color_data, camera_depth_data, camera_info_data)
 
@@ -402,6 +425,8 @@ class PrepareToolHLA(HighLevelAction):
             # skill_library.twirling_skill(camera_color_data, camera_depth_data, camera_info_data)
 
             # skill_library.cutting_skill(camera_color_data, camera_depth_data, camera_info_data)
+
+            return sim_states
 
         else:
             # Other tools are always prepared
