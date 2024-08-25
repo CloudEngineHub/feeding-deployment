@@ -7,44 +7,27 @@
 
 import queue
 import time
-from dataclasses import dataclass
 
 import numpy as np
 from multiprocess.managers import BaseManager as MPBaseManager
-from numpy.typing import NDArray
+import threading
 
 # from arm_controller import JointCompliantController
 # from constants import RPC_AUTHKEY, ARM_RPC_PORT
 RPC_AUTHKEY = b"secret-key"
 ARM_RPC_PORT = 5000
+# import rospy
+
 # from ik_solver import IKSolver
-from feeding_deployment.robot_controller.kinova import KinovaArm
+from feeding_deployment.robot_controller.command_interface import KinovaCommand
+try:
+    from feeding_deployment.robot_controller.kinova import KinovaArm
+except ImportError:
+    print("KinovaArm import failed, continuing without executing arm commands on real robot")
+
+# from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
-
-
-class KinovaCommand:
-    """Establish an interface for commands that can be sent to the robot."""
-
-
-@dataclass(frozen=True)
-class JointTrajectoryCommand(KinovaCommand):
-    """Command to follow an joint trajectory."""
-
-    traj: list[NDArray]
-
-    def __post_init__(self):
-        num_dof = 7
-        assert all(x.shape == (num_dof,) for x in self.traj)
-
-
-class OpenGripperCommand(KinovaCommand):
-    """Command to open the gripper."""
-
-
-class CloseGripperCommand(KinovaCommand):
-    """Command to close the gripper."""
-
 
 class Arm:
     def __init__(self):
@@ -124,6 +107,12 @@ class Arm:
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
             return self.set_joint_trajectory(cmd.traj)
+        
+        if cmd.__class__.__name__ == "JointCommand":
+            return self.set_joint_position(cmd.pos)
+        
+        if cmd.__class__.__name__ == "CartesianCommand":
+            return self.set_ee_pose(cmd.pos, cmd.quat)
 
         if cmd.__class__.__name__ == "OpenGripperCommand":
             return self.open_gripper()
