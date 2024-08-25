@@ -80,6 +80,10 @@ class SceneDescription:
         default_factory=lambda: [-2.86554642, -1.61951779, -2.60986085, -1.37302839, 1.11779249, -1.18028264, 2.05515862]
     )
 
+    retract_pos: JointPositions = field(
+        default_factory=lambda: [0.0, -0.34903602299465675, -3.141591055693139, -2.5482592711638783, 0.0, -0.872688061814757, 1.57075917569769]
+    )
+
     # Robot.
     robot_name: str = "kinova-gen3"
     initial_joints: JointPositions = field(
