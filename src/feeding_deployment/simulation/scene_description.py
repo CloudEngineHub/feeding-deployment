@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field, fields, replace
 from pathlib import Path
 from typing import Any
@@ -16,20 +17,21 @@ from pybullet_helpers.joint import (
 )
 from pybullet_helpers.math_utils import rotate_about_point
 from scipy.spatial.transform import Rotation
-import json
+
 
 def create_scene_description_from_config(config_file_path: str) -> SceneDescription:
     # Read the config file
-    with open(config_file_path, 'r') as file:
+    with open(config_file_path, "r") as file:
         config = json.load(file)
 
     # convert lists containting 6 elements to Pose objects
     for key in config:
         if isinstance(config[key], list):
             config[key] = Pose(config[key][:3], config[key][3:])
-    
+
     # Create an instance of SceneDescription using the config
     return SceneDescription(**config)
+
 
 @dataclass(frozen=True)
 class SceneDescription:
@@ -41,7 +43,15 @@ class SceneDescription:
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
     utensil_inside_mount_pos: JointPositions = field(
-        default_factory=lambda: [2.854928662273119, 0.5484296235490069, 2.3664516551307853, -2.5354838210986594, 1.1181978253322737, -0.4196300319060411, -0.4776571162655596]
+        default_factory=lambda: [
+            2.854928662273119,
+            0.5484296235490069,
+            2.3664516551307853,
+            -2.5354838210986594,
+            1.1181978253322737,
+            -0.4196300319060411,
+            -0.4776571162655596,
+        ]
     )
 
     utensil_outside_mount: Pose = Pose(
@@ -49,7 +59,15 @@ class SceneDescription:
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
     utensil_outside_mount_pos: JointPositions = field(
-        default_factory=lambda: [2.6263072016502855, 0.6990732614011294, 2.3072804767669686, -2.22978328799399, 0.9554788158864868, -0.6272143841300117, -0.4820587889152428]
+        default_factory=lambda: [
+            2.6263072016502855,
+            0.6990732614011294,
+            2.3072804767669686,
+            -2.22978328799399,
+            0.9554788158864868,
+            -0.6272143841300117,
+            -0.4820587889152428,
+        ]
     )
 
     utensil_above_mount: Pose = Pose(
@@ -57,7 +75,15 @@ class SceneDescription:
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
     utensil_above_mount_pos: JointPositions = field(
-        default_factory=lambda: [-2.9830267107059303, 0.39129809251777437, 1.8614008644185065, -2.4207417918487044, 0.614389066373381, -0.6996630184245269, -0.006409696111602692]
+        default_factory=lambda: [
+            -2.9830267107059303,
+            0.39129809251777437,
+            1.8614008644185065,
+            -2.4207417918487044,
+            0.614389066373381,
+            -0.6996630184245269,
+            -0.006409696111602692,
+        ]
     )
 
     utensil_infront_mount: Pose = Pose(
@@ -65,23 +91,63 @@ class SceneDescription:
         (0.7071068, -0.7071068, 0.0, 0.0),
     )
     utensil_infront_mount_pos: JointPositions = field(
-        default_factory=lambda: [2.835106221647441, 0.18716812654374576, 1.7554270267415284, -2.5582927305707517, 0.3492644556371586, -0.5794207625752312, -0.3984099643402903]
+        default_factory=lambda: [
+            2.835106221647441,
+            0.18716812654374576,
+            1.7554270267415284,
+            -2.5582927305707517,
+            0.3492644556371586,
+            -0.5794207625752312,
+            -0.3984099643402903,
+        ]
     )
 
     utensil_neutral_pos: JointPositions = field(
-        default_factory=lambda: [2.2912525080624357, 0.730991513381838, 2.0830126187361424, -2.1737367965371632, 0.28532185799581516, -0.4648462461578422, -0.29495787389950756] # Rajat ToDo: Add the joint positions for the utensil neutral position
+        default_factory=lambda: [
+            2.2912525080624357,
+            0.730991513381838,
+            2.0830126187361424,
+            -2.1737367965371632,
+            0.28532185799581516,
+            -0.4648462461578422,
+            -0.29495787389950756,
+        ]  # Rajat ToDo: Add the joint positions for the utensil neutral position
     )
 
     above_plate_pos: JointPositions = field(
-        default_factory=lambda: [-2.86495014, -1.61460533, -2.6115943, -1.37673391, 1.11842806, -1.17904586, -2.6957422]
+        default_factory=lambda: [
+            -2.86495014,
+            -1.61460533,
+            -2.6115943,
+            -1.37673391,
+            1.11842806,
+            -1.17904586,
+            -2.6957422,
+        ]
     )
 
     before_transfer_pos: JointPositions = field(
-        default_factory=lambda: [-2.86554642, -1.61951779, -2.60986085, -1.37302839, 1.11779249, -1.18028264, 2.05515862]
+        default_factory=lambda: [
+            -2.86554642,
+            -1.61951779,
+            -2.60986085,
+            -1.37302839,
+            1.11779249,
+            -1.18028264,
+            2.05515862,
+        ]
     )
 
     retract_pos: JointPositions = field(
-        default_factory=lambda: [0.0, -0.34903602299465675, -3.141591055693139, -2.5482592711638783, 0.0, -0.872688061814757, 1.57075917569769]
+        default_factory=lambda: [
+            0.0,
+            -0.34903602299465675,
+            -3.141591055693139,
+            -2.5482592711638783,
+            0.0,
+            -0.872688061814757,
+            1.57075917569769,
+        ]
     )
 
     # Robot.
@@ -111,8 +177,12 @@ class SceneDescription:
     robot_holder_half_extents: tuple[float, float, float] = (0.18, 0.12, 0.26)
 
     # Wheelchair.
-    wheelchair_pose: Pose = Pose((0.2, 0.5, -0.25), tuple(p.getQuaternionFromEuler((0.0, 0.0, np.pi/2))))
-    wheelchair_relative_head_pose: Pose = Pose((0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0)) # Rajat ToDo: Fix this
+    wheelchair_pose: Pose = Pose(
+        (0.2, 0.5, -0.25), tuple(p.getQuaternionFromEuler((0.0, 0.0, np.pi / 2)))
+    )
+    wheelchair_relative_head_pose: Pose = Pose(
+        (0.0, -0.25, 0.75), (0.0, 0.0, 0.0, 1.0)
+    )  # Rajat ToDo: Fix this
     wheelchair_urdf_path: Path = (
         Path(__file__).parent.parent
         / "assets"

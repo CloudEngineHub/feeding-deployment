@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from numpy.typing import NDArray
+
 import numpy as np
+from numpy.typing import NDArray
 
 
 class KinovaCommand:
@@ -15,9 +16,10 @@ class JointTrajectoryCommand(KinovaCommand):
 
     # Rajat ToDo: Ask Tom if this is bad practice
     def __init__(self, traj):
-        object.__setattr__(self, 'traj', [np.array(x) for x in traj])
+        object.__setattr__(self, "traj", [np.array(x) for x in traj])
         num_dof = 7
         assert all(x.shape == (num_dof,) for x in self.traj)
+
 
 @dataclass(frozen=True)
 class JointCommand(KinovaCommand):
@@ -26,9 +28,10 @@ class JointCommand(KinovaCommand):
     pos: NDArray
 
     def __init__(self, pos):
-        object.__setattr__(self, 'pos', np.array(pos)) # convert list to numpy array
+        object.__setattr__(self, "pos", np.array(pos))  # convert list to numpy array
         num_dof = 7
         assert self.pos.shape == (num_dof,)
+
 
 @dataclass(frozen=True)
 class CartesianCommand(KinovaCommand):
@@ -38,10 +41,11 @@ class CartesianCommand(KinovaCommand):
     quat: NDArray
 
     def __init__(self, pos, quat):
-        object.__setattr__(self, 'pos', np.array(pos))
-        object.__setattr__(self, 'quat', np.array(quat))
+        object.__setattr__(self, "pos", np.array(pos))
+        object.__setattr__(self, "quat", np.array(quat))
         assert self.pos.shape == (3,)
         assert self.quat.shape == (4,)
+
 
 class OpenGripperCommand(KinovaCommand):
     """Command to open the gripper."""
