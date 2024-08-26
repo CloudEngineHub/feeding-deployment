@@ -6,11 +6,11 @@
 # control and causing latency spikes.
 
 import queue
+import threading
 import time
 
 import numpy as np
 from multiprocess.managers import BaseManager as MPBaseManager
-import threading
 
 # from arm_controller import JointCompliantController
 # from constants import RPC_AUTHKEY, ARM_RPC_PORT
@@ -20,14 +20,18 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.command_interface import KinovaCommand
+
 try:
     from feeding_deployment.robot_controller.kinova import KinovaArm
 except ImportError:
-    print("KinovaArm import failed, continuing without executing arm commands on real robot")
+    print(
+        "KinovaArm import failed, continuing without executing arm commands on real robot"
+    )
 
 # from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
+
 
 class Arm:
     def __init__(self):
@@ -107,10 +111,10 @@ class Arm:
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
             return self.set_joint_trajectory(cmd.traj)
-        
+
         if cmd.__class__.__name__ == "JointCommand":
             return self.set_joint_position(cmd.pos)
-        
+
         if cmd.__class__.__name__ == "CartesianCommand":
             return self.set_ee_pose(cmd.pos, cmd.quat)
 

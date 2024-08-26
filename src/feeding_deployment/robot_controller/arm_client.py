@@ -6,11 +6,11 @@
 # control and causing latency spikes.
 
 import queue
+import threading
 import time
 
 import numpy as np
 from multiprocess.managers import BaseManager as MPBaseManager
-import threading
 
 # from arm_controller import JointCompliantController
 # from constants import RPC_AUTHKEY, ARM_RPC_PORT
@@ -20,14 +20,18 @@ ARM_RPC_PORT = 5000
 
 # from ik_solver import IKSolver
 from feeding_deployment.robot_controller.command_interface import KinovaCommand
+
 try:
     from feeding_deployment.robot_controller.kinova import KinovaArm
 except ImportError:
-    print("KinovaArm import failed, continuing without executing arm commands on real robot")
+    print(
+        "KinovaArm import failed, continuing without executing arm commands on real robot"
+    )
 
 # from sensor_msgs.msg import JointState
 
 NUC_HOSTNAME = "192.168.1.3"
+
 
 class Arm:
     def __init__(self):
@@ -107,10 +111,10 @@ class Arm:
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
             return self.set_joint_trajectory(cmd.traj)
-        
+
         if cmd.__class__.__name__ == "JointCommand":
             return self.set_joint_position(cmd.pos)
-        
+
         if cmd.__class__.__name__ == "CartesianCommand":
             return self.set_ee_pose(cmd.pos, cmd.quat)
 
@@ -157,7 +161,9 @@ if __name__ == "__main__":
         def publish_joint_states(arm):
 
             # publish joint states
-            joint_states_pub = rospy.Publisher("/robot_joint_states", JointState, queue_size=10)
+            joint_states_pub = rospy.Publisher(
+                "/robot_joint_states", JointState, queue_size=10
+            )
 
             while not rospy.is_shutdown():
                 arm_pos, gripper_pos = arm.get_state()
@@ -179,9 +185,7 @@ if __name__ == "__main__":
                 joint_states_pub.publish(joint_state_msg)
                 time.sleep(0.01)
 
-        joint_state_thread = threading.Thread(
-                target=publish_joint_states, args=(arm,)
-            )
+        joint_state_thread = threading.Thread(target=publish_joint_states, args=(arm,))
         joint_state_thread.start()
 
         # above_plate_pos = [
@@ -249,9 +253,15 @@ if __name__ == "__main__":
             5.988186420599291,
         ]
 
-        inside_mount_pose = (np.array([-0.147, -0.17, 0.07]), np.array([0.7071068, -0.7071068, 0, 0]))
+        inside_mount_pose = (
+            np.array([-0.147, -0.17, 0.07]),
+            np.array([0.7071068, -0.7071068, 0, 0]),
+        )
 
-        outside_mount_pose = (np.array([-0.147, -0.29, 0.07]), np.array([0.7071068, -0.7071068, 0, 0]))
+        outside_mount_pose = (
+            np.array([-0.147, -0.29, 0.07]),
+            np.array([0.7071068, -0.7071068, 0, 0]),
+        )
 
         outside_mount_joint_states = [
             2.6266411620509817,
@@ -263,7 +273,10 @@ if __name__ == "__main__":
             5.80065247559031,
         ]
 
-        above_mount_pose = (np.array([-0.147, -0.17, 0.15]), np.array([0.7071068, -0.7071068, 0, 0]))
+        above_mount_pose = (
+            np.array([-0.147, -0.17, 0.15]),
+            np.array([0.7071068, -0.7071068, 0, 0]),
+        )
 
         above_mount_joint_states = [
             3.300153003835367,
@@ -275,7 +288,10 @@ if __name__ == "__main__":
             6.276739392077158,
         ]
 
-        infront_mount_pose = (np.array([0.0, -0.17, 0.15]), np.array([0.7071068, -0.7071068, 0, 0]))
+        infront_mount_pose = (
+            np.array([0.0, -0.17, 0.15]),
+            np.array([0.7071068, -0.7071068, 0, 0]),
+        )
 
         infront_mount_joint_states = [
             2.835106221647441,

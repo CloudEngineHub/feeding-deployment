@@ -34,7 +34,10 @@ from feeding_deployment.robot_controller.arm_client import (
     RPC_AUTHKEY,
     ArmManager,
 )
-from feeding_deployment.simulation.scene_description import SceneDescription, create_scene_description_from_config
+from feeding_deployment.simulation.scene_description import (
+    SceneDescription,
+    create_scene_description_from_config,
+)
 from feeding_deployment.simulation.simulator import (
     FeedingDeploymentPyBulletSimulator,
     FeedingDeploymentSimulatorState,
@@ -90,7 +93,7 @@ def _main(
         LiftedAtom(GripperFree, []),
         ToolPrepared([wiper]),
         ToolPrepared([cup]),
-    }   
+    }
 
     # TODO update this once the user interface is ready.
     TransferTool = hla_name_to_hla["TransferTool"]

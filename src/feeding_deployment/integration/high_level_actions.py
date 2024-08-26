@@ -4,6 +4,7 @@ import abc
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
 import numpy as np
 
 # Rajat ToDo: Remove this hacky addition
@@ -12,7 +13,7 @@ import sys
 
 sys.path.append(FLAIR_PATH)
 try:
-    raise ModuleNotFoundError # Just to skip this block
+    raise ModuleNotFoundError  # Just to skip this block
     from skill_library import SkillLibrary
 
     FLAIR_IMPORTED = True
@@ -21,6 +22,13 @@ except ModuleNotFoundError:
     pass
 
 
+from pybullet_helpers.geometry import Pose
+from pybullet_helpers.motion_planning import (
+    get_joint_positions_distance,
+    run_motion_planning,
+    run_smooth_motion_planning_to_pose,
+    smoothly_follow_end_effector_path,
+)
 from relational_structs import (
     GroundAtom,
     GroundOperator,
@@ -32,11 +40,25 @@ from relational_structs import (
     Variable,
 )
 
+from feeding_deployment.integration.low_level_actions import (
+    move_to_joint_positions,
+    teleport_to_ee_pose,
+)
 from feeding_deployment.integration.perception_interface import PerceptionInterface
 from feeding_deployment.integration.utils import simulated_trajectory_to_kinova_commands
 from feeding_deployment.robot_controller.arm_client import Arm
-from feeding_deployment.robot_controller.command_interface import KinovaCommand, CartesianCommand, JointCommand, OpenGripperCommand, CloseGripperCommand
+from feeding_deployment.robot_controller.command_interface import (
+    CartesianCommand,
+    CloseGripperCommand,
+    JointCommand,
+    KinovaCommand,
+    OpenGripperCommand,
+)
 from feeding_deployment.simulation.planning import (
+    _get_motion_plan_for_robot_finger_tip,
+    _get_plan_to_execute_grasp,
+    _get_plan_to_execute_ungrasp,
+    _plan_to_sim_state_trajectory,
     get_bite_transfer_plan,
     get_plan_to_grasp_cup,
     get_plan_to_grasp_utensil,
@@ -46,23 +68,8 @@ from feeding_deployment.simulation.planning import (
     get_plan_to_stow_wiper,
     get_plan_to_transfer_cup,
     get_plan_to_transfer_wiper,
-    _get_motion_plan_for_robot_finger_tip,
     remap_trajectory_to_constant_distance,
-    _get_plan_to_execute_grasp,
-    _get_plan_to_execute_ungrasp,
-    _plan_to_sim_state_trajectory,
 )
-from pybullet_helpers.motion_planning import (
-    run_motion_planning,
-    get_joint_positions_distance,
-    run_smooth_motion_planning_to_pose,
-    smoothly_follow_end_effector_path,
-)
-from feeding_deployment.integration.low_level_actions import (
-    move_to_joint_positions,
-    teleport_to_ee_pose,
-)
-from pybullet_helpers.geometry import Pose
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
 
@@ -74,9 +81,10 @@ ToolTransferDone = Predicate("ToolTransferDone", [tool_type])  # wiped, drank, o
 ToolPrepared = Predicate("ToolPrepared", [tool_type])  # e.g., bite acquired
 
 # Feeding:
-# - Bite acquisition: move_joint(above_plate) -> move_ee(pickup food) -> move_joint(above plate) 
+# - Bite acquisition: move_joint(above_plate) -> move_ee(pickup food) -> move_joint(above plate)
 # - Bite transfer: move_joint(transfer_pos) -> plan_to_pose(infront_mouth) -> plan_to_pose(inside_mouth) -> plan_to_pose(infront_mouth) -> plan_to_pose(transfer_pos)
 # - Stow utensil: move_joint(utensil neutral) -> move_joint(outside mount) -> move_ee(inside mount) -> move_ee(above mount)
+
 
 # Define high-level actions.
 class HighLevelAction(abc.ABC):
@@ -149,6 +157,7 @@ class GroundHighLevelAction:
         """Execute the command."""
         return self.hla.execute_action(self.objects, self.params)
 
+
 class PickToolHLA(HighLevelAction):
     """Pick up a tool (utensil, drink, or wipe)."""
 
@@ -164,7 +173,7 @@ class PickToolHLA(HighLevelAction):
             add_effects={Holding([tool])},
             delete_effects={LiftedAtom(GripperFree, [])},
         )
-    
+
     def execute_action(
         self,
         objects: tuple[Object, ...],
@@ -174,41 +183,59 @@ class PickToolHLA(HighLevelAction):
         tool = objects[0]
 
         if tool.name == "utensil":
-            
+
             assert self._sim.held_object_name is None
             sim_states: list[FeedingDeploymentSimulatorState] = []
             robot_commands = []
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0]
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_infront_mount_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim,
+                self._sim.scene_description.utensil_infront_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_above_mount_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim,
+                self._sim.scene_description.utensil_above_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
-            plan, commands = teleport_to_ee_pose(self._sim, self._sim.scene_description.utensil_inside_mount, self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0])
+            plan, commands = teleport_to_ee_pose(
+                self._sim,
+                self._sim.scene_description.utensil_inside_mount,
+                self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
             # open grippers
             robot_commands.append(OpenGripperCommand())
             # only for sim: set held object
             sim_states.extend(_get_plan_to_execute_grasp(self._sim, "utensil"))
             # input("Press Enter to continue...")
-            
-            plan, commands = teleport_to_ee_pose(self._sim, self._sim.scene_description.utensil_outside_mount, self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0])
+
+            plan, commands = teleport_to_ee_pose(
+                self._sim,
+                self._sim.scene_description.utensil_outside_mount,
+                self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0]
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
-            
+
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
 
@@ -217,6 +244,7 @@ class PickToolHLA(HighLevelAction):
         else:
             print(f"PickTool not yet implemented for {tool}")
             return []
+
 
 class StowToolHLA(HighLevelAction):
     """Stow a tool (utensil, drink, or wipe)."""
@@ -233,7 +261,7 @@ class StowToolHLA(HighLevelAction):
             add_effects={LiftedAtom(GripperFree, [])},
             delete_effects={Holding([tool])},
         )
-    
+
     def execute_action(
         self,
         objects: tuple[Object, ...],
@@ -243,41 +271,60 @@ class StowToolHLA(HighLevelAction):
         tool = objects[0]
 
         if tool.name == "utensil":
-            
+
             assert self._sim.held_object_name == "utensil"
             sim_states: list[FeedingDeploymentSimulatorState] = []
             robot_commands = []
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0]
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim,
+                self._sim.scene_description.utensil_outside_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
-            plan, commands = teleport_to_ee_pose(self._sim, self._sim.scene_description.utensil_inside_mount, self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0])
+            plan, commands = teleport_to_ee_pose(
+                self._sim,
+                self._sim.scene_description.utensil_inside_mount,
+                self._sim.scene_description.utensil_inside_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
-            robot_commands.extend(commands) 
+            robot_commands.extend(commands)
 
             # close grippers
             robot_commands.append(CloseGripperCommand())
             # only for sim: unset held object
             sim_states.extend(_get_plan_to_execute_ungrasp(self._sim))
             # input("Press Enter to continue...")
-            
-            plan, commands = teleport_to_ee_pose(self._sim, self._sim.scene_description.utensil_above_mount, self._sim.scene_description.utensil_above_mount_pos + [0.0, 0.0])
+
+            plan, commands = teleport_to_ee_pose(
+                self._sim,
+                self._sim.scene_description.utensil_above_mount,
+                self._sim.scene_description.utensil_above_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = teleport_to_ee_pose(self._sim, self._sim.scene_description.utensil_infront_mount, self._sim.scene_description.utensil_infront_mount_pos + [0.0, 0.0])
+            plan, commands = teleport_to_ee_pose(
+                self._sim,
+                self._sim.scene_description.utensil_infront_mount,
+                self._sim.scene_description.utensil_infront_mount_pos + [0.0, 0.0],
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
 
-            plan, commands = move_to_joint_positions(self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0])
+            plan, commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.retract_pos + [0.0, 0.0]
+            )
             sim_states.extend(plan)
             robot_commands.extend(commands)
-            
+
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
 
@@ -340,7 +387,7 @@ class TransferToolHLA(HighLevelAction):
             return []
         remapped_plan = remap_trajectory_to_constant_distance(nominal_plan, self._sim)
         return remapped_plan
-    
+
     def execute_action(
         self,
         objects: tuple[Object, ...],
@@ -352,7 +399,9 @@ class TransferToolHLA(HighLevelAction):
         if tool.name == "utensil":
             assert self._sim.held_object_name == "utensil"
 
-            plan, robot_commands = move_to_joint_positions(self._sim, self._sim.scene_description.before_transfer_pos + [0.0, 0.0])
+            plan, robot_commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.before_transfer_pos + [0.0, 0.0]
+            )
             sim_states = plan
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
@@ -400,7 +449,9 @@ class PrepareToolHLA(HighLevelAction):
 
             assert self._sim.held_object_name == "utensil"
 
-            plan, robot_commands = move_to_joint_positions(self._sim, self._sim.scene_description.above_plate_pos + [0.0, 0.0])
+            plan, robot_commands = move_to_joint_positions(
+                self._sim, self._sim.scene_description.above_plate_pos + [0.0, 0.0]
+            )
             sim_states = plan
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
