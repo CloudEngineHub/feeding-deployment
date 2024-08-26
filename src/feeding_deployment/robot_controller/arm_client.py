@@ -244,38 +244,39 @@ if __name__ == "__main__":
         # arm.set_joint_position(transfer_pose)
 
         outside_cup_pose = (
-            np.array([0.54, 0.5, 0.3158]),
-            np.array([0, 0.7071068, 0.7071068, 0]),
+            np.array([0.545, 0.45, 0.270]),
+            np.array([-0.2126311, -0.6743797, -0.6743797, 0.2126311]),
         )
-        outside_cup_pos = [-2.9471131844578844, -1.6206821277020431, -1.724364315261008, -1.3886978935707663, 0.38836691755349223, -0.42193579677783166, 2.813355918708655]
+        outside_cup_pos = [-3.100185292329023, -1.0924888665911388, -0.5706994426374399, -1.424560020809773, -1.4250553687725285, -1.041275746196697, -2.8561579774322996]
 
         cup_inside_mount = (
-            np.array([0.54, 0.58, 0.3158]),
-            np.array([0, 0.7071068, 0.7071068, 0]),
+            np.array([0.545, 0.518, 0.270]),
+            np.array([-0.2126311, -0.6743797, -0.6743797, 0.2126311]),
         )
+        cup_inside_mount_pos = [3.042634381172411, -1.168988168903665, -0.5663478374162505, -1.2153447487342381, -1.3638740364179194, -1.0536210957458687, -2.9810178882956833]
 
         above_cup_pose = (
-            np.array([0.54, 0.58, 0.4158]),
-            np.array([0, 0.7071068, 0.7071068, 0]),
+            np.array([0.545, 0.518, 0.370]),
+            np.array([-0.2126311, -0.6743797, -0.6743797, 0.2126311]),
         )
-        above_cup_pos = [3.141430200763298, -1.4221115105035542, -1.7185037629661792, -1.1659074241546614, 0.34054286938325806, -0.440465006378167, 2.692516315826855]
+        above_cup_pos = [3.0622933037071576, -0.9648787092700299, -0.5952463310369183, -1.2963117700914815, -1.4352504820575698, -0.9462605500892867, -3.085153612188289]
 
         before_transfer_pos = [-2.86554642, -1.61951779, -2.60986085, -1.37302839, 1.11779249, -1.18028264, 2.05515862]
 
-        input("Press enter to move to outside cup pose...")
-        arm.set_joint_position(outside_cup_pos)
+        # input("Press enter to move to outside cup pose...")
+        # arm.set_joint_position(outside_cup_pos)
 
         # input("Press enter to move to outside cup mount pose...")
         # arm.set_ee_pose(outside_cup_pose[0], outside_cup_pose[1])
 
-        input("Press enter to move to inside cup mount pose...")
-        arm.set_ee_pose(cup_inside_mount[0], cup_inside_mount[1])
+        # input("Press enter to move to inside cup mount pose...")
+        # arm.set_ee_pose(cup_inside_mount[0], cup_inside_mount[1])
 
-        input("Press enter to grasp the cup...")
-        arm.set_gripper(0.5)
+        # input("Press enter to grasp the cup...")
+        # arm.set_gripper(0.5)
 
-        input("Press enter to pickup the cup...")
-        arm.set_ee_pose(above_cup_pose[0], above_cup_pose[1])
+        # input("Press enter to pickup the cup...")
+        # arm.set_ee_pose(above_cup_pose[0], above_cup_pose[1])
 
         input("Press enter to move to before transfer pose...")
         arm.set_joint_position(before_transfer_pos)
