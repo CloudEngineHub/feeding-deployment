@@ -293,11 +293,6 @@ if __name__ == "__main__":
         input("Press enter to move to outside cup pose...")
         arm.set_ee_pose(outside_cup_pose[0], outside_cup_pose[1])
 
-
-
-
-
-
         # home_pos = [
         #     2.2912759438800285,
         #     0.7308686750765581,
