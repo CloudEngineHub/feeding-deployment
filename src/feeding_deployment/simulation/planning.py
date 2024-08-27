@@ -178,11 +178,12 @@ def _get_plan_to_execute_grasp(
         robot.robot_id, robot.end_effector_id, physics_client_id
     )
     assert sim.held_object_id is not None
-    world_from_held_object = get_pose(sim.held_object_id, physics_client_id)
-    base_link_to_held_obj = multiply_poses(
-        world_from_end_effector.invert(), world_from_held_object
+    finger_frame_id = sim.robot.link_from_name("finger_tip")
+    end_effector_link_id = sim.robot.link_from_name(sim.robot.tool_link_name)
+    cup_from_end_effector = get_relative_link_pose(
+        sim.robot.robot_id, finger_frame_id, end_effector_link_id, sim.physics_client_id
     )
-    sim.held_object_tf = base_link_to_held_obj
+    sim.held_object_tf = cup_from_end_effector
     return _plan_to_sim_state_trajectory([robot.get_joint_positions()], sim)
 
 
