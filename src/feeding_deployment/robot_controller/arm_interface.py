@@ -29,6 +29,7 @@ class ArmInterface:
     def __init__(self):
         self.arm = KinovaArm()
         # self.arm.set_joint_limits(speed_limits=(7 * (30,)), acceleration_limits=(7 * (80,)))
+        self.in_compliant_mode = False
         self.command_queue = queue.Queue(1)
         self.controller = None
 
@@ -47,6 +48,8 @@ class ArmInterface:
 
     def switch_to_joint_compliant_mode(self):
 
+        assert not self.in_compliant_mode, "Already in compliant mode"
+
         # clear command queue
         print("Clearing command queue")
         while not self.command_queue.empty():
@@ -55,34 +58,21 @@ class ArmInterface:
         # switch to joint compliant mode
         print("Switching to joint compliant mode")
         self.arm.switch_to_joint_compliant_mode(self.command_queue)
+        self.in_compliant_mode = True
 
     def switch_out_of_joint_compliant_mode(self):
+
+        assert self.in_compliant_mode, "Not in compliant mode"
+
         # switch out of joint compliant mode
         print("Switching out of joint compliant mode")
         self.arm.switch_out_of_joint_compliant_mode()
+        self.in_compliant_mode = False
 
     def compliant_set_joint_position(self, command_pos):
         print(f"Received compliant joint pos command: {command_pos}")
         gripper_pos = 0
         self.command_queue.put((command_pos, gripper_pos))
-
-    def compliant_set_joint_trajectory(self, trajectory_command):
-        print(
-            f"Received compliant joint trajectory command with {len(trajectory_command)} waypoints"
-        )
-        gripper_pos = 0
-        for command_pos in trajectory_command:
-            while True:
-                time.sleep(0.01)
-                q, _, _ = self.arm.get_update_state()
-                error = np.linalg.norm(np.array(command_pos) - np.array(q))
-                # threshold = 0.03*np.sqrt(7)
-                threshold = 0.3
-                print(f"Error: {error}, Threshold: {threshold}")
-                # When near (distance < threshold) next waypoint, update to next waypoint
-                if error < threshold:
-                    self.command_queue.put((command_pos, gripper_pos))
-                    break
 
     # def compliant_set_joint_trajectory(self, trajectory_command):
     #     print(
@@ -90,8 +80,34 @@ class ArmInterface:
     #     )
     #     gripper_pos = 0
     #     for command_pos in trajectory_command:
-    #         self.command_queue.put((command_pos, gripper_pos))
-    #         time.sleep(0.1)
+    #         while True:
+    #             time.sleep(0.01)
+    #             q, _, _ = self.arm.get_update_state()
+    #             error = np.linalg.norm(np.array(command_pos) - np.array(q))
+    #             # threshold = 0.03*np.sqrt(7)
+    #             threshold = 0.3
+    #             print(f"Error: {error}, Threshold: {threshold}")
+    #             # When near (distance < threshold) next waypoint, update to next waypoint
+    #             if error < threshold:
+    #                 self.command_queue.put((command_pos, gripper_pos))
+    #                 break
+
+    def compliant_set_joint_trajectory(self, trajectory_command):
+        print(
+            f"Received compliant joint trajectory command with {len(trajectory_command)} waypoints"
+        )
+
+        for command_pos in trajectory_command:
+            for i in range(len(command_pos)):
+                if command_pos[i] > np.pi:
+                    command_pos[i] -= 2 * np.pi
+                if command_pos[i] < -np.pi:
+                    command_pos[i] += 2 * np.pi
+
+        gripper_pos = 0
+        for command_pos in trajectory_command:
+            self.command_queue.put((command_pos, gripper_pos))
+            time.sleep(0.1)
 
     def set_joint_position(self, command_pos):
         print(f"Received joint pos command: {command_pos}")
@@ -133,7 +149,10 @@ class ArmInterface:
     def execute_command(self, cmd: KinovaCommand) -> None:
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
-            return self.set_joint_trajectory(cmd.traj)
+            if self.in_compliant_mode:
+                return self.compliant_set_joint_trajectory(cmd.traj)
+            else:
+                return self.set_joint_trajectory(cmd.traj)
 
         if cmd.__class__.__name__ == "JointCommand":
             return self.set_joint_position(cmd.pos)
