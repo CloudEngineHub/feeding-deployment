@@ -41,8 +41,8 @@ class Arm:
         self.controller = None
 
     def get_state(self):
-        arm_pos, gripper_pos = self.arm.get_state()
-        return arm_pos, gripper_pos
+        arm_pos, ee_pose, gripper_pos = self.arm.get_state()
+        return arm_pos, ee_pose, gripper_pos
     
     def get_update_state(self):
         arm_pos, arm_vel, gripper_pos = self.arm.get_update_state()
@@ -74,32 +74,32 @@ class Arm:
         gripper_pos = 0
         self.command_queue.put((command_pos, gripper_pos))
 
-    # def compliant_set_joint_trajectory(self, trajectory_command):
-    #     print(
-    #         f"Received compliant joint trajectory command with {len(trajectory_command)} waypoints"
-    #     )
-    #     gripper_pos = 0
-    #     for command_pos in trajectory_command:
-    #         while True:
-    #             time.sleep(0.01)
-    #             q, _, _ = self.arm.get_update_state()
-    #             error = np.linalg.norm(np.array(command_pos) - np.array(q))
-    #             # threshold = 0.03*np.sqrt(7)
-    #             threshold = 0.2
-    #             print(f"Error: {error}, Threshold: {threshold}")
-    #             # When near (distance < threshold) next waypoint, update to next waypoint
-    #             if error < threshold:
-    #                 self.command_queue.put((command_pos, gripper_pos))
-    #                 break
-
     def compliant_set_joint_trajectory(self, trajectory_command):
         print(
             f"Received compliant joint trajectory command with {len(trajectory_command)} waypoints"
         )
         gripper_pos = 0
         for command_pos in trajectory_command:
-            self.command_queue.put((command_pos, gripper_pos))
-            time.sleep(0.1)
+            while True:
+                time.sleep(0.01)
+                q, _, _ = self.arm.get_update_state()
+                error = np.linalg.norm(np.array(command_pos) - np.array(q))
+                # threshold = 0.03*np.sqrt(7)
+                threshold = 0.3
+                print(f"Error: {error}, Threshold: {threshold}")
+                # When near (distance < threshold) next waypoint, update to next waypoint
+                if error < threshold:
+                    self.command_queue.put((command_pos, gripper_pos))
+                    break
+
+    # def compliant_set_joint_trajectory(self, trajectory_command):
+    #     print(
+    #         f"Received compliant joint trajectory command with {len(trajectory_command)} waypoints"
+    #     )
+    #     gripper_pos = 0
+    #     for command_pos in trajectory_command:
+    #         self.command_queue.put((command_pos, gripper_pos))
+    #         time.sleep(0.1)
 
     def set_joint_position(self, command_pos):
         print(f"Received joint pos command: {command_pos}")
@@ -181,6 +181,7 @@ if __name__ == "__main__":
         import rospy
         from sensor_msgs.msg import JointState
         from std_msgs.msg import Bool
+        from geometry_msgs.msg import Pose
 
         rospy.init_node("arm_client", anonymous=True)
 
@@ -189,35 +190,51 @@ if __name__ == "__main__":
 
         rospy.Subscriber("/estop", Bool, emergency_stop_callback)
 
-        # def publish_joint_states(arm):
+        def publish_joint_states(arm):
 
-        #     # publish joint states
-        #     joint_states_pub = rospy.Publisher(
-        #         "/robot_joint_states", JointState, queue_size=10
-        #     )
+            # publish joint states
+            joint_states_pub = rospy.Publisher(
+                "/robot_joint_states", JointState, queue_size=10
+            )
 
-        #     while not rospy.is_shutdown():
-        #         arm_pos, gripper_pos = arm.get_state()
-        #         joint_state_msg = JointState()
-        #         joint_state_msg.header.stamp = rospy.Time.now()
-        #         joint_state_msg.name = [
-        #             "joint_1",
-        #             "joint_2",
-        #             "joint_3",
-        #             "joint_4",
-        #             "joint_5",
-        #             "joint_6",
-        #             "joint_7",
-        #             "finger_joint",
-        #         ]
-        #         joint_state_msg.position = arm_pos.tolist() + [gripper_pos]
-        #         joint_state_msg.velocity = [0.0] * 8
-        #         joint_state_msg.effort = [0.0] * 8
-        #         joint_states_pub.publish(joint_state_msg)
-        #         time.sleep(0.01)
+            # publish cartesian states
+            cartesian_states_pub = rospy.Publisher(
+                "/robot_cartesian_states", Pose, queue_size=10
+            )
 
-        # joint_state_thread = threading.Thread(target=publish_joint_states, args=(arm,))
-        # joint_state_thread.start()
+            while not rospy.is_shutdown():
+                arm_pos, ee_pose, gripper_pos = arm.get_state()
+                joint_state_msg = JointState()
+                joint_state_msg.header.stamp = rospy.Time.now()
+                joint_state_msg.name = [
+                    "joint_1",
+                    "joint_2",
+                    "joint_3",
+                    "joint_4",
+                    "joint_5",
+                    "joint_6",
+                    "joint_7",
+                    "finger_joint",
+                ]
+                joint_state_msg.position = arm_pos.tolist() + [gripper_pos]
+                joint_state_msg.velocity = [0.0] * 8
+                joint_state_msg.effort = [0.0] * 8
+                joint_states_pub.publish(joint_state_msg)
+
+                cartesian_state_msg = Pose()
+                cartesian_state_msg.position.x = ee_pose[0]
+                cartesian_state_msg.position.y = ee_pose[1]
+                cartesian_state_msg.position.z = ee_pose[2]
+                cartesian_state_msg.orientation.x = ee_pose[3]
+                cartesian_state_msg.orientation.y = ee_pose[4]
+                cartesian_state_msg.orientation.z = ee_pose[5]
+                cartesian_state_msg.orientation.w = ee_pose[6]
+                cartesian_states_pub.publish(cartesian_state_msg)
+
+                time.sleep(0.01)
+
+        joint_state_thread = threading.Thread(target=publish_joint_states, args=(arm,))
+        joint_state_thread.start()
 
         before_transfer_pos = [-2.86554642, -1.61951779, -2.60986085, -1.37302839,  1.11779249, -1.18028264,  2.05515862]
         
