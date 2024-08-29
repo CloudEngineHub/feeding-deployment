@@ -20,12 +20,12 @@ from sensor_msgs.msg import CameraInfo
 from geometry_msgs.msg import WrenchStamped
 from std_msgs.msg import Bool
 
-CAMERA_FREQUENCY_THRESHOLD = 20
-FT_FREQUENCY_THRESHOLD = 800
+CAMERA_FREQUENCY_THRESHOLD = 20 # expected is 30 Hz
+FT_FREQUENCY_THRESHOLD = 800 # expected is 1000 Hz
 FT_THRESHOLD = [10.0, 10.0, 10.0, 0.5, 0.5, 0.5]
-COLLISION_FREE_FREQUENCY_THRESHOLD = 80 
-USER_ESTOP_FREQUENCY_THRESHOLD = 80
-EXPERIMENTOR_ESTOP_FREQUENCY_THRESHOLD = 80
+COLLISION_FREE_FREQUENCY_THRESHOLD = 300 # expected is 350 Hz (empirical)
+USER_ESTOP_FREQUENCY_THRESHOLD = 800 # expected is 1000 Hz
+EXPERIMENTOR_ESTOP_FREQUENCY_THRESHOLD = 800 # expected is 1000 Hz
 
 WATCHDOG_MONITOR_FREQUENCY = 1000
 
@@ -45,7 +45,7 @@ class AnomalyStatus(Enum):
 class PeekableQueue(queue.Queue):
     def peek(self):
         with self.mutex:  # Lock the queue to ensure thread safety
-            if self.qsize() > 0:
+            if len(self.queue) > 0:
                 return self.queue[0]  # Safely access the first element
             else:
                 raise queue.Empty  # Handle the case when the queue is empty
@@ -66,7 +66,7 @@ class WatchDog:
         self.collision_free_timestamps = PeekableQueue()
         self.collision_free_unexpected = False
 
-        self.user_emergency_stop_sub = rospy.Subscriber('/estop', Bool, self.userEmergencyStopCallback)
+        self.user_emergency_stop_sub = rospy.Subscriber('/user_estop', Bool, self.userEmergencyStopCallback)
         self.user_emergency_stop_timestamps = PeekableQueue()
         self.user_emergency_stop_pressed = False
 
@@ -123,7 +123,8 @@ class WatchDog:
             while _queue.peek() < start_time - 1.0:
                 _queue.get()
             if _queue.qsize() < _threshold:
-                anomaly = _anomaly   
+                anomaly = _anomaly
+                break   
 
         for _unexpected, _anomaly in [(self.camera_unexpected, AnomalyStatus.CAMERA_UNEXPECTED),
                                     (self.ft_unexpected, AnomalyStatus.FT_UNEXPECTED),
@@ -132,6 +133,7 @@ class WatchDog:
                                     (self.experimentor_emergency_stop_pressed, AnomalyStatus.EXPERIMENTOR_ESTOP_PRESSED)]:
             if _unexpected:
                 anomaly = _anomaly
+                break
 
         return anomaly
 

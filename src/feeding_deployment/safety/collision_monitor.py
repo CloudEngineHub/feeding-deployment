@@ -34,7 +34,7 @@ class CollisionMonitor:
             )
         self._use_ros = use_ros
         self._scene_description = SceneDescription()
-        self._sim = FeedingDeploymentPyBulletSimulator(self._scene_description)
+        self._sim = FeedingDeploymentPyBulletSimulator(self._scene_description, use_gui=False)
 
     def _joint_state_callback(self, joint_state_msg: "JointState") -> None:
         # Convert joint state message into JointPositions.
@@ -57,7 +57,7 @@ class CollisionMonitor:
                                                             finger_state)
         # Run collision checking.
         has_collision = self.check_collisions(combined_joint_state)
-        self._collision_pub.publish(Bool(data=has_collision))
+        self._collision_pub.publish(Bool(data=not has_collision))
 
     def check_collisions(self, joint_positions: JointPositions) -> bool:
         """Check collisions, but only with objects that can't be held."""
