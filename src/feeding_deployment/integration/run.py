@@ -218,10 +218,16 @@ if __name__ == "__main__":
 
     runner = _Runner(args.run_on_robot, args.max_motion_planning_time)
 
-    # Uncomment to test commands.
-    msg = namedtuple("String", ["data"])
-    runner.web_interface_callback(msg(json.dumps({"status": "drink_pickup"})))
-    runner.web_interface_callback(msg(json.dumps({"status": "drink_transfer"})))
+    # # Uncomment to test commands.
+    # msg = namedtuple("String", ["data"])
+    # runner.web_interface_callback(msg(json.dumps({"status": "drink_pickup"})))
+    # runner.web_interface_callback(msg(json.dumps({"status": "drink_transfer"})))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.cup,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.cup,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.cup,)))
 
     if args.make_videos:
         runner.make_video(Path("full.mp4"))
