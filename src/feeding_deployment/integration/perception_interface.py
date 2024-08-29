@@ -67,10 +67,12 @@ class PerceptionInterface:
         if robot_interface is None:
             self._head_perception = None
         else:
-            self._head_perception = HeadPerceptionROSWrapper()
-            # warm start head perception
-            for _ in range(10):
-                self._head_perception.run_head_perception()
+            self._head_perception = None
+            # RemoveBeforePushToDo
+            # self._head_perception = HeadPerceptionROSWrapper()
+            # # warm start head perception
+            # for _ in range(10):
+            #     self._head_perception.run_head_perception()
 
     def get_robot_joints(self) -> "JointState":
         """Get the current robot joint state."""
