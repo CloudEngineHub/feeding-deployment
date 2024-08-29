@@ -12,10 +12,11 @@ import rospy
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Pose
+from netft_rdt_driver.srv import String_cmd
 
 from feeding_deployment.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
 from feeding_deployment.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
-from feeding_deployment.safety.watchdog import Watchdog, AnomalyStatus, WATCHDOG_MONITOR_FREQUENCY
+from feeding_deployment.safety.watchdog import WatchDog, AnomalyStatus, WATCHDOG_MONITOR_FREQUENCY
 
 class ArmInterfaceClient:
     def __init__(self):
@@ -35,12 +36,16 @@ class ArmInterfaceClient:
         self.joint_state_thread = threading.Thread(target=self.publish_joint_states)
         self.joint_state_thread.start()
 
-        # create watchdog
-        self.watchdog = Watchdog()
+        # bias FT sensor
+        bias = rospy.ServiceProxy('/forque/bias_cmd', String_cmd)
+        bias('bias')
 
-        # spin watchdog monitor thread
-        self.watchdog_thread = threading.Thread(target=self.monitor_watchdog)
-        self.watchdog_thread.start()
+        # # create watchdog
+        # self.watchdog = WatchDog()
+
+        # # spin watchdog monitor thread
+        # self.watchdog_thread = threading.Thread(target=self.monitor_watchdog)
+        # self.watchdog_thread.start()
 
     def publish_joint_states(self):
 
@@ -71,9 +76,7 @@ class ArmInterfaceClient:
             cartesian_state_msg.orientation.y = ee_pose[4]
             cartesian_state_msg.orientation.z = ee_pose[5]
             cartesian_state_msg.orientation.w = ee_pose[6]
-            self.cartesian_states_pub.publish(cartesian_state_msg)
-
-            time.sleep(0.01) 
+            self.cartesian_states_pub.publish(cartesian_state_msg) 
 
     def monitor_watchdog(self):
         while True:
