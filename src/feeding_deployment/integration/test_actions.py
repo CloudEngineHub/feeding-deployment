@@ -3,6 +3,13 @@
 from pathlib import Path
 from typing import Any
 
+try:
+    import rospy
+
+    ROSPY_IMPORTED = True
+except ModuleNotFoundError:
+    ROSPY_IMPORTED = False
+
 from relational_structs import (
     GroundAtom,
     LiftedAtom,
@@ -30,6 +37,7 @@ from feeding_deployment.integration.high_level_actions import (
     tool_type,
 )
 from feeding_deployment.integration.perception_interface import PerceptionInterface
+from feeding_deployment.integration.rviz_interface import RVizInterface
 from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 from feeding_deployment.simulation.scene_description import (
     SceneDescription,
@@ -41,11 +49,15 @@ from feeding_deployment.simulation.simulator import (
 )
 from feeding_deployment.simulation.video import make_simulation_video
 
-
 def _main(
     run_on_robot: bool, make_videos: bool, max_motion_planning_time: float = 10
 ) -> None:
     """Testing components of the system."""
+
+    if ROSPY_IMPORTED:
+        rospy.init_node("test_actions")
+    else:
+        assert not args.run_on_robot, "Need ROS to run on robot"
 
     # Initialize the interface to the robot.
     if run_on_robot:
@@ -66,10 +78,16 @@ def _main(
     scene_description = SceneDescription(**kwargs)
     sim = FeedingDeploymentPyBulletSimulator(scene_description)
 
+    if ROSPY_IMPORTED:
+        # Initialize the interface to RViz.
+        rviz_interface = RVizInterface(scene_description)
+    else:
+        rviz_interface = None
+
     # Create skills for high-level planning.
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
 
-    high_level_action = TransferToolHLA(sim, robot_interface, perception_interface, hla_hyperparams, run_on_robot)
+    high_level_action = TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, hla_hyperparams, run_on_robot)
     cup = Object("cup", tool_type)
 
     sim.held_object_name = "cup"
