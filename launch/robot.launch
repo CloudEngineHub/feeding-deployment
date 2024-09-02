@@ -23,6 +23,9 @@
 
     <node name="st_map2world" pkg="tf" type="static_transform_publisher" respawn="false" output="screen" args="0 0 0 0 0 0 1 map world 10"/>
 
+    <!-- Feeding Utensil (Access does not work through roslaunch even after an immense number of tries :( ) -->
+    <!-- <node pkg="wrist_driver_ros" type="wrist_driver" name="wrist_driver" output="screen"/> -->
+
     <!-- Camera -->
     <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
         <arg name="filters" value="pointcloud"/>
@@ -41,7 +44,7 @@
 
     <!-- Emergency Stops -->
     <node pkg="aliencontrol" type="aliencontrol" name="aliencontrol_emergency_stop">
-        <param name="cmd" value="$(arg python_path) $(arg base_path)/src/feeding_deployment/safety/estops_publisher.py --user_estop -1 --exp_estop 8"/>
+        <param name="cmd" value="$(arg python_path) $(arg base_path)/src/feeding_deployment/safety/estops_publisher.py --user_estop -1 --exp_estop 7"/>
     </node>
 
     <!-- Joint States Publisher -->
