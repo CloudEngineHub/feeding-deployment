@@ -13,12 +13,6 @@
 1. Recommended: create and source a virtualenv.
 2. `pip install -e ".[develop]"`
 
-## Controller Example
-
-1. On one terminal on the compute system, ssh to the NUC: `sshnuc` with lab password
-2. On the NUC, run the controller server: `cd feeding-deployment/src/feeding_deployment/robot_controller && python arm_server.py`
-3. On another terminal on the compute system, run the controller client example: `cd deployment_ws/src/feeding-deployment/src/feeding_deployment/robot_controller && python arm_client.py`
-
 ## Run Feeding Demo on Real Robot
 1. Run the arm controller server on the NUC:
    - ssh to the NUC: `sshnuc` with lab password
@@ -35,6 +29,13 @@
         - `source devel/setup.bash`
         - `cd src/feeding-deployment/launch`
         - `roslaunch robot.launch`
+3. Start feeding utensil:
+   - Alias `launch_utensil` on compute system
+   - Otherwise, run the following commands from the root of your ROS workspace:
+        - `conda activate feed`
+        - `source devel/setup.bash`
+        - `rosrun wrist_driver_ros wrist_driver`  
+   - _Important Note:_ To shutdown this node, press Ctrl + / (Signal handling is setup to shutdown cleanly) 
 3. Run the feeding demo:
    - Alias `run_demo` on compute system
    - Otherwise,run the following commands from the root of your ROS workspace:
