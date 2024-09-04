@@ -20,8 +20,8 @@ import sys
 sys.path.append(FLAIR_PATH)
 try:
     # raise ModuleNotFoundError  # Just to skip this block
-    from skill_library import SkillLibrary
     from wrist_controller import WristController
+    from flair import FLAIR
 
     FLAIR_IMPORTED = True
     print("FLAIR imported successfully")
@@ -98,10 +98,10 @@ class _Runner:
         # Initialize the FLAIR interface.
         if FLAIR_IMPORTED:
             wrist_controller = WristController()
-            skill_library = SkillLibrary(self.robot_interface, wrist_controller)
+            flair = FLAIR(self.robot_interface, wrist_controller)
         else:
             wrist_controller = None
-            skill_library = None
+            flair = None
 
         # Initialize the simulator.
         kwargs: dict[str, Any] = {}
@@ -122,7 +122,7 @@ class _Runner:
         hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
         self.hlas = {
             cls(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, hla_hyperparams, run_on_robot,
-                wrist_controller, skill_library) for cls in HLAS  # type: ignore
+                wrist_controller, flair) for cls in HLAS  # type: ignore
         }
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
         self.operators = {hla.get_operator() for hla in self.hlas}
@@ -266,10 +266,11 @@ if __name__ == "__main__":
     # msg = namedtuple("String", ["data"])
     # runner.web_interface_callback(msg(json.dumps({"status": "drink_pickup"})))
     # runner.web_interface_callback(msg(json.dumps({"status": "drink_transfer"})))
-    # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.utensil,)))
     # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
-    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
-    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
+    # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
+    # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
 
     if args.make_videos:
         runner.make_video(Path("full.mp4"))
