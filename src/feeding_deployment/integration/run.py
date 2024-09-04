@@ -69,6 +69,7 @@ from feeding_deployment.simulation.simulator import (
     FeedingDeploymentSimulatorState,
 )
 from feeding_deployment.simulation.video import make_simulation_video
+from pybullet_helpers.geometry import Pose
 
 # All the high level actions we want to consider.
 HLAS = {PickToolHLA, StowToolHLA, LookAtPlateHLA, AcquireBiteHLA, TransferToolHLA}
@@ -161,7 +162,7 @@ class _Runner:
             self._load_from_last_state()
             print("WARNING: The system state has been restored to:")
             print(" ", sorted(self.current_atoms))
-            resp = input("Are you sure you want to continue from here? [y/n]")
+            resp = input("Are you sure you want to continue from here? [y/n] ")
             if resp != "y":
                 sys.exit(0)
 
@@ -268,7 +269,12 @@ class _Runner:
         with open(self._saved_state_outfile, "rb") as f:
             sim_state, self.current_atoms = pickle.load(f)
         if sim_state is not None:
+            assert isinstance(sim_state, FeedingDeploymentSimulatorState)
             self.sim.sync(sim_state)
+            self.rviz_interface.joint_state_update(sim_state.robot_joints)
+            if sim_state.held_object:
+                self.rviz_interface.tool_update(True, sim_state.held_object, Pose((0, 0, 0), (0, 0, 0, 1)))
+                
         print(f"Loaded system state to {self._saved_state_outfile}")
 
 
