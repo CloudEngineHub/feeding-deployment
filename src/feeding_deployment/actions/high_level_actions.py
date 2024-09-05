@@ -651,7 +651,7 @@ class TransferToolHLA(HighLevelAction):
 
             sim_length = len(sim_states)
 
-            target_pose = self._perception_interface.get_head_perception_forque_target_pose(simulation=False)
+            target_pose = self._perception_interface.get_head_perception_forque_target_pose(simulation=True)
             k = input("Does pose look good? Press 'y/n' to continue")
             while k != "y":
                 target_pose = self._perception_interface.get_head_perception_forque_target_pose()
