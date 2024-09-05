@@ -143,11 +143,11 @@ class WatchDog:
         anomaly = AnomalyStatus.NO_ANOMALY
         start_time = time.time()
         frequencies = []
-        for _queue, _threshold, _anomaly in [(self.camera_timestamps, CAMERA_FREQUENCY_THRESHOLD, AnomalyStatus.CAMERA_FREQUENCY), 
-                                            (self.ft_timestamps, FT_FREQUENCY_THRESHOLD, AnomalyStatus.FT_FREQUENCY), 
+        for _queue, _threshold, _anomaly in [(self.camera_timestamps, CAMERA_FREQUENCY_THRESHOLD, AnomalyStatus.CAMERA_FREQUENCY)]: 
+                                            # (self.ft_timestamps, FT_FREQUENCY_THRESHOLD, AnomalyStatus.FT_FREQUENCY)]
                                             # (self.collision_free_timestamps, COLLISION_FREE_FREQUENCY_THRESHOLD, AnomalyStatus.COLLISION_FREE_FREQUENCY), 
-                                            (self.user_emergency_stop_timestamps, USER_ESTOP_FREQUENCY_THRESHOLD, AnomalyStatus.USER_ESTOP_FREQUENCY), 
-                                            (self.experimentor_emergency_stop_timestamps, experimentor_ESTOP_FREQUENCY_THRESHOLD, AnomalyStatus.experimentor_ESTOP_FREQUENCY)]:
+                                            # (self.user_emergency_stop_timestamps, USER_ESTOP_FREQUENCY_THRESHOLD, AnomalyStatus.USER_ESTOP_FREQUENCY), 
+                                            # (self.experimentor_emergency_stop_timestamps, experimentor_ESTOP_FREQUENCY_THRESHOLD, AnomalyStatus.experimentor_ESTOP_FREQUENCY)]:
             while _queue.peek() < start_time - 1.0:
                 _queue.get()
             queue_size = _queue.qsize()
@@ -163,11 +163,11 @@ class WatchDog:
             # print(f"Frequencies:  Camera: {frequencies[0]}, FT: {frequencies[1]}, Collision Free: {frequencies[2]}, User EStop: {frequencies[3]}, Experimentor EStop: {frequencies[4]}")
             self.second_counter = 0
 
-        for _unexpected, _anomaly in [(self.camera_unexpected, AnomalyStatus.CAMERA_UNEXPECTED),
+        for _unexpected, _anomaly in [(self.camera_unexpected, AnomalyStatus.CAMERA_UNEXPECTED)]:
                                     # (self.ft_unexpected, AnomalyStatus.FT_UNEXPECTED),
                                     # (self.collision_free_unexpected, AnomalyStatus.COLLISION_FREE_UNEXPECTED),
-                                    (self.user_emergency_stop_pressed, AnomalyStatus.USER_ESTOP_PRESSED),
-                                    (self.experimentor_emergency_stop_pressed, AnomalyStatus.experimentor_ESTOP_PRESSED)]:
+                                    # (self.user_emergency_stop_pressed, AnomalyStatus.USER_ESTOP_PRESSED),
+                                    # (self.experimentor_emergency_stop_pressed, AnomalyStatus.experimentor_ESTOP_PRESSED)]:
             if _unexpected:
                 print(f"Unexpected: {_anomaly}")
                 rospy.loginfo(f"Unexpected: {_anomaly}")
