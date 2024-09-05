@@ -29,7 +29,7 @@ from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 class PerceptionInterface:
     """An interface for perception (robot joints, human head poses, etc.)."""
 
-    def __init__(self, robot_interface: ArmInterfaceClient | None) -> None:
+    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False, tansfer_tool: str ="utensil") -> None:
         self._robot_interface = robot_interface
         
         # Create a shared publisher for rviz simulation.
@@ -59,7 +59,7 @@ class PerceptionInterface:
             self._head_perception = None
         else:
             # self._head_perception = None
-            self._head_perception = HeadPerceptionROSWrapper()
+            self._head_perception = HeadPerceptionROSWrapper(record_goal_pose, tansfer_tool)
             # warm start head perception
             for _ in range(10):
                 self._head_perception.run_head_perception()

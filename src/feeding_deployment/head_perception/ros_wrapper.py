@@ -6,6 +6,7 @@ from threading import Lock
 from types import SimpleNamespace
 
 import cv2
+import argparse
 import message_filters
 import numpy as np
 import rospy
@@ -19,18 +20,14 @@ from std_msgs.msg import Bool, Float64, Float64MultiArray, String
 from visualization_msgs.msg import Marker, MarkerArray
 
 from feeding_deployment.head_perception.deca_perception import (
-    RECORD_GOAL_POSE,
     HeadPerception,
 )
 
-VISUALIZE_DATA = False
-
-
 class HeadPerceptionROSWrapper:
-    def __init__(self):
+    def __init__(self, record_goal_pose=False):
         # rospy.init_node("HeadPerception")
 
-        self.head_perception = HeadPerception()
+        self.head_perception = HeadPerception(record_goal_pose)
 
         # Top Camera Data
         self.top_camera_lock = Lock()
@@ -51,6 +48,9 @@ class HeadPerceptionROSWrapper:
         # Head Pose Visualisation
         self.voxel_publisher = rospy.Publisher(
             "/head_perception/voxels/marker_array", MarkerArray, queue_size=10
+        )
+        self.cam_voxel_publisher = rospy.Publisher(
+            "/head_perception/cam_voxels/marker_array", MarkerArray, queue_size=10
         )
         # self.face_publisher =  rospy.Publisher("/head_perception/face/marker_array", MarkerArray, queue_size=10)
         self.forque_publisher = rospy.Publisher(
@@ -180,11 +180,8 @@ class HeadPerceptionROSWrapper:
                 deepcopy(self.bottom_camera_header),
             )
 
-    def get_base_to_camera_transform(self, camera_info_data, use_top_camera=True):
-        if use_top_camera:
-            target_frame = "camera_color_optical_frame"
-        else:
-            target_frame = "bottom_camera_color_optical_frame"
+    def get_base_to_camera_transform(self, camera_info_data):
+        target_frame = "camera_color_optical_frame"
         stamp = camera_info_data.header.stamp
         try:
             with self.tf_buffer_lock:
@@ -202,30 +199,17 @@ class HeadPerceptionROSWrapper:
             print("Exexption finding transform between base_link and", target_frame)
             return None
 
-    def run_head_perception(self, use_top_camera=True):
+    def run_head_perception(self, visualize=False):
 
         print("Running Head Perception")
         transform = None
         while transform is None:
-            if use_top_camera:
-                camera_color_data, camera_info_data, camera_depth_data, _ = (
-                    self.get_top_camera_data()
-                )
-                if camera_info_data is None:
-                    continue
-                transform = self.get_base_to_camera_transform(
-                    camera_info_data, use_top_camera=True
-                )
-            else:
-                camera_color_data, camera_info_data, camera_depth_data, _ = (
-                    self.get_bottom_camera_data()
-                )
-                if camera_info_data is None:
-                    continue
-                transform = self.get_base_to_camera_transform(
-                    camera_info_data, use_top_camera=False
-                )
-            # time.sleep(0.01)
+            camera_color_data, camera_info_data, camera_depth_data, _ = (
+                self.get_top_camera_data()
+            )
+            if camera_info_data is None:
+                continue
+            transform = self.get_base_to_camera_transform(camera_info_data)
 
         base_to_camera = np.zeros((4, 4))
         base_to_camera[:3, :3] = Rotation.from_quat(
@@ -257,30 +241,33 @@ class HeadPerceptionROSWrapper:
             visualization_points_world_frame,
             reference_neck_frame,
             neck_frame,
+            camera_frame_points,
         ) = self.head_perception.run_deca(
             camera_color_data,
             camera_info_data,
             camera_depth_data,
             base_to_camera,
             debug_print=False,
-            visualize=VISUALIZE_DATA,
+            visualize=visualize,
         )
         run_deca_end_time = time.time()
         print("Run DECA time: ", run_deca_end_time - run_deca_start_time)
 
-        if landmarks2d is not None:
+        if visualization_points_world_frame is not None:
             self.mouth_state_publisher.publish(mouth_state)
 
-            head_distance_msg = Float64MultiArray()
-            head_distance_msg.data = [
-                average_head_point[0],
-                average_head_point[1],
-                average_head_point[2],
-            ]
-            self.head_distance_publisher.publish(head_distance_msg)
+            if average_head_point is not None:  
+                head_distance_msg = Float64MultiArray()
+                head_distance_msg.data = [
+                    average_head_point[0],
+                    average_head_point[1],
+                    average_head_point[2],
+                ]
+                self.head_distance_publisher.publish(head_distance_msg)
 
             self.visualizeForque(forque_target_pose)
             self.visualizeVoxels(visualization_points_world_frame)
+            self.visualizeCamVoxels(camera_frame_points)
 
             self.updateTF("base_link", "forque_end_effector_target", forque_target_pose)
             self.updateTF("base_link", "head_pose", neck_frame)
@@ -319,7 +306,7 @@ class HeadPerceptionROSWrapper:
         forque_marker = Marker()
         forque_marker.header.seq = 0
         forque_marker.header.stamp = rospy.Time.now()
-        if RECORD_GOAL_POSE:
+        if self.head_perception.record_goal_pose:
             forque_marker.header.frame_id = "camera_color_optical_frame"
         else:
             forque_marker.header.frame_id = "base_link"
@@ -392,11 +379,84 @@ class HeadPerceptionROSWrapper:
 
         self.voxel_publisher.publish(markerArray)
 
+    def visualizeCamVoxels(self, voxels, namespace="visualize_voxels"):
+
+        # print(voxels)
+
+        markerArray = MarkerArray()
+
+        marker = Marker()
+        marker.header.seq = 0
+        marker.header.stamp = rospy.Time.now()
+        marker.header.frame_id = "camera_color_optical_frame"
+        marker.ns = namespace
+        marker.id = 1
+        marker.type = 6
+        # CUBE LIST
+        marker.action = 0
+        # ADD
+        marker.lifetime = rospy.Duration()
+        marker.scale.x = 0.01
+        marker.scale.y = 0.01
+        marker.scale.z = 0.01
+        marker.color.r = 1
+        marker.color.g = 1
+        marker.color.b = 0
+        marker.color.a = 1
+
+        for i in range(voxels.shape[0]):
+
+            point = Point()
+            point.x = voxels[i, 0]
+            point.y = voxels[i, 1]
+            point.z = voxels[i, 2]
+
+            marker.points.append(point)
+
+        markerArray.markers.append(marker)
+
+        self.cam_voxel_publisher.publish(markerArray)
+
 
 if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--record_goal_pose", action="store_true")
+    parser.add_argument("--tool", type=str, default="fork")
+    parser.add_argument("--set_tool_tip_transform", action="store_true")
+    parser.add_argument("--visualize", action="store_true")
+
+    args = parser.parse_args()
+
     rospy.init_node("head_perception", anonymous=True)
-    head_perception_ros_wrapper = HeadPerceptionROSWrapper()
+
+    head_perception_ros_wrapper = HeadPerceptionROSWrapper(record_goal_pose=args.record_goal_pose)
     time.sleep(2.0)  # let the buffers fill up
+
+    if args.set_tool_tip_transform:
+
+        rate = rospy.Rate(1000.0)
+        while not rospy.is_shutdown():
+            try:
+                print("Looking for transform")
+                with head_perception_ros_wrapper.tf_buffer_lock:
+                    transform = head_perception_ros_wrapper.tfBuffer.lookup_transform('camera_color_optical_frame', args.tool + '_tip', rospy.Time())
+                    break
+            except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+                try:
+                    rate.sleep()
+                except Exception as inst:
+                    print(inst)
+                continue
+
+        tool_planar_tip_pose = np.zeros((4,4))
+        tool_planar_tip_pose[:3,:3] = Rotation.from_quat([transform.transform.rotation.x, transform.transform.rotation.y, transform.transform.rotation.z, transform.transform.rotation.w]).as_matrix()
+        tool_planar_tip_pose[:3,3] = np.array([transform.transform.translation.x, transform.transform.translation.y, transform.transform.translation.z]).reshape(1,3)
+        tool_planar_tip_pose[3,3] = 1
+
+        head_perception_ros_wrapper.head_perception.save_tool_tip_transform(args.tool, tool_planar_tip_pose)
+
+    head_perception_ros_wrapper.head_perception.set_tool(args.tool)
     while not rospy.is_shutdown():
-        head_perception_ros_wrapper.run_head_perception()
+        head_perception_ros_wrapper.run_head_perception(visualize=args.visualize)
         # rospy.sleep(0.1)
