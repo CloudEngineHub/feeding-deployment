@@ -19,7 +19,7 @@ ArmManager.register("ArmInterface", lambda: arm_interface_instance)
 # Signal handler function to call arm_interface_instance.stop() on Ctrl-C or Ctrl-\
 def signal_handler(sig, frame):
     print(f"Signal {sig} received, stopping the arm.")
-    arm_interface_instance.stop()
+    arm_interface_instance.close()
     sys.exit(0)
 
 # Register signal handler for Ctrl-C (SIGINT) and Ctrl-\ (SIGQUIT)
