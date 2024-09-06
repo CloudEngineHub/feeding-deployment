@@ -7,6 +7,7 @@ import numpy as np
 from pybullet_helpers.geometry import Pose
 from pybullet_helpers.joint import JointPositions
 from scipy.spatial.transform import Rotation as R
+import json
 
 
 try:
@@ -28,7 +29,7 @@ from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 class PerceptionInterface:
     """An interface for perception (robot joints, human head poses, etc.)."""
 
-    def __init__(self, robot_interface: ArmInterfaceClient | None) -> None:
+    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False) -> None:
         self._robot_interface = robot_interface
         
         # Create a shared publisher for rviz simulation.
@@ -43,6 +44,12 @@ class PerceptionInterface:
         self.update_web_interface_image(np.zeros((512, 512, 3)))
         thread = threading.Thread(target=self._publish_web_interface_image)
         thread.start()
+        # The following is a hacky leaky abstraction to handle the one-time preference
+        # setting step at the beginning of FLAIR.
+        self.user_preference = None
+        self.web_interface_sub = rospy.Subscriber(
+            "WebAppComm", String, self._web_interface_callback
+        )
 
         # This doesn't work in simulation.
         # rospy.Timer(rospy.Duration(1.0), self._web_interface_image_callback)
@@ -52,10 +59,12 @@ class PerceptionInterface:
             self._head_perception = None
         else:
             # self._head_perception = None
-            self._head_perception = HeadPerceptionROSWrapper()
+            self._head_perception = HeadPerceptionROSWrapper(record_goal_pose)
+            
             # warm start head perception
-            for _ in range(10):
-                self._head_perception.run_head_perception()
+            # self._head_perception.set_tool("fork")
+            # for _ in range(10):
+            #     self._head_perception.run_head_perception()
 
     def get_robot_joints(self) -> "JointState":
         """Get the current robot joint state."""
@@ -76,24 +85,18 @@ class PerceptionInterface:
     def get_camera_data(self):  # Rajat ToDo: Add return type
         return self._head_perception.get_top_camera_data()
 
-    def get_head_perception_forque_target_pose(self) -> Pose:
+    def get_head_perception_forque_target_pose(self, simulation = False) -> Pose:
         """Get a target of the forque from head perception."""
-        if self._head_perception is not None:
+        if self._head_perception is not None and not simulation:
             forque_target_transform = self._head_perception.run_head_perception()
+            print("\n--\n---\n----Forque target transform: ", forque_target_transform)
         else:
             # Use a sensible default value for testing in simulation.
             forque_target_transform = np.array(
-                [
-                    [
-                        0.05720315,
-                        -0.00795624,
-                        -0.99833086,
-                        0.02325958,
-                    ],
-                    [-0.9842066, 0.16734664, -0.05772752, 0.5556016],
-                    [0.16752662, 0.98586602, 0.00174218, 0.5478612],
-                    [0.0, 0.0, 0.0, 1.0],
-                ]
+                [[ 2.39288367e-02,  8.46555150e-04, -9.99713306e-01, -9.36197722e-02],
+                [-9.98958576e-01, -3.88389663e-02, -2.39436604e-02,  4.75341624e-01],
+                [-3.88481010e-02,  9.99245124e-01, -8.36977532e-05,  6.02467578e-01],
+                [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]]
             )
         forque_target_pose = Pose(
             (
@@ -158,3 +161,10 @@ class PerceptionInterface:
         while not rospy.is_shutdown():
             self.web_interface_image_publisher.publish(self.last_captured_ros_image)
             rate.sleep()
+
+    def _web_interface_callback(self, msg: "String") -> None:
+        """Callback for the web interface."""
+        msg_dict = json.loads(msg.data)
+        if msg_dict["state"] == "order_selection" and msg_dict["status"] != "ready_for_initial_data":
+            self.user_preference =msg_dict["status"]
+
