@@ -36,17 +36,6 @@ from threading import Lock
 
 warnings.filterwarnings("ignore")
 
-# UTENSIL = "fork"
-UTENSIL = "spoon"
-# 1: fork
-# 2: spoon
-
-RECORD_GOAL_POSE = False
-USER = "shunyang"
-
-INSIDE_MOUTH_DISTANCE = 0.015
-MOUTH_OFFSET = -0.005
-
 import sys
 import warnings
 from collections import deque
@@ -57,7 +46,10 @@ warnings.filterwarnings("ignore")
 
 
 class HeadPerception:
-    def __init__(self):
+    def __init__(self, record_goal_pose=False):
+
+        self.record_goal_pose = record_goal_pose
+        self.tool = None
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -110,6 +102,21 @@ class HeadPerception:
         self.min_rotation_threshold = np.array([np.pi / 18, np.pi / 18, np.pi / 18])
         self.min_distance_threshold = np.array([0.01, 0.01, 0.01])
 
+        self.current_filepath = os.path.dirname(os.path.abspath(__file__))
+
+    def save_tool_tip_transform(self, tool, tool_tip_transform):
+        '''
+        Set transforms between camera_color_optical_frame and the tool tip (needs to be set only when tool tip calibration changes)
+        '''
+        file_path = self.current_filepath + "/config/" + tool + "/tool_tip_transform.npy"
+
+        np.save(file_path, tool_tip_transform)
+        print(f"Saved tool tip transform: {tool_tip_transform} for {tool} in {file_path}")
+
+    def set_tool(self, tool):
+        self.tool = tool
+
+        # reset all logged data
         self.last_trans = None
         self.last_neck_frame = None
 
@@ -121,20 +128,20 @@ class HeadPerception:
         self.trans_perception_buffer = []
         self.neck_frame_perception_buffer = []
 
-        current_filepath = os.path.dirname(os.path.abspath(__file__))
+        # load corresponding reference data
         self.fixed_model_head_points = np.load(
-            current_filepath + "/assets/fixed_model_head_points.npy"
+            self.current_filepath + "/config/fixed_model_head_points.npy"
         )
-        if not RECORD_GOAL_POSE:
-            self.reference_forque_pose = np.load(
-                current_filepath + "/assets/fork_forque_pose.npy"
-            )
-            self.reference_head_points = np.load(
-                current_filepath + "/assets/fork_head_points.npy"
-            )
-            self.reference_neck_frame = np.load(
-                current_filepath + "/assets/fork_reference_neck_frame.npy"
-            )
+
+        # check if file exists
+        if not os.path.exists(self.current_filepath + "/config/" + tool + "/tool_tip_transform.npy"):   
+            raise ValueError("Tool poses not found. Please calibrate the tool first (using save_tool_transforms).")
+
+        self.reference_tool_tip_transform = np.load(self.current_filepath + "/config/" + tool + "/tool_tip_transform.npy")
+
+        if not self.record_goal_pose:            
+            self.reference_head_points = np.load(self.current_filepath + "/config/" + tool + "/head_points.npy")
+            self.reference_neck_frame = np.load(self.current_filepath + "/config/" + tool + "/reference_neck_frame.npy")
 
     def run_deca(
         self,
@@ -145,6 +152,12 @@ class HeadPerception:
         debug_print=False,
         visualize=False,
     ):
+        '''
+        The realsense camera is inverted vertically, leading to flipped images.
+        This function flips the image vertically before running DECA as DECA doesn't work well with flipped images.
+        '''
+
+        image = cv2.flip(image, -1)
 
         viz_image = None
 
@@ -198,16 +211,19 @@ class HeadPerception:
 
         valid_landmarks_selected_model = []
         valid_landmarks_selected_world = []
+        landmarks_selected_world = []
         for i in range(landmarks_selected.shape[0]):
             validity, point = self.pixel2World(
                 camera_info_msg,
                 landmarks_selected[i, 0].astype(int),
                 landmarks_selected[i, 1].astype(int),
+                image,
                 depth_image,
             )
             if validity:
                 valid_landmarks_selected_model.append(landmarks_selected_model[i])
                 valid_landmarks_selected_world.append(point)
+            landmarks_selected_world.append(point)
 
         if len(valid_landmarks_selected_world) < 4:
             print("Not enough landmarks to fit model.")
@@ -251,27 +267,14 @@ class HeadPerception:
             )
 
             # allow window size to be adjusted
-            # cv2.namedWindow("viz_image", cv2.WINDOW_NORMAL)
-            # cv2.imshow("viz_image",viz_image)
-            # cv2.waitKey(10)
+            cv2.namedWindow("viz_image", cv2.WINDOW_NORMAL)
+            cv2.imshow("viz_image",viz_image)
+            cv2.waitKey(10)
 
-        if RECORD_GOAL_POSE:
+        if self.record_goal_pose:
 
-            forque_pose = np.array(
-                [
-                    [-0.99991264, -0.01268631, -0.00371056, 0.04003387],
-                    [0.01267759, -0.99991685, 0.00236201, 0.06337766],
-                    [-0.00374022, 0.00231477, 0.99999033, 0.31434989],
-                    [0.0, 0.0, 0.0, 1.0],
-                ]
-            )
-
-            np.save(
-                "/home/rkjenamani/bite_transfer_ws/src/head_perception/"
-                + UTENSIL
-                + "_forque_pose.npy",
-                forque_pose,
-            )
+            if self.tool is None:
+                raise ValueError("Head Perception Tool is not set.")
 
             print(
                 "landmarks_selected_model[:,:,np.newaxis].shape: ",
@@ -284,11 +287,9 @@ class HeadPerception:
             landmarks_selected_model_camera_frame = np.squeeze(
                 landmarks_selected_model_camera_frame
             )
-
+            
             np.save(
-                "/home/rkjenamani/bite_transfer_ws/src/head_perception/"
-                + UTENSIL
-                + "_head_points.npy",
+                self.current_filepath + "/config/" + self.tool + "/head_points.npy",
                 landmarks_selected_model_camera_frame,
             )
 
@@ -337,17 +338,15 @@ class HeadPerception:
             neck_frame[3, 3] = 1
 
             np.save(
-                "/home/rkjenamani/bite_transfer_ws/src/head_perception/"
-                + UTENSIL
-                + "_reference_neck_frame.npy",
+                self.current_filepath + "/config/" + self.tool + "/reference_neck_frame.npy",
                 neck_frame,
             )
 
-            print("Press [ENTER] to update saved data... ")
-            lol = input()
+            input("Press [ENTER] to update saved data... ")
 
             landmark2d = None
             landmarks3d = None
+            average_head_point = None
 
             return (
                 landmark2d,
@@ -355,7 +354,8 @@ class HeadPerception:
                 viz_image,
                 mouth_state,
                 average_head_point,
-                forque_target_pose,
+                self.reference_tool_tip_transform,
+                visualization_points_world_frame,
                 neck_frame,
                 neck_frame,
             )
@@ -522,7 +522,7 @@ class HeadPerception:
             self.last_trans = trans
             self.last_neck_frame = neck_frame
 
-            forque_target_pose = trans @ self.reference_forque_pose
+            forque_target_pose = trans @ self.reference_tool_tip_transform
 
             forque_target_pose = base_to_camera @ forque_target_pose
 
@@ -722,7 +722,14 @@ class HeadPerception:
 
         return c, R, t
 
-    def pixel2World(self, camera_info, image_x, image_y, depth_image):
+    def pixel2World(self, camera_info, image_x, image_y, image, depth_image):
+        '''
+        Important note: the image_x and image_y, as well as the image is actually inverted
+        '''
+
+        # # get image_x and image_y in the non-inverted form
+        image_y = image.shape[0] - image_y
+        image_x = image.shape[1] - image_x
 
         # print("(image_y,image_x): ",image_y,image_x)
         # print("depth image: ", depth_image.shape[0], depth_image.shape[1])
@@ -760,6 +767,7 @@ class HeadPerception:
         fx = camera_info.K[0]
         fy = camera_info.K[4]
         cx = camera_info.K[2]
+        # cy = image.shape[0] - camera_info.K[5]
         cy = camera_info.K[5]
 
         # Convert to world space

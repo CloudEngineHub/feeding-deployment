@@ -115,8 +115,10 @@ class HighLevelAction(abc.ABC):
         self._perception_interface.update_web_interface_image(image)
 
     def _wait_for_user_continue_button(self) -> None:
-        msg = rospy.wait_for_message("/user_continue_button", Bool)
+        print("Waiting for transfer complete button press / ft sensor trigger ...")
+        msg = rospy.wait_for_message("/transfer_complete", Bool)
         assert msg.data
+        print("Received message, continuing ...")
 
 
 @dataclass(frozen=True)
@@ -649,9 +651,14 @@ class TransferToolHLA(HighLevelAction):
 
             sim_length = len(sim_states)
 
-            # target_pose = self._perception_interface.get_head_perception_forque_target_pose()
-            target_pose = Pose(position=(-0.17272330207928777, 0.6273752674813526, 0.5572539925006535), 
-                orientation=(-0.42030807,  0.56739361,  0.47188225, -0.52795148))
+            target_pose = self._perception_interface.get_head_perception_forque_target_pose(simulation=True)
+            k = input("Does pose look good? Press 'y/n' to continue")
+            while k != "y":
+                target_pose = self._perception_interface.get_head_perception_forque_target_pose()
+                k = input("Does pose look good? Press 'y/n' to continue")
+
+            # target_pose = Pose(position=(-0.17272330207928777, 0.6273752674813526, 0.5572539925006535), 
+                # orientation=(-0.42030807,  0.56739361,  0.47188225, -0.52795148))
             intermediate_pose = multiply_poses(
                 target_pose, Pose(position=[0.0, 0.0, -0.1], orientation=[0.0, 0.0, 0.0, 1.0])
             ) # 10 cms away from the mouth
@@ -666,7 +673,7 @@ class TransferToolHLA(HighLevelAction):
             move_to_ee_pose(sim=self._sim,
                 target_pose=intermediate_pose,
                 exclude_collision_ids=None,
-                tip_from_end_effector=self._sim.scene_description.wipe_tip_from_end_effector,
+                tip_from_end_effector=self._sim.scene_description.utensil_tip_from_end_effector,
                 max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
                 sim_states=sim_states,
                 robot_commands=robot_commands,
@@ -679,20 +686,17 @@ class TransferToolHLA(HighLevelAction):
             #     time.sleep(0.1)
                 # input("Press Enter to continue...")
 
-            # sim_length = len(sim_states)
-            # robot_command_length = len(robot_commands)
-
             # NOTE: disabling collision checking here between held object and
             # conservative bounding box.
-            # move_to_ee_pose(sim=self._sim,
-            #     target_pose=target_pose,
-            #     exclude_collision_ids=None,
-            #     tip_from_end_effector=self._sim.scene_description.wipe_tip_from_end_effector,
-            #     max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
-            #     sim_states=sim_states,
-            #     robot_commands=robot_commands,
-            #     rviz_interface=self._rviz_interface,
-            #     check_held_object_collisions=False)
+            move_to_ee_pose(sim=self._sim,
+                target_pose=target_pose,
+                exclude_collision_ids=None,
+                tip_from_end_effector=self._sim.scene_description.utensil_tip_from_end_effector,
+                max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
+                sim_states=sim_states,
+                robot_commands=robot_commands,
+                rviz_interface=self._rviz_interface,
+                check_held_object_collisions=False)
             
             # input("Replaying the trajectory to check. Press Enter to continue...")
             # for i in range(sim_length, len(sim_states)):
@@ -700,19 +704,19 @@ class TransferToolHLA(HighLevelAction):
             #     time.sleep(0.1)
                 # input("Press Enter to continue...")
 
-            if self._rviz_interface is not None:
-                for sim_state in sim_states:
-                    self._rviz_interface.joint_state_update(sim_state.robot_joints)
-                    time.sleep(0.1)
+            # if self._rviz_interface is not None:
+            #     for sim_state in sim_states:
+            #         self._rviz_interface.joint_state_update(sim_state.robot_joints)
+            #         time.sleep(0.1)
 
             if self._run_on_robot:
-                y = input("Does the trajectory look good? Press 'y' to execute on robot")
+                y = input("Does the trajectory look good? Press 'y/n' to execute on robot")
+                while y != "y" and y != "n":
+                    y = input("Please enter 'y' or 'n'")
                 if y == "y":
                     input("Press enter to switch to joint compliant mode")
                     self._robot_interface.switch_to_joint_compliant_mode()
                     self.execute_robot_commands(robot_commands)
-                    input("Press enter to switch out of joint compliant mode")
-                    self._robot_interface.switch_out_of_joint_compliant_mode()
                 else:
                     print("Trajectory not executed on robot")
             
@@ -726,10 +730,10 @@ class TransferToolHLA(HighLevelAction):
             transfer_sim_states = sim_states[sim_length:]
             sim_states.extend(transfer_sim_states[::-1])
 
-            if self._rviz_interface is not None:
-                for sim_state in transfer_sim_states[::-1]:
-                    self._rviz_interface.joint_state_update(sim_state.robot_joints)
-                    time.sleep(0.1)
+            # if self._rviz_interface is not None:
+            #     for sim_state in transfer_sim_states[::-1]:
+            #         self._rviz_interface.joint_state_update(sim_state.robot_joints)
+            #         time.sleep(0.02)
             
             transfer_robot_commands = robot_commands.copy()
             reversed_robot_commands = []
@@ -744,11 +748,10 @@ class TransferToolHLA(HighLevelAction):
                 assert np.allclose(robot_commands[i].traj, robot_commands[-(i+1)].traj[::-1]), "Robot commands not a palindrome"
 
             if self._run_on_robot:
-                # y = input("Does the trajectory look good? Press 'y' to execute on robot")
-                y = "n"
+                y = input("Does the trajectory look good? Press 'y' to execute on robot")
+                while y != "y" and y != "n":
+                    y = input("Please enter 'y' or 'n'")
                 if y == "y":
-                    input("Press enter to switch to joint compliant mode")
-                    self._robot_interface.switch_to_joint_compliant_mode()
                     self.execute_robot_commands(reversed_robot_commands)
                     input("Press enter to switch out of joint compliant mode")
                     self._robot_interface.switch_out_of_joint_compliant_mode()
@@ -1085,7 +1088,6 @@ class LookAtPlateHLA(HighLevelAction):
 
                     # Handle one-time preference setting.
 
-                    import ipdb; ipdb.set_trace()
                     food_types = sorted(set(items_detection['clean_item_labels']))
 
                     # Send detections back to interface.
@@ -1108,15 +1110,12 @@ class LookAtPlateHLA(HighLevelAction):
                     self._send_web_interface_message({"n_ordering": len(ordering_options), "data": ordering_options})
 
                     # Wait for web interface to report order selection.
-                    selected_order_preference = None
-                    while True:
-                        msg = rospy.wait_for_message("/WepAppComm", String)
-                        msg_dict = json.loads(msg.data)
-                        if msg_dict["state"] == "order_selection":
-                            selected_order_preference = msg_dict["status"]
-                            break
+                    print("WAITING TO GET PREFERENCE")
+                    while self._perception_interface.user_preference is None:
+                        time.sleep(1e-1)
+                    print("FINISHED GETTING PREFERENCES")
 
-                    self.flair.set_preferences(selected_order_preference)
+                    self.flair.set_preferences(self._perception_interface.user_preference)
                     self._preferences_set = True
 
                 # Prepare for bite acquisition.
