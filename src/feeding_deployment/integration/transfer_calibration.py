@@ -79,22 +79,24 @@ def _main(
         web_interface = None
 
     # Initialize the perceiver (e.g., get joint states or human head poses).
+    if record_rom:
+        test = True
+
     perception_interface = PerceptionInterface(robot_interface, not test)
     
     wrist_controller = WristController()
 
     if not test: # calibrate utensil tip
-        if not record_rom:
-            # set tool transform - only required once globally
-            perception_interface._head_perception.save_tool_tip_transform(args.tool)
-            
-            perception_interface._head_perception.set_tool(args.tool)
-            while not rospy.is_shutdown():
-                perception_interface._head_perception.run_head_perception()
-        else:
-            perception_interface._head_perception.set_tool(args.tool)
-            while not rospy.is_shutdown():
-                perception_interface._head_perception.run_head_perception()
+        # set tool transform - only required once globally
+        perception_interface._head_perception.save_tool_tip_transform(args.tool)
+        
+        perception_interface._head_perception.set_tool(args.tool)
+        while not rospy.is_shutdown():
+            perception_interface._head_perception.run_head_perception()
+    elif record_rom:
+        perception_interface._head_perception.set_tool(args.tool)
+        while not rospy.is_shutdown():
+            perception_interface._head_perception.run_head_perception()
     else: # actually do the transfer
         run_on_robot = True
 
