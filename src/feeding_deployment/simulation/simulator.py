@@ -14,7 +14,7 @@ from pybullet_helpers.utils import create_pybullet_block
 
 from feeding_deployment.simulation.scene_description import SceneDescription
 from feeding_deployment.simulation.state import FeedingDeploymentSimulatorState
-
+from feeding_deployment.simulation.feeding_utensil import FeedingPyBulletUtensil
 
 class FeedingDeploymentPyBulletSimulator:
     """A PyBullet-based simulator for the feeding deployment environment."""
@@ -119,17 +119,12 @@ class FeedingDeploymentPyBulletSimulator:
         )
 
         # Create feeding utensil.
-        self.utensil_id = p.loadURDF(
-            str(scene_description.utensil_urdf_path),
-            useFixedBase=True,
-            physicsClientId=self.physics_client_id,
-        )
-        p.resetBasePositionAndOrientation(
-            self.utensil_id,
-            scene_description.utensil_pose.position,
-            scene_description.utensil_pose.orientation,
-            physicsClientId=self.physics_client_id,
-        )
+        self.utensil = FeedingPyBulletUtensil(
+            scene_description.utensil_urdf_path, 
+            scene_description.utensil_pose, 
+            scene_description.utensil_initial_joints,
+            self.physics_client_id)
+        self.utensil_id = self.utensil.utensil_id
 
         # Track held objects.
         self.held_object_name: str | None = None
@@ -158,6 +153,7 @@ class FeedingDeploymentPyBulletSimulator:
     def sync(self, state: FeedingDeploymentSimulatorState) -> None:
         """Sync the simulator to a given state."""
         self.robot.set_joints(state.robot_joints)
+        self.utensil.set_joints(state.utensil_joints)
 
         some_object_held = False
         for obj_id, name, state_pose in [

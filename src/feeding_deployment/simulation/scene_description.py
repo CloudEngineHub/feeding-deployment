@@ -138,6 +138,12 @@ class SceneDescription:
     utensil_pose: Pose = Pose(
         (0.35, -0.15, -0.05), p.getQuaternionFromEuler((0.0, np.pi, np.pi))
     )
+    utensil_initial_joints: JointPositions = field(
+        default_factory=lambda: [
+            0.0,
+            0.0
+        ]
+    )
     utensil_urdf_path: Path = (
         Path(__file__).parent.parent
         / "assets"

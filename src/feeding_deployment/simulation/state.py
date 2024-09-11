@@ -11,6 +11,7 @@ class FeedingDeploymentSimulatorState:
     """The state of a feeding deployment simulated environment."""
 
     robot_joints: JointPositions
+    utensil_joints: JointPositions
     drink_pose: Pose | None = None  # None if held
     wipe_pose: Pose | None = None  # None if held
     utensil_pose: Pose | None = None  # None if held
