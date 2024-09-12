@@ -6,16 +6,8 @@ import json
 import pybullet as p
 import time
 import numpy as np
-from scipy.spatial.transform import Rotation
+import pandas as pd
 
-from relational_structs import (
-    GroundAtom,
-    LiftedAtom,
-    Object,
-    PDDLDomain,
-    PDDLProblem,
-    Predicate,
-)
 from relational_structs.utils import parse_pddl_plan
 from tomsutils.pddl_planning import run_pyperplan_planning
 from pybullet_helpers.geometry import Pose
@@ -43,9 +35,49 @@ from feeding_deployment.simulation.simulator import (
 )
 from feeding_deployment.simulation.video import make_simulation_video
 
-def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: float = 10
+
+def _sample_food_pose(scene_description: SceneDescription, rng: np.random.Generator) -> Pose:
+    # TODO
+    return Pose.identity()
+
+
+def _check_pose_reachability(pose: Pose, sim: FeedingDeploymentPyBulletSimulator) -> bool:
+    # TODO
+    return True
+
+
+def _get_acquisition_to_transfer_plan(food_pose: Pose, target_pose: Pose, sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Generator) -> list[JointPositions]:
+    # TODO
+    return []
+
+
+def _measure_efficiency(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
+    # TODO
+    return 0.0
+
+
+def _measure_comfort(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator, setting: str) -> float:
+    # TODO
+    return 0.0
+
+
+def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: float = 10,
+          seed: int = 0, num_samples: int = 100,
 ) -> None:
     """Testing components of the system."""
+
+    env_settings = ["Social", "TV", "Radio"]
+
+    utensil = "flair" if use_flair_utensil else "new"
+    rng = np.random.default_rng(seed)
+
+    # Append to existing results or start new results file if none exists.
+    outfile = Path(__file__).parent / "results.csv"
+    if outfile.exists():
+        df = pd.read_csv(outfile, index_col=False)
+    else:
+        headers = ["Head Reachable", "Food Reachable", "Efficiency", "Comfort", "Utensil", "Env", "Food x", "Food y", "Food z", "Food qx", "Food qy", "Food qz", "Food qw", "Head x", "Head y", "Head z", "Head qx", "Head qy", "Head qz", "Head qw"]
+        df = pd.DataFrame(columns=headers)
 
     print("use_flair_utensil:", use_flair_utensil)
     kwargs: dict[str, Any] = {}
@@ -107,27 +139,64 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
     )
     sim.sync(transfer_state)
 
-    input("Press enter to visualize 10 sampled target tool tip poses for transfer (within Benjamin's ROM)")
-
     # read npy file
     tool_tip_target_transforms = np.load("benjamin_target_transforms.npy")
 
-    for i in range(10):
-        id = np.random.randint(0, len(tool_tip_target_transforms))
-        target_tool_tip_transform = tool_tip_target_transforms[id]
-        
-        # ToDo: add to pybullet helpers
-        # target_pose = Pose.from_matrix(target_tool_tip_transform)
+    for i in range(num_samples):
+        # Sample food pose.
+        food_pose = _sample_food_pose(scene_description, rng)
 
-        target_pose = Pose(
-            position=tuple(target_tool_tip_transform[:3, 3]),
-            orientation=tuple(Rotation.from_matrix(target_tool_tip_transform[:3, :3]).as_quat())
-        )
-        visualize_pose(target_pose, sim.physics_client_id)
-        print(f"Visualizing target tool tip pose ({i+1}/10).")
-        if i < 9:
-            input(f"Press enter to visualize next target tool tip pose...")
-        
+        # Check reachability of food pose.
+        food_pose_reachable = _check_pose_reachability(food_pose, sim)
+
+        # Sample head pose.
+        idx = rng.integers(0, len(tool_tip_target_transforms))
+        target_pose = Pose.from_matrix(tool_tip_target_transforms[idx])
+
+        # Sample environment setting.
+        idx = rng.integers(0, len(env_settings))
+        env_setting = env_settings[idx]
+
+        # Check reachability of target pose.
+        target_pose_reachable = True  # TODO!
+
+        # Generate a plan for acquisition -> transfer.
+        if food_pose_reachable and target_pose_reachable:
+            plan = _get_acquisition_to_transfer_plan(food_pose, target_pose, sim, rng)
+            # Measure efficiency and comfort of plan.
+            efficiency = _measure_efficiency(plan, sim)
+            comfort = _measure_comfort(plan, sim, env_setting)
+        else:
+            efficiency = np.nan
+            comfort = np.nan
+
+        # Save result.
+        datum = {
+            "Head Reachable": target_pose_reachable,
+            "Food Reachable": food_pose_reachable,
+            "Efficiency": efficiency,
+            "Comfort": comfort,
+            "Utensil": utensil,
+            "Env": env_setting,
+            "Food x": food_pose.position[0],
+            "Food y": food_pose.position[1],
+            "Food z": food_pose.position[2],
+            "Food qx": food_pose.orientation[0],
+            "Food qy": food_pose.orientation[1],
+            "Food qz": food_pose.orientation[2],
+            "Food qw": food_pose.orientation[3],
+            "Head x": target_pose.position[0],
+            "Head y": target_pose.position[1],
+            "Head z": target_pose.position[2],
+            "Head qx": target_pose.orientation[0],
+            "Head qy": target_pose.orientation[1],
+            "Head qz": target_pose.orientation[2],
+            "Head qw": target_pose.orientation[3],
+        }
+        df = pd.concat([df, pd.DataFrame([datum])], ignore_index=True)
+
+    df.to_csv(outfile, index=False)
+    print(f"Wrote out to {outfile}.")
 
 
 if __name__ == "__main__":
