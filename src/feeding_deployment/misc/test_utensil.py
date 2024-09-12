@@ -56,7 +56,7 @@ def _measure_efficiency(plan: list[JointPositions], sim: FeedingDeploymentPyBull
     return 0.0
 
 
-def _measure_comfort(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator, setting: str) -> float:
+def _measure_comfort(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
     # TODO
     return 0.0
 
@@ -65,8 +65,6 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
           seed: int = 0, num_samples: int = 100,
 ) -> None:
     """Testing components of the system."""
-
-    env_settings = ["Social", "TV", "Radio"]
 
     utensil = "flair" if use_flair_utensil else "new"
     rng = np.random.default_rng(seed)
@@ -153,10 +151,6 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
         idx = rng.integers(0, len(tool_tip_target_transforms))
         target_pose = Pose.from_matrix(tool_tip_target_transforms[idx])
 
-        # Sample environment setting.
-        idx = rng.integers(0, len(env_settings))
-        env_setting = env_settings[idx]
-
         # Check reachability of target pose.
         target_pose_reachable = True  # TODO!
 
@@ -165,7 +159,7 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
             plan = _get_acquisition_to_transfer_plan(food_pose, target_pose, sim, rng)
             # Measure efficiency and comfort of plan.
             efficiency = _measure_efficiency(plan, sim)
-            comfort = _measure_comfort(plan, sim, env_setting)
+            comfort = _measure_comfort(plan, sim)
         else:
             efficiency = np.nan
             comfort = np.nan
@@ -177,7 +171,6 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
             "Efficiency": efficiency,
             "Comfort": comfort,
             "Utensil": utensil,
-            "Env": env_setting,
             "Food x": food_pose.position[0],
             "Food y": food_pose.position[1],
             "Food z": food_pose.position[2],

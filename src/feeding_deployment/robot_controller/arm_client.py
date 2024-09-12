@@ -8,10 +8,13 @@ import threading
 import time
 import numpy as np
 
-import rospy
-from sensor_msgs.msg import JointState
-from std_msgs.msg import Bool
-from geometry_msgs.msg import Pose
+try:
+    import rospy
+    from sensor_msgs.msg import JointState
+    from std_msgs.msg import Bool
+    from geometry_msgs.msg import Pose
+except ModuleNotFoundError:
+    pass
 # from netft_rdt_driver.srv import String_cmd
 
 from feeding_deployment.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
