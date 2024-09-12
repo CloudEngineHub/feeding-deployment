@@ -8,9 +8,9 @@ import numpy as np
 import pandas as pd
 
 from pybullet_helpers.geometry import Pose, multiply_poses
-from pybullet_helpers.link import get_link_pose, get_relative_link_pose
+from pybullet_helpers.link import get_link_pose, get_relative_link_pose, get_link_state
 from pybullet_helpers.inverse_kinematics import inverse_kinematics, InverseKinematicsError, set_robot_joints_with_held_object
-from pybullet_helpers.joint import JointPositions
+from pybullet_helpers.joint import JointPositions, get_joint_infos, get_joints
 from pybullet_helpers.gui import visualize_pose
 
 from feeding_deployment.simulation.scene_description import (
@@ -61,7 +61,7 @@ def _check_pose_reachability(pose: Pose, utensil_from_end_effector: Pose,
     except InverseKinematicsError:
         reachable = False
     
-    # Show target end effector pose.
+    # Show pose.
     visualize_pose(pose, sim.physics_client_id)
     while True:
         p.stepSimulation()
@@ -112,22 +112,55 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     scene_description = SceneDescription(**kwargs)
     sim = FeedingDeploymentPyBulletSimulator(scene_description, use_gui=True)
 
+    # Set to acquisition pose, first without grasping.
+    if use_flair_utensil:
+        acquisition_robot_joint_state = JointPositions([0.005280353523030187, 6.157869196821472, 3.1416656242036614, 4.861354493854926, 1.7963305196145385e-05, 4.4379560890064225, 1.576155405856463]) \
+            + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
+    else:
+        acquisition_robot_joint_state = scene_description.above_plate_pos + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
+
+    acquisition_state = FeedingDeploymentSimulatorState(
+        robot_joints=acquisition_robot_joint_state,
+        utensil_joints=sim.utensil.get_joint_positions(),
+        drink_pose=scene_description.drink_pose,
+        wipe_pose=scene_description.wipe_pose,
+        utensil_pose=scene_description.utensil_pose,
+    )
+    sim.sync(acquisition_state)
+    
+    # Recover the utensil-end-effector transform.
     if use_flair_utensil:
         sim.robot.set_finger_state(0.69)
-        # utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
-        utensil_from_end_effector = Pose.from_rpy(translation=(0.0, -0.02, -0.18), rpy=(0.0, -1.570796, -1.570796))
+        utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
     else:
         sim.robot.set_finger_state(sim.scene_description.tool_grasp_fingers_value)
-        utensil_from_end_effector = Pose.from_rpy(translation=(0.0, -0.035, -0.22), rpy=(0, -1.570796, 1.570796))
+        finger_frame_id = sim.robot.link_from_name("finger_tip")
+        end_effector_link_id = sim.robot.link_from_name(sim.robot.tool_link_name)
+        utensil_from_end_effector = get_relative_link_pose(
+            sim.robot.robot_id, finger_frame_id, end_effector_link_id, sim.physics_client_id
+        )
 
-    # Start by picking up the utensil.
+    # Simulate grasping.
+    acquisition_state = FeedingDeploymentSimulatorState(
+        robot_joints=acquisition_robot_joint_state,
+        utensil_joints=sim.utensil.get_joint_positions(),
+        drink_pose=scene_description.drink_pose,
+        wipe_pose=scene_description.wipe_pose,
+        held_object="utensil",
+        held_object_tf=utensil_from_end_effector,
+    )
+    sim.sync(acquisition_state)
+
+    # Get the transform from utensil base to utensil tip.
+    joint_ids = get_joints(sim.utensil_id, sim.physics_client_id)
+    joint_infos = get_joint_infos(sim.utensil_id, joint_ids, sim.physics_client_id)
+    fork_tip_idx = [i for i, info in enumerate(joint_infos) if info.linkName == "fork_tip"][0]
+    utensil_to_fork_tip = get_relative_link_pose(sim.utensil_id, -1, fork_tip_idx, sim.physics_client_id)
     utensil_pose = get_link_pose(sim.utensil_id, -1, sim.physics_client_id)
-    end_effector_pose = multiply_poses(utensil_pose, utensil_from_end_effector)
-
-    visualize_pose(end_effector_pose, sim.physics_client_id)
+    tip_pose = multiply_poses(utensil_pose, utensil_to_fork_tip.invert())
+    visualize_pose(tip_pose, sim.physics_client_id)
     while True:
         p.stepSimulation()
-
 
     end_effector_pose = multiply_poses(utensil_pose, utensil_from_end_effector)
     joints = inverse_kinematics(sim.robot, end_effector_pose)
@@ -140,27 +173,8 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     while True:
         p.stepSimulation()
 
-    # # set to acquisition pose
-    # if use_flair_utensil:
-    #     acquisition_robot_joint_state = JointPositions([0.005280353523030187, 6.157869196821472, 3.1416656242036614, 4.861354493854926, 1.7963305196145385e-05, 4.4379560890064225, 1.576155405856463]) \
-    #         + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
-    #     transfer_robot_joint_state = JointPositions([0.3333664491938215, 1.4858324332736625, 3.1415, 1.5856359930210362, 0.8180422599332581, 1.5794872866962613, 4.604932028296647]) \
-    #         + sim.robot.get_joint_positions()[len(scene_description.before_transfer_pos):]
-    # else:
-    #     acquisition_robot_joint_state = scene_description.above_plate_pos + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
-    #     transfer_robot_joint_state = scene_description.before_transfer_pos + sim.robot.get_joint_positions()[len(scene_description.before_transfer_pos):]
-
-    # acquisition_state = FeedingDeploymentSimulatorState(
-    #     robot_joints=acquisition_robot_joint_state,
-    #     utensil_joints=sim.utensil.get_joint_positions(),
-    #     drink_pose=scene_description.drink_pose,
-    #     wipe_pose=scene_description.wipe_pose,
-    #     utensil_pose=scene_description.utensil_pose,
-    #     held_object="utensil",
-    #     held_object_tf=utensil_from_end_effector,
-    # )
-    # sim.sync(acquisition_state)
-
+    # while True:
+    #     p.stepSimulation()
 
     # transfer_state = FeedingDeploymentSimulatorState(
     #     robot_joints=transfer_robot_joint_state,
