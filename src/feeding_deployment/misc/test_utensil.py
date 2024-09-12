@@ -7,6 +7,7 @@ import time
 import numpy as np
 import pandas as pd
 from functools import partial
+import tqdm
 
 from pybullet_helpers.geometry import Pose, multiply_poses
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose, get_link_state
@@ -224,7 +225,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     # read npy file
     tool_tip_target_transforms = np.load("benjamin_target_transforms.npy")
 
-    for i in range(num_samples):
+    for _ in tqdm.tqdm(range(num_samples)):
         # Sample food pose.
         food_pose = _sample_food_pose(sim, rng)
 
@@ -276,7 +277,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
         df = pd.concat([df, pd.DataFrame([datum])], ignore_index=True)
 
         df.to_csv(outfile, index=False)
-        print(f"Wrote out to {outfile}.")
+        # print(f"Wrote out to {outfile}.")
 
 
 if __name__ == "__main__":
