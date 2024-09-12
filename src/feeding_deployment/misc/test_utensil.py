@@ -14,6 +14,7 @@ from pybullet_helpers.link import get_link_pose, get_relative_link_pose, get_lin
 from pybullet_helpers.inverse_kinematics import inverse_kinematics, InverseKinematicsError, set_robot_joints_with_held_object, sample_collision_free_inverse_kinematics
 from pybullet_helpers.joint import JointPositions, get_joint_infos, get_joints
 from pybullet_helpers.gui import visualize_pose
+from pybullet_helpers.utils import create_pybullet_cylinder
 from pybullet_helpers.motion_planning import (
     get_joint_positions_distance,
     run_smooth_motion_planning_to_pose,
@@ -27,6 +28,7 @@ from feeding_deployment.simulation.simulator import (
     FeedingDeploymentPyBulletSimulator,
     FeedingDeploymentSimulatorState,
 )
+from feeding_deployment.simulation.planning import _plan_to_sim_state_trajectory, remap_trajectory_to_constant_distance
 
 
 def _sample_food_pose(sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Generator) -> Pose:
@@ -135,9 +137,104 @@ def _measure_plan_length(plan: list[JointPositions], sim: FeedingDeploymentPyBul
     return _score_motion_plan(plan)
 
 
-def _measure_comfort(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
-    # TODO
-    return 0.0
+def _measure_plan_comfort(plan: list[JointPositions], head_pose: Pose, sim: FeedingDeploymentPyBulletSimulator) -> float:
+    comfort_score = 0.0
+
+    for state in plan:
+        set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
+                                          sim.held_object_id,
+                                          sim.held_object_tf,
+                                          state)
+        comfort_score += _measure_state_comfort(head_pose, sim)
+
+    return comfort_score
+
+
+def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimulator) -> float:
+    # Rotate feed pose to get mouth pose.
+    mouth_pose = multiply_poses(feed_pose, Pose.from_rpy((0.0, 0.0, 0.0), rpy=(np.pi, 0.0, 0.0)))
+
+    # Snap food to fork. Super duper hacky.
+    fork_pose = get_link_pose(sim.utensil_id, _get_fork_tip_link_id(sim), sim.physics_client_id)
+    if not hasattr(sim, "_food_id"):
+        sim._food_id = create_pybullet_cylinder((0.25, 0.1, 0.25, 1.0), radius=0.025,
+                                                length=0.025, physics_client_id=sim.physics_client_id)
+    p.resetBasePositionAndOrientation(
+        sim._food_id,
+        fork_pose.position,
+        fork_pose.orientation,
+        physicsClientId=sim.physics_client_id,
+    )
+
+    # The rays start in an array relative to the head position and point in
+    # straight lines for a maximum distance.
+    num_rows, num_cols = 9, 9
+    max_ray_length = 1.0
+    row_delta, col_delta = 0.01, 0.01
+    assert (num_rows % 2 == 1) and (num_cols % 2 == 1)  # odd numbers
+
+    ray_from_positions = []
+    ray_to_positions = []
+
+    visualize_pose(mouth_pose, sim.physics_client_id)
+
+    for r in range(num_rows):
+        row_val = (r - num_rows // 2) * row_delta
+        for c in range(num_cols):
+            col_val = (c - num_cols // 2) * col_delta
+            # Transform to world pose frame.
+            ray_from = Pose((row_val, col_val, 0.0))
+            ray_to = Pose((row_val, col_val, max_ray_length))
+            mouth_ray_from = multiply_poses(mouth_pose, ray_from)
+            mouth_ray_to = multiply_poses(mouth_pose, ray_to)
+            ray_from_positions.append(mouth_ray_from.position)
+            ray_to_positions.append(mouth_ray_to.position)
+
+    ray_outputs = p.rayTestBatch(
+        rayFromPositions=ray_from_positions,
+        rayToPositions=ray_to_positions,
+        physicsClientId=sim.physics_client_id,
+    )
+
+    # See equation 11 in paper.
+    alpha = 10.0
+    sigma = np.eye(2)
+    score = 0.0
+    for i, output in enumerate(ray_outputs):
+        if output[0] != -1:
+            ray_from = ray_from_positions[i]
+            world_hit_pose = Pose(output[3])
+            # Transform the hit position back into the mouth frame.
+            hit_pose = multiply_poses(mouth_pose.invert(), world_hit_pose)
+            # assert multiply_poses(mouth_pose, hit_pose).allclose(world_hit_pose)
+            # See equation 11 in paper.
+            vec = np.array(hit_pose.position[:2])
+            point_score = 1 - np.exp(-alpha * np.transpose(vec) @ sigma @ vec / (hit_pose.position[2] ** 2))
+            score += point_score
+
+            # p.addUserDebugLine(ray_from, world_hit_pose.position, (point_score, point_score, 0.0),
+            #                    physicsClientId=sim.physics_client_id)
+
+    score /= len(ray_outputs)
+
+    # time.sleep(0.1)
+    # p.removeAllUserDebugItems(physicsClientId=sim.physics_client_id)
+        
+    # Put food out of view.
+    p.resetBasePositionAndOrientation(
+        sim._food_id,
+        (-100, -100, -100),
+        fork_pose.orientation,
+        physicsClientId=sim.physics_client_id,
+    )
+
+    return score
+
+
+def _get_fork_tip_link_id(sim: FeedingDeploymentPyBulletSimulator) -> int:
+    joint_ids = get_joints(sim.utensil_id, sim.physics_client_id)
+    joint_infos = get_joint_infos(sim.utensil_id, joint_ids, sim.physics_client_id)
+    return [i for i, info in enumerate(joint_infos) if info.linkName == "fork_tip"][0]
 
 
 def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
@@ -159,6 +256,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     kwargs: dict[str, Any] = {
         "drink_pose": Pose((-100, -100, -100)),  # remove from scene
         "wipe_pose": Pose((-100, -100, -100)),  # remove from scene
+        "conservative_bb_pose": Pose((-100, -100, -100)),  # remove from scene
     }
     
     if use_flair_utensil:
@@ -208,9 +306,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     sim.sync(acquisition_state)
 
     # Get the transform from utensil base to utensil tip.
-    joint_ids = get_joints(sim.utensil_id, sim.physics_client_id)
-    joint_infos = get_joint_infos(sim.utensil_id, joint_ids, sim.physics_client_id)
-    fork_tip_idx = [i for i, info in enumerate(joint_infos) if info.linkName == "fork_tip"][0]
+    fork_tip_idx = _get_fork_tip_link_id(sim)
     fork_tip_from_utensil = get_relative_link_pose(sim.utensil_id, fork_tip_idx, -1, sim.physics_client_id)
     fork_tip_from_end_effector = multiply_poses(utensil_from_end_effector, fork_tip_from_utensil)
 
@@ -245,9 +341,12 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
         if food_pose_reachable and target_pose_reachable:
             plan = _get_acquisition_to_transfer_plan(acquisition_joints, target_pose, fork_tip_from_end_effector, sim,
                                                      max_motion_planning_time=max_motion_planning_time)
+            sim_states = _plan_to_sim_state_trajectory(plan, sim)
+            sim_states = remap_trajectory_to_constant_distance(sim_states, sim)
+            plan = [s.robot_joints for s in sim_states]
             # Measure efficiency and comfort of plan.
             plan_length = _measure_plan_length(plan, sim)
-            comfort = _measure_comfort(plan, sim)
+            comfort = _measure_plan_comfort(plan, target_pose, sim)
         else:
             plan_length = np.nan
             comfort = np.nan
