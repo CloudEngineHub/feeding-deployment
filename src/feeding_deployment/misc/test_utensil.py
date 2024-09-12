@@ -86,7 +86,8 @@ def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
 
 
 def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: Pose, utensil_tip_from_end_effector: Pose,
-                                      sim: FeedingDeploymentPyBulletSimulator) -> list[JointPositions]:
+                                      sim: FeedingDeploymentPyBulletSimulator,
+                                      max_motion_planning_time: float = 10) -> list[JointPositions]:
 
     set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
                                           sim.held_object_id,
@@ -98,7 +99,8 @@ def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: 
     end_effector_frame_to_plan_frame = utensil_tip_from_end_effector.invert()
     plan = run_smooth_motion_planning_to_pose(target_pose, sim.robot, collision_ids, end_effector_frame_to_plan_frame,
                                        seed, sim.held_object_id,
-                                       sim.held_object_tf)
+                                       sim.held_object_tf,
+                                       max_time=max_motion_planning_time)
     assert plan is not None
 
     # for state in plan:
@@ -224,7 +226,8 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Generate a plan for acquisition -> transfer.
         if food_pose_reachable and target_pose_reachable:
-            plan = _get_acquisition_to_transfer_plan(acquisition_joints, target_pose, fork_tip_from_end_effector, sim)
+            plan = _get_acquisition_to_transfer_plan(acquisition_joints, target_pose, fork_tip_from_end_effector, sim,
+                                                     max_motion_planning_time=max_motion_planning_time)
             # Measure efficiency and comfort of plan.
             efficiency = _measure_efficiency(plan, sim)
             comfort = _measure_comfort(plan, sim)
