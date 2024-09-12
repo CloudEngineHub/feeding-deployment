@@ -46,20 +46,30 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
 ) -> None:
     """Testing components of the system."""
 
+    print("use_flair_utensil:", use_flair_utensil)
+    kwargs: dict[str, Any] = {}
+    
+    if use_flair_utensil:
+        kwargs["utensil_urdf_path"] = Path(__file__).parent.parent / "assets" / "urdf" / "flair_feeding_utensil" / "feeding_utensil.urdf"
+        utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
+
     # Initialize the simulator
-    scene_description = SceneDescription()
+    scene_description = SceneDescription(**kwargs)
     sim = FeedingDeploymentPyBulletSimulator(scene_description, use_gui=True)
 
     # Create skills for high-level planning.
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
 
-    finger_frame_id = sim.robot.link_from_name("finger_tip")
-    end_effector_link_id = sim.robot.link_from_name(sim.robot.tool_link_name)
-    utensil_from_end_effector = get_relative_link_pose(
-        sim.robot.robot_id, finger_frame_id, end_effector_link_id, sim.physics_client_id
-    )
-
-    sim.robot.set_finger_state(sim.scene_description.tool_grasp_fingers_value)
+    if use_flair_utensil:
+        sim.robot.set_finger_state(0.69)
+        utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
+    else:
+        sim.robot.set_finger_state(sim.scene_description.tool_grasp_fingers_value)
+        finger_frame_id = sim.robot.link_from_name("finger_tip")
+        end_effector_link_id = sim.robot.link_from_name(sim.robot.tool_link_name)
+        utensil_from_end_effector = get_relative_link_pose(
+            sim.robot.robot_id, finger_frame_id, end_effector_link_id, sim.physics_client_id
+        )
     sim.utensil.set_joints(joint_positions=JointPositions([0.5, 0.5]))  
 
     init_state = FeedingDeploymentSimulatorState(
