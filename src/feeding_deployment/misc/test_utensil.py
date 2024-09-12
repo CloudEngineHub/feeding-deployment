@@ -51,7 +51,7 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
     kwargs: dict[str, Any] = {}
     
     if use_flair_utensil:
-        kwargs["utensil_urdf_path"] = Path(__file__).parent.parent / "assets" / "urdf" / "flair_feeding_utensil" / "feeding_utensil.urdf"
+        kwargs["utensil_urdf_path"] = Path(__file__).parent.parent / "assets" / "urdf" / "flair_feeding_tool" / "feeding_tool.urdf"
         utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
 
     # Initialize the simulator

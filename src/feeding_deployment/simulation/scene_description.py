@@ -148,8 +148,8 @@ class SceneDescription:
         Path(__file__).parent.parent
         / "assets"
         / "urdf"
-        / "feeding_utensil"
-        / "feeding_utensil.urdf"
+        / "feeding_tool"
+        / "feeding_tool.urdf"
     )
 
     # Constants for utensil pick and place
