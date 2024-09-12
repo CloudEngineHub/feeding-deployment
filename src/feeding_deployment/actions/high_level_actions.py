@@ -8,10 +8,13 @@ from typing import Any
 import cv2
 import numpy as np
 import json
-import rospy
-from std_msgs.msg import String, Bool
-from sensor_msgs.msg import JointState
-from visualization_msgs.msg import Marker, MarkerArray
+try:
+    import rospy
+    from std_msgs.msg import String, Bool
+    from sensor_msgs.msg import JointState
+    from visualization_msgs.msg import Marker, MarkerArray
+except ModuleNotFoundError:
+    pass
 import time
 
 
@@ -1230,7 +1233,8 @@ class AcquireBiteHLA(HighLevelAction):
                 time.sleep(2.0)  # simulate delay, also needed for web interface
 
             # Send message to web interface indicating that robot is done with acquisition.
-            self._web_interface.send_web_interface_message({"state": "bite_pickup", "status": "completed"})
+            if self._web_interface:
+                self._web_interface.send_web_interface_message({"state": "bite_pickup", "status": "completed"})
 
             return []
 
