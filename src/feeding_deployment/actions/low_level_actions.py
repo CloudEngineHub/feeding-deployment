@@ -130,6 +130,7 @@ def teleport_to_ee_pose(
     )
     sim_state = FeedingDeploymentSimulatorState(
         robot_joints=target_joint_positions,
+        utensil_joints=sim.utensil.get_joint_positions(),
         drink_pose=drink_pose,
         wipe_pose=wipe_pose,
         utensil_pose=utensil_pose,

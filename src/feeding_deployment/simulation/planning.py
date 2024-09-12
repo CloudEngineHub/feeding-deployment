@@ -145,6 +145,7 @@ def _plan_to_sim_state_trajectory(
     for joints in plan:
         sim_state = FeedingDeploymentSimulatorState(
             joints,
+            sim.utensil.get_joint_positions(),
             drink_pose=drink_pose,
             wipe_pose=wipe_pose,
             utensil_pose=utensil_pose,
@@ -245,6 +246,7 @@ def remap_trajectory_to_constant_distance(
         # TODO need to refactor interpolate_poses.
         return FeedingDeploymentSimulatorState(
             robot_joints,
+            sim.utensil.get_joint_positions(),
             drink_pose=s0.drink_pose,
             wipe_pose=s0.wipe_pose,
             utensil_pose=s0.utensil_pose,

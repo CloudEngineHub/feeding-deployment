@@ -256,7 +256,8 @@ class PickToolHLA(HighLevelAction):
             # only for sim: set held object
             sim_states.extend(_get_plan_to_execute_grasp(self._sim, "utensil"))
             # input("Press Enter to continue...")
-            self._rviz_interface.tool_update(True, "utensil", Pose((0, 0, 0), (0, 0, 0, 1))) # pickup the utensil
+            if self._rviz_interface is not None:
+                self._rviz_interface.tool_update(True, "utensil", Pose((0, 0, 0), (0, 0, 0, 1))) # pickup the utensil
 
             if self._run_on_robot:
                 self.execute_robot_commands(robot_commands)
