@@ -9,7 +9,7 @@ import pandas as pd
 
 from pybullet_helpers.geometry import Pose, multiply_poses
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose, get_link_state
-from pybullet_helpers.inverse_kinematics import inverse_kinematics, InverseKinematicsError, set_robot_joints_with_held_object
+from pybullet_helpers.inverse_kinematics import inverse_kinematics, InverseKinematicsError, set_robot_joints_with_held_object, sample_collision_free_inverse_kinematics
 from pybullet_helpers.joint import JointPositions, get_joint_infos, get_joints
 from pybullet_helpers.gui import visualize_pose
 
@@ -25,7 +25,7 @@ from feeding_deployment.simulation.simulator import (
 def _sample_food_pose(sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Generator) -> Pose:
     # Define workspace bounds.
     min_x, max_x = 0.35, 0.65
-    min_y, max_y = 0.4, 0.75
+    min_y, max_y = 0.4, 0.6
     min_z, max_z = 0.2, 0.25
     
     # Show corners.
@@ -43,33 +43,45 @@ def _sample_food_pose(sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Ge
     y = rng.uniform(min_y, max_y)
     z = rng.uniform(min_z, max_z)
 
-    return Pose((x, y, z), p.getQuaternionFromEuler((np.pi, 0, 0)))
+    return Pose((x, y, z), p.getQuaternionFromEuler((0, np.pi, 0)))
 
 
-def _check_pose_reachability(pose: Pose, utensil_from_end_effector: Pose,
+def _check_pose_reachability(pose: Pose, utensil_tip_from_end_effector: Pose,
                              sim: FeedingDeploymentPyBulletSimulator) -> bool:
-    target_end_effector_pose = multiply_poses(pose, utensil_from_end_effector)
+    target_end_effector_pose = multiply_poses(pose, utensil_tip_from_end_effector.invert())
 
     try:
-        joints = inverse_kinematics(sim.robot, target_end_effector_pose)
+        gen = sample_collision_free_inverse_kinematics(sim.robot, target_end_effector_pose,
+                                                 sim.get_collision_ids(),
+                                                 held_object=sim.held_object_id,
+                                                 base_link_to_held_obj=sim.held_object_tf)
+        joints = next(gen)
+        # joints = inverse_kinematics(sim.robot, target_end_effector_pose)
         set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
                                           sim.held_object_id,
                                           sim.held_object_tf,
                                           joints)
 
         reachable = True
-    except InverseKinematicsError:
+    except (InverseKinematicsError, StopIteration):
         reachable = False
     
     # Show pose.
-    visualize_pose(pose, sim.physics_client_id)
-    while True:
-        p.stepSimulation()
+    ids = visualize_pose(target_end_effector_pose, sim.physics_client_id)
+    time.sleep(0.1)
+    print("Reachable?", reachable)
+    # if not reachable:
+    #     import ipdb; ipdb.set_trace()
+    for i in ids:
+        p.removeUserDebugItem(i, sim.physics_client_id)
+    # while True:
+    #     p.stepSimulation()
+
 
     return reachable
 
 
-def _get_acquisition_to_transfer_plan(food_pose: Pose, target_pose: Pose, utensil_from_end_effector: Pose, sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Generator) -> list[JointPositions]:
+def _get_acquisition_to_transfer_plan(food_pose: Pose, target_pose: Pose, utensil_tip_from_end_effector: Pose, sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Generator) -> list[JointPositions]:
     # TODO
     return []
 
@@ -155,37 +167,16 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     joint_ids = get_joints(sim.utensil_id, sim.physics_client_id)
     joint_infos = get_joint_infos(sim.utensil_id, joint_ids, sim.physics_client_id)
     fork_tip_idx = [i for i, info in enumerate(joint_infos) if info.linkName == "fork_tip"][0]
-    utensil_to_fork_tip = get_relative_link_pose(sim.utensil_id, -1, fork_tip_idx, sim.physics_client_id)
-    utensil_pose = get_link_pose(sim.utensil_id, -1, sim.physics_client_id)
-    tip_pose = multiply_poses(utensil_pose, utensil_to_fork_tip.invert())
-    visualize_pose(tip_pose, sim.physics_client_id)
-    while True:
-        p.stepSimulation()
+    fork_tip_from_utensil = get_relative_link_pose(sim.utensil_id, fork_tip_idx, -1, sim.physics_client_id)
+    fork_tip_from_end_effector = multiply_poses(utensil_from_end_effector, fork_tip_from_utensil)
 
-    end_effector_pose = multiply_poses(utensil_pose, utensil_from_end_effector)
-    joints = inverse_kinematics(sim.robot, end_effector_pose)
-    set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
-                                        sim.held_object_id,
-                                        sim.held_object_tf,
-                                        joints)
+    # utensil_pose = get_link_pose(sim.utensil_id, -1, sim.physics_client_id)
+    # tip_pose = multiply_poses(utensil_pose, fork_tip_from_utensil)
 
-    visualize_pose(multiply_poses(sim.robot.get_end_effector_pose(), utensil_from_end_effector.invert()), sim.physics_client_id)
-    while True:
-        p.stepSimulation()
-
+    # tip_pose = multiply_poses(sim.robot.get_end_effector_pose(), fork_tip_from_end_effector)
+    # visualize_pose(tip_pose, sim.physics_client_id)
     # while True:
     #     p.stepSimulation()
-
-    # transfer_state = FeedingDeploymentSimulatorState(
-    #     robot_joints=transfer_robot_joint_state,
-    #     utensil_joints=sim.utensil.get_joint_positions(),
-    #     drink_pose=scene_description.drink_pose,
-    #     wipe_pose=scene_description.wipe_pose,
-    #     utensil_pose=scene_description.utensil_pose,
-    #     held_object="utensil",
-    #     held_object_tf=utensil_from_end_effector,
-    # )
-    # sim.sync(transfer_state)
 
     # read npy file
     tool_tip_target_transforms = np.load("benjamin_target_transforms.npy")
@@ -195,7 +186,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
         food_pose = _sample_food_pose(sim, rng)
 
         # Check reachability of food pose.
-        food_pose_reachable = _check_pose_reachability(food_pose, utensil_from_end_effector, sim)
+        food_pose_reachable = _check_pose_reachability(food_pose, fork_tip_from_end_effector, sim)
 
         # Sample head pose.
         idx = rng.integers(0, len(tool_tip_target_transforms))
@@ -206,7 +197,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Generate a plan for acquisition -> transfer.
         if food_pose_reachable and target_pose_reachable:
-            plan = _get_acquisition_to_transfer_plan(food_pose, target_pose, utensil_from_end_effector, sim, rng)
+            plan = _get_acquisition_to_transfer_plan(food_pose, target_pose, fork_tip_from_end_effector, sim, rng)
             # Measure efficiency and comfort of plan.
             efficiency = _measure_efficiency(plan, sim)
             comfort = _measure_comfort(plan, sim)
