@@ -2,8 +2,11 @@
 
 from pathlib import Path
 from typing import Any
-
 import json
+import pybullet as p
+import time
+import numpy as np
+from scipy.spatial.transform import Rotation
 
 from relational_structs import (
     GroundAtom,
@@ -18,6 +21,7 @@ from tomsutils.pddl_planning import run_pyperplan_planning
 from pybullet_helpers.geometry import Pose
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose
 from pybullet_helpers.joint import JointPositions
+from pybullet_helpers.gui import visualize_pose
 
 from feeding_deployment.actions.high_level_actions import (
     TransferToolHLA,
@@ -38,9 +42,6 @@ from feeding_deployment.simulation.simulator import (
     FeedingDeploymentSimulatorState,
 )
 from feeding_deployment.simulation.video import make_simulation_video
-
-import pybullet as p
-import time
 
 def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: float = 10
 ) -> None:
@@ -106,9 +107,27 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
     )
     sim.sync(transfer_state)
 
-    input("Press enter to sample goal fork pose for transfer (within Benjamin's ROM)")
-    # sample goal fork trajectories for transfer
-    raise NotImplementedError
+    input("Press enter to visualize 10 sampled target tool tip poses for transfer (within Benjamin's ROM)")
+
+    # read npy file
+    tool_tip_target_transforms = np.load("benjamin_target_transforms.npy")
+
+    for i in range(10):
+        id = np.random.randint(0, len(tool_tip_target_transforms))
+        target_tool_tip_transform = tool_tip_target_transforms[id]
+        
+        # ToDo: add to pybullet helpers
+        # target_pose = Pose.from_matrix(target_tool_tip_transform)
+
+        target_pose = Pose(
+            position=tuple(target_tool_tip_transform[:3, 3]),
+            orientation=tuple(Rotation.from_matrix(target_tool_tip_transform[:3, :3]).as_quat())
+        )
+        visualize_pose(target_pose, sim.physics_client_id)
+        print(f"Visualizing target tool tip pose ({i+1}/10).")
+        if i < 9:
+            input(f"Press enter to visualize next target tool tip pose...")
+        
 
 
 if __name__ == "__main__":
