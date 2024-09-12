@@ -7,7 +7,6 @@ import time
 import numpy as np
 import pandas as pd
 
-from relational_structs import Object
 from pybullet_helpers.geometry import Pose, multiply_poses
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose
 from pybullet_helpers.inverse_kinematics import inverse_kinematics, InverseKinematicsError, set_robot_joints_with_held_object
@@ -17,7 +16,6 @@ from pybullet_helpers.gui import visualize_pose
 from feeding_deployment.simulation.scene_description import (
     SceneDescription,
 )
-from feeding_deployment.actions.high_level_actions import PickToolHLA, tool_type, GroundHighLevelAction
 from feeding_deployment.simulation.simulator import (
     FeedingDeploymentPyBulletSimulator,
     FeedingDeploymentSimulatorState,
@@ -49,8 +47,8 @@ def _sample_food_pose(sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Ge
 
 
 def _check_pose_reachability(pose: Pose, utensil_from_end_effector: Pose,
-                             acquisition_tf: Pose, sim: FeedingDeploymentPyBulletSimulator) -> bool:
-    target_end_effector_pose = multiply_poses(pose, acquisition_tf, utensil_from_end_effector)
+                             sim: FeedingDeploymentPyBulletSimulator) -> bool:
+    target_end_effector_pose = multiply_poses(pose, utensil_from_end_effector)
 
     try:
         joints = inverse_kinematics(sim.robot, target_end_effector_pose)
@@ -64,7 +62,7 @@ def _check_pose_reachability(pose: Pose, utensil_from_end_effector: Pose,
         reachable = False
     
     # Show target end effector pose.
-    visualize_pose(multiply_poses(pose, acquisition_tf), sim.physics_client_id)
+    visualize_pose(pose, sim.physics_client_id)
     while True:
         p.stepSimulation()
 
@@ -114,27 +112,33 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     scene_description = SceneDescription(**kwargs)
     sim = FeedingDeploymentPyBulletSimulator(scene_description, use_gui=True)
 
-    # Start by picking up the utensil.
-    pick_tool_hla = PickToolHLA(sim, robot_interface=None, perception_interface=None,
-                                rviz_interface=None, web_interface=None,
-                                hla_hyperparams={"max_motion_planning_time": max_motion_planning_time},
-                                run_on_robot=False, wrist_controller=None, flair=None)
-    pick_utensil = GroundHighLevelAction(pick_tool_hla, (Object("utensil", tool_type),))
-    pick_utensil.execute_action()
-
     if use_flair_utensil:
         sim.robot.set_finger_state(0.69)
         # utensil_from_end_effector = Pose.from_rpy(translation=(0.0, 0.02, 0.04), rpy=(0.0, -1.570796, -1.570796))
         utensil_from_end_effector = Pose.from_rpy(translation=(0.0, -0.02, -0.18), rpy=(0.0, -1.570796, -1.570796))
-        acquisition_tf = Pose.from_rpy(translation=(0.0, 0.0, 0.0), rpy=(0.0, 0.0, np.pi))
     else:
         sim.robot.set_finger_state(sim.scene_description.tool_grasp_fingers_value)
         utensil_from_end_effector = Pose.from_rpy(translation=(0.0, -0.035, -0.22), rpy=(0, -1.570796, 1.570796))
-        acquisition_tf = Pose.identity()
 
-    # visualize_pose(multiply_poses(sim.robot.get_end_effector_pose(), utensil_from_end_effector.invert()), sim.physics_client_id)
-    # while True:
-    #     p.stepSimulation()
+    # Start by picking up the utensil.
+    utensil_pose = get_link_pose(sim.utensil_id, -1, sim.physics_client_id)
+    end_effector_pose = multiply_poses(utensil_pose, utensil_from_end_effector)
+
+    visualize_pose(end_effector_pose, sim.physics_client_id)
+    while True:
+        p.stepSimulation()
+
+
+    end_effector_pose = multiply_poses(utensil_pose, utensil_from_end_effector)
+    joints = inverse_kinematics(sim.robot, end_effector_pose)
+    set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
+                                        sim.held_object_id,
+                                        sim.held_object_tf,
+                                        joints)
+
+    visualize_pose(multiply_poses(sim.robot.get_end_effector_pose(), utensil_from_end_effector.invert()), sim.physics_client_id)
+    while True:
+        p.stepSimulation()
 
     # # set to acquisition pose
     # if use_flair_utensil:
@@ -177,7 +181,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
         food_pose = _sample_food_pose(sim, rng)
 
         # Check reachability of food pose.
-        food_pose_reachable = _check_pose_reachability(food_pose, utensil_from_end_effector, acquisition_tf, sim)
+        food_pose_reachable = _check_pose_reachability(food_pose, utensil_from_end_effector, sim)
 
         # Sample head pose.
         idx = rng.integers(0, len(tool_tip_target_transforms))
