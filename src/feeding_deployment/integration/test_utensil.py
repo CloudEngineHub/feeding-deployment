@@ -70,10 +70,20 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
         utensil_from_end_effector = get_relative_link_pose(
             sim.robot.robot_id, finger_frame_id, end_effector_link_id, sim.physics_client_id
         )
-    sim.utensil.set_joints(joint_positions=JointPositions([0.5, 0.5]))  
+    
+    # set to acquisition pose
+    if use_flair_utensil:
+        acquisition_robot_joint_state = JointPositions([0.005280353523030187, 6.157869196821472, 3.1416656242036614, 4.861354493854926, 1.7963305196145385e-05, 4.4379560890064225, 1.576155405856463]) \
+            + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
+        transfer_robot_joint_state = JointPositions([0.3333664491938215, 1.4858324332736625, 3.1415, 1.5856359930210362, 0.8180422599332581, 1.5794872866962613, 4.604932028296647]) \
+            + sim.robot.get_joint_positions()[len(scene_description.before_transfer_pos):]
+    else:
+        acquisition_robot_joint_state = scene_description.above_plate_pos + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
+        transfer_robot_joint_state = scene_description.before_transfer_pos + sim.robot.get_joint_positions()[len(scene_description.before_transfer_pos):]
 
-    init_state = FeedingDeploymentSimulatorState(
-        robot_joints=sim.robot.get_joint_positions(),
+    input("Press enter to set to acquisition (above plate) state")
+    acquisition_state = FeedingDeploymentSimulatorState(
+        robot_joints=acquisition_robot_joint_state,
         utensil_joints=sim.utensil.get_joint_positions(),
         drink_pose=scene_description.drink_pose,
         wipe_pose=scene_description.wipe_pose,
@@ -81,16 +91,24 @@ def _main(use_flair_utensil: bool, make_videos: bool, max_motion_planning_time: 
         held_object="utensil",
         held_object_tf=utensil_from_end_effector,
     )
-    sim.sync(init_state)
+    sim.sync(acquisition_state)
 
-    # step simulation until ctrl+c
-    try:
-        while True:
-            # do nothing
-            time.sleep(0.1)
-            # p.stepSimulation(physicsClientId=sim.physics_client_id)
-    except KeyboardInterrupt:
-        pass
+
+    input("Press enter to set to transfer (staging) state")
+    transfer_state = FeedingDeploymentSimulatorState(
+        robot_joints=transfer_robot_joint_state,
+        utensil_joints=sim.utensil.get_joint_positions(),
+        drink_pose=scene_description.drink_pose,
+        wipe_pose=scene_description.wipe_pose,
+        utensil_pose=scene_description.utensil_pose,
+        held_object="utensil",
+        held_object_tf=utensil_from_end_effector,
+    )
+    sim.sync(transfer_state)
+
+    input("Press enter to sample goal fork pose for transfer (within Benjamin's ROM)")
+    # sample goal fork trajectories for transfer
+    raise NotImplementedError
 
 
 if __name__ == "__main__":
