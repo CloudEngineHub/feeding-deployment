@@ -6,6 +6,7 @@ import pybullet as p
 import time
 import numpy as np
 import pandas as pd
+from functools import partial
 
 from pybullet_helpers.geometry import Pose, multiply_poses
 from pybullet_helpers.link import get_link_pose, get_relative_link_pose, get_link_state
@@ -15,6 +16,7 @@ from pybullet_helpers.gui import visualize_pose
 from pybullet_helpers.motion_planning import (
     get_joint_positions_distance,
     run_smooth_motion_planning_to_pose,
+    get_motion_plan_distance,
 )
 
 from feeding_deployment.simulation.scene_description import (
@@ -113,9 +115,23 @@ def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: 
     return plan
 
 
-def _measure_efficiency(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
-    # TODO
-    return 0.0
+def _measure_plan_length(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
+
+    def _score_motion_plan(plan: list[JointPositions]) -> float:
+        weights = [1.0] * len(sim.robot.arm_joints)
+        joint_infos = get_joint_infos(
+            sim.robot.robot_id, sim.robot.arm_joints, sim.robot.physics_client_id
+        )
+        dist_fn = partial(
+            get_joint_positions_distance,
+            sim.robot,
+            joint_infos,
+            metric="weighted_joints",
+            weights=weights,
+        )
+        return get_motion_plan_distance(plan, dist_fn)
+
+    return _score_motion_plan(plan)
 
 
 def _measure_comfort(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
@@ -136,7 +152,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
     if outfile.exists():
         df = pd.read_csv(outfile, index_col=False)
     else:
-        headers = ["Head Reachable", "Food Reachable", "Efficiency", "Comfort", "Utensil", "Env", "Food x", "Food y", "Food z", "Food qx", "Food qy", "Food qz", "Food qw", "Head x", "Head y", "Head z", "Head qx", "Head qy", "Head qz", "Head qw"]
+        headers = ["Head Reachable", "Food Reachable", "Plan Length", "Comfort", "Utensil", "Food x", "Food y", "Food z", "Food qx", "Food qy", "Food qz", "Food qw", "Head x", "Head y", "Head z", "Head qx", "Head qy", "Head qz", "Head qw"]
         df = pd.DataFrame(columns=headers)
 
     kwargs: dict[str, Any] = {
@@ -229,17 +245,17 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
             plan = _get_acquisition_to_transfer_plan(acquisition_joints, target_pose, fork_tip_from_end_effector, sim,
                                                      max_motion_planning_time=max_motion_planning_time)
             # Measure efficiency and comfort of plan.
-            efficiency = _measure_efficiency(plan, sim)
+            plan_length = _measure_plan_length(plan, sim)
             comfort = _measure_comfort(plan, sim)
         else:
-            efficiency = np.nan
+            plan_length = np.nan
             comfort = np.nan
 
         # Save result.
         datum = {
             "Head Reachable": target_pose_reachable,
             "Food Reachable": food_pose_reachable,
-            "Efficiency": efficiency,
+            "Plan Length": plan_length,
             "Comfort": comfort,
             "Utensil": utensil,
             "Food x": food_pose.position[0],
@@ -259,8 +275,8 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
         }
         df = pd.concat([df, pd.DataFrame([datum])], ignore_index=True)
 
-    df.to_csv(outfile, index=False)
-    print(f"Wrote out to {outfile}.")
+        df.to_csv(outfile, index=False)
+        print(f"Wrote out to {outfile}.")
 
 
 if __name__ == "__main__":
