@@ -157,8 +157,8 @@ def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimula
     # Snap food to fork. Super duper hacky.
     fork_pose = get_link_pose(sim.utensil_id, _get_fork_tip_link_id(sim), sim.physics_client_id)
     if not hasattr(sim, "_food_id"):
-        sim._food_id = create_pybullet_cylinder((0.25, 0.1, 0.25, 1.0), radius=0.025,
-                                                length=0.025, physics_client_id=sim.physics_client_id)
+        sim._food_id = create_pybullet_cylinder((0.25, 0.1, 0.25, 1.0), radius=0.01,
+                                                length=0.01, physics_client_id=sim.physics_client_id)
     p.resetBasePositionAndOrientation(
         sim._food_id,
         fork_pose.position,
@@ -212,13 +212,14 @@ def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimula
             point_score = 1 - np.exp(-alpha * np.transpose(vec) @ sigma @ vec / (hit_pose.position[2] ** 2))
             score += point_score
 
-            # p.addUserDebugLine(ray_from, world_hit_pose.position, (point_score, point_score, 0.0),
-            #                    physicsClientId=sim.physics_client_id)
+            p.addUserDebugLine(ray_from, world_hit_pose.position, (point_score, point_score, 0.0),
+                               physicsClientId=sim.physics_client_id)
 
-    score /= len(ray_outputs)
+    if ray_outputs:
+        score /= len(ray_outputs)
 
-    # time.sleep(0.1)
-    # p.removeAllUserDebugItems(physicsClientId=sim.physics_client_id)
+    time.sleep(0.1)
+    p.removeAllUserDebugItems(physicsClientId=sim.physics_client_id)
         
     # Put food out of view.
     p.resetBasePositionAndOrientation(
