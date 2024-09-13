@@ -641,19 +641,22 @@ class TransferToolHLA(HighLevelAction):
                 self.wrist_controller.reset()
 
             # Send message to web interface indicating transfer is done.
-            self._web_interface.send_web_interface_message({"state": "bite_transfer", "status": "completed"})
-            return sim_states
+            if self._web_interface is not None:
+                self._web_interface.send_web_interface_message({"state": "bite_transfer", "status": "completed"})
+            # return sim_states
 
             sim_length = len(sim_states)
 
-            target_pose = self._perception_interface.get_head_perception_forque_target_pose(simulation=True)
-            k = input("Does pose look good? Press 'y/n' to continue")
-            while k != "y":
-                target_pose = self._perception_interface.get_head_perception_forque_target_pose()
-                k = input("Does pose look good? Press 'y/n' to continue")
+            # target_pose = self._perception_interface.get_head_perception_forque_target_pose(simulation=True)
+            # k = input("Does pose look good? Press 'y/n' to continue")
+            # while k != "y":
+            #     target_pose = self._perception_interface.get_head_perception_forque_target_pose()
+            #     k = input("Does pose look good? Press 'y/n' to continue")
 
             # target_pose = Pose(position=(-0.17272330207928777, 0.6273752674813526, 0.5572539925006535), 
-                # orientation=(-0.42030807,  0.56739361,  0.47188225, -0.52795148))
+            #     orientation=(-0.42030807,  0.56739361,  0.47188225, -0.52795148))
+            target_pose = params["target_pose"]
+            utensil_tip_from_end_effector = params["utensil_tip_from_end_effector"]
             intermediate_pose = multiply_poses(
                 target_pose, Pose(position=[0.0, 0.0, -0.1], orientation=[0.0, 0.0, 0.0, 1.0])
             ) # 10 cms away from the mouth
@@ -668,7 +671,7 @@ class TransferToolHLA(HighLevelAction):
             move_to_ee_pose(sim=self._sim,
                 target_pose=intermediate_pose,
                 exclude_collision_ids=None,
-                tip_from_end_effector=self._sim.scene_description.utensil_tip_from_end_effector,
+                tip_from_end_effector=utensil_tip_from_end_effector,
                 max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
                 sim_states=sim_states,
                 robot_commands=robot_commands,
@@ -686,7 +689,7 @@ class TransferToolHLA(HighLevelAction):
             move_to_ee_pose(sim=self._sim,
                 target_pose=target_pose,
                 exclude_collision_ids=None,
-                tip_from_end_effector=self._sim.scene_description.utensil_tip_from_end_effector,
+                tip_from_end_effector=utensil_tip_from_end_effector,
                 max_motion_plan_time=self._hla_hyperparams["max_motion_planning_time"],
                 sim_states=sim_states,
                 robot_commands=robot_commands,
@@ -716,7 +719,8 @@ class TransferToolHLA(HighLevelAction):
                     print("Trajectory not executed on robot")
             
             # Wait for button press to indicate that transfer is finished.
-            self._perception_interface.wait_for_user_continue_button()
+            if self._perception_interface is not None:
+                self._perception_interface.wait_for_user_continue_button()
             
             # Reverse the transfer plan.
             transfer_sim_states = sim_states[sim_length:]

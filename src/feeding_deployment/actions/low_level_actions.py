@@ -58,7 +58,7 @@ def move_to_joint_positions(
         robot=sim.robot,
         initial_positions=initial_joint_positions,
         target_positions=target_joint_positions,
-        collision_bodies=sim.get_collision_ids(),
+        collision_bodies=set(), #sim.get_collision_ids(),
         seed=0,  # not used
         physics_client_id=sim.physics_client_id,
         held_object=sim.held_object_id,
@@ -174,7 +174,7 @@ def move_to_ee_pose(
 
     assert plan is not None
 
-    plan = remap_trajectory_to_constant_distance(plan, sim, max_joint_space_distance=0.005)
+    plan = remap_trajectory_to_constant_distance(plan, sim)  #, max_joint_space_distance=0.005)
 
     sim_states.extend(plan)
     robot_commands.extend(simulated_trajectory_to_kinova_commands(plan))

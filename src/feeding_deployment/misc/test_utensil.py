@@ -24,6 +24,13 @@ from pybullet_helpers.motion_planning import (
 from feeding_deployment.simulation.scene_description import (
     SceneDescription,
 )
+from feeding_deployment.actions.high_level_actions import (
+    Object,
+    GroundHighLevelAction,
+    TransferToolHLA,
+    LookAtPlateHLA,
+    tool_type,
+)
 from feeding_deployment.simulation.simulator import (
     FeedingDeploymentPyBulletSimulator,
     FeedingDeploymentSimulatorState,
@@ -94,30 +101,49 @@ def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
 
 def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: Pose, utensil_tip_from_end_effector: Pose,
                                       sim: FeedingDeploymentPyBulletSimulator,
-                                      max_motion_planning_time: float = 10) -> list[JointPositions]:
+                                      max_motion_planning_time: float = 10) -> list[FeedingDeploymentSimulatorState]:
     
     set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
                                           sim.held_object_id,
                                           sim.held_object_tf,
                                           init_joints)
     
-    collision_ids = set()
-    seed = 0
-    end_effector_frame_to_plan_frame = utensil_tip_from_end_effector.invert()
-    plan = run_smooth_motion_planning_to_pose(target_pose, sim.robot, collision_ids, end_effector_frame_to_plan_frame,
-                                       seed, sim.held_object_id,
-                                       sim.held_object_tf,
-                                       max_time=max_motion_planning_time)
-    assert plan is not None
+    look_at_plate_hla = LookAtPlateHLA(sim, None, None, None, None, {"max_motion_planning_time": max_motion_planning_time}, False, None, None)
+    transfer_bite_hla = TransferToolHLA(sim, None, None, None, None, {"max_motion_planning_time": max_motion_planning_time}, False, None, None)
 
-    for state in plan:
-        set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
-                                          sim.held_object_id,
-                                          sim.held_object_tf,
-                                          state)
-        time.sleep(0.1)
+    utensil = Object("utensil", tool_type)
+    look_at_plate = GroundHighLevelAction(look_at_plate_hla, (utensil, ))
+    transfer_bite = GroundHighLevelAction(transfer_bite_hla, (utensil, ), params={"target_pose": target_pose,
+                                                                                  "utensil_tip_from_end_effector": utensil_tip_from_end_effector})
 
-    return plan
+    sim_states = []
+    sim_states.extend(look_at_plate.execute_action())
+    sim_states.extend(transfer_bite.execute_action())
+    
+
+
+    # set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
+    #                                       sim.held_object_id,
+    #                                       sim.held_object_tf,
+    #                                       init_joints)
+    
+    # collision_ids = set()
+    # seed = 0
+    # end_effector_frame_to_plan_frame = utensil_tip_from_end_effector.invert()
+    # plan = run_smooth_motion_planning_to_pose(target_pose, sim.robot, collision_ids, end_effector_frame_to_plan_frame,
+    #                                    seed, sim.held_object_id,
+    #                                    sim.held_object_tf,
+    #                                    max_time=max_motion_planning_time)
+    # assert plan is not None
+
+    # for state in plan:
+    #     set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
+    #                                       sim.held_object_id,
+    #                                       sim.held_object_tf,
+    #                                       state)
+    #     time.sleep(0.1)
+
+    return sim_states
 
 
 def _measure_plan_length(plan: list[JointPositions], sim: FeedingDeploymentPyBulletSimulator) -> float:
@@ -170,7 +196,7 @@ def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimula
 
     # The rays start in an array relative to the head position and point in
     # straight lines for a maximum distance.
-    num_rows, num_cols = 9, 9
+    num_rows, num_cols = 5, 5
     max_ray_length = 1.0
     row_delta, col_delta = 0.01, 0.01
     assert (num_rows % 2 == 1) and (num_cols % 2 == 1)  # odd numbers
@@ -340,10 +366,8 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Generate a plan for acquisition -> transfer.
         if food_pose_reachable and target_pose_reachable:
-            plan = _get_acquisition_to_transfer_plan(init_robot_joints, target_pose, fork_tip_from_end_effector, sim,
+            sim_states = _get_acquisition_to_transfer_plan(init_robot_joints, target_pose, fork_tip_from_end_effector, sim,
                                                      max_motion_planning_time=max_motion_planning_time)
-            sim_states = _plan_to_sim_state_trajectory(plan, sim)
-            sim_states = remap_trajectory_to_constant_distance(sim_states, sim)
             plan = [s.robot_joints for s in sim_states]
             # Measure efficiency and comfort of plan.
             plan_length = _measure_plan_length(plan, sim)
