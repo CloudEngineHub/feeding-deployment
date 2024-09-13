@@ -68,7 +68,22 @@ def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
                              sim: FeedingDeploymentPyBulletSimulator,
                              debug: bool = False,
                              check_collisions: bool = True) -> JointPositions | None:
+    init_joints = sim.robot.get_joint_positions()
     target_end_effector_pose = multiply_poses(pose, utensil_tip_from_end_effector.invert())
+
+    def _score_candidate(candidate: JointPositions) -> float:
+        weights = [1.0] * len(sim.robot.arm_joints)
+        joint_infos = get_joint_infos(
+            sim.robot.robot_id, sim.robot.arm_joints, sim.robot.physics_client_id
+        )
+        dist_fn = partial(
+            get_joint_positions_distance,
+            sim.robot,
+            joint_infos,
+            metric="weighted_joints",
+            weights=weights,
+        )
+        return dist_fn(init_joints, candidate)
 
     joints = None
     try:
@@ -77,13 +92,21 @@ def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
                                                     sim.get_collision_ids(),
                                                     held_object=sim.held_object_id,
                                                     base_link_to_held_obj=sim.held_object_tf)
-            joints = next(gen)
+            best_dist = np.inf
+            for candidate in gen:
+                dist = _score_candidate(candidate)
+                if dist < best_dist:
+                    joints = candidate
+                    best_dist = dist
+                
         else:
             joints = inverse_kinematics(sim.robot, target_end_effector_pose)
-        set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
-                                          sim.held_object_id,
-                                          sim.held_object_tf,
-                                          joints)
+
+        if joints:
+            set_robot_joints_with_held_object(sim.robot, sim.physics_client_id,
+                                            sim.held_object_id,
+                                            sim.held_object_tf,
+                                            joints)
 
     except (InverseKinematicsError, StopIteration):
         pass
@@ -99,7 +122,7 @@ def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
     return joints
 
 
-def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: Pose, utensil_tip_from_end_effector: Pose,
+def _get_acquisition_to_transfer_plan(init_joints: JointPositions, acquisition_joints: JointPositions, target_pose: Pose, utensil_tip_from_end_effector: Pose,
                                       sim: FeedingDeploymentPyBulletSimulator,
                                       max_motion_planning_time: float = 10) -> list[FeedingDeploymentSimulatorState]:
     
@@ -112,7 +135,7 @@ def _get_acquisition_to_transfer_plan(init_joints: JointPositions, target_pose: 
     transfer_bite_hla = TransferToolHLA(sim, None, None, None, None, {"max_motion_planning_time": max_motion_planning_time}, False, None, None)
 
     utensil = Object("utensil", tool_type)
-    look_at_plate = GroundHighLevelAction(look_at_plate_hla, (utensil, ))
+    look_at_plate = GroundHighLevelAction(look_at_plate_hla, (utensil, ), params={"above_plate_pos": acquisition_joints})
     transfer_bite = GroundHighLevelAction(transfer_bite_hla, (utensil, ), params={"target_pose": target_pose,
                                                                                   "utensil_tip_from_end_effector": utensil_tip_from_end_effector})
 
@@ -297,7 +320,8 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
     # Set to acquisition pose, first without grasping.
     if use_flair_utensil:
-        init_robot_joints = JointPositions([0.005280353523030187, 6.157869196821472, 3.1416656242036614, 4.861354493854926, 1.7963305196145385e-05, 4.4379560890064225, 1.576155405856463]) \
+        # init_robot_joints = JointPositions([0.005280353523030187, 6.157869196821472, 3.1416656242036614, 4.861354493854926, 1.7963305196145385e-05, 4.4379560890064225, 1.576155405856463]) \
+        init_robot_joints = [-0.9149456581592856, 0.5813212803154899, 2.9898957549467275, -0.9921239621224368, -5.7539244142264065, -1.3259255391921456, 2.044563830404519] \
             + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
     else:
         init_robot_joints = scene_description.above_plate_pos + sim.robot.get_joint_positions()[len(scene_description.above_plate_pos):]
@@ -354,6 +378,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Check reachability of food pose.
         acquisition_joints = _run_fork_tip_ik(food_pose, fork_tip_from_end_effector, sim)
+        print(acquisition_joints)
         food_pose_reachable = acquisition_joints is not None
 
         # Sample head pose.
@@ -366,7 +391,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Generate a plan for acquisition -> transfer.
         if food_pose_reachable and target_pose_reachable:
-            sim_states = _get_acquisition_to_transfer_plan(init_robot_joints, target_pose, fork_tip_from_end_effector, sim,
+            sim_states = _get_acquisition_to_transfer_plan(init_robot_joints, acquisition_joints, target_pose, fork_tip_from_end_effector, sim,
                                                      max_motion_planning_time=max_motion_planning_time)
             plan = [s.robot_joints for s in sim_states]
             # Measure efficiency and comfort of plan.

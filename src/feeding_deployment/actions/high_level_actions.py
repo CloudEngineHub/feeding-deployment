@@ -1060,9 +1060,11 @@ class LookAtPlateHLA(HighLevelAction):
             sim_states: list[FeedingDeploymentSimulatorState] = []
             robot_commands = []
 
+            above_plate_pos = params["above_plate_pos"]
+
             move_to_joint_positions(
                 self._sim,
-                self._sim.scene_description.above_plate_pos,
+                above_plate_pos,
                 sim_states,
                 robot_commands,
                 rviz_interface=self._rviz_interface
