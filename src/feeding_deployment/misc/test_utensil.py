@@ -260,13 +260,16 @@ def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimula
             # assert multiply_poses(mouth_pose, hit_pose).allclose(world_hit_pose)
             # See equation 11 in paper.
             vec = np.array(hit_pose.position[:2])
-            point_score = 1 - np.exp(-alpha * np.transpose(vec) @ sigma @ vec / (hit_pose.position[2] ** 2))
+            if np.isclose(hit_pose.position[2], 0.0):
+                point_score = 0.0
+            else:
+                point_score = 1 - np.exp(-alpha * np.transpose(vec) @ sigma @ vec / (hit_pose.position[2] ** 2))
             score += point_score
 
             p.addUserDebugLine(ray_from, world_hit_pose.position, (point_score, point_score, 0.0),
                                physicsClientId=sim.physics_client_id)
 
-    if ray_outputs:
+    if score > 0:
         score /= len(ray_outputs)
 
     time.sleep(0.1)
@@ -279,6 +282,8 @@ def _measure_state_comfort(feed_pose: Pose, sim: FeedingDeploymentPyBulletSimula
         fork_pose.orientation,
         physicsClientId=sim.physics_client_id,
     )
+
+    assert not np.isnan(score)
 
     return score
 
@@ -378,7 +383,6 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
 
         # Check reachability of food pose.
         acquisition_joints = _run_fork_tip_ik(food_pose, fork_tip_from_end_effector, sim)
-        print(acquisition_joints)
         food_pose_reachable = acquisition_joints is not None
 
         # Sample head pose.
@@ -397,6 +401,7 @@ def _main(use_flair_utensil: bool, max_motion_planning_time: float = 10,
             # Measure efficiency and comfort of plan.
             plan_length = _measure_plan_length(plan, sim)
             comfort = _measure_plan_comfort(plan, target_pose, sim)
+            assert not np.isnan(comfort)
         else:
             plan_length = np.nan
             comfort = np.nan
