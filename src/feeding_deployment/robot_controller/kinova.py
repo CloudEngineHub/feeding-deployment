@@ -320,7 +320,7 @@ class KinovaArm:
                 tau = np.insert(tau, 5, 0)
 
             return q, x, gripper_pos
-
+            
         assert (
             not self.cyclic_running
         ), "Arm must be in high-level servoing mode"  # Rajat ToDo: Combine this with self.update_state()
