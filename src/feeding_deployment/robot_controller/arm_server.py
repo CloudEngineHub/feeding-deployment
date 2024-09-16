@@ -1,12 +1,7 @@
 import numpy as np
 import signal
 import sys
-try:
-    from feeding_deployment.robot_controller.kinova import KinovaArm
-except ImportError:
-    print(
-        "KinovaArm import failed, continuing without executing arm commands on real robot"
-    )
+from feeding_deployment.robot_controller.kinova import KinovaArm
 from feeding_deployment.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
 
 # Create a single instance of KinovaArm and ArmInterface
