@@ -286,8 +286,8 @@ class InsideMouthTransfer:
                     time.sleep(0.1)
                     print("Need to set default stiffness for moving to fixed position")
 
-                    self.publishTaskMode("none")
-                    self.publishTaskMode("default_stiffness")
+                    # self.publishTaskMode("none")
+                    # self.publishTaskMode("default_stiffness")
                     run_once = False
                 
                 final_target = self.perception_interface.get_tool_tip_pose_at_staging()
