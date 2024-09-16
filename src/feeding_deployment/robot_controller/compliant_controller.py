@@ -86,8 +86,8 @@ class CompliantController:
                 self.K_p = np.diag([100.0, 100.0, 100.0, 100.0, 50.0, 50.0])
                 self.K_d = np.diag([3.0, 3.0, 3.0, 3.0, 2.0, 2.0])
             elif self.control_type == "task":
-                self.K_T_p = np.diag([200.0, 200.0, 200.0, 400.0, 400.0, 400.0])
-                self.K_T_d = np.diag([20, 20, 20, 40, 40, 40])
+                self.K_T_p = np.diag([100.0, 100.0, 100.0, 400.0, 400.0, 400.0])
+                self.K_T_d = np.diag([10, 10, 10, 40, 40, 40])
 
     def control_callback(self, arm):
         # Initialize variables on first call
@@ -245,37 +245,36 @@ class CompliantController:
 
         return tau_c, self.gripper_pos
 
+# def command_loop_retract(command_queue, stop_event):
+#     # qpos = np.array([-2.771089155364116, -1.4597435746030278, -1.9011992769067048, -1.0872040897239863, 0.39878180820749237, -0.8243154690389938, 2.672235278861465])
+#     # qpos = np.array([-2.7611776687351686, -1.1867898028941912, -1.7014195845733209, -1.8118651360366513, 0.2697381378506211, -0.09092617856970353, 2.4944202739346184])
+#     qpos = np.array(
+#         [0.0, 0.26179939, 3.14159265, -2.26892803, 0.0, 0.95993109, 1.57079633]
+#     )  # Home
+#     # qpos = np.array([0.0, -0.34906585, 3.14159265, -2.54818071, 0.0, -0.87266463, 1.57079633])
+#     gripper_pos = 0
+#     while not stop_event.is_set():
+#         command_queue.put((qpos, gripper_pos))
+#         time.sleep(self.POLICY_CONTROL_PERIOD)
 
-def command_loop_retract(command_queue, stop_event):
-    # qpos = np.array([-2.771089155364116, -1.4597435746030278, -1.9011992769067048, -1.0872040897239863, 0.39878180820749237, -0.8243154690389938, 2.672235278861465])
-    # qpos = np.array([-2.7611776687351686, -1.1867898028941912, -1.7014195845733209, -1.8118651360366513, 0.2697381378506211, -0.09092617856970353, 2.4944202739346184])
-    qpos = np.array(
-        [0.0, 0.26179939, 3.14159265, -2.26892803, 0.0, 0.95993109, 1.57079633]
-    )  # Home
-    # qpos = np.array([0.0, -0.34906585, 3.14159265, -2.54818071, 0.0, -0.87266463, 1.57079633])
-    gripper_pos = 0
-    while not stop_event.is_set():
-        command_queue.put((qpos, gripper_pos))
-        time.sleep(self.POLICY_CONTROL_PERIOD)
 
+# def command_loop_circle(arm, command_queue, stop_event):
+#     from ik_solver import IKSolver
 
-def command_loop_circle(arm, command_queue, stop_event):
-    from ik_solver import IKSolver
-
-    ik_solver = IKSolver(ee_offset=0.12)
-    quat = np.array([0.707, 0.707, 0.0, 0.0])  # (x, y, z, w)
-    radius = 0.1
-    num_points = 30
-    center = np.array([0.45, 0.0, 0.2])
-    t = np.linspace(0, 2 * np.pi, num_points)
-    x = radius * np.cos(t)
-    y = radius * np.sin(t)
-    z = np.zeros(num_points)
-    points = np.column_stack((x, y, z))
-    points += center
-    gripper_pos = 0
-    while not stop_event.is_set():
-        for pos in points:
-            qpos = ik_solver.solve(pos, quat, arm.q)
-            command_queue.put((qpos, gripper_pos))
-            time.sleep(self.POLICY_CONTROL_PERIOD)
+#     ik_solver = IKSolver(ee_offset=0.12)
+#     quat = np.array([0.707, 0.707, 0.0, 0.0])  # (x, y, z, w)
+#     radius = 0.1
+#     num_points = 30
+#     center = np.array([0.45, 0.0, 0.2])
+#     t = np.linspace(0, 2 * np.pi, num_points)
+#     x = radius * np.cos(t)
+#     y = radius * np.sin(t)
+#     z = np.zeros(num_points)
+#     points = np.column_stack((x, y, z))
+#     points += center
+#     gripper_pos = 0
+#     while not stop_event.is_set():
+#         for pos in points:
+#             qpos = ik_solver.solve(pos, quat, arm.q)
+#             command_queue.put((qpos, gripper_pos))
+#             time.sleep(self.POLICY_CONTROL_PERIOD)
