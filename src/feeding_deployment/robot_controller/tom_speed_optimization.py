@@ -154,21 +154,37 @@ class Arm:
         if np.dot(R_d_quat, R_n_quat) < 0.0:
             R_n_quat = -R_n_quat
 
-        # Convert to Rotation objects
-        R_n = R.from_quat(R_n_quat)
-        R_d = R.from_quat(R_d_quat)
+        R_n_quat_inv = np.array([-R_n_quat[0], -R_n_quat[1], -R_n_quat[2], R_n_quat[3]])
 
-        # Compute error rotation
-        error_rotation = R_n.inv() * R_d
+        def multiply_quaternions(q1, q2):
+            """
+            Multiplies two quaternions in xyzw format.
+            
+            Args:
+                q1: The first quaternion as a list or array [x1, y1, z1, w1]
+                q2: The second quaternion as a list or array [x2, y2, z2, w2]
+                
+            Returns:
+                A list representing the resulting quaternion [x, y, z, w]
+            """
+            x1, y1, z1, w1 = q1
+            x2, y2, z2, w2 = q2
+            
+            # Quaternion multiplication formula
+            x = w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2
+            y = w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2
+            z = w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2
+            w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2
+            
+            return [x, y, z, w]
 
-        # Convert error rotation to quaternion
-        error_quat = error_rotation.as_quat()
+        error_quat = multiply_quaternions(R_n_quat_inv, R_d_quat)
 
         # Extract vector part
         orient_error_vector = error_quat[:3]
 
         # Get rotation matrix of nominal pose
-        R_n_matrix = R_n.as_matrix()
+        R_n_matrix = R.from_quat(R_n_quat).as_matrix()
 
         # Compute orientation error
         orient_error = -R_n_matrix @ orient_error_vector
