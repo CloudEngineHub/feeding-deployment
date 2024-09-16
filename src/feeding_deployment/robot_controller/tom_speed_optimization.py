@@ -137,29 +137,98 @@ class Arm:
         # Nominal friction
         tau_f = self.K_r_K_l @ ((self.dq_n - dq_s) + self.K_lp @ (self.q_n - self.q_s))
 
+        return tau_f
+
+    def new_function(self, q, tau_s_f, dq_s):
+
+        g = self.gravity()
+
+        x_n, J_n = self.get_fk(q)
+
+        pos_error = x_n[:3] - self.x_d[:3]
+
+        R_n_quat = x_n[3:]
+        R_d_quat = self.x_d[3:]
+
+        # Adjust quaternions to be on the same hemisphere
+        if np.dot(R_d_quat, R_n_quat) < 0.0:
+            R_n_quat = -R_n_quat
+
+        # Convert to Rotation objects
+        R_n = R.from_quat(R_n_quat)
+        R_d = R.from_quat(R_d_quat)
+
+        # Compute error rotation
+        error_rotation = R_n.inv() * R_d
+
+        # Convert error rotation to quaternion
+        error_quat = error_rotation.as_quat()
+
+        # Extract vector part
+        orient_error_vector = error_quat[:3]
+
+        # Get rotation matrix of nominal pose
+        R_n_matrix = R_n.as_matrix()
+
+        # Compute orientation error
+        orient_error = -R_n_matrix @ orient_error_vector
+
+        # Assemble error
+        error = np.zeros(6)
+        error[:3] = pos_error
+        error[3:] = orient_error 
+
+        damping_lambda = self.DAMPING_FACTOR * np.eye(self.n_compliant_dofs)
+        J_n_damped = np.linalg.inv(J_n.T @ J_n + damping_lambda) @ J_n.T
+
+        tau_task = J_n_damped @ (-self.K_T_p @ error - self.K_T_d @ (J_n @ self.dq_n)) + g
+
+        # Nominal motor plant
+        ddq_n = self.K_r_inv @ (tau_task - tau_s_f)
+        self.dq_n += ddq_n * self.DT
+        self.q_n += self.dq_n * self.DT
+
+        # Nominal friction
+        tau_f = self.K_r_K_l @ ((self.dq_n - dq_s) + self.K_lp @ (self.q_n - self.q_s))
+
+        return tau_f
+
 
 def _main():
     rng = np.random.default_rng(0)
     num_samples = 10000
     arm = Arm()
+    arm_copy = Arm()
     lower_limits = [arm.model.lowerPositionLimit[i] for i in arm.model.idx_qs]
     upper_limits = [arm.model.upperPositionLimit[i] for i in arm.model.idx_qs]
     tau_s_f = np.zeros(6)
     dq_s = np.zeros(6)
-    durations = []
+    original_durations = []
+    new_durations = []
     for _ in range(num_samples):
         q = rng.uniform(lower_limits, upper_limits)
+
         start_time = time.perf_counter()
-        arm.original_function(q, tau_s_f, dq_s)
+        original_result = arm.original_function(q, tau_s_f, dq_s)
         duration = time.perf_counter() - start_time
-        durations.append(duration)
-    ms_durations = np.array(durations) * 1000
-    print(f"Results over {num_samples} samples")
-    print(f"Mean duration: {np.mean(ms_durations)} ms")
-    print(f"Max duration: {np.max(ms_durations)} ms")
-    print(f"Percentage over 1ms: {100 * np.sum(ms_durations > 1) / num_samples}%")
-    print(f"Percentage over 4ms: {100 * np.sum(ms_durations > 4) / num_samples}%")
-    import ipdb; ipdb.set_trace()
+        original_durations.append(duration)
+
+        start_time = time.perf_counter()
+        new_result = arm_copy.new_function(q, tau_s_f, dq_s)
+        duration = time.perf_counter() - start_time
+        new_durations.append(duration)
+
+        assert np.allclose(original_result, new_result)
+
+    for name, durations in (("Original", original_durations), ("New", new_durations)):
+        ms_durations = np.array(durations) * 1000
+        print("##", name, "##")
+        print(f"results over {num_samples} samples")
+        print(f"Mean duration: {np.mean(ms_durations)} ms")
+        print(f"Max duration: {np.max(ms_durations)} ms")
+        print(f"Percentage over 1ms: {100 * np.sum(ms_durations > 1) / num_samples}%")
+        print(f"Percentage over 4ms: {100 * np.sum(ms_durations > 4) / num_samples}%")
+        print()
 
 if __name__ == "__main__":
     _main()
