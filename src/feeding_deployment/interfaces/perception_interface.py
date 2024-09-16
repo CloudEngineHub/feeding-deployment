@@ -29,11 +29,11 @@ from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 class PerceptionInterface:
     """An interface for perception (robot joints, human head poses, etc.)."""
 
-    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False) -> None:
+    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False, simulate_head_perception: bool = False) -> None:
         self._robot_interface = robot_interface
 
         # run head perception
-        if robot_interface is None:
+        if robot_interface is None or simulate_head_perception:
             self._head_perception = None
         else:
             # self._head_perception = None
@@ -62,29 +62,31 @@ class PerceptionInterface:
 
     def get_camera_data(self):  # Rajat ToDo: Add return type
         return self._head_perception.get_camera_data()
+    
+    def set_head_perception_tool(self, tool: str) -> None:
+        """Set the tool for head perception."""
+        if self._head_perception is not None:
+            self._head_perception.set_tool(tool)
 
-    def get_head_perception_forque_target_pose(self, simulation = False) -> Pose:
+    # Rajat ToDo: Change return type to Pose
+    def get_head_perception_tool_tip_target_pose(self) -> np.ndarray:
         """Get a target of the forque from head perception."""
-        if self._head_perception is not None and not simulation:
+        if self._head_perception is not None:
             forque_target_transform = self._head_perception.run_head_perception()
-            print("\n--\n---\n----Forque target transform: ", forque_target_transform)
         else:
-            # Use a sensible default value for testing in simulation.
-            forque_target_transform = np.array(
-                [[ 2.39288367e-02,  8.46555150e-04, -9.99713306e-01, -9.36197722e-02],
-                [-9.98958576e-01, -3.88389663e-02, -2.39436604e-02,  4.75341624e-01],
-                [-3.88481010e-02,  9.99245124e-01, -8.36977532e-05,  6.02467578e-01],
-                [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]]
-            )
-        forque_target_pose = Pose(
-            (
-                forque_target_transform[0, 3],
-                forque_target_transform[1, 3],
-                forque_target_transform[2, 3],
-            ),
-            R.from_matrix(forque_target_transform[:3, :3]).as_quat(),
-        )
-        return forque_target_pose
+            # forque_target_pose = Pose((-0.282, 0.540, 0.619), (-0.490, 0.510, 0.511, -0.489))
+
+            forque_target_pose = np.eye(4)
+            forque_target_pose[:3, 3] = [-0.282, 0.540, 0.619]
+            forque_target_pose[:3, :3] = R.from_quat([-0.490, 0.510, 0.511, -0.489]).as_matrix()
+
+            return forque_target_pose
+        
+    def get_tool_tip_pose(self) -> np.ndarray:
+        raise NotImplementedError
+    
+    def get_tool_tip_pose_at_staging(self) -> np.ndarray:
+        raise NotImplementedError
     
     def wait_for_user_continue_button(self) -> None:
         print("Waiting for transfer complete button press / ft sensor trigger ...")
