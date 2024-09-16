@@ -680,7 +680,7 @@ class KinovaArm:
             step_time = t_now - t_cyclic
             if step_time >= 0.001:  # 1 kHz
                 t_cyclic = t_now
-                if step_time > 0.01:  # 10 ms # Rajat ToDo: Change back to 0.004 (4ms)
+                if step_time > 0.004:  
                     print(
                         f"Warning: Step time {1000 * step_time:.3f} ms in {self.__class__.__name__} run_cyclic"
                     )

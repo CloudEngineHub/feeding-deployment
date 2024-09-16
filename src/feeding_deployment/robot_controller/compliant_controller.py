@@ -11,6 +11,7 @@ import time
 from scipy.spatial.transform import Rotation as R
 
 import numpy as np
+from scipy.linalg import cho_factor, cho_solve
 from ruckig import InputParameter, OutputParameter, Result, Ruckig
 
 class LowPassFilter:
@@ -228,7 +229,13 @@ class CompliantController:
                 error[3:] = orient_error 
 
                 damping_lambda = self.DAMPING_FACTOR * np.eye(arm.n_compliant_dofs)
-                J_n_damped = np.linalg.inv(J_n.T @ J_n + damping_lambda) @ J_n.T
+                J_n_J_nT = J_n.T @ J_n + damping_lambda
+                
+                # J_n_damped = np.linalg.inv(J_n_J_nT) @ J_n.T
+
+                # this is faster than the above commented computation
+                c, lower = cho_factor(J_n_J_nT)
+                J_n_damped = cho_solve((c, lower), J_n.T)
 
                 tau_task = J_n_damped @ (-self.K_T_p @ error - self.K_T_d @ (J_n @ self.dq_n)) + g
 
