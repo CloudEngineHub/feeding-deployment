@@ -639,6 +639,10 @@ class TransferToolHLA(HighLevelAction):
                 self.execute_robot_commands(robot_commands)
             robot_commands = []
 
+            if self.wrist_controller is not None:
+                # stop the keep horizontal thread
+                self.wrist_controller.stop_horizontal_spoon_thread()
+
             if self._run_on_robot:
                 input("Press enter to switch to task compliant mode")
                 self._robot_interface.switch_to_task_compliant_mode()
@@ -980,7 +984,8 @@ class LookAtPlateHLA(HighLevelAction):
 
                 items = self.flair.identify_plate(camera_color_data)
                 # flair.set_food_items(items)
-                self.flair.set_food_items(['banana', 'baby carrot'])
+                # self.flair.set_food_items(['banana', 'baby carrot'])
+                self.flair.set_food_items(['cantaloupe'])
                 items_detection = self.flair.detect_items(camera_color_data, camera_depth_data, camera_info_data, log_path=None)
                 
                 if not self._preferences_set:
@@ -1127,6 +1132,10 @@ class AcquireBiteHLA(HighLevelAction):
 
                 if self._run_on_robot:
                     self.execute_robot_commands(robot_commands)
+
+                # set the wrist controller to always keep utensil horizontal
+                if self.wrist_controller is not None:
+                    self.wrist_controller.start_horizontal_spoon_thread()
     
             else:
                 time.sleep(2.0)  # simulate delay, also needed for web interface
