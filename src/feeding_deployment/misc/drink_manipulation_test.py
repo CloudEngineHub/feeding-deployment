@@ -20,6 +20,7 @@ from visualization_msgs.msg import MarkerArray, Marker
 from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 from feeding_deployment.robot_controller.command_interface import CartesianCommand
 from geometry_msgs.msg import TransformStamped
+from collections import deque
 
 # from feeding_deployment.head_perception.ros_wrapper import HeadPerceptionROSWrapper
 
@@ -30,10 +31,13 @@ class ArUcoPerception:
         rospy.init_node('ArUcoPerception')
         self.AR_center_pose = None # get rid of this later
 
+        self.robot_interface = ArmInterfaceClient()
         self.bridge = CvBridge()
+        self.current_pose = None
+        self.goal_pose_queue = deque(maxlen=10)
 
         self.cartesian_state_sub = message_filters.Subscriber('/robot_cartesian_state', pose_msg)
-        self.cartesian_state_sub.registerCallback(self.follow_AR_tag)
+        self.cartesian_state_sub.registerCallback(self.read_pose)
 
         self.color_image_sub = message_filters.Subscriber('/camera/color/image_raw', Image)
         self.camera_info_sub = message_filters.Subscriber('/camera/color/camera_info', CameraInfo)
@@ -47,6 +51,8 @@ class ArUcoPerception:
         self.listener = tf2_ros.TransformListener(self.tfBuffer)
         self.broadcaster = tf2_ros.TransformBroadcaster()
         time.sleep(1.0)
+
+
 
     def rgbdCallback(self, rgb_image_msg, camera_info_msg, depth_image_msg):
 
@@ -101,7 +107,7 @@ class ArUcoPerception:
 
         tag_pos = np.append(np.mean(valid_landmarks_world, axis=0), 1) # pad with 1 for homogeneous coordinate
 
-        transform = self.get_base_to_camera_transform(camera_info_msg)
+        transform = self.get_frame_to_frame_transform(camera_info_msg)
 
         if transform is not None:   
             base_to_camera = self.make_homogeneous_transform(transform)
@@ -116,12 +122,8 @@ class ArUcoPerception:
             base_to_tag = np.dot(base_to_camera, camera_to_tag)
             self.updateTF("base_link", "AR_tag", base_to_tag)
 
-
-
-
-
-
-
+            base_to_tool = self.get_frame_to_frame_transform(camera_info_msg, "base_link", "tool_frame")
+            self.follow_AR_tag(self.make_homogeneous_transform(base_to_tool), base_to_tag)
 
         self.visualizeVoxels(landmarks_model_camera_frame)
 
@@ -236,12 +238,11 @@ class ArUcoPerception:
 
         return scale, R.as_matrix(), t
     
-    def get_base_to_camera_transform(self, camera_info_data):
-        target_frame = "camera_color_optical_frame"
+    def get_frame_to_frame_transform(self, camera_info_data, frame_A = "base_link", target_frame = "camera_color_optical_frame"):
         stamp = camera_info_data.header.stamp
         try:
             transform = self.tfBuffer.lookup_transform(
-                "base_link",
+                frame_A,
                 target_frame,
                 rospy.Time(secs=stamp.secs, nsecs=stamp.nsecs),
             )
@@ -293,57 +294,92 @@ class ArUcoPerception:
         t.transform.rotation.z = R[2]
         t.transform.rotation.w = R[3]
 
-        print(t)
-
         self.broadcaster.sendTransform(t)
 
 
-    def follow_AR_tag(self, cartesian_state_msg):
+    def follow_AR_tag(self, base_to_tool, base_to_tag):
+
+        # print(base_to_tool)
+
+        static_transform = np.zeros((4, 4))
 
 
-        if self.AR_center_pose is None: return
 
-        tag_corner_pos, tag_rot = self.AR_center_pose
-        tag_pos = np.mean(tag_corner_pos, axis=0)
+        static_transform[:3, :3] = np.array([  [0,  1,  0],[0,  0, -1],[-1,  0,  0] ])
+        static_transform[:3, 3] = np.array([.02, 0, .4]).reshape(1, 3)
+        static_transform[3, 3] = 1 
 
-        q = cartesian_state_msg.orientation
-        q = q.x, q.y, q.z, q.w
-        robot_rot = Rotation.from_quat(q).as_matrix()
-        robot_pos = cartesian_state_msg.position
-        robot_pos = np.array([robot_pos.x, robot_pos.y, robot_pos.z])
+        goal_frame = np.dot(base_to_tag, static_transform)
+        # self.updateTF("base_link", "goal_frame", goal_frame)
+
+        target_position = (goal_frame[0, 3], goal_frame[1, 3], goal_frame[2, 3]) # list slice instead? does this accept non-tuple?
+        target_orientation = Rotation.from_matrix(goal_frame[:3, :3]).as_quat()
+        target_orientation = (target_orientation[0], target_orientation[1], target_orientation[2], target_orientation[3])
+
+        self.goal_pose_queue.append((target_position, target_orientation))
+
+        running_average_position = np.mean([pose[0] for pose in self.goal_pose_queue], axis=0)
+        running_average_orientation = np.mean([pose[1] for pose in self.goal_pose_queue], axis=0)
+        running_average_rotation = Rotation.from_quat(running_average_orientation).as_matrix()
+        running_average_frame = np.zeros((4, 4))
+        running_average_frame[:3, :3] = running_average_rotation
+        running_average_frame[:3, 3] = running_average_position
+        self.updateTF("base_link", "goal_frame", running_average_frame)
+
+        # Move in the direction of the goal, but not too quickly.
+        current_position = np.array(self.current_pose[0])
+        current_orientation = np.array(self.current_pose[1])
+        position_delta = running_average_position - current_position
+        orientation_delta = running_average_orientation - current_orientation
         
+        max_position_delta = 0.01
+        magnitude = np.linalg.norm(position_delta)
+        if magnitude > max_position_delta:
+            scale = max_position_delta / magnitude
+            position_delta = position_delta * scale
+            orientation_delta = orientation_delta * scale
 
-        # print(robot_pos)
-
-        print(tag_pos)
-
-        # distance_to_cup = np.linalg.norm(np.array(robot_pos) - np.array(self.AR_center_pose))
-        # print(distance_to_cup)
-
-
-        # [ 0.23372017 -0.11247288  0.58964063]
-        # [-0.14779702 -0.12871058  0.58610937]
-
-
-
+        move_position = current_position + position_delta
+        move_orientation = current_orientation + orientation_delta 
         
+        self.send_command(move_position, move_orientation)
+
+        # print(target_position, target_orientation)
+
+        # self.send_command(target_position, target_orientation)
+
+        # tool_to_tag = np.dot(np.linalg.inv(base_to_tool),base_to_tag)
+
+        # print(tool_to_tag[0,3], tool_to_tag[1,3], tool_to_tag[2,3])
 
 
-
-
-
-        # print(robot_rot)
-
-        # tag_pos, tag_rot = self.AR_center_pose
-        # q = Rotation.from_matrix(AR_rot).as_quat()
-
-
-
-        # print(f"AR_pos: {AR_pos}, AR_rot: {q}") # AR_pos: [-0.07119214 -0.0782794   0.51123438], AR_rot: [0.71363607 0.65925799 0.03252051 0.23461644]
+    def send_command(self, target_position, target_orientation):
+        cmd = CartesianCommand(target_position, target_orientation)
+        self.robot_interface.execute_command(cmd)
+        # robot_interface = ArmInterfaceClient()
+        # robot_interface.execute_command(cmd)
         
+    def read_pose(self, arm_pose_msg):
+        self.current_pose = (
+            (arm_pose_msg.position.x, arm_pose_msg.position.y, arm_pose_msg.position.z),
+            (arm_pose_msg.orientation.x, arm_pose_msg.orientation.y, arm_pose_msg.orientation.z, arm_pose_msg.orientation.w)
+        )
 
-        # print(robot_tool_pose)
+        """
         
+(0.5736776157933938, -0.09580082382673927, 0.0766157263532676) [0.5627823  0.43596175 0.43279593 0.55308329]"""
+
+        """
+        position: 
+            x: 0.5629775524139404
+            y: -0.09015465527772903
+            z: 0.07269313931465149
+        orientation: 
+            x: 0.5700255012489195
+            y: 0.46046393122423585
+            z: 0.4095031450955806
+            w: 0.5434621147092666
+        """
 
 if __name__ == '__main__':
 
