@@ -18,7 +18,7 @@ from geometry_msgs.msg import Point, Pose
 from visualization_msgs.msg import MarkerArray, Marker
 
 from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
-from feeding_deployment.robot_controller.command_interface import CartesianCommand, JointCommand, CloseGripperCommand
+from feeding_deployment.robot_controller.command_interface import CartesianCommand, JointCommand, CloseGripperCommand, OpenGripperCommand
 from geometry_msgs.msg import TransformStamped
 from collections import deque
 
@@ -108,11 +108,12 @@ class TFInterface:
 
 
 class ArUcoPerception(TFInterface):
-    def __init__(self):
+    def __init__(self, num_perception_samples=10):
         rospy.init_node('ArUcoPerception')
 
+        self.num_perception_samples = num_perception_samples
         self.bridge = CvBridge()
-        self.aruco_pose_queue = deque(maxlen=10)
+        self.aruco_pose_queue = deque(maxlen=num_perception_samples)
         self.aruco_pose_publisher =  rospy.Publisher("/aruco_pose", Pose, queue_size=10)
 
         self.color_image_sub = message_filters.Subscriber('/camera/color/image_raw', Image)
@@ -193,17 +194,19 @@ class ArUcoPerception(TFInterface):
     def update_aruco_pose(self, aruco_pose_mat):
         aruco_pose = self.matrix_to_pose(aruco_pose_mat)
         self.aruco_pose_queue.append(aruco_pose)
-        running_average_position = np.mean([pose[0] for pose in self.aruco_pose_queue], axis=0)
-        running_average_orientation = np.mean([pose[1] for pose in self.aruco_pose_queue], axis=0)
-        p = Pose()
-        p.position.x = running_average_position[0]
-        p.position.y = running_average_position[1]
-        p.position.z = running_average_position[2]
-        p.orientation.x = running_average_orientation[0]
-        p.orientation.y = running_average_orientation[1]
-        p.orientation.z = running_average_orientation[2]
-        p.orientation.w = running_average_orientation[3]
-        self.aruco_pose_publisher.publish(p)
+        # Wait to update until we have at least num_perception_samples samples.
+        if len(self.aruco_pose_queue) >= self.num_perception_samples:
+            running_average_position = np.mean([pose[0] for pose in self.aruco_pose_queue], axis=0)
+            running_average_orientation = np.mean([pose[1] for pose in self.aruco_pose_queue], axis=0)
+            p = Pose()
+            p.position.x = running_average_position[0]
+            p.position.y = running_average_position[1]
+            p.position.z = running_average_position[2]
+            p.orientation.x = running_average_orientation[0]
+            p.orientation.y = running_average_orientation[1]
+            p.orientation.z = running_average_orientation[2]
+            p.orientation.w = running_average_orientation[3]
+            self.aruco_pose_publisher.publish(p)
 
     def pixel2World(self, camera_info, image_x, image_y, depth_image):
 
@@ -284,17 +287,33 @@ class DrinkManipulation(TFInterface):
         orientation = (msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w)
         self.aruco_pose = (position, orientation)
 
-    def get_pre_grasp_pose(self, aruco_pose):
-        aruco_pos_mat = self.pose_to_matrix(aruco_pose)
-        
-        static_transform = np.zeros((4, 4))
-        static_transform[:3, :3] = Rotation.from_euler("xyz", [np.pi, 0, np.pi / 2]).as_matrix()
-        static_transform[:3, 3] = np.array([0.02, 0, 0.05])
-        static_transform[3, 3] = 1 
-
-        goal_frame = np.dot(aruco_pos_mat, static_transform)
+    def get_aruco_relative_pose(self, transform):
+        aruco_pos_mat = self.pose_to_matrix(self.aruco_pose)
+        goal_frame = np.dot(aruco_pos_mat, transform)
         goal_pose = self.matrix_to_pose(goal_frame)
         return goal_pose
+
+    def get_pre_grasp_transform(self):
+        tf = np.zeros((4, 4))
+        tf[:3, :3] = Rotation.from_euler("xyz", [np.pi, 0, np.pi / 2]).as_matrix()
+        tf[:3, 3] = np.array([0.06, 0.0, 0.05])
+        tf[3, 3] = 1
+        return tf
+
+    def get_inside_bottom_transform(self):
+        tf = self.get_pre_grasp_transform()
+        tf[2, 3] = 0.0
+        return tf
+
+    def get_inside_top_transform(self):
+        tf = self.get_inside_bottom_transform()
+        tf[0, 3] = 0.09
+        return tf
+    
+    def get_post_grasp_pose(self):
+        tf = self.get_inside_top_transform()
+        tf[0, 3] = 0.15
+        return tf
 
     def pick_up_drink(self):
         # Wait for the aruco pose to be found.
@@ -305,9 +324,29 @@ class DrinkManipulation(TFInterface):
         self.close_fingers()
 
         # Move to the pre-grasp pose.
-        pre_grasp_pose = self.get_pre_grasp_pose(self.aruco_pose)
+        pre_grasp_pose = self.get_aruco_relative_pose(self.get_pre_grasp_transform())
         self.move_to_pose(pre_grasp_pose)
-        
+
+        # Move to the inside bottom pose.
+        inside_bottom_pose = self.get_aruco_relative_pose(self.get_inside_bottom_transform())
+        self.move_to_pose(inside_bottom_pose)
+
+        # Move to the inside top pose.
+        inside_top_pose = self.get_aruco_relative_pose(self.get_inside_top_transform())
+        self.move_to_pose(inside_top_pose)
+
+        # Open the fingers.
+        self.open_fingers()
+
+        # Move up to verify that the cup has been grasped successfully.
+        post_grasp_pose = self.get_aruco_relative_pose(self.get_post_grasp_pose())
+        self.move_to_pose(post_grasp_pose)
+
+        # NOTE: stuff below here should be changed, this is just here for testing.
+        self.move_to_pose(inside_top_pose)
+        self.close_fingers()
+        self.move_to_pose(inside_bottom_pose)
+        self.move_to_pose(pre_grasp_pose)
 
     def move_to_pose(self, pose):
         self.updateTF("base_link", "goal_frame", self.pose_to_matrix(pose))
@@ -318,6 +357,9 @@ class DrinkManipulation(TFInterface):
 
     def close_fingers(self):
         self.robot_interface.execute_command(CloseGripperCommand())
+
+    def open_fingers(self):
+        self.robot_interface.execute_command(OpenGripperCommand())
 
 
 if __name__ == '__main__':
@@ -335,6 +377,10 @@ if __name__ == '__main__':
     input("Press enter to reset the robot to gaze position")
     gaze_joints = [1.125354671287698, 0.9558922716457215, -1.8328343338277167, -2.020429265225662, -1.428489781314294, -1.8853739747611273]
     drink_manipulation.robot_interface.execute_command(JointCommand(gaze_joints))
+
+    # Wait until enough samples have been collected.
+    while drink_manipulation.aruco_pose is None:
+        time.sleep(0.1)
 
     input("Press enter to reset the robot to staging position")
     gaze_joints = [0.7834493286907556, 1.0428972118263922, -1.3236784134531359, -1.053118290932062, -1.9758625959637302, -2.263605433837996]
