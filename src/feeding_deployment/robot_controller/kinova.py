@@ -369,6 +369,18 @@ class KinovaArm:
     def zero(self):
         self._execute_reference_action("Zero")
 
+    def set_before_transfer_config(self):
+        before_transfer_config = [
+            -2.8655331,  
+            -1.61973777, 
+            -2.6097253, 
+            -1.37301134, 
+            1.11781087,
+            -1.18039928,
+            2.05515662
+        ]
+        self.move_angular(before_transfer_config)
+
     def get_state(self):
 
         # Rajat ToDo: this isn't exactly the same as get_state as it returns tool tip pose instead of tool_frame pose
@@ -640,6 +652,11 @@ class KinovaArm:
     def zero_torque_offsets(self):
         assert not self.cyclic_running, "Arm must be in high-level servoing mode"
 
+        input(
+            "Arm will now be moved to before transfer configuration, press <Enter> to continue..."
+        )
+        self.set_before_transfer_config()
+
         # Move arm to zero configuration
         print("Arm will be moved to the candlestick configuration")
         input(
@@ -660,9 +677,9 @@ class KinovaArm:
 
         # Move arm to home configuration
         input(
-            "Arm will now be moved to the home configuration, press <Enter> to continue..."
+            "Arm will now be moved to before transfer configuration, press <Enter> to continue..."
         )
-        self.home()
+        self.set_before_transfer_config()
 
     def init_cyclic(self, control_callback):
         assert not self.cyclic_running, "Cyclic thread is already running"
@@ -1054,30 +1071,30 @@ def main():
         # input("Press Enter to move to home pos")
         # arm.home()
 
-        # input("Press Enter to zero torque offsets")
-        # arm.zero_torque_offsets()
+        input("Press Enter to zero torque offsets")
+        arm.zero_torque_offsets()
 
         # np.set_printoptions(precision=4, suppress=True)
 
         # input("Press Enter to move to home pos")
         # arm.home()
 
-        before_transfer_pos = [
-            -2.8655331,  
-            -1.61973777, 
-            -2.6097253, 
-            -1.37301134, 
-            1.11781087,
-            -1.18039928,
-            2.05515662
-        ]
+        # before_transfer_pos = [
+        #     -2.8655331,  
+        #     -1.61973777, 
+        #     -2.6097253, 
+        #     -1.37301134, 
+        #     1.11781087,
+        #     -1.18039928,
+        #     2.05515662
+        # ]
 
-        before_transfer_tool_transform = np.zeros(7)
-        before_transfer_tool_transform[:3] = [0.250, 0.271, 0.529]
-        before_transfer_tool_transform[3:] = [0.539, -0.445, -0.526, 0.483]
+        # before_transfer_tool_transform = np.zeros(7)
+        # before_transfer_tool_transform[:3] = [0.250, 0.271, 0.529]
+        # before_transfer_tool_transform[3:] = [0.539, -0.445, -0.526, 0.483]
         
-        input("Press Enter to move to before transfer pos")
-        arm.move_angular(before_transfer_pos)
+        # input("Press Enter to move to before transfer pos")
+        # arm.move_angular(before_transfer_pos)
 
         # input('Press Enter to switch to gravity compensation mode')
         # arm.switch_to_gravity_compensation_mode()
@@ -1086,17 +1103,17 @@ def main():
         # command_queue = queue.Queue(1)
         # arm.switch_to_joint_compliant_mode(command_queue)  
 
-        input('Press Enter to switch to task compliant mode')
-        command_queue = queue.Queue(1)
-        arm.switch_to_task_compliant_mode(command_queue)
+        # input('Press Enter to switch to task compliant mode')
+        # command_queue = queue.Queue(1)
+        # arm.switch_to_task_compliant_mode(command_queue)
 
-        for i in range(5):
-            input("Press Enter to read current state")
-            q, _, _, current_x, _ = arm.get_update_state()
-            print(f"Current q: {q}")
-            print(f"Goal q: {before_transfer_pos}")
-            print(f"Current x: {current_x[:3]}")
-            print(f"Goal x: {before_transfer_tool_transform[:3]}")
+        # for i in range(5):
+        #     input("Press Enter to read current state")
+        #     q, _, _, current_x, _ = arm.get_update_state()
+        #     print(f"Current q: {q}")
+        #     print(f"Goal q: {before_transfer_pos}")
+        #     print(f"Current x: {current_x[:3]}")
+        #     print(f"Goal x: {before_transfer_tool_transform[:3]}")
 
         # input('Press Enter to switch to task compliant mode')
         # command_queue = queue.Queue(1)
@@ -1116,8 +1133,8 @@ def main():
         #     command_queue.put((desired_x, gripper_pos))
         #     time.sleep(1)
 
-        input('Press Enter to switch out of joint compliant mode')
-        arm.switch_out_of_compliant_mode()
+        # input('Press Enter to switch out of joint compliant mode')
+        # arm.switch_out_of_compliant_mode()
 
         # arm.home()
 
