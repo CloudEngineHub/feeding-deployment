@@ -5,6 +5,7 @@ from collections import namedtuple
 from pathlib import Path
 from typing import Any
 import pickle
+import queue
 
 try:
     import rospy
@@ -105,10 +106,8 @@ class _Runner:
 
         if ROSPY_IMPORTED:
             # Initialize the web interface.
-            self.web_interface = WebInterface()
-            self.web_interface_sub = rospy.Subscriber(
-                "WebAppComm", String, self.web_interface_callback
-            )
+            self.hla_command_queue = queue.Queue()
+            self.web_interface = WebInterface(self.hla_command_queue)
 
         # Initialize the FLAIR interface.
         if FLAIR_IMPORTED:
@@ -178,14 +177,19 @@ class _Runner:
             resp = input("Are you sure you want to continue from here? [y/n] ")
             if resp != "y":
                 sys.exit(0)
-        
-        print("Runner is ready.")
 
-    def web_interface_callback(self, msg: "String") -> None:
-        """Callback for the web interface."""
-        msg_dict = json.loads(msg.data)
-        print("(run.py) RECEIVED MESSAGE FROM WEB INTERFACE:")
-        print(msg_dict)
+        print("Runner is ready.")
+        
+        while not rospy.is_shutdown():
+            try:
+                hla_interface_msg = self.hla_command_queue.get(timeout=1)
+                self.parse_interface_msg(hla_interface_msg)
+                print("Ready for next user command.")
+            except queue.Empty:
+                continue
+
+    def parse_interface_msg(self, msg_dict: dict[str, Any]) -> None:
+        """Pass high level action message from the web interface."""
         if msg_dict["status"] == "drink_pickup":
             user_cmd = GroundHighLevelAction(
                 self.hla_name_to_hla["PickTool"], (self.drink,)
@@ -211,7 +215,7 @@ class _Runner:
                 self.hla_name_to_hla["TransferTool"], (self.wipe,)
             )
         else:
-            print("WARNING: Unrecognized message from web interface.")
+            print("WARNING: Unrecognized high level action message from web interface.")
             return
         self.process_user_command(user_cmd)
 

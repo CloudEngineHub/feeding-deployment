@@ -9,6 +9,7 @@ from pybullet_helpers.geometry import Pose
 from pybullet_helpers.joint import JointPositions
 from scipy.spatial.transform import Rotation as R
 import json
+import queue
 
 
 try:
@@ -30,7 +31,9 @@ class WebInterface:
     '''
     An interface to interact with the web interface.
     '''
-    def __init__(self):
+    def __init__(self, hla_command_queue: queue.Queue) -> None:
+
+        self.hla_command_queue = hla_command_queue
         
         # Create a publisher for communication with the web interface.
         self.web_interface_publisher = rospy.Publisher("/ServerComm", String, queue_size=10)
@@ -38,8 +41,8 @@ class WebInterface:
         self.image_bridge = CvBridge()
         self.last_captured_ros_image = None
         self.update_web_interface_image(np.zeros((512, 512, 3)))
-        thread = threading.Thread(target=self._publish_web_interface_image)
-        thread.start()
+        self.web_interface_image_thread = threading.Thread(target=self._publish_web_interface_image)
+        self.web_interface_image_thread.start()
         # The following is a hacky leaky abstraction to handle the one-time preference
         # setting step at the beginning of FLAIR.
         self.user_preference = None
@@ -57,14 +60,18 @@ class WebInterface:
 
     def _message_callback(self, msg: "String") -> None:
         """Callback for the web interface."""
-        print("(web interface) Received message on WebAppComm: ", msg.data)
-        # msg_dict = json.loads(msg.data)
-        # print(f"Received message: {msg_dict}")
-        # if msg_dict["state"] == "order_selection" and msg_dict["status"] != "ready_for_initial_data":
-        #     self.user_preference = msg_dict["status"]
-        #     print("SETTING USER PREFERENCE: ", self.user_preference)
-        # else:
-        #     print("DID NOT SET USER PREFERENCE")
+        print("Received message on WebAppComm: ", msg.data)
+        msg_dict = json.loads(msg.data)
+        print(f"Received message: {msg_dict}")
+        if msg_dict["state"] == "order_selection" and msg_dict["status"] != "ready_for_initial_data":
+            self.user_preference = msg_dict["status"]
+            print("SETTING USER PREFERENCE: ", self.user_preference)
+        elif msg_dict["status"] in ["drink_pickup", "drink_transfer", "move_to_above_plate", "aquire_food", "bite_transfer", "mouth_wiping"]:
+            print("Received high-level action message from web interface.")
+            self.hla_command_queue.put(msg_dict)
+        else:
+            print("WARNING: Unrecognized message from web interface.")
+            return
 
     def send_web_interface_message(self, msg_dict: dict[str, Any]) -> None:
         self.web_interface_publisher.publish(
@@ -73,6 +80,10 @@ class WebInterface:
 
     def _send_web_interface_image(self, image) -> None:
         self._perception_interface.update_web_interface_image(image)
+
+    # make sure thread is closed when object is deleted
+    def __del__(self):
+        self.web_interface_image_thread.join()
 
 if __name__ == "__main__":
     rospy.init_node("test_web_interface")
@@ -83,14 +94,12 @@ if __name__ == "__main__":
     web_interface.update_web_interface_image(np.ones((512, 512, 3)))
     time.sleep(1.0)  # simulate delay, also needed for web interface
 
-
     # Wait for web interface to report order selection.
     print("WAITING TO GET PREFERENCE")
-    while web_interface.user_preference is None:
+    while web_interface.user_preference is None and not rospy.is_shutdown():
         print("user preference is still None")
         time.sleep(1e-1)
     print("FINISHED GETTING PREFERENCES")
 
     print("User Preference:", web_interface.user_preference)
     input("Received user preference. Press Enter to continue...")
-    rospy.spin()

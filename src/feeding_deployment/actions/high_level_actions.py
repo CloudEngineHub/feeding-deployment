@@ -882,13 +882,9 @@ class LookAtPlateHLA(HighLevelAction):
                     # Wait for web interface to report order selection.
                     print("WAITING TO GET PREFERENCE")
                     while self._web_interface.user_preference is None:
-                        print("user preference is still None")
                         time.sleep(1e-1)
                     print("FINISHED GETTING PREFERENCES")
-
                     print("User Preference:", self._web_interface.user_preference)
-                    input("Received user preference. Press Enter to continue...")
-
                     self.flair.set_preferences(self._web_interface.user_preference)
                     self._preferences_set = True
 
