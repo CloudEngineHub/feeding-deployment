@@ -44,6 +44,7 @@ class ArmInterfaceClient:
 
     def switch_out_of_compliant_mode(self):
         assert self.in_compliant_mode, "Not in compliant mode"
+        time.sleep(2.0) # Wait for the arm to settle
         self._arm_interface.switch_out_of_compliant_mode()
         self.in_compliant_mode = False
 

@@ -34,7 +34,7 @@ class WebInterface:
     '''
     An interface to interact with the web interface.
     '''
-    def __init__(self, hla_command_queue: queue.Queue) -> None:
+    def __init__(self, hla_command_queue: queue.Queue = None) -> None:
 
         self.hla_command_queue = hla_command_queue
         
@@ -69,9 +69,10 @@ class WebInterface:
         if msg_dict["state"] == "order_selection" and msg_dict["status"] != "ready_for_initial_data":
             self.user_preference = msg_dict["status"]
             print("SETTING USER PREFERENCE: ", self.user_preference)
-        elif msg_dict["status"] in ["drink_pickup", "drink_transfer", "move_to_above_plate", "aquire_food", 0, "bite_skill_selection", "bite_transfer", "mouth_wiping", "return_to_main"]:
+        elif msg_dict["status"] in ["move_to_wiping_position", "drink_pickup", "drink_transfer", "move_to_above_plate", "aquire_food", 0, "bite_skill_selection", "bite_transfer", "mouth_wiping", "return_to_main"]:
             print("Received high-level action message from web interface.")
-            self.hla_command_queue.put(msg_dict)
+            if self.hla_command_queue is not None:
+                self.hla_command_queue.put(msg_dict)
         else:
             print("WARNING: Unrecognized message from web interface.")
             return
