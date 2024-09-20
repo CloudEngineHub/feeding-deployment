@@ -44,6 +44,7 @@ class ArmInterfaceClient:
 
     def switch_out_of_compliant_mode(self):
         assert self.in_compliant_mode, "Not in compliant mode"
+        time.sleep(2.0) # Wait for the arm to settle
         self._arm_interface.switch_out_of_compliant_mode()
         self.in_compliant_mode = False
 
@@ -55,6 +56,9 @@ class ArmInterfaceClient:
         self._arm_interface.set_tool(tool)
 
     def execute_command(self, cmd: KinovaCommand) -> None:
+
+        # if not self.in_compliant_mode:
+            # input("Press enter to execute command...")
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
             return self._arm_interface.set_joint_trajectory(cmd.traj)
@@ -96,13 +100,21 @@ if __name__ == "__main__":
         2.05515662
     ]
 
-    input("Press enter to move to home position...")
     arm_client_interface.execute_command(JointCommand(before_transfer_pos))
 
     input("Press enter to go to compliance mode...")
     arm_client_interface.switch_to_task_compliant_mode()
 
-    input("Press enter to go to non-compliance mode...")
+    arm_pos, ee_pose, gripper_pos = arm_client_interface.get_state()
+    drop_test_pose = np.zeros(7)
+    drop_test_pose[:3] = [0.45, 0.62, 0.6]
+    drop_test_pose[3:] = [-0.03083443277876381, 0.7132803649800029, 0.7001853591905794, -0.00456305428030798]
+    drop_test_task_command = CartesianCommand(pos=drop_test_pose[:3], quat=drop_test_pose[3:])
+    
+    input("Press Enter to move to drop test pos")
+    arm_client_interface.execute_command(drop_test_task_command)
+
+    input('Press Enter to switch out of compliant mode')
     arm_client_interface.switch_out_of_compliant_mode()
 
     # utensil_inside_mount = (
