@@ -145,11 +145,14 @@ class InsideMouthTransfer:
         while not rospy.is_shutdown():
             with self.mouth_open_lock:
                 if self.mouth_open:
+                    print("Detected mouth to be open")
                     # set it to false once (for the next time)
-                    with self.mouth_open_lock:
-                        self.mouth_open = False
+                    self.mouth_open = False
+                    print("Setting mouth open to false")
                     break
             self.control_rate.sleep()
+
+        print("Setting state to 1")
 
         # start at state 1
         with self.state_lock:
@@ -164,7 +167,7 @@ class InsideMouthTransfer:
 
             self.control_rate.sleep()
 
-            print("Frequency: ",1.0/(time.time() - last_time))
+            # print("Frequency: ",1.0/(time.time() - last_time))
             last_time = time.time()
             
             with self.state_lock:
@@ -366,6 +369,9 @@ class InsideMouthTransfer:
                 self.publishTaskCommand(target)
                 self.rviz_interface.visualizeTransform("base_link", "next_target", target)
                 self.rviz_interface.visualizeTransform("base_link", "final_target", final_target)
+
+        # incase for some reason the head perception thread is still running
+        self.perception_interface.stop_head_perception_thread()
             
         print("Exiting transfer loop")
 

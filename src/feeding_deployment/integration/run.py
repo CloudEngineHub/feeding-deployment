@@ -85,10 +85,11 @@ class _Runner:
     """A class for running the integrated system."""
 
     def __init__(self, run_on_robot: bool, simulate_head_perception: bool, max_motion_planning_time: float,
-                 resume_from_state: str = ""):
+                 resume_from_state: str = "", no_waits: bool = False) -> None:
         self.run_on_robot = run_on_robot
         self.simulate_head_perception = simulate_head_perception
         self.max_motion_planning_time = max_motion_planning_time
+        self.no_waits = no_waits
 
         if resume_from_state == "":
             self._saved_state_infile = None
@@ -113,7 +114,7 @@ class _Runner:
         # Initialize the FLAIR interface.
         if FLAIR_IMPORTED:
             wrist_controller = WristController()
-            flair = FLAIR(self.robot_interface, wrist_controller)
+            flair = FLAIR(self.robot_interface, wrist_controller, self.no_waits)
         else:
             wrist_controller = None
             flair = None
@@ -138,7 +139,7 @@ class _Runner:
         print("Creating HLAs...")
         self.hlas = {
             cls(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.web_interface, hla_hyperparams, run_on_robot,
-                wrist_controller, flair) for cls in HLAS  # type: ignore
+                wrist_controller, flair, self.no_waits) for cls in HLAS  # type: ignore
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
@@ -176,8 +177,10 @@ class _Runner:
             print("WARNING: The system state has been restored to:")
             print(" ", sorted(self.current_atoms))
             resp = input("Are you sure you want to continue from here? [y/n] ")
-            if resp != "y":
-                sys.exit(0)
+            while resp not in ["y", "n"]:
+                resp = input("Please enter 'y' or 'n': ")
+                if resp == "n":
+                    sys.exit(0)
 
         print("Runner is ready.")
 
@@ -187,6 +190,14 @@ class _Runner:
 
         # drink_transfer_msg = {"status": "drink_transfer"}
         # self.hla_command_queue.put(drink_transfer_msg)
+
+        wipe_transfer_msg = {"status": "move_to_wiping_position", "state": "prepared_mouth_wiping"}
+        self.hla_command_queue.put(wipe_transfer_msg)
+
+        drink_pickup_msg = {"status": "drink_pickup", "state": "pre_bite_pickup"}
+        self.hla_command_queue.put(drink_pickup_msg)
+
+
 
         while not rospy.is_shutdown():
             try:
@@ -221,7 +232,11 @@ class _Runner:
             user_cmd = GroundHighLevelAction(
                 self.hla_name_to_hla["TransferTool"], (self.utensil,)
             )
-        elif msg_dict["status"] == "mouth_wiping":
+        elif msg_dict["status"] == "mouth_wiping" and msg_dict["state"] == "bite_selection":
+            user_cmd = GroundHighLevelAction(
+                self.hla_name_to_hla["PickTool"], (self.wipe,)
+            )
+        elif msg_dict["status"] == "move_to_wiping_position" and msg_dict["state"] == "prepared_mouth_wiping":
             user_cmd = GroundHighLevelAction(
                 self.hla_name_to_hla["TransferTool"], (self.wipe,)
             )
@@ -318,6 +333,7 @@ if __name__ == "__main__":
     parser.add_argument("--make_videos", action="store_true")
     parser.add_argument("--max_motion_planning_time", type=float, default=10.0)
     parser.add_argument("--resume_from_state", type=str, default="")
+    parser.add_argument("--no_waits", action="store_true")
     args = parser.parse_args()
 
     if ROSPY_IMPORTED:
@@ -328,7 +344,8 @@ if __name__ == "__main__":
     runner = _Runner(args.run_on_robot, 
                      args.simulate_head_perception,
                      args.max_motion_planning_time,
-                     args.resume_from_state)
+                     args.resume_from_state,
+                     args.no_waits)
 
     # Uncomment to test commands.
     # drink_pickup_msg = {"status": "drink_pickup"}

@@ -78,6 +78,7 @@ class HighLevelAction(abc.ABC):
         run_on_robot: bool,
         wrist_controller,
         flair,
+        no_waits=False,
     ) -> None:
         self._sim = sim
         self._robot_interface = robot_interface
@@ -88,6 +89,7 @@ class HighLevelAction(abc.ABC):
         self._run_on_robot = run_on_robot
         self.wrist_controller = wrist_controller
         self.flair = flair
+        self.no_waits = no_waits
 
     @abc.abstractmethod
     def get_name(self) -> str:
@@ -109,7 +111,10 @@ class HighLevelAction(abc.ABC):
     def execute_robot_commands(self, robot_commands: list[KinovaCommand]) -> None:
         """Execute the given commands on the robot."""
         for robot_command in robot_commands:
-            input("Execute next command?")
+            if not self.no_waits:
+                input("Execute next command?")
+            else:
+                time.sleep(0.05) # to get around the weird non-blocking behavior of the robot interface
             self._robot_interface.execute_command(robot_command)
 
 @dataclass(frozen=True)
@@ -177,7 +182,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -185,7 +190,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.drink_gaze_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -199,7 +204,7 @@ class PickToolHLA(HighLevelAction):
             #     self._sim.scene_description.drink_pre_staging_pos,
             #     sim_states,
             #     robot_commands,
-            #     rviz_interface=self._rviz_interface,
+            #     rviz_interface=self._rviz_interface if not self.no_waits else None,
             # )
 
             move_to_joint_positions(
@@ -207,7 +212,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.drink_staging_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # close grippers
@@ -223,7 +228,7 @@ class PickToolHLA(HighLevelAction):
             #     max_motion_plan_time=10,
             #     sim_states=sim_states,
             #     robot_commands=robot_commands,
-            #     rviz_interface=self._rviz_interface,
+            #     rviz_interface=self._rviz_interface if not self.no_waits else None,
             # )
 
             teleport_to_ee_pose(
@@ -232,7 +237,7 @@ class PickToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -241,7 +246,7 @@ class PickToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -250,7 +255,7 @@ class PickToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # open grippers
@@ -265,7 +270,7 @@ class PickToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -289,7 +294,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -297,7 +302,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -306,7 +311,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_inside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # open grippers
@@ -332,7 +337,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_outside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -341,7 +346,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_outside_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -360,7 +365,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -368,7 +373,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_infront_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -376,7 +381,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -385,7 +390,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_inside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # open grippers
@@ -401,7 +406,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_outside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -409,7 +414,7 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_neutral_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -417,7 +422,15 @@ class PickToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
+            )
+
+            move_to_joint_positions(
+                self._sim,
+                self._sim.scene_description.before_transfer_pos,
+                sim_states,
+                robot_commands,
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -470,7 +483,7 @@ class StowToolHLA(HighLevelAction):
                 last_drink_pickup_joint_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -479,7 +492,7 @@ class StowToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # close grippers
@@ -495,7 +508,7 @@ class StowToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -504,7 +517,7 @@ class StowToolHLA(HighLevelAction):
                 None,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -523,7 +536,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_outside_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -532,7 +545,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_outside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -541,7 +554,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_inside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # close grippers
@@ -557,7 +570,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.utensil_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -565,7 +578,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -584,7 +597,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -592,7 +605,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_neutral_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -600,7 +613,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_outside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -609,7 +622,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_inside_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             # close grippers
@@ -625,7 +638,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_above_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             teleport_to_ee_pose(
@@ -634,7 +647,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.wipe_infront_mount_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             move_to_joint_positions(
@@ -642,7 +655,7 @@ class StowToolHLA(HighLevelAction):
                 self._sim.scene_description.retract_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -694,7 +707,7 @@ class TransferToolHLA(HighLevelAction):
                 self._sim.scene_description.before_transfer_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -710,13 +723,15 @@ class TransferToolHLA(HighLevelAction):
 
             # Rajat Hack: Just to test interface
             if self._run_on_robot:
-                input("Press enter to switch to task compliant mode")
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
                 self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
                 self.inside_mouth_transfer.execute_transfer_loop()
-
-                input("Press enter to switch out of compliant mode")
+                
+                if not self.no_waits:
+                    input("Press enter to switch out of compliant mode")
                 self._robot_interface.switch_out_of_compliant_mode()
 
             # Send message to web interface indicating transfer is done.
@@ -735,7 +750,7 @@ class TransferToolHLA(HighLevelAction):
                 self._sim.scene_description.before_transfer_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -746,13 +761,15 @@ class TransferToolHLA(HighLevelAction):
             self._robot_interface.set_tool("drink")
 
             if self._run_on_robot:
-                input("Press enter to switch to task compliant mode")
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
                 self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
                 self.inside_mouth_transfer.execute_transfer_loop()
 
-                input("Press enter to switch out of compliant mode")
+                if not self.no_waits:
+                    input("Press enter to switch out of compliant mode")
                 self._robot_interface.switch_out_of_compliant_mode()
 
             # Send message to web interface indicating transfer is done.
@@ -770,7 +787,7 @@ class TransferToolHLA(HighLevelAction):
                 self._sim.scene_description.before_transfer_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -781,13 +798,15 @@ class TransferToolHLA(HighLevelAction):
             self._robot_interface.set_tool("wipe")
 
             if self._run_on_robot:
-                input("Press enter to switch to task compliant mode")
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
                 self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
                 self.inside_mouth_transfer.execute_transfer_loop()
 
-                input("Press enter to switch out of compliant mode")
+                if not self.no_waits:
+                    input("Press enter to switch out of compliant mode")
                 self._robot_interface.switch_out_of_compliant_mode()
 
             # Send message to web interface indicating transfer is done.
@@ -843,7 +862,7 @@ class LookAtPlateHLA(HighLevelAction):
                 self._sim.scene_description.above_plate_pos,
                 sim_states,
                 robot_commands,
-                rviz_interface=self._rviz_interface
+                rviz_interface=self._rviz_interface if not self.no_waits else None
             )
 
             if self._run_on_robot:
@@ -971,9 +990,6 @@ class AcquireBiteHLA(HighLevelAction):
 
         if tool.name == "utensil":
 
-            print("params", params)
-            input("Press Enter to continue...")
-
             if self.flair is not None:
 
                 print("Doing Bite Acquisition")
@@ -994,18 +1010,17 @@ class AcquireBiteHLA(HighLevelAction):
                     print("Positions:", params["positions"])
                     print("Point:", point_x, point_y)
 
-                    # visualize point on camera color image
-                    viz = camera_color_data.copy()
-                    for pos in params["positions"]:
-                        cv2.circle(viz, (point_x, point_y), 5, (0, 255, 0), -1)
-                    cv2.imshow("viz", viz)
-                    cv2.waitKey(0)
-                    cv2.destroyAllWindows()
-
-                    # import pdb; pdb.set_trace()
+                    if not self.no_waits:
+                        # visualize point on camera color image
+                        viz = camera_color_data.copy()
+                        for pos in params["positions"]:
+                            cv2.circle(viz, (point_x, point_y), 5, (0, 255, 0), -1)
+                        cv2.imshow("viz", viz)
+                        cv2.waitKey(0)
+                        cv2.destroyAllWindows()
 
                     skewer_center = (point_x, point_y)
-                    skewer_angle = 90
+                    skewer_angle = -np.pi/2
 
                     self.flair.skill_library.skewering_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = skewer_center, major_axis = skewer_angle)
 
@@ -1034,7 +1049,7 @@ class AcquireBiteHLA(HighLevelAction):
                     self._sim.scene_description.above_plate_pos,
                     sim_states,
                     robot_commands,
-                    rviz_interface=self._rviz_interface
+                    rviz_interface=self._rviz_interface if not self.no_waits else None
                 )
 
                 if self._run_on_robot:
