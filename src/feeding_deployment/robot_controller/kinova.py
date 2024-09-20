@@ -1071,8 +1071,15 @@ def main():
         # input("Press Enter to move to home pos")
         # arm.home()
 
-        input("Press Enter to zero torque offsets")
-        arm.zero_torque_offsets()
+        # input("Press Enter to zero torque offsets")
+        # arm.zero_torque_offsets()
+
+        input('Press Enter to switch to joint compliant mode')
+        command_queue = queue.Queue(1)
+        arm.switch_to_joint_compliant_mode(command_queue)  
+
+        input('Press Enter to switch out of joint compliant mode')
+        arm.switch_out_of_compliant_mode()
 
         # np.set_printoptions(precision=4, suppress=True)
 

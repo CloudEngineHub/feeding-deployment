@@ -70,22 +70,21 @@ class CompliantController:
             self.K_r_K_l = self.K_r @ self.K_l
 
             if self.control_type == "joint":
-                # self.K_p = np.diag([20.0, 20.0, 20.0, 20.0, 10.0, 10.0, 10.0])
-                self.K_p = np.diag([100.0, 100.0, 100.0, 100.0, 50.0, 50.0, 50.0])
-                # self.K_d = np.diag([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])
-                self.K_d = np.diag([3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0])
+                self.K_p = np.diag([20.0, 20.0, 20.0, 20.0, 10.0, 10.0, 10.0])
+                self.K_d = np.diag([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])
+                # self.K_d = np.diag([3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0])
             elif self.control_type == "task":
                 raise NotImplementedError
         else:
-            self.K_r = np.diag([0.4, 0.4, 0.4, 0.4, 0.2, 0.2])
-            self.K_l = np.diag([160.0, 160.0, 160.0, 160.0, 100.0, 100.0])
-            self.K_lp = np.diag([10.0, 10.0, 10.0, 10.0, 7.5, 7.5])
+            self.K_r = np.diag([0.3, 0.3, 0.3, 0.3, 0.18, 0.18])
+            self.K_l = np.diag([75.0, 75.0, 75.0, 75.0, 40.0, 40.0])
+            self.K_lp = np.diag([5.0, 5.0, 5.0, 5.0, 4.0, 4.0])
             self.K_r_inv = np.linalg.inv(self.K_r)
             self.K_r_K_l = self.K_r @ self.K_l
             
             if self.control_type == "joint":
-                self.K_p = np.diag([100.0, 100.0, 100.0, 100.0, 50.0, 50.0])
-                self.K_d = np.diag([3.0, 3.0, 3.0, 3.0, 2.0, 2.0])
+                self.K_p = np.diag([50.0, 50.0, 50.0, 50.0, 30.0, 30.0])
+                self.K_d = np.diag([2.0, 2.0, 2.0, 2.0, 1.5, 1.5])
             elif self.control_type == "task":
                 self.K_T_p = np.diag([100.0, 100.0, 100.0, 100.0, 100.0, 100.0])
                 self.K_T_d = np.diag([20, 20, 20, 20, 20, 20])
