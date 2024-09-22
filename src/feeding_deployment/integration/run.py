@@ -57,6 +57,8 @@ from feeding_deployment.actions.high_level_actions import (
     ToolPrepared,
     ToolTransferDone,
     TransferToolHLA,
+    ResetPos,
+    ResetHLA,
     pddl_plan_to_hla_plan,
     tool_type,
 )
@@ -76,7 +78,7 @@ from feeding_deployment.simulation.video import make_simulation_video
 from pybullet_helpers.geometry import Pose
 
 # All the high level actions we want to consider.
-HLAS = {PickToolHLA, StowToolHLA, LookAtPlateHLA, AcquireBiteHLA, TransferToolHLA}
+HLAS = {PickToolHLA, StowToolHLA, LookAtPlateHLA, AcquireBiteHLA, TransferToolHLA, ResetHLA}
 
 assert os.environ.get("PYTHONHASHSEED") == "0", \
         "Please add `export PYTHONHASHSEED=0` to your bash profile!"
@@ -151,6 +153,7 @@ class _Runner:
             ToolTransferDone,
             IsUtensil,
             PlateInView,
+            ResetPos,
         }
         self.types = {tool_type}
         self.domain = PDDLDomain(
@@ -211,9 +214,9 @@ class _Runner:
         """Pass high level action message from the web interface."""
         if msg_dict["status"] == "finish_feeding":
             user_cmd = GroundHighLevelAction(
-                self.hla_name_to_hla["Reset"], (self.drink,)
+                self.hla_name_to_hla["Reset"], ()
             )
-        if msg_dict["status"] == "drink_pickup":
+        elif msg_dict["status"] == "drink_pickup":
             user_cmd = GroundHighLevelAction(
                 self.hla_name_to_hla["PickTool"], (self.drink,)
             )
