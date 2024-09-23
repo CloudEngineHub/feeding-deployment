@@ -17,6 +17,7 @@ try:
     from kortex_api.autogen.client_stubs.ActuatorConfigClientRpc import (
         ActuatorConfigClient,
     )
+    from kortex_api.autogen.client_stubs.DeviceConfigClientRpc import DeviceConfigClient
     from kortex_api.autogen.client_stubs.BaseClientRpc import BaseClient
     from kortex_api.autogen.client_stubs.BaseCyclicClientRpc import BaseCyclicClient
     from kortex_api.autogen.client_stubs.ControlConfigClientRpc import (
@@ -33,6 +34,7 @@ try:
         Common_pb2,
         ControlConfig_pb2,
         Session_pb2,
+        DeviceConfig_pb2,
     )
     from kortex_api.RouterClient import RouterClient, RouterClientSendOptions
     from kortex_api.SessionManager import SessionManager
@@ -142,6 +144,8 @@ class KinovaArm:
         self.udp_connection = DeviceConnection.createUdpConnection()
         self.base = BaseClient(self.tcp_connection.__enter__())
         self.base_cyclic = BaseCyclicClient(self.udp_connection.__enter__())
+
+        self.device_config = DeviceConfigClient(self.base.router)
         self.actuator_config = ActuatorConfigClient(self.base.router)
         self.actuator_count = self.base.GetActuatorCount().count
         self.control_config = ControlConfigClient(self.base.router)
@@ -176,6 +180,14 @@ class KinovaArm:
 
         # Make sure arm is in high-level servoing mode
         self.set_arm_servoing_mode("high")
+
+        # # disable joint following error
+        joint_following_error_message = DeviceConfig_pb2.SafetyEnable()
+        joint_following_error_message.handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
+        joint_following_error_message.enable = False
+        for device_id in self.actuator_device_ids:
+            self.device_config.SetSafetyEnable(joint_following_error_message, device_id)
+        print("Joint following error disabled")
 
         # Torque control setup
         # Note: Torque commands are converted to current commands since
@@ -285,12 +297,24 @@ class KinovaArm:
 
             print("Tool set to wipe")
         elif tool == "drink":
+
+            ee_force = self.get_ee_force()
+            all_drink_urdfs = {
+                6: "hack_gen3_robotiq_2f_85_drink_6.urdf",
+                7.5: "hack_gen3_robotiq_2f_85_drink_7_5.urdf",
+                9: "hack_gen3_robotiq_2f_85_drink_9.urdf",
+                10.5: "hack_gen3_robotiq_2f_85_drink_10_5.urdf",
+                12: "hack_gen3_robotiq_2f_85_drink_12.urdf",
+            }
+            drink_approximate_mass = -ee_force[2] 
+            current_drink_urdf = all_drink_urdfs[min(all_drink_urdfs.keys(), key=lambda x: abs(x - drink_approximate_mass))]
+
             # Pinocchio setup (only used in low-level servoing mode)
             self.file_path = os.path.dirname(os.path.realpath(__file__))
 
             if self.fix_joint_hack:
                 self.model = pin.buildModelFromUrdf(
-                    os.path.join(self.file_path, "hack_gen3_robotiq_2f_85_drink.urdf")
+                    os.path.join(self.file_path, current_drink_urdf)
                 )
             else:
                 raise ValueError("URDF not available for drink tool without joint hack")
@@ -301,7 +325,7 @@ class KinovaArm:
             self.q_pin = np.zeros(self.model.nq)
             self.tool_frame_id = self.model.getFrameId("drink_tip")
 
-            print("Tool set to drink")
+            print(f"Tool set to drink with approximate mass {drink_approximate_mass} and urdf {current_drink_urdf}")
         else:
             raise ValueError("Invalid tool")
 
@@ -375,6 +399,17 @@ class KinovaArm:
         ]
         self.move_angular(intermediate_zero_config)
 
+    def get_ee_force(self):
+        base_feedback = self.base_cyclic.RefreshFeedback()
+        ee_force = np.array(
+            [
+                base_feedback.base.tool_external_wrench_force_x,
+                base_feedback.base.tool_external_wrench_force_y,
+                base_feedback.base.tool_external_wrench_force_z,
+            ]
+        )
+        return ee_force
+
     def get_state(self):
 
         # Rajat ToDo: this isn't exactly the same as get_state as it returns tool tip pose instead of tool_frame pose
@@ -423,6 +458,8 @@ class KinovaArm:
         ee_vel[3:] = R.from_euler("xyz", np.deg2rad(tool_rot_vel)).as_quat()
 
         ee_force[:3] = (base_feedback.base.tool_external_wrench_force_x, base_feedback.base.tool_external_wrench_force_y, base_feedback.base.tool_external_wrench_force_z)
+
+        # print("End Effector Force: ", ee_force)
 
         gripper_pos = (
             base_feedback.interconnect.gripper_feedback.motor[0].position / 100.0
@@ -1107,6 +1144,11 @@ def main():
         arm.zero_torque_offsets()
 
         # np.set_printoptions(precision=4, suppress=True)
+
+        # for i in range(10):
+        #     input("Press Enter to read current state")
+        #     ee_force = arm.get_ee_force()
+        #     print(f"End Effector Force: {ee_force}")
 
         # input("Press Enter to move to home pos")
         # arm.home()
