@@ -119,12 +119,12 @@ class ArmInterface:
         assert not self.emergency_stop_active, "Emergency stop is active"
         assert self.in_compliant_mode, "Not in compliant mode"
 
-        # first move to gravity compensation 
-        print("Moving to gravity compensation")
-        self.gravity_compensation_event.set()
-        time.sleep(1.0) # Wait for the arm to settle
-
         with self.gravity_compensation_event_lock:
+            # first move to gravity compensation 
+            print("Moving to gravity compensation")
+            self.gravity_compensation_event.set()
+            time.sleep(1.0) # Wait for the arm to settle
+
             # switch out of joint compliant mode
             if self.emergency_stop_active:
                 print("Cannot switch out of compliant mode due to emergency stop")
