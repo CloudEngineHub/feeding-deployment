@@ -162,6 +162,7 @@ class CompliantController:
         dq_s = arm.dq.copy()
         tau_s = arm.tau.copy()
         tau_s_f = self.tau_filter.filter(tau_s)
+        self.x_s = arm.x.copy()
 
         if self.gravity_compensation_event.is_set():
             torque_command = arm.gravity()
@@ -202,6 +203,7 @@ class CompliantController:
         for i in range(arm.n_compliant_dofs):
             if wrapped_q_s[i] < self.soft_joint_limits[i][0] or wrapped_q_s[i] > self.soft_joint_limits[i][1]:
                 within_limits = False
+                print("[Compliant Controller] Arm is out of joint limits: Switching to gravity compensation")
                 break
 
         # safety check - delta in commands
@@ -214,6 +216,9 @@ class CompliantController:
         elif self.control_type == "task":
             if np.linalg.norm(self.x_s[:3] - self.x_d[:3]) > 0.1: # 10 cm
                 within_range = False
+                print("[Compliant Controller] Command is too far from current position: Switching to gravity compensation")
+                print(f"Current position: {self.x_s[:3]}")
+                print(f"Commanded position: {self.x_d[:3]}")
 
         if not within_limits or not within_range:
             self.gravity_compensation_event.set()
