@@ -98,32 +98,32 @@ if __name__ == "__main__":
     if run_commands != "y":
         exit()
 
-    before_transfer_pos = [
-        -2.8655331,  
-        -1.61973777, 
-        -2.6097253, 
-        -1.37301134, 
-        1.11781087,
-        -1.18039928,
-        2.05515662
-    ]
+    # before_transfer_pos = [
+    #     -2.8655331,  
+    #     -1.61973777, 
+    #     -2.6097253, 
+    #     -1.37301134, 
+    #     1.11781087,
+    #     -1.18039928,
+    #     2.05515662
+    # ]
 
-    arm_client_interface.execute_command(JointCommand(before_transfer_pos))
+    # arm_client_interface.execute_command(JointCommand(before_transfer_pos))
 
-    input("Press enter to go to compliance mode...")
-    arm_client_interface.switch_to_task_compliant_mode()
+    # input("Press enter to go to compliance mode...")
+    # arm_client_interface.switch_to_task_compliant_mode()
 
-    arm_pos, ee_pose, gripper_pos = arm_client_interface.get_state()
-    drop_test_pose = np.zeros(7)
-    drop_test_pose[:3] = [0.45, 0.62, 0.6]
-    drop_test_pose[3:] = [-0.03083443277876381, 0.7132803649800029, 0.7001853591905794, -0.00456305428030798]
-    drop_test_task_command = CartesianCommand(pos=drop_test_pose[:3], quat=drop_test_pose[3:])
+    # arm_pos, ee_pose, gripper_pos = arm_client_interface.get_state()
+    # drop_test_pose = np.zeros(7)
+    # drop_test_pose[:3] = [0.45, 0.62, 0.6]
+    # drop_test_pose[3:] = [-0.03083443277876381, 0.7132803649800029, 0.7001853591905794, -0.00456305428030798]
+    # drop_test_task_command = CartesianCommand(pos=drop_test_pose[:3], quat=drop_test_pose[3:])
     
-    input("Press Enter to move to drop test pos")
-    arm_client_interface.execute_command(drop_test_task_command)
+    # input("Press Enter to move to drop test pos")
+    # arm_client_interface.execute_command(drop_test_task_command)
 
-    input('Press Enter to switch out of compliant mode')
-    arm_client_interface.switch_out_of_compliant_mode()
+    # input('Press Enter to switch out of compliant mode')
+    # arm_client_interface.switch_out_of_compliant_mode()
 
     # close gripper
     # arm_client_interface.execute_command(CloseGripperCommand())
@@ -185,35 +185,37 @@ if __name__ == "__main__":
     #     else:
     #         arm_client_interface.execute_command(CartesianCommand(pos=test_poses[i % 4][:3], quat=test_poses[i % 4][3:]))
 
-    # utensil_inside_mount = (
-    #     np.array([0.242, -0.077, 0.07]),
-    #     np.array([-1, 0, 0, 0]),
-    # )
+    utensil_inside_mount = (
+        np.array([-0.286, -0.133, 0.065]),
+        np.array([0.7071068, -0.7071068, 0, 0 ]),
+    )
 
-    # utensil_outside_mount = (
-    #     utensil_inside_mount[0].copy(),
-    #     utensil_inside_mount[1].copy(),
-    # )
-    # utensil_outside_mount[0][0] += 0.13
+    utensil_outside_mount = (
+        utensil_inside_mount[0].copy(),
+        utensil_inside_mount[1].copy(),
+    )
+    utensil_outside_mount[0][1] -= 0.13
 
-    # utensil_outside_above_mount = (
-    #     utensil_outside_mount[0].copy(),
-    #     utensil_outside_mount[1].copy(),
-    # )
-    # utensil_outside_above_mount[0][2] += 0.1
+    utensil_outside_above_mount = (
+        utensil_outside_mount[0].copy(),
+        utensil_outside_mount[1].copy(),
+    )
+    utensil_outside_above_mount[0][2] += 0.1
 
-    # utensil_above_mount = (
-    #     utensil_inside_mount[0].copy(),
-    #     utensil_inside_mount[1].copy(),
-    # )
-    # utensil_above_mount[0][2] += 0.1
+    utensil_above_mount = (
+        utensil_inside_mount[0].copy(),
+        utensil_inside_mount[1].copy(),
+    )
+    utensil_above_mount[0][2] += 0.1
 
-    # utensil_inside_mount_pos = [0.03610898146611135, 0.46058565446690675, -2.7959276599029583, -2.4802831496040416, -0.5912420020218754, -0.27659484555119374, 0.9346522303717946]
+    utensil_inside_mount_pos = [2.2467215251591117, 0.5836147086598885, -2.535738152982762, -2.2963045246503158, -0.7542663428866403, -0.4699185027700077, 1.9096838418235886]
 
     # # depend on the offsets set above
-    # utensil_above_mount_pos = [-0.3081224117999879, 0.1449308244187662, -2.4515079603418446, -2.3539334664268674, -0.14376009880356744, -0.6872590793313744, 0.5028097739444904]
-    # utensil_outside_mount_pos = [-0.13616795916796942, 0.6152003983994736, -2.673508269862523, -2.09060888627143, -0.5157179493005364, -0.5540355110645967, 0.7160963868259976]
+    utensil_above_mount_pos = [1.9755942824839052, 0.3527602540420511, -2.2270956258218817, -2.1930039680755593, -0.39397207269978196, -0.7730064748453094, 1.5904074455880766]
+    utensil_outside_mount_pos = [1.9202113176126718, 0.6917033625584985, -2.4682459277929927, -2.063521874824234, -0.7181986196114787, -0.6391235078926281, 1.523472620014461]
     # utensil_outside_above_mount_pos = [-0.2692035082617874, 0.4127082432063301, -2.513398492494741, -1.9930522355357558, -0.31928105676741936, -0.8392446174777604, 0.5472652562309106]
+
+    retract_pos = [0.0, -0.34908342726206065, 3.1415748104104897, -2.548278978555945, 0.0, -0.8726901923436294, 1.5707848752022093]
 
     # above_plate_pos = [
     #     -2.86495014,
@@ -235,23 +237,29 @@ if __name__ == "__main__":
     #     2.05515862,
     # ]
 
-    # # input("Press enter to move to above utensil mount pose...")
-    # # arm_client_interface.execute_command(CartesianCommand(utensil_above_mount[0], utensil_above_mount[1]))
+    input("Press enter to move to close fingers...")
+    arm_client_interface.execute_command(CloseGripperCommand())
 
-    # input("Press enter to move to above utensil pos...")
-    # arm_client_interface.execute_command(JointCommand(utensil_above_mount_pos))
-
-    # input("Press enter to move to inside utensil mount pose...")
+    # input("Press enter to move to inside utensil pos...")
     # arm_client_interface.execute_command(CartesianCommand(utensil_inside_mount[0], utensil_inside_mount[1]))
 
-    # input("Press enter to grasp the utensil...")
-    # arm_client_interface.execute_command(OpenGripperCommand())
+    # input("Press enter to move to above utensil mount pose...")
+    # arm_client_interface.execute_command(CartesianCommand(utensil_above_mount[0], utensil_above_mount[1]))
 
-    # input("Press enter to move outside the mount...")
-    # arm_client_interface.execute_command(CartesianCommand(utensil_outside_mount[0], utensil_outside_mount[1]))
+    input("Press enter to move to above utensil pos...")
+    arm_client_interface.execute_command(JointCommand(utensil_above_mount_pos))
 
-    # input("Press enter to move to above outside utensil pose...")
-    # arm_client_interface.execute_command(CartesianCommand(utensil_outside_above_mount[0], utensil_outside_above_mount[1]))
+    input("Press enter to move to inside utensil mount pose...")
+    arm_client_interface.execute_command(CartesianCommand(utensil_inside_mount[0], utensil_inside_mount[1]))
+
+    input("Press enter to grasp the utensil...")
+    arm_client_interface.execute_command(OpenGripperCommand())
+
+    input("Press enter to move outside the mount...")
+    arm_client_interface.execute_command(CartesianCommand(utensil_outside_mount[0], utensil_outside_mount[1]))
+
+    input("Press enter to move to retract pos...")
+    arm_client_interface.execute_command(JointCommand(retract_pos))
 
     # # input("Press enter to move to before transfer pose...")
     # # arm_client_interface.execute_command(JointCommand(before_transfer_pos))
@@ -262,14 +270,17 @@ if __name__ == "__main__":
     # input("Press enter to move to above outside utensil mount pos...")
     # arm_client_interface.execute_command(JointCommand(utensil_outside_above_mount_pos))
 
-    # input("Press enter to move outside the mount...")
-    # arm_client_interface.execute_command(JointCommand(utensil_outside_mount_pos))
+    input("Press enter to move outside the mount...")
+    arm_client_interface.execute_command(JointCommand(utensil_outside_mount_pos))
 
-    # input("Press enter to move to inside utensil mount pose...")
-    # arm_client_interface.execute_command(CartesianCommand(utensil_inside_mount[0], utensil_inside_mount[1]))
+    input("Press enter to move to inside utensil mount pose...")
+    arm_client_interface.execute_command(CartesianCommand(utensil_inside_mount[0], utensil_inside_mount[1]))
 
-    # input("Press enter to ungrasp the utensil...")
-    # arm_client_interface.execute_command(CloseGripperCommand())
+    input("Press enter to ungrasp the utensil...")
+    arm_client_interface.execute_command(CloseGripperCommand())
 
-    # input("Press enter to move to above utensil pose...")
-    # arm_client_interface.execute_command(CartesianCommand(utensil_above_mount[0], utensil_above_mount[1]))
+    input("Press enter to move to above utensil pose...")
+    arm_client_interface.execute_command(CartesianCommand(utensil_above_mount[0], utensil_above_mount[1]))
+
+    input("Press enter to move to retract pos...")
+    arm_client_interface.execute_command(JointCommand(retract_pos))
