@@ -61,6 +61,7 @@ IsUtensil = Predicate("IsUtensil", [tool_type])
 
 # Rajat ToDo: Move this to a config file
 INSIDE_MOUTH_TRANSFER = False 
+DISTANCE_INFRONT_MOUTH = 0.20
 
 # Define high-level actions.
 class HighLevelAction(abc.ABC):
@@ -703,10 +704,93 @@ class TransferToolHLA(HighLevelAction):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if INSIDE_MOUTH_TRANSFER:
-            self.transfer = InsideMouthTransfer(perception_interface=self._perception_interface, robot_interface=self._robot_interface, rviz_interface=self._rviz_interface)
+        self.tool = None
+
+        self.ready_for_transfer_interaction = "silent" # "silent", "voice" or "led"
+        self.initiate_transfer_interaction = "open_mouth" # "button", "open_mouth" or "auto_timeout"
+        self.transfer_complete_interaction = "sense" # "button", "sense" or "auto_timeout"
+    
+    def set_tool(self, tool):
+        self.tool = tool
+
+    def detect_initiate_transfer(self):
+        if self.initiate_transfer_interaction == "button":
+            self._perception_interface.detect_button_press()
+        elif self.initiate_transfer_interaction == "open_mouth":
+            self._perception_interface.detect_mouth_open()
+        elif self.initiate_transfer_interaction == "auto_timeout":
+            self._perception_interface.auto_timeout()
+        print("Initiating transfer")
+
+    def detect_transfer_complete(self):
+        if self.transfer_complete_interaction == "button":
+            self._perception_interface.detect_button_press()
+        elif self.transfer_complete_interaction == "sense":
+            if self.tool == "fork":
+                self._perception_interface.detect_force_trigger()
+            elif self.tool == "drink":
+                self._perception_interface.detect_head_shake()
+            elif self.tool == "wipe":
+                self._perception_interface.detect_head_still()
+        elif self.transfer_complete_interaction == "auto_timeout":
+            self._perception_interface.auto_timeout()
+        print("Detected transfer completion")
+
+    def relay_ready_for_transfer(self):
+        if self.ready_for_transfer_interaction == "silent":
+            pass
+        elif self.ready_for_transfer_interaction == "voice":
+            self._perception_interface.speak("Please ooopen your mouth when ready")
+
+    def publishTaskCommand(self, tip_pose):
+
+        tip_pose[:3, :3] = Rotation.from_quat([0.478, -0.505, -0.515, 0.502]).as_matrix()
+
+        if self.tool == "fork":
+            tip_to_wrist = self.tf_utils.getTransformationFromTF('fork_tip', 'tool_frame')
+        elif self.tool == "drink":
+            tip_to_wrist = self.tf_utils.getTransformationFromTF('drink_tip', 'tool_frame')
+        elif self.tool == "wipe":
+            tip_to_wrist = self.tf_utils.getTransformationFromTF('wipe_tip', 'tool_frame')
         else:
-            self.transfer = OutsideMouthTransfer(perception_interface=self._perception_interface, robot_interface=self._robot_interface, rviz_interface=self._rviz_interface)
+            raise ValueError("Tool not recognized")
+        tool_frame_target = tip_pose @ tip_to_wrist
+
+        # self.visualizer.visualize_fork(tip_pose)
+        self.tf_utils.publishTransformationToTF('base_link', 'tool_frame_target_viz', tool_frame_target)
+      
+        tool_frame_pos = tool_frame_target[:3,3].reshape(1,3).tolist()[0] # one dimensional list
+        tool_frame_quat = Rotation.from_matrix(tool_frame_target[:3,:3]).as_quat()
+        self.robot_interface.execute_command(CartesianCommand(tool_frame_pos, tool_frame_quat))
+
+    def execute_transfer_loop(self, maintain_position_at_goal = False):
+        
+        assert self._perception_interface.head_perception_thread_is_running(), "Head perception thread is not running"
+        assert self.tool is not None, "Tool is not set"
+
+        self.relay_ready_for_transfer()
+        self.detect_initiate_transfer()
+
+        print("Setting state to 1")
+
+        # move to infront of mouth
+        forque_target_base = self._perception_interface.get_head_perception_tool_tip_target_pose()
+        servo_point_forque_target = np.identity(4)
+        servo_point_forque_target[:3,3] = np.array([0, 0, -DISTANCE_INFRONT_MOUTH]).reshape(1,3)
+        infront_mouth_target = forque_target_base @ servo_point_forque_target
+        self.publishTaskCommand(infront_mouth_target)
+
+        self.detect_transfer_complete()
+        # shutdown the head perception thread
+        self._perception_interface.stop_head_perception_thread()
+
+        # move to before transfer position
+        final_target = self._perception_interface.get_tool_tip_pose_at_staging()
+        self.publishTaskCommand(final_target)
+
+        # incase for some reason the head perception thread is still running
+        self._perception_interface.stop_head_perception_thread()            
+        print("Exiting transfer loop")
 
     def get_name(self) -> str:
         return "TransferTool"
@@ -755,7 +839,7 @@ class TransferToolHLA(HighLevelAction):
             self._perception_interface.start_head_perception_thread()
             time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             self._robot_interface.set_tool("fork")
-            self.transfer.set_tool("fork")
+            self.set_tool("fork")
 
             # Rajat Hack: Just to test interface
             if self._run_on_robot:
@@ -766,7 +850,7 @@ class TransferToolHLA(HighLevelAction):
                     self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
-                self.transfer.execute_transfer_loop()
+                self.execute_transfer_loop()
 
                 if INSIDE_MOUTH_TRANSFER:                
                     if not self.no_waits:
@@ -800,7 +884,7 @@ class TransferToolHLA(HighLevelAction):
             self._perception_interface.start_head_perception_thread()
             time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             self._robot_interface.set_tool("drink")
-            self.transfer.set_tool("drink")
+            self.set_tool("drink")
 
             if self._run_on_robot:
                 if INSIDE_MOUTH_TRANSFER:
@@ -809,7 +893,7 @@ class TransferToolHLA(HighLevelAction):
                     self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
-                self.transfer.execute_transfer_loop(maintain_position_at_goal=True)
+                self.execute_transfer_loop(maintain_position_at_goal=True)
 
                 if INSIDE_MOUTH_TRANSFER:
                     if not self.no_waits:
@@ -842,7 +926,7 @@ class TransferToolHLA(HighLevelAction):
             self._perception_interface.start_head_perception_thread()
             time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             self._robot_interface.set_tool("wipe")
-            self.transfer.set_tool("wipe")
+            self.set_tool("wipe")
 
             if self._run_on_robot:
                 if INSIDE_MOUTH_TRANSFER:
@@ -851,7 +935,7 @@ class TransferToolHLA(HighLevelAction):
                     self._robot_interface.switch_to_task_compliant_mode()
                 
                 # Do inside-mouth transfer here
-                self.transfer.execute_transfer_loop(maintain_position_at_goal=True)
+                self.execute_transfer_loop(maintain_position_at_goal=True)
 
                 if INSIDE_MOUTH_TRANSFER:
                     if not self.no_waits:

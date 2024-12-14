@@ -62,6 +62,126 @@ class PerceptionInterface:
             self.head_perception_thread = None
             self.kill_the_thread = False
             self.head_perception_running = False
+
+            self.speak_pub = rospy.Publisher('/speak', String, queue_size=1)
+
+            self.set_filter_noisy_readings_pub = rospy.Publisher('/head_perception/set_filter_noisy_readings', Bool, queue_size=1)
+
+            self.transfer_button = False
+            self.transfer_button_sub = rospy.Subscriber('/transfer_button', Bool, self.transfer_button_callback)
+
+            self.mouth_open = False
+            self.mouth_state_sub = rospy.Subscriber('/head_perception/mouth_state', Bool, self.mouth_state_callback)
+            
+            self.ft_threshold_exceeded = False
+            self.ft_sensor_sub = rospy.Subscriber('/forque/forqueSensor', WrenchStamped, self.ft_callback)
+
+            self.head_shake_detected = False
+            self.head_still_detected = False
+            self.neck_rotation_sub = rospy.Subscriber('/head_perception/neck_rotation', Point, self.neck_rotation_callback)
+
+    def zero_ft_sensor(self):
+        # bias FT sensor
+        bias = rospy.ServiceProxy('/forque/bias_cmd', String_cmd)
+        bias('bias')
+        
+    def speak(self, text):
+        print("Speaking: ", text)
+        self.speak_pub.publish(String(data=text))
+
+    def neck_rotation_callback(self, msg):
+
+        neck_rotation = np.array([msg.x, msg.y, msg.z])
+        if neck_rotation[1] > 5: # in degrees
+            self.head_shake_detected = True
+        if np.abs(neck_rotation[0]) < 5 and np.abs(neck_rotation[1]) < 5 and np.abs(neck_rotation[2]) < 5:
+            self.head_still_detected = True
+        else:
+            self.head_still_detected = False
+
+    def detect_mouth_open(self):
+        self.mouth_open = False
+        # wait for mouth to open
+        while not rospy.is_shutdown() and not self.mouth_open:
+            time.sleep(0.05)
+        self.mouth_open = False
+        return True
+
+    def detect_button_press(self):
+        self.transfer_button = False
+        # wait for button press
+        print("Waiting for button press")
+        while not rospy.is_shutdown() and not self.transfer_button:
+            time.sleep(0.05)
+        self.transfer_button = False
+        return True
+    
+    def detect_force_trigger(self):
+        self.ft_threshold_exceeded = False
+        # wait for force torque threshold to be exceeded
+        print("Waiting for force torque threshold to be exceeded")
+        while not rospy.is_shutdown() and not self.ft_threshold_exceeded:
+            time.sleep(0.05)
+        self.ft_threshold_exceeded = False
+        return True
+    
+    def detect_head_shake(self):
+        self.set_filter_noisy_readings_pub.publish(Bool(data=False))
+        self.head_shake_detected = False
+        # wait for head shake
+        print("Waiting for head shake")
+        while not rospy.is_shutdown() and not self.head_shake_detected:
+            time.sleep(0.05)
+        self.set_filter_noisy_readings_pub.publish(Bool(data=True))
+        self.head_shake_detected = False
+        return True
+    
+    def detect_head_still(self):
+        self.head_shake_detected = True
+        self.set_filter_noisy_readings_pub.publish(Bool(data=False))
+        print("Waiting for head still to be detected for 4 seconds")
+        while not rospy.is_shutdown():
+            head_still_start_time = time.time()
+            while not rospy.is_shutdown():
+                print("Head still detected: ",self.head_still_detected)
+                if not self.head_still_detected or time.time() - head_still_start_time > 4.0:
+                    break
+                if time.time() - head_still_start_time > 3.0:
+                    print("Waiting for head still to be detected for 1 more second")
+                elif time.time() - head_still_start_time > 2.0:
+                    print("Waiting for head still to be detected for 2 more seconds")
+                elif time.time() - head_still_start_time > 1.0:
+                    print("Waiting for head still to be detected for 3 more seconds")
+                time.sleep(0.05)
+            if time.time() - head_still_start_time > 4.0:
+                break
+        self.set_filter_noisy_readings_pub.publish(Bool(data=True))
+        self.head_still_detected = True
+        return True
+    
+    def auto_timeout(self, timeout=5.0):
+        print("Waiting for auto timeout")
+        time.sleep(timeout)
+        return True
+
+    def ft_callback(self, msg):
+
+        ft_reading = np.array([msg.wrench.force.x, msg.wrench.force.y, msg.wrench.force.z, msg.wrench.torque.x, msg.wrench.torque.y, msg.wrench.torque.z])
+
+        down_torque = ft_reading[3]
+        if np.abs(down_torque) > 0.1:
+            self.ft_threshold_exceeded = True
+
+    def mouth_state_callback(self, msg):
+        self.mouth_open = msg.data
+
+    def transfer_button_callback(self, msg):
+        print("Transfer button pressed")
+        self.transfer_button = True
+
+    def head_shake_callback(self, msg):
+        with self.head_shake_lock:
+            self.head_shake_detected = msg.data
         
     def get_robot_joints(self) -> "JointState":
         """Get the current robot joint state."""
