@@ -58,14 +58,17 @@ def _sample_food_pose(sim: FeedingDeploymentPyBulletSimulator, rng: np.random.Ge
 def _run_fork_tip_ik(pose: Pose, utensil_tip_from_end_effector: Pose,
                              sim: FeedingDeploymentPyBulletSimulator,
                              debug: bool = False,
-                             check_collisions: bool = True) -> JointPositions | None:
+                             check_collisions: bool = True,
+                             seed: int = 0) -> JointPositions | None:
     target_end_effector_pose = multiply_poses(pose, utensil_tip_from_end_effector.invert())
 
     joints = None
     try:
         if check_collisions:
+            rng = np.random.default_rng(seed)
             gen = sample_collision_free_inverse_kinematics(sim.robot, target_end_effector_pose,
                                                     sim.get_collision_ids(),
+                                                    rng=rng,
                                                     held_object=sim.held_object_id,
                                                     base_link_to_held_obj=sim.held_object_tf)
             joints = next(gen)
