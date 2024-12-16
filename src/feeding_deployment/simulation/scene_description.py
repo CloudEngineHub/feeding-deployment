@@ -383,6 +383,8 @@ class SceneDescription:
             "outer_camera_yaw": 30,
             "outer_camera_distance": 2.5,
             "outer_camera_pitch": -30,
+            "inner_image_width": 2000,
+            "inner_image_height": 2000,
             "inner_camera_target": head_position,
             "inner_camera_yaw": 0,
             "inner_camera_distance": 1.0,

@@ -870,9 +870,11 @@ class TransferToolHLA(HighLevelAction):
 
             self._perception_interface.set_head_perception_tool("fork")
             self._perception_interface.start_head_perception_thread()
-            time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             if self._robot_interface is not None:
+                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
                 self._robot_interface.set_tool("fork")
+            else:
+                time.sleep(1.0) # let sim head perception thread warmstart
             self.set_tool("fork")
 
             if INSIDE_MOUTH_TRANSFER and self._robot_interface is not None:
@@ -913,26 +915,24 @@ class TransferToolHLA(HighLevelAction):
 
             self._perception_interface.set_head_perception_tool("drink")
             self._perception_interface.start_head_perception_thread()
-            time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             if self._robot_interface is not None:
+                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
                 self._robot_interface.set_tool("drink")
+            else:
+                time.sleep(1.0) # let sim head perception thread warmstart
             self.set_tool("drink")
 
-            if self._robot_interface is not None:
-                if INSIDE_MOUTH_TRANSFER:
-                    if not self.no_waits:
-                        input("Press enter to switch to task compliant mode")
-                    if self._robot_interface is not None:
-                        self._robot_interface.switch_to_task_compliant_mode()
+            if INSIDE_MOUTH_TRANSFER and self._robot_interface is not None:
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
+                self._robot_interface.switch_to_task_compliant_mode()
                 
-                # Do inside-mouth transfer here
-                self.execute_transfer_loop(sim_states, robot_commands, maintain_position_at_goal=True)
+            self.execute_transfer_loop(sim_states, robot_commands, maintain_position_at_goal=True)
 
-                if INSIDE_MOUTH_TRANSFER:
-                    if not self.no_waits:
-                        input("Press enter to switch out of compliant mode")
-                    if self._robot_interface is not None:
-                        self._robot_interface.switch_out_of_compliant_mode()
+            if INSIDE_MOUTH_TRANSFER and self._robot_interface is not None:                
+                if not self.no_waits:
+                    input("Press enter to switch out of compliant mode")
+                self._robot_interface.switch_out_of_compliant_mode()
 
             # Send message to web interface indicating transfer is done.
             if self._web_interface is not None:
@@ -959,26 +959,24 @@ class TransferToolHLA(HighLevelAction):
 
             self._perception_interface.set_head_perception_tool("wipe")
             self._perception_interface.start_head_perception_thread()
-            time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
             if self._robot_interface is not None:
+                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
                 self._robot_interface.set_tool("wipe")
+            else:
+                time.sleep(1.0) # let sim head perception thread warmstart
             self.set_tool("wipe")
 
-            if self._robot_interface is not None:
-                if INSIDE_MOUTH_TRANSFER:
-                    if not self.no_waits:
-                        input("Press enter to switch to task compliant mode")
-                    if self._robot_interface is not None:
-                        self._robot_interface.switch_to_task_compliant_mode()
+            if INSIDE_MOUTH_TRANSFER and self._robot_interface is not None:
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
+                self._robot_interface.switch_to_task_compliant_mode()
                 
-                # Do inside-mouth transfer here
-                self.execute_transfer_loop(sim_states, robot_commands, maintain_position_at_goal=True)
+            self.execute_transfer_loop(sim_states, robot_commands, maintain_position_at_goal=True)
 
-                if INSIDE_MOUTH_TRANSFER:
-                    if not self.no_waits:
-                        input("Press enter to switch out of compliant mode")
-                    if self._robot_interface is not None:
-                        self._robot_interface.switch_out_of_compliant_mode()
+            if INSIDE_MOUTH_TRANSFER and self._robot_interface is not None:                
+                if not self.no_waits:
+                    input("Press enter to switch out of compliant mode")
+                self._robot_interface.switch_out_of_compliant_mode()
 
             # Send message to web interface indicating transfer is done.
             if self._web_interface is not None:

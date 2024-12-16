@@ -130,6 +130,9 @@ def teleport_to_ee_pose(
 
     joint_trajectory = _get_joint_trajectory_to_pose(sim, pose, max_control_time=30.0)
     plan = _plan_to_sim_state_trajectory(joint_trajectory, sim)
+    print('Current plan has', len(plan), 'steps')
+    plan = remap_trajectory_to_constant_distance(plan, sim)
+    print('After remapping, plan has', len(plan), 'steps')
     sim_states.extend(plan)
 
     if rviz_interface is not None:
