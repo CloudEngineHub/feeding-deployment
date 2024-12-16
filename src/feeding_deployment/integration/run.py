@@ -386,6 +386,8 @@ if __name__ == "__main__":
     # runner.hla_command_queue.put(drink_transfer_msg)
 
     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
+    # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
     print("Processed transfer command")
     # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.utensil,)))
     # for _ in range(10):
@@ -399,5 +401,5 @@ if __name__ == "__main__":
     if args.make_videos:
         runner.make_video(Path("full.mp4"))
 
-    if ROSPY_IMPORTED:
+    if args.run_on_robot:
         rospy.spin()
