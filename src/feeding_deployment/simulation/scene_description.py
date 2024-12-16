@@ -154,6 +154,11 @@ class SceneDescription:
         ]
     )
 
+    before_transfer_pose: Pose = Pose(
+        (0.346, 0.300, 0.392), 
+        (0.0, 0.707, 0.707, 0),
+    )
+
     retract_pos: JointPositions = field(
         default_factory=lambda: [
             0.0,
@@ -180,6 +185,10 @@ class SceneDescription:
         / "urdf"
         / "feeding_utensil"
         / "feeding_utensil.urdf"
+    )
+    tool_frame_to_utensil_tip: Pose = Pose(
+        (0.255, 0.0, -0.018),
+        (0.000, 0.707, 0.000, 0.707),
     )
 
     # Constants for utensil pick and place
@@ -231,13 +240,6 @@ class SceneDescription:
         ]
     )
 
-    # Constants for utensil transfer
-    # Rajat ToDo: Fix with correct values, copied from drinking utensil
-    utensil_tip_from_end_effector: Pose = Pose(
-        (0.255, 0.0, -0.018),
-        (0.000, 0.707, 0.000, 0.707),
-    )
-
     ######### drink #########
 
     drink_pose: Pose = Pose(
@@ -250,6 +252,10 @@ class SceneDescription:
         / "urdf"
         / "drinking_utensil"
         / "drinking_utensil.urdf"
+    )
+    tool_frame_to_drink_tip: Pose = Pose(
+        (0.210, 0.070, 0.023),
+        (0.000, 0.707, 0.000, 0.707),
     )
 
     # # Constants for drink pick and place
@@ -302,6 +308,10 @@ class SceneDescription:
         / "urdf"
         / "wiping_utensil"
         / "wiping_utensil.urdf"
+    )
+    tool_frame_to_wipe_tip: Pose = Pose(
+        (0.089, -0.015, -0.018),
+        (0.000, 0.707, 0.000, 0.707),
     )
 
     # Constants for wiping utensil pick and place

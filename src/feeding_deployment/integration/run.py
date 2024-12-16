@@ -103,8 +103,11 @@ class _Runner:
         else:
             self.robot_interface = None
 
+        self.log_dir = Path(__file__).parent / "sensor_log"
+        self.log_dir.mkdir(exist_ok=True)
+
         # Initialize the perceiver (e.g., get joint states or human head poses).
-        self.perception_interface = PerceptionInterface(robot_interface=self.robot_interface, simulate_head_perception=self.simulate_head_perception)
+        self.perception_interface = PerceptionInterface(robot_interface=self.robot_interface, simulate_head_perception=self.simulate_head_perception, log_dir=self.log_dir)
 
         # Initialize the simulator.
         kwargs: dict[str, Any] = {}
@@ -141,7 +144,7 @@ class _Runner:
         print("Creating HLAs...")
         self.hlas = {
             cls(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.web_interface, hla_hyperparams,
-                wrist_controller, flair, self.no_waits) for cls in HLAS  # type: ignore
+                wrist_controller, flair, self.no_waits, self.log_dir) for cls in HLAS  # type: ignore
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
