@@ -12,13 +12,11 @@ import pickle
 
 try:
     import rospy
-    from sensor_msgs.msg import JointState, CompressedImage
+    from sensor_msgs.msg import JointState
     from std_msgs.msg import String, Bool
-    from visualization_msgs.msg import MarkerArray
     import tf2_ros
-    from geometry_msgs.msg import TransformStamped
-    from cv_bridge import CvBridge
-    from geometry_msgs.msg import Pose as PoseMsg
+    from geometry_msgs.msg import WrenchStamped, Point, Pose as PoseMsg
+    from netft_rdt_driver.srv import String_cmd
 
     from feeding_deployment.head_perception.ros_wrapper import HeadPerceptionROSWrapper
     from feeding_deployment.aruco_perception.aruco_perception import ArUcoPerception
@@ -30,9 +28,10 @@ from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
 class PerceptionInterface:
     """An interface for perception (robot joints, human head poses, etc.)."""
 
-    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False, simulate_head_perception: bool = False) -> None:
+    def __init__(self, robot_interface: ArmInterfaceClient | None, record_goal_pose: bool = False, simulate_head_perception: bool = False, log_dir: str | None = None) -> None:
         self._robot_interface = robot_interface
         self._simulate_head_perception = simulate_head_perception
+        self.log_dir = log_dir
 
         # run head perception
         if self._robot_interface is None:
@@ -255,9 +254,18 @@ class PerceptionInterface:
                 if self._head_perception is not None and not self._simulate_head_perception:
                     tool_tip_target_pose = self._head_perception.run_head_perception()
                 else:
-                    tool_tip_target_pose = np.eye(4)
-                    tool_tip_target_pose[:3, 3] = [-0.282, 0.540, 0.619]
-                    tool_tip_target_pose[:3, :3] = R.from_quat([-0.490, 0.510, 0.511, -0.489]).as_matrix()
+                    # read from logged data
+                    if self.tool == "fork":
+                        with open(self.log_dir / 'head_perception_pose_fork.pkl', 'rb') as f:
+                            tool_tip_target_pose = pickle.load(f)
+                    elif self.tool == "drink":
+                        with open(self.log_dir / 'head_perception_pose_drink.pkl', 'rb') as f:
+                            tool_tip_target_pose = pickle.load(f)
+                    elif self.tool == "wipe":
+                        with open(self.log_dir / 'head_perception_pose_wipe.pkl', 'rb') as f:
+                            tool_tip_target_pose = pickle.load(f)
+                    else:
+                        raise ValueError("Invalid tool")
                 with self.tool_tip_target_lock:
                     self.tool_tip_target_pose = tool_tip_target_pose
         self.head_perception_running = False
@@ -273,8 +281,23 @@ class PerceptionInterface:
     # Rajat ToDo: Change return type to Pose
     def get_head_perception_tool_tip_target_pose(self) -> np.ndarray:
         """Get a target of the forque from head perception."""
+
         with self.tool_tip_target_lock:
-            return self.tool_tip_target_pose
+            target_pose = self.tool_tip_target_pose
+
+        # save them in a pickle file
+        if self._robot_interface is not None:
+            if self.tool == "fork":
+                with open(self.log_dir / 'head_perception_pose_fork.pkl', 'wb') as f:
+                    pickle.dump(target_pose, f)
+            elif self.tool == "drink":
+                with open(self.log_dir / 'head_perception_pose_drink.pkl', 'wb') as f:
+                    pickle.dump(target_pose, f)
+            elif self.tool == "wipe":
+                with open(self.log_dir / 'head_perception_pose_wipe.pkl', 'wb') as f:
+                    pickle.dump(target_pose, f)
+            else:
+                raise ValueError("Invalid tool")
         
     def get_tool_tip_pose(self) -> np.ndarray:
 
@@ -290,6 +313,7 @@ class PerceptionInterface:
 
         tool_tip_staging_pose = np.eye(4)
 
+        # Rajat ToDo: Fix these hardcoded values
         if self.tool == "fork":
             tool_tip_staging_pose[:3, 3] = [0.091, 0.292, 0.402]
             tool_tip_staging_pose[:3, :3] = R.from_quat([0.478, -0.505, -0.515, 0.502]).as_matrix()

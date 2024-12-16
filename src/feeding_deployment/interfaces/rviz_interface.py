@@ -16,7 +16,9 @@ try:
     import tf2_ros
     from geometry_msgs.msg import TransformStamped
     from feeding_deployment.head_perception.ros_wrapper import HeadPerceptionROSWrapper
-except ModuleNotFoundError:
+    ROSPY_IMPORTED = True
+except ModuleNotFoundError as e:
+    print(f"ROS not imported: {e}")
     ROSPY_IMPORTED = False
 
 from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient

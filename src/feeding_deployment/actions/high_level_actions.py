@@ -8,6 +8,8 @@ from typing import Any
 import cv2
 import numpy as np
 import time
+import pickle
+
 from scipy.spatial.transform import Rotation
 
 from pybullet_helpers.geometry import Pose, multiply_poses
@@ -76,6 +78,7 @@ class HighLevelAction(abc.ABC):
         wrist_controller,
         flair,
         no_waits=False,
+        log_path=None
     ) -> None:
         self._sim = sim
         self._robot_interface = robot_interface
@@ -86,6 +89,7 @@ class HighLevelAction(abc.ABC):
         self.wrist_controller = wrist_controller
         self.flair = flair
         self.no_waits = no_waits
+        self.log_path = log_path
 
     @abc.abstractmethod
     def get_name(self) -> str:
@@ -746,28 +750,6 @@ class TransferToolHLA(HighLevelAction):
         elif self.ready_for_transfer_interaction == "voice":
             self._perception_interface.speak("Please ooopen your mouth when ready")
 
-    def publishTaskCommand(self, tip_pose):
-
-        tip_pose[:3, :3] = Rotation.from_quat([0.478, -0.505, -0.515, 0.502]).as_matrix()
-
-        # Rajat ToDo: Get this transform from pybullet (remove ROS dependency)
-        if self.tool == "fork":
-            tip_to_wrist = self.tf_utils.getTransformationFromTF('fork_tip', 'tool_frame')
-        elif self.tool == "drink":
-            tip_to_wrist = self.tf_utils.getTransformationFromTF('drink_tip', 'tool_frame')
-        elif self.tool == "wipe":
-            tip_to_wrist = self.tf_utils.getTransformationFromTF('wipe_tip', 'tool_frame')
-        else:
-            raise ValueError("Tool not recognized")
-        tool_frame_target = tip_pose @ tip_to_wrist
-
-        # self.visualizer.visualize_fork(tip_pose)
-        self.tf_utils.publishTransformationToTF('base_link', 'tool_frame_target_viz', tool_frame_target)
-    
-        tool_frame_pos = tool_frame_target[:3,3].reshape(1,3).tolist()[0] # one dimensional list
-        tool_frame_quat = Rotation.from_matrix(tool_frame_target[:3,:3]).as_quat()
-        self.robot_interface.execute_command(CartesianCommand(tool_frame_pos, tool_frame_quat))
-
     def execute_transfer_loop(self, sim_states, robot_commands, maintain_position_at_goal = False):
         
         assert self._perception_interface.head_perception_thread_is_running(), "Head perception thread is not running"
@@ -784,42 +766,52 @@ class TransferToolHLA(HighLevelAction):
         servo_point_forque_target[:3,3] = np.array([0, 0, -DISTANCE_INFRONT_MOUTH]).reshape(1,3)
         infront_mouth_target = forque_target_base @ servo_point_forque_target
 
-        if self._robot_interface is not None:
-            self.publishTaskCommand(infront_mouth_target)
+        # mouth is assumed to be facing away from the wheelchair
+        infront_mouth_target[:3, :3] = Rotation.from_quat([0.478, -0.505, -0.515, 0.502]).as_matrix()
+        if self.tool == "fork":
+            wrist_to_tip = self._sim.scene_description.tool_frame_to_utensil_tip
+        elif self.tool == "drink":
+            wrist_to_tip = self._sim.scene_description.tool_frame_to_drink_tip
+        elif self.tool == "wipe":
+            wrist_to_tip = self._sim.scene_description.tool_frame_to_wipe_tip
         else:
-            infront_mouth_target[:3, :3] = Rotation.from_quat([0, 0.7071068, 0.7071068, 0 ]).as_matrix()
+            raise ValueError("Tool not recognized")
+        
+        tip_to_wrist = np.linalg.inv(wrist_to_tip.to_matrix())
+        tool_frame_target = infront_mouth_target @ tip_to_wrist
 
-            tool_frame_pos = infront_mouth_target[:3,3].reshape(1,3).tolist()[0] # one dimensional list
-            tool_frame_quat = Rotation.from_matrix(infront_mouth_target[:3,:3]).as_quat()
+        target_pose = Pose.from_matrix(tool_frame_target)
 
-            teleport_to_ee_pose(
-                self._sim,
-                Pose(tool_frame_pos, tool_frame_quat),
-                None,
-                sim_states,
-                robot_commands,
-                rviz_interface=self._rviz_interface if not self.no_waits else None
-            )
+        teleport_to_ee_pose(
+            self._sim,
+            target_pose,
+            None,
+            sim_states,
+            robot_commands,
+            rviz_interface=self._rviz_interface if not self.no_waits else None
+        )
+
+        if self._robot_interface is not None:
+            # self.tf_utils.publishTransformationToTF('base_link', 'tool_frame_target_viz', tool_frame_target)
+            self.execute_robot_commands(robot_commands)
+        robot_commands = []
 
         self.detect_transfer_complete()
         # shutdown the head perception thread
         self._perception_interface.stop_head_perception_thread()
 
-        # move to before transfer position
+        teleport_to_ee_pose(
+            self._sim,
+            self._sim.scene_description.before_transfer_pose,
+            None,
+            sim_states,
+            robot_commands,
+            rviz_interface=self._rviz_interface if not self.no_waits else None
+        )
+
         if self._robot_interface is not None:
-            final_target = self._perception_interface.get_tool_tip_pose_at_staging()
-            self.publishTaskCommand(final_target)
-        else:
-            before_transfer_pose = Pose(position=(0.34608936309814453, 0.29957517981529236, 0.39175164699554443), orientation=(0.026013847440481186, 0.711905300617218, 0.7017908692359924, 0.0019354750402271748))
-            
-            teleport_to_ee_pose(
-                self._sim,
-                before_transfer_pose,
-                None,
-                sim_states,
-                robot_commands,
-                rviz_interface=self._rviz_interface if not self.no_waits else None
-            )
+            self.execute_robot_commands(robot_commands)
+        robot_commands = []
 
         # incase for some reason the head perception thread is still running
         self._perception_interface.stop_head_perception_thread()            
@@ -1040,10 +1032,31 @@ class LookAtPlateHLA(HighLevelAction):
 
             if self.flair is not None:
 
-                # Run FLAIR perception.
-                camera_color_data, camera_info_data, camera_depth_data, _ = (
-                    self._perception_interface.get_camera_data()
-                )
+                if self._robot_interface is not None:
+                    # Run FLAIR perception.
+                    camera_color_data, camera_info_data, camera_depth_data, _ = (
+                        self._perception_interface.get_camera_data()
+                    )
+                    # log the data
+                    if self.log_path is not None:
+                        # save the data
+                        acq_data = {
+                            "camera_color_data": camera_color_data,
+                            "camera_info_data": camera_info_data,
+                            "camera_depth_data": camera_depth_data,
+                        }
+                        with open(self.log_path + "acq_data.pkl", "wb") as f:
+                            pickle.dump(acq_data, f)
+                else:
+                    # read last logged data
+                    try:
+                        with open(self.log_path + "acq_data.pkl", "rb") as f:
+                            acq_data = pickle.load(f)
+                        camera_color_data = acq_data["camera_color_data"]
+                        camera_info_data = acq_data["camera_info_data"]
+                        camera_depth_data = acq_data["camera_depth_data"]
+                    except FileNotFoundError:
+                        raise FileNotFoundError("No logged data found")
 
                 items = self.flair.identify_plate(camera_color_data)
                 # flair.set_food_items(items)

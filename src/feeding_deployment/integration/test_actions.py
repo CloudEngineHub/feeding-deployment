@@ -62,9 +62,9 @@ from feeding_deployment.simulation.simulator import (
 )
 from feeding_deployment.simulation.video import make_simulation_video
 
-def test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, tool):
+def test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, tool, no_waits):
 
-    high_level_action = TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair)
+    high_level_action = TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, no_waits=no_waits)
 
     if tool == "fork":
         utensil = Object("utensil", tool_type)
@@ -102,9 +102,9 @@ def test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interf
         make_simulation_video(sim, sim_traj, outfile)
         print(f"Saved video to {outfile}")
 
-def test_LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos):
+def test_LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, no_waits):
 
-    high_level_action = LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair)
+    high_level_action = LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, no_waits=no_waits)
     utensil = Object("utensil", tool_type)
 
     sim.held_object_name = "utensil"
@@ -123,14 +123,14 @@ def test_LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interfa
 
     sim_traj = high_level_action.execute_action(objects=[utensil], params={})
 
-def test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, run_on_robot, wrist_controller, flair, make_videos):
+def test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, run_on_robot, wrist_controller, flair, make_videos, no_waits):
 
     print("WAITING FOR MESSAGE on /WebAppComm")
     msg = rospy.wait_for_message("/WebAppComm", String)
     msg_dict = json.loads(msg.data)   
     print(f"Received message: {msg_dict}")
 
-    high_level_action = AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, run_on_robot, wrist_controller, flair)
+    high_level_action = AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, run_on_robot, wrist_controller, flair, no_waits=no_waits)
     utensil = Object("utensil", tool_type)
 
     sim.held_object_name = "utensil"
@@ -150,7 +150,7 @@ def test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interfa
     sim_traj = high_level_action.execute_action(objects=[utensil], params=msg_dict)
     
 def _main(
-    run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, make_videos: bool, max_motion_planning_time: float = 10, tool: str = "fork"
+    run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, make_videos: bool, max_motion_planning_time: float = 10, tool: str = "fork", no_waits: bool = False
 ) -> None:
     """Testing components of the system."""
 
@@ -165,13 +165,16 @@ def _main(
     else:
         robot_interface = None
 
+    log_dir = Path(__file__).parent / "sensor_log"
+    log_dir.mkdir(exist_ok=True)
+
     if use_interface:
         web_interface = WebInterface()
     else:
         web_interface = None
 
     # Initialize the perceiver (e.g., get joint states or human head poses).
-    perception_interface = PerceptionInterface(robot_interface=robot_interface, simulate_head_perception=simulate_head_perception)
+    perception_interface = PerceptionInterface(robot_interface=robot_interface, simulate_head_perception=simulate_head_perception, log_dir=log_dir)
     print("Perception Interface Loaded")
 
     # Initialize the FLAIR interface.
@@ -210,9 +213,9 @@ def _main(
     # Create skills for high-level planning.
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
 
-    # test_LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos)
-    # test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos)
-    test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, tool)
+    # test_LookAtPlateHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, no_waits)
+    # test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, no_waits)
+    test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_controller, flair, make_videos, tool, no_waits)
 
 if __name__ == "__main__":
     import argparse
@@ -225,6 +228,7 @@ if __name__ == "__main__":
     parser.add_argument("--make_videos", action="store_true")
     parser.add_argument("--max_motion_planning_time", type=float, default=10.0)
     parser.add_argument("--tool", type=str, default="fork")
+    parser.add_argument("--no_waits", action="store_true")
     args = parser.parse_args()
 
-    _main(args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.make_videos, args.max_motion_planning_time, args.tool)
+    _main(args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.make_videos, args.max_motion_planning_time, args.tool, args.no_waits)
