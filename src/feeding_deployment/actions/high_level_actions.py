@@ -1045,12 +1045,12 @@ class LookAtPlateHLA(HighLevelAction):
                             "camera_info_data": camera_info_data,
                             "camera_depth_data": camera_depth_data,
                         }
-                        with open(self.log_path + "acq_data.pkl", "wb") as f:
+                        with open(self.log_path / "acq_data.pkl", "wb") as f:
                             pickle.dump(acq_data, f)
                 else:
                     # read last logged data
                     try:
-                        with open(self.log_path + "acq_data.pkl", "rb") as f:
+                        with open(self.log_path / "acq_data.pkl", "rb") as f:
                             acq_data = pickle.load(f)
                         camera_color_data = acq_data["camera_color_data"]
                         camera_info_data = acq_data["camera_info_data"]

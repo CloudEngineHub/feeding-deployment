@@ -283,21 +283,23 @@ class PerceptionInterface:
         """Get a target of the forque from head perception."""
 
         with self.tool_tip_target_lock:
-            target_pose = self.tool_tip_target_pose
+            tool_tip_target_pose = self.tool_tip_target_pose
 
         # save them in a pickle file
         if self._robot_interface is not None:
             if self.tool == "fork":
                 with open(self.log_dir / 'head_perception_pose_fork.pkl', 'wb') as f:
-                    pickle.dump(target_pose, f)
+                    pickle.dump(tool_tip_target_pose, f)
             elif self.tool == "drink":
                 with open(self.log_dir / 'head_perception_pose_drink.pkl', 'wb') as f:
-                    pickle.dump(target_pose, f)
+                    pickle.dump(tool_tip_target_pose, f)
             elif self.tool == "wipe":
                 with open(self.log_dir / 'head_perception_pose_wipe.pkl', 'wb') as f:
-                    pickle.dump(target_pose, f)
+                    pickle.dump(tool_tip_target_pose, f)
             else:
                 raise ValueError("Invalid tool")
+            
+        return tool_tip_target_pose
         
     def get_tool_tip_pose(self) -> np.ndarray:
 
