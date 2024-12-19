@@ -198,13 +198,13 @@ class _Runner:
         # drink_pickup_msg = {"status": "drink_pickup", "state": "pre_bite_pickup"}
         # self.hla_command_queue.put(drink_pickup_msg)
 
-        while not rospy.is_shutdown():
-            try:
-                hla_interface_msg = self.hla_command_queue.get(timeout=1)
-                self.parse_interface_msg(hla_interface_msg)
-                print("Ready for next user command.")
-            except queue.Empty:
-                continue
+        # while not rospy.is_shutdown():
+        #     try:
+        #         hla_interface_msg = self.hla_command_queue.get(timeout=1)
+        #         self.parse_interface_msg(hla_interface_msg)
+        #         print("Ready for next user command.")
+        #     except queue.Empty:
+        #         continue
 
     def parse_interface_msg(self, msg_dict: dict[str, Any]) -> None:
         """Pass high level action message from the web interface."""
@@ -363,7 +363,8 @@ if __name__ == "__main__":
     # for _ in range(10):
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
-    # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
+    runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
     # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
 
     if args.make_videos:

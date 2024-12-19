@@ -922,9 +922,9 @@ class LookAtPlateHLA(HighLevelAction):
                 items = self.flair.identify_plate(camera_color_data)
                 # flair.set_food_items(items)
                 # self.flair.set_food_items(['banana', 'baby carrot'])
-                self.flair.set_food_items(['cantaloupe', 'banana'])
+                # self.flair.set_food_items(['cantaloupe', 'banana'])
                 # self.flair.set_food_items(['chicken nugget'])
-                # self.flair.set_food_items(['banana'])
+                self.flair.set_food_items(['banana'])
                 items_detection = self.flair.detect_items(camera_color_data, camera_depth_data, camera_info_data, log_path=None)
                 
                 if not self.flair.is_preference_set():
