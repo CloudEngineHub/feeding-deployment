@@ -91,8 +91,16 @@ class SceneDescription:
     wipe_outside_mount_pos: JointPositions
     wipe_above_mount: Pose
     wipe_above_mount_pos: JointPositions
-    wipe_outside_above_mount: Pose
-    wipe_outside_above_mount_pos: JointPositions
+
+    # Specific env arguments can be set to None
+    utensil_outside_above_mount: Pose = None
+    utensil_outside_above_mount_pos: JointPositions = None
+    # Used for specific environments
+    wipe_outside_above_mount: Pose = None
+    wipe_outside_above_mount_pos: JointPositions = None
+    wipe_infront_mount: Pose = None 
+    wipe_infront_mount_pos: JointPositions = None
+    wipe_neutral_pos: JointPositions = None
 
     # Robot.
     robot_name: str = "kinova-gen3"
