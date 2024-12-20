@@ -20,7 +20,7 @@ from scipy.spatial.transform import Rotation
 
 import yaml
 
-def create_scene_description_from_config(config_file_path: str) -> SceneDescription:
+def create_scene_description_from_config(config_file_path: str, transfer_type: str) -> SceneDescription:
     """Create a SceneDescription instance from a YAML configuration file."""
     # Load the YAML file
     with open(config_file_path, "r") as file:
@@ -51,6 +51,7 @@ def create_scene_description_from_config(config_file_path: str) -> SceneDescript
         else:
             raise ValueError(f"Unexpected value type for key '{key}': {type(value)}")
     
+    processed_config["transfer_type"] = transfer_type
     processed_config["scene_label"] = Path(config_file_path).stem
 
     # Create an instance of SceneDescription using the processed config
@@ -62,6 +63,7 @@ class SceneDescription:
     """Scene description."""
 
     scene_label: str
+    transfer_type: str
 
     # Robot constants
     initial_joints: JointPositions

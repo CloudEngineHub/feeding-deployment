@@ -33,9 +33,6 @@ from feeding_deployment.robot_controller.command_interface import (
 
 from pybullet_helpers.geometry import Pose
 
-# PLATE_HEIGHT = 0.16 # 0.192 for scooping, 0.2 for skewering, 0.198 for pushing, twirling
-PLATE_HEIGHT = 0.12 # 0.192 for scooping, 0.2 for skewering, 0.198 for pushing, twirling
-
 class FoodManipulationSkillLibrary:
     def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, wrist_interface: WristInterface, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False):
         
@@ -45,6 +42,13 @@ class FoodManipulationSkillLibrary:
         self.perception_interface = perception_interface
         self.rviz_interface = rviz_interface
         self.no_waits = no_waits
+
+        if self.sim.scene_description.scene_label == "wheelchair":
+            self.plate_height = 0.12
+        elif self.sim.scene_description.scene_label == "vention":
+            self.plate_height = 0.16
+        else:
+            raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 
         self.pixel_selector = PixelSelector()
         if self.robot_interface is not None:
@@ -135,7 +139,7 @@ class FoodManipulationSkillLibrary:
         print("Food detection height: ", food_base[2,3])
         if not self.no_waits:
             input("Press enter to continue")
-        food_base[2,3] = max(food_base[2,3] - 0.01, PLATE_HEIGHT) 
+        food_base[2,3] = max(food_base[2,3] - 0.01, self.plate_height) 
         print("---- Height of skewer point (after max): ", food_base[2,3]) 
 
         food_base[:3,:3] = Rotation.from_euler('xyz', [0,0,0], degrees=True).as_matrix()

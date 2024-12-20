@@ -1,0 +1,41 @@
+
+import abc
+
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
+from feeding_deployment.robot_controller.arm_client import ArmInterfaceClient
+from feeding_deployment.interfaces.perception_interface import PerceptionInterface
+from feeding_deployment.interfaces.rviz_interface import RVizInterface
+from feeding_deployment.robot_controller.command_interface import CartesianCommand
+
+class Transfer(abc.ABC):
+    """ Base class for transfer actions. """
+
+    def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False):
+            
+        self.sim = sim
+        self.robot_interface = robot_interface
+        self.perception_interface = perception_interface
+        self.rviz_interface = rviz_interface
+        self.no_waits = no_waits
+
+    def set_tool(self, tool):
+        self.tool = tool
+
+    def move_to_ee_pose(self, pose, plan_override=False):
+
+        if not plan_override:
+            plan = self.sim.plan_to_ee_pose(pose)
+        if self.robot_interface is None:
+            self.sim.visualize_plan(plan)
+        else:
+            self.robot_interface.execute_command(CartesianCommand(pos=pose.position, quat=pose.orientation))
+
+    @abc.abstractmethod
+    def move_to_transfer_state(self, maintain_position_at_goal = False):
+        """Move robot to the transfer state."""
+
+    @abc.abstractmethod
+    def move_to_before_transfer_state(self):
+        """Move robot to the state before transfer."""
+
+    

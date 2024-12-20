@@ -73,7 +73,7 @@ assert os.environ.get("PYTHONHASHSEED") == "0", \
 class _Runner:
     """A class for running the integrated system."""
 
-    def __init__(self, scene_config: str, run_on_robot: bool, use_interface: bool, use_gui: bool, simulate_head_perception: bool, max_motion_planning_time: float,
+    def __init__(self, scene_config: str, transfer_type: str, run_on_robot: bool, use_interface: bool, use_gui: bool, simulate_head_perception: bool, max_motion_planning_time: float,
                  resume_from_state: str = "", no_waits: bool = False) -> None:
         self.run_on_robot = run_on_robot
         self.use_interface = use_interface  
@@ -103,7 +103,7 @@ class _Runner:
 
         # Initialize the simulator.
         scene_config_path = Path(__file__).parent.parent / "simulation" / "configs" / f"{scene_config}.yaml"
-        self.scene_description = create_scene_description_from_config(str(scene_config_path))
+        self.scene_description = create_scene_description_from_config(str(scene_config_path), transfer_type)
 
         if run_on_robot:
             print("Initial Robot Joints:", self.perception_interface.get_robot_joints())
@@ -126,7 +126,6 @@ class _Runner:
             self.rviz_interface = None
             self.flair = None
 
-        # self.sim = FeedingDeploymentPyBulletSimulator(self.scene_description)
         self.sim = FeedingDeploymentPyBulletSimulator(self.scene_description, use_gui=use_gui, ignore_user=True)
 
         # Create skills for high-level planning.
@@ -333,6 +332,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--scene_config", type=str, default="vention")
+    parser.add_argument("--transfer_type", type=str, default="inside")
     parser.add_argument("--run_on_robot", action="store_true")
     parser.add_argument("--use_interface", action="store_true")
     parser.add_argument("--use_gui", action="store_true")
@@ -354,6 +354,7 @@ if __name__ == "__main__":
         args.use_interface = True
 
     runner = _Runner(args.scene_config,
+                     args.transfer_type,
                      args.run_on_robot, 
                      args.use_interface,
                      args.use_gui,
@@ -373,13 +374,13 @@ if __name__ == "__main__":
     # runner.hla_command_queue.put(drink_transfer_msg)
 
     if not args.use_interface:
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.utensil,)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.utensil,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         # for _ in range(10):
             # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
