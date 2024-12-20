@@ -85,8 +85,12 @@ class PickToolHLA(HighLevelAction):
                 self.wrist_interface.reset()
 
             self.move_to_ee_pose(self.sim.scene_description.utensil_outside_mount)
+            if self.sim.scene_description.scene_label == "vention":
+                self.move_to_ee_pose(self.sim.scene_description.utensil_outside_above_mount)
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-            self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
+            if self.sim.scene_description.scene_label == "wheelchair":
+                # Pre-emptively move to the before_transfer_pos because moving to above_plate_pos from retract_pos is unsafe.
+                self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
             
         if tool.name == "wipe":
 
@@ -94,13 +98,23 @@ class PickToolHLA(HighLevelAction):
             
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
             self.close_gripper()
+
+            if self.sim.scene_description.scene_label == "vention":
+                self.move_to_joint_positions(self.sim.scene_description.wipe_infront_mount_pos)
+
             self.move_to_joint_positions(self.sim.scene_description.wipe_above_mount_pos)
             self.move_to_ee_pose(self.sim.scene_description.wipe_inside_mount)
             self.grasp_tool("wipe")
             self.move_to_ee_pose(self.sim.scene_description.wipe_outside_mount)
-            self.move_to_ee_pose(self.sim.scene_description.wipe_outside_above_mount)
+            
+            if self.sim.scene_description.scene_label == "wheelchair":
+                self.move_to_ee_pose(self.sim.scene_description.wipe_outside_above_mount)
+            elif self.sim.scene_description.scene_label == "vention":
+                self.move_to_joint_positions(self.sim.scene_description.wipe_neutral_pos)
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-            self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
+
+            if self.sim.scene_description.scene_label == "wheelchair":
+                self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
 
             # Send message to web interface.
             if self.web_interface is not None:

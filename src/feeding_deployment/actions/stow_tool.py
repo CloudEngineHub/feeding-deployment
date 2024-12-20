@@ -64,7 +64,13 @@ class StowToolHLA(HighLevelAction):
             assert self.sim.held_object_name == "utensil"
             
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-            self.move_to_joint_positions(self.sim.scene_description.utensil_outside_mount_pos)
+
+            if self.sim.scene_description.scene_label == "vention":
+                self.move_to_joint_positions(self.sim.scene_description.utensil_outside_above_mount_pos)
+                self.move_to_ee_pose(self.sim.scene_description.utensil_outside_mount)
+            elif self.sim.scene_description.scene_label == "wheelchair":
+                self.move_to_joint_positions(self.sim.scene_description.utensil_outside_mount_pos)
+
             self.move_to_ee_pose(self.sim.scene_description.utensil_inside_mount)
             self.ungrasp_tool("utensil")
             self.move_to_ee_pose(self.sim.scene_description.utensil_above_mount)
@@ -75,11 +81,20 @@ class StowToolHLA(HighLevelAction):
             assert self.sim.held_object_name == "wipe"
             
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-            self.move_to_joint_positions(self.sim.scene_description.wipe_outside_mount_pos)
-            self.move_to_ee_pose(self.sim.scene_description.wipe_outside_mount)
+
+            if self.sim.scene_description.scene_label == "vention":
+                self.move_to_joint_positions(self.sim.scene_description.wipe_neutral_pos)
+                self.move_to_joint_positions(self.sim.scene_description.wipe_outside_mount_pos)
+            elif self.sim.scene_description.scene_label == "wheelchair":
+                self.move_to_joint_positions(self.sim.scene_description.wipe_outside_above_mount_pos)
+                self.move_to_ee_pose(self.sim.scene_description.wipe_outside_mount)
             self.move_to_ee_pose(self.sim.scene_description.wipe_inside_mount)
             self.ungrasp_tool("wipe")
             self.move_to_ee_pose(self.sim.scene_description.wipe_above_mount)
+
+            if self.sim.scene_description.scene_label == "vention":
+                self.move_to_ee_pose(self.sim.scene_description.wipe_infront_mount)
+
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
         else:
