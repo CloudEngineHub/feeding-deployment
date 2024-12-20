@@ -235,6 +235,10 @@ class PerceptionInterface:
     def start_head_perception_thread(self):
         assert not self.head_perception_running, "Head perception thread is already running"
 
+        if self.robot_interface is not None:
+            # Filter noisy readings
+            self.set_filter_noisy_readings_pub.publish(Bool(data=True))
+
         # Start head perception thread
         self.kill_the_thread = False
         self.head_perception_thread = threading.Thread(

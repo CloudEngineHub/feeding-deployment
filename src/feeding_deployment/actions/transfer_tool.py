@@ -26,9 +26,8 @@ from feeding_deployment.actions.base import (
     ToolTransferDone,
 )
 
-# Rajat ToDo: Move this to a config file
-INSIDE_MOUTH_TRANSFER = False 
-DISTANCE_INFRONT_MOUTH = 0.20
+from feeding_deployment.actions.feel_the_bite.inside_mouth_transfer import InsideMouthTransfer
+from feeding_deployment.actions.feel_the_bite.outside_mouth_transfer import OutsideMouthTransfer
 
 class TransferToolHLA(HighLevelAction):
     """Wipe, or transfer drink, or transfer bite."""
@@ -37,6 +36,13 @@ class TransferToolHLA(HighLevelAction):
         super().__init__(*args, **kwargs)
 
         self.tool = None
+
+        if self.sim.scene_description.transfer_type == "inside":
+            self.transfer = InsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits)
+        elif self.sim.scene_description.transfer_type == "outside":
+            self.transfer = OutsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits)
+        else:
+            raise ValueError("Bite transfer type not recognized")
 
         self.ready_for_transfer_interaction = "silent" # "silent", "voice" or "led"
         self.initiate_transfer_interaction = "open_mouth" # "button", "open_mouth" or "auto_timeout"
@@ -74,49 +80,39 @@ class TransferToolHLA(HighLevelAction):
         elif self.ready_for_transfer_interaction == "voice":
             self.perception_interface.speak("Please ooopen your mouth when ready")
 
-    def execute_transfer_loop(self, maintain_position_at_goal = False):
-        
-        assert self.perception_interface.head_perception_thread_is_running(), "Head perception thread is not running"
-        assert self.tool is not None, "Tool is not set"
+    def execute_transfer(self, maintain_position_at_goal = False):
+
+        self.perception_interface.set_head_perception_tool(self.tool)
+        self.perception_interface.start_head_perception_thread()
+        if self.robot_interface is not None:
+            time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
+            self.robot_interface.set_tool(self.tool)
+            self.perception_interface.zero_ft_sensor()
+        else:
+            time.sleep(1.0) # let sim head perception thread warmstart
+
+        if self.sim.scene_description.transfer_type == "inside" and self.robot_interface is not None:
+            if not self.no_waits:
+                input("Press enter to switch to task compliant mode")
+            self.robot_interface.switch_to_task_compliant_mode()
 
         self.relay_ready_for_transfer()
         self.detect_initiate_transfer()
 
-        print("Setting state to 1")
-
-        # move to infront of mouth
-        forque_target_base = self.perception_interface.get_head_perception_tool_tip_target_pose()
-        servo_point_forque_target = np.identity(4)
-        servo_point_forque_target[:3,3] = np.array([0, 0, -DISTANCE_INFRONT_MOUTH]).reshape(1,3)
-        infront_mouth_target = forque_target_base @ servo_point_forque_target
-
-        # mouth is assumed to be facing away from the wheelchair
-        infront_mouth_target[:3, :3] = Rotation.from_quat([0.478, -0.505, -0.515, 0.502]).as_matrix()
-        if self.tool == "fork":
-            wrist_to_tip = self.sim.scene_description.tool_frame_to_utensil_tip
-        elif self.tool == "drink":
-            wrist_to_tip = self.sim.scene_description.tool_frame_to_drink_tip
-        elif self.tool == "wipe":
-            wrist_to_tip = self.sim.scene_description.tool_frame_to_wipe_tip
-        else:
-            raise ValueError("Tool not recognized")
-        
-        tip_to_wrist = np.linalg.inv(wrist_to_tip.to_matrix())
-        tool_frame_target = infront_mouth_target @ tip_to_wrist
-
-        target_pose = Pose.from_matrix(tool_frame_target)
-
-        self.move_to_ee_pose(target_pose)
+        self.transfer.set_tool(self.tool)
+        self.transfer.move_to_transfer_state(maintain_position_at_goal)
 
         self.detect_transfer_complete()
+
         # shutdown the head perception thread
         self.perception_interface.stop_head_perception_thread()
 
-        self.move_to_ee_pose(self.sim.scene_description.before_transfer_pose)
-
-        # incase for some reason the head perception thread is still running
-        self.perception_interface.stop_head_perception_thread()            
-        print("Exiting transfer loop")
+        self.transfer.move_to_before_transfer_state()        
+        
+        if self.sim.scene_description.transfer_type == "inside" and self.robot_interface is not None:                
+            if not self.no_waits:
+                input("Press enter to switch out of compliant mode")
+            self.robot_interface.switch_out_of_compliant_mode()
 
     def get_name(self) -> str:
         return "TransferTool"
@@ -148,26 +144,8 @@ class TransferToolHLA(HighLevelAction):
                 # stop the keep horizontal thread
                 self.wrist_interface.stop_horizontal_spoon_thread()
 
-            self.perception_interface.set_head_perception_tool("fork")
-            self.perception_interface.start_head_perception_thread()
-            if self.robot_interface is not None:
-                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
-                self.robot_interface.set_tool("fork")
-            else:
-                time.sleep(1.0) # let sim head perception thread warmstart
             self.set_tool("fork")
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:
-                if not self.no_waits:
-                    input("Press enter to switch to task compliant mode")
-                self.robot_interface.switch_to_task_compliant_mode()
-                
-            self.execute_transfer_loop()
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:                
-                if not self.no_waits:
-                    input("Press enter to switch out of compliant mode")
-                self.robot_interface.switch_out_of_compliant_mode()
+            self.execute_transfer()
 
             # Send message to web interface indicating transfer is done.
             if self.web_interface is not None:
@@ -179,26 +157,8 @@ class TransferToolHLA(HighLevelAction):
             
             self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
 
-            self.perception_interface.set_head_perception_tool("drink")
-            self.perception_interface.start_head_perception_thread()
-            if self.robot_interface is not None:
-                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
-                self.robot_interface.set_tool("drink")
-            else:
-                time.sleep(1.0) # let sim head perception thread warmstart
-            self.set_tool("drink")
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:
-                if not self.no_waits:
-                    input("Press enter to switch to task compliant mode")
-                self.robot_interface.switch_to_task_compliant_mode()
-                
-            self.execute_transfer_loop(maintain_position_at_goal=True)
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:                
-                if not self.no_waits:
-                    input("Press enter to switch out of compliant mode")
-                self.robot_interface.switch_out_of_compliant_mode()
+            self.set_tool("drink")    
+            self.execute_transfer(maintain_position_at_goal=True)
 
             # Send message to web interface indicating transfer is done.
             if self.web_interface is not None:
@@ -210,26 +170,8 @@ class TransferToolHLA(HighLevelAction):
             
             self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
 
-            self.perception_interface.set_head_perception_tool("wipe")
-            self.perception_interface.start_head_perception_thread()
-            if self.robot_interface is not None:
-                time.sleep(5.0) # let head perception thread warmstart / robot to stabilize
-                self.robot_interface.set_tool("wipe")
-            else:
-                time.sleep(1.0) # let sim head perception thread warmstart
             self.set_tool("wipe")
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:
-                if not self.no_waits:
-                    input("Press enter to switch to task compliant mode")
-                self.robot_interface.switch_to_task_compliant_mode()
-                
-            self.execute_transfer_loop(maintain_position_at_goal=True)
-
-            if INSIDE_MOUTH_TRANSFER and self.robot_interface is not None:                
-                if not self.no_waits:
-                    input("Press enter to switch out of compliant mode")
-                self.robot_interface.switch_out_of_compliant_mode()
+            self.execute_transfer(maintain_position_at_goal=True)
 
             # Send message to web interface indicating transfer is done.
             if self.web_interface is not None:
