@@ -126,9 +126,9 @@ class SceneDescription:
 
     # Robot holder (vention stand).
     # robot_holder_pose: Pose = Pose((0.0, 0.0, -0.261))
-    robot_holder_pose: Pose = Pose((0.0, 0.0, -0.28))
+    robot_holder_pose: Pose = Pose((0.0, 0.0, -0.34))
     robot_holder_rgba: tuple[float, float, float, float] = (0.5, 0.5, 0.5, 1.0)
-    robot_holder_half_extents: tuple[float, float, float] = (0.18, 0.12, 0.26)
+    robot_holder_half_extents: tuple[float, float, float] = (0.10, 0.10, 0.33)
 
     # Wheelchair.
     wheelchair_pose: Pose = Pose(
@@ -163,9 +163,27 @@ class SceneDescription:
     conservative_bb_half_extents: tuple[float, float, float] = (0.4, 0.4, 1.0)
 
     # Table.
-    table_pose: Pose = Pose((0.5, 0.75, -0.175))
-    table_rgba: tuple[float, float, float, float] = (0.5, 0.5, 0.5, 1.0)
-    table_half_extents: tuple[float, float, float] = (0.25, 0.4, 0.345)
+    table_pose: Pose = Pose((0.25, 0.45, 0.15))
+    table_urdf_path: Path = Path(__file__).parent.parent / "assets" / "urdf" / "table" / "table.urdf"
+
+    # Plate
+    plate_pose: Pose = Pose((0.25, 0.25, 0.16))
+    plate_urdf_path: Path = Path(__file__).parent.parent / "assets" / "urdf" / "plate" / "plate.urdf"
+
+    # Floor
+    floor_position: tuple[float, float, float] = (0, 0, -0.66)
+    floor_urdf: Path = Path(__file__).parent.parent / "assets" / "urdf" / "floor" / "floor.urdf"
+
+    wall_poses: list[Pose] = field(
+        default_factory=lambda: [
+            Pose.from_rpy((0.0, -1.25, 0.0), (np.pi / 2, 0.0, np.pi / 2)),
+            Pose.from_rpy((-1.25, 0.0, 0.0), (np.pi / 2, 0.0, 0.0)),
+            # Pose.from_rpy((4.25, 0.0, 0.0), (np.pi / 2, 0.0, np.pi)),
+            # Pose.from_rpy((0.0, 0.0, 3.0), (0.0, np.pi / 2, 0.0)),
+        ]
+    )
+    wall_half_extents: tuple[float, float, float] = (0.1, 3.0, 5.0)
+    wall_texture: Path = Path(__file__).parent.parent / "assets" / "tiled_wall_texture.jpg"
 
     tool_grasp_fingers_value: float = 0.44
 
