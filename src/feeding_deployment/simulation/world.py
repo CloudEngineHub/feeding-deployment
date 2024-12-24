@@ -8,7 +8,7 @@ from pathlib import Path
 import imageio.v2 as iio
 
 import pybullet as p
-from pybullet_helpers.geometry import Pose
+from pybullet_helpers.geometry import Pose, set_pose
 from pybullet_helpers.gui import create_gui_connection
 from pybullet_helpers.inverse_kinematics import set_robot_joints_with_held_object
 from pybullet_helpers.robots import create_pybullet_robot
@@ -34,6 +34,37 @@ class FeedingDeploymentPyBulletWorld:
             self.physics_client_id = create_gui_connection(camera_yaw=180)
         else:
             self.physics_client_id = p.connect(p.DIRECT)
+
+        # Create floor.
+        self.floor_id = p.loadURDF(
+            str(scene_description.floor_urdf),
+            scene_description.floor_position,
+            useFixedBase=True,
+            physicsClientId=self.physics_client_id,
+        )
+
+        # Create walls.
+        self.wall_ids = [
+            create_pybullet_block(
+                (1.0, 1.0, 1.0, 1.0),
+                scene_description.wall_half_extents,
+                self.physics_client_id,
+            )
+            for _ in scene_description.wall_poses
+        ]
+        wall_texture_id = p.loadTexture(
+            str(scene_description.wall_texture), self.physics_client_id
+        )
+        for wall_id, pose in zip(
+            self.wall_ids, scene_description.wall_poses, strict=True
+        ):
+            p.changeVisualShape(
+                wall_id,
+                -1,
+                textureUniqueId=wall_texture_id,
+                physicsClientId=self.physics_client_id,
+            )
+            set_pose(wall_id, pose, self.physics_client_id)
 
         # Create robot.
         robot = create_pybullet_robot(
@@ -117,15 +148,30 @@ class FeedingDeploymentPyBulletWorld:
         )
 
         # Create table.
-        self.table_id = create_pybullet_block(
-            scene_description.table_rgba,
-            half_extents=scene_description.table_half_extents,
-            physics_client_id=self.physics_client_id,
+        self.table_id = p.loadURDF(
+            str(scene_description.table_urdf_path),
+            useFixedBase=True,
+            physicsClientId=self.physics_client_id,
         )
+
         p.resetBasePositionAndOrientation(
             self.table_id,
             scene_description.table_pose.position,
             scene_description.table_pose.orientation,
+            physicsClientId=self.physics_client_id,
+        )
+
+        # Create plate.
+        self.plate_id = p.loadURDF(
+            str(scene_description.plate_urdf_path),
+            useFixedBase=True,
+            physicsClientId=self.physics_client_id,
+        )
+
+        p.resetBasePositionAndOrientation(
+            self.plate_id,
+            scene_description.plate_pose.position,
+            scene_description.plate_pose.orientation,
             physicsClientId=self.physics_client_id,
         )
 
