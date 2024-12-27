@@ -202,8 +202,6 @@ class ResetHLA(HighLevelAction):
     ) -> None:
         assert len(objects) == 0
         assert self.sim.held_object_name is None
-        sim_states: list[FeedingDeploymentWorldState] = []
-        robot_commands = []
 
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 

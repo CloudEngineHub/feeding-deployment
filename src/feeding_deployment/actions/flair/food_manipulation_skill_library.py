@@ -17,7 +17,6 @@ from feeding_deployment.utils.pixel_selector import PixelSelector
 from feeding_deployment.utils.camera_utils import angle_between_pixels, pixel2World, world2Pixel
 from feeding_deployment.utils.tf_utils import TFUtils
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
-from feeding_deployment.simulation.state import FeedingDeploymentWorldState
 
 from feeding_deployment.interfaces.perception_interface import PerceptionInterface
 from feeding_deployment.interfaces.rviz_interface import RVizInterface

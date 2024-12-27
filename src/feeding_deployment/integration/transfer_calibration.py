@@ -32,15 +32,8 @@ from feeding_deployment.interfaces.rviz_interface import RVizInterface
 from feeding_deployment.interfaces.web_interface import WebInterface
 from feeding_deployment.control.robot_controller.arm_client import ArmInterfaceClient
 from feeding_deployment.control.wrist_controller.wrist_controller import WristInterface
-from feeding_deployment.simulation.scene_description import (
-    SceneDescription,
-    create_scene_description_from_config,
-)
-from feeding_deployment.simulation.simulator import (
-    FeedingDeploymentPyBulletSimulator,
-    FeedingDeploymentWorldState,
-)
-from feeding_deployment.actions.flair.flair import FLAIR
+from feeding_deployment.simulation.scene_description import create_scene_description_from_config
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 
 def _main(
     scene_config: str, transfer_type: str, tool: str, test: bool, record_rom: bool, max_motion_planning_time: float = 10

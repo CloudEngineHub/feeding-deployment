@@ -39,10 +39,7 @@ from feeding_deployment.simulation.scene_description import (
     SceneDescription,
     create_scene_description_from_config,
 )
-from feeding_deployment.simulation.simulator import (
-    FeedingDeploymentPyBulletSimulator,
-    FeedingDeploymentWorldState,
-)
+from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
 from feeding_deployment.actions.flair.flair import FLAIR
 
 def test_TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, flair, tool, no_waits):

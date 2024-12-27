@@ -274,11 +274,11 @@ class SceneDescription:
         head_position = self.wheelchair_head_pose.position
         return {
             "outer_camera_target": base_position,
-            "outer_camera_yaw": 30,
+            "outer_camera_yaw": 160,
             "outer_camera_distance": 2.5,
-            "outer_camera_pitch": -30,
-            "outer_image_width": 2000,
-            "outer_image_height": 2000,
+            "outer_camera_pitch": -45,
+            "outer_image_width": 1000,
+            "outer_image_height": 1000,
             "inner_camera_target": head_position,
             "inner_camera_yaw": 0,
             "inner_camera_distance": 1.0,
