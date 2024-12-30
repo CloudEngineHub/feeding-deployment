@@ -1,5 +1,7 @@
 """High-level actions that we can simulate and execute."""
 
+from __future__ import annotations
+
 import abc
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -120,6 +122,44 @@ class HighLevelAction(abc.ABC):
         bt = load_behavior_tree(bt_filepath, self)
         bt.tick()
 
+    def process_behavior_tree_update(
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+        node_name: str,
+        parameter_name: str,
+        new_parameter_value: Any
+    ) -> None:
+        """Validate and update the behavior tree for this HLA."""
+        # Load the current behavior tree.
+        bt_filename = self.get_behavior_tree_filename(objects, params)
+        bt_filepath = self.behavior_tree_dir / bt_filename
+        assert bt_filepath.exists()
+        bt = load_behavior_tree(bt_filepath, self)
+        # Get the node.
+        node = bt.get_node(node_name)
+        if node is None or not isinstance(node, ParameterizedActionBehaviorTreeNode):
+            print(f"BT UPDATE FAILED. Invalid node name: {node_name}")
+            return
+        # Get the parameter.
+        parameter = node.get_parameter(parameter_name)
+        if parameter is None:
+            print(f"BT UPDATE FAILED. Invalid parameter name: {parameter_name}")
+            return
+        # Ensure the parameter is allowed to be edited.
+        if not parameter.is_user_editable:
+            print(f"BT UPDATE FAILED. Parameter not user editable: {parameter_name}")
+            return
+        # Ensure the new value is in bounds.
+        if not parameter.space.contains(new_parameter_value):
+            print(f"BT UPDATE FAILED. Parameter value is out of bounds: {new_parameter_value} for {parameter_name}")
+            return
+        # Update is valid! So update the tree.
+        print(f"BT UPDATE SUCCEEDED! New: {new_parameter_value} for {parameter_name}")
+        node.set_parameter(parameter, new_parameter_value)
+        # Write the change to disk.
+        save_behavior_tree(bt, bt_filepath)
+
     def move_to_joint_positions(self, joint_positions: list[float]) -> None:
         
         plan = None 
@@ -211,6 +251,10 @@ class GroundHighLevelAction:
     def execute_action(self) -> None:
         """Execute the command."""
         self.hla.execute_action(self.objects, self.params)
+
+    def process_behavior_tree_update(self, node_name: str, parameter_name: str, new_parameter_value: Any) -> None:
+        """Validate and update the behavior tree for this ground HLA."""
+        self.hla.process_behavior_tree_update(self.objects, self.params, node_name, parameter_name, new_parameter_value)
 
 
 class ResetHLA(HighLevelAction):
@@ -341,6 +385,10 @@ class BehaviorTreeNode(abc.ABC):
     def tick(self) -> bool:
         """Execute the node for one step and return a status."""
 
+    @abc.abstractmethod
+    def get_node(self, name: str) -> BehaviorTreeNode | None:
+        """Get a node in this subtree with the given name."""
+
 
 class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
     """A node in a behavior tree that executes a parameterized action open-loop.
@@ -359,6 +407,23 @@ class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
         self._policy.run(self._bindings)
         return True  # assume this worked
 
+    def get_node(self, name: str) -> BehaviorTreeNode | None:
+        if name == self._name:
+            return self
+        return None
+    
+    def get_parameter(self, name: str) -> BehaviorTreeParameter | None:
+        """Access a policy parameter by name."""
+        for parameter in self._policy.get_parameters():
+            if parameter.name == name:
+                return parameter
+        return None
+    
+    def set_parameter(self, parameter: BehaviorTreeParameter, value: Any) -> None:
+        """Update the parameter binding."""
+        assert parameter.space.contains(value)
+        self._bindings[parameter] = value
+
 
 class SequenceBehaviorTreeNode(BehaviorTreeNode):
     """A sequence node in a behavior tree.
@@ -373,6 +438,12 @@ class SequenceBehaviorTreeNode(BehaviorTreeNode):
         for child in self._children:
             child.tick()
         return True  # assume everything worked
+
+    def get_node(self, name: str) -> BehaviorTreeNode | None:
+        for child in self._children:
+            if child.get_node(name) is not None:
+                return child
+        return None
 
 
 def _eval_expression(obj, loader, node):
@@ -397,6 +468,10 @@ def load_behavior_tree(filepath: Path, hla: HighLevelAction) -> BehaviorTreeNode
                                                                          hla.sim.scene_description))
     root_dict = yaml.load(yaml_text, Loader=CustomLoader)
     return _parse_node(root_dict)
+
+
+def save_behavior_tree(behavior_tree: BehaviorTreeNode, filepath: Path):
+    import ipdb; ipdb.set_trace()
 
 
 def _parse_node(node_dict: dict) -> BehaviorTreeNode:

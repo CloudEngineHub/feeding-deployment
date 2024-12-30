@@ -298,15 +298,6 @@ class _Runner:
             # after a crash.
             self._save_state(sim_state, self.current_atoms)
 
-    def update_behavior_tree(
-        self,
-        ground_hla: GroundHighLevelAction,
-        parameter_name: str,
-        new_parameter_value: Any
-    ) -> None:
-        """Validate and update the behavior tree."""
-        import ipdb; ipdb.set_trace()
-
     def make_video(self, outfile: Path) -> None:
         """Create a video of the simulated trajectory."""
         self.sim.make_simulation_video(outfile)
@@ -375,11 +366,11 @@ if __name__ == "__main__":
 
     if not args.use_interface:
         # Example of updating a behavior tree parameer.
-        transfer_utensil = GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,))
-        runner.update_behavior_tree(transfer_utensil, "ConveyUserReadyForTransfer", "silent")
+        bite_acquisition = GroundHighLevelAction(runner.hla_name_to_hla["AcquireBite"], (runner.utensil,))
+        bite_acquisition.process_behavior_tree_update("AcquireBite", "Speed", 1.25)
 
         # Run some commands.
-        runner.process_user_command(transfer_utensil)
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
