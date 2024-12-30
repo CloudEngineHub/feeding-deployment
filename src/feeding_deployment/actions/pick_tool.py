@@ -15,7 +15,7 @@ from relational_structs import (
 from feeding_deployment.actions.base import (
     HighLevelAction,
     BehaviorTreeNode,
-    parse_behavior_tree,
+    load_behavior_tree,
     tool_type,
     GripperFree,
     Holding,
@@ -42,122 +42,18 @@ class PickToolHLA(HighLevelAction):
         objects: tuple[Object, ...],
         params: dict[str, Any],
     ) -> BehaviorTreeNode:
+        del params  # not used right now
         
         assert len(objects) == 1
         tool = objects[0]
-        assert tool.name == "utensil"  # other things forthcoming
-        del params  # not used right now
-
         assert self.sim.held_object_name is None
 
-        # Need to figure out how to handle conditional statements...
-        assert self.sim.scene_description.scene_label == "vention"
+        if tool.name == "utensil" and self.sim.scene_description.scene_label == "vention":
+            yaml_filename = "pick_utensil.yaml"
+        else:
+            raise NotImplementedError
 
-        # We'll move this into a file later.
-        yaml_str = """
-name: "Root"
-type: "Sequence"
-children:
-
-  - name: "MoveToRetractPos"
-    type: "Behavior"
-    parameters:
-      - name: "RetractPosition"
-        space:
-          type: "Box"
-          lower: !hla arm_joint_lower_limits
-          upper: !hla arm_joint_upper_limits
-        is_user_editable: False
-        value: !scene_description retract_pos
-    fn: !hla move_to_joint_positions
-
-  - name: "CloseGripper"
-    type: "Behavior"
-    parameters: []
-    fn: !hla close_gripper
-
-  - name: "MoveToUtensilAboveMountPos"
-    type: "Behavior"
-    parameters:
-      - name: "UtensilAboveMountPos"
-        space:
-          type: "Box"
-          lower: !hla arm_joint_lower_limits
-          upper: !hla arm_joint_upper_limits
-        is_user_editable: False
-        value: !scene_description utensil_above_mount_pos
-    fn: !hla move_to_joint_positions
-
-  - name: "MoveUtensilInsideMount"
-    type: "Behavior"
-    parameters:
-      - name: "UtensilInsideMountEE"
-        space:
-          type: "PoseSpace"
-        is_user_editable: False
-        value: !scene_description utensil_inside_mount
-    fn: !hla move_to_ee_pose
-
-  - name: "GraspUtensil"
-    type: "Behavior"
-    parameters:
-      - name: "Tool"
-        space:
-          type: "Enum"
-          elements: ["utensil", "drink", "wipe"]
-        is_user_editable: False
-        value: "utensil"
-    fn: !hla grasp_tool
-
-  - name: "MoveUtensilOutsideMount"
-    type: "Behavior"
-    parameters:
-      - name: "MoveUtensilOutsideMountEE"
-        space:
-          type: "PoseSpace"
-        is_user_editable: False
-        value: !scene_description utensil_outside_mount
-    fn: !hla move_to_ee_pose
-
-  # Assuming here self.sim.scene_description.scene_label == "vention"
-  - name: "MoveUtensilOutsideAboveMount"
-    type: "Behavior"
-    parameters:
-      - name: "MoveUtensilOutsideAboveMountEE"
-        space:
-          type: "PoseSpace"
-        is_user_editable: False
-        value: !scene_description utensil_outside_above_mount
-    fn: !hla move_to_ee_pose
-
-  - name: "MoveToRetractPos"
-    type: "Behavior"
-    parameters:
-      - name: "RetractPosition"
-        space:
-          type: "Box"
-          lower: !hla arm_joint_lower_limits
-          upper: !hla arm_joint_upper_limits
-        is_user_editable: False
-        value: !scene_description retract_pos
-    fn: !hla move_to_joint_positions
-
-  # Pre-emptively move to the before_transfer_pos because moving to above_plate_pos
-  # from retract_pos is unsafe.
-  - name: "MoveToBeforeTransferPos"
-    type: "Behavior"
-    parameters:
-      - name: "BeforeTransferPos"
-        space:
-          type: "Box"
-          lower: !hla arm_joint_lower_limits
-          upper: !hla arm_joint_upper_limits
-        is_user_editable: False
-        value: !scene_description before_transfer_pos
-    fn: !hla move_to_joint_positions
-"""
-        bt = parse_behavior_tree(yaml_str, self)
-        return bt
+        return load_behavior_tree(yaml_filename, self)
 
     def execute_action(
         self,
