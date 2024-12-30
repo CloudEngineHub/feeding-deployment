@@ -51,6 +51,8 @@ class StowToolHLA(HighLevelAction):
             yaml_filename = "stow_utensil.yaml"
         elif tool.name == "drink":
             yaml_filename = "stow_drink.yaml"
+        elif tool.name == "wipe":
+            yaml_filename = "stow_wipe.yaml"
         else:
             raise NotImplementedError
 
@@ -64,32 +66,11 @@ class StowToolHLA(HighLevelAction):
         assert len(objects) == 1
         tool = objects[0]
 
-        if tool.name in ["drink", "utensil"]:
+        if tool.name in ["drink", "utensil", "wipe"]:
 
             # Get and execute the behavior tree.
             behavior_tree = self.get_behavior_tree(objects, params)
             behavior_tree.tick()
-        
-        elif tool.name == "wipe":
-
-            assert self.sim.held_object_name == "wipe"
-            
-            self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-
-            if self.sim.scene_description.scene_label == "vention":
-                self.move_to_joint_positions(self.sim.scene_description.wipe_neutral_pos)
-                self.move_to_joint_positions(self.sim.scene_description.wipe_outside_mount_pos)
-            elif self.sim.scene_description.scene_label == "wheelchair":
-                self.move_to_joint_positions(self.sim.scene_description.wipe_outside_above_mount_pos)
-                self.move_to_ee_pose(self.sim.scene_description.wipe_outside_mount)
-            self.move_to_ee_pose(self.sim.scene_description.wipe_inside_mount)
-            self.ungrasp_tool("wipe")
-            self.move_to_ee_pose(self.sim.scene_description.wipe_above_mount)
-
-            if self.sim.scene_description.scene_label == "vention":
-                self.move_to_ee_pose(self.sim.scene_description.wipe_infront_mount)
-
-            self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
         else:
             print(f"StowTool not yet implemented for {tool}")
@@ -124,4 +105,24 @@ class StowToolHLA(HighLevelAction):
         self.move_to_ee_pose(last_drink_poses['place_inside_bottom_pose'])
         self.move_to_ee_pose(last_drink_poses['place_pre_grasp_pose'])
         self.move_to_joint_positions(self.sim.scene_description.drink_staging_pos)
+        self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+
+    def stow_wipe(self) -> None:
+        assert self.sim.held_object_name == "wipe"
+            
+        self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+
+        if self.sim.scene_description.scene_label == "vention":
+            self.move_to_joint_positions(self.sim.scene_description.wipe_neutral_pos)
+            self.move_to_joint_positions(self.sim.scene_description.wipe_outside_mount_pos)
+        elif self.sim.scene_description.scene_label == "wheelchair":
+            self.move_to_joint_positions(self.sim.scene_description.wipe_outside_above_mount_pos)
+            self.move_to_ee_pose(self.sim.scene_description.wipe_outside_mount)
+        self.move_to_ee_pose(self.sim.scene_description.wipe_inside_mount)
+        self.ungrasp_tool("wipe")
+        self.move_to_ee_pose(self.sim.scene_description.wipe_above_mount)
+
+        if self.sim.scene_description.scene_label == "vention":
+            self.move_to_ee_pose(self.sim.scene_description.wipe_infront_mount)
+
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
