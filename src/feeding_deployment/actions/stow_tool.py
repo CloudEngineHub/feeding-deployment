@@ -14,6 +14,8 @@ from relational_structs import (
 )
 from feeding_deployment.actions.base import (
     HighLevelAction,
+    BehaviorTreeNode,
+    load_behavior_tree,
     tool_type,
     GripperFree,
     Holding,
@@ -34,6 +36,23 @@ class StowToolHLA(HighLevelAction):
             add_effects={LiftedAtom(GripperFree, [])},
             delete_effects={Holding([tool])},
         )
+    
+    def get_behavior_tree(
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> BehaviorTreeNode:
+        del params  # not used right now
+        
+        assert len(objects) == 1
+        tool = objects[0]
+
+        if tool.name == "utensil":
+            yaml_filename = "stow_utensil.yaml"
+        else:
+            raise NotImplementedError
+
+        return load_behavior_tree(yaml_filename, self)
 
     def execute_action(
         self,
@@ -61,20 +80,9 @@ class StowToolHLA(HighLevelAction):
 
         elif tool.name == "utensil":
 
-            assert self.sim.held_object_name == "utensil"
-            
-            self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-
-            if self.sim.scene_description.scene_label == "vention":
-                self.move_to_joint_positions(self.sim.scene_description.utensil_outside_above_mount_pos)
-                self.move_to_ee_pose(self.sim.scene_description.utensil_outside_mount)
-            elif self.sim.scene_description.scene_label == "wheelchair":
-                self.move_to_joint_positions(self.sim.scene_description.utensil_outside_mount_pos)
-
-            self.move_to_ee_pose(self.sim.scene_description.utensil_inside_mount)
-            self.ungrasp_tool("utensil")
-            self.move_to_ee_pose(self.sim.scene_description.utensil_above_mount)
-            self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+            # Get and execute the behavior tree.
+            behavior_tree = self.get_behavior_tree(objects, params)
+            behavior_tree.tick()
         
         elif tool.name == "wipe":
 
@@ -100,3 +108,19 @@ class StowToolHLA(HighLevelAction):
         else:
             print(f"StowTool not yet implemented for {tool}")
             return []
+
+    def stow_utensil(self) -> None:
+        assert self.sim.held_object_name == "utensil"
+        
+        self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+
+        if self.sim.scene_description.scene_label == "vention":
+            self.move_to_joint_positions(self.sim.scene_description.utensil_outside_above_mount_pos)
+            self.move_to_ee_pose(self.sim.scene_description.utensil_outside_mount)
+        elif self.sim.scene_description.scene_label == "wheelchair":
+            self.move_to_joint_positions(self.sim.scene_description.utensil_outside_mount_pos)
+
+        self.move_to_ee_pose(self.sim.scene_description.utensil_inside_mount)
+        self.ungrasp_tool("utensil")
+        self.move_to_ee_pose(self.sim.scene_description.utensil_above_mount)
+        self.move_to_joint_positions(self.sim.scene_description.retract_pos)
