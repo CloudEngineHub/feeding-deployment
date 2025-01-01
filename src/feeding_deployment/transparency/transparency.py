@@ -4,6 +4,7 @@ from openai import OpenAI
 import numpy as np
 import math
 import time
+from pathlib import Path
 
 class GPTInterface:
     def __init__(self):
@@ -34,18 +35,43 @@ class Transparency:
     
     def load_execution(self):
         """
-        Loads the current logs from the logs directory.
+        Loads the current execution log from the log directory.
         """
 
     def load_behavior(self):
         """
-        Loads the current behavior from the behavior directory.
+        Loads the current behavior description from the log directory.
         """
 
         # For now I am sequencing them in a fixed order, but ideally this should reflect integration with the web interface.
         bite = ["pick_utensil", "look_at_plate", "acquire_bite", "transfer_utensil", "stow_utensil"]
         drink = ["pick_drink", "transfer_drink", "stow_drink"]
-        wipe = ["pick_wipe", "wipe_mouth", "stow_wipe"]
+        wipe = ["pick_wipe", "transfer_wipe", "stow_wipe"]
+
+        self.behavior_log_path = Path(__file__).parent.parent / "integration" / "log" / "behavior_trees"
+
+        all_nodes_description = ""
+        
+        # Load the behavior trees
+        all_nodes_description += "Bite:\n"
+        for bite_node in bite:
+            with open(self.behavior_log_path / f"{bite_node}.yaml", 'r') as f:
+                node_description = f.read()
+            all_nodes_description += node_description + "\n---\n"
+
+        all_nodes_description += "Drink:\n"
+        for drink_node in drink:
+            with open(self.behavior_log_path / f"{drink_node}.yaml", 'r') as f:
+                node_description = f.read()
+            all_nodes_description += node_description + "\n---\n"
+
+        all_nodes_description += "Wipe:\n"
+        for wipe_node in wipe:
+            with open(self.behavior_log_path / f"{wipe_node}.yaml", 'r') as f:
+                node_description = f.read()
+            all_nodes_description += node_description + "\n---\n"
+
+        return all_nodes_description
 
     def answer_query(self, query):
         """
@@ -54,7 +80,6 @@ class Transparency:
 
         behavior = self.load_behavior()
         execution = self.load_execution()
-        
         prompt = self.prompt_skeleton%(behavior, execution, query)
         response = self.gpt.chat_with_openai(prompt)
         return response
