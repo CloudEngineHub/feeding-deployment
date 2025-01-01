@@ -317,6 +317,7 @@ class BehaviorTreeParameter:
     """
     
     name: str
+    description: str
     space: Space
     is_user_editable: bool
 
@@ -331,6 +332,7 @@ class BehaviorTreeParameter:
         space_dict = get_space_yaml_dict(self.space)
         return {
             "name": self.name,
+            "description": self.description,
             "is_user_editable": self.is_user_editable,
             "space": space_dict
         }
@@ -394,8 +396,9 @@ class FunctionalBehaviorTreeParameterizedPolicy(BehaviorTreeParameterizedPolicy)
 class BehaviorTreeNode(abc.ABC):
     """A node in a behavior tree."""
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, description: str) -> None:
         self._name = name
+        self._description = description
 
     @abc.abstractmethod
     def tick(self) -> bool:
@@ -417,9 +420,9 @@ class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
 
     Parameters may or may not be user-editable.
     """
-    def __init__(self, name: str, policy: BehaviorTreeParameterizedPolicy,
+    def __init__(self, name: str, description: str, policy: BehaviorTreeParameterizedPolicy,
                  bindings: dict[BehaviorTreeParameter, Any]) -> None:
-        super().__init__(name)
+        super().__init__(name, description)
         self._policy = policy
         self._bindings = bindings
 
@@ -443,6 +446,7 @@ class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
             parameter_dicts.append(parameter_dict)
         return {
             "name": self._name,
+            "description": self._description,
             "type": "Behavior",
             "parameters": parameter_dicts,
             "fn": fn_str,
@@ -466,8 +470,8 @@ class SequenceBehaviorTreeNode(BehaviorTreeNode):
     
     For now, the status after execution is not checked.
     """
-    def __init__(self, name: str, children: list[BehaviorTreeNode]) -> None:
-        super().__init__(name)
+    def __init__(self, name: str, description: str, children: list[BehaviorTreeNode]) -> None:
+        super().__init__(name, description)
         self._children = children
 
     def tick(self) -> bool:
@@ -485,6 +489,7 @@ class SequenceBehaviorTreeNode(BehaviorTreeNode):
         child_dicts = [child.get_yaml_dict(hla) for child in self._children]
         return {
             "name": self._name,
+            "description": self._description,
             "type": "Sequence",
             "children": child_dicts,
         }
@@ -538,12 +543,13 @@ def save_behavior_tree(behavior_tree: BehaviorTreeNode, filepath: Path, hla: Hig
 def _parse_node(node_dict: dict) -> BehaviorTreeNode:
     """Recursively parse a node from the loaded YAML structure."""
     node_name = node_dict["name"]
+    node_description = node_dict["description"]
     node_type = node_dict["type"]
 
     if node_type == "Sequence":
         children_dicts = node_dict.get("children", [])
         children_nodes = [_parse_node(child) for child in children_dicts]
-        return SequenceBehaviorTreeNode(node_name, children_nodes)
+        return SequenceBehaviorTreeNode(node_name, node_description, children_nodes)
 
     elif node_type == "Behavior":
         params_list = node_dict.get("parameters", [])
@@ -551,6 +557,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
         bindings = {}
         for p in params_list:
             p_name = p["name"]
+            p_description = p["description"]
             p_is_user_editable = p["is_user_editable"]
             space_spec = p["space"]
             space_type = space_spec["type"]
@@ -566,6 +573,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
                 raise ValueError(f"Unrecognized space type: {space_type}")
             param_obj = BehaviorTreeParameter(
                 name=p_name,
+                description=p_description,
                 space=space,
                 is_user_editable=p_is_user_editable
             )
@@ -578,7 +586,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
             parameters=parameters,
             fn=fn
         )
-        return ParameterizedActionBehaviorTreeNode(node_name, policy, bindings)
+        return ParameterizedActionBehaviorTreeNode(node_name, node_description, policy, bindings)
 
     else:
         raise ValueError(f"Unknown node type: {node_type}")
