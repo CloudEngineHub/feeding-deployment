@@ -42,6 +42,11 @@ class Transparency:
         Loads the current behavior from the behavior directory.
         """
 
+        # For now I am sequencing them in a fixed order, but ideally this should reflect integration with the web interface.
+        bite = ["pick_utensil", "look_at_plate", "acquire_bite", "transfer_utensil", "stow_utensil"]
+        drink = ["pick_drink", "transfer_drink", "stow_drink"]
+        wipe = ["pick_wipe", "wipe_mouth", "stow_wipe"]
+
     def answer_query(self, query):
         """
         Answers the query using the GPT model.
