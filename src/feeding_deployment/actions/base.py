@@ -139,6 +139,7 @@ class HighLevelAction(abc.ABC):
         new_node_name = f"UserGeneratedNode{next(self.new_node_counter)}"
         new_node_dict = self.create_user_addition_node_dict(new_node_name, new_node_type, new_node_parameters)
         if new_node_dict is None:  # node addition was misspecified / not safe
+            print(f"BT UPDATE FAILED in node addition (see error above).")
             return
         if before_or_after not in ("before", "after"):
             print(f"BT UPDATE FAILED. Invalid before or after: {before_or_after}")
