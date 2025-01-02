@@ -317,6 +317,7 @@ class BehaviorTreeParameter:
     """
     
     name: str
+    description: str
     space: Space
     is_user_editable: bool
 
@@ -331,6 +332,7 @@ class BehaviorTreeParameter:
         space_dict = get_space_yaml_dict(self.space)
         return {
             "name": self.name,
+            "description": self.description,
             "is_user_editable": self.is_user_editable,
             "space": space_dict
         }
@@ -394,8 +396,12 @@ class FunctionalBehaviorTreeParameterizedPolicy(BehaviorTreeParameterizedPolicy)
 class BehaviorTreeNode(abc.ABC):
     """A node in a behavior tree."""
 
-    def __init__(self, name: str) -> None:
+    # using for creating an execution log of the behavior tree
+    _execution_log_path = Path(__file__).parent.parent / "integration" / "log" / "execution_log.txt"
+
+    def __init__(self, name: str, description: str) -> None:
         self._name = name
+        self._description = description
 
     @abc.abstractmethod
     def tick(self) -> bool:
@@ -409,6 +415,16 @@ class BehaviorTreeNode(abc.ABC):
     def get_yaml_dict(self, hla: HighLevelAction) -> dict[str, Any]:
         """Get a dictionary to pass to yaml.dump()."""
 
+    def log_start(self) -> None:
+        """Log the start of execution."""
+        with open(self._execution_log_path, 'a') as f:
+            f.write(f"Starting node: {self._name}\n")
+
+    def log_end(self) -> None:
+        """Log the end of execution."""
+        with open(self._execution_log_path, 'a') as f:
+            f.write(f"Finished executing node: {self._name}\n")
+
 
 class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
     """A node in a behavior tree that executes a parameterized action open-loop.
@@ -417,14 +433,16 @@ class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
 
     Parameters may or may not be user-editable.
     """
-    def __init__(self, name: str, policy: BehaviorTreeParameterizedPolicy,
+    def __init__(self, name: str, description: str, policy: BehaviorTreeParameterizedPolicy,
                  bindings: dict[BehaviorTreeParameter, Any]) -> None:
-        super().__init__(name)
+        super().__init__(name, description)
         self._policy = policy
         self._bindings = bindings
 
     def tick(self) -> bool:
+        self.log_start()
         self._policy.run(self._bindings)
+        self.log_end()
         return True  # assume this worked
 
     def get_node(self, name: str) -> BehaviorTreeNode | None:
@@ -443,6 +461,7 @@ class ParameterizedActionBehaviorTreeNode(BehaviorTreeNode):
             parameter_dicts.append(parameter_dict)
         return {
             "name": self._name,
+            "description": self._description,
             "type": "Behavior",
             "parameters": parameter_dicts,
             "fn": fn_str,
@@ -466,13 +485,15 @@ class SequenceBehaviorTreeNode(BehaviorTreeNode):
     
     For now, the status after execution is not checked.
     """
-    def __init__(self, name: str, children: list[BehaviorTreeNode]) -> None:
-        super().__init__(name)
+    def __init__(self, name: str, description: str, children: list[BehaviorTreeNode]) -> None:
+        super().__init__(name, description)
         self._children = children
 
     def tick(self) -> bool:
+        self.log_start()
         for child in self._children:
             child.tick()
+        self.log_end()
         return True  # assume everything worked
 
     def get_node(self, name: str) -> BehaviorTreeNode | None:
@@ -485,6 +506,7 @@ class SequenceBehaviorTreeNode(BehaviorTreeNode):
         child_dicts = [child.get_yaml_dict(hla) for child in self._children]
         return {
             "name": self._name,
+            "description": self._description,
             "type": "Sequence",
             "children": child_dicts,
         }
@@ -538,12 +560,13 @@ def save_behavior_tree(behavior_tree: BehaviorTreeNode, filepath: Path, hla: Hig
 def _parse_node(node_dict: dict) -> BehaviorTreeNode:
     """Recursively parse a node from the loaded YAML structure."""
     node_name = node_dict["name"]
+    node_description = node_dict["description"]
     node_type = node_dict["type"]
 
     if node_type == "Sequence":
         children_dicts = node_dict.get("children", [])
         children_nodes = [_parse_node(child) for child in children_dicts]
-        return SequenceBehaviorTreeNode(node_name, children_nodes)
+        return SequenceBehaviorTreeNode(node_name, node_description, children_nodes)
 
     elif node_type == "Behavior":
         params_list = node_dict.get("parameters", [])
@@ -551,6 +574,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
         bindings = {}
         for p in params_list:
             p_name = p["name"]
+            p_description = p["description"]
             p_is_user_editable = p["is_user_editable"]
             space_spec = p["space"]
             space_type = space_spec["type"]
@@ -566,6 +590,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
                 raise ValueError(f"Unrecognized space type: {space_type}")
             param_obj = BehaviorTreeParameter(
                 name=p_name,
+                description=p_description,
                 space=space,
                 is_user_editable=p_is_user_editable
             )
@@ -578,7 +603,7 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
             parameters=parameters,
             fn=fn
         )
-        return ParameterizedActionBehaviorTreeNode(node_name, policy, bindings)
+        return ParameterizedActionBehaviorTreeNode(node_name, node_description, policy, bindings)
 
     else:
         raise ValueError(f"Unknown node type: {node_type}")
