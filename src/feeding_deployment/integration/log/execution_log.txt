@@ -25,3 +25,40 @@ Finished executing node: MoveUtensilInsideMount
 Starting node: GraspUtensil
 Finished executing node: GraspUtensil
 Starting node: MoveUtensilOutsideMount
+Starting node: Root
+Starting node: MoveToRetractPos
+Finished executing node: MoveToRetractPos
+Starting node: CloseGripper
+Finished executing node: CloseGripper
+Starting node: MoveToUtensilAboveMountPos
+Finished executing node: MoveToUtensilAboveMountPos
+Starting node: MoveUtensilInsideMount
+Starting node: Root
+Starting node: MoveToRetractPos
+Finished executing node: MoveToRetractPos
+Starting node: CloseGripper
+Finished executing node: CloseGripper
+Starting node: MoveToUtensilAboveMountPos
+Finished executing node: MoveToUtensilAboveMountPos
+Starting node: MoveUtensilInsideMount
+Starting node: Root
+Starting node: MoveToRetractPos
+Finished executing node: MoveToRetractPos
+Starting node: CloseGripper
+Finished executing node: CloseGripper
+Starting node: MoveToUtensilAboveMountPos
+Finished executing node: MoveToUtensilAboveMountPos
+Starting node: MoveUtensilInsideMount
+Finished executing node: MoveUtensilInsideMount
+Starting node: GraspUtensil
+Finished executing node: GraspUtensil
+Starting node: MoveUtensilOutsideMount
+Finished executing node: MoveUtensilOutsideMount
+Starting node: MoveUtensilOutsideAboveMount
+Finished executing node: MoveUtensilOutsideAboveMount
+Starting node: MoveToRetractPos
+Finished executing node: MoveToRetractPos
+Starting node: MoveToBeforeTransferPos
+Finished executing node: MoveToBeforeTransferPos
+Finished executing node: Root
+Starting node: LookAtPlate
