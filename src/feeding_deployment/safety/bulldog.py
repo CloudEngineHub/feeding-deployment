@@ -13,6 +13,7 @@ import sys
 import threading
 import time
 import numpy as np
+from pathlib import Path
 
 import rospy
 from std_msgs.msg import Bool
@@ -36,7 +37,6 @@ class BullDog:
         self.manager = ArmManager(address=(NUC_HOSTNAME, ARM_RPC_PORT), authkey=RPC_AUTHKEY)
         self.manager.connect()
         
-
         # This will now use the single, shared instance of ArmInterface
         self._arm_interface = self.manager.ArmInterface()
 
@@ -50,6 +50,8 @@ class BullDog:
         self.experimentor_emergency_stop_pressed = False
 
         self.bulldog_status_pub = rospy.Publisher('/bulldog_status', Bool, queue_size=1)
+
+        self.execution_log_path = Path(__file__).parent.parent / "integration" / "log" / "execution_log.txt"
 
         self.second_counter = 0
         time.sleep(1.0)
@@ -99,9 +101,11 @@ class BullDog:
                 break
 
         if anomaly != AnomalyStatus.NO_ANOMALY:
+            self._arm_interface.emergency_stop()
             print(f"AnomalyStatus detected: {anomaly}")
             rospy.loginfo(f"AnomalyStatus detected: {anomaly}")
-            self._arm_interface.emergency_stop() 
+            with open(self.execution_log_path, 'a') as f:
+                f.write(f"Anomaly Detected: {AnomalyStatus.get_error_message(anomaly)}\n") 
 
         self.bulldog_status_pub.publish(Bool(data=anomaly == AnomalyStatus.NO_ANOMALY))
         return anomaly
@@ -111,8 +115,6 @@ class BullDog:
             start_time = time.time()
             status = self.check_status()
             if status != AnomalyStatus.NO_ANOMALY:
-                print(f"AnomalyStatus detected: {status}")
-                rospy.loginfo(f"AnomalyStatus detected: {status}")
                 break
             end_time = time.time()
             # print(f"Time taken: {end_time - start_time}")
