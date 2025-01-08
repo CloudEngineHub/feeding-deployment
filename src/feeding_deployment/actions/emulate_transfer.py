@@ -29,7 +29,7 @@ from feeding_deployment.actions.base import (
 from feeding_deployment.actions.feel_the_bite.outside_mouth_transfer import OutsideMouthTransfer
 
 class EmulateTransferHLA(HighLevelAction):
-    """Wipe, or transfer drink, or transfer bite."""
+    """Emulate transfer by bringing the robot infront of the user's mouth."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
