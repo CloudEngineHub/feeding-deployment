@@ -29,12 +29,10 @@ from feeding_deployment.actions.base import (
 from feeding_deployment.actions.feel_the_bite.outside_mouth_transfer import OutsideMouthTransfer
 
 class EmulateTransferHLA(HighLevelAction):
-    """Emulate transfer by bringing the empty gripper infront of the user's mouth."""
+    """Emulate transfer by bringing the empty gripper in front of the user's mouth."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.tool = None
 
         self.transfer = OutsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits)
 
@@ -114,6 +112,13 @@ class EmulateTransferHLA(HighLevelAction):
         objects: tuple[Object, ...],
         params: dict[str, Any],
     ) -> str:
+        return f"emulate_transfer.yaml"
+    
+    def execute_action(
+        self,
+        objects: tuple[Object, ...],
+        params: dict[str, Any],
+    ) -> None:
         if params["test_mode"]:
             self.test_mode = True
-        return f"emulate_transfer.yaml"
+        return super().execute_action(objects, params)
