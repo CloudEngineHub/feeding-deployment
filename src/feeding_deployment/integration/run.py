@@ -40,6 +40,7 @@ from feeding_deployment.actions.base import (
     PlateInView,
     ToolPrepared,
     ToolTransferDone,
+    EmulateTransferDone,
     ResetPos,
     tool_type,
     GroundHighLevelAction,
@@ -51,6 +52,7 @@ from feeding_deployment.actions.base import (
 from feeding_deployment.actions.pick_tool import PickToolHLA
 from feeding_deployment.actions.stow_tool import StowToolHLA
 from feeding_deployment.actions.transfer_tool import TransferToolHLA
+from feeding_deployment.actions.emulate_transfer import EmulateTransferHLA
 from feeding_deployment.actions.acquisition import LookAtPlateHLA, AcquireBiteHLA
 from feeding_deployment.interfaces.perception_interface import PerceptionInterface
 from feeding_deployment.interfaces.web_interface import WebInterface
@@ -69,7 +71,7 @@ from feeding_deployment.actions.flair.flair import FLAIR
 
 
 # All the high level actions we want to consider.
-HLAS = {PickToolHLA, StowToolHLA, LookAtPlateHLA, AcquireBiteHLA, TransferToolHLA, ResetHLA}
+HLAS = {PickToolHLA, StowToolHLA, LookAtPlateHLA, AcquireBiteHLA, TransferToolHLA, EmulateTransferHLA, ResetHLA}
 
 assert os.environ.get("PYTHONHASHSEED") == "0", \
         "Please add `export PYTHONHASHSEED=0` to your bash profile!"
@@ -170,6 +172,7 @@ class _Runner:
             GripperFree,
             Holding,
             ToolTransferDone,
+            EmulateTransferDone,
             IsUtensil,
             PlateInView,
             ResetPos,
@@ -448,6 +451,7 @@ def my_custom_gesture_detector(robot, timeout):
         bite_acquisition.process_behavior_tree_node_addition("Pause", {"duration": 0.5}, "AcquireBite", "after")
 
         # Run some commands.
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["EmulateTransfer"], ()))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
