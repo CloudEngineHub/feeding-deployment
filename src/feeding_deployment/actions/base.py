@@ -60,6 +60,7 @@ tool_type = Type("tool")  # utensil, drink, or wiping tool
 GripperFree = Predicate("GripperFree", [])  # not holding any tool
 Holding = Predicate("Holding", [tool_type])  # holding tool
 ToolTransferDone = Predicate("ToolTransferDone", [tool_type])  # wiped, drank, or ate
+EmulateTransferDone = Predicate("EmulateTransferDone", [])  # emulated transfer
 ToolPrepared = Predicate("ToolPrepared", [tool_type])  # e.g., bite acquired
 PlateInView = Predicate("PlateInView", [])  # of the hand camera
 ResetPos = Predicate("ResetPos", [])  # robot in reset position
