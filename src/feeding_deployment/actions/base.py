@@ -6,11 +6,12 @@ import abc
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
-from gymnasium.spaces import Space, Box
+from gymnasium.spaces import Space, Box, Text
 from tomsutils.spaces import EnumSpace
 import functools
 from operator import attrgetter
 import itertools
+import string
 
 import yaml
 
@@ -91,6 +92,7 @@ class HighLevelAction(abc.ABC):
         self.wrist_interface = wrist_interface
         self.flair = flair
         self.behavior_tree_dir = behavior_tree_dir
+        self.gesture_detector_filepath = self.behavior_tree_dir / "synthesized_gesture_detectors.py"
         self.no_waits = no_waits
         self.log_path = log_path
         # NOTE: assuming 7-dof and that first 7 entries are arm joints (not gripper).
@@ -248,6 +250,30 @@ class HighLevelAction(abc.ABC):
                 ],
                 "fn": self.pause,
             }
+        
+        if new_node_type == "WaitForGesture":
+            if "gesture_fn_name" not in new_node_parameters:
+                print("BT UPDATE FAILED: missing parameter gesture_fn_name")
+                return
+            gesture_fn_name = new_node_parameters["gesture_fn_name"]
+            return {
+                "type": "Behavior",
+                "name": new_node_name,
+                "description": "User-added gesture detector.",
+                "parameters": [
+                {
+                    "name": "GestureDetector",
+                    "space": {
+                        "type": "Text",
+                    },
+                    "description": "Gesture detection function name.",
+                    "is_user_editable": True,
+                    "value": gesture_fn_name,
+                },
+                ],
+                "fn": self.wait_for_gesture,
+            }
+
 
         print(f"BT UPDATE FAILED: invalid new node type {new_node_type}")
         return None
@@ -303,6 +329,30 @@ class HighLevelAction(abc.ABC):
 
     def pause(self, duration: float) -> None:
         time.sleep(duration)
+
+    def wait_for_gesture(self, gesture_fn_name: str) -> None:
+        # Create a local namespace with gesture detector code.
+        local_namespace = globals().copy()
+
+        # Add the saved gesture detection code to the local namespace.
+        with open(self.gesture_detector_filepath, "r", encoding="utf-8") as f:
+            gesture_detector_code_text = f.read()
+        exec(gesture_detector_code_text, local_namespace)
+        assert gesture_fn_name in local_namespace
+
+        # Add constants that we will pass to the gesture detector.
+        local_namespace["ROBOT"] = self.robot_interface
+        local_namespace["TIMEOUT"] = 5.0
+
+        # Create a snippet that will actually run gesture detection in a loop.
+        wait_for_gesture_code_text = f"""
+while True:  # maybe do max retries instead?
+    if {gesture_fn_name}(ROBOT, TIMEOUT):
+        break
+    time.sleep(1.0)  # or whatever
+"""
+        # Run the code.
+        exec(wait_for_gesture_code_text, local_namespace)
 
     def execute_robot_command(self, robot_command: KinovaCommand, plan_viz: list[FeedingDeploymentWorldState] = None, tool_update: str = None) -> None:
         """Execute the given commands on the robot."""
@@ -703,6 +753,8 @@ def _parse_node(node_dict: dict) -> BehaviorTreeNode:
                 space = EnumSpace(space_spec["elements"])
             elif space_type == "PoseSpace":
                 space = PoseSpace()
+            elif space_type == "Text":
+                space = Text(max_length=100000000, charset=frozenset(string.printable))
             else:
                 raise ValueError(f"Unrecognized space type: {space_type}")
             param_obj = BehaviorTreeParameter(
@@ -744,6 +796,11 @@ def get_space_yaml_dict(space: Space) -> dict[str, Any]:
     if isinstance(space, PoseSpace):
         return {
             "type": "PoseSpace",
+        }
+    
+    if isinstance(space, Text):
+        return {
+            "type": "Text",
         }
 
     raise ValueError(f"Unrecognized space type: {space}")
