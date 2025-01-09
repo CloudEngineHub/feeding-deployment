@@ -198,15 +198,17 @@ class HeadPerceptionROSWrapper:
             self.updateTF("base_link", "head_pose", head_perception_data["neck_frame"])
             self.updateTF("base_link", "reference_head_pose", head_perception_data["reference_neck_frame"])
 
+            return {
+                "head_pose": head_perception_data["head_pose"],
+                "face_keypoints": head_perception_data["landmarks2d"],
+                "tool_tip_target_pose": head_perception_data["tool_tip_target_pose"],
+            }
+
         else:
             if self.filter_noisy_readings:
                 self.noisy_reading_publisher.publish(Bool(data=True))
-
-        return {
-            "head_pose": head_perception_data["head_pose"],
-            "face_keypoints": head_perception_data["landmarks2d"],
-            "tool_tip_target_pose": head_perception_data["tool_tip_target_pose"],
-        }
+            
+            return None
 
     def updateTF(self, source_frame, target_frame, pose):
 
