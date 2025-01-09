@@ -1,28 +1,9 @@
-Using the given language description, create a corresponding gesture detection function that utilizes the appropriate parameters. You have access to the following head perception method which is a member of the perception_interface class:
+import time
 
-def get_head_perception_data():
+def in_context_example1(perception_interface, timeout, threshold):
     """
-    Detects the current head pose of the user in the camera frame (z forward, x up) and face keypoints.
-    Execution time: 0.1 sec.
-    Returns:
-        dict: {
-            "head_pose": (x, y, z, roll, pitch, yaw),  # Tuple of ints
-            "face_keypoints": list[tuple[int, int]]   # 68 face keypoints (x, y) in dlib format
-        }
+    Verifies the in-context example 1 code (head shake left to right) provided in the prompt
     """
-    pass
-
-
-In-Context Example 1:
-
-Input:
-##################
-Language Description: "left to right head shake"
-##################
-
-Output:
-##################
-def gesture_detector(perception_interface, threshold, timeout):
 
     start_time = time.time()
     yaw_data = []
@@ -32,6 +13,8 @@ def gesture_detector(perception_interface, threshold, timeout):
         head_perception_data = perception_interface.get_head_perception_data()
         if head_perception_data is None:
             break
+        # else:
+        #     time.sleep(0.1) # Maintain 10 Hz rate
         head_pose = head_perception_data["head_pose"]
 
         (head_x, head_y, head_z, head_roll, head_pitch, head_yaw) = head_pose
@@ -53,18 +36,9 @@ def gesture_detector(perception_interface, threshold, timeout):
     
     # If timeout expires without detecting the gesture, return False
     return False
-##################
 
-In-Context Example 2:
-
-Input:
-##################
-Language Description: "mouth open"
-##################
-
-Output:
-##################
-def gesture_detector(perception_interface, threshold, timeout):
+def in_context_example2(perception_interface, threshold, timeout):
+    """ Verifies the in-context example 2 code (mouth open) provided in the prompt """
 
     def euclidean_distance(p1, p2):
         """Calculate Euclidean distance between two points."""
@@ -75,6 +49,8 @@ def gesture_detector(perception_interface, threshold, timeout):
         head_perception_data = perception_interface.get_head_perception_data()
         if head_perception_data is None:
             break
+        # else:
+        #     time.sleep(0.1) # Maintain 10 Hz rate
         face_keypoints = head_perception_data["face_keypoints"]
         
         # Indices for mouth landmarks
@@ -92,13 +68,3 @@ def gesture_detector(perception_interface, threshold, timeout):
             return True
     
     return False
-##################
-
-Using the In-Context Examples as reference, generate a detector for the following input. Generate output in the same format as the in-context examples - just the code with comments, and without any additional text explanations, as additional text will render the output unexecutable in python. Absolutely make sure that there are no time.sleep() calls in the function. If using a while loop, make sure that you have the code lines for breaking out if face_keypoints or head_pose is None.
-
-Input:
-##################
-Language Description: %s
-##################
-
-Output:
