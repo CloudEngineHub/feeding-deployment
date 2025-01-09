@@ -253,8 +253,6 @@ class HeadPerception:
         landmark2d[..., 0] = landmark2d[..., 0] * w / 2 + w / 2
         landmark2d[..., 1] = landmark2d[..., 1] * h / 2 + h / 2
 
-        mouth_state, dist = self.is_mouth_open(landmark2d)
-
         if visualize:
 
             kpts = landmark2d.copy()
