@@ -432,26 +432,7 @@ if __name__ == "__main__":
     # runner.hla_command_queue.put(drink_transfer_msg)
 
     if not args.use_interface:
-        # Example of using LLM to generate updates to behavior trees.
-        runner.process_user_update_request("Move a little bit faster while picking up the food")
-
-        # Example of directly updating the behavior trees.
-        bite_acquisition = GroundHighLevelAction(runner.hla_name_to_hla["AcquireBiteWithTool"], (runner.utensil,))
-
-        gesture_fn_text = """
-def my_custom_gesture_detector(perception_interface, timeout):
-    print("Detecting gesture...")
-    time.sleep(timeout)
-    return True
-"""
-        gesture_fn_name = "my_custom_gesture_detector"
-        runner.register_gesture_detector(gesture_fn_name, gesture_fn_text)
-
-        bite_acquisition.process_behavior_tree_node_addition("WaitForGesture", {"gesture_fn_name": gesture_fn_name}, "AcquireBite", "before")
-        bite_acquisition.process_behavior_tree_node_addition("Pause", {"duration": 0.5}, "AcquireBite", "after")
-
         # Run some commands.
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["EmulateTransfer"], (), {"test_mode": True} ))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
