@@ -15,6 +15,13 @@ class NodeModificationUserUpdateRequest(UserUpdateRequest):
     parameter_name: str
     new_value: Any
 
+@dataclass(frozen=True)
+class NodeAdditionUserRequest(UserUpdateRequest):
+    new_node_type: str  # can be "Retract" or "Pause"
+    new_node_parameters: dict[str, Any]  # {} for Retract and {"duration": float} for Pause
+    anchor_node_name: str  # the name of an existing behavior tree node
+    before_or_after: str  # "before" or "after"
+
 The "hla" stands for high-level action. Each hla can be grounded with zero or more object names. The possible hla and object combinations are:
 hla_name=AcquireBiteWithTool, hla_object_names=(drink,)
 hla_name=AcquireBiteWithTool, hla_object_names=(utensil,)

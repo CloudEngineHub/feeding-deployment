@@ -1,6 +1,6 @@
 Your job is to convert the following command into one or more structured outputs in a format that I will describe next.
 
-The command is: Can you remain quiet the whole time?
+The command is: Move a little bit faster while picking up the food
 
 The available structured output types are:
 
@@ -14,6 +14,13 @@ class NodeModificationUserUpdateRequest(UserUpdateRequest):
     node_name: str
     parameter_name: str
     new_value: Any
+
+@dataclass(frozen=True)
+class NodeAdditionUserRequest(UserUpdateRequest):
+    new_node_type: str  # can be "Retract" or "Pause"
+    new_node_parameters: dict[str, Any]  # {} for Retract and {"duration": float} for Pause
+    anchor_node_name: str  # the name of an existing behavior tree node
+    before_or_after: str  # "before" or "after"
 
 The "hla" stands for high-level action. Each hla can be grounded with zero or more object names. The possible hla and object combinations are:
 hla_name=AcquireBiteWithTool, hla_object_names=(drink,)
@@ -37,63 +44,6 @@ hla_name=TransferTool, hla_object_names=(wipe,)
 IMPORTANT: make sure your hla_object_names and hla_name appear together in the list above!
 
 A NodeModificationUserUpdateRequest a request to modify one parameter for one node in a behavior tree associated with an hla.
-
-Based on the information given, convert the original command into a list of one or more structured outputs.
-
-Return your answer in a format where calling eval() in python will directly produce a list of UserUpdateRequest instances.
-I previously asked you to do this and you returned the following:
-
-[
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("utensil",),
-        node_name="TransferTool",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("utensil",),
-        node_name="TransferTool",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("drink",),
-        node_name="TransferTool",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("drink",),
-        node_name="TransferTool",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("wipe",),
-        node_name="TransferTool",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("wipe",),
-        node_name="TransferTool",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
-    )
-]
-     
-The following request is invalid:
-
-NodeModificationUserUpdateRequest(hla_name='TransferTool', hla_object_names=('utensil',), node_name='TransferTool', parameter_name='ReadyToInitiateTransferInteraction', new_value='silent')
-
-because the node_name is not in the behavior tree. Recall again all of the behavior trees:
-
 
 Here are all behavior trees:
 Bite:
@@ -230,40 +180,51 @@ parameters:
 fn: !hla acquire_bite
 
 ---
-name: "TransferUtensil"
-description: "Bring the utensil to the user's mouth for a bite."
-type: "Behavior"
+name: TransferUtensil
+description: Bring the utensil to the user's mouth for a bite.
+type: Behavior
 parameters:
-  - name: "ReadyToInitiateTransferInteraction"
-    description: "Interaction mode for ready to initiate transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "ReadyForTransferInteraction"
-    description: "Interaction mode for ready to transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "InitiateTransferInteraction"
-    description: "Interaction mode for transfer."
-    space:
-      type: "Enum"
-      elements: ["button", "open_mouth", "auto_timeout"]
-    is_user_editable: True
-    value: "open_mouth"
-  - name: "TransferCompleteInteraction"
-    description: "Interaction mode for transfer completion."
-    space:
-      type: "Enum"
-      elements: ["button", "sense", "auto_timeout"]
-    is_user_editable: True
-    value: "sense"
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
 fn: !hla transfer_utensil
-
 ---
 name: "StowUtensil"
 description: "Place the utensil in the tool mount."
@@ -280,40 +241,51 @@ parameters: []
 fn: !hla pick_drink
 
 ---
-name: "TransferDrink"
-description: "Bring the mug to the user's mouth for a sip."
-type: "Behavior"
+name: TransferDrink
+description: Bring the mug to the user's mouth for a sip.
+type: Behavior
 parameters:
-  - name: "ReadyToInitiateTransferInteraction"
-    description: "Interaction mode for ready to initiate transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "ReadyForTransferInteraction"
-    description: "Interaction mode for ready to transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "InitiateTransferInteraction"
-    description: "Interaction mode for transfer."
-    space:
-      type: "Enum"
-      elements: ["button", "open_mouth", "auto_timeout"]
-    is_user_editable: True
-    value: "open_mouth"
-  - name: "TransferCompleteInteraction"
-    description: "Interaction mode for transfer completion."
-    space:
-      type: "Enum"
-      elements: ["button", "sense", "auto_timeout"]
-    is_user_editable: True
-    value: "sense"
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
 fn: !hla transfer_drink
-
 ---
 name: "StowDrink"
 description: "Place the mug on the table."
@@ -330,40 +302,51 @@ parameters: []
 fn: !hla pick_wipe
 
 ---
-name: "TransferWipe"
-description: "Bring the wipe to the user's mouth for a cleaning."
-type: "Behavior"
+name: TransferWipe
+description: Bring the wipe to the user's mouth for a cleaning.
+type: Behavior
 parameters:
-  - name: "ReadyToInitiateTransferInteraction"
-    description: "Interaction mode for ready to initiate transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "ReadyForTransferInteraction"
-    description: "Interaction mode for ready to transfer."
-    space:
-      type: "Enum"
-      elements: ["silent", "voice", "led"]
-    is_user_editable: True
-    value: "led"
-  - name: "InitiateTransferInteraction"
-    description: "Interaction mode for transfer."
-    space:
-      type: "Enum"
-      elements: ["button", "open_mouth", "auto_timeout"]
-    is_user_editable: True
-    value: "open_mouth"
-  - name: "TransferCompleteInteraction"
-    description: "Interaction mode for transfer completion."
-    space:
-      type: "Enum"
-      elements: ["button", "sense", "auto_timeout"]
-    is_user_editable: True
-    value: "sense"
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: silent
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
 fn: !hla transfer_wipe
-
 ---
 name: "StowWipe"
 description: "Place the wipe in the tool mount."
@@ -374,51 +357,19 @@ fn: !hla stow_wipe
 ---
 
 
-Fix the code. Once again, only return your answer in a format where eval() can be called.
+Based on the information given, convert the original command into a list of one or more structured outputs.
+
+Return your answer in a format where calling eval() in python will directly produce a list of UserUpdateRequest instances.
+
 ####$$$###$$$####$$$$###$$$####$$$###$$$###
 ```python
 [
     NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
+        hla_name="AcquireBiteWithTool",
         hla_object_names=("utensil",),
-        node_name="TransferUtensil",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("utensil",),
-        node_name="TransferUtensil",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("drink",),
-        node_name="TransferDrink",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("drink",),
-        node_name="TransferDrink",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("wipe",),
-        node_name="TransferWipe",
-        parameter_name="ReadyToInitiateTransferInteraction",
-        new_value="silent"
-    ),
-    NodeModificationUserUpdateRequest(
-        hla_name="TransferTool",
-        hla_object_names=("wipe",),
-        node_name="TransferWipe",
-        parameter_name="ReadyForTransferInteraction",
-        new_value="silent"
+        node_name="AcquireBite",
+        parameter_name="Speed",
+        new_value=1.5
     )
 ]
 ```
