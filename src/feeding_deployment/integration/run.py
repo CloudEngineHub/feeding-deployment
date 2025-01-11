@@ -235,10 +235,12 @@ class _Runner:
         """Pass high level action message from the web interface."""
         if msg_dict["status"] == "transparency":
             answer = self.transparency_query.answer_query(msg_dict["request"])
-            self.web_interface.send_web_interface_message({"data": answer})
+            self.web_interface.send_web_interface_text(answer)
+            return 
         elif msg_dict["status"] == "adaptability":
             self.process_user_update_request(msg_dict["request"])
-            self.web_interface.send_web_interface_message({"data": "Adaptability request processed."})
+            self.web_interface.send_web_interface_text("Adaptability request processed.")
+            return
         elif msg_dict["status"] == "finish_feeding":
             user_cmd = GroundHighLevelAction(
                 self.hla_name_to_hla["Reset"], ()
