@@ -46,14 +46,37 @@ class WebInterface:
         self.web_interface_sub = rospy.Subscriber("WebAppComm", String, self._message_callback, queue_size=100)
         time.sleep(1.0)  # Wait for the subscriber to connect
 
+        self.state = "task_selection" # task_selection, transparency, or adaptability
+
     def _message_callback(self, msg: "String") -> None:
         """Callback for the web interface."""
         print("Received message on WebAppComm: ", msg.data)
         msg_dict = json.loads(msg.data)
 
+        if "status" not in msg_dict:
+            # This only happens when the web interface is sending a text message without a status / state.
+            if self.state == "transparency" or self.state == "adaptability":
+                request = {
+                    "status": self.state,
+                    "request": msg_dict,
+                    "state": None
+                }
+                self.hla_command_queue.put(request)
+                return
+            else:
+                print("WARNING: Unrecognized message from web interface.")
+                return
+        
         # hack to not run into errors when message does not contain state
         if "state" not in msg_dict:
             msg_dict["state"] = None
+
+        if (msg_dict["state"] == "order_selection" and msg_dict["status"] == "opened_transparency_page"):
+            self.state = "transparency"
+        elif (msg_dict["state"] == "order_selection" and msg_dict["status"] == "opened_adaptability_page"):
+            self.state = "adaptability"
+        else:
+            self.state = "task_selection"
 
         if (msg_dict["state"] == "order_selection" and msg_dict["status"] != "ready_for_initial_data") \
             or (msg_dict["state"] == "voice"):
