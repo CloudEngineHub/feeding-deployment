@@ -12,6 +12,7 @@ import functools
 from operator import attrgetter
 import itertools
 import string
+import traceback
 
 import yaml
 
@@ -851,6 +852,7 @@ def interpret_user_update_request(
     llm: LargeLanguageModel,
     available_hla_object_names: list[str],
     behavior_log_path,
+    max_retries: int = 3,
 ) -> list[UserUpdateRequest]:
     """Use an LLM to convert natural language into a user update request."""
 
@@ -883,7 +885,7 @@ def interpret_user_update_request(
 
     hla_object_name_str = "\n".join(available_hla_object_names)
 
-    prompt = """Your job is to convert the following command into one or more structured outputs in a format that I will describe next.
+    prompt_prefix = """Your job is to convert the following command into one or more structured outputs in a format that I will describe next.
 
 The command is: %s
 
@@ -906,22 +908,52 @@ The "hla" stands for high-level action. Each hla can be grounded with zero or mo
 IMPORTANT: make sure your hla_object_names and hla_name appear together in the list above!
 
 A NodeModificationUserUpdateRequest a request to modify one parameter for one node in a behavior tree associated with an hla.
+""" % (request_txt, hla_object_name_str)
 
+    behavior_tree_prompt = """
 Here are all behavior trees:
 %s
+""" % all_nodes_description
 
+    final_prompt = """
 Based on the information given, convert the original command into a list of one or more structured outputs.
 
 Return your answer in a format where calling eval() in python will directly produce a list of UserUpdateRequest instances.
-""" % (request_txt, hla_object_name_str, all_nodes_description)
-
+"""
+    prompt = prompt_prefix + behavior_tree_prompt + final_prompt
     response = llm.sample_completions(prompt, imgs=None, temperature=0.0, seed=0)[0]
+    response = _strip_python_response(response)
+
+    final_fix_prompt = """Fix the code. Once again, only return your answer in a format where eval() can be called."""
+
+    # Validate the response.
+    for _ in range(max_retries):
+        response_prompt = """I previously asked you to do this and you returned the following:
+%s     
+""" % response
+        try:
+            # This is really not safe but I'm not actually worried.
+            pythonic_response = eval(response)
+            # TODO remove
+            raise ValueError("This is a fake error to test reprompting")
+        except BaseException as e:
+            tb = traceback.format_exception(e)
+            tb_str = "".join(tb)
+            # Reprompt to fix exception.
+            error_prompt = """Evaluating that code produced the following exception:
+%s
+""" % tb_str
+            prompt = prompt_prefix + response_prompt + error_prompt + final_fix_prompt
+            response = llm.sample_completions(prompt, imgs=None, temperature=0.0, seed=0)[0]
+            response = _strip_python_response(response)
+            
+
+    return pythonic_response
+
+
+def _strip_python_response(response: str) -> str:
     if response.startswith("```python"):
         response = response[len("```python"):]
     if response.endswith("```"):
         response = response[:-len("```")]
-
-    # This is really not safe but I'm not actually worried.
-    pythonic_response = eval(response)
-
-    return pythonic_response
+    return response
