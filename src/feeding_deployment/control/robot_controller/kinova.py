@@ -182,12 +182,12 @@ class KinovaArm:
         self.set_arm_servoing_mode("high")
 
         # # disable joint following error
-        joint_following_error_message = DeviceConfig_pb2.SafetyEnable()
-        joint_following_error_message.handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
-        joint_following_error_message.enable = False
-        for device_id in self.actuator_device_ids:
-            self.device_config.SetSafetyEnable(joint_following_error_message, device_id)
-        print("Joint following error disabled")
+        # joint_following_error_message = DeviceConfig_pb2.SafetyEnable()
+        # joint_following_error_message.handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
+        # joint_following_error_message.enable = False
+        # for device_id in self.actuator_device_ids:
+        #     self.device_config.SetSafetyEnable(joint_following_error_message, device_id)
+        # print("Joint following error disabled")
 
         # Torque control setup
         # Note: Torque commands are converted to current commands since
