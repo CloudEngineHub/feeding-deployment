@@ -181,6 +181,55 @@ class KinovaArm:
         # Make sure arm is in high-level servoing mode
         self.set_arm_servoing_mode("high")
 
+        # get and print safety information
+        safety_info = []
+        safety_configuration = []
+        for device_id in self.actuator_device_ids:
+            safety_info.append(self.device_config.GetAllSafetyInformation(device_id))
+            safety_configuration.append(self.device_config.GetAllSafetyConfiguration(device_id))
+
+        with open("safety_log/safety_info.txt", "w") as f:
+            for i, (info, config) in enumerate(zip(safety_info, safety_configuration)):
+                f.write(f"Device {i}\n")
+                f.write(f"Info: {info}\n")
+                f.write(f"Config: {config}\n")
+
+        joint_following_safety_configuration = []
+        joint_following_safety_info = []
+
+        joint_following_safety_handle = ActuatorConfig_pb2.SafetyHandle()
+        joint_following_safety_handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
+        for device_id in self.actuator_device_ids:
+            joint_following_safety_configuration.append(self.device_config.GetSafetyConfiguration(joint_following_safety_handle, device_id))
+            joint_following_safety_info.append(self.device_config.GetSafetyInformation(joint_following_safety_handle, device_id))
+            
+
+        with open("safety_log/joint_following_safety_info.txt", "w") as f:
+            for i, (info, config) in enumerate(zip(joint_following_safety_info, joint_following_safety_configuration)):
+                f.write(f"Device {i}\n")
+                f.write(f"Info: {info}\n")
+                f.write(f"Config: {config}\n")
+
+        safety_enables = []
+        safety_enable_sets = []
+        safety_statuses = []
+
+        joint_following_safety_handle = ActuatorConfig_pb2.SafetyHandle()
+        joint_following_safety_handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
+        for device_id in self.actuator_device_ids:
+            safety_enable = self.device_config.GetSafetyEnable(joint_following_safety_handle, device_id)
+            safety_enables.append(safety_enable)
+            safety_enable_sets.append(safety_enable.enable)
+            safety_statuses.append(self.device_config.GetSafetyStatus(joint_following_safety_handle, device_id))
+
+        with open("safety_log/joint_following_safety_enables.txt", "w") as f:
+            for i, (enable, enable_set, status) in enumerate(zip(safety_enables, safety_enable_sets, safety_statuses)):
+                f.write(f"Device {i}\n")
+                f.write(f"Enable: {enable}\n")
+                f.write(f"Enable Set: {enable_set}\n")
+                f.write(f"Status: {status}\n")
+        
+
         # # disable joint following error
         # joint_following_error_message = DeviceConfig_pb2.SafetyEnable()
         # joint_following_error_message.handle.identifier = ActuatorConfig_pb2.SafetyIdentifierBankA.Value("FOLLOWING_ERROR")
