@@ -1,7 +1,7 @@
 import time
 import numpy as np
 
-def mouth_open_detector(perception_interface, timeout):
+def mouth_open_detector(perception_interface, timeout, terminate_event = None):
     """ Detect mouth open """
     threshold = 0.45
 
@@ -12,7 +12,7 @@ def mouth_open_detector(perception_interface, timeout):
             return ((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)**0.5
 
         start_time = time.time()
-        while time.time() - start_time < timeout:
+        while time.time() - start_time < timeout and (terminate_event is None or not terminate_event.is_set()):
             head_perception_data = perception_interface.get_head_perception_data()
             if head_perception_data is None:
                 continue
@@ -38,7 +38,7 @@ def mouth_open_detector(perception_interface, timeout):
 
     return gesture_detector(perception_interface, threshold, timeout)
 
-def head_shake_detector(perception_interface, timeout):
+def head_shake_detector(perception_interface, timeout, terminate_event=None):
     """ Detect head shake """
     threshold = 2.0
 
@@ -49,7 +49,7 @@ def head_shake_detector(perception_interface, timeout):
         direction_changes = 0  # Counts the number of left-right or right-left changes
         
 
-        while time.time() - start_time < timeout:
+        while time.time() - start_time < timeout and (terminate_event is None or not terminate_event.is_set()):
             head_perception_data = perception_interface.get_head_perception_data()
             if head_perception_data is None:
                 continue
@@ -79,7 +79,7 @@ def head_shake_detector(perception_interface, timeout):
     
     return gesture_detector(perception_interface, threshold, timeout)
 
-def head_still_detector(perception_interface, timeout):
+def head_still_detector(perception_interface, timeout, terminate_event=None):
     """ Detect head still for 5 seconds """
 
     distance_threshold = 0.02
@@ -91,7 +91,7 @@ def head_still_detector(perception_interface, timeout):
         last_head_pose = None
         head_still_start_time = time.time()
 
-        while time.time() - start_time < timeout:
+        while time.time() - start_time < timeout and (terminate_event is None or not terminate_event.is_set()):
             head_perception_data = perception_interface.get_head_perception_data()
             if head_perception_data is None:
                 continue

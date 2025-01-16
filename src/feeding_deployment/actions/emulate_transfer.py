@@ -4,6 +4,8 @@ import numpy as np
 import time
 import pickle
 from scipy.spatial.transform import Rotation
+import inspect
+from pathlib import Path
 
 from pybullet_helpers.geometry import Pose
 
@@ -25,8 +27,10 @@ from feeding_deployment.actions.base import (
     ToolPrepared,
     EmulateTransferDone,
 )
-from feeding_deployment.perception.gestures_perception.static_gesture_detectors import mouth_open_detector
 from feeding_deployment.actions.feel_the_bite.outside_mouth_transfer import OutsideMouthTransfer
+from feeding_deployment.perception.gestures_perception.synthesizer import PersonalizedGestureDetectorSynthesizer
+import feeding_deployment.perception.gestures_perception.static_gesture_detectors as static_gesture_detectors
+import feeding_deployment.perception.gestures_perception.synthesized_gesture_detectors as synthesized_gesture_detectors
 
 class EmulateTransferHLA(HighLevelAction):
     """Emulate transfer by bringing the empty gripper in front of the user's mouth."""
@@ -40,6 +44,10 @@ class EmulateTransferHLA(HighLevelAction):
         self.ready_for_transfer_interaction = "voice" # "silent", "voice" or "led"
         self.initiate_transfer_interaction = "open_mouth" # "button", "open_mouth" or "auto_timeout"
         self.transfer_complete_interaction = "button" # "button", "sense" or "auto_timeout"
+
+        self.gesture_examples_path = Path(__file__).parent.parent / "integration" / "log" / "gesture_examples"
+        self.synthesized_detectors_path = Path(__file__).parent.parent / "integration" / "log" / "synthesized_detectors"
+        self.detector_synthesizer = PersonalizedGestureDetectorSynthesizer()
 
     def detect_initiate_transfer(self):
         if self.initiate_transfer_interaction == "button":
@@ -102,12 +110,52 @@ class EmulateTransferHLA(HighLevelAction):
         if self.robot_interface is not None:
             self.relay_ready_for_gestures()
 
-        if self.test_mode:
-            # Test new gestures at this state using the web application
-            pass
+        if self.web_interface is not None and self.robot_interface is not None:
+            if self.test_mode:
+                # find all available gestures
+                available_gestures = inspect.getmembers(static_gesture_detectors, inspect.isfunction)
+                available_gestures += inspect.getmembers(synthesized_gesture_detectors, inspect.isfunction)
+
+                while not self.web_interface.current_page == "test_gestures":
+                    # get which gesture to test from the web application
+                    selected_gesture, termination_event = self.web_interface.get_test_gesture(available_gestures)
+                    gesture_detected = globals()[selected_gesture](self.perception_interface, timeout=600, termination_event=termination_event) # 10 minutes timeout
+                    if gesture_detected:
+                        self.web_interface.register_positive_gesture_detection() # otherwise it is already showing negative detection
+            else:
+                # start logging perception data while user selects when to record and delete on the web interface,
+                # then extract relevant examples using timestamps
+                logging_start_time = self.perception_interface.start_logging_perception_data()
+                recorded_gesture_data = self.web_interface.record_gesture_examples(logging_start_time)
+                self.perception_interface.stop_logging_perception_data()
+                
+                if recorded_gesture_data is not None:
+                    positive_examples = []
+                    for timestamp in recorded_gesture_data["positive_examples_timestamps"]:
+                        positive_examples.append(self.perception_interface.extract_from_logged_perception_data(timestamp))
+
+                    negative_examples = []
+                    for timestamp in recorded_gesture_data["negative_examples_timestamps"]:
+                        negative_examples.append(self.perception_interface.extract_from_logged_perception_data(timestamp))
+
+                    # save the examples
+                    gesture_datapath = self.gesture_examples_path / f"{recorded_gesture_data['gesture_name']}.pkl"
+                    with open(gesture_datapath, "wb") as f:
+                        pickle.dump({
+                            "description": recorded_gesture_data["description"],
+                            "positive_examples": positive_examples, 
+                            "negative_examples": negative_examples
+                        }, f)
+
+                    # Rajat ToDo: how do I refresh the synthesized detectors module?
+                    self.detector_synthesizer.generate_function(gesture_datapath)
+                else:
+                    print("Gesture examples recording is not valid")
+
+                # Record new gestures at this state using the web application
+                pass
         else:
-            # Record new gestures at this state using the web application
-            pass
+            print("Can record or test gestures only with real robot and web interface")
         
         if self.robot_interface is not None:
             self.detect_transfer_complete()
