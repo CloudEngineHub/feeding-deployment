@@ -1,6 +1,66 @@
 import time
 import numpy as np
 
+def blinking(perception_interface, termination_event, timeout):
+    """eyes blinking"""
+    threshold = 0.2
+
+    def gesture_detector(perception_interface, termination_event, timeout, threshold):
+
+        def euclidean_distance(p1, p2):
+            """Calculate Euclidean distance between two points."""
+            return ((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)**0.5
+
+        start_time = time.time()
+        blink_detected = False
+
+        while time.time() - start_time < timeout and (termination_event is None or not termination_event.is_set()):
+            head_perception_data = perception_interface.get_head_perception_data()
+            if head_perception_data is None:
+                continue
+            else:
+                time.sleep(0.1) # Maintain 10 Hz rate
+            face_keypoints = head_perception_data["face_keypoints"]
+
+            # Indices for eye landmarks
+            left_eye_points = face_keypoints[36:42]
+            right_eye_points = face_keypoints[42:48]
+
+            # Calculate vertical distances for left eye
+            left_eye_vertical_1 = euclidean_distance(left_eye_points[1], left_eye_points[5])
+            left_eye_vertical_2 = euclidean_distance(left_eye_points[2], left_eye_points[4])
+
+            # Calculate horizontal distance for left eye
+            left_eye_horizontal = euclidean_distance(left_eye_points[0], left_eye_points[3])
+
+            # Calculate Eye Aspect Ratio (EAR) for left eye
+            left_ear = (left_eye_vertical_1 + left_eye_vertical_2) / (2.0 * left_eye_horizontal)
+
+            # Calculate vertical distances for right eye
+            right_eye_vertical_1 = euclidean_distance(right_eye_points[1], right_eye_points[5])
+            right_eye_vertical_2 = euclidean_distance(right_eye_points[2], right_eye_points[4])
+
+            # Calculate horizontal distance for right eye
+            right_eye_horizontal = euclidean_distance(right_eye_points[0], right_eye_points[3])
+
+            # Calculate Eye Aspect Ratio (EAR) for right eye
+            right_ear = (right_eye_vertical_1 + right_eye_vertical_2) / (2.0 * right_eye_horizontal)
+
+            # Average EAR for both eyes
+            ear = (left_ear + right_ear) / 2.0
+
+            # Check if EAR is below the threshold indicating a blink
+            if ear < threshold:
+                blink_detected = True
+            else:
+                if blink_detected:
+                    return True
+                blink_detected = False
+
+        return False
+
+    return gesture_detector(perception_interface, termination_event, timeout, threshold)
+
 def eyebrows_raised(perception_interface, termination_event, timeout):
     """eyebrows raised"""
     threshold = 0.0
@@ -18,22 +78,24 @@ def eyebrows_raised(perception_interface, termination_event, timeout):
                 continue
             else:
                 time.sleep(0.1) # Maintain 10 Hz rate
-            print("Running eyebrows raised detector")
             face_keypoints = head_perception_data["face_keypoints"]
         
-            # Indices for eyebrow and eye landmarks
+            # Indices for eyebrow landmarks
             left_eyebrow_points = face_keypoints[17:22]
             right_eyebrow_points = face_keypoints[22:27]
             left_eye_points = face_keypoints[36:42]
             right_eye_points = face_keypoints[42:48]
         
             # Calculate vertical distances between eyebrows and eyes
-            left_eyebrow_eye_distance = euclidean_distance(left_eyebrow_points[1], left_eye_points[1])
-            right_eyebrow_eye_distance = euclidean_distance(right_eyebrow_points[1], right_eye_points[1])
+            left_eyebrow_eye_distance = euclidean_distance(left_eyebrow_points[2], left_eye_points[1])
+            right_eyebrow_eye_distance = euclidean_distance(right_eyebrow_points[2], right_eye_points[1])
 
-            if left_eyebrow_eye_distance > threshold and right_eyebrow_eye_distance > threshold:
+            # Average distance
+            average_distance = (left_eyebrow_eye_distance + right_eyebrow_eye_distance) / 2.0
+
+            if average_distance > threshold:
                 return True
-    
+
         return False
 
     return gesture_detector(perception_interface, termination_event, timeout, threshold)
@@ -54,7 +116,6 @@ def head_nod(perception_interface, termination_event, timeout):
                 continue
             else:
                 time.sleep(0.1) # Maintain 10 Hz rate
-            print("Running head nod detector")
             head_pose = head_perception_data["head_pose"]
 
             (head_x, head_y, head_z, head_roll, head_pitch, head_yaw) = head_pose
@@ -64,7 +125,7 @@ def head_nod(perception_interface, termination_event, timeout):
             if len(pitch_data) >= 3:
 
                 if (pitch_data[-2] - pitch_data[-3] > threshold and pitch_data[-2] - pitch_data[-1] > threshold) or \
-                   (pitch_data[-3] - pitch_data[-2] > threshold and pitch_data[-1] - pitch_data[-2] > threshold):
+                (pitch_data[-3] - pitch_data[-2] > threshold and pitch_data[-1] - pitch_data[-2] > threshold):
                     direction_changes += 1
 
                 if direction_changes >= 2:
@@ -79,7 +140,7 @@ def head_nod(perception_interface, termination_event, timeout):
 
     return gesture_detector(perception_interface, termination_event, timeout, threshold)
 
-def head_still_atleast_three_secs(perception_interface, timeout, termination_event = None):
+def head_still_atleast_three_secs(perception_interface, termination_event, timeout):
     """head is still for atleast three seconds"""
     threshold = 0.0
 
@@ -98,9 +159,8 @@ def head_still_atleast_three_secs(perception_interface, timeout, termination_eve
 
             (head_x, head_y, head_z, head_roll, head_pitch, head_yaw) = head_pose
 
-            # Check if head movement is below the threshold
-            if abs(head_x) < threshold and abs(head_y) < threshold and abs(head_z) < threshold and \
-               abs(head_roll) < threshold and abs(head_pitch) < threshold and abs(head_yaw) < threshold:
+            # Check if head is still by comparing the absolute values of roll, pitch, and yaw with the threshold
+            if abs(head_roll) < threshold and abs(head_pitch) < threshold and abs(head_yaw) < threshold:
                 if still_start_time is None:
                     still_start_time = time.time()
                 elif time.time() - still_start_time >= 3:
@@ -131,7 +191,7 @@ def look_at_robot_atleast_three_secs(perception_interface, termination_event, ti
 
             (head_x, head_y, head_z, head_roll, head_pitch, head_yaw) = head_pose
 
-            # Check if head is still within the threshold
+            # Check if head is still by comparing roll, pitch, and yaw to the threshold
             if abs(head_roll) < threshold and abs(head_pitch) < threshold and abs(head_yaw) < threshold:
                 if still_start_time is None:
                     still_start_time = time.time()
@@ -156,6 +216,7 @@ def talking(perception_interface, termination_event, timeout):
 
         start_time = time.time()
         mouth_open_frames = 0
+        total_frames = 0
 
         while time.time() - start_time < timeout and (termination_event is None or not termination_event.is_set()):
             head_perception_data = perception_interface.get_head_perception_data()
@@ -178,13 +239,13 @@ def talking(perception_interface, termination_event, timeout):
             mar = (A + B) / (2.0 * C)
             if mar > threshold:
                 mouth_open_frames += 1
-            else:
-                mouth_open_frames = 0
 
-            # If mouth is open for a certain number of consecutive frames, consider it as talking
-            if mouth_open_frames >= 5:
+            total_frames += 1
+
+            # Check if the mouth is open for a significant portion of the frames
+            if total_frames > 0 and (mouth_open_frames / total_frames) > 0.5:
                 return True
-    
+
         return False
 
     return gesture_detector(perception_interface, termination_event, timeout, threshold)
