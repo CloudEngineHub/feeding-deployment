@@ -44,7 +44,7 @@ class PersonalizedGestureDetectorSynthesizer:
             self.prompt_skeleton = f.read()
 
     def _load_from_data_path(self, gesture_datapath: Path):
-        self.label = gesture_datapath.name
+        self.label = gesture_datapath.stem
         with open(gesture_datapath, 'rb') as f:
             gesture_data = pickle.load(f)
         self.language_description = gesture_data['description']
@@ -64,7 +64,7 @@ class PersonalizedGestureDetectorSynthesizer:
             threshold, accuracy = self.search_threshold(gesture_detector)
             print("Best Threshold: ", threshold)
             print("Best Accuracy: ", accuracy)
-            with open(f"gesture_data/{self.label}/results/response.txt", "a") as f:
+            with open(Path(__file__).parent / "results" / f"{self.label}.txt", "a") as f:
                 f.write(f"\nBest Threshold: {threshold}\nBest Accuracy: {accuracy}")
             
             # Code snippet to replace
@@ -84,16 +84,16 @@ class PersonalizedGestureDetectorSynthesizer:
 """
             updated_function_code = function_code.replace(old_snippet.strip(), new_snippet.strip())  
             function_code_with_threshold = f"""
-def {self.label}(perception_interface, timeout):
+def {self.label}(perception_interface, termination_event, timeout):
     \"\"\"{self.language_description}\"\"\"
     threshold = {threshold}
 {textwrap.indent(updated_function_code, "    ")}
-    return gesture_detector(perception_interface, timeout, threshold)
+    return gesture_detector(perception_interface, termination_event, timeout, threshold)
 """   
             return function_code_with_threshold
         except Exception as e:
             print("Error: ", e)
-            with open(f"gesture_data/{self.label}/results/response.txt", "a") as f:
+            with open(Path(__file__).parent / "results" / f"{self.label}.txt", "a") as f:
                 f.write(f"\nError: {e}")
             return None
     
@@ -136,7 +136,7 @@ def {self.label}(perception_interface, timeout):
         best_accuracy = 0.0
 
         for threshold in np.arange(threshold_range[0], threshold_range[1], step):
-            positive_accuracy, negative_accuracy = self.run_detector(gesture_detector, timeout=timeout, threshold=threshold)
+            positive_accuracy, negative_accuracy = self.run_detector(gesture_detector, termination_event=None, timeout=timeout, threshold=threshold)
             # print("Threshold: ", threshold, "Positive Accuracy: ", positive_accuracy, "Negative Accuracy: ", negative_accuracy)
             accuracy = (positive_accuracy + negative_accuracy) / 2.0
             if accuracy > best_accuracy:
@@ -150,16 +150,15 @@ def main():
     synthesizer = PersonalizedGestureDetectorSynthesizer()
     synthesizer.test_in_context_examples()
 
-    # gestures = ["blinking", "eyebrows_raised", "head_nod", "head_still_atleast_three_secs", "look_at_robot_atleast_three_secs", "talking"]
+    gestures = ["blinking", "eyebrows_raised", "head_nod", "head_still_atleast_three_secs", "look_at_robot_atleast_three_secs", "talking"]
 
-    # for gesture in gestures:
+    for gesture in gestures:
         
-    #     gesture_datapath = f"gestures_examples/{gesture}.pkl"
-
-    #     generated_function = synthesizer.generate_function(gesture_datapath)
-    #     # if generated_function is not None:
-    #     #     with open("synthesized_gesture_detectors.py", "a") as f:
-    #     #         f.write(generated_function)
+        gesture_datapath = Path(__file__).parent / "gestures_examples" / f"{gesture}.pkl"
+        generated_function = synthesizer.generate_function(gesture_datapath)
+        if generated_function is not None:
+            with open("synthesized_gesture_detectors.py", "a") as f:
+                f.write(generated_function)
 
 if __name__ == '__main__':
     main()
