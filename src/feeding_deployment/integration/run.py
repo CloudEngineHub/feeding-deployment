@@ -472,17 +472,27 @@ if __name__ == "__main__":
 
     if not args.use_interface:
 
-        # Variations on modifying the speed of the robot.
+        ## Variations on modifying the speed of the robot.
+
+        # All fast.
         # runner.process_user_update_request("Set the speed of the robot to high.") 
         # runner.process_user_update_request("Make the robot move fast.") 
         # runner.process_user_update_request("Can the robot move faster.") 
         # runner.process_user_update_request("The robot is too slow right now.") 
         # runner.process_user_update_request("Go faster.") 
+
+        # All slow.
         # runner.process_user_update_request("Set the speed of the robot to low.") 
         # runner.process_user_update_request("Make the robot move slow.") 
         # runner.process_user_update_request("Can the robot move slower.") 
         # runner.process_user_update_request("The robot is too fast right now.") 
-        runner.process_user_update_request("Go slower.") 
+        # runner.process_user_update_request("Go slower.")
+
+        # All medium.
+        # runner.process_user_update_request("Can the robot go not too fast but also not too slow?") 
+
+        # Selective speeds.
+        runner.process_user_update_request("When the robot is coming close to my mouth can it go more slowly") 
 
         # TODO Test selective speed edits (just acq, just transfer, just transfer with utensil and so on?)
         # TODO I also pushed personalizing autocontinue time for drink and utensil transfer. Seems to work. Can you also run a few variations on this?

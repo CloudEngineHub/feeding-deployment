@@ -193,6 +193,7 @@ class HighLevelAction(abc.ABC):
         new_parameter_value: Any
     ) -> None:
         """Validate and update the behavior tree for this HLA."""
+        print(f"Attempting BT update for {self.get_name()} in node {node_name}... ", end="")
         # Load the current behavior tree.
         bt_filename = self.get_behavior_tree_filename(objects, params)
         bt_filepath = self.behavior_tree_dir / bt_filename
@@ -881,6 +882,8 @@ Here is what the user said:
 """ % request_txt
     
     rephrased_txt = llm.sample_completions(rephrase_prompt, imgs=None, temperature=0.0, seed=0)[0]
+    print("Original user request:", request_txt)
+    print("Rephrased user request:", rephrased_txt)
 
     # TODO refactor to avoid this copied code from query_llm.py. I'm not yet
     # sure where this code should live.
