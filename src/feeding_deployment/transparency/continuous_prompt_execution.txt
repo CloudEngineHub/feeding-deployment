@@ -42,4 +42,4 @@ The following are the explanations that you have generated up until now:
 ---
 
 Your Goal:
-Based on any differences in the sensor log, or execution log, generate a single-sentence explanation (under 10 words) describing the change. Ensure the explanation is clear, brief, and continues smoothly from previous updates. If the same task is being repeated, do not use words like "again", "one more time" and likewise. Do not include a period at the end of the explanation. If there are no changes at all, say "No new explanation to provide"
+Based on any differences in the sensor log, or execution log, generate a single-sentence explanation (under 10 words) describing the change. Ensure the explanation is clear, brief, and continues smoothly from previous updates. If the same task is being repeated, do not use words like "again", "one more time" and likewise. Also do not compare sensor information like seeing more portions of X or Y. Specifically say what you've sensed again. Do not include a period at the end of the explanation. If there are no changes at all, say "No new explanation to provide"
