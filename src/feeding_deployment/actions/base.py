@@ -82,6 +82,7 @@ class HighLevelAction(abc.ABC):
         wrist_interface: WristInterface,
         flair,
         behavior_tree_dir: Path,
+        gestures_dir: Path,
         no_waits=False,
         log_path=None
     ) -> None:

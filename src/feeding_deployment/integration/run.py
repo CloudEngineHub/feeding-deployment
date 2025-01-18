@@ -154,19 +154,26 @@ class _Runner:
         for original_bt_filename in original_behavior_tree_dir.glob("*.yaml"):
             shutil.copy(original_bt_filename, self.run_behavior_tree_dir)
 
+        self.gestures_dir = self.log_dir / "gestures"
         # Copy the initial gesture detction file into a directory for this run,
         # where it will be updated from LLM-based few-shot learning.
         original_gesture_detection_filepath = Path(__file__).parents[1] / "perception" / "gestures_perception" / "synthesized_gesture_detectors.py"
         assert original_gesture_detection_filepath.exists()
-        shutil.copy(original_gesture_detection_filepath, self.run_behavior_tree_dir)
-        self._gesture_detection_filepath = self.run_behavior_tree_dir / original_gesture_detection_filepath.name
+        shutil.copy(original_gesture_detection_filepath, self.gestures_dir)
+        self._gesture_detection_filepath = self.gestures_dir / "synthesized_gesture_detectors.py"
+
+        # Copy the available gesture detectors dictionary into a directory for this run,
+        original_gesture_detectors_dict = Path(__file__).parents[1] / "perception" / "gestures_perception" / "available_gesture_detectors.json"
+        assert original_gesture_detectors_dict.exists()
+        shutil.copy(original_gesture_detectors_dict, self.gestures_dir)
+        self._gesture_detectors_dict = self.gestures_dir / "available_gesture_detectors.json"
 
         # Create skills for high-level planning.
         hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
         print("Creating HLAs...")
         self.hlas = {
             cls(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.web_interface, hla_hyperparams,
-                self.wrist_interface, self.flair, self.run_behavior_tree_dir, self.no_waits, self.log_dir) for cls in HLAS  # type: ignore
+                self.wrist_interface, self.flair, self.run_behavior_tree_dir, self.gestures_dir, self.no_waits, self.log_dir) for cls in HLAS  # type: ignore
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}

@@ -307,3 +307,89 @@ def three_eye_blinks(perception_interface, termination_event, timeout):
         return False
 
     return gesture_detector(perception_interface, termination_event, timeout, threshold)
+
+def dwdwwd(perception_interface, termination_event, timeout):
+    """dwdwwd"""
+    threshold = 0.0
+
+    def gesture_detector(perception_interface, termination_event, timeout, threshold):
+
+        start_time = time.time()
+        yaw_data = []
+        direction_changes = 0  # Counts the number of direction changes in the pattern dwdwwd
+
+        while time.time() - start_time < timeout and (termination_event is None or not termination_event.is_set()):
+            head_perception_data = perception_interface.get_head_perception_data()
+            if head_perception_data is None:
+                continue
+            else:
+                time.sleep(0.1) # Maintain 10 Hz rate
+            head_pose = head_perception_data["head_pose"]
+
+            (head_x, head_y, head_z, head_roll, head_pitch, head_yaw) = head_pose
+            yaw_data.append(head_yaw)
+
+            # Check if there is enough data to detect the pattern
+            if len(yaw_data) >= 7:
+                # Detect the pattern dwdwwd
+                if (yaw_data[-7] - yaw_data[-6] > threshold and
+                    yaw_data[-6] - yaw_data[-5] < -threshold and
+                    yaw_data[-5] - yaw_data[-4] > threshold and
+                    yaw_data[-4] - yaw_data[-3] > threshold and
+                    yaw_data[-3] - yaw_data[-2] < -threshold and
+                    yaw_data[-2] - yaw_data[-1] > threshold):
+                    return True
+
+            # To avoid excessive memory usage, keep the yaw_data size small
+            if len(yaw_data) > 100:
+                yaw_data.pop(0)
+
+        # If timeout expires without detecting the gesture, return False
+        return False
+
+    return gesture_detector(perception_interface, termination_event, timeout, threshold)
+
+def mouth is open for 3 seconds(perception_interface, termination_event, timeout):
+    """mouth is open for 3 seconds"""
+    threshold = 0.0
+
+    def gesture_detector(perception_interface, termination_event, timeout, threshold):
+
+        def euclidean_distance(p1, p2):
+            """Calculate Euclidean distance between two points."""
+            return ((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)**0.5
+
+        start_time = time.time()
+        open_start_time = None
+
+        while time.time() - start_time < timeout and (termination_event is None or not termination_event.is_set()):
+            head_perception_data = perception_interface.get_head_perception_data()
+            if head_perception_data is None:
+                continue
+            else:
+                time.sleep(0.1) # Maintain 10 Hz rate
+            face_keypoints = head_perception_data["face_keypoints"]
+        
+            # Indices for mouth landmarks
+            mouth_points = face_keypoints[48:68]
+        
+            # Calculate vertical distances
+            A = euclidean_distance(mouth_points[2], mouth_points[10])  # 51, 59
+            B = euclidean_distance(mouth_points[4], mouth_points[8])   # 53, 57
+    
+            # Calculate horizontal distance
+            C = euclidean_distance(mouth_points[0], mouth_points[6])   # 49, 55
+
+            mar = (A + B) / (2.0 * C)
+        
+            if mar > threshold:
+                if open_start_time is None:
+                    open_start_time = time.time()
+                elif time.time() - open_start_time >= 3:
+                    return True
+            else:
+                open_start_time = None
+
+        return False
+
+    return gesture_detector(perception_interface, termination_event, timeout, threshold)
