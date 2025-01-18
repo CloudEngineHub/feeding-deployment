@@ -91,7 +91,10 @@ class EmulateTransferHLA(HighLevelAction):
         elif self.ready_for_transfer_interaction == "led":
             self.perception_interface.turn_on_led()
 
-    def emulate_transfer(self):
+    def emulate_transfer(self, speed: str):
+
+        if self.robot_interface is not None:
+            self.robot_interface.set_speed(speed)
 
         self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
 

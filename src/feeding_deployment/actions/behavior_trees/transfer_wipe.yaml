@@ -2,6 +2,13 @@ name: "TransferWipe"
 description: "Bring the wipe to the user's mouth for a cleaning."
 type: "Behavior"
 parameters:
+  - name: "Speed"
+    description: "Speed of the robot during bringing the wipe to the user's mouth."
+    space:
+      type: "Enum"
+      elements: ["slow", "medium", "fast"]
+    is_user_editable: True
+    value: "medium"
   - name: "ReadyToInitiateTransferInteraction"
     description: "Interaction mode for ready to initiate transfer."
     space:
