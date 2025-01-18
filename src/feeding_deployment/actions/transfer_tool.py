@@ -180,8 +180,11 @@ class TransferToolHLA(HighLevelAction):
         assert tool.name in ["utensil", "drink", "wipe"]
         return f"transfer_{tool.name}.yaml"    
     
-    def transfer_utensil(self, *args, **kwargs) -> None:
+    def transfer_utensil(self, speed: str, *args, **kwargs) -> None:
         assert self.sim.held_object_name == "utensil"
+
+        if self.robot_interface is not None:
+            self.robot_interface.set_speed(speed)
 
         if self.wrist_interface is not None:
             # start the horizontal spoon thread if it is not already running
@@ -196,8 +199,11 @@ class TransferToolHLA(HighLevelAction):
         self.set_tool("fork")
         self.execute_transfer(*args, **kwargs)
 
-    def transfer_drink(self, *args, **kwargs) -> None:
+    def transfer_drink(self, speed: str, *args, **kwargs) -> None:
         assert self.sim.held_object_name == "drink"
+
+        if self.robot_interface is not None:
+            self.robot_interface.set_speed(speed)
         
         # Assume the last item in args is the ask_confirmation
         ask_confirmation = args[-1]
@@ -212,8 +218,11 @@ class TransferToolHLA(HighLevelAction):
         self.set_tool("drink")    
         self.execute_transfer(*remaining_args, maintain_position_at_goal=True, **kwargs)    
 
-    def transfer_wipe(self, ask_confirmation, *args, **kwargs) -> None:
+    def transfer_wipe(self, speed: str, ask_confirmation, *args, **kwargs) -> None:
         assert self.sim.held_object_name == "wipe"
+
+        if self.robot_interface is not None:
+            self.robot_interface.set_speed(speed)
 
         # Assume the last item in args is the ask_confirmation
         ask_confirmation = args[-1]

@@ -62,6 +62,14 @@ class ArmInterfaceClient:
 
     def get_state(self):
         return self._arm_interface.get_state()
+    
+    def get_speed(self):
+        return self._arm_interface.get_speed_preset()
+    
+    def set_speed(self, speed: str):
+        assert not self.in_compliant_mode, "Cannot set speed in compliant mode"
+        assert speed in ["low", "medium", "high"], "Speed must be one of 'low', 'medium', 'high'"
+        self._arm_interface.set_speed_preset(speed)
 
     def set_tool(self, tool: str):
         assert not self.in_compliant_mode, "Cannot set tool in compliant mode"

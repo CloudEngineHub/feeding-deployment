@@ -84,7 +84,7 @@ class ArmInterface:
             raise Exception(f"Error in set_tool: {str(e)}") from None # suppress original exception
 
     def set_speed(self, speed: str):
-    """ speed: "low", "medium", "high" """
+        """ speed: "low", "medium", "high" """
         assert speed in ["low", "medium", "high"], "Invalid speed"
         assert not self.emergency_stop_active, "Emergency stop is active"
         assert not self.in_compliant_mode, "Cannot set speed while in compliant mode"

@@ -59,13 +59,12 @@ class AcquireBiteHLA(HighLevelAction):
         assert tool.name == "utensil"
         return "acquire_bite.yaml"
     
-    def acquire_bite(self, speed: float, autocontinue_timeout: float, ask_confirmation: bool) -> None:
+    def acquire_bite(self, speed: str, autocontinue_timeout: float, ask_confirmation: bool) -> None:
 
-        # TODO actually use speed
-        print("ACQUIRE BITE CALLED WITH SPEED: ", speed)
-
-        print("In AcquireBiteHLA")
         assert self.sim.held_object_name == "utensil"
+
+        if self.robot_interface is not None:
+            self.robot_interface.set_speed(speed)
 
         # stop the keep horizontal thread (incase we're trying to re-acquire a bite)
         if self.wrist_interface is not None:
