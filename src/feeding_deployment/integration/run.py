@@ -442,9 +442,15 @@ class _Runner:
         for request, message in all_update_messages:
             all_update_str += f"\nRequest: {request}"
             all_update_str += f"\nResult: {message}"
-        prompt = f"""Given the log below of changes that were requested to behavior trees and the results, write a VERY BRIEF summary of all the changes for a non-technical end user.
+        prompt = f"""A user requested the following change to a robot assisted feeding system:
 
-{all_update_str}        
+"{request_text}"
+                
+Here is a log of changes that were requested to behavior trees and the results:
+
+{all_update_str}
+
+Write a VERY BRIEF summary of all the changes for a non-technical end user. Make sure not to use technical terms like "behavior tree".
 """
         summary = self.llm.sample_completions(prompt, imgs=None, temperature=0.0, seed=0)[0]
         print("SUMMARY:", summary)
@@ -508,7 +514,7 @@ if __name__ == "__main__":
         ## Variations on modifying the speed of the robot.
 
         # All fast.
-        runner.process_user_update_request("Set the speed of the robot to high.") 
+        # runner.process_user_update_request("Set the speed of the robot to high.") 
         # runner.process_user_update_request("Make the robot move fast.") 
         # runner.process_user_update_request("Can the robot move faster.") 
         # runner.process_user_update_request("The robot is too slow right now.") 
@@ -552,7 +558,7 @@ if __name__ == "__main__":
         # runner.process_user_update_request("Remove all transfer confirmations.")
 
         # NOTE: this is not working perfectly -- it updates "silent for ReadyForTransferInteraction" instead of the web app confirmations.
-        # runner.process_user_update_request("On the iPad, don't ask me to confirm when I'm ready.")
+        runner.process_user_update_request("On the iPad, don't ask me to confirm when I'm ready.")
 
 
         input("Press Enter to continue...")
