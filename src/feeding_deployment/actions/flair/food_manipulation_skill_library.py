@@ -196,7 +196,7 @@ class FoodManipulationSkillLibrary:
         tool_frame = self.get_transform('base_link', 'tool_frame')
 
         tool_frame_displacement = np.eye(4)
-        tool_frame_displacement[0,3] = distance/8 # move down
+        tool_frame_displacement[0,3] = distance/10 # move down
         tool_frame_displacement[1,3] = -distance*3/4 # move back
 
         tool_frame_target = tool_frame @ tool_frame_displacement
