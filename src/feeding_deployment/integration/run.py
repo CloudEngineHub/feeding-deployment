@@ -3,7 +3,7 @@
 import json
 from collections import namedtuple
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 import pickle
 import queue
 import os
@@ -13,6 +13,8 @@ import shutil
 import numpy as np
 from tomsutils.llm import OpenAILLM
 import time
+import types
+import inspect
 
 try:
     import rospy
@@ -168,7 +170,8 @@ class _Runner:
         print("Creating HLAs...")
         self.hlas = {
             cls(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.web_interface, hla_hyperparams,
-                self.wrist_interface, self.flair, self.run_behavior_tree_dir, self.no_waits, self.log_dir, self._gesture_detection_filepath) for cls in HLAS  # type: ignore
+                self.wrist_interface, self.flair, self.run_behavior_tree_dir, self.no_waits, self.log_dir,
+                self.register_gesture_detector, self.load_synthesized_gestures) for cls in HLAS  # type: ignore
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
@@ -456,6 +459,23 @@ Write a VERY BRIEF summary of all the changes for a non-technical end user. Make
         print("SUMMARY:", summary)
         return summary
 
+    def register_gesture_detector(self, gesture_fn_name: str, gesture_fn_text: str) -> bool:
+        """Add the gesture function to this run's python file."""
+        with open(self._gesture_detection_filepath, "r", encoding="utf-8") as f:
+            gesture_file_text = f.read()
+        assert f"def {gesture_fn_name}(" not in gesture_file_text
+        gesture_file_text += "\n" + gesture_fn_text + "\n"
+        with open(self._gesture_detection_filepath, "w", encoding="utf-8") as f:
+            f.write(gesture_file_text)
+        print(f"Registered new gesture detection function: {gesture_fn_name}")    
+
+    def load_synthesized_gestures(self) -> list[tuple[str, Callable]]:
+        """Returns a list of function names and functions."""
+        with open(self._gesture_detection_filepath, "r", encoding="utf-8") as f:
+            gesture_file_text = f.read()
+        synthesized_gesture_module = types.ModuleType('synthesized_gestures')
+        exec(gesture_file_text, synthesized_gesture_module.__dict__)
+        return inspect.getmembers(synthesized_gesture_module, inspect.isfunction)
 
 
 if __name__ == "__main__":
