@@ -239,21 +239,3 @@ class EmulateTransferHLA(HighLevelAction):
             self.gesture_label = params["gesture_label"]
             self.gesture_description = params["gesture_description"]
         return super().execute_action(objects, params)
-    
-    def register_gesture_detector(self, gesture_fn_name: str, gesture_fn_text: str) -> bool:
-        """Add the gesture function to this run's python file."""
-        with open(self.gesture_detection_filepath, "r", encoding="utf-8") as f:
-            gesture_file_text = f.read()
-        assert f"def {gesture_fn_name}(" not in gesture_file_text
-        gesture_file_text += "\n" + gesture_fn_text + "\n"
-        with open(self.gesture_detection_filepath, "w", encoding="utf-8") as f:
-            f.write(gesture_file_text)
-        print(f"Registered new gesture detection function: {gesture_fn_name}")    
-
-    def load_synthesized_gestures(self) -> list[tuple[str, Callable]]:
-        """Returns a list of function names and functions."""
-        with open(self.gesture_detection_filepath, "r", encoding="utf-8") as f:
-            gesture_file_text = f.read()
-        synthesized_gesture_module = types.ModuleType('synthesized_gestures')
-        exec(gesture_file_text, synthesized_gesture_module.__dict__)
-        return inspect.getmembers(synthesized_gesture_module, inspect.isfunction)
