@@ -1,0 +1,1 @@
+{'bite_history': ['watermelon', 'yogurt', 'watermelon', 'yogurt'], 'food_labels': ['watermelon', 'yogurt'], 'food_categories': ['solid', 'dip'], 'user_preference': '"I would like to alternate between dipping watermelon in yogurt and not dipping it."'}
