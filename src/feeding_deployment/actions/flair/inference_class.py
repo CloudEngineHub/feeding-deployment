@@ -599,8 +599,15 @@ class BiteAcquisitionInference:
         replacement_dict = {}
         for i, category in enumerate(self.FOOD_CATEGORIES):
             if category == 'solid': # append "piece to solid items"
-                replacement_dict[self.FOOD_CLASSES[i]] = self.FOOD_CLASSES[i] + " piece"
-                food_classes_being_detected.append(self.FOOD_CLASSES[i] + " piece")
+                if "steak" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "small cut brown steak piece"
+                    food_classes_being_detected.append("small cut brown steak piece")
+                elif "potato wedge" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "yellow potato wedge piece"
+                    food_classes_being_detected.append("yellow potato wedge piece")
+                else:
+                    replacement_dict[self.FOOD_CLASSES[i]] = self.FOOD_CLASSES[i] + " piece"
+                    food_classes_being_detected.append(self.FOOD_CLASSES[i] + " piece")
             else: # append "dip" to dip items
                 replacement_dict[self.FOOD_CLASSES[i]] = self.FOOD_CLASSES[i] + " dip"
                 food_classes_being_detected.append(self.FOOD_CLASSES[i] + " dip")

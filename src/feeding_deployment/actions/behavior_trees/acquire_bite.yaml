@@ -13,10 +13,10 @@ parameters:
     description: "The depth a food item is dipped into a dipping sauce."
     space:
       type: "Box"
-      lower: 0.02
-      upper: 0.05
+      lower: 0.01
+      upper: 0.03
     is_user_editable: True
-    value: 0.03
+    value: 0.02
   - name: "SkeweringDepth"
     description: "The depth a food item is skewered."
     space:

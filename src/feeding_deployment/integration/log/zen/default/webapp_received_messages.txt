@@ -1,89 +1,42 @@
-{"state":"task_selection","status":"adaptability"}
-{"state":"adaptability_request","status":"make everything as fast as possible"}
-{"state":"adaptability_request","status":"Remove all weights to minimums and remove auto continue pages"}
-{"state":"adaptability_request","status":"Make everything as fast as possible"}
-{"state":"adaptability_request","status":"I'm in a hurry could you please minimize the auto continue times and remove confirmation pages please and thank you"}
-{"state":"task_selection","status":"jump"}
 {"state":"task_selection","status":"take_bite"}
 {"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"Chicken nuggies","status":"Chicken nuggies"}
+{"state":"Steak and potato wedges","status":"Steak"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
-{"state":"task_selection","status":"adaptability"}
-{"state":"adaptability_request","status":"Please make the auto execution time minimal"}
-{"state":"task_selection","status":"jump"}
-{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedges",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"aquire_food","data":["steak",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_sip"}
-{"state":"task_selection","status":"take_sip"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"mouth_wiping"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
-{"state":"task_selection","status":"take_sip"}
-{"state":"task_selection","status":"mouth_wiping"}
-{"status":"finish_feeding"}
-{"status":"finish_feeding"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"watermelon and yoghurt","status":"I would like the watermelon dipped in yoghurt"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"watermelon and yoghurt","status":"I would like to eat watermelon dipped in yoghurt"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
-{"state":"dip_selection","status":"yogurt"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
+{"state":"bite_selection","status":"aquire_food","data":["steak",1]}
 {"state":"dip_selection","status":"No dip"}
 {"state":"task_selection","status":"take_bite"}
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"watermelon and yoghurt","status":"I want watermelons dipped in yoghurt"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
-{"state":"dip_selection","status":"yogurt"}
-{"state":"task_selection","status":"take_bite"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
-{"state":"dip_selection","status":"yogurt"}
+{"state":"bite_selection","status":"aquire_food","data":["steak",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
 {"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["steak",10]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedges",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedges",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"prepared_mouth_wiping","status":"move_to_wiping_position"}

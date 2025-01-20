@@ -1,1 +1,0 @@
-{'bite_history': [], 'food_labels': ['watermelon', 'yogurt'], 'food_categories': ['solid', 'dip'], 'user_preference': '"I would like to dip the watermelon in yogurt first"'}

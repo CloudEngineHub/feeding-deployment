@@ -212,7 +212,7 @@ class AcquireBiteHLA(HighLevelAction):
                     self.flair.update_bite_history(dip_type)
                     dip_mask = food_type_to_masks[dip_type][0]
                     dip_point = self.flair.inference_server.get_dip_action(dip_mask)
-                    self.food_manipulation_skill_library.reset()
+                    self.food_manipulation_skill_library.robot_reset()
                     skill_success = self.food_manipulation_skill_library.dipping_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = dip_point, dipping_depth=dipping_depth)
             
             elif skill_type == "manual_skewering":
