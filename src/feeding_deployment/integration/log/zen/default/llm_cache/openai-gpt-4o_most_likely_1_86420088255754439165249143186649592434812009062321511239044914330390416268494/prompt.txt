@@ -1,0 +1,482 @@
+Your job is to convert the following command into one or more structured outputs in a format that I will describe next.
+
+The original command is: Please make everything really really fast
+You think maybe what they mean is: Increase the robot's operation speed significantly.
+
+The available structured output types are:
+
+@dataclass(frozen=True)
+class UserUpdateRequest:
+    hla_name: str
+    hla_object_names: tuple[str, ...]
+
+@dataclass(frozen=True)
+class NodeModificationUserUpdateRequest(UserUpdateRequest):
+    node_name: str
+    parameter_name: str
+    new_value: Any
+
+@dataclass(frozen=True)
+class NodeAdditionUserRequest(UserUpdateRequest):
+    new_node_type: str  # can be "Retract" or "Pause"
+    new_node_parameters: dict[str, Any]  # {} for Retract and {"duration": float} for Pause
+    anchor_node_name: str  # the name of an existing behavior tree node
+    before_or_after: str  # "before" or "after"
+
+The "hla" stands for high-level action. Each hla can be grounded with zero or more object names. The possible hla and object combinations are:
+hla_name=AcquireBiteWithTool, hla_object_names=(utensil,)
+hla_name=EmulateTransfer, hla_object_names=(,)
+hla_name=PickTool, hla_object_names=(drink,)
+hla_name=PickTool, hla_object_names=(utensil,)
+hla_name=PickTool, hla_object_names=(wipe,)
+hla_name=Reset, hla_object_names=(,)
+hla_name=StowTool, hla_object_names=(drink,)
+hla_name=StowTool, hla_object_names=(utensil,)
+hla_name=StowTool, hla_object_names=(wipe,)
+hla_name=TransferTool, hla_object_names=(drink,)
+hla_name=TransferTool, hla_object_names=(utensil,)
+hla_name=TransferTool, hla_object_names=(wipe,)
+
+IMPORTANT: make sure your hla_object_names and hla_name appear together in the list above!
+
+A NodeModificationUserUpdateRequest a request to modify one parameter for one node in a behavior tree associated with an hla.
+
+Here are all behavior trees:
+Bite:
+name: PickUtensil
+description: Pick up the utensil from the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during picking up the utensil.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla pick_utensil
+---
+name: AcquireBite
+description: Pick up the appropriate food item from the plate.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bite acquisition.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: TimeToWaitBeforeAutocontinue
+  description: Time to wait before auto-continuing pickup bite button on the webapp.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 5.0
+    upper: 100.0
+  value: 10.0
+- name: TransferAskForConfirmation
+  description: Ask for confirmation on the web app before initiating the transfer
+    sequence for a bite.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+fn: !hla acquire_bite
+---
+name: TransferUtensil
+description: Bring the utensil to the user's mouth for a bite.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the utensil to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
+- name: OutsideMouthDistance
+  description: Distance from the tool tip to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.1
+    upper: 0.2
+  value: 0.15
+- name: TimeToWaitBeforeAutocontinue
+  description: Autocontinue duration for re-selecting drinking transfer after a sip.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 5.0
+    upper: 100.0
+  value: 10.0
+fn: !hla transfer_utensil
+---
+name: StowUtensil
+description: Place the utensil in the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during placing the utensil.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla stow_utensil
+---
+Drink:
+name: PickDrink
+description: Detect where the mug is and pick it up.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during picking up the mug.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla pick_drink
+---
+name: TransferDrink
+description: Bring the mug to the user's mouth for a sip.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the mug to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: button
+- name: OutsideMouthDistance
+  description: Distance from the tool tip to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.1
+    upper: 0.2
+  value: 0.15
+- name: AskForConfirmationInitiatingTransferSequence
+  description: Ask for confirmation on the web app before initiating the transfer
+    sequence for drinking.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+- name: TimeToWaitBeforeAutocontinue
+  description: Autocontinue duration for re-selecting drinking transfer after a sip.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 5.0
+    upper: 100.0
+  value: 10.0
+fn: !hla transfer_drink
+---
+name: StowDrink
+description: Place the mug on the table.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during placing the mug.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla stow_drink
+---
+Wipe:
+name: PickWipe
+description: Pick up the wipe from the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during picking up the wipe.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla pick_wipe
+---
+name: TransferWipe
+description: Bring the wipe to the user's mouth for a cleaning.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the wipe to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
+- name: OutsideMouthDistance
+  description: Distance from the tool tip to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.1
+    upper: 0.2
+  value: 0.15
+- name: AskForConfirmationInitiatingTransferSequence
+  description: Ask the user for confirmation on the web app and wait for their response
+    before initiating the transfer sequence for wiping. True is 1 and False is 0.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+fn: !hla transfer_wipe
+---
+name: StowWipe
+description: Place the wipe in the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during placing the wipe.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla stow_wipe
+---
+
+
+Note that the units used for parameters are all speeds in degrees per second, all durations in seconds, and all distances in meters. Take this into account when user requests contain units and make sure to convert them to the appropriate units for the behavior tree.
+
+Based on the information given, convert the original command into a list of one or more structured outputs. 
+If the user does not specifically mention a certain tool, make the update for all tools.
+
+Return your answer in a format where calling eval() in python will directly produce a list of UserUpdateRequest instances.
+
+####$$$###$$$####$$$$###$$$####$$$###$$$###
+```python
+[
+    NodeModificationUserUpdateRequest(
+        hla_name="PickTool",
+        hla_object_names=("utensil",),
+        node_name="PickUtensil",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="PickTool",
+        hla_object_names=("drink",),
+        node_name="PickDrink",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="PickTool",
+        hla_object_names=("wipe",),
+        node_name="PickWipe",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="TransferTool",
+        hla_object_names=("utensil",),
+        node_name="TransferUtensil",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="TransferTool",
+        hla_object_names=("drink",),
+        node_name="TransferDrink",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="TransferTool",
+        hla_object_names=("wipe",),
+        node_name="TransferWipe",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="StowTool",
+        hla_object_names=("utensil",),
+        node_name="StowUtensil",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="StowTool",
+        hla_object_names=("drink",),
+        node_name="StowDrink",
+        parameter_name="Speed",
+        new_value="high"
+    ),
+    NodeModificationUserUpdateRequest(
+        hla_name="StowTool",
+        hla_object_names=("wipe",),
+        node_name="StowWipe",
+        parameter_name="Speed",
+        new_value="high"
+    )
+]
+```

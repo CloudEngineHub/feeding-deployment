@@ -1,0 +1,30 @@
+A user requested the following change to a robot assisted feeding system:
+
+"Please make everything really really fast"
+                
+Here is a log of changes that were requested to behavior trees and the results:
+
+
+Request: NodeModificationUserUpdateRequest(hla_name='PickTool', hla_object_names=('utensil',), node_name='PickUtensil', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='PickTool', hla_object_names=('drink',), node_name='PickDrink', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='PickTool', hla_object_names=('wipe',), node_name='PickWipe', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='TransferTool', hla_object_names=('utensil',), node_name='TransferUtensil', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='TransferTool', hla_object_names=('drink',), node_name='TransferDrink', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='TransferTool', hla_object_names=('wipe',), node_name='TransferWipe', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='StowTool', hla_object_names=('utensil',), node_name='StowUtensil', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='StowTool', hla_object_names=('drink',), node_name='StowDrink', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+Request: NodeModificationUserUpdateRequest(hla_name='StowTool', hla_object_names=('wipe',), node_name='StowWipe', parameter_name='Speed', new_value='high')
+Result: Success! New: high for Speed
+
+Write a VERY BRIEF summary of all the changes for a non-technical end user. Make sure not to use technical terms like "behavior tree".
+
+####$$$###$$$####$$$$###$$$####$$$###$$$###
+The robot-assisted feeding system has been updated to operate at a higher speed for all tasks, including picking, transferring, and stowing utensils, drinks, and wipes.

@@ -1,0 +1,10 @@
+Given the following text from a person who is using an assisted feeding robot, briefly rephrase their request into some kind of specific setting that should be changed in the robot's software.
+    
+For example, if the user said "I don't like the sound that the robot makes when it wants my attention", a good rephrasing would be "Use something other than the current sound to signal when the robot needs attention."
+
+Here is what the user said:
+
+"Please remove all of the auto confirmation pages"
+
+####$$$###$$$####$$$$###$$$####$$$###$$$###
+Disable the automatic confirmation pages feature.
