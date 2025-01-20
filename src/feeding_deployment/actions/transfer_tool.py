@@ -143,11 +143,27 @@ class TransferToolHLA(HighLevelAction):
         if ready_for_transfer_interaction == "led":
             self.perception_interface.turn_off_led()
 
-    def relay_ready_to_initiate_transfer(self, ready_to_initiate_transfer_interaction: str):
+    def relay_ready_to_initiate_transfer(self, ready_to_initiate_transfer_interaction: str, initiate_transfer_interaction: str):
         if ready_to_initiate_transfer_interaction == "silent":
             pass
         elif ready_to_initiate_transfer_interaction == "voice":
-            self.perception_interface.speak("Please open your mouth when ready")
+            if initiate_transfer_interaction == "button":
+                self.perception_interface.speak("Please press the button when ready")
+            elif initiate_transfer_interaction == "open_mouth":
+                self.perception_interface.speak("Please open your mouth when ready")
+            elif initiate_transfer_interaction == "auto_timeout":
+                self.perception_interface.speak("Please wait 5 seconds for the transfer to initiate")
+            else:
+                # Check if the initiate_transfer_interaction is a synthesized gesture.
+                gestures = dict(self.load_synthesized_gestures())
+                # load from synthesized_gestures_dict_path
+                with open(self.synthesized_gestures_dict_path, "r") as f:
+                    synthesized_gesture_function_name_to_label = json.load(f)
+
+                if initiate_transfer_interaction in gestures:
+                    self.perception_interface.speak(f"Please do a {synthesized_gesture_function_name_to_label[initiate_transfer_interaction]} to initiate transfer")
+                else:
+                    raise NotImplementedError
         elif ready_to_initiate_transfer_interaction == "led":
             self.perception_interface.turn_on_led()
         else:
@@ -186,7 +202,7 @@ class TransferToolHLA(HighLevelAction):
             self.robot_interface.switch_to_task_compliant_mode()
 
         if self.robot_interface is not None:
-            self.relay_ready_to_initiate_transfer(ready_to_initiate_mode)
+            self.relay_ready_to_initiate_transfer(ready_to_initiate_mode, initiate_transfer_mode)
             self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
 
         self.transfer.set_tool(self.tool)

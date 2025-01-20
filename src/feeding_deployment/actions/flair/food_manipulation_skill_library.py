@@ -54,6 +54,13 @@ class FoodManipulationSkillLibrary:
         if self.robot_interface is not None:
             self.tf_utils = TFUtils()
 
+        self.cached_reset_tip_to_wrist =  np.array(
+            [[ 4.97225726e-05, -1.53284719e-03, -9.99998824e-01, -1.79554958e-02],
+            [-3.22083141e-02,  9.99480001e-01, -1.53365339e-03,  5.15432893e-04],
+            [ 9.99481176e-01,  3.22083525e-02,  3.26293322e-07, -2.55042925e-01],
+            [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]]
+        )
+
         print("Skill library initialized")
 
     def move_to_joint_positions(self, joint_positions):
@@ -79,6 +86,9 @@ class FoodManipulationSkillLibrary:
             self.sim.set_wrist_state(pitch_angle, roll_angle)
         else:
             self.wrist_interface.set_wrist_state(pitch_angle, roll_angle)
+
+    def robot_reset(self):
+        self.move_to_joint_positions(self.sim.scene_description.above_plate_pos)
 
     def reset(self):
 
@@ -188,7 +198,7 @@ class FoodManipulationSkillLibrary:
 
         return True
 
-    def dipping_skill(self, color_image, depth_image, camera_info, keypoint=None, dipping_depth=0.03):
+    def dipping_skill(self, color_image, depth_image, camera_info, keypoint=None, dipping_depth=0.02):
         """ Dipping amount must be between 0.02 and 0.05"""
 
         if keypoint is not None:
@@ -199,13 +209,13 @@ class FoodManipulationSkillLibrary:
             (center_x, center_y) = clicks[0]
             major_axis = -np.pi/2
 
-        # visualize keypoint
-        import cv2
-        cv2.circle(color_image, (center_x, center_y), 5, (0, 0, 255), -1)
-        cv2.imshow("Color image", color_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        input("Press enter to continue...")
+        # # visualize keypoint
+        # import cv2
+        # cv2.circle(color_image, (center_x, center_y), 5, (0, 0, 255), -1)
+        # cv2.imshow("Color image", color_image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+        # input("Press enter to continue...")
 
         # get 3D point from depth image
         validity, point = pixel2World(camera_info, center_x, center_y, depth_image)
@@ -223,7 +233,9 @@ class FoodManipulationSkillLibrary:
         food_base = base_to_camera_transform @ food_base
         print("Food height detected: ", food_base[2,3])
         print("Plate height: ", self.plate_height)
-        food_base[2,3] = max(food_base[2,3] - dipping_depth, self.plate_height) 
+        food_base[2,3] = self.plate_height + 0.06 - dipping_depth
+        print("Food height after plate update: ", food_base[2,3])
+        # food_base[2,3] = max(food_base[2,3] - dipping_depth, self.plate_height) 
         # magic number for skewering offset
         # food_base[0,3] += 0.012 # positive moves away from the robot
         # keep the orientation of the food base fixed
@@ -237,26 +249,31 @@ class FoodManipulationSkillLibrary:
             major_axis = major_axis + np.pi/2
 
         # caching this so that the robot doesn't rotate the wrist again
-        tip_to_wrist = self.get_transform('fork_tip', 'tool_frame')
-        print("Tip to wrist: ", tip_to_wrist)
+        # tip_to_wrist = self.get_transform('fork_tip', 'tool_frame')
+        # print("Tip to wrist: ", tip_to_wrist)
         
         # action 0: Rotate scooping DoF to dip angle
-        # self.wrist_interface.set_to_dip_pos()
+        self.wrist_interface.set_to_dip_pos()
 
         # Action 1: Move above food
         waypoint_1_tip = np.copy(food_base)
-        waypoint_1_tip[2,3] += 0.07
-        # waypoint_1_tip[0,3] += 0.13
-        self.move_utensil_to_pose(waypoint_1_tip, tip_to_wrist)
+        waypoint_1_tip[2,3] -= 0.07
+        waypoint_1_tip[2,3] += 0.13
+        waypoint_1_tip[0,3] += 0.1
+        self.move_utensil_to_pose(waypoint_1_tip, self.cached_reset_tip_to_wrist)
 
         # Action 2: Dip
         waypoint_2_tip = np.copy(food_base)
-        self.move_utensil_to_pose(waypoint_2_tip, tip_to_wrist)
+        waypoint_2_tip[2,3] -= 0.07
+        waypoint_2_tip[0,3] += 0.1
+        self.move_utensil_to_pose(waypoint_2_tip, self.cached_reset_tip_to_wrist)
 
         # Action 3: Move above food
         waypoint_3_tip = np.copy(food_base)
-        waypoint_3_tip[2,3] += 0.07
-        self.move_utensil_to_pose(waypoint_3_tip, tip_to_wrist)
+        waypoint_3_tip[2,3] -= 0.07
+        waypoint_3_tip[2,3] += 0.13
+        waypoint_3_tip[0,3] += 0.1
+        self.move_utensil_to_pose(waypoint_3_tip, self.cached_reset_tip_to_wrist)
 
         # Action 4: Set scooping state
         self.wrist_interface.scoop_wrist()

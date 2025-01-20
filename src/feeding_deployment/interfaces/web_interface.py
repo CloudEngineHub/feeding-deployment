@@ -35,6 +35,7 @@ class WebInterface:
         # Used for generating continuous explanations.
         self.transparency_continuous = TransparencyContinuous(log_dir)
         self.webapp_sent_messages_log = log_dir / "webapp_sent_messages.txt"
+        self.webapp_explanation_messages_log = log_dir / "webapp_explanation_messages.txt"
         self.webapp_received_messages_log = log_dir / "webapp_received_messages.txt"
 
         # Objects of task_selection_queue are dicts and can be of the following types:
@@ -81,10 +82,14 @@ class WebInterface:
             print("Error stopping gesture listener thread: ", e)
 
 
-    def _send_message(self, msg_dict: dict[str, Any]) -> None:
-        with open(self.webapp_sent_messages_log, "a") as f:
-            f.write(json.dumps(msg_dict) + "\n")
+    def _send_message(self, msg_dict: dict[str, Any], explanation=True) -> None:
         self.web_interface_publisher.publish(String(json.dumps(msg_dict)))
+        if explanation:
+            with open(self.webapp_explanation_messages_log, "a") as f:
+                f.write(json.dumps(msg_dict) + "\n")
+        else:
+            with open(self.webapp_sent_messages_log, "a") as f:
+                f.write(json.dumps(msg_dict) + "\n")
 
     def _send_image(self, image) -> None:
         self.web_interface_image_publisher.publish(self.image_bridge.cv2_to_compressed_imgmsg(image))

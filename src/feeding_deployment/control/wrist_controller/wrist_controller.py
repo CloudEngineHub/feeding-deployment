@@ -257,7 +257,7 @@ class WristInterface:
 
         # find nearest multiple of math.pi *2 for current_pitch and current_roll
         target_roll = round(current_roll / (math.pi * 2)) * math.pi * 2
-        self.set_wrist_state(0.4 * math.pi, target_roll)
+        self.set_wrist_state(0.3 * math.pi, target_roll)
 
     def set_to_cut_pos(self):
         wrist_joint_states = rospy.wait_for_message('/wrist_joint_states', JointState)

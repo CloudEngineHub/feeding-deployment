@@ -305,8 +305,8 @@ class _Runner:
                                     print('Processed user update request.')
                                     self.web_interface.update_adaptability_response(update_summary)
                                 except Exception as e:
-                                    print(f"Adaptation failed. Please try rephrasing the request.")
-                                    self.web_interface.update_adaptability_response(f"Update failed: {str(e)}")
+                                    print(f"Update failed: {str(e)}")
+                                    self.web_interface.update_adaptability_response("Adaptation failed. Please try rephrasing the request.")
                             else:
                                 break
                     elif task_type == "gesture":
