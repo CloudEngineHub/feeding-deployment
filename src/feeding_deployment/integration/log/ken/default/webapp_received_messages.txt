@@ -1,16 +1,11 @@
-{"state":"task_selection","status":"take_bite"}
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"watermelon and yoghurt","status":"Can I alternate between dipping watermelon in yoghurt and not dipping watermelon in yoghurt?"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
-{"state":"dip_selection","status":"yogurt"}
 {"state":"task_selection","status":"transparency"}
-{"state":"transparency_request","status":"How much do you dip the watermelons in yoghurt right now?"}
+{"state":"transparency_request","status":"what is current skewering depth"}
 {"state":"task_selection","status":"jump"}
 {"state":"task_selection","status":"adaptability"}
-{"state":"adaptability_request","status":"Can you dip the watermelon in yoghurt even more? "}
+{"state":"adaptability_request","status":"can you set skewerind depth to max"}
 {"state":"task_selection","status":"jump"}
 {"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"watermelon and yoghurt","status":"dip it"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["watermelon",1]}
-{"state":"dip_selection","status":"yogurt"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.3064174996378386,"y":0.6031953902566789}]}
