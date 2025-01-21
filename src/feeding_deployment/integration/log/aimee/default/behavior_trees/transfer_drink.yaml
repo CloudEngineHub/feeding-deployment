@@ -1,0 +1,81 @@
+name: TransferDrink
+description: Bring the mug to the user's mouth for a sip.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the mug to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: high
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
+- name: OutsideMouthDistance
+  description: Distance from the tool tip to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.1
+    upper: 0.2
+  value: 0.1
+- name: AskForConfirmationInitiatingTransferSequence
+  description: Ask for confirmation on the web app before initiating the transfer
+    sequence for drinking.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+- name: TimeToWaitBeforeAutocontinue
+  description: Autocontinue duration for re-selecting drinking transfer after a sip.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 5.0
+    upper: 100.0
+  value: 5.0
+fn: !hla transfer_drink

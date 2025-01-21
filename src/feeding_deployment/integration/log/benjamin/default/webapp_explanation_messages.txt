@@ -1,0 +1,124 @@
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Acquiring a bite from the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"cantaloupe": [[170, 80, 50, 62], [236, 139, 64, 70], [81, 280, 63, 71], [136, 158, 64, 52], [67, 181, 64, 68]]}], "current_bite": {"strawberry": [[351, 454, 75, 73], [353, 322, 80, 61], [154, 403, 64, 74], [235, 436, 69, 71], [194, 299, 84, 60], [290, 395, 82, 57], [232, 362, 72, 68], [150, 344, 71, 57]]}}
+{"n_ordering": 2, "data": ["chocolate dressing", "No dip"]}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}
+{"state": "explanation", "status": "Detected chocolate dressing, strawberry, and cantaloupe on the plate"}

@@ -1,0 +1,6 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Strawberries cantaloupes and chocolate dressing","status":"I would like to eat the strawberries dipped in chocolate sauce first please feed me cantaloupes only at the end"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"chocolate dressing"}
