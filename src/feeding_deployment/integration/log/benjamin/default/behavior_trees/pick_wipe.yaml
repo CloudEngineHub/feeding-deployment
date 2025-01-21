@@ -11,5 +11,5 @@ parameters:
     - low
     - medium
     - high
-  value: medium
+  value: high
 fn: !hla pick_wipe

@@ -11,7 +11,7 @@ parameters:
     - low
     - medium
     - high
-  value: medium
+  value: high
 - name: ReadyToInitiateTransferInteraction
   description: Interaction mode for ready to initiate transfer.
   is_user_editable: true
@@ -77,5 +77,5 @@ parameters:
     type: Box
     lower: 5.0
     upper: 100.0
-  value: 10.0
+  value: 5.0
 fn: !hla transfer_drink

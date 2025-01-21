@@ -11,7 +11,7 @@ parameters:
     - low
     - medium
     - high
-  value: medium
+  value: high
 - name: ReadyToInitiateTransferInteraction
   description: Interaction mode for ready to initiate transfer.
   is_user_editable: true
