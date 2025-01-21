@@ -439,7 +439,8 @@ class PerceptionInterface:
         data_segment = {
             "head_pose": [],
             "face_keypoints": [],
-            "tool_tip_target_pose": []
+            "tool_tip_target_pose": [],
+            "timestamp": []
         }
 
         video_segment = []
@@ -451,6 +452,7 @@ class PerceptionInterface:
                 data_segment["head_pose"].append(head_perception_data["head_pose"])
                 data_segment["face_keypoints"].append(head_perception_data["face_keypoints"])
                 data_segment["tool_tip_target_pose"].append(head_perception_data["tool_tip_target_pose"])
+                data_segment["timestamp"].append(timestamp)
                 video_segment.append(head_perception_data["camera_color_data"])
 
         return data_segment, video_segment

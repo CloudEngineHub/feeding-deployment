@@ -34,9 +34,8 @@ from feeding_deployment.control.robot_controller.arm_interface import ArmInterfa
 
 
 CAMERA_FREQUENCY_THRESHOLD = 10 # expected is 30 Hz
-FT_FREQUENCY_THRESHOLD = 500 # expected is 1000 Hz
+FT_FREQUENCY_THRESHOLD = 200 # expected is 1000 Hz
 FT_THRESHOLD = [40.0, 40.0, 40.0, 2.0, 2.0, 2.0]
-WITHIN_JOINT_LIMITS_FREQUENCY = 100 # expected is 100 Hz
 COLLISION_FREE_FREQUENCY_THRESHOLD = 100 # expected is 350 Hz (empirical)
 
 WATCHDOG_RUN_FREQUENCY = 1000

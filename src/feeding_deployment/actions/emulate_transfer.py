@@ -157,8 +157,14 @@ class EmulateTransferHLA(HighLevelAction):
                 if synthesized_gesture_function_name in synthesized_gestures_dict or synthesized_gesture_function_name in static_gesture_detectors.function_name_to_label:
                     print(f"Gesture {self.gesture_label} already synthesized or in static detectors")
                     # slightly hacky way to uniquely name the synthesized gesture (assumption: only one user generated gesture per label)
-                    synthesized_gesture_function_name = synthesized_gesture_function_name + "_user_generated"
-                    self.gesture_label = self.gesture_label + " (user generated)"
+                    id = 0
+                    new_function_name = synthesized_gesture_function_name
+                    while new_function_name in synthesized_gestures_dict or new_function_name in static_gesture_detectors.function_name_to_label:
+                        id += 1
+                        new_function_name = synthesized_gesture_function_name + f"_{id}"
+                    synthesized_gesture_function_name = new_function_name
+                    self.gesture_label = self.gesture_label + f"_{id}"
+                    print(f"Renaming to {self.gesture_label}")
 
                 synthesized_gestures_dict[synthesized_gesture_function_name] = self.gesture_label
                 with open(self.synthesized_gestures_dict_path, "w") as f:
