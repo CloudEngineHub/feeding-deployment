@@ -120,8 +120,8 @@ def _main(
 
     # logs are saved in user/scenario directory
     log_dir = Path(__file__).parent / "log" / "transfer_calibration"
-    # if log_dir.exists():
-    #     shutil.rmtree(log_dir)
+    if log_dir.exists():
+        shutil.rmtree(log_dir)
     log_dir.mkdir(exist_ok=True)
 
     execution_log = Path(__file__).parent / "log" / "execution_log.txt" # in root log directory

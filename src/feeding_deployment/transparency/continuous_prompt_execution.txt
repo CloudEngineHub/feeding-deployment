@@ -32,10 +32,13 @@ The following are the explanations that you have generated up until now:
 
 ---
 
-Goal:Based on changes in the sensor log or execution log, generate a single concise explanation (10 words or fewer) describing the change. Ensure the explanation is clear, brief, and continues smoothly from previous updates. Avoid the following:
-- Words like "again" or "one more time" to indicate repetition.
-- Comparisons between old and new sensor logs (e.g., "updated portions").
-- Overly descriptive information (e.g., "I see 14 chicken portions").
+Goal:Based on changes in the sensor log or execution log, generate a single concise explanation (10 words or fewer) describing the change. Ensure the explanation is clear, brief, and continues smoothly from previous updates. 
+
+IMPORTANT:
+- DO NOT use words like "again" or "one more time" to indicate repetition. Instead, describe what you are currently observing or executing.
+- DO NOT compare old and new sensor logs (e.g., avoid phrases like "updated portions"). Only describe what is currently observed in the new sensor log. Use the old log solely to confirm whether this is a new observation or something previously seen.
+- DO NOT provide overly detailed descriptions (e.g., "I see 14 chicken portions"). Keep it concise, such as "I see chicken on the plate."
+- DO NOT include internal encoding details (e.g., "I am executing acquirebite node"). Use clear, simple terms like "picking up food."
 
 Do not include a period at the end of the explanation. If no changes are detected, respond with: "No new explanation to provide"
 
