@@ -39,7 +39,7 @@ class TransparencyContinuous(TransparencyBase):
             return "No new explanation to provide"
 
         # prompt = self.prompt_skeleton%(self.last_behavior, behavior, self.last_execution, execution, self.last_sensor, sensor, self.explanation_history)
-        prompt = self.prompt_skeleton%(behavior, self.last_execution, execution, self.last_sensor, sensor, self.explanation_history)
+        prompt = self.prompt_skeleton%(behavior, self.last_sensor, sensor, self.last_execution, execution, self.explanation_history)
 
         response = self.llm.sample_completions(prompt, imgs=None, temperature=0.0, seed=0)[0]
         self.explanation_history += response + "\n"

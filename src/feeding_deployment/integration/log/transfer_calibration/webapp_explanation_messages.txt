@@ -33,1199 +33,799 @@
 {"state": "explanation", "status": ""}
 {"state": "explanation", "status": ""}
 {"state": "explanation", "status": ""}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
 {"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"n_food_types": 3, "data": [{"salmon": [[381, 356, 66, 84], [280, 135, 81, 58], [411, 202, 79, 84]]}, {"chicken": [[316, 217, 50, 71]]}], "current_bite": {"broccoli": [[271, 383, 76, 81], [149, 389, 80, 78], [146, 253, 83, 96], [66, 210, 68, 64], [78, 295, 79, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"chocolate cake": [[130, 200, 112, 79], [110, 371, 98, 82], [158, 300, 95, 82]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
 {"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
 {"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected ketchup and chocolate cake on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
 {"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"n_food_types": 3, "data": [{"broccoli": [[269, 381, 76, 82], [147, 387, 79, 78], [75, 293, 80, 104], [147, 252, 79, 95], [93, 216, 51, 62]]}, {"chicken": [[313, 215, 50, 72]]}], "current_bite": {"salmon": [[379, 354, 66, 84], [409, 200, 78, 84], [274, 132, 85, 59]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"chocolate cake": [[108, 373, 98, 82], [147, 331, 101, 63]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
 {"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
 {"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected broccoli, salmon, and chicken on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer chocolate cake portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
 {"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"n_food_types": 3, "data": [{"broccoli": [[269, 385, 76, 82], [147, 392, 80, 77], [147, 255, 79, 96], [93, 221, 51, 61], [76, 298, 77, 103]]}, {"salmon": [[379, 357, 66, 85], [409, 204, 78, 84]]}], "current_bite": {"chicken": [[318, 236, 48, 73], [272, 299, 67, 64]]}}
-{"n_ordering": 1, "data": ["No dip"]}
+{"n_food_types": 1, "data": [], "current_bite": {"chocolate cake": [[144, 332, 101, 63]]}}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
 {"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
 {"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected two chicken portions on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[383, 357, 66, 84], [322, 226, 48, 84]]}, {"chicken": [[276, 298, 67, 65]]}], "current_bite": {"broccoli": [[273, 385, 76, 81], [151, 392, 79, 77], [151, 256, 79, 95], [96, 219, 52, 63], [80, 297, 78, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": "Detected one chicken portion on the plate"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[322, 235, 48, 74], [276, 299, 66, 64]]}, {"chicken": [[172, 118, 70, 66], [208, 66, 70, 64]]}], "current_bite": {"broccoli": [[273, 385, 75, 81], [151, 391, 80, 78], [79, 297, 78, 104], [151, 256, 77, 94], [96, 220, 52, 62]]}}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": "Detected additional chicken portion on the plate"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[320, 234, 48, 73], [274, 297, 67, 64]]}, {"chicken": [[170, 116, 70, 66]]}], "current_bite": {"broccoli": [[271, 383, 76, 82], [149, 389, 79, 78], [149, 254, 79, 94], [95, 218, 51, 62], [77, 295, 77, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"n_food_types": 2, "data": [{"salmon": [[322, 236, 48, 73], [276, 299, 66, 64]]}], "current_bite": {"broccoli": [[335, 85, 108, 101], [443, 283, 85, 88], [151, 391, 79, 78], [151, 256, 78, 94], [96, 220, 52, 62], [79, 297, 78, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": "Detected broccoli and salmon on the plate"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"n_food_types": 3, "data": [{"broccoli": [[442, 283, 86, 87], [151, 391, 80, 78], [97, 220, 51, 62], [151, 256, 78, 94], [79, 297, 77, 104]]}, {"chicken": [[172, 118, 70, 66]]}], "current_bite": {"salmon": [[322, 236, 48, 73], [276, 299, 66, 64]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"n_food_types": 3, "data": [{"salmon": [[314, 296, 49, 76], [254, 316, 66, 64]]}, {"chicken": [[168, 115, 70, 65]]}], "current_bite": {"broccoli": [[438, 280, 86, 86], [147, 387, 79, 78], [91, 216, 53, 62], [147, 252, 79, 95], [75, 293, 77, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"n_food_types": 2, "data": [{"salmon": [[310, 363, 56, 73], [257, 326, 65, 64], [174, 120, 70, 66]]}], "current_bite": {"broccoli": [[444, 285, 85, 87], [153, 393, 79, 78], [81, 299, 78, 104], [152, 258, 80, 94], [96, 222, 54, 62]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": "Detected salmon on the plate"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"n_food_types": 2, "data": [{"salmon": [[255, 328, 65, 64], [298, 441, 59, 72]]}], "current_bite": {"broccoli": [[442, 287, 86, 87], [151, 395, 79, 78], [151, 259, 79, 95], [97, 224, 51, 62], [79, 301, 77, 104]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected fewer salmon portions"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"n_food_types": 3, "data": [{"salmon": [[277, 218, 77, 77], [369, 152, 72, 86]]}, {"chicken": [[253, 322, 65, 64], [170, 116, 70, 66]]}], "current_bite": {"broccoli": [[440, 282, 85, 86], [149, 389, 79, 78], [77, 295, 77, 104], [148, 254, 80, 94], [95, 217, 50, 63]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected chicken on the plate"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 2, "data": [{"salmon": [[372, 150, 71, 86], [251, 345, 66, 65]]}], "current_bite": {"broccoli": [[442, 280, 86, 86], [151, 387, 79, 78], [80, 294, 77, 103], [151, 251, 78, 95], [96, 216, 52, 62]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": "Detected fewer chicken portions"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 2, "data": [{"salmon": [[365, 152, 72, 86], [245, 347, 66, 65]]}], "current_bite": {"broccoli": [[436, 281, 86, 87], [145, 389, 79, 78], [74, 295, 76, 104], [144, 254, 80, 94], [90, 217, 52, 63]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 2, "data": [{"salmon": [[369, 152, 71, 86], [249, 348, 66, 64]]}], "current_bite": {"broccoli": [[149, 389, 79, 78], [77, 296, 78, 103], [148, 254, 80, 94], [94, 218, 52, 61]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[371, 150, 72, 86], [251, 345, 66, 65]]}, {"broccoli": [[79, 293, 78, 104], [150, 252, 79, 94], [97, 215, 51, 62]]}], "current_bite": {"chicken": [[208, 62, 69, 64], [172, 114, 70, 66]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[371, 150, 72, 86], [251, 345, 66, 65]]}, {"chicken": [[153, 161, 69, 64]]}], "current_bite": {"broccoli": [[80, 293, 76, 104], [150, 252, 79, 94], [97, 216, 51, 61]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 3, "data": [{"salmon": [[369, 152, 71, 86], [249, 348, 66, 64]]}, {"chicken": [[151, 163, 68, 64]]}], "current_bite": {"broccoli": [[54, 348, 76, 106], [94, 218, 52, 62], [148, 254, 79, 95]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 3, "data": [{"broccoli": [[150, 250, 80, 97], [96, 216, 51, 62]]}, {"chicken": [[153, 161, 68, 64]]}], "current_bite": {"salmon": [[371, 150, 72, 86], [251, 346, 66, 64]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 2, "data": [{"salmon": [[249, 344, 66, 64], [152, 159, 68, 64]]}], "current_bite": {"broccoli": [[148, 250, 79, 95], [92, 213, 54, 63]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"broccoli": [[140, 318, 87, 110], [92, 223, 60, 66]]}, {"salmon": [[374, 173, 181, 188]]}], "current_bite": {"chicken": [[251, 346, 66, 64]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"chicken": [[151, 163, 68, 64]]}, {"salmon": [[373, 175, 179, 188]]}], "current_bite": {"broccoli": [[138, 320, 86, 110], [90, 225, 61, 65]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 3, "data": [{"broccoli": [[90, 225, 61, 66]]}, {"chicken": [[151, 163, 68, 64], [132, 435, 25, 23]]}], "current_bite": {"salmon": [[373, 176, 179, 187]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"n_food_types": 3, "data": [{"salmon": [[375, 174, 179, 186]]}, {"chicken": [[153, 161, 68, 64]]}], "current_bite": {"broccoli": [[92, 223, 61, 66]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "explanation", "status": ""}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 2, "data": [{"chicken": [[149, 161, 68, 64], [131, 433, 24, 23]]}], "current_bite": {"salmon": [[370, 172, 180, 189]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "acquirebite", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"n_food_types": 3, "data": [{"chicken": [[134, 437, 25, 23]]}, {"broccoli": [[139, 338, 38, 80]]}], "current_bite": {"salmon": [[375, 177, 179, 188], [288, 150, 59, 58]]}}
-{"n_ordering": 1, "data": ["No dip"]}
-{"state": "auto_time", "status": "10.0"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "transfermeal", "status": "jump"}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
-{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
+{"state": "explanation", "status": "Detected fewer ketchup portions on the plate"}
