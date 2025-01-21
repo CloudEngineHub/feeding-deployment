@@ -1,1 +1,0 @@
-{'bite_history': ['potato wedges', 'steak', 'steak', 'steak', 'steak', 'potato wedges', 'potato wedges'], 'food_labels': ['steak', 'potato wedges'], 'food_categories': ['solid', 'solid'], 'user_preference': '"I would like to eat the steak first"'}

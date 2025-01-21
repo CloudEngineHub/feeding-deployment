@@ -41,6 +41,7 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
+    - headshake
   value: open_mouth
 - name: TransferCompleteInteraction
   description: Interaction mode for transfer completion.
@@ -51,6 +52,7 @@ parameters:
     - button
     - sense
     - auto_timeout
+    - headshake
   value: sense
 - name: OutsideMouthDistance
   description: Distance from the tool tip to the user's mouth.
