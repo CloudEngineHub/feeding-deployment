@@ -1,1 +1,0 @@
-{"state":"post_drink_pickup","status":"drink_transfer"}

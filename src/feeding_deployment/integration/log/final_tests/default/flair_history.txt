@@ -1,1 +1,0 @@
-{'bite_history': ['strawberry', 'chocolate sauce', 'strawberry', 'chocolate sauce', 'strawberry', 'chocolate sauce', 'strawberry', 'chocolate sauce', 'strawberry', 'chocolate sauce'], 'food_labels': ['strawberry', 'chocolate sauce'], 'food_categories': ['solid', 'dip'], 'user_preference': '"I would like to dip the strawberry in chocolate sauce"'}
