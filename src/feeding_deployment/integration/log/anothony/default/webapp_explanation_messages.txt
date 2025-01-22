@@ -1,0 +1,2006 @@
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Starting transfer process"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 2, "data": ["head nod", "mouth open"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Finished transfer process"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"n_food_types": 2, "data": [{"potato wedge": [[191, 305, 72, 81], [110, 285, 64, 112], [131, 452, 87, 62], [50, 297, 83, 53], [40, 345, 70, 54], [102, 406, 93, 59], [192, 448, 55, 85], [194, 400, 64, 52], [157, 347, 75, 55]]}], "current_bite": {"chicken": [[349, 448, 88, 82], [257, 310, 85, 103], [393, 96, 80, 88], [388, 378, 87, 80], [294, 388, 82, 98], [342, 330, 88, 69], [456, 321, 89, 92], [470, 242, 79, 75], [323, 239, 91, 91], [392, 188, 86, 87], [304, 160, 93, 86], [411, 267, 66, 79]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[113, 283, 63, 113], [194, 304, 72, 81], [105, 405, 94, 58], [42, 345, 71, 53], [134, 450, 88, 63], [52, 297, 84, 52], [195, 447, 55, 84], [196, 399, 65, 51], [159, 346, 75, 55]]}], "current_bite": {"chicken": [[297, 385, 81, 99], [259, 308, 85, 103], [391, 375, 88, 81], [394, 93, 80, 89], [458, 317, 90, 93], [345, 327, 87, 69], [393, 184, 87, 88], [473, 239, 76, 75], [327, 235, 89, 93], [306, 158, 93, 87], [413, 263, 67, 81]]}}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[196, 314, 72, 81], [115, 294, 63, 113], [107, 415, 93, 59], [136, 460, 88, 63], [54, 307, 83, 52], [44, 355, 72, 53], [197, 457, 55, 85], [198, 409, 65, 52], [161, 357, 75, 55]]}], "current_bite": {"chicken": [[396, 104, 80, 88], [299, 396, 81, 98], [261, 319, 85, 102], [393, 385, 87, 80], [347, 337, 87, 69], [459, 326, 90, 94], [473, 249, 78, 75], [327, 245, 91, 93], [395, 195, 86, 87], [310, 168, 91, 86]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to operate faster by increasing the speed of its actions when handling utensils, drinks, and wipes."}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": "The robot's feeding system was adjusted to use less sauce by reducing the depth at which it dips the utensil into the sauce."}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": "Confirmation pages have been removed from the system for actions involving acquiring bites with a utensil, transferring drinks, and transferring wipes."}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"n_food_types": 2, "data": [{"potato wedge": [[112, 284, 64, 113], [183, 476, 47, 97], [191, 304, 74, 82], [51, 298, 83, 52], [195, 399, 65, 53], [41, 345, 71, 54], [219, 444, 40, 97]]}], "current_bite": {"chicken": [[393, 93, 80, 89], [297, 386, 80, 99], [390, 375, 88, 81], [258, 310, 85, 103], [457, 318, 90, 92], [471, 240, 78, 75], [343, 327, 89, 70], [392, 185, 87, 89], [327, 235, 88, 94], [308, 158, 90, 87]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": "The robot feeding system was adjusted to bring utensils, drinks, and wipes slightly closer to the user's mouth for improved convenience."}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": "The robot has been adjusted to bring utensils, drinks, and wipes closer to your mouth, now stopping at a distance of 0.1 units."}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"n_food_types": 2, "data": [{"potato wedge": [[110, 287, 63, 112], [181, 478, 47, 97], [187, 306, 74, 81], [49, 300, 83, 52], [39, 347, 71, 54], [193, 401, 66, 53], [217, 446, 40, 97]]}], "current_bite": {"chicken": [[293, 397, 77, 98], [390, 111, 87, 87], [365, 226, 76, 90], [396, 395, 85, 84], [255, 311, 81, 102], [337, 342, 93, 76], [455, 269, 89, 71], [462, 342, 88, 100], [413, 301, 64, 83], [297, 183, 90, 76]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[112, 280, 63, 113], [183, 472, 47, 97], [189, 300, 74, 82], [41, 342, 71, 54], [51, 294, 83, 53], [195, 396, 65, 52], [219, 440, 41, 97]]}], "current_bite": {"chicken": [[392, 105, 87, 87], [257, 305, 81, 101], [367, 220, 77, 89], [339, 335, 93, 77], [457, 263, 88, 70], [398, 391, 85, 82], [465, 342, 86, 93], [415, 296, 64, 83], [301, 177, 88, 75]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Detected chicken, ketchup, and potato wedge on the plate"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Placing the utensil"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Picking up the drink"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Placing the drink"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"n_food_types": 2, "data": [{"potato wedge": [[189, 308, 75, 80], [54, 289, 81, 57], [42, 347, 71, 54], [162, 383, 63, 78], [184, 476, 48, 98], [220, 413, 69, 60], [229, 452, 54, 89]]}], "current_bite": {"chicken": [[394, 111, 86, 86], [259, 310, 80, 102], [368, 226, 77, 89], [399, 396, 86, 83], [340, 341, 93, 77], [459, 269, 88, 70], [467, 341, 86, 100], [302, 183, 88, 76], [416, 301, 64, 83]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[189, 308, 75, 81], [55, 289, 80, 57], [162, 383, 63, 78], [43, 347, 70, 54], [185, 476, 48, 98], [230, 453, 53, 88], [220, 413, 69, 60]]}], "current_bite": {"chicken": [[335, 249, 88, 92], [259, 311, 81, 101], [340, 342, 94, 76], [459, 268, 89, 71], [400, 395, 85, 84], [467, 341, 86, 100], [295, 183, 96, 77], [416, 300, 65, 84]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[55, 289, 80, 57], [190, 309, 74, 80], [43, 347, 70, 54], [162, 383, 62, 78], [185, 476, 47, 97], [220, 414, 69, 59], [230, 453, 53, 88]]}], "current_bite": {"chicken": [[351, 387, 94, 77], [415, 435, 86, 87], [259, 311, 82, 101], [456, 272, 93, 68], [308, 263, 79, 93], [472, 345, 87, 101], [419, 308, 65, 91], [297, 183, 94, 77]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[407, 436, 91, 85], [257, 309, 82, 101], [455, 269, 92, 69], [306, 261, 79, 93], [418, 306, 65, 91], [470, 343, 87, 101], [299, 181, 90, 77]]}], "current_bite": {"potato wedge": [[53, 287, 81, 57], [188, 307, 74, 80], [41, 345, 70, 54], [160, 381, 62, 78], [183, 474, 48, 98], [218, 411, 69, 60], [227, 451, 54, 88]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to use a button to start transferring drinks, utensils, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[57, 405, 67, 53], [187, 306, 76, 81], [161, 381, 61, 78], [184, 474, 47, 98], [228, 451, 54, 88], [218, 411, 70, 60]]}], "current_bite": {"chicken": [[407, 435, 90, 85], [418, 306, 65, 91], [470, 343, 87, 101], [306, 261, 79, 94], [455, 269, 92, 69], [258, 309, 81, 101], [294, 181, 95, 77]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot assisted feeding system was updated to operate more quietly. It will no longer announce actions when transferring drinks, utensils, or wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[61, 412, 67, 54], [190, 312, 73, 83], [164, 386, 62, 79], [191, 480, 47, 99], [234, 455, 52, 89], [222, 416, 70, 60]]}], "current_bite": {"chicken": [[260, 313, 81, 102], [307, 263, 80, 94], [420, 306, 65, 92], [295, 183, 93, 77], [457, 268, 91, 70], [473, 341, 87, 103]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[303, 259, 83, 92], [420, 299, 65, 90], [456, 260, 93, 70], [473, 333, 88, 103], [294, 175, 94, 77]]}], "current_bite": {"potato wedge": [[192, 305, 67, 86], [61, 404, 68, 54], [164, 378, 62, 79], [182, 468, 53, 85], [237, 463, 63, 81]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[420, 302, 65, 91], [457, 265, 92, 68], [473, 337, 89, 103], [295, 179, 93, 78], [61, 408, 67, 54], [219, 431, 69, 60]]}], "current_bite": {"potato wedge": [[192, 308, 68, 87], [165, 383, 62, 78], [181, 471, 54, 85], [237, 466, 63, 81]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[60, 406, 66, 54], [153, 417, 67, 67], [177, 475, 57, 82], [235, 466, 65, 79], [218, 431, 70, 61]]}], "current_bite": {"chicken": [[454, 263, 93, 69], [418, 300, 65, 92], [471, 335, 89, 103], [292, 177, 94, 78]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[179, 477, 56, 82], [237, 468, 65, 79]]}], "current_bite": {"chicken": [[438, 336, 102, 92], [61, 408, 67, 54], [155, 419, 67, 68], [295, 179, 93, 78], [220, 433, 70, 62]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[294, 179, 94, 77], [62, 408, 66, 53], [155, 419, 67, 67], [179, 477, 56, 81], [237, 468, 65, 79], [220, 433, 70, 62]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[58, 408, 67, 53], [151, 419, 67, 67], [175, 477, 56, 81], [216, 433, 70, 62], [233, 468, 65, 79]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[151, 419, 68, 67], [175, 477, 56, 82], [216, 433, 70, 62], [233, 468, 65, 79]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to turn on an LED light to indicate when it is ready to transfer drinks, utensils, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[216, 480, 51, 98], [167, 192, 76, 56], [225, 421, 61, 67], [253, 476, 86, 60]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[226, 402, 63, 74], [287, 450, 82, 54]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[294, 463, 88, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Please press the button to initiate transfer"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to include a confirmation step after the robot picks up a bite of food, ensuring the user can confirm before the robot proceeds."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[166, 197, 79, 58]]}], "current_bite": {"chicken": [[385, 483, 12, 11]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[180, 166, 78, 71], [387, 506, 12, 15]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[184, 270, 82, 64], [390, 505, 10, 11]]}}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": "The robot's feeding system was adjusted to pick up food by moving the utensil deeper, with a new depth setting of 0.05."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[189, 269, 81, 66]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[383, 509, 12, 11]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[254, 398, 12, 12]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}
+{"state": "explanation", "status": "Detected chicken and ketchup on the plate"}

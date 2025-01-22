@@ -40,3 +40,4 @@
 {"state":"bite_selection","status":"ready_for_initial_data"}
 {"state":"bite_selection","status":"ready_for_initial_data"}
 {"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}

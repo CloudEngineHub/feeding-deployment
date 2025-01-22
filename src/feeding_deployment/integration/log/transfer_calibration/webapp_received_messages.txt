@@ -1,13 +1,1 @@
-{"state":"order_selection","status":"ready_for_initial_data"}
-{"state":"Chocolate cake and ketchup","status":"I strongly prefer not depending the chocolate cake and ketchup"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chocolate cake",1]}
-{"state":"dip_selection","status":"No dip"}
-{"state":"post_bite_pickup","status":"return_to_main"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chocolate cake",1]}
-{"state":"dip_selection","status":"No dip"}
-{"state":"post_bite_pickup","status":"return_to_main"}
-{"state":"bite_selection","status":"ready_for_initial_data"}
-{"state":"bite_selection","status":"aquire_food","data":["chocolate cake",1]}
-{"state":"dip_selection","status":"No dip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}

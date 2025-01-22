@@ -1,1 +1,0 @@
-{'bite_history': ['chocolate cake', 'chocolate cake', 'chocolate cake'], 'food_labels': ['chocolate cake', 'ketchup'], 'food_categories': ['solid', 'dip'], 'user_preference': '"I strongly prefer not to dip the chocolate cake in ketchup"'}
