@@ -1,0 +1,132 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[397, 227, 121, 52], [357, 143, 67, 55], [453, 130, 77, 100], [375, 330, 113, 51], [298, 130, 41, 85], [318, 237, 76, 51]]}], "current_bite": {"chicken nugget": [[256, 312, 80, 69], [207, 430, 81, 83], [290, 375, 87, 70], [169, 361, 68, 67], [351, 202, 80, 51]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot feeding system was adjusted to bring utensils, drinks, and wipes closer to the user's mouth for easier access."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[378, 335, 114, 51], [401, 231, 121, 53], [302, 135, 41, 85], [457, 135, 77, 99]]}], "current_bite": {"chicken nugget": [[319, 430, 67, 90], [212, 433, 81, 84], [174, 365, 67, 67], [362, 148, 66, 54]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[457, 143, 77, 100], [402, 240, 122, 52], [378, 343, 114, 52]]}], "current_bite": {"chicken nugget": [[319, 439, 67, 89], [212, 442, 80, 83], [173, 374, 68, 66], [362, 156, 66, 54]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[398, 221, 120, 52], [357, 137, 66, 54], [376, 325, 114, 59], [324, 317, 61, 71], [452, 123, 77, 99], [350, 210, 77, 36]]}], "current_bite": {"chicken nugget": [[207, 423, 80, 83], [315, 420, 66, 89], [169, 356, 67, 66]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[473, -3, 111, 105], [363, 159, 66, 54], [400, 307, 111, 71], [380, 352, 113, 53], [335, 339, 52, 75], [357, 232, 76, 38]]}], "current_bite": {"chicken nugget": [[321, 442, 66, 88], [214, 445, 80, 84], [175, 378, 67, 66]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "For initiating the transfer of food, drink, or wipe to your mouth, you have the following options:\n\n1. **Button**: You can press a button on the web app to start the transfer.\n2. **Open Mouth**: The robot will detect when you open your mouth to begin the transfer.\n3. **Auto Timeout**: The transfer will automatically start after a set period if no other action is taken.\n\nYou can choose the option that best suits your preference."}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot's feeding system has been updated to operate at a higher speed for all tasks involving utensils, drinks, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[392, 301, 113, 72], [327, 333, 53, 76], [349, 228, 77, 37], [372, 347, 114, 53]]}], "current_bite": {"chicken nugget": [[313, 431, 67, 95], [206, 439, 80, 84], [168, 372, 67, 67], [357, 155, 65, 53]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[396, 305, 113, 72], [376, 350, 114, 54], [352, 233, 77, 37], [331, 337, 53, 76]]}], "current_bite": {"chicken nugget": [[211, 443, 79, 83], [172, 376, 67, 67], [361, 159, 65, 53]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to allow users to press a button to indicate they have finished using the mouth-wiping tool. This change does not apply to taking a sip or a bite."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "Confirmation pages have been removed for acquiring bites with a utensil, transferring drinks, and transferring wipes. However, there was an issue with removing the confirmation for transferring utensils."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "No, I am not showing the confirmation page when taking bites right now. The current setting for asking for confirmation before initiating the transfer sequence for a bite is set to \"0,\" which means it is disabled."}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 2, "data": ["head nod", "mouth open"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 3, "data": ["head nod", "mouth open", "Head still"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}

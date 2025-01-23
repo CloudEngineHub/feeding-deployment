@@ -11,7 +11,7 @@ parameters:
     - low
     - medium
     - high
-  value: medium
+  value: high
 - name: FoodDippingDepth
   description: The depth a food item is dipped into a dipping sauce.
   is_user_editable: true
@@ -45,5 +45,5 @@ parameters:
     elements:
     - 0
     - 1
-  value: 1
+  value: 0
 fn: !hla acquire_bite
