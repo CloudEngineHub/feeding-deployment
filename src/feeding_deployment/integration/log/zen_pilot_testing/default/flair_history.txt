@@ -1,0 +1,1 @@
+{'bite_history': [], 'food_labels': ['chicken nugget', 'potato wedge', 'ranch dip'], 'food_categories': ['solid', 'solid', 'dip'], 'user_preference': '"I would like to eat the chicken nuggets dipped in ranch dip first, and the potato wedges without ranch dip"'}

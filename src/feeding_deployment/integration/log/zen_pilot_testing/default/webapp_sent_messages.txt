@@ -1,0 +1,121 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[104, 385, 79, 78], [330, 357, 72, 95], [181, 369, 83, 83], [341, 463, 88, 71], [156, 453, 88, 80], [437, 290, 53, 140], [492, 260, 51, 93], [272, 423, 82, 75], [404, 347, 46, 78], [245, 319, 91, 80], [236, 476, 76, 92]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot has been adjusted to come closer when transferring food, drinks, and wipes, stopping 0.05 units away from the mouth."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[99, 391, 79, 78], [320, 380, 80, 85], [196, 434, 73, 84], [350, 473, 87, 72], [405, 350, 51, 75], [128, 460, 76, 85], [439, 292, 53, 140], [268, 445, 87, 79], [494, 262, 51, 94], [218, 496, 90, 74], [296, 55, 55, 80]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"potato wedge": [[318, 374, 81, 85], [492, 256, 51, 94], [404, 344, 50, 75], [438, 286, 52, 140], [97, 386, 78, 77], [479, 132, 61, 123], [294, 49, 55, 80], [313, 126, 80, 62], [343, 265, 102, 73], [390, 33, 95, 67], [288, 188, 96, 57], [196, 428, 72, 84], [127, 454, 75, 85]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[95, 384, 77, 76], [308, 382, 72, 86], [193, 428, 78, 82], [402, 343, 50, 75], [490, 255, 51, 93], [436, 285, 52, 140], [125, 452, 74, 83], [477, 130, 61, 123]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[441, 299, 52, 140], [318, 138, 83, 63], [484, 145, 59, 124], [292, 202, 96, 56], [344, 95, 139, 77], [348, 280, 100, 71]]}], "current_bite": {"chicken nugget": [[312, 395, 71, 83], [100, 394, 75, 75], [198, 441, 76, 77], [207, 502, 82, 80], [129, 462, 74, 82], [495, 271, 51, 92], [406, 358, 50, 75]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken nugget": [[98, 390, 77, 76], [196, 437, 77, 79], [127, 458, 74, 83], [205, 498, 83, 82], [403, 355, 51, 76], [494, 268, 51, 93], [299, 57, 55, 81]]}], "current_bite": {"potato wedge": [[439, 297, 52, 141], [316, 135, 84, 65], [343, 92, 139, 78], [290, 198, 97, 58]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[439, 294, 52, 140], [316, 131, 83, 65], [483, 138, 59, 125]]}], "current_bite": {"chicken nugget": [[98, 386, 76, 76], [196, 433, 76, 79], [127, 454, 74, 83], [205, 494, 82, 82], [403, 351, 51, 76], [493, 264, 52, 93], [273, 58, 39, 51], [299, 53, 55, 81]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[439, 290, 50, 141]]}], "current_bite": {"chicken nugget": [[98, 382, 77, 75], [196, 428, 77, 80], [401, 347, 47, 79], [127, 450, 75, 83], [290, 189, 98, 59], [205, 490, 82, 81], [344, 268, 100, 74], [48, 189, 36, 41]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"small fried chicken nugget piece": [[94, 377, 76, 76], [192, 424, 77, 80], [123, 446, 74, 83], [201, 486, 82, 81], [391, 388, 55, 74], [286, 186, 98, 58]]}], "current_bite": {"yellow potato wedge piece": [[435, 286, 51, 140]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[384, 218, 123, 82], [294, 202, 99, 58], [347, 95, 140, 79], [320, 139, 87, 65], [303, 61, 56, 81], [400, 45, 95, 70], [487, 144, 62, 127]]}], "current_bite": {"chicken nugget": [[102, 394, 77, 75], [200, 440, 77, 80], [131, 462, 75, 83], [209, 502, 82, 81], [396, 406, 36, 82]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[392, 289, 129, 66]]}], "current_bite": {"chicken nugget": [[102, 394, 77, 76], [200, 441, 77, 79], [131, 462, 75, 83], [396, 407, 36, 81], [208, 502, 83, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"potato wedge": [[492, 283, 88, 73], [380, 312, 108, 67], [343, 151, 64, 99], [443, 141, 82, 94], [384, 254, 119, 57], [365, 155, 77, 138]]}}
+{"n_ordering": 2, "data": ["No dip", "ranch dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"potato wedge": [[442, 133, 82, 95], [341, 143, 65, 100], [379, 304, 108, 68], [383, 245, 120, 61], [363, 148, 78, 138]]}], "current_bite": {"chicken nugget": [[252, 306, 79, 70], [285, 373, 88, 69], [201, 427, 82, 80], [164, 355, 68, 66]]}}
+{"n_ordering": 2, "data": ["ranch dip", "No dip"]}
+{"state": "auto_time", "status": "10.0"}

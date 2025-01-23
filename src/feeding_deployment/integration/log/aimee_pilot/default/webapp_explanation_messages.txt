@@ -1,0 +1,2940 @@
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Starting to pick up the utensil"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "newmealpage", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": "Camera frequency below expected rate, please check the camera"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "newmealpage", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[282, 340, 69, 72], [368, 379, 66, 84], [353, 297, 88, 65], [309, 199, 82, 88], [432, 362, 65, 84], [367, 114, 74, 77], [448, 251, 68, 65], [245, 131, 66, 74], [279, 68, 75, 57], [420, 180, 72, 83]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "adaptability", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "adaptability_response", "status": "The robot has been adjusted to bring utensils, drinks, and wipes closer to your mouth, now stopping at a distance of 0.05 units."}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to the user's mouth"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[302, 204, 81, 88], [360, 384, 67, 83], [345, 301, 88, 65], [424, 367, 65, 83], [441, 256, 68, 65], [360, 119, 74, 76], [411, 185, 73, 83], [238, 136, 66, 73], [272, 73, 75, 56]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "Starting another bite acquisition process"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[301, 204, 82, 87], [345, 302, 88, 64], [359, 385, 67, 83], [423, 367, 65, 84], [359, 119, 75, 77], [440, 256, 69, 65], [237, 136, 66, 74], [412, 185, 71, 83], [272, 73, 74, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[301, 204, 82, 87], [345, 302, 88, 65], [359, 384, 67, 84], [424, 367, 65, 84], [440, 257, 68, 64], [359, 119, 75, 76], [238, 136, 66, 73], [411, 185, 72, 83], [272, 73, 75, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[297, 197, 82, 87], [355, 377, 67, 83], [341, 294, 88, 65], [419, 359, 65, 84], [436, 249, 68, 64], [355, 111, 74, 77], [406, 178, 74, 82], [233, 128, 66, 73], [267, 65, 75, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Picking up food from the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[352, 309, 79, 75], [425, 365, 64, 84], [359, 117, 74, 76], [361, 384, 67, 83], [441, 255, 67, 63], [411, 183, 73, 83], [237, 134, 66, 74], [271, 71, 75, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[359, 114, 74, 77], [362, 425, 82, 69], [425, 362, 64, 83], [441, 251, 67, 65], [411, 180, 73, 83], [271, 68, 75, 56], [237, 131, 66, 73]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[361, 429, 83, 68], [359, 118, 75, 77], [425, 365, 64, 84], [441, 255, 69, 64], [237, 135, 66, 73], [411, 183, 73, 84], [271, 71, 75, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[428, 362, 65, 84], [363, 112, 75, 77], [445, 250, 69, 66], [241, 128, 66, 74], [416, 179, 73, 83], [275, 64, 76, 58]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Picking up food"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[442, 173, 66, 78], [327, 112, 53, 90], [396, 93, 67, 73], [442, 261, 84, 90]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[355, 293, 73, 80], [461, 155, 52, 76], [381, 154, 56, 86], [422, 353, 87, 85], [381, 411, 69, 65]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": "Unexpected force-torque sensor anomaly detected"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[419, 255, 67, 77]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[356, 194, 64, 86], [350, 363, 80, 57]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[423, 214, 63, 80], [277, 279, 63, 61], [201, 407, 81, 87]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[460, 289, 51, 85], [266, 283, 65, 56], [164, 393, 79, 88]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[298, 314, 64, 68], [458, 292, 55, 86]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[463, 264, 56, 86]]}}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected whipped cream and strawberry on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[81, 229, 87, 69], [503, 242, 58, 87]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[125, 190, 78, 86], [504, 269, 55, 90]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected two strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[509, 242, 58, 89], [194, 410, 82, 87], [131, 381, 68, 80], [225, 96, 60, 69]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected four strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[415, 184, 74, 67], [312, 95, 63, 92], [90, 219, 81, 85], [113, 151, 77, 70], [324, 436, 83, 66]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": "Detected five strawberries on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
