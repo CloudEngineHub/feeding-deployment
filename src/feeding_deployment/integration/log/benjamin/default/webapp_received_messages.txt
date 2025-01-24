@@ -1,0 +1,139 @@
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Chicken nuggets ketchup and apple slices","status":"Dip chicken nuggets and ketchup and give apple slices after two bites of chicken nuggets"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",4]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Don't show continue after picking up apples or chicken nuggets on plate or drink"}
+{"state":"adaptability_request","status":"Top show continueConfirmation pages on the web interface"}
+{"state":"adaptability_request","status":"Don't show continue pages on the web interface"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["apple slice",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["apple slice",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Dip chicken and ketchup more"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Go faster in between picking up bites of apple"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["Waiting for content",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Do not dip apple and ketchup"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.3305229610314356,"y":0.6311332285664397}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"status":"finish_feeding"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}

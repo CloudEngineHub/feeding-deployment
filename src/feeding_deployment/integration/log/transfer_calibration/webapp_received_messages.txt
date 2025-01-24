@@ -1,0 +1,1 @@
+{"state":"prepared_mouth_wiping","status":"move_to_wiping_position"}

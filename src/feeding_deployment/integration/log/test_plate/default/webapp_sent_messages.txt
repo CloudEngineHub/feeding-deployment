@@ -1,0 +1,69 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple slice": [[247, 376, 96, 122], [33, 262, 81, 109], [162, 343, 96, 107], [146, 213, 94, 118], [30, 159, 128, 100], [73, 404, 132, 108], [208, 175, 78, 116]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[245, 374, 97, 122], [145, 211, 93, 117], [31, 260, 81, 109], [160, 341, 96, 107], [29, 157, 127, 99], [71, 402, 132, 107], [309, 99, 135, 76], [207, 173, 77, 116], [221, 11, 124, 56]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[317, 144, 70, 83], [366, 86, 71, 89], [275, 87, 86, 79], [355, 321, 75, 87], [460, 230, 78, 74], [402, 155, 107, 74], [388, 241, 60, 82], [428, 370, 84, 83], [301, 240, 79, 89], [457, 307, 71, 76], [111, 411, 76, 50], [332, 473, 43, 74], [99, 352, 79, 60], [169, 329, 61, 80]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[404, 134, 65, 72], [265, 216, 84, 87], [108, 410, 75, 50], [313, 38, 81, 85], [269, 135, 80, 71], [385, 255, 74, 82], [425, 368, 85, 84], [454, 305, 72, 78], [293, 294, 76, 90], [198, 495, 80, 57], [352, 320, 75, 86], [329, 472, 43, 75], [136, 470, 66, 60], [280, 493, 56, 67], [247, 390, 64, 50], [96, 350, 78, 61], [166, 327, 61, 82]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[112, 411, 75, 50], [170, 328, 61, 81], [100, 351, 78, 60], [202, 496, 81, 56], [284, 493, 56, 68], [334, 472, 42, 75], [251, 391, 64, 49], [204, 359, 54, 86]]}], "current_bite": {"chicken nugget": [[269, 217, 84, 86], [395, 254, 66, 81], [458, 306, 71, 77], [272, 136, 80, 70], [429, 368, 85, 84], [316, 39, 80, 82], [296, 294, 77, 91], [353, 321, 78, 86]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[183, 434, 50, 68], [333, 472, 43, 75], [165, 514, 46, 66], [212, 495, 70, 65], [100, 351, 80, 60], [203, 359, 55, 86], [251, 391, 64, 52]]}], "current_bite": {"chicken nugget": [[395, 254, 66, 81], [269, 217, 84, 86], [429, 370, 84, 81], [458, 306, 71, 76], [316, 38, 80, 83], [272, 136, 81, 69], [296, 293, 77, 92], [354, 321, 77, 86]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[185, 436, 51, 68], [102, 353, 79, 60], [172, 330, 61, 81], [205, 361, 56, 86], [214, 497, 71, 66]]}], "current_bite": {"chicken nugget": [[266, 210, 76, 86], [461, 307, 70, 77], [431, 371, 85, 83], [319, 40, 80, 84], [398, 256, 65, 81], [274, 138, 81, 69], [283, 495, 43, 80], [168, 516, 46, 66], [296, 325, 85, 73], [357, 327, 76, 82]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[96, 332, 131, 84], [180, 438, 50, 69]]}], "current_bite": {"chicken nugget": [[425, 373, 86, 83], [454, 310, 72, 76], [266, 140, 82, 71], [392, 258, 65, 81], [312, 42, 80, 83], [353, 327, 74, 84], [283, 326, 80, 86], [162, 518, 46, 66], [277, 497, 43, 80], [355, 273, 35, 66]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[285, 500, 43, 81], [170, 522, 46, 66], [188, 442, 50, 68], [208, 367, 55, 86], [216, 503, 70, 65]]}], "current_bite": {"chicken nugget": [[172, 335, 64, 82], [275, 143, 82, 71], [400, 261, 65, 82], [433, 376, 86, 84], [463, 313, 71, 77], [321, 46, 80, 84], [291, 329, 80, 86], [361, 330, 74, 85]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[218, 497, 70, 66]]}], "current_bite": {"chicken nugget": [[402, 256, 65, 80], [278, 53, 92, 61], [465, 307, 71, 76], [435, 371, 85, 82], [175, 329, 62, 83], [293, 323, 80, 87], [276, 151, 80, 68], [363, 324, 74, 84], [189, 436, 51, 69], [172, 512, 46, 70], [365, 270, 35, 68], [287, 494, 43, 81]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "The options for initiating a transfer are \"button,\" \"open mouth,\" and \"auto timeout.\" These options determine how the robot knows when to start moving the utensil, mug, or wipe towards your mouth."}
+{"state": "transparency_response", "status": "The options for completing the transfer are \"button,\" \"sense,\" and \"auto timeout.\" These options determine how the robot knows when the transfer of the utensil, mug, or wipe to your mouth is finished."}
+{"state": "task_selection", "status": "jump"}

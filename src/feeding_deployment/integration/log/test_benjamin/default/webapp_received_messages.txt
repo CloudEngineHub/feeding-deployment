@@ -1,0 +1,45 @@
+{"status":"finish_feeding"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Chicken nuggets ketchup and apple slices","status":"Tip chicken nuggets and ketchup and do not dip apple slices"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.25449804432855283,"y":0.30984808800419067}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.26562364189482834,"y":0.393661602933473}]}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.5567434448790382,"y":0.18133403177929108}]}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"prepared_mouth_wiping","status":"move_to_wiping_position"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Longer time between continuous lights"}
+{"state":"adaptability_request","status":"Go faster"}
+{"state":"adaptability_request","status":"Increase speed for utensils"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use button for detecting transfer of bites but not drinks and sips"}
+{"state":"adaptability_request","status":"Use button for completion of wipes but not drinks and bitesi "}
+{"state":"adaptability_request","status":"Change the time for auto bites to be longer on the interface"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"adaptability"}
