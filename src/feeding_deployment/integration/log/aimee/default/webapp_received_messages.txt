@@ -1,0 +1,145 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Feed me As fast as you can"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"How can I speed up Feeding me with a utensil"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Increase speed to high when feeding with a utensil"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Skip confirmation screens"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring everything as close to my mouth as possible"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Chicken nuggets and potato wedges and ranch dipping sauce","status":"Chicken nugget dipped in ranch dipping sauce then potato wedge without dipping"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedge",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.6902506156743445,"y":0.6842151213549852}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.8126321889033753,"y":0.7596472847913393}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedge",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.3490656236418948,"y":0.32661079099004714}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.2915833695494712,"y":0.27352889820150167}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.48442706069824715,"y":0.3489610616378558}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.2619151093727365,"y":0.357342413130784}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.3564826886860785,"y":0.31264187183516673}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.3472113573808489,"y":0.3489610616378558}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.2452267130233232,"y":0.31543565566614284}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.7662755323772273,"y":0.7903789069320761}]}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use button when completing a transfer when taking a sip"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"What is the default action to complete a transfer"}
+{"state":"transparency_request","status":"What other ways can I end a transfer besides pushing the button"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use the sense interaction when completing a transfer Bite"}
+{"state":"adaptability_request","status":"Use the button to complete a transfer onlyWhen taking a sip"}
+{"state":"adaptability_request","status":"Use sensory to complete bite transactions but not for sips or face wiping "}
+{"state":"adaptability_request","status":"Use sensors to end transaction with utensil use the button to end transactions when taking a sip use the button to end transaction for face wipe"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["potato wedge",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.4362161379110532,"y":0.572463768115942}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Initiate transfersWith open mouth gesture"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",9]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.4046936114732725,"y":0.6702462022001048}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"ranch dipping sauce"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"status":"finish_feeding"}

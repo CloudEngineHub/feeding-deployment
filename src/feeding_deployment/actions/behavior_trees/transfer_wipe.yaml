@@ -41,7 +41,7 @@ parameters:
     description: "Distance from the tool tip to the user's mouth."
     space:
       type: "Box"
-      lower: 0.05
+      lower: 0.07
       upper: 0.15
     is_user_editable: True
     value: 0.1

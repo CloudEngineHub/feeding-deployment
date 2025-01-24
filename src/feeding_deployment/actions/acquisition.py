@@ -226,7 +226,7 @@ class AcquireBiteHLA(HighLevelAction):
                     elif skill == "Scoop":
                         raise NotImplementedError("Scoop skill not yet implemented")
                     
-                    if dip_type != "No dip":
+                    if dip_type != "No dip" and skill_success:
                         self.flair.update_bite_history(dip_type)
                         dip_mask = food_type_to_masks[dip_type][0]
                         dip_point = self.flair.inference_server.get_dip_action(dip_mask)
