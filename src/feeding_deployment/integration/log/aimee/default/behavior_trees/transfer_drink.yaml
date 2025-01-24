@@ -57,9 +57,9 @@ parameters:
   is_user_editable: true
   space:
     type: Box
-    lower: 0.07
+    lower: 0.06
     upper: 0.15
-  value: 0.07
+  value: 0.06
 - name: AskForConfirmationInitiatingTransferSequence
   description: Ask for confirmation on the web app before initiating the transfer
     sequence for drinking.
