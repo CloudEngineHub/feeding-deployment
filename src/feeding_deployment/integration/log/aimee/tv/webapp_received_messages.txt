@@ -1,0 +1,92 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Strawberries and whipped cream","status":"Please feed me strawberries dipped and whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Strawberries and whipped cream","status":"Feed me a strawberry dipped in whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Dip the strawberry deeper into the whipped cream"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Be silent"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.24337244676227726,"y":0.41321808975030555}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.18589019266985368,"y":0.4495372795529946}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.17847312762567,"y":0.5920202549327745}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.6791250181080689,"y":0.46909376636982714}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.3731710850354918,"y":0.43277457656713814}]}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Change automatic timer to every five seconds"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.24708097928436912,"y":0.3796926837785926}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":2,"positions":[{"index":1,"x":0.23039258293495582,"y":0.3796926837785926}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.4065478777343184,"y":0.6814213375240091}]}
+{"status":"finish_feeding"}

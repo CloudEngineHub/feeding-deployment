@@ -1,0 +1,146 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[430, 299, 73, 66], [347, 384, 75, 68], [302, 456, 63, 63], [314, 124, 77, 62], [200, 465, 67, 61], [235, 130, 71, 67], [281, 252, 63, 66], [157, 100, 74, 69], [409, 190, 68, 61], [361, 231, 72, 65], [320, 318, 73, 63], [231, 384, 81, 63], [228, 318, 69, 72], [158, 377, 67, 84]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[344, 386, 73, 67], [296, 456, 63, 62], [195, 462, 66, 61], [319, 125, 77, 60], [238, 128, 73, 68], [411, 193, 68, 61], [160, 95, 74, 69], [364, 232, 69, 65], [282, 251, 64, 67], [227, 382, 81, 64], [318, 318, 73, 63], [226, 314, 70, 73], [156, 374, 66, 84]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[299, 357, 65, 58], [347, 399, 63, 62], [403, 390, 70, 69], [305, 139, 68, 69], [306, 202, 69, 79], [457, 212, 65, 68], [392, 189, 70, 71], [368, 131, 63, 65], [383, 309, 67, 81], [311, 282, 77, 86], [450, 331, 65, 69], [369, 237, 75, 63], [439, 266, 64, 70]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[354, 424, 60, 66], [403, 395, 70, 69], [305, 143, 68, 68], [310, 286, 78, 87], [305, 206, 70, 79], [457, 217, 65, 67], [392, 193, 70, 71], [368, 135, 63, 65], [383, 313, 67, 80], [369, 242, 76, 62], [450, 335, 65, 72], [439, 270, 63, 70]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to dip the strawberry deeper into the whipped cream by adjusting the dipping depth to 0.03."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[399, 386, 71, 70], [301, 135, 68, 68], [306, 279, 78, 86], [302, 199, 69, 78], [453, 208, 65, 68], [388, 185, 70, 71], [379, 305, 66, 80], [364, 126, 63, 66], [445, 328, 66, 70], [365, 234, 75, 62], [435, 262, 64, 70]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to operate silently when transferring drinks, utensils, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[307, 275, 77, 86], [301, 131, 68, 68], [301, 194, 70, 79], [388, 181, 70, 71], [379, 301, 67, 81], [446, 324, 65, 70], [453, 204, 64, 68], [365, 123, 62, 65], [365, 230, 75, 62], [435, 259, 64, 69]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[379, 301, 67, 80], [302, 194, 69, 78], [301, 131, 68, 68], [388, 181, 70, 71], [446, 323, 64, 69], [453, 206, 64, 66], [365, 230, 75, 63], [364, 123, 63, 65], [434, 259, 64, 69]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[299, 195, 70, 78], [444, 323, 66, 70], [450, 204, 65, 68], [363, 231, 75, 62], [299, 132, 68, 68], [432, 258, 65, 70], [385, 181, 70, 72], [361, 124, 64, 65], [288, 5, 91, 117]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[307, 203, 70, 78], [452, 332, 66, 70], [371, 238, 75, 62], [458, 212, 65, 68], [307, 140, 67, 68], [393, 189, 71, 71], [440, 266, 65, 71], [370, 132, 62, 65], [296, 13, 91, 118]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[300, 195, 70, 78], [444, 325, 66, 68], [451, 205, 65, 67], [299, 132, 69, 68], [364, 231, 75, 61], [362, 123, 63, 65], [433, 259, 65, 69], [386, 181, 71, 71], [84, 309, 70, 84]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[449, 336, 66, 70], [305, 206, 69, 79], [456, 216, 65, 67], [304, 143, 68, 69], [368, 241, 76, 64], [391, 193, 70, 71], [367, 135, 63, 65], [438, 270, 64, 70]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[438, 262, 64, 70], [305, 199, 70, 77], [304, 135, 68, 67], [456, 208, 66, 68], [368, 234, 76, 62], [391, 185, 71, 71], [368, 127, 63, 66]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[454, 211, 65, 67], [367, 237, 75, 61], [303, 201, 70, 78], [302, 137, 69, 69], [389, 187, 71, 71], [366, 129, 62, 65]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[303, 200, 70, 79], [454, 210, 65, 68], [389, 187, 71, 75], [302, 137, 68, 68], [365, 129, 63, 65]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[395, 189, 71, 76], [460, 213, 65, 67], [307, 139, 69, 68], [372, 131, 62, 65]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[459, 212, 64, 68], [306, 140, 69, 68], [370, 132, 63, 66], [287, -5, 98, 116]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system was updated to automatically proceed every five seconds when acquiring a bite with a utensil and transferring a utensil or drink. However, the change could not be applied to the wiping action."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[460, 212, 65, 67], [308, 139, 68, 68], [371, 131, 64, 66]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[308, 139, 68, 68], [371, 130, 64, 68]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[368, 147, 77, 64]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[279, -16, 114, 113]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[288, -3, 113, 109]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"strawberry": [[280, -12, 114, 116]]}}
+{"n_ordering": 2, "data": ["whipped cream", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
