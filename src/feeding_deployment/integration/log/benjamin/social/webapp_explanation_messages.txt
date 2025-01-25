@@ -1,0 +1,1915 @@
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "User emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": "Experimenter emergency stop activated"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Starting to pick up the drink"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": "Transferring the drink to the user's mouth"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Please do a Continuous mouth open to initiate transfer"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}
+{"state": "explanation", "status": "Placing the drink on the table"}

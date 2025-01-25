@@ -1,0 +1,117 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Strawberries and whipped cream","status":"Dip strawberries and whip cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["Waiting for content",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",6]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",5]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"How do I change the amount I want you toDip"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Dip for the next time"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Increase auto bite timeOn the webpage"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Remove confirmation page"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Move faster when giving me bites"}
+{"state":"adaptability_request","status":"Go faster"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.2452267130233232,"y":0.4551248472149467}]}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"head nod"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"mouth open"}
+{"state":"test_selection","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"Continuous mouth open","status":"Mouth open for five seconds"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"delete"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"Continuous mouth open"}
+{"status":"finish_feeding"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"Continuous mouth open"}
+{"state":"test_selection","status":"back"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use continuous mouth open for when I'm ready for a bite"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["strawberry",1]}
+{"state":"dip_selection","status":"whipped cream"}
+{"state":"task_selection","status":"take_bite"}
+{"status":"finish_feeding"}
+{"state":"bite_selection","status":"ready_for_initial_data"}

@@ -1,0 +1,26 @@
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Show confirmation page before transfer"}
+{"state":"adaptability_request","status":"Turn off voice"}
+{"state":"adaptability_request","status":"Use continuous mouth to detect I'm ready for a drink"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use continuous mouth open to detect for transfers"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"status":"finish_feeding"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"status":"finish_feeding"}
