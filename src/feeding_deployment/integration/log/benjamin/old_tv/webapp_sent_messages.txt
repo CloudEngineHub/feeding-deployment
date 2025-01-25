@@ -1,0 +1,196 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[131, 367, 70, 75], [113, 247, 89, 89], [286, 363, 61, 81], [281, 239, 66, 70], [112, 134, 326, 311]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[106, 249, 89, 89], [280, 365, 61, 81], [275, 241, 66, 71], [350, 262, 81, 72], [106, 135, 325, 312], [207, 358, 75, 71], [319, 152, 72, 52]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[292, 366, 65, 93], [167, 220, 93, 61], [275, 242, 66, 69], [163, 339, 100, 76], [350, 256, 80, 78], [331, 335, 96, 63], [319, 153, 72, 75]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[272, 232, 67, 70], [328, 325, 97, 62], [211, 375, 73, 77], [162, 329, 102, 76], [165, 210, 93, 60], [348, 258, 81, 66], [317, 142, 72, 53], [200, 256, 68, 66]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[163, 220, 93, 61], [209, 385, 73, 77], [326, 335, 96, 63], [345, 254, 81, 80], [314, 153, 73, 54], [159, 338, 103, 77], [270, 242, 67, 70], [277, 305, 76, 59], [198, 266, 67, 66]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[287, 244, 67, 71], [224, 414, 80, 74], [363, 257, 81, 79], [344, 337, 97, 63], [176, 363, 100, 78], [333, 154, 72, 51]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[351, 256, 83, 79], [292, 345, 70, 72], [214, 413, 80, 73], [353, 337, 74, 79], [213, 312, 69, 71], [323, 153, 71, 48], [166, 361, 95, 78]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[319, 155, 101, 122], [345, 397, 98, 66]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[327, 395, 98, 66], [320, 127, 76, 80], [279, 353, 72, 67], [205, 412, 79, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[332, 127, 75, 78], [291, 353, 72, 67], [218, 413, 77, 73]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[339, 86, 79, 83], [281, 342, 72, 68]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[346, 63, 73, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[355, 64, 73, 80], [289, 354, 73, 68]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[356, 60, 71, 82]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[362, 64, 73, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[354, 64, 74, 79], [283, 353, 72, 66]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[352, 67, 74, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[361, 63, 74, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[359, 67, 76, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[351, 61, 76, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[372, 60, 73, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[364, 61, 72, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[364, 61, 71, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[301, 378, 78, 58], [223, 420, 76, 74], [222, 327, 68, 72], [167, 299, 215, 195]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[215, 436, 82, 75], [228, 333, 67, 71], [311, 469, 84, 66], [174, 380, 103, 78], [367, 501, 58, 71]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[199, 429, 82, 75], [295, 462, 83, 66], [157, 372, 104, 79], [212, 325, 67, 72], [351, 492, 57, 71], [277, 304, 62, 76]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[165, 366, 102, 83], [303, 461, 84, 65], [359, 492, 57, 70], [220, 324, 67, 71]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[286, 293, 92, 89], [305, 462, 84, 67], [206, 396, 65, 82]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[288, 291, 92, 89], [211, 391, 68, 82], [213, 479, 84, 92]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[284, 291, 92, 89]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[286, 293, 92, 89], [208, 377, 69, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[210, 390, 67, 75]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"sesame chicken nugget": [[202, 493, 70, 52], [361, 492, 56, 72], [305, 464, 83, 65], [233, 374, 46, 41]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
