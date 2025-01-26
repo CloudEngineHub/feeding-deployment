@@ -1,0 +1,55 @@
+name: "TransferWipe"
+description: "Bring the wipe to the user's mouth for a cleaning."
+type: "Behavior"
+parameters:
+  - name: "Speed"
+    description: "Speed of the robot during bringing the wipe to the user's mouth."
+    space:
+      type: "Enum"
+      elements: ["low", "medium", "high"]
+    is_user_editable: True
+    value: "medium"
+  - name: "ReadyToInitiateTransferInteraction"
+    description: "Interaction mode for ready to initiate transfer."
+    space:
+      type: "Enum"
+      elements: ["silent", "voice", "led"]
+    is_user_editable: True
+    value: "voice"
+  - name: "ReadyForTransferInteraction"
+    description: "Interaction mode for ready to transfer."
+    space:
+      type: "Enum"
+      elements: ["silent", "voice", "led"]
+    is_user_editable: True
+    value: "voice"
+  - name: "InitiateTransferInteraction"
+    description: "Interaction mode for transfer."
+    space:
+      type: "Enum"
+      elements: ["button", "open_mouth", "auto_timeout"]
+    is_user_editable: True
+    value: "open_mouth"
+  - name: "TransferCompleteInteraction"
+    description: "Interaction mode for transfer completion."
+    space:
+      type: "Enum"
+      elements: ["button", "sense", "auto_timeout"]
+    is_user_editable: True
+    value: "sense"
+  - name: "OutsideMouthDistance"
+    description: "Distance from the tool tip to the user's mouth."
+    space:
+      type: "Box"
+      lower: 0.07
+      upper: 0.15
+    is_user_editable: True
+    value: 0.1
+  - name: "AskForConfirmationInitiatingTransferSequence"
+    description: "Ask the user for confirmation on the web app and wait for their response before initiating the transfer sequence for wiping. True is 1 and False is 0."
+    space:
+      type: "Enum"
+      elements: [0, 1]
+    is_user_editable: True
+    value: 1
+fn: !hla transfer_wipe

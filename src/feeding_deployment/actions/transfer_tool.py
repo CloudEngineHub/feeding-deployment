@@ -187,6 +187,7 @@ class TransferToolHLA(HighLevelAction):
                          maintain_position_at_goal = False):
         
         self.perception_interface.set_head_perception_tool(self.tool)
+        print("--- Starting head perception thread ---")
         self.perception_interface.start_head_perception_thread()
         if self.robot_interface is not None:
             time.sleep(2.0) # let head perception thread warmstart / robot to stabilize

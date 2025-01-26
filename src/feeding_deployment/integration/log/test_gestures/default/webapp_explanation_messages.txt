@@ -1,0 +1,44 @@
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
