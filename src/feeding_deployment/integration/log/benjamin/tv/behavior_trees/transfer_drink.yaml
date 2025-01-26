@@ -21,7 +21,7 @@ parameters:
     - silent
     - voice
     - led
-  value: voice
+  value: silent
 - name: ReadyForTransferInteraction
   description: Interaction mode for ready to transfer.
   is_user_editable: true
@@ -31,7 +31,7 @@ parameters:
     - silent
     - voice
     - led
-  value: voice
+  value: silent
 - name: InitiateTransferInteraction
   description: Interaction mode for transfer.
   is_user_editable: true
@@ -41,7 +41,6 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
-    - head_still
     - head_still
   value: open_mouth
 - name: TransferCompleteInteraction
@@ -53,7 +52,6 @@ parameters:
     - button
     - sense
     - auto_timeout
-    - head_still
     - head_still
   value: sense
 - name: OutsideMouthDistance
@@ -73,7 +71,7 @@ parameters:
     elements:
     - 0
     - 1
-  value: 0
+  value: 1
 - name: TimeToWaitBeforeAutocontinue
   description: Autocontinue duration for re-selecting drinking transfer after a sip.
   is_user_editable: true

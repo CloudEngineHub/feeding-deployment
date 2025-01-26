@@ -21,7 +21,7 @@ parameters:
     - silent
     - voice
     - led
-  value: voice
+  value: silent
 - name: ReadyForTransferInteraction
   description: Interaction mode for ready to transfer.
   is_user_editable: true
@@ -31,7 +31,7 @@ parameters:
     - silent
     - voice
     - led
-  value: voice
+  value: silent
 - name: InitiateTransferInteraction
   description: Interaction mode for transfer.
   is_user_editable: true
@@ -41,7 +41,6 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
-    - head_still
     - head_still
   value: open_mouth
 - name: TransferCompleteInteraction
@@ -54,8 +53,7 @@ parameters:
     - sense
     - auto_timeout
     - head_still
-    - head_still
-  value: sense
+  value: head_still
 - name: OutsideMouthDistance
   description: Distance from the tool tip to the user's mouth.
   is_user_editable: true
@@ -73,5 +71,5 @@ parameters:
     elements:
     - 0
     - 1
-  value: 0
+  value: 1
 fn: !hla transfer_wipe

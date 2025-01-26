@@ -1,0 +1,521 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"Chicken","status":"Chicken "}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",5]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",6]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",5]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",5]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.5511806460959003,"y":0.784791339270124}]}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.46032159930465016,"y":0.18692159944124323}]}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.4121106765174562,"y":0.9188929631569758}]}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",7]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.677270751847023,"y":0.8127291775798847}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.6438939591481965,"y":0.8127291775798847}]}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.5140953208749819,"y":0.14780862580757814}]}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.5178038533970737,"y":0.781997555439148}]}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"Twerking","status":"Shaking my head"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"headshake","status":"shaking my head horizontally for three seconds"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"mouth open"}
+{"state":"test_selection","status":"head nod"}
+{"state":"test_selection","status":"headshake"}
+{"state":"test_selection","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"Twerking","status":"When I shake my ass in a circle"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"test"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"Twerking"}
+{"state":"test_selection","status":"back"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":" ","status":" "}
+{"state":"task_selection","status":"gesture"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"blah","status":"blah"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"head ","status":"head"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"gerh","status":"gsrgg"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"delete"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"back"}
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"hrthi","status":"bftnj"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.6568738229755179,"y":0.3713113322856644}]}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Remove all confirmation pages on web"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.20628712154135884,"y":0.3321983586519993}]}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Use open mouth for transfer initiation"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.703230479501666,"y":0.4104243059193295}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.21555845284658845,"y":0.30146673651126243}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.19701579023612922,"y":0.33778592631395143}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.27489497320005796,"y":0.251178627553693}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.30085470085470084,"y":0.3042605203422385}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.21370418658554252,"y":0.3685175484546883}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.21926698536868028,"y":0.3321983586519993}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.3027089671157468,"y":0.2986729526802864}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.2878748370273794,"y":0.2986729526802864}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.2897291032884253,"y":0.2679413305395495}]}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.4139649427785021,"y":0.21485943775100402}]}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.3286686947703897,"y":0.30146673651126243}]}
+{"state":"task_selection","status":"adaptability"}

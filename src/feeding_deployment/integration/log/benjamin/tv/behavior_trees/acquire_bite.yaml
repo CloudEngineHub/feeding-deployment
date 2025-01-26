@@ -45,5 +45,5 @@ parameters:
     elements:
     - 0
     - 1
-  value: 0
+  value: 1
 fn: !hla acquire_bite

@@ -1,0 +1,685 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[126, 117, 325, 365], [125, 257, 67, 96], [138, 158, 56, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[301, 93, 66, 76], [121, 165, 56, 87], [391, 118, 123, 90], [152, 91, 127, 73], [67, 279, 62, 95], [388, 201, 95, 80], [267, 242, 89, 84]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[297, 89, 66, 75], [387, 114, 123, 91], [117, 160, 56, 86], [149, 86, 126, 73], [63, 274, 62, 95], [278, 174, 73, 46], [176, 225, 70, 80], [241, 301, 97, 90], [263, 238, 89, 82], [211, 158, 68, 56], [383, 198, 95, 78], [388, 279, 73, 88]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[299, 85, 66, 76], [119, 156, 56, 87], [65, 271, 62, 95], [390, 111, 122, 90], [150, 83, 126, 73], [385, 194, 95, 80], [265, 234, 89, 87], [242, 299, 98, 89], [177, 222, 72, 80], [280, 170, 73, 47]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[388, 121, 124, 91], [146, 94, 128, 73], [114, 168, 58, 88], [60, 284, 63, 96], [385, 206, 95, 78], [172, 235, 71, 79], [343, 207, 43, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[152, 83, 127, 74], [64, 274, 63, 95], [95, 198, 89, 60], [393, 112, 111, 91], [390, 196, 95, 79], [347, 197, 44, 74], [185, 403, 67, 75], [214, 155, 71, 53], [230, 201, 74, 62], [262, 268, 96, 83], [394, 278, 74, 89], [178, 227, 70, 77], [159, 333, 61, 74], [304, 361, 82, 87]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[149, 84, 127, 86], [97, 204, 89, 60], [67, 280, 62, 95], [395, 118, 111, 91], [391, 202, 96, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[235, 32, 79, 133], [394, 115, 112, 92]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[235, 28, 78, 133], [96, 198, 89, 59], [394, 111, 110, 92], [66, 273, 62, 96]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[235, 34, 78, 135], [394, 119, 112, 91], [60, 318, 63, 98], [96, 207, 89, 59], [390, 204, 96, 78]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[235, 27, 78, 134], [60, 311, 62, 97], [96, 199, 89, 59], [394, 111, 111, 92], [390, 196, 96, 79], [263, 267, 97, 84], [349, 197, 42, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[235, 31, 77, 135], [394, 115, 123, 91], [59, 315, 63, 97], [96, 203, 89, 59], [159, 341, 62, 55]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 31, 78, 134], [393, 115, 125, 91], [59, 315, 64, 97], [96, 203, 89, 59], [250, 283, 98, 82]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[233, 28, 78, 134], [393, 111, 124, 90], [95, 200, 89, 59], [59, 312, 63, 96], [390, 195, 95, 80], [288, 323, 91, 112]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[237, 36, 78, 134], [397, 119, 125, 91], [63, 320, 63, 97], [99, 208, 89, 59], [393, 203, 96, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[218, 94, 112, 93], [394, 116, 124, 90], [96, 204, 89, 60], [59, 316, 64, 97], [390, 200, 95, 78], [348, 201, 43, 74], [122, 363, 52, 62], [292, 395, 79, 85], [210, 187, 79, 57]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[218, 92, 112, 93], [95, 202, 89, 58], [394, 115, 111, 91], [307, 315, 90, 98], [395, 200, 99, 77], [59, 313, 63, 96]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[223, 94, 112, 93], [61, 180, 82, 61], [398, 118, 108, 92], [309, 317, 90, 99], [61, 313, 63, 98], [352, 203, 42, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[221, 91, 112, 93], [60, 179, 82, 60], [396, 114, 110, 92], [398, 198, 99, 78]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[396, 123, 114, 91], [60, 186, 82, 61], [350, 208, 43, 74], [398, 206, 98, 78], [61, 320, 64, 97], [293, 419, 100, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[391, 113, 113, 91], [392, 197, 100, 78], [345, 199, 43, 74], [55, 311, 65, 97], [288, 410, 100, 68], [55, 395, 79, 66], [118, 358, 53, 62]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[391, 113, 124, 90], [392, 197, 99, 77], [345, 198, 43, 74], [120, 360, 50, 63]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[161, 240, 165, 137], [126, 370, 51, 62], [296, 421, 99, 67], [352, 208, 131, 115], [129, 449, 85, 39]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[126, 370, 51, 62], [351, 359, 100, 108], [162, 240, 163, 137], [389, 243, 92, 79], [351, 208, 43, 74], [129, 449, 84, 39], [455, 307, 113, 83]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[347, 200, 130, 113], [156, 231, 165, 137], [121, 361, 51, 62]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[346, 200, 131, 114], [155, 231, 165, 137]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[387, 271, 95, 82], [89, 408, 82, 61], [103, 325, 50, 65], [227, 335, 126, 107], [359, 215, 39, 75], [357, 361, 94, 114]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[91, 418, 82, 60], [105, 334, 51, 65], [362, 224, 39, 75], [350, 396, 106, 102]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[100, 338, 51, 64], [346, 397, 106, 100], [354, 225, 40, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[357, 224, 40, 73], [351, 395, 107, 100]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[340, 449, 111, 88], [228, 338, 127, 108], [357, 216, 40, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[208, 435, 93, 106], [342, 451, 111, 87], [359, 217, 40, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[342, 451, 111, 88], [156, 224, 169, 128]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[340, 449, 111, 88], [149, 301, 96, 118], [357, 215, 40, 74], [240, 214, 87, 132]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[340, 457, 111, 87], [127, 405, 85, 129], [242, 222, 85, 132], [357, 223, 40, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[241, 221, 87, 131], [128, 405, 86, 128], [342, 455, 111, 87], [334, 142, 45, 74]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[126, 405, 86, 129], [340, 457, 111, 87], [240, 222, 87, 132]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[342, 448, 111, 87], [239, 214, 88, 131]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[273, 316, 75, 84], [342, 456, 111, 87]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[345, 456, 111, 87]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[341, 448, 111, 87]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[152, 292, 24, 17]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[157, 303, 24, 16]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[154, 294, 23, 17], [201, 267, 14, 23]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 3, "data": ["head nod", "mouth open", "headshake"]}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 3, "data": ["head nod", "mouth open", "headshake"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 3, "data": ["head nod", "mouth open", "headshake"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 4, "data": ["head nod", "mouth open", "headshake", "Twerking"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 6"}
+{"state": "gesture_response", "status": "Recorded gesture example: 6"}
+{"state": "gesture_response", "status": "Started recording gesture example: 7"}
+{"state": "gesture_response", "status": "Recorded gesture example: 7"}
+{"state": "gesture_response", "status": "Started recording gesture example: 8"}
+{"state": "gesture_response", "status": "Recorded gesture example: 8"}
+{"state": "gesture_response", "status": "Started recording gesture example: 9"}
+{"state": "gesture_response", "status": "Recorded gesture example: 9"}
+{"state": "gesture_response", "status": "Started recording gesture example: 10"}
+{"state": "gesture_response", "status": "Recorded gesture example: 10"}
+{"state": "gesture_response", "status": "Started recording gesture example: 11"}
+{"state": "gesture_response", "status": "Recorded gesture example: 11"}
+{"state": "gesture_response", "status": "Started recording gesture example: 12"}
+{"state": "gesture_response", "status": "Recorded gesture example: 12"}
+{"state": "gesture_response", "status": "Started recording gesture example: 13"}
+{"state": "gesture_response", "status": "Recorded gesture example: 13"}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Started recording gesture example: 14"}
+{"state": "gesture_response", "status": "Recorded gesture example: 14"}
+{"state": "gesture_response", "status": "Started recording gesture example: 15"}
+{"state": "gesture_response", "status": "Recorded gesture example: 15"}
+{"state": "gesture_response", "status": "Started recording gesture example: 16"}
+{"state": "gesture_response", "status": "Recorded gesture example: 16"}
+{"state": "gesture_response", "status": "Started recording gesture example: 17"}
+{"state": "gesture_response", "status": "Recorded gesture example: 17"}
+{"state": "gesture_response", "status": "Started recording gesture example: 18"}
+{"state": "gesture_response", "status": "Recorded gesture example: 18"}
+{"state": "gesture_response", "status": "Started recording gesture example: 19"}
+{"state": "gesture_response", "status": "Recorded gesture example: 19"}
+{"state": "gesture_response", "status": "Started recording gesture example: 20"}
+{"state": "gesture_response", "status": "Recorded gesture example: 20"}
+{"state": "gesture_response", "status": "Started recording gesture example: 21"}
+{"state": "gesture_response", "status": "Recorded gesture example: 21"}
+{"state": "gesture_response", "status": "Started recording gesture example: 22"}
+{"state": "gesture_response", "status": "Recorded gesture example: 22"}
+{"state": "gesture_response", "status": "Started recording gesture example: 23"}
+{"state": "gesture_response", "status": "Recorded gesture example: 23"}
+{"state": "gesture_response", "status": "Started recording gesture example: 24"}
+{"state": "gesture_response", "status": "Recorded gesture example: 24"}
+{"state": "gesture_response", "status": "Deleted gesture example: 24. 23 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 24"}
+{"state": "gesture_response", "status": "Recorded gesture example: 24"}
+{"state": "gesture_response", "status": "Started recording gesture example: 25"}
+{"state": "gesture_response", "status": "Recorded gesture example: 25"}
+{"state": "gesture_response", "status": "Started recording gesture example: 26"}
+{"state": "gesture_response", "status": "Recorded gesture example: 26"}
+{"state": "gesture_response", "status": "Started recording gesture example: 27"}
+{"state": "gesture_response", "status": "Recorded gesture example: 27"}
+{"state": "gesture_response", "status": "Started recording gesture example: 28"}
+{"state": "gesture_response", "status": "Recorded gesture example: 28"}
+{"state": "gesture_response", "status": "Started recording gesture example: 29"}
+{"state": "gesture_response", "status": "Recorded gesture example: 29"}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Started recording gesture example: 30"}
+{"state": "gesture_response", "status": "Recorded gesture example: 30"}
+{"state": "gesture_response", "status": "Started recording gesture example: 31"}
+{"state": "gesture_response", "status": "Recorded gesture example: 31"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Invalid example: received stop before start. Please click on start, then demonstrate the gesture, and then click on stop."}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[513, 362, 13, 41], [157, 337, 17, 15]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[292, 341, 36, 25]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[313, 406, 33, 30]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[155, 326, 17, 15]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[152, 334, 10, 19], [197, 276, 13, 21]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[200, 257, 14, 24], [178, 352, 6, 20]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[178, 357, 6, 19], [200, 262, 12, 21]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[175, 351, 7, 22]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[182, 365, 7, 22]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[201, 268, 12, 21], [179, 363, 6, 20]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[196, 258, 13, 20]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[200, 260, 13, 23], [177, 355, 8, 20]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[198, 258, 12, 21]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[190, 259, 12, 20], [169, 354, 5, 18], [108, 334, 12, 11]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 240, 74, 130]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to remove all confirmation prompts during its operation. This means the system will now automatically proceed with actions like acquiring bites, transferring drinks, utensils, and wipes without asking for user confirmation."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[233, 230, 73, 129]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to start the transfer process when the user opens their mouth. This change applies to using utensils, drinking, and wiping."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 236, 74, 129], [162, 267, 70, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[229, 234, 74, 130], [155, 265, 72, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 240, 75, 130], [161, 271, 71, 95]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[228, 230, 75, 130], [156, 261, 70, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 240, 74, 130]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[228, 234, 74, 129], [156, 265, 70, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[233, 234, 74, 129], [159, 265, 71, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 240, 74, 129], [161, 271, 71, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[236, 242, 74, 130], [163, 274, 71, 93]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[236, 219, 75, 148], [163, 270, 71, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[233, 234, 73, 129], [159, 265, 71, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken": [[234, 236, 74, 130]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}

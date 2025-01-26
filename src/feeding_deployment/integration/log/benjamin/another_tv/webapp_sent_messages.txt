@@ -1,0 +1,93 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 3, "data": ["head nod", "mouth open", "Head still"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 2, "data": ["head nod", "mouth open"]}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 2, "data": ["head nod", "mouth open"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "task_selection", "status": "jump"}

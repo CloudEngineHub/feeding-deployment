@@ -1,93 +1,181 @@
 {"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system was updated to keep the user's head still after completing mouth wiping, but not after drinking or eating."}
 {"state": "task_selection", "status": "jump"}
 {"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system was updated to keep the user's head still when wiping their mouth. However, the system will not keep the head still when the user is eating or drinking."}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to operate silently when transferring drinks, utensils, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system now includes a confirmation step before using utensils to acquire food, transferring drinks, and using wipes."}
+{"state": "adaptability_response", "status": ""}
 {"state": "task_selection", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturetest", "status": "jump"}
-{"n_ordering": 3, "data": ["head nod", "mouth open", "Head still"]}
-{"state": "gesture_response", "status": "Did not detect the selected gesture."}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturetest", "status": "jump"}
-{"n_ordering": 2, "data": ["head nod", "mouth open"]}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturetest", "status": "jump"}
-{"n_ordering": 2, "data": ["head nod", "mouth open"]}
-{"state": "gesture_response", "status": "Did not detect the selected gesture."}
-{"state": "gesture_response", "status": "Did not detect the selected gesture."}
-{"state": "gesture_response", "status": "Did not detect the selected gesture."}
-{"state": "task_selection", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "gesture_response", "status": "Started recording gesture example: 4"}
-{"state": "gesture_response", "status": "Recorded gesture example: 4"}
-{"state": "gesture_response", "status": "Started recording gesture example: 1"}
-{"state": "gesture_response", "status": "Recorded gesture example: 1"}
-{"state": "gesture_response", "status": "Started recording gesture example: 2"}
-{"state": "gesture_response", "status": "Recorded gesture example: 2"}
-{"state": "gesture_response", "status": "Started recording gesture example: 3"}
-{"state": "gesture_response", "status": "Recorded gesture example: 3"}
-{"state": "gesture_response", "status": "Started recording gesture example: 4"}
-{"state": "gesture_response", "status": "Recorded gesture example: 4"}
-{"state": "task_selection", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
-{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[273, 187, 98, 85], [441, 297, 84, 72], [169, 375, 97, 82], [260, 333, 89, 91], [331, 85, 80, 90], [146, 191, 84, 103]]}], "current_bite": {"General Tso chicken": [[364, 158, 90, 91], [413, 362, 81, 74], [423, 220, 84, 83], [120, 299, 79, 87], [233, 424, 92, 85], [342, 326, 67, 92], [253, 93, 83, 85], [206, 159, 80, 78], [352, 252, 91, 75], [256, 260, 98, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
 {"state": "afterbitetransfer", "status": "jump"}
 {"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[441, 304, 85, 70], [327, 85, 79, 90], [270, 190, 95, 89]]}], "current_bite": {"General Tso chicken": [[419, 232, 84, 77], [410, 364, 80, 75], [203, 160, 79, 79], [352, 267, 84, 83], [229, 428, 90, 81], [251, 263, 98, 78], [116, 298, 80, 89], [332, 344, 69, 93], [250, 94, 82, 85], [187, 267, 69, 102]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
 {"state": "task_selection", "status": "jump"}
-{"state": "gesturerecording", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[410, 389, 85, 74], [339, 206, 94, 84], [246, 287, 90, 95], [434, 145, 89, 78], [149, 269, 92, 96], [233, 123, 97, 80]]}], "current_bite": {"General Tso chicken": [[355, 419, 71, 74], [432, 315, 88, 82], [354, 301, 83, 101], [146, 191, 91, 83], [381, 98, 87, 96], [313, 130, 82, 78], [290, 233, 88, 101]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"General Tso chicken": [[352, 433, 73, 84], [351, 303, 85, 101], [379, 100, 86, 95]]}], "current_bite": {"broccoli": [[424, 439, 69, 77], [245, 288, 88, 98], [431, 148, 90, 77], [230, 124, 97, 81], [336, 208, 95, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[434, 146, 90, 79], [339, 206, 94, 87], [246, 286, 87, 99], [233, 123, 95, 80], [149, 271, 93, 94]]}], "current_bite": {"General Tso chicken": [[356, 449, 69, 77], [353, 301, 87, 101], [146, 191, 93, 85], [314, 130, 80, 78], [381, 98, 85, 93], [290, 233, 87, 101]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"General Tso chicken": [[357, 449, 68, 76], [354, 301, 85, 100], [146, 191, 91, 83]]}], "current_bite": {"broccoli": [[442, 151, 87, 78], [341, 213, 96, 84], [150, 270, 94, 95], [247, 286, 86, 99], [231, 123, 99, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[345, 211, 92, 86], [429, 246, 84, 79], [151, 270, 93, 95], [233, 123, 98, 80], [248, 286, 85, 98]]}], "current_bite": {"General Tso chicken": [[358, 448, 68, 77], [355, 300, 85, 100], [146, 191, 91, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[422, 340, 87, 95], [246, 288, 85, 98], [343, 213, 92, 87], [148, 272, 95, 96], [229, 125, 99, 81]]}], "current_bite": {"General Tso chicken": [[355, 450, 69, 77], [359, 314, 73, 95], [145, 193, 93, 85], [308, 139, 71, 84], [288, 235, 87, 101], [281, 353, 74, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"General Tso chicken": [[360, 313, 73, 94], [146, 191, 93, 84], [310, 138, 71, 82], [290, 233, 87, 99], [282, 352, 75, 85]]}], "current_bite": {"broccoli": [[423, 338, 87, 98], [337, 210, 99, 85], [248, 286, 85, 98], [151, 271, 92, 93], [231, 122, 101, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[344, 216, 93, 83], [231, 126, 99, 82], [151, 273, 92, 95]]}], "current_bite": {"General Tso chicken": [[360, 318, 73, 92], [310, 141, 71, 81], [147, 195, 90, 83], [282, 355, 75, 87], [290, 237, 87, 101]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[245, 288, 86, 98], [149, 273, 92, 94], [338, 214, 97, 86], [228, 125, 101, 81], [171, 420, 79, 79]]}], "current_bite": {"General Tso chicken": [[144, 193, 91, 84], [308, 140, 71, 82], [288, 235, 87, 102], [279, 354, 78, 86], [159, 362, 101, 64]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[339, 213, 98, 84], [231, 123, 99, 86], [143, 295, 98, 93]]}], "current_bite": {"General Tso chicken": [[310, 138, 71, 83], [295, 235, 87, 102], [230, 202, 76, 97], [282, 355, 79, 84]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[232, 122, 103, 85], [349, 234, 84, 88], [143, 297, 97, 90]]}], "current_bite": {"General Tso chicken": [[282, 373, 83, 79], [223, 208, 88, 90], [289, 261, 91, 99]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[347, 234, 84, 89]]}], "current_bite": {"General Tso chicken": [[282, 370, 82, 82], [199, 238, 95, 94], [290, 268, 91, 94]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[241, 306, 80, 98]]}], "current_bite": {"General Tso chicken": [[322, 284, 80, 108], [262, 398, 81, 82], [195, 245, 91, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[138, 303, 101, 91], [263, 499, 95, 87]]}], "current_bite": {"General Tso chicken": [[326, 284, 80, 111], [200, 245, 90, 85], [277, 414, 78, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[142, 306, 99, 91]]}], "current_bite": {"General Tso chicken": [[201, 247, 91, 85], [275, 424, 80, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[176, 472, 74, 78]]}], "current_bite": {"General Tso chicken": [[195, 245, 91, 86], [138, 412, 102, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"broccoli": [[262, 531, 61, 65]]}], "current_bite": {"General Tso chicken": [[196, 247, 92, 86], [139, 411, 101, 82]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"General Tso chicken": [[199, 245, 91, 85], [141, 410, 101, 80], [273, 422, 79, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"General Tso chicken": [[140, 410, 102, 80], [272, 422, 80, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"General Tso chicken": [[279, 424, 80, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
 {"state": "task_selection", "status": "jump"}
