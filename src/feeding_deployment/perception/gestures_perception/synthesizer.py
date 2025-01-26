@@ -205,8 +205,8 @@ def main():
     #         }, f)
         
 
-    synthesizer = PersonalizedGestureDetectorSynthesizer(log_dir=Path(__file__).parent / "log" / "testing_gestures")
-    gesture_data_path = Path(__file__).parent.parent.parent / "integration" / "log" / "gesture_examples_rajat" / "head_still.pkl"
+    synthesizer = PersonalizedGestureDetectorSynthesizer(log_dir=Path(__file__).parent / "log" / "testing_gestures_2")
+    gesture_data_path = Path(__file__).parent.parent.parent / "integration" / "log" / "benjamin" / "tv" / "gesture_detectors" / "gesture_examples" / "head_still.pkl"
     generated_function_txt, accuracy = synthesizer.generate_function(gesture_datapath=gesture_data_path)
     # synthesizer.test_in_context_examples()
 
