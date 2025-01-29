@@ -1,0 +1,5 @@
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"take_sip"}

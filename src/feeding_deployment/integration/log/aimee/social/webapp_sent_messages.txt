@@ -1,0 +1,136 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"hash brown": [[237, 233, 81, 83]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"hash brown": [[190, 244, 81, 86], [373, 411, 93, 109], [329, 250, 102, 115]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[373, 411, 92, 109]]}], "current_bite": {"hash brown": [[190, 244, 81, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[375, 413, 93, 107]]}], "current_bite": {"hash brown": [[193, 245, 79, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "A new step was successfully added to the system to move the utensil back after each use. However, this step could not be added for drinks or wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[481, 479, 80, 79], [471, 252, 78, 76], [567, 243, 74, 82], [524, 408, 83, 80], [502, 337, 77, 74], [547, 155, 86, 81], [489, 94, 78, 86]]}], "current_bite": {"chicken": [[337, 212, 92, 112], [288, 310, 93, 93], [197, 443, 101, 105], [153, 304, 99, 106], [190, 178, 89, 90]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[354, 321, 95, 103], [263, 443, 102, 104], [219, 305, 100, 105], [381, 446, 95, 104]]}], "current_bite": {"hashbrown": [[547, 479, 80, 79], [536, 253, 79, 75], [633, 244, 75, 81], [590, 409, 83, 79], [614, 156, 85, 80], [568, 337, 77, 74], [556, 94, 78, 86], [256, 178, 89, 90], [280, 74, 92, 104]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to increase the wait time to 100 seconds for acquiring a bite with a utensil and transferring a drink. However, changes could not be made for transferring a wipe due to an issue with the parameter name."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to operate more quietly when transferring utensils, drinks, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[518, 409, 82, 80], [464, 252, 79, 76], [560, 243, 75, 82], [496, 337, 77, 74], [147, 305, 99, 105], [541, 155, 86, 80], [483, 93, 78, 86], [184, 178, 88, 90]]}], "current_bite": {"chicken": [[282, 321, 94, 102], [191, 444, 101, 103], [308, 124, 120, 100]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[247, 440, 102, 102], [239, 175, 89, 89], [363, 120, 121, 100], [203, 301, 99, 105]]}], "current_bite": {"hashbrown": [[519, 248, 79, 76], [575, 404, 81, 79], [616, 239, 75, 82], [597, 150, 85, 81], [551, 332, 77, 74], [538, 90, 78, 85]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[566, 242, 75, 81], [539, 438, 81, 79], [548, 153, 85, 80], [507, 365, 76, 79], [490, 92, 77, 85]]}], "current_bite": {"chicken": [[197, 442, 102, 103], [153, 303, 100, 104], [323, 511, 88, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[125, 302, 100, 106], [295, 511, 88, 79], [186, 72, 90, 103], [286, 123, 121, 99]]}], "current_bite": {"hashbrown": [[510, 438, 82, 79], [538, 241, 75, 81], [479, 365, 76, 79], [520, 152, 85, 81], [461, 91, 78, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[538, 241, 76, 82], [511, 438, 81, 79], [480, 365, 75, 79], [520, 152, 85, 81], [461, 91, 78, 85], [162, 177, 89, 89]]}], "current_bite": {"chicken": [[126, 302, 99, 106], [286, 123, 120, 99], [186, 72, 90, 103], [295, 511, 89, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[284, 122, 120, 99], [183, 71, 92, 104], [293, 510, 88, 79], [159, 176, 90, 90]]}], "current_bite": {"hashbrown": [[536, 240, 76, 82], [509, 437, 81, 80], [477, 365, 76, 78], [517, 152, 85, 81], [459, 90, 78, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[477, 365, 76, 79], [508, 438, 82, 79], [518, 152, 85, 80], [460, 91, 77, 86]]}], "current_bite": {"chicken": [[284, 123, 120, 98], [184, 72, 91, 103], [293, 510, 88, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[447, 330, 81, 79], [496, 152, 85, 81], [437, 91, 78, 85]]}], "current_bite": {"chicken": [[262, 123, 120, 99], [270, 489, 89, 100], [138, 177, 89, 89]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken": [[162, 72, 91, 103], [271, 511, 88, 78]]}], "current_bite": {"hashbrown": [[447, 330, 80, 79], [496, 152, 84, 81], [437, 91, 78, 86]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[517, 152, 84, 80], [459, 91, 78, 85]]}], "current_bite": {"chicken": [[184, 72, 91, 102]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"hashbrown": [[459, 91, 78, 85]]}], "current_bite": {"chicken": [[183, 72, 92, 102], [293, 510, 88, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "100.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}

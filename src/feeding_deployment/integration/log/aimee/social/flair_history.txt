@@ -1,0 +1,1 @@
+{'bite_history': ['chicken', 'hashbrown', 'chicken', 'hashbrown', 'chicken', 'hashbrown', 'chicken', 'hashbrown', 'hashbrown', 'chicken', 'hashbrown', 'hashbrown', 'hashbrown'], 'food_labels': ['chicken', 'hashbrown'], 'food_categories': ['solid', 'solid'], 'user_preference': '"I would like to alternate one bite of each"'}

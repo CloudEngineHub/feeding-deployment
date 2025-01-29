@@ -1,0 +1,15 @@
+name: StowWipe
+description: Place the wipe in the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during placing the wipe.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: high
+fn: !hla stow_wipe
