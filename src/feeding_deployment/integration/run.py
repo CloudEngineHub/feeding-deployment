@@ -549,16 +549,16 @@ if __name__ == "__main__":
 
     if not args.use_interface:
 
-        # Test adding a new gesture.
-        gesture_label = "detect_head_shake"
-        gesture_description = "shaking head from left to right"
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["EmulateTransfer"], (), {"test_mode": False, "gesture_label":gesture_label, "gesture_description": gesture_description} ))        
+        # # Test adding a new gesture.
+        # gesture_label = "detect_head_shake"
+        # gesture_description = "shaking head from left to right"
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["EmulateTransfer"], (), {"test_mode": False, "gesture_label":gesture_label, "gesture_description": gesture_description} ))        
 
-        # Test using the new gesture.
-        runner.process_user_update_request("Let me shake my head to tell the robot that I'm done.")
+        # # Test using the new gesture.
+        # runner.process_user_update_request("Let me shake my head to tell the robot that I'm done.")
 
         # Now try actually doing a transfer. The gesture should be used.
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
 
         ## Variations on modifying the speed of the robot.
 
@@ -607,17 +607,22 @@ if __name__ == "__main__":
         # runner.process_user_update_request("Remove all transfer confirmations.")
 
         # NOTE: this is not working perfectly -- it updates "silent for ReadyForTransferInteraction" instead of the web app confirmations.
-        runner.process_user_update_request("On the iPad, don't ask me to confirm when I'm ready.")
+        # runner.process_user_update_request("On the iPad, don't ask me to confirm when I'm ready.")
+
+        # Final proof of concept stuff.
+
+        # Change skewering axis for FLAIR.
+        runner.process_user_update_request("Can you please skewer food up-down instead?")
 
 
-        input("Press Enter to continue...")
+        # input("Press Enter to continue...")
 
         # Run some commands.
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
         # for i in range(5):
         #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
         #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))

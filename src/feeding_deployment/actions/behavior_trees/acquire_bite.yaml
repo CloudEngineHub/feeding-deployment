@@ -24,4 +24,11 @@ parameters:
       elements: [0, 1]
     is_user_editable: True
     value: 1
+  - name: "SkeweringOrientation"
+    description: "The orientation for skewering food."
+    space:
+      type: Enum
+      elements: ["horizontal", "vertical"]
+    is_user_editable: True
+    value: "horizontal"
 fn: !hla acquire_bite
