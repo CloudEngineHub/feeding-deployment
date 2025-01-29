@@ -638,14 +638,16 @@ if __name__ == "__main__":
         # NOTE: this is not working perfectly -- it updates "silent for ReadyForTransferInteraction" instead of the web app confirmations.
         # runner.process_user_update_request("On the iPad, don't ask me to confirm when I'm ready.")
 
+        # Final proof of concept stuff.
 
-        input("Press Enter to continue...")
-        for i in range(5):
-            runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
+        # Change skewering axis for FLAIR.
+        runner.process_user_update_request("Can you please skewer food up-down instead?")
+
+
+        # input("Press Enter to continue...")
 
         # Run some commands.
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
