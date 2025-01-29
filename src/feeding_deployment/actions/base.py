@@ -302,6 +302,28 @@ class HighLevelAction(abc.ABC):
                 ],
                 "fn": self.move_to_joint_positions,
             }, "Success"
+        
+        if new_node_type == "Speak":
+            if "text" not in new_node_parameters:
+                return None, "Missing parameter text"
+            text = new_node_parameters["text"]
+            return {
+                "type": "Behavior",
+                "name": new_node_name,
+                "description": "Custom speech.",
+                "parameters": [
+                {
+                    "name": "Speech",
+                    "space": {
+                        "type": "Text",
+                    },
+                    "description": "Custom speech.",
+                    "is_user_editable": True,
+                    "value": text,
+                },
+                ],
+                "fn": self.speak,
+            }, "Success"
 
         return None, f"Invalid new node type {new_node_type}"
 
@@ -356,6 +378,10 @@ class HighLevelAction(abc.ABC):
 
     def pause(self, duration: float) -> None:
         time.sleep(duration)
+
+    def speak(self, text: str) -> None:
+        if self.perception_interface is not None:
+            self.perception_interface.speak(text)
 
     def wait_for_gesture(self, gesture_fn_name: str) -> None:
         static_gestures = inspect.getmembers(static_gesture_detectors, inspect.isfunction)
@@ -852,8 +878,8 @@ class NodeModificationUserUpdateRequest(UserUpdateRequest):
 class NodeAdditionUserRequest(UserUpdateRequest):
     """A request to add a new node."""
 
-    new_node_type: str  # can be "Retract" or "Pause"
-    new_node_parameters: dict[str, Any]  # {} for Retract and {"duration": float} for Pause
+    new_node_type: str  # can be "Retract" or "Pause" or "Speak"
+    new_node_parameters: dict[str, Any]  # {} for Retract, {"duration": float} for Pause, and {"text": str} for Spreak
     anchor_node_name: str  # the name of an existing behavior tree node
     before_or_after: str  # "before" or "after"
 
@@ -957,8 +983,8 @@ class NodeModificationUserUpdateRequest(UserUpdateRequest):
 
 @dataclass(frozen=True)
 class NodeAdditionUserRequest(UserUpdateRequest):
-    new_node_type: str  # can be "Retract" or "Pause"
-    new_node_parameters: dict[str, Any]  # {} for Retract and {"duration": float} for Pause
+    new_node_type: str  # can be "Retract" or "Pause" or "Speak"
+    new_node_parameters: dict[str, Any]  # {} for Retract, {"duration": float} for Pause, and {"text": str} for Spreak
     anchor_node_name: str  # the name of an existing behavior tree node
     before_or_after: str  # "before" or "after"
 

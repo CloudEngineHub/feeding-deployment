@@ -646,6 +646,11 @@ if __name__ == "__main__":
         # Use a beep to signal ready for transfer.
         runner.process_user_update_request("Just use a beep to signal when you want my attention")
 
+        # Add a custom voice command.
+        runner.process_user_update_request("Can you say, 'Here comes the train, choo-choo!', while you are bringing me a bite?")
+
+
+
         # input("Press Enter to continue...")
 
         # Run some commands.
