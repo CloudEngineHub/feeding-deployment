@@ -614,6 +614,8 @@ if __name__ == "__main__":
         # Change skewering axis for FLAIR.
         runner.process_user_update_request("Can you please skewer food up-down instead?")
 
+        # Use a beep to signal ready for transfer.
+        runner.process_user_update_request("Just use a beep to signal when you want my attention")
 
         # input("Press Enter to continue...")
 

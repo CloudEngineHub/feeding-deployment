@@ -13,14 +13,14 @@ parameters:
     description: "Interaction mode for ready to initiate transfer."
     space:
       type: "Enum"
-      elements: ["silent", "voice", "led"]
+      elements: ["silent", "voice", "led", "beep"]
     is_user_editable: True
     value: "voice"
   - name: "ReadyForTransferInteraction"
     description: "Interaction mode for ready to transfer."
     space:
       type: "Enum"
-      elements: ["silent", "voice", "led"]
+      elements: ["silent", "voice", "led", "beep"]
     is_user_editable: True
     value: "voice"
   - name: "InitiateTransferInteraction"
