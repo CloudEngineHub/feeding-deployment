@@ -1,0 +1,204 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[288, 475, 85, 61], [287, 403, 78, 74], [283, 233, 66, 79], [225, 323, 90, 57], [346, 217, 86, 61], [180, 426, 53, 87], [297, 323, 64, 80]]}], "current_bite": {"chicken nugget": [[427, 355, 95, 80], [341, 72, 69, 88], [413, 87, 91, 85], [412, 169, 79, 82], [480, 277, 82, 63], [365, 415, 94, 70], [345, 274, 67, 78], [413, 254, 71, 73], [111, 393, 75, 52], [333, 155, 79, 72], [338, 351, 80, 75]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[182, 428, 53, 87], [289, 478, 84, 61], [228, 325, 89, 57], [299, 325, 65, 80], [208, 374, 78, 59]]}], "current_bite": {"chicken nugget": [[359, 457, 81, 67], [344, 75, 69, 87], [289, 405, 78, 74], [285, 235, 67, 80], [348, 219, 86, 61], [415, 89, 92, 85], [340, 354, 80, 72], [484, 280, 80, 61], [113, 395, 75, 52], [347, 277, 67, 78], [414, 171, 79, 83], [416, 245, 71, 86], [336, 157, 78, 71], [159, 356, 73, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[287, 487, 79, 71], [292, 236, 67, 79], [356, 220, 86, 61], [235, 325, 90, 58]]}], "current_bite": {"chicken nugget": [[351, 75, 69, 87], [422, 89, 91, 85], [297, 405, 78, 75], [422, 171, 78, 83], [121, 395, 75, 53], [489, 280, 82, 62], [343, 157, 79, 72], [190, 429, 54, 87], [348, 354, 80, 73], [354, 276, 68, 79], [423, 245, 71, 85]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[277, 230, 61, 80], [176, 426, 53, 87], [222, 323, 89, 57], [202, 373, 78, 58], [293, 323, 65, 80]]}], "current_bite": {"chicken nugget": [[281, 407, 78, 74], [339, 216, 72, 69], [406, 84, 93, 87], [337, 73, 70, 87], [273, 485, 79, 70], [475, 280, 74, 77], [409, 297, 64, 84], [330, 155, 79, 75], [338, 289, 70, 71], [332, 359, 80, 72], [107, 393, 75, 52], [154, 354, 72, 57]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[287, 506, 78, 59], [349, 217, 72, 70], [185, 428, 54, 86], [232, 325, 89, 57]]}], "current_bite": {"chicken nugget": [[485, 283, 74, 76], [287, 232, 61, 80], [416, 86, 93, 88], [348, 75, 68, 87], [341, 360, 81, 73], [418, 299, 66, 84], [349, 291, 69, 70], [339, 157, 79, 74], [117, 395, 75, 52], [163, 356, 73, 57]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[289, 504, 78, 59], [234, 323, 88, 58], [187, 426, 53, 86], [213, 372, 79, 60]]}], "current_bite": {"chicken nugget": [[418, 84, 93, 87], [349, 73, 69, 87], [418, 297, 68, 84], [343, 358, 81, 73], [351, 216, 72, 69], [289, 230, 61, 80], [342, 155, 78, 76], [350, 289, 70, 71], [165, 354, 73, 56], [119, 393, 75, 52], [304, 323, 66, 79]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[291, 506, 78, 59], [236, 325, 89, 57], [215, 375, 79, 59]]}], "current_bite": {"chicken nugget": [[345, 361, 81, 72], [420, 299, 68, 85], [354, 225, 73, 65], [327, 82, 82, 86], [352, 292, 70, 69], [121, 395, 75, 52], [341, 162, 84, 69], [189, 428, 54, 87], [291, 232, 61, 80], [307, 325, 65, 79]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was requested to stop showing a \"continue\" prompt after picking up apples, chicken nuggets, or a drink. However, the changes could not be made because the requested settings were not allowed."}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to ask for confirmation before performing actions like acquiring a bite with a utensil, transferring a drink, and using a wipe."}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to no longer ask for confirmation when acquiring a bite with a utensil, transferring a drink, or using a wipe."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken nugget": [[327, 86, 81, 85], [417, 303, 69, 84], [340, 165, 82, 70], [352, 229, 72, 65], [290, 236, 60, 79], [350, 294, 74, 74], [118, 397, 75, 52], [165, 359, 72, 57]]}], "current_bite": {"apple slice": [[287, 510, 79, 58], [232, 327, 89, 57], [302, 334, 67, 75], [186, 431, 53, 86], [213, 377, 78, 60]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[231, 321, 89, 57], [184, 425, 53, 86], [211, 371, 78, 60]]}], "current_bite": {"chicken nugget": [[300, 328, 67, 76], [326, 81, 80, 85], [416, 299, 68, 84], [351, 224, 72, 65], [116, 391, 75, 52], [337, 160, 85, 69], [348, 289, 74, 71], [288, 230, 61, 80], [163, 353, 73, 56], [230, 433, 46, 81]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[224, 323, 89, 58], [205, 374, 77, 59]]}], "current_bite": {"chicken nugget": [[274, 453, 65, 67], [321, 83, 79, 85], [409, 301, 68, 84], [344, 226, 73, 65], [282, 233, 60, 79], [332, 162, 82, 66], [342, 292, 71, 70], [178, 427, 53, 86], [110, 393, 75, 53], [156, 355, 73, 56]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[236, 323, 89, 58], [190, 427, 53, 86], [217, 374, 77, 59]]}], "current_bite": {"chicken nugget": [[332, 83, 80, 85], [356, 226, 73, 65], [421, 301, 68, 85], [353, 294, 69, 70], [293, 233, 61, 79], [344, 162, 83, 70], [121, 394, 76, 52], [235, 435, 46, 81], [168, 355, 73, 56]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[184, 429, 52, 86], [282, 275, 50, 78], [234, 342, 94, 61], [331, 301, 82, 63], [210, 376, 78, 59]]}], "current_bite": {"chicken nugget": [[350, 207, 77, 84], [230, 437, 45, 81], [419, 314, 76, 85], [370, 351, 71, 70], [115, 396, 76, 52], [162, 357, 73, 56]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"chicken nugget": [[429, 318, 81, 87], [236, 435, 45, 81], [379, 356, 71, 81], [122, 394, 75, 51], [168, 355, 73, 57]]}], "current_bite": {"apple slice": [[190, 427, 53, 86], [288, 272, 50, 78], [240, 340, 94, 60], [330, 331, 84, 61], [216, 374, 78, 59]]}}
+{"n_ordering": 2, "data": ["No dip", "ketchup"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[221, 437, 53, 72], [415, 314, 83, 87], [109, 390, 75, 52], [227, 336, 94, 61], [318, 327, 82, 61], [155, 351, 73, 57], [366, 352, 72, 81], [275, 269, 50, 77], [202, 370, 79, 59]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[428, 318, 82, 87], [330, 331, 83, 61], [287, 272, 51, 78], [240, 340, 93, 60], [215, 374, 78, 59], [121, 394, 76, 51], [379, 356, 71, 81], [168, 355, 73, 58]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[254, 397, 60, 86]]}], "current_bite": {"chicken nugget": [[422, 316, 82, 88], [323, 358, 78, 60], [187, 411, 66, 64], [162, 353, 73, 56], [390, 358, 74, 85], [115, 392, 75, 52]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot's feeding system was adjusted to dip the chicken deeper into the ketchup, enhancing the dipping action."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[253, 396, 61, 87]]}], "current_bite": {"chicken nugget": [[367, 422, 73, 82], [323, 357, 77, 61], [188, 411, 65, 64], [115, 392, 76, 51], [162, 353, 73, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[258, 400, 60, 87], [119, 396, 75, 52], [327, 361, 77, 61], [165, 357, 74, 55], [191, 415, 66, 64]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[192, 417, 61, 68], [328, 361, 77, 60], [120, 395, 75, 52], [166, 357, 74, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot's speed has been increased when picking up and transferring bites of apple."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[182, 458, 70, 65], [329, 359, 77, 60], [121, 393, 75, 53], [167, 355, 74, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[174, 458, 70, 65], [320, 359, 78, 60], [113, 394, 75, 52], [159, 356, 74, 54]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to ensure that when using a utensil to serve food, apples are only lightly dipped in sauces like ketchup, with minimal depth."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[321, 359, 77, 60], [113, 394, 76, 52], [160, 355, 73, 55]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[166, 357, 73, 55], [119, 396, 75, 52]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[159, 352, 73, 54], [112, 390, 76, 52]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[161, 354, 74, 54], [115, 392, 75, 52]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[161, 421, 60, 62], [93, 399, 60, 64]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[109, 403, 60, 65]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 2, "data": [{"apple slice": [[242, -18, 80, 81]]}], "current_bite": {"chicken nugget": [[430, 412, 8, 9]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "task_selection", "status": "jump"}
