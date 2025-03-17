@@ -411,6 +411,18 @@ class _Runner:
             sim_state, self.current_atoms = pickle.load(f)
         if sim_state is not None:
             assert isinstance(sim_state, FeedingDeploymentWorldState)
+            print("Robot Joints: ", sim_state.robot_joints)
+            flair_utensil_sim_state = FeedingDeploymentWorldState(
+                robot_joints=sim_state.robot_joints[:-6] + [0.6, 0.6, 0.6, 0.6, -0.6, -0.6],
+                drink_pose=sim_state.drink_pose,
+                wipe_pose=sim_state.wipe_pose,
+                utensil_pose=sim_state.utensil_pose,
+                held_object=sim_state.held_object,
+                held_object_tf=Pose((0, 0.02, 0.04), (-0.5, -0.5, -0.5, 0.5)),
+            )
+            sim_state = flair_utensil_sim_state
+            print("Held Object:", sim_state.held_object)
+            print("Held Object TF:", sim_state.held_object_tf)
             self.sim.sync(sim_state)
             if self.rviz_interface is not None:
                 self.rviz_interface.joint_state_update(sim_state.robot_joints)
@@ -640,11 +652,11 @@ if __name__ == "__main__":
         input("Press Enter to continue...")
 
         # Run some commands.
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.wipe,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.wipe,)))
         # for i in range(5):
         #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
         #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))

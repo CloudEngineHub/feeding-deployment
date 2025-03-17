@@ -205,7 +205,7 @@ class SceneDescription:
     utensil_urdf_path: Path = (
         Path(__file__).parent.parent
         / "assets"
-        / "feeding_utensil"
+        / "flair_feeding_utensil" # "feeding_utensil"
         / "feeding_utensil.urdf"
     )
     tool_frame_to_utensil_tip: Pose = Pose(
