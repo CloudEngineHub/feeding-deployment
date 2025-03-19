@@ -1,0 +1,1598 @@
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": "Detected three banana portions on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Transferring utensil to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Transferring the utensil to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
