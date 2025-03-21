@@ -979,7 +979,7 @@ Here are all behavior trees:
 Note that the units used for parameters are all speeds in degrees per second, all durations in seconds, and all distances in meters. Take this into account when user requests contain units and make sure to convert them to the appropriate units for the behavior tree.
 
 Based on the information given, convert the original command into a list of one or more structured outputs. 
-If the user does not specifically mention a certain tool, make the update for all tools.
+If the user does not specifically mention a certain tool (be careful about synonyms: bite corresponds to utensil, sip corresponds to drink, and clean corresponds to wipe), make the update for all tools.
 
 Return your answer in a format where calling eval() in python will directly produce a list of UserUpdateRequest instances.
 """
