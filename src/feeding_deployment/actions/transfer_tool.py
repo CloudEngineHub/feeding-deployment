@@ -181,8 +181,8 @@ class TransferToolHLA(HighLevelAction):
         else:
             raise NotImplementedError
 
-    def execute_transfer(self, ready_to_initiate_mode: str, ready_to_transfer_mode: str,
-                         initiate_transfer_mode: str, transfer_complete_mode: str,
+    def execute_transfer(self, ready_to_initiate_mode: str, initiate_transfer_mode: str,
+                         ready_to_transfer_mode: str, transfer_complete_mode: str,
                          outside_mouth_distance: float = 0.0,
                          maintain_position_at_goal = False):
         

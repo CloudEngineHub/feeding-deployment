@@ -438,11 +438,11 @@ class PerceptionInterface:
     
     def extract_from_logged_head_perception_data(self, timestamp):
 
-        # add five second to timestamp[0]
+        # add three second to timestamp[0]
         print("data segment true start time: ", timestamp[0])
         print("data segment true end time: ", timestamp[1])
-        start_time = timestamp[0] + 5
-        end_time = timestamp[1] - 5
+        start_time = timestamp[0] + 3
+        end_time = timestamp[1] - 3
         
         data_segment = {
             "head_pose": [],

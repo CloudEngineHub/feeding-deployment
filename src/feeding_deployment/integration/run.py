@@ -147,7 +147,7 @@ class _Runner:
             self.wrist_interface = None
 
         self.llm = OpenAILLM(
-            model_name="gpt-4o",
+            model_name="gpt-4.5-preview-2025-02-27",
             cache_dir=self.log_dir / "llm_cache",
         )
 
