@@ -211,11 +211,13 @@ class _Runner:
         self.drink = Object("drink", tool_type)
         self.wipe = Object("wipe", tool_type)
         self.utensil = Object("utensil", tool_type)
-        self.all_objects = {self.drink, self.wipe, self.utensil}
+        self.plate = Object("plate", tool_type)
+        self.all_objects = {self.drink, self.wipe, self.utensil, self.plate}
         self.object_name_to_object = {
             "drink": self.drink,
             "wipe": self.wipe,
             "utensil": self.utensil,
+            "plate": self.plate,
         }
         # Create all ground HLAs that will be used.
         self._all_ground_hlas = []
@@ -232,6 +234,9 @@ class _Runner:
                 self._all_ground_hlas.append(ground_hla)
         # Rewrite the behavior trees to avoid any inconsistencies.
         for hla, objs in self._all_ground_hlas:
+            # Super Hack: skip the plate transfer behavior tree.
+            if hla == self.hla_name_to_hla["TransferTool"] and objs[0].name == "plate":
+                continue
             try:
                 bt_filepath = hla.behavior_tree_dir / hla.get_behavior_tree_filename(objs, {})
             except NotImplementedError:
@@ -244,6 +249,7 @@ class _Runner:
             LiftedAtom(GripperFree, []),
             ToolPrepared([self.wipe]),
             ToolPrepared([self.drink]),
+            ToolPrepared([self.plate]),
             IsUtensil([self.utensil]),
         }
 
@@ -390,9 +396,10 @@ class _Runner:
             self.current_atoms -= operator.delete_effects
             self.current_atoms |= operator.add_effects
 
-            # Super hack: the drink and wipe are always prepared.
+            # Super hack: the drink, wipe and plate are always prepared.
             self.current_atoms.add(ToolPrepared([self.wipe]))
             self.current_atoms.add(ToolPrepared([self.drink]))
+            self.current_atoms.add(ToolPrepared([self.plate]))
 
             # Save the latest state in case we want to resume execution
             # after a crash.
@@ -645,9 +652,12 @@ if __name__ == "__main__":
         # runner.process_user_update_request("Just use a beep to signal when you want my attention")
 
         input("Press Enter to continue...")
-        for i in range(5):
-            runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
+        # for i in range(5):
+        #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
+
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.plate,)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.plate,)))
 
         # Run some commands.
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
