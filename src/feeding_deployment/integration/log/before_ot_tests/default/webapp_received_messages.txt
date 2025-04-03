@@ -1,0 +1,107 @@
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring food items as close to my mouth as you can"}
+{"state":"adaptability_request","status":"Move drinks away from my mouth as much as you can"}
+{"state":"adaptability_request","status":"Slightly move mouth wipes away from my mouth"}
+{"state":"adaptability_request","status":"Make the robot faster for bites"}
+{"state":"adaptability_request","status":"Remove Web app confirmation page for transfer of a bite"}
+{"state":"adaptability_request","status":"Remove Web app confirmation page before transferring a drink"}
+{"state":"adaptability_request","status":"Increase auto continue time before picking up a bite to 25 seconds"}
+{"state":"adaptability_request","status":"Increase auto continue time after transferring a drink to 37 seconds"}
+{"state":"adaptability_request","status":"Decrease auto continue time after transferring a bite to as less as possible"}
+{"state":"adaptability_request","status":"Switch to a button to detect whether I'm ready for a bite"}
+{"state":"adaptability_request","status":"Be quiet"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"chicken nuggets and ketchup","status":"dip in ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"how far away is bite transfer happening right now"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Move bike transfer to as far away as possible"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"How far away is Bay Tran happening right now"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring back confirmation page on Web application for bite transfer"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Switch to using open mouth to detect ready for drink transfer"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_sip"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"How do you detectDrink transfer is complete"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Make the robot fast for all tasks"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring back robot voice"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"prepared_mouth_wiping","status":"move_to_wiping_position"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"status":"finish_feeding"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"chicken nuggets and ketchup","status":"dip in sauce"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring food item very closer to my mouth"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"status":"finish_feeding"}

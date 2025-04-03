@@ -1,0 +1,375 @@
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": "Synthesized gesture detector for Head nod_1 with accuracy 80.00%"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Transfer sequence complete"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Starting transfer sequence"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Starting transfer task"}
+{"state": "explanation", "status": "Moving to infront of mouth"}
+{"state": "explanation", "status": "Ready for gestures"}
+{"state": "explanation", "status": "Moving back to before transfer position"}
+{"state": "explanation", "status": "Synthesizing gesture detector, please wait ..."}

@@ -1,0 +1,299 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[372, 189, 78, 74], [189, 287, 74, 73], [277, 368, 69, 62], [340, 279, 68, 61], [349, 349, 66, 55]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[372, 194, 78, 74], [189, 292, 74, 73], [278, 373, 68, 62], [341, 284, 67, 60], [350, 354, 65, 55]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[368, 178, 78, 74], [274, 357, 68, 62], [185, 276, 74, 73], [346, 338, 65, 55], [337, 268, 67, 60]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[186, 289, 75, 73], [275, 370, 69, 62], [369, 191, 79, 74], [347, 351, 66, 55], [338, 281, 68, 61], [270, 279, 48, 57]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[370, 188, 78, 74], [276, 367, 68, 62], [187, 286, 74, 73], [348, 348, 65, 55], [339, 278, 67, 60], [271, 276, 48, 56]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[368, 194, 78, 74], [185, 292, 75, 72], [274, 373, 68, 62], [337, 284, 67, 60]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[138, 386, 70, 78], [275, 370, 68, 62], [187, 289, 74, 73], [333, 286, 70, 64], [347, 353, 64, 53], [270, 279, 48, 57]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[145, 209, 81, 77], [138, 374, 70, 78]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "The current method to decide that the transfer is complete is by using a \"sense\" interaction mode. This means the robot uses its sensors to detect when the transfer has been successfully completed."}
+{"state": "transparency_response", "status": "The robot uses its built-in sensors to detect when the transfer is complete. These sensors can sense the position and movement of the utensil or mug to determine if the transfer to your mouth has been successfully completed."}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot-assisted feeding system has been updated to use a button to detect when a bite transfer is complete for utensils, drinks, and wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"apple": [[145, 217, 81, 77], [138, 382, 70, 78], [416, 420, 64, 71]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "gesturetest", "status": "jump"}
+{"n_ordering": 2, "data": ["head nod", "mouth open"]}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "gesture_response", "status": "Detected the selected gesture."}
+{"state": "gesture_response", "status": "Did not detect the selected gesture."}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Deleted gesture example: 5. 4 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Deleted gesture example: 3. 2 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Deleted gesture example: 3. 2 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "gesturerecording", "status": "jump"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Deleted gesture example: 1. 0 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Deleted gesture example: 5. 4 examples remain in recording history"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "gesture_response", "status": "Started recording gesture example: 1"}
+{"state": "gesture_response", "status": "Recorded gesture example: 1"}
+{"state": "gesture_response", "status": "Started recording gesture example: 2"}
+{"state": "gesture_response", "status": "Recorded gesture example: 2"}
+{"state": "gesture_response", "status": "Started recording gesture example: 3"}
+{"state": "gesture_response", "status": "Recorded gesture example: 3"}
+{"state": "gesture_response", "status": "Started recording gesture example: 4"}
+{"state": "gesture_response", "status": "Recorded gesture example: 4"}
+{"state": "gesture_response", "status": "Started recording gesture example: 5"}
+{"state": "gesture_response", "status": "Recorded gesture example: 5"}
+{"state": "task_selection", "status": "jump"}

@@ -1,0 +1,21 @@
+{"state":"task_selection","status":"gesture"}
+{"state":"gesture_main","status":"add"}
+{"state":"head nod","status":"up down head nod"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"delete"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"start"}
+{"state":"gesture_add","status":"stop"}
+{"state":"gesture_add","status":"next"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}
+{"state":"gesture_add_negative","status":"start"}
+{"state":"gesture_add_negative","status":"stop"}

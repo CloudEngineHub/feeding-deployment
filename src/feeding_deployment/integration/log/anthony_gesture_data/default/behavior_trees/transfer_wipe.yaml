@@ -1,0 +1,89 @@
+name: TransferWipe
+description: Bring the wipe to the user's mouth for a cleaning.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the wipe to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for ready to initiate transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: ReadyForTransferInteraction
+  description: Interaction mode for ready to transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+    - head_nod_1
+    - headshake
+    - head_tilt
+    - head_still
+    - mouth_open_1
+    - mouth_open_continuous
+    - eye_blink
+    - eye_brows_raised
+  value: open_mouth
+- name: TransferCompleteInteraction
+  description: Interaction mode for transfer completion.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+    - head_nod_1
+    - headshake
+    - head_tilt
+    - head_still
+    - mouth_open_1
+    - mouth_open_continuous
+    - eye_blink
+    - eye_brows_raised
+  value: button
+- name: OutsideMouthDistance
+  description: Distance from the tool tip to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.07
+    upper: 0.15
+  value: 0.1
+- name: AskForConfirmationInitiatingTransferSequence
+  description: Ask the user for confirmation on the web app and wait for their response
+    before initiating the transfer sequence for wiping. True is 1 and False is 0.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+fn: !hla transfer_wipe
