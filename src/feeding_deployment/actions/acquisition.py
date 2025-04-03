@@ -62,7 +62,7 @@ class AcquireBiteHLA(HighLevelAction):
         assert tool.name == "utensil"
         return "acquire_bite.yaml"
     
-    def acquire_bite(self, speed: str, dipping_depth: float, skewering_depth: float, autocontinue_timeout: float, ask_confirmation: bool) -> None:
+    def acquire_bite(self, speed: str, dipping_depth: float, skewering_depth: float, skewering_orientation: str, autocontinue_timeout: float, ask_confirmation: bool) -> None:
 
         assert self.sim.held_object_name == "utensil"
 
@@ -222,6 +222,8 @@ class AcquireBiteHLA(HighLevelAction):
 
                     if skill == "Skewer":
                         skewer_point, skewer_angle = self.flair.inference_server.get_skewer_action(mask)
+                        if skewering_orientation == "vertical":
+                            skewer_angle = skewer_angle + np.pi / 2
                         skill_success = self.food_manipulation_skill_library.skewering_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = skewer_point, major_axis = skewer_angle, skewering_depth=skewering_depth)
                     elif skill == "Scoop":
                         raise NotImplementedError("Scoop skill not yet implemented")
