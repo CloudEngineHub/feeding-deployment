@@ -168,6 +168,8 @@ class TransferToolHLA(HighLevelAction):
                     raise NotImplementedError
         elif ready_to_initiate_transfer_interaction == "led":
             self.perception_interface.turn_on_led()
+        elif ready_to_initiate_transfer_interaction == "beep":
+            self.perception_interface.speak("Beep")
         else:
             raise NotImplementedError
 
@@ -178,6 +180,8 @@ class TransferToolHLA(HighLevelAction):
             self.perception_interface.speak("Ready for transfer")
         elif ready_for_transfer_interaction == "led":
             self.perception_interface.turn_on_led()
+        elif ready_for_transfer_interaction == "beep":
+            self.perception_interface.speak("Beep")
         else:
             raise NotImplementedError
 
