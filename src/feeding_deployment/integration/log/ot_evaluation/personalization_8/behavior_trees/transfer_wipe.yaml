@@ -1,0 +1,93 @@
+name: TransferWipe
+description: Bring the wipe to the user's mouth for a cleaning. Before initiating
+  the transfer sequence for wipe, the robot can confirm with the user on the web app
+  (web interface) once using AskForConfirmationInitiatingTransferSequence. A wipe
+  transfer starts with an ReadyToInitiateTransferInteraction (robot to human) where
+  the robot conveys to the user that it is ready to initiate the wipe transfer, then
+  an InitiateTransferInteraction (human to robot) where the human conveys to the robot
+  that it is ready for a wipe transfer. After this, the robot moves the wipe either
+  near the user's mouth (OutsideMouthDistance defines how near) or to touching distance
+  of the user's mouth. Then commences the ReadyForTransferInteraction (robot to human)
+  where the robot conveys to the user that they can start cleaning their mouth now.
+  After the users is done cleaning their mouth, they use the TransferCompleteInteraction
+  (human to robot) to convey to the robot that they are done. The robot then moves
+  the wipe away from the user's mouth. The robot does not autocontinue wipe transfer
+  again, and wait's for the user's to specify the next task.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bringing the wipe to the user's mouth.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: ReadyToInitiateTransferInteraction
+  description: Interaction mode for how the robot conveys to the user that it is ready
+    to initiate the wipe transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+    - beep
+  value: voice
+- name: InitiateTransferInteraction
+  description: Interaction mode for how the user conveys to the robot that they are
+    ready for a wipe transfer.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - open_mouth
+    - auto_timeout
+  value: open_mouth
+- name: ReadyForTransferInteraction
+  description: Interaction mode for how the robot conveys to the user that they can
+    take start cleaning now.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - silent
+    - voice
+    - led
+    - beep
+  value: voice
+- name: TransferCompleteInteraction
+  description: Interaction mode for how the user conveys to the robot that they are
+    done cleaning their mouth. Sense corresponds to the robot waiting for a head nod
+    from the user.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - button
+    - sense
+    - auto_timeout
+  value: sense
+- name: OutsideMouthDistance
+  description: Distance from the wipe tip to the user's mouth for the wipe transfer.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.1
+    upper: 0.2
+  value: 0.1
+- name: AskForConfirmationInitiatingTransferSequence
+  description: Ask for confirmation on the web app (web interface) before initiating
+    the transfer sequence for wiping. True is 1 and False is 0.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+fn: !hla transfer_wipe

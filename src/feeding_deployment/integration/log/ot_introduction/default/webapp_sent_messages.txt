@@ -1,0 +1,163 @@
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "newmealpage", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[115, 111, 82, 104], [58, 232, 111, 78], [159, 347, 79, 89], [201, 136, 100, 79], [212, 301, 94, 72], [242, 213, 89, 92], [167, 208, 85, 89]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transparency", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[64, 232, 112, 78], [121, 112, 82, 104], [207, 136, 100, 78], [245, 213, 91, 92], [213, 352, 94, 77], [171, 411, 77, 89]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[122, 112, 82, 104], [208, 136, 99, 79], [246, 213, 91, 92], [172, 411, 77, 89], [213, 352, 95, 77]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transparency", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transferdrinks", "status": "jump"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "wipingtrans", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "The robot can initiate transfer when you indicate you're ready. You have three options to signal this:\n\n1. **Button**: Press a button to let the robot know you're ready.\n2. **Open Mouth**: Simply open your mouth, and the robot will detect this as a readiness signal.\n3. **Auto Timeout**: The robot waits a set amount of time and then automatically begins the transfer.\n\nCurrently, the robot is set to use the \"Open Mouth\" option."}
+{"state": "transparency_response", "status": "The robot can start feeding you when you indicate you're ready. You have three options:\n\n1. **Button**: Press a button to signal you're ready.\n2. **Open Mouth**: Open your mouth, and the robot will recognize this as a readiness signal.\n3. **Auto Timeout**: The robot waits a set amount of time and then automatically begins feeding.\n\nCurrently, the robot is set to use the \"Open Mouth\" option."}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot has been adjusted to bring utensils, drinks, and wipes closer to your mouth during transfers, as you requested."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[89, 153, 90, 83], [165, 44, 100, 73], [216, 172, 79, 87]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[83, 152, 90, 83], [159, 43, 99, 73], [210, 171, 79, 88]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[87, 152, 90, 84], [214, 171, 79, 88], [163, 43, 99, 73]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The automatic wait time before the robot continues feeding or giving you a drink has been reduced."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[86, 294, 90, 80], [214, 317, 79, 84]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[86, 294, 90, 80], [214, 316, 79, 85]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[87, 294, 90, 80], [214, 316, 79, 85]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[221, 316, 81, 83]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "5.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The automatic wait time for selecting tasks\u2014such as picking up food, handing over utensils, or offering a drink\u2014has been updated to 15 seconds."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to automatically continue picking up bites after 5 seconds, and to automatically move forward with selecting tasks (like utensils or drinks) after 15 seconds."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[222, 316, 81, 83]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot's movements for picking up utensils, drinks, and wipes, as well as bringing them to you and putting them away, have all been sped up."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "Reduced how far chicken nuggets are dipped into ketchup."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "Removed confirmation pages for bite acquisition, drink transfer, and wipe transfer actions."}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot has been set to operate quietly and will no longer speak during utensil, drink, or wipe transfers."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[139, 345, 86, 75], [129, 218, 77, 94], [219, 266, 96, 66]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[162, 359, 77, 79], [128, 219, 77, 93], [218, 267, 96, 65]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[131, 219, 76, 93], [221, 266, 95, 66]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "afterdrinktransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot feeding system now uses a button to start handing you utensils, drinks, or wipes."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[219, 266, 96, 66]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "15.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[194, 314, 81, 88]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "5.0"}

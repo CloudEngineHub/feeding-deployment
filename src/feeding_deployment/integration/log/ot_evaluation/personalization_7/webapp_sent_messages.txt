@@ -1,0 +1,106 @@
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": "The system was updated to automatically continue feeding without waiting for your confirmation signal."}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[145, 387, 73, 98], [218, 210, 88, 86], [52, 246, 85, 89]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The robot was updated to automatically feed you each bite without waiting for your confirmation."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[219, 211, 89, 87], [54, 248, 84, 89], [133, 373, 82, 92]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transparency", "status": "jump"}
+{"state": "transparency_response", "status": "You need to signal by opening your mouth to let the robot know you're ready for a bite transfer. Currently, the robot does not automatically transfer bites without your signal."}
+{"state": "task_selection", "status": "jump"}
+{"state": "adaptability", "status": "jump"}
+{"state": "adaptability_response", "status": ""}
+{"state": "adaptability_response", "status": "The feeding system was updated to automatically start bringing food toward your mouth without waiting for you to open it."}
+{"state": "adaptability_response", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"chicken nugget": [[51, 246, 85, 89], [206, 428, 85, 91], [129, 369, 82, 93]]}}
+{"n_ordering": 2, "data": ["ketchup", "No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "adaptability", "status": "jump"}

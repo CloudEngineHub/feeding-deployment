@@ -1,0 +1,56 @@
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Picking up the wipe"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Please do a head nod to complete transfer"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Bringing wipe to user's mouth"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}
+{"state": "explanation", "status": "Wipe transfer complete"}

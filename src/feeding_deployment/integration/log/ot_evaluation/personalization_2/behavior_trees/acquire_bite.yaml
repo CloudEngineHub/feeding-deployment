@@ -1,0 +1,65 @@
+name: AcquireBite
+description: Pick up the appropriate food item from the plate. The robot predicts
+  a food item to pickup from the plate and waits TimeToWaitBeforeAutocontinue on the
+  web application (web interface) before auto-continuing the pickup bite button. Within
+  this duration, the user can confirm or change the prediction. The robot then attempts
+  to pick up the food item from the plate and dip it if required. The robot then asks
+  for confirmation on the web application (web interface) before initiating the transfer
+  sequence for a bite, which is controlled by the TransferAskForConfirmation parameter.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during bite acquisition (bite pickup).
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+- name: FoodDippingDepth
+  description: The depth a food item is dipped into a dipping sauce.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.01
+    upper: 0.03
+  value: 0.015
+- name: SkeweringDepth
+  description: The depth a food item is skewered.
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 0.01
+    upper: 0.05
+  value: 0.015
+- name: SkeweringOrientation
+  description: The orientation for skewering food (with respect to major axis of food).
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - horizontal
+    - vertical
+  value: horizontal
+- name: TimeToWaitBeforeAutocontinue
+  description: Time to wait before auto-continuing pickup bite button on the web app
+    (web interface).
+  is_user_editable: true
+  space:
+    type: Box
+    lower: 5.0
+    upper: 100.0
+  value: 10.0
+- name: TransferAskForConfirmation
+  description: Ask for confirmation on the web app (web interface) before initiating
+    the transfer sequence for a bite.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - 0
+    - 1
+  value: 1
+fn: !hla acquire_bite

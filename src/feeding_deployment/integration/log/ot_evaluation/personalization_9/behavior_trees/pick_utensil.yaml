@@ -1,0 +1,15 @@
+name: PickUtensil
+description: Pick up the feeding (bite) utensil from the tool mount.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during picking up the feeding (bite) utensil.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: high
+fn: !hla pick_utensil

@@ -1,0 +1,1 @@
+{'bite_history': ['chicken nugget', 'ketchup', 'chicken nugget', 'ketchup'], 'food_labels': ['chicken nugget', 'ketchup'], 'food_categories': ['solid', 'dip'], 'user_preference': '"I would like to eat the chicken nuggets dipped in ketchup"'}

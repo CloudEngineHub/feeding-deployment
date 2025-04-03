@@ -1,0 +1,12 @@
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring wipe 3 cm from my face before transfer"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"How close can you bring the wipe to my mouth before transfer"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Bring the wipe as close as possible to my mouth before transfer"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"mouth_wiping"}
+{"state":"prepared_mouth_wiping","status":"move_to_wiping_position"}
+{"state":"task_selection","status":"adaptability"}

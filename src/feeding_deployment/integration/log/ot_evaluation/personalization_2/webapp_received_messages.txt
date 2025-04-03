@@ -1,0 +1,9 @@
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Dip food item less and ketchup"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"adaptability"}

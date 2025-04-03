@@ -1,0 +1,26 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Continue initiating bite transfer without my signal"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Don't wait for my signal to transfer the bite"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"transparency"}
+{"state":"transparency_request","status":"Do I need to signal with opening my mouth to have it transfer a bite or can it automatically transfer with no signal from me"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"adaptability"}
+{"state":"adaptability_request","status":"Auto initiate bite transfer instead of waiting for me to open my mouth"}
+{"state":"task_selection","status":"jump"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"task_selection","status":"adaptability"}
