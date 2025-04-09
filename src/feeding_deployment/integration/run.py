@@ -695,6 +695,7 @@ if __name__ == "__main__":
             ps = pickle.loads(s)
             # Update the scene spec.
             runner.update_scene_spec(ps)
+            print("Scene spec updated.")
 
         def _publish_mp_state(mp_state):
             msg = String()
@@ -709,6 +710,8 @@ if __name__ == "__main__":
         # Get the initial state to pass to multitask_personalization.
         mp_state = runner.get_multitask_personalization_state()
         _publish_mp_state(mp_state)
+
+        input("Press enter after the scene has been updated.")
         
         # Run the first bite sequence (no plate movement).
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,)))
