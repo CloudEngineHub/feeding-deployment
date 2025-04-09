@@ -478,7 +478,7 @@ class PerceptionInterface:
             # TODO need to update...
             tf = np.zeros((4, 4))
             tf[:3, :3] = R.from_euler("xyz", [0, 0, 0]).as_matrix()
-            tf[:3, 3] = np.array([0.0, 0.0, 0.0]) 
+            tf[:3, 3] = np.array([0.08, 0.17, 0.0]) 
             tf[3, 3] = 1
             return tf
 
@@ -534,7 +534,7 @@ class PerceptionInterface:
             self.aruco_pose = (position, orientation)
 
             plate_poses  = {}
-            plate_poses['plate_pose'] = self.get_aruco_relative_pose(get_plate_transform(), "plate")
+            plate_poses['plate_pose'] = self.get_aruco_relative_pose(get_plate_transform(), override_angles=None)
             plate_poses['pre_grasp_pose'] = self.get_aruco_relative_pose(get_pre_grasp_transform(), "plate")
             plate_poses['inside_bottom_pose'] = self.get_aruco_relative_pose(get_inside_bottom_transform(), "plate")
             plate_poses['inside_top_pose'] = self.get_aruco_relative_pose(get_inside_top_transform(), "plate")
