@@ -693,20 +693,31 @@ if __name__ == "__main__":
 
         import base64
         
+        num_scene_spec_updates = 0
+
         def _update_scene_spec(mp_state_out):
             # Decode the message.
+            global num_scene_spec_updates
             s = base64.b64decode(mp_state_out.data.encode('ascii'))
             ps = pickle.loads(s)
             # Update the scene spec.
             runner.update_scene_spec(ps)
             print("Scene spec updated.")
+            num_scene_spec_updates += 1
 
         def _publish_mp_state(mp_state):
+            global num_scene_spec_updates
             msg = String()
             ps = pickle.dumps(mp_state)
             s = base64.b64encode(ps).decode('ascii')
             msg.data = s
+            before_num_scene_spec_updates = num_scene_spec_updates
             mp_state_pub.publish(msg)
+            # Wait for scene spec updates.
+            print("Waiting for scene spec updates...")
+            while num_scene_spec_updates == before_num_scene_spec_updates:
+                time.sleep(0.01)
+            print("Done")
 
         mp_state_pub = rospy.Publisher('/mp_state', String, queue_size=1)
         mp_state_sub = rospy.Subscriber('/mp_state_out', String, _update_scene_spec)
@@ -714,12 +725,11 @@ if __name__ == "__main__":
         # Get the initial state to pass to multitask_personalization.
         mp_state = runner.get_multitask_personalization_state(look_topdown=True)
         _publish_mp_state(mp_state)
-        input("Press enter after the scene has been updated.")
         
         # Run the first bite sequence (no plate movement).
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
-        skill = runner.hla_name_to_hla["PickTool"]
-        skill.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
+        pick_tool = runner.hla_name_to_hla["PickTool"]
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
         
         # Ask for feedback.
         occluded = False
@@ -736,18 +746,22 @@ if __name__ == "__main__":
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
 
-        skill.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
        
         # Send the feedback and sync the environment.
         mp_state = runner.get_multitask_personalization_state(occluded=occluded)
         _publish_mp_state(mp_state)
-        input("Press enter after the scene has been updated.")
 
         # Move the plate.
-        pick_tool = runner.hla_name_to_hla["PickTool"]
         stow_tool = runner.hla_name_to_hla["StowTool"]
         runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
         runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+
+        # Run the second bite sequence.
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
+
 
 
         # TODO next: plate movement
