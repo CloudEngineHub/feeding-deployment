@@ -72,7 +72,7 @@ class PickToolHLA(HighLevelAction):
             # Not sure if this is necessary.
             self.move_to_joint_positions(self.sim.scene_description.retract_pos)
         # Pre-emptively move to the before_transfer_pos because moving to above_plate_pos from retract_pos is unsafe.
-        self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
+        self.move_to_joint_positions(self.sim.scene_description.absolute_before_transfer_pos)
         
     def pick_drink(self, speed: str) -> None:
         assert self.sim.held_object_name is None
