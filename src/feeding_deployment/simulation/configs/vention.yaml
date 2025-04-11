@@ -14,7 +14,7 @@ initial_joints:
 plate_gaze_pos:
   description: "Gaze configuration, the plate should be visible from this configuration"
   type: "joint_positions"
-  values: [0.3055459366033905, 0.6053777947719071, 1.1660526995921257, -1.0548844993670023, 0.5442964308267175, -0.5540525552955726, -3.042111868966537]
+  values: [0.22173928644433688, 0.7992988656022532, 1.1492074067490474, -0.7552192219246701, 0.6357102009025009, -0.7243989912614008, -2.808513759214673]
 above_plate_pos: 
   description: "Above plate configuration"
   type: "joint_positions"
