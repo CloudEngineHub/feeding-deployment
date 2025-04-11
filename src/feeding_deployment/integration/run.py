@@ -739,9 +739,28 @@ if __name__ == "__main__":
         _publish_mp_state(mp_state)
         assert np.allclose(runner.scene_description.plate_delta_xy, (0, 0)), "The CSP solver thinks that the plate is not reachable by the robot."
 
+        pick_tool = runner.hla_name_to_hla["PickTool"]
+        stow_tool = runner.hla_name_to_hla["StowTool"]
+
+        # TEST TWO MOVES IN A ROW
+        # runner.scene_description.plate_delta_xy = (0.2, 0.0)
+        # runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
+        # runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+
+        # mp_state = runner.get_multitask_personalization_state(user_request="food", actively_detect_plate=True,
+        #                                                       actively_detect_drink=True)
+        # _publish_mp_state(mp_state)
+        # assert np.allclose(runner.scene_description.plate_delta_xy, (0, 0)), "The CSP solver thinks that the plate is not reachable by the robot."
+
+        # runner.scene_description.plate_delta_xy = (-0.2, 0.0)
+        # runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
+        # runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+
+        # import ipdb; ipdb.set_trace()
+        # END TEST
+
         # Run the first bite sequence (no plate movement).
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
-        pick_tool = runner.hla_name_to_hla["PickTool"]
         pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
         
         # Ask for feedback.
@@ -766,7 +785,6 @@ if __name__ == "__main__":
         _publish_mp_state(mp_state)
 
         # Move the plate.
-        stow_tool = runner.hla_name_to_hla["StowTool"]
         runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
         runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
 
