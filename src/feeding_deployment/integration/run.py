@@ -780,7 +780,9 @@ if __name__ == "__main__":
         input("Put the drink on the table, then press enter")
 
         # Detect the drink and plan to move it and the plate.
-        mp_state = runner.get_multitask_personalization_state(user_request="prepare", actively_detect_drink=True)
+        mp_state = runner.get_multitask_personalization_state(user_request="prepare",
+                                                              actively_detect_plate=True,
+                                                              actively_detect_drink=True)
         _publish_mp_state(mp_state)
 
         # Make room for the drink by moving the plate again.
