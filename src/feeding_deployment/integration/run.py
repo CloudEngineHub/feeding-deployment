@@ -533,20 +533,31 @@ Write a VERY BRIEF summary of all the changes for a non-technical end user. Make
         return inspect.getmembers(synthesized_gesture_module, inspect.isfunction)
     
     def get_multitask_personalization_state(self, occluded: bool = False,
-                                            look_topdown: bool = False) -> dict[str, Any]:
+                                            actively_detect_plate: bool = False,
+                                            actively_detect_drink: bool = False) -> dict[str, Any]:
         """Get a sufficient state for multitask personalization."""
         mp_state = {}
 
-        if look_topdown:
+        if actively_detect_plate:
             skill = self.hla_name_to_hla["PickTool"]
             skill.move_to_joint_positions(self.sim.scene_description.retract_pos)
             skill.close_gripper()
             skill.move_to_joint_positions(self.sim.scene_description.plate_gaze_pos)
             self.perception_interface.perceive_plate_pickup_poses()
             skill.move_to_joint_positions(self.sim.scene_description.retract_pos)
-        
-        last_plate_poses = self.perception_interface.get_last_plate_pickup_configs()
-        mp_state["plate_pose"] = last_plate_poses["plate_pose"]
+            last_plate_poses = self.perception_interface.get_last_plate_pickup_configs()
+            mp_state["plate_pose"] = last_plate_poses["plate_pose"]
+
+        if actively_detect_drink:
+            skill = self.hla_name_to_hla["PickTool"]
+            skill.move_to_joint_positions(self.sim.scene_description.retract_pos)
+            skill.close_gripper()
+            skill.move_to_joint_positions(self.sim.scene_description.drink_gaze_pos)
+            self.perception_interface.perceive_drink_pickup_poses()
+            skill.move_to_joint_positions(self.sim.scene_description.retract_pos)
+            last_drink_poses, _ = self.perception_interface.get_last_drink_pickup_configs()
+            mp_state["drink_pose"] = last_drink_poses["drink_pose"]
+
         mp_state["robot_joints"] = self.perception_interface.get_robot_joints()
 
         if occluded:
@@ -693,37 +704,37 @@ if __name__ == "__main__":
 
         import base64
         
-        # num_scene_spec_updates = 0
+        num_scene_spec_updates = 0
 
-        # def _update_scene_spec(mp_state_out):
-        #     # Decode the message.
-        #     global num_scene_spec_updates
-        #     s = base64.b64decode(mp_state_out.data.encode('ascii'))
-        #     ps = pickle.loads(s)
-        #     # Update the scene spec.
-        #     runner.update_scene_spec(ps)
-        #     print("Scene spec updated.")
-        #     num_scene_spec_updates += 1
+        def _update_scene_spec(mp_state_out):
+            # Decode the message.
+            global num_scene_spec_updates
+            s = base64.b64decode(mp_state_out.data.encode('ascii'))
+            ps = pickle.loads(s)
+            # Update the scene spec.
+            runner.update_scene_spec(ps)
+            print("Scene spec updated.")
+            num_scene_spec_updates += 1
 
-        # def _publish_mp_state(mp_state):
-        #     global num_scene_spec_updates
-        #     msg = String()
-        #     ps = pickle.dumps(mp_state)
-        #     s = base64.b64encode(ps).decode('ascii')
-        #     msg.data = s
-        #     before_num_scene_spec_updates = num_scene_spec_updates
-        #     mp_state_pub.publish(msg)
-        #     # Wait for scene spec updates.
-        #     print("Waiting for scene spec updates...")
-        #     while num_scene_spec_updates == before_num_scene_spec_updates:
-        #         time.sleep(0.01)
-        #     print("Done")
+        def _publish_mp_state(mp_state):
+            global num_scene_spec_updates
+            msg = String()
+            ps = pickle.dumps(mp_state)
+            s = base64.b64encode(ps).decode('ascii')
+            msg.data = s
+            before_num_scene_spec_updates = num_scene_spec_updates
+            mp_state_pub.publish(msg)
+            # Wait for scene spec updates.
+            print("Waiting for scene spec updates...")
+            while num_scene_spec_updates == before_num_scene_spec_updates:
+                time.sleep(0.01)
+            print("Done")
 
-        # mp_state_pub = rospy.Publisher('/mp_state', String, queue_size=1)
-        # mp_state_sub = rospy.Subscriber('/mp_state_out', String, _update_scene_spec)
+        mp_state_pub = rospy.Publisher('/mp_state', String, queue_size=1)
+        mp_state_sub = rospy.Subscriber('/mp_state_out', String, _update_scene_spec)
 
         # # Get the initial state to pass to multitask_personalization.
-        # mp_state = runner.get_multitask_personalization_state(look_topdown=True)
+        # mp_state = runner.get_multitask_personalization_state(actively_detect_plate=True)
         # _publish_mp_state(mp_state)
         
         # # Run the first bite sequence (no plate movement).
@@ -762,9 +773,16 @@ if __name__ == "__main__":
         # pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
         # pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
 
+        # Ask the experimenter to put the drink on the table.
+        input("Put the drink on the table, then press enter")
+
+        # Detect the drink.
+        mp_state = runner.get_multitask_personalization_state(actively_detect_drink=True)
+        _publish_mp_state(mp_state)
+
         # Pick up and put down the drink.
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
 
 
         # TODO next: plate movement
