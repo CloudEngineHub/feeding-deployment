@@ -299,6 +299,13 @@ class PerceptionInterface:
 
     def perceive_drink_pickup_poses(self):
 
+        def get_drink_transform():
+            tf = np.zeros((4, 4))
+            tf[:3, :3] = R.from_euler("xyz", [0, 0, 0]).as_matrix()
+            tf[:3, 3] = np.array([0.0, 0.02, 0.02]) 
+            tf[3, 3] = 1
+            return tf
+
         def get_pre_grasp_transform():
             tf = np.zeros((4, 4))
             tf[:3, :3] = R.from_euler("xyz", [np.pi, 0, np.pi / 2]).as_matrix()
@@ -330,7 +337,7 @@ class PerceptionInterface:
             tf = get_pre_grasp_transform()
             # tf[1, 3] = 0.0
             return tf
-        
+                
         if self.simulation:
             # load them from a pickle file
             with open(self.log_dir / 'drink_pickup_pos.pkl', 'rb') as f:
@@ -347,6 +354,7 @@ class PerceptionInterface:
             self.aruco_pose = (position, orientation)
 
             drink_poses  = {}
+            drink_poses['drink_pose'] = self.get_aruco_relative_pose(get_drink_transform(), override_angles=None)
             drink_poses['pre_grasp_pose'] = self.get_aruco_relative_pose(get_pre_grasp_transform(), "drink")
             drink_poses['inside_bottom_pose'] = self.get_aruco_relative_pose(get_inside_bottom_transform(), "drink")
             drink_poses['inside_top_pose'] = self.get_aruco_relative_pose(get_inside_top_transform(), "drink")
@@ -373,21 +381,12 @@ class PerceptionInterface:
         print("Drink pickup poses recorded")
 
     def get_last_drink_pickup_configs(self, study_poses = False):
-        if study_poses:
-            with open(Path(__file__).parent.parent / 'integration' / 'log' / 'study_drink_pickup_pos.pkl', 'rb') as f:
-                drink_pickup_pos = pickle.load(f)
-            last_drink_poses = drink_pickup_pos["last_drink_poses"]
-            drink_pickup_joint_pos = drink_pickup_pos["drink_pickup_joint_pos"]
-        else:
-            try:
-                last_drink_poses = self.last_drink_poses
-                drink_pickup_joint_pos = self.drink_pickup_joint_pos
-            except Exception as e:
-                print("Error loading drink pickup poses from script, using values from file instead")
-                with open(self.log_dir / 'drink_pickup_pos.pkl', 'rb') as f:
-                    drink_pickup_pos = pickle.load(f)
-                last_drink_poses = drink_pickup_pos["last_drink_poses"]
-                drink_pickup_joint_pos = drink_pickup_pos["drink_pickup_joint_pos"]
+        assert not study_poses
+        last_drink_poses = self.last_drink_poses
+        try:
+            drink_pickup_joint_pos = self.drink_pickup_joint_pos
+        except Exception as e:
+            drink_pickup_joint_pos = None
         
         return last_drink_poses, drink_pickup_joint_pos
 
