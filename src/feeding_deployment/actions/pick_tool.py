@@ -136,11 +136,17 @@ class PickToolHLA(HighLevelAction):
         else:
             plate_poses = self.perception_interface.last_plate_poses
 
+        print("Moving to plate staging position ...")
         self.move_to_joint_positions(self.sim.scene_description.plate_staging_pos)
+        print("Moving to plate pre-grasp pose ...")
         self.move_to_ee_pose(plate_poses['pre_grasp_pose'])
+        print("Moving to plate inside bottom pose ...")
         self.move_to_ee_pose(plate_poses['inside_bottom_pose'])
+        print("Moving to plate inside top pose ...")
         self.move_to_ee_pose(plate_poses['inside_top_pose'])
+        print("Grasping plate ...")
         self.grasp_tool("plate")
+        print("Moving to plate post-grasp pose ...")
         self.move_to_ee_pose(plate_poses['post_grasp_pose'])
 
         self.perception_interface.record_plate_pickup_joint_pos()

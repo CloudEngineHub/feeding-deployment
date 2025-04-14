@@ -183,6 +183,14 @@ def remap_trajectory_to_constant_distance(
         )
         segments.append(seg)
     continuous_time_trajectory = concatenate_trajectories(segments)
+
+    if continuous_time_trajectory.duration < 1e-6:
+        logging.warning(
+            "Trajectory is too short to remap. "
+            "Returning original trajectory."
+        )
+        return traj
+
     remapped_traj = list(
         iter_traj_with_max_distance(
             continuous_time_trajectory, max_joint_space_distance
