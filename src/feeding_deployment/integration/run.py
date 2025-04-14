@@ -816,13 +816,19 @@ if __name__ == "__main__":
                                                               actively_detect_drink=True)
         _publish_mp_state(mp_state)
 
-        # Make room for the drink by moving the plate again.
-        runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
-        runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+        if not np.allclose(runner.scene_description.plate_delta_xy, (0, 0), atol=1e-3):
+            # Make room for the drink by moving the plate again.
+            runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
+            runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
 
-        # Pick up and put down the drink.
-        runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.drink,)))
-        runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.drink,)))
+        if not np.allclose(runner.scene_description.drink_delta_xy, (0, 0), atol=1e-3):
+            # Pick up and put down the drink.
+            runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.drink,)))
+            runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.drink,)))
+
+        # Do a drink transfer.
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.drink,)))
+        
 
 
         # TODO next: plate movement
