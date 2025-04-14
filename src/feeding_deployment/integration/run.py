@@ -430,6 +430,7 @@ class _Runner:
 
     def process_user_update_request(self, request_text: str) -> str:
         """Validate and update behavior trees."""
+        self.perception_interface.sync_rviz()
         available_hla_object_names = []
         for hla, obj_combo in self._all_ground_hlas:
             hla_name = hla.get_name()
@@ -562,6 +563,8 @@ Write a VERY BRIEF summary of all the changes for a non-technical end user. Make
 
         if occluded:
             mp_state["occluded"] = True
+
+        self.perception_interface.sync_rviz()
 
         return mp_state
     
@@ -815,6 +818,9 @@ if __name__ == "__main__":
                                                               actively_detect_plate=True,
                                                               actively_detect_drink=True)
         _publish_mp_state(mp_state)
+
+        # The plate pre-grasp pose is going to be wrong now for some reason...
+        import ipdb; ipdb.set_trace()
 
         if not np.allclose(runner.scene_description.plate_delta_xy, (0, 0), atol=1e-3):
             # Make room for the drink by moving the plate again.

@@ -82,6 +82,7 @@ class PerceptionInterface:
         self.log_head_perception = False
 
         self.last_plate_poses = None
+        self.last_drink_poses = None
 
         # set led brightness
         self.set_led_brightness()
@@ -362,9 +363,6 @@ class PerceptionInterface:
             drink_poses['place_inside_bottom_pose'] = self.get_aruco_relative_pose(get_place_inside_bottom_transform(), "drink")
             drink_poses['place_pre_grasp_pose'] = self.get_aruco_relative_pose(get_place_pre_grasp_transform(), "drink")
 
-            self._aruco_perception.updateTF("base_link", "drink_pose", self.pose_to_matrix(drink_poses['drink_pose']))
-            self._aruco_perception.updateTF("base_link", "pre_grasp_pose", self.pose_to_matrix(drink_poses['pre_grasp_pose']))
-
         self.last_drink_poses = drink_poses
 
         return drink_poses
@@ -552,9 +550,6 @@ class PerceptionInterface:
             plate_poses['place_inside_bottom_pose'] = self.get_aruco_relative_pose(get_place_inside_bottom_transform(), "plate")
             plate_poses['place_pre_grasp_pose'] = self.get_aruco_relative_pose(get_place_pre_grasp_transform(), "plate")
 
-            self._aruco_perception.updateTF("base_link", "plate", self.pose_to_matrix(plate_poses['plate_pose']))
-            self._aruco_perception.updateTF("base_link", "pre_grasp_pose", self.pose_to_matrix(plate_poses['pre_grasp_pose']))
-
         self.last_plate_poses = plate_poses
 
         return plate_poses
@@ -583,3 +578,13 @@ class PerceptionInterface:
             last_plate_poses = self.last_plate_poses
         
         return last_plate_poses
+
+    def sync_rviz(self):
+        if self.last_plate_poses:
+            plate_poses = self.last_plate_poses
+            self._aruco_perception.updateTF("base_link", "plate", self.pose_to_matrix(plate_poses['plate_pose']))
+            self._aruco_perception.updateTF("base_link", "plate_pre", self.pose_to_matrix(plate_poses['pre_grasp_pose']))
+        if self.last_drink_poses:
+            drink_poses = self.last_drink_poses
+            self._aruco_perception.updateTF("base_link", "drink", self.pose_to_matrix(drink_poses['drink_pose']))
+            self._aruco_perception.updateTF("base_link", "drink_pre", self.pose_to_matrix(drink_poses['pre_grasp_pose']))
