@@ -73,6 +73,7 @@ class StowToolHLA(HighLevelAction):
         
         last_drink_poses, _ = self.perception_interface.get_last_drink_pickup_configs()
         x_movement, y_movement = self.sim.scene_description.drink_delta_xy
+        self.sim.scene_description.drink_delta_xy = (0, 0)
 
         for value in ['inside_top_pose', 'place_inside_bottom_pose', 'place_pre_grasp_pose']:
             last_drink_poses[value].position[0] += y_movement
@@ -121,6 +122,7 @@ class StowToolHLA(HighLevelAction):
         # x_movement = input("Input the amount of x movement (to your right) for the plate: ")
         # x_movement = float(x_movement)
         x_movement, y_movement = self.sim.scene_description.plate_delta_xy
+        self.sim.scene_description.plate_delta_xy = (0, 0)
 
         # y_movement = input("Input the amount of y movement (away from you) for the plate: ")
         # y_movement = float(y_movement)
