@@ -84,7 +84,7 @@ class StowToolHLA(HighLevelAction):
         self.ungrasp_tool("drink")
         self.move_to_ee_pose(last_drink_poses['place_inside_bottom_pose'])
         self.move_to_ee_pose(last_drink_poses['place_pre_grasp_pose'])
-        self.move_to_joint_positions(self.sim.scene_description.drink_staging_pos)
+        # self.move_to_joint_positions(self.sim.scene_description.drink_staging_pos)
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
     def stow_wipe(self, speed: str) -> None:
