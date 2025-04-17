@@ -746,51 +746,51 @@ if __name__ == "__main__":
         pick_tool = runner.hla_name_to_hla["PickTool"]
         stow_tool = runner.hla_name_to_hla["StowTool"]
 
-        # # Get the initial state to pass to multitask_personalization.
-        # mp_state = runner.get_multitask_personalization_state(user_request="food", actively_detect_plate=True)
-        # _publish_mp_state(mp_state)
-        # assert np.allclose(runner.scene_description.plate_delta_xy, (0, 0)), "The CSP solver thinks that the plate is not reachable by the robot."
+        # Get the initial state to pass to multitask_personalization.
+        mp_state = runner.get_multitask_personalization_state(user_request="food", actively_detect_plate=True)
+        _publish_mp_state(mp_state)
+        assert np.allclose(runner.scene_description.plate_delta_xy, (0, 0)), "The CSP solver thinks that the plate is not reachable by the robot."
 
-        # # Run the first bite sequence (no plate movement).
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
-        # pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
+        # Run the first bite sequence (no plate movement).
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
         
-        # # Ask for feedback.
-        # occluded = False
-        # while True:
-        #     response = input("Was there occlusion? y/n ")
-        #     if response.lower() in ["y", "yes"]:
-        #         print("User feedback: occlusion")
-        #         occluded = True
-        #         break
-        #     elif response.lower() in ["n", "no"]:
-        #         print("User feedback: no occlusion")
-        #         occluded = False
-        #         break
-        #     else:
-        #         print("Invalid input. Please enter 'y' or 'n'.")
+        # Ask for feedback.
+        occluded = False
+        while True:
+            response = input("Was there occlusion? y/n ")
+            if response.lower() in ["y", "yes"]:
+                print("User feedback: occlusion")
+                occluded = True
+                break
+            elif response.lower() in ["n", "no"]:
+                print("User feedback: no occlusion")
+                occluded = False
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
 
-        # pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
        
-        # # Send the feedback and sync the environment.
-        # mp_state = runner.get_multitask_personalization_state(user_request="food", occluded=occluded)
-        # _publish_mp_state(mp_state)
+        # Send the feedback and sync the environment.
+        mp_state = runner.get_multitask_personalization_state(user_request="food", occluded=occluded)
+        _publish_mp_state(mp_state)
 
-        # # Move the plate.
-        # runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
-        # runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+        # Move the plate.
+        runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
+        runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
 
-        # # Run the second bite sequence.
-        # runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.utensil,)))
-        # pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
-        # pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
-        # runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.utensil,)))
+        # Run the second bite sequence.
+        runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.utensil,)))
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.above_plate_pos)
+        pick_tool.move_to_joint_positions(runner.sim.scene_description.absolute_before_transfer_pos)
+        runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.utensil,)))
 
-        # # Ask the experimenter to put the drink on the table.
-        # input("Put the drink on the table, then press enter")
+        # Ask the experimenter to put the drink on the table.
+        input("Put the drink on the table, then press enter")
 
         # Detect the drink and plan to move it and the plate.
-        enable_plate_repositioning = False  # TODO change this for video
+        enable_plate_repositioning = True  # TODO change this for video
         if enable_plate_repositioning:
             user_request = "prepare"
         else:
