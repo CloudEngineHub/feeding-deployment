@@ -182,7 +182,7 @@ class SceneDescription:
     conservative_bb_half_extents: tuple[float, float, float] = (0.4, 0.4, 1.0)
 
     # Table.
-    table_pose: Pose = Pose((0.35, 0.45, 0.15))
+    table_pose: Pose = Pose((0.35, 0.45, 0.2))
     table_urdf_path: Path = Path(__file__).parent.parent / "assets" / "table" / "table.urdf"
     table_mesh_path: Path = Path(__file__).parent.parent / "assets" / "table" / "table.obj"
 
