@@ -703,8 +703,8 @@ if __name__ == "__main__":
         #     runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
 
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.utensil,)))
-        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.utensil,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PickTool"], (runner.drink,)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["StowTool"], (runner.drink,)))
 
         #####################################################################################################
         #                                < MULTITASK PERSONALIZATION DEMO >                                 #
@@ -777,8 +777,9 @@ if __name__ == "__main__":
         _publish_mp_state(mp_state)
 
         # Move the plate.
-        runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
-        runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
+        if not np.allclose(runner.scene_description.plate_delta_xy, (0, 0), atol=1e-3):
+            runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.plate,)))
+            runner.process_user_command(GroundHighLevelAction(stow_tool, (runner.plate,)))
 
         # Run the second bite sequence.
         runner.process_user_command(GroundHighLevelAction(pick_tool, (runner.utensil,)))
@@ -790,13 +791,13 @@ if __name__ == "__main__":
         input("Put the drink on the table, then press enter")
 
         # Detect the drink and plan to move it and the plate.
-        enable_plate_repositioning = True  # TODO change this for video
+        enable_plate_repositioning = True
         if enable_plate_repositioning:
             user_request = "prepare"
         else:
             user_request = "prepare-drink-only"
         mp_state = runner.get_multitask_personalization_state(user_request=user_request,
-                                                              actively_detect_plate=True,  # TODO change back to enable_plate_repositioning
+                                                              actively_detect_plate=enable_plate_repositioning,
                                                               actively_detect_drink=True)
         _publish_mp_state(mp_state)
 
