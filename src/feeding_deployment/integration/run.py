@@ -779,8 +779,25 @@ if __name__ == "__main__":
 
 
         # initialize FEAST with the predicted parameters
-        # Rajat ToDo
 
+        # ready signal
+        if ready_signal == "auto_continue":
+            ready_signal = "auto_timeout"
+        runner.process_user_update_request(f"For all transfer actions, set the initiate transfer interaction to {ready_signal}.")
+        # be verbal
+        if not be_verbal:
+            runner.process_user_update_request("For all actions, be quiet.")
+        # set params for bite acquisition
+        runner.flair.inference_server.FOOD_CLASSES = []
+        runner.flair.inference_server.FOOD_CATEGORIES = []
+        for food_item in current_meal.food_items:
+            runner.flair.inference_server.FOOD_CLASSES.append(food_item)
+            runner.flair.inference_server.FOOD_CATEGORIES.append("solid")
+        for dip in current_meal.dips:
+            runner.flair.inference_server.FOOD_CLASSES.append(dip)
+            runner.flair.inference_server.FOOD_CATEGORIES.append("dip")
+        runner.flair.user_preference = bite_ordering
+        
         pick_tool = runner.hla_name_to_hla["PickTool"]
         stow_tool = runner.hla_name_to_hla["StowTool"]
 
