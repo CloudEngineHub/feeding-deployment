@@ -802,9 +802,8 @@ if __name__ == "__main__":
         stow_tool = runner.hla_name_to_hla["StowTool"]
 
         # make sure there is no occlusion at bite acquisition and drink acquisition poses
-        plate_occluded = "y"
-        drink_occluded = "y"
-        while plate_occluded == "y" or drink_occluded == "y":
+        occlusion = True
+        while occlusion:
 
             plate_pose = runner.get_plate_pose()
             drink_pose = runner.get_drink_pose()
@@ -820,8 +819,10 @@ if __name__ == "__main__":
                               "plate_pose": plate_pose, 
                               "drink_pose": drink_pose})
             assert mp_response["response_type"] == "occlusion_query"
-            plate_delta_xy = mp_response["plate_delta_xy"]
-            drink_delta_xy = mp_response["drink_delta_xy"]
+            disoriented_plate_delta_xy = mp_response["plate_delta_xy"]
+            disoriented_drink_delta_xy = mp_response["drink_delta_xy"]
+            plate_delta_xy = (-1 * disoriented_plate_delta_xy[1], disoriented_plate_delta_xy[0])
+            drink_delta_xy = (-1 * disoriented_drink_delta_xy[1], disoriented_drink_delta_xy[0])
             before_transfer_pose = mp_response["before_transfer_pose"]
             before_transfer_pos = mp_response["before_transfer_pos"]
             above_plate_pos = mp_response["above_plate_pos"]
@@ -876,6 +877,9 @@ if __name__ == "__main__":
                     "plate_occlusion": plate_occlusion,
                     "drink_occlusion": drink_occlusion,
                 }
+
+                if plate_occlusion or drink_occlusion:
+                    occlusion = True
             mp_response = _send_mp_request(occlusion_dataset_dict)
             assert mp_response["response_type"] == "occlusion_dataset" 
         
