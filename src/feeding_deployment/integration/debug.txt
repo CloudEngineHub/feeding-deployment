@@ -1,5 +1,5 @@
-Parameter name being checked for validity: Speed
-Node name: StowWipe
+Parameter name being checked for validity: ReadyForTransferInteraction
+Node name: TransferWipe
 Behavior tree prompt: 
 Here are all behavior trees:
 Behavior Tree Nodes Related to Bite (synonyms: Feeding, Utensil, Food Item):
@@ -123,7 +123,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: InitiateTransferInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     ready for a feeding utensil (bite) transfer.
@@ -134,7 +134,7 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
-  value: open_mouth
+  value: button
 - name: ReadyForTransferInteraction
   description: Interaction mode for how the robot conveys to the user that they can
     take a bite now.
@@ -146,7 +146,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: TransferCompleteInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     done taking a bite. Sense corresponds to the robot waiting for the user to bite
@@ -250,7 +250,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: InitiateTransferInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     ready for a drink transfer.
@@ -261,7 +261,7 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
-  value: open_mouth
+  value: button
 - name: ReadyForTransferInteraction
   description: Interaction mode for how the robot conveys to the user that they can
     take a sip now.
@@ -273,7 +273,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: TransferCompleteInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     done taking a sip. Sense corresponds to the robot waiting for a head nod from
@@ -386,7 +386,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: InitiateTransferInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     ready for a wipe transfer.
@@ -397,7 +397,7 @@ parameters:
     - button
     - open_mouth
     - auto_timeout
-  value: open_mouth
+  value: button
 - name: ReadyForTransferInteraction
   description: Interaction mode for how the robot conveys to the user that they can
     take start cleaning now.
@@ -409,7 +409,7 @@ parameters:
     - voice
     - led
     - beep
-  value: voice
+  value: silent
 - name: TransferCompleteInteraction
   description: Interaction mode for how the user conveys to the robot that they are
     done cleaning their mouth. Sense corresponds to the robot waiting for a head nod
@@ -460,5 +460,5 @@ fn: !hla stow_wipe
 ---
 
 
-Node name substring: name: StowWipe
+Node name substring: name: TransferWipe
 Parameter name is valid

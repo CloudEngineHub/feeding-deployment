@@ -117,9 +117,14 @@ if __name__ == "__main__":
     if run_commands != "y":
         exit()
 
-    inside_mount_pose = Pose(
-        position=[0.2385, 0.08, 0.169],
-        orientation=[-1.0, 0.0, 0.0, 0.0],
-    )
+    retract_pos = [0.0, -0.34903602299465675, -3.141591055693139, -2.0, 0.0, -0.872688061814757, 1.57075917569769]
+    arm_client_interface.execute_command(JointCommand(retract_pos))
 
-    arm_client_interface.execute_command(CartesianCommand(inside_mount_pose.position, inside_mount_pose.orientation))
+    # midpoint_pos = [2.2912525080624357, 0.730991513381838, 2.0830126187361424, -2.1737367965371632, 0.28532185799581516, -0.4648462461578422, -0.29495787389950756]
+    # arm_client_interface.execute_command(JointCommand(midpoint_pos))
+
+    before_transfer_pos = [-2.86554642, -1.61951779, -2.60986085, -1.37302839, 1.11779249, -1.18028264, 2.05515862]
+    arm_client_interface.execute_command(JointCommand(before_transfer_pos))
+
+    # drink_gaze_pos = [-0.004187021865822871, 0.6034579885210962, -3.1259047705564633, -2.3538005746884725, 0.01149092320739253, 1.3411586039000891, 1.6825233913747728]
+    # arm_client_interface.execute_command(JointCommand(drink_gaze_pos))
