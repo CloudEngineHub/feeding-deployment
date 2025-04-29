@@ -71,7 +71,7 @@ parameters:
     - button
     - sense
     - auto_timeout
-  value: sense
+  value: auto_timeout
 - name: OutsideMouthDistance
   description: Distance from the feeding utensil tip to the user's mouth for the bite
     transfer.

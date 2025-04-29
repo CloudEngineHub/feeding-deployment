@@ -1,0 +1,73 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"tater tots, bbq sauce, ketchup","status":"dip tater tots in ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",7]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",3]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",2]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"return_to_main"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"post_drink_pickup","status":"drink_transfer"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["tater tot",1]}
+{"state":"dip_selection","status":"ketchup"}
