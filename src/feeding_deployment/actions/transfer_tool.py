@@ -209,10 +209,11 @@ class TransferToolHLA(HighLevelAction):
             self.robot_interface.switch_to_task_compliant_mode()
             time.sleep(2.0) # let the robot stabilize
 
-        if self.robot_interface is not None:
-            self.relay_ready_to_initiate_transfer(ready_to_initiate_mode, initiate_transfer_mode)
-            self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
-
+        # if self.robot_interface is not None:
+            # self.relay_ready_to_initiate_transfer(ready_to_initiate_mode, initiate_transfer_mode)
+            # self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
+        
+        # input("Press enter to start the transfer")
         self.transfer.set_tool(self.tool)
         self.transfer.move_to_transfer_state(outside_mouth_distance, maintain_position_at_goal)
 

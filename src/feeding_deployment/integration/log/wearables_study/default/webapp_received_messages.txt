@@ -1,0 +1,28 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"bananas","status":"eat bananas"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["banana",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["banana",4]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["banana",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["banana",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["banana",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}

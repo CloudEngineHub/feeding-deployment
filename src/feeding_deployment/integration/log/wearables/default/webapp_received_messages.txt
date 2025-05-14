@@ -1,0 +1,96 @@
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"order_selection","status":"ready_for_initial_data"}
+{"state":"chicken nuggets","status":"eat chicken nuggets"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",1]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_skill_selection","status":0,"positions":[{"index":1,"x":0.6568076212258901,"y":0.45851376745887773}]}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",3]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"task_selection","status":"take_bite"}
+{"state":"bite_selection","status":"ready_for_initial_data"}
+{"state":"bite_selection","status":"aquire_food","data":["chicken nugget",2]}
+{"state":"dip_selection","status":"No dip"}
+{"state":"post_bite_pickup","status":"bite_transfer"}

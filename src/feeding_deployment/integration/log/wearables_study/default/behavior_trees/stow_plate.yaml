@@ -1,0 +1,15 @@
+name: StowPlate
+description: Place the plate on the table.
+type: Behavior
+parameters:
+- name: Speed
+  description: Speed of the robot during placing the plate.
+  is_user_editable: true
+  space:
+    type: Enum
+    elements:
+    - low
+    - medium
+    - high
+  value: medium
+fn: !hla stow_plate

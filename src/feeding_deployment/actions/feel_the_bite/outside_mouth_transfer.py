@@ -2,6 +2,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 import pickle
+import time
 
 try:
     import rospy
@@ -28,13 +29,39 @@ class OutsideMouthTransfer(Transfer):
 
         self.log_dir = log_dir
 
+    def continue_approach(self, target_pose, looking_at_robot_head_pose):
+        # return True
+
+        distance_threshold = 0.05
+        # looking_at_robot_threshold = np.pi / 8
+
+        if np.linalg.norm(self.robot_interface.get_state()["ee_pos"][:3] - target_pose.position) < distance_threshold:
+            return True
+
+        # head_perception_data = self.perception_interface.get_head_perception_data()
+        # head_pose = head_perception_data["head_pose"]
+        
+        # if abs(head_pose[3] - looking_at_robot_head_pose[3]) > looking_at_robot_threshold or abs(head_pose[4] - looking_at_robot_head_pose[4]) > looking_at_robot_threshold or abs(head_pose[5] - looking_at_robot_head_pose[5]) > looking_at_robot_threshold:
+        #     print("head pose: ", head_pose)
+        #     print("looking at robot head pose: ", looking_at_robot_head_pose)
+        #     print("[0]: ", abs(head_pose[3] - looking_at_robot_head_pose[3]))
+        #     print("[1]: ", abs(head_pose[4] - looking_at_robot_head_pose[4]))
+        #     print("[2]: ", abs(head_pose[5] - looking_at_robot_head_pose[5]))
+        #     return False
+        
+        if not self.perception_interface.get_bite_transfer_approach():
+            return False
+        
+        return True
+
     def move_to_transfer_state(self, outside_mouth_distance, maintain_position_at_goal = False):
 
         if self.robot_interface is not None:
             self.set_filter_noisy_readings_pub.publish(Bool(data=True))
 
         # move to infront of mouth
-        head_perception_data = self.perception_interface.get_head_perception_data()
+        # head_perception_data = self.perception_interface.get_head_perception_data()
+        head_perception_data = self.perception_interface.get_looking_at_robot_head_perception()
         forque_target_base = head_perception_data["tool_tip_target_pose"]
         head_pose = head_perception_data["head_pose"]
 
@@ -60,7 +87,23 @@ class OutsideMouthTransfer(Transfer):
 
         target_pose = Pose.from_matrix(tool_frame_target)
 
-        self.move_to_ee_pose(target_pose)
+        if self.robot_interface is not None:
+            looking_at_robot_head_pose = head_pose
+            while not self.continue_approach(target_pose, looking_at_robot_head_pose):
+                time.sleep(0.1)
+
+        self.move_to_ee_pose(target_pose, blocking=False)
+        
+        if self.robot_interface is not None:
+            currently_paused = False
+            while np.linalg.norm(self.robot_interface.get_state()["ee_pos"][:3] - target_pose.position) > 0.02: # reached the target pose
+                if currently_paused and self.continue_approach(target_pose, looking_at_robot_head_pose):
+                    self.robot_interface.resume()
+                    currently_paused = False
+                elif not currently_paused and not self.continue_approach(target_pose, looking_at_robot_head_pose):
+                    self.robot_interface.pause()
+                    currently_paused = True
+                print("Distance to target: ", np.linalg.norm(self.robot_interface.get_state()["ee_pos"][:3] - target_pose.position))
 
         if self.robot_interface is not None:
             self.set_filter_noisy_readings_pub.publish(Bool(data=False))

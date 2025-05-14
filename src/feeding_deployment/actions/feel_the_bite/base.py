@@ -45,13 +45,13 @@ class Transfer(abc.ABC):
         tip_to_wrist = np.linalg.inv(wrist_to_tip.to_matrix())
         return tip_to_wrist
 
-    def move_to_ee_pose(self, pose):
+    def move_to_ee_pose(self, pose, blocking=True):
 
         if self.robot_interface is None:
             plan = self.sim.plan_to_ee_pose(pose)
             self.sim.visualize_plan(plan)
         else:
-            self.robot_interface.execute_command(CartesianCommand(pos=pose.position, quat=pose.orientation))
+            self.robot_interface.execute_command(CartesianCommand(pos=pose.position, quat=pose.orientation), blocking=blocking)
 
     @abc.abstractmethod
     def move_to_transfer_state(self, outside_mouth_distance, maintain_position_at_goal = False):

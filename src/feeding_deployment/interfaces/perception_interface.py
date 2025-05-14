@@ -67,6 +67,9 @@ class PerceptionInterface:
             self.ft_threshold_exceeded = False
             self.ft_sensor_sub = rospy.Subscriber('/forque/forqueSensor', WrenchStamped, self.ft_callback)
 
+            self.bite_transfer_approach = True
+            self.bite_transfer_approach_sub = rospy.Subscriber('/approach', Bool, self.bite_transfer_approach_callback)
+
         self.head_perception_data_lock = threading.Lock()
         # this term is updated in the run_head_perception method and read in the get_tool_tip_pose method
         self.head_perception_data = None
@@ -102,6 +105,7 @@ class PerceptionInterface:
         self.speak_pub.publish(String(data=text))
 
     def set_led_brightness(self, brightness: float = 0.2):
+        return # not using LED for now
         print("Setting LED Brightness")
         if self.simulation:
             return
@@ -113,16 +117,29 @@ class PerceptionInterface:
             ser.write(command)
 
     def turn_on_led(self):
+        return # not using LED for now
         with serial.Serial(LED_SERIAL_PORT, LED_BAUD_RATE, timeout=1) as ser:
             ser.reset_input_buffer()  # Clear input buffer
             ser.reset_output_buffer()  # Clear output buffer
             ser.write(b"ON\r\n")  # Send the command
 
     def turn_off_led(self):
+        return # not using LED for now
         with serial.Serial(LED_SERIAL_PORT, LED_BAUD_RATE, timeout=1) as ser:
             ser.reset_input_buffer()
             ser.reset_output_buffer()
             ser.write(b"OFF\r\n")
+
+    def bite_transfer_approach_callback(self, msg):
+        # print("Bite transfer approach callback")
+        # if self.simulation:
+            # return
+        self.bite_transfer_approach = msg.data
+
+    def get_bite_transfer_approach(self):
+        # if self.simulation:
+        #     return True
+        return self.bite_transfer_approach
 
     def detect_button_press(self):
         print("Waiting for button press")
@@ -251,6 +268,22 @@ class PerceptionInterface:
             with open(self.log_dir / f'head_perception_data_{self.tool}.pkl', 'wb') as f:
                 pickle.dump(head_perception_data, f)
             
+        return head_perception_data
+    
+    def log_looking_at_robot_head_perception(self):
+        if self.simulation:
+            return
+        # get the head pose
+        head_perception_data = self.get_head_perception_data()
+        with open(self.log_dir / 'looking_at_robot_head_perception.pkl', 'wb') as f:
+            pickle.dump(head_perception_data, f)
+
+    def get_looking_at_robot_head_perception(self):
+        if self.simulation:
+            return
+        # load them from a pickle file
+        with open(self.log_dir / 'looking_at_robot_head_perception.pkl', 'rb') as f:
+            head_perception_data = pickle.load(f)
         return head_perception_data
         
     def get_tool_tip_pose(self) -> np.ndarray:

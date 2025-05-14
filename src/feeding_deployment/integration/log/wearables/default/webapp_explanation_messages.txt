@@ -1,0 +1,343 @@
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up the utensil"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Detected chicken nugget on the plate"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Unexpected camera issue detected"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Finished transferring food to the user's mouth"}
+{"state": "explanation", "status": "Finished transferring food to the user's mouth"}
+{"state": "explanation", "status": "Finished transferring food to the user's mouth"}
+{"state": "explanation", "status": "Finished transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Unexpected camera anomaly detected"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Collision detected, please remove obstacles from robot's path"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Detected chicken on the plate"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Please open your mouth to initiate transfer"}

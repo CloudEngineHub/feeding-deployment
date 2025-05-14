@@ -90,9 +90,9 @@ class HeadPerception:
 
         self.FLAME_neck_index = 2151
 
-        roll_threshold = np.pi / 5
-        pitch_threshold = np.pi / 5
-        yaw_threshold = np.pi / 5
+        roll_threshold = np.pi / 2
+        pitch_threshold = np.pi / 2
+        yaw_threshold = np.pi / 2
 
         self.max_rotation_threshold = np.array(
             [roll_threshold, pitch_threshold, yaw_threshold]

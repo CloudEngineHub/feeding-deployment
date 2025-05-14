@@ -275,6 +275,24 @@ class ArmInterface:
             print(f"Error in set_ee_pose: {e}")
             # Re-raise a simplified exception to avoid pickling issues
             raise Exception(f"Error in set_ee_pose: {str(e)}") from None # suppress original exception
+        
+    def set_ee_pose_nonblocking(self, xyz, xyz_quat):
+
+        assert not self.emergency_stop_active, "Emergency stop is active"
+        assert not self.in_compliant_mode, "In compliant mode"
+
+        # save in log file
+        with open(self.log_file, "a") as f:
+            f.write(f"set_ee_pose_nonblocking: {xyz}, {xyz_quat}\n")
+
+        print(f"Received non-blocking cartesian pose command: {xyz}, {xyz_quat}")
+
+        try:
+            self.arm.move_cartesian(xyz, xyz_quat, blocking=False)
+        except Exception as e:
+            print(f"Error in set_ee_pose_nonblocking: {e}")
+            # Re-raise a simplified exception to avoid pickling issues
+            raise Exception(f"Error in set_ee_pose_nonblocking: {str(e)}") from None
 
     def set_gripper(self, gripper_pos):
 
@@ -317,6 +335,34 @@ class ArmInterface:
             print(f"Error in close_gripper: {e}")
             # Re-raise a simplified exception to avoid pickling issues
             raise Exception(f"Error in close_gripper: {str(e)}") from None # suppress original exception
+        
+    def pause(self):
+
+        assert not self.emergency_stop_active, "Emergency stop is active"
+        assert not self.in_compliant_mode, "In compliant mode"
+
+        print("Received pause command")
+
+        try:
+            self.arm.pause_action()
+        except Exception as e:
+            print(f"Error in pause: {e}")
+            # Re-raise a simplified exception to avoid pickling issues
+            raise Exception(f"Error in pause: {str(e)}") from None
+        
+    def resume(self):
+
+        assert not self.emergency_stop_active, "Emergency stop is active"
+        assert not self.in_compliant_mode, "In compliant mode"
+
+        print("Received resume command")
+
+        try:
+            self.arm.resume_action()
+        except Exception as e:
+            print(f"Error in resume: {e}")
+            # Re-raise a simplified exception to avoid pickling issues
+            raise Exception(f"Error in resume: {str(e)}") from None
 
     def close(self):
         print("Close arm command received")
