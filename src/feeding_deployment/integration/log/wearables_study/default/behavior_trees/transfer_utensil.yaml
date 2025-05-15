@@ -78,9 +78,9 @@ parameters:
   is_user_editable: true
   space:
     type: Box
-    lower: 0.1
+    lower: 0.05
     upper: 0.2
-  value: 0.15
+  value: 0.05
 - name: TimeToWaitBeforeAutocontinue
   description: Autocontinue duration for re-selecting feeding utensil (bite) transfer
     after a bite on the web app (web interface).
