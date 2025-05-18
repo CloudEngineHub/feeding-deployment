@@ -94,6 +94,7 @@
 - To check FT readings: `rostopic echo /forque/forqueSensor`
 - IP for robot: 192.168..10
 - IP for webapp:" http://192.168.1.2:8080/#/home
+- Command for wearables study: `python run.py --user wearables_study --run_on_robot --no_waits --use_interface`
 
 ## Check Installation
 
