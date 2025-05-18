@@ -83,10 +83,11 @@ class EmulateTransferHLA(HighLevelAction):
                 input("Press enter to start the transfer")
         
         self.transfer.set_tool("fork")
-        self.transfer.move_to_transfer_state(outside_mouth_distance=0.15)
+        self.transfer.move_to_transfer_state(outside_mouth_distance=0.05)
 
         if self.robot_interface is not None:
-            self.perception_interface.detect_force_trigger()
+            time.sleep(5.0)
+            # self.perception_interface.detect_force_trigger()
 
         # shutdown the head perception thread and move to before transfer state
         self.perception_interface.stop_head_perception_thread()

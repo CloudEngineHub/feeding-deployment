@@ -2567,3 +2567,240 @@
 {"n_ordering": 1, "data": ["No dip"]}
 {"state": "auto_time", "status": "10.0"}
 {"state": "transfermeal", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[340, 217, 80, 45], [202, 406, 57, 76], [300, 409, 56, 66], [416, 388, 51, 84]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[293, 411, 56, 65], [409, 390, 51, 83], [196, 408, 57, 75], [288, 70, 76, 39]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[297, 411, 56, 65], [292, 71, 76, 38], [200, 408, 57, 75], [258, -9, 61, 81]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[216, 44, 48, 86], [298, 65, 80, 39], [201, 404, 56, 75]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[344, 193, 86, 64], [322, 353, 51, 87], [247, 381, 65, 72], [362, 276, 47, 78], [187, 271, 72, 59], [243, 253, 58, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[346, 195, 86, 64], [364, 278, 47, 78], [249, 383, 65, 72], [190, 273, 71, 59], [245, 255, 58, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[344, 193, 86, 64], [247, 380, 65, 72], [187, 270, 71, 60], [243, 253, 58, 80]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[344, 193, 86, 64], [188, 271, 71, 59], [243, 253, 58, 79]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[342, 195, 86, 64], [217, 4, 50, 62], [186, 273, 71, 59], [242, 256, 57, 78]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[341, 197, 86, 64], [182, 274, 62, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[184, 273, 63, 70]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[184, 274, 63, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[184, 270, 63, 69], [217, 2, 51, 62]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[186, 272, 63, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[184, 274, 63, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "acquirebite", "status": "jump"}
+{"n_food_types": 1, "data": [], "current_bite": {"banana": [[183, 270, 63, 69]]}}
+{"n_ordering": 1, "data": ["No dip"]}
+{"state": "auto_time", "status": "10.0"}
+{"state": "transfermeal", "status": "jump"}
+{"state": "afterbitetransfer", "status": "jump"}
+{"state": "auto_time", "status": "10.0"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "task_selection", "status": "jump"}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}
+{"state": "explanation", "status": ""}

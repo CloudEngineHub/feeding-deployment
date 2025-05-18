@@ -75,19 +75,24 @@ class AcquireBiteHLA(HighLevelAction):
 
         # self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos) # leads to safer motion
         self.move_to_joint_positions(self.sim.scene_description.above_plate_pos)
+        print("Moved to above plate position")
         
         while True:
             if self.wrist_interface is not None:
+                print("Setting wrist to velocity mode ...")
                 self.wrist_interface.set_velocity_mode()
                 self.wrist_interface.reset()
+                print("Wrist set to velocity mode")
 
             try: # bite ordering and detection
                 if self.robot_interface is not None:   
 
+                    print("Getting camera data ...")    
                     camera_color_data, camera_info_data, camera_depth_data = (
                         self.perception_interface.get_camera_data()
                     )
 
+                    print("Setting FLAIR preference ...")
                     if not self.flair.is_preference_set():
                         plate_image = self.flair.crop_plate(camera_color_data)
                         if self.web_interface is not None:
@@ -108,6 +113,7 @@ class AcquireBiteHLA(HighLevelAction):
                         self.flair.set_food_items(food_items)
                         self.flair.set_preference(bite_ordering_preference)
 
+                    print("Detecting items ...")
                     items_detection = self.flair.detect_items(camera_color_data, camera_depth_data, camera_info_data, log_path=None)
 
                     assert self.log_dir is not None, "Log path must be set to save food detection data"
@@ -156,11 +162,14 @@ class AcquireBiteHLA(HighLevelAction):
 
             try: # actual acquisition
 
+                print("Initiating acquisition ...")
+
                 # Prepare for bite acquisition.
                 if self.wrist_interface is not None:
                     self.wrist_interface.set_velocity_mode()
                     self.wrist_interface.reset()
 
+                print("Predicting next action ...")
                 next_action_prediction = self.flair.predict_next_action(camera_color_data, items_detection, log_path=None)
 
                 next_food_item = next_action_prediction['labels_list'][next_action_prediction['food_id']]

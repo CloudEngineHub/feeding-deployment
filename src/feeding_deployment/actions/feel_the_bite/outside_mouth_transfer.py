@@ -19,8 +19,6 @@ from feeding_deployment.actions.feel_the_bite.base import Transfer
 
 from pybullet_helpers.geometry import Pose
 
-DISTANCE_INFRONT_MOUTH = 0.10
-
 class OutsideMouthTransfer(Transfer):
 
     def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False, log_dir=None):

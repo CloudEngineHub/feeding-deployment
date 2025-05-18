@@ -602,7 +602,10 @@ class BiteAcquisitionInference:
                 # if "steak" in self.FOOD_CLASSES[i]:
                 #     replacement_dict[self.FOOD_CLASSES[i]] = "small cut brown steak piece"
                 #     food_classes_being_detected.append("small cut brown steak piece")
-                if "potato" in self.FOOD_CLASSES[i]:
+                if "banana" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "cut yellow banana piece"
+                    food_classes_being_detected.append("cut yellow banana piece")
+                elif "potato" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "yellow potato wedge piece"
                     food_classes_being_detected.append("yellow potato wedge piece")
                 elif "tater tots" in self.FOOD_CLASSES[i]:

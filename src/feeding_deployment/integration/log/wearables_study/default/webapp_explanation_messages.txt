@@ -3398,3 +3398,2750 @@
 {"state": "explanation", "status": "Detected banana on the plate"}
 {"state": "explanation", "status": "Detected banana on the plate"}
 {"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please bite down on the fork to complete transfer"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "Transferring food to the user's mouth"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "I see banana on the plate"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Detected banana on the plate"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Picking up banana"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Please wait for the transfer to complete in 5 seconds"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Bringing banana to user's mouth"}
+{"state": "explanation", "status": "Banana transferred to user's mouth"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}
+{"state": "explanation", "status": "Picking up food"}

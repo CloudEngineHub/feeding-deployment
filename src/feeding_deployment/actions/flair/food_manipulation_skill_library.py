@@ -51,7 +51,8 @@ class FoodManipulationSkillLibrary:
             # self.plate_height = 0.185
             # self.plate_height = 0.197 # green table
             # self.plate_height = 0.221
-            self.plate_height = 0.166
+            # self.plate_height = 0.24
+            self.plate_height = 0.19
         else:
             raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 
@@ -169,9 +170,12 @@ class FoodManipulationSkillLibrary:
         print("Plate height: ", self.plate_height)
         food_base[2,3] = max(food_base[2,3] - skewering_depth, self.plate_height) 
         # magic number for skewering offset
-        # food_base[0,3] += 0.012 # positive moves away from the robot
+        # food_base[1,3] += 0.015 # positive moves away from the robot
+        food_base[0,3] -= 0.005 # positive moves away from the robot
+        food_base[1,3] -= 0.015 # positive moves left
         # keep the orientation of the food base fixed
-        food_base[:3,:3] = Rotation.from_quat([-0.7071068, 0.7071068, 0, 0]).as_matrix()
+        # food_base[:3,:3] = Rotation.from_quat([-0.7071068, 0.7071068, 0, 0]).as_matrix()
+        food_base[:3,:3] = Rotation.from_quat([-0.3826835, 0.9238795, 0, 0]).as_matrix()
 
         if self.robot_interface is not None:
             self.tf_utils.publishTransformationToTF('base_link', 'food_frame', food_base)
