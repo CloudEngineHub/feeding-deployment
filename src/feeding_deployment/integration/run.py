@@ -315,14 +315,20 @@ class _Runner:
                         while self.active:
                             adaptation_request = self.web_interface.get_adaptability_request()
                             if adaptation_request:
-                                try:
-                                    print("Processing user update request:", adaptation_request)
-                                    update_summary = self.process_user_update_request(adaptation_request)
-                                    print('Processed user update request.')
-                                    self.web_interface.update_adaptability_response(update_summary)
-                                except Exception as e:
-                                    print(f"Update failed: {str(e)}")
-                                    self.web_interface.update_adaptability_response("Adaptation failed. Please try rephrasing the request.")
+                                user_input = input("Do you want to manually process this? (y/n): ")
+                                while user_input not in ["y", "n"]:
+                                    user_input = input("Please enter 'y' or 'n': ")
+                                if user_input == "y":
+                                    update_summary = input("Please enter the update summary to show on the web interface: ")
+                                else:
+                                    try:
+                                        print("Processing user update request:", adaptation_request)
+                                        update_summary = self.process_user_update_request(adaptation_request)
+                                        print('Processed user update request.')
+                                        self.web_interface.update_adaptability_response(update_summary)
+                                    except Exception as e:
+                                        print(f"Update failed: {str(e)}")
+                                        self.web_interface.update_adaptability_response("Adaptation failed. Please try rephrasing the request.")
                             else:
                                 break
                     elif task_type == "gesture":
@@ -801,7 +807,7 @@ if __name__ == "__main__":
 
         feeding_side = "right"
         bite_ordering = bite_ordering_options[0]
-        ready_signal = "open_mouth"
+        ready_signal = "mouth_open"
         be_verbal = True
         if args.cbtl:
             # sends encoded messages to multitask personalization on ROS topic /mp_request, and expects to receive a response on /mp_response
@@ -845,6 +851,8 @@ if __name__ == "__main__":
         # be verbal
         if not be_verbal:
             runner.process_user_update_request("For all actions, be quiet.")
+        else:
+            runner.process_user_update_request("For all actions, speak aloud what you are doing.")
         # set params for bite acquisition
         runner.flair.inference_server.FOOD_CLASSES = []
         runner.flair.inference_server.FOOD_CATEGORIES = []
@@ -869,6 +877,7 @@ if __name__ == "__main__":
             explanation_text += " speak aloud: yes."
         else:
             explanation_text += " speak aloud: no."
+        print('Explanation text:', explanation_text)
         runner.web_interface.fix_explanation(explanation_text)
 
         input("Showing explanation. Press Enter to continue...")
@@ -946,6 +955,18 @@ if __name__ == "__main__":
                     current_plate_pose = new_plate_pose
                     occlusion_iter += 1
             else:
+                # ready signal
+                if ready_signal == "auto_continue":
+                    ready_signal = "auto_timeout"
+                runner.process_user_update_request(f"For all transfer actions, set the initiate transfer interaction to {ready_signal}. Do not consider the plate tool.")
+                # be verbal
+                if not be_verbal:
+                    runner.process_user_update_request("For all actions, be quiet.")
+                else:
+                    runner.process_user_update_request("For all actions, speak aloud what you are doing.")
+                # set params for bite acquisition
+                runner.flair.user_preference = bite_ordering
+
                 print("For meal 5, the plate pose needs to be detected.")
                
                 pick_tool = runner.hla_name_to_hla["PickTool"]
@@ -1001,6 +1022,9 @@ if __name__ == "__main__":
 
         else:
             if current_meal.meal_id == 5:
+                bite_ordering = verify_predictions("bite_ordering", bite_ordering, bite_ordering_options)
+                runner.flair.user_preference = bite_ordering
+
                 plate_delta_xy = (0.0, 0.0)
                 before_transfer_pose = Pose((0.43629148602485657, 0.5221561789512634, 0.5431587100028992), 
                                             (-0.03718446899872125, 0.705653494730171, 0.7073595770431803, -0.01768868015632298))
