@@ -9,17 +9,29 @@ description = "Code for 2024 EmPRISE lab feeding deployment."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-   "pybullet_helpers@git+https://github.com/tomsilver/pybullet-helpers.git",
+   "pybullet_helpers@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=pybullet-helpers",
+   "relational_structs@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=relational-structs",
+   "prpl-utils@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=prpl-utils",
+   "tomsutils@git+https://github.com/tomsilver/toms-utils.git",
    "pyaudio",
    "imageio[ffmpeg]",
    "pin",
    "ruckig",
-   "relational_structs@git+https://github.com/tomsilver/relational-structs.git",
-   "tomsutils@git+https://github.com/tomsilver/toms-utils.git",
    "opencv-python",
    "multiprocess",
    "scikit-learn",
    "paramiko",
+   "pyyaml",
+   "rospkg",
+   "catkin_pkg",
+   "empy",
+   "defusedxml",
+   "serial",
+   "twisted",
+   "pyOpenSSL",
+   "autobahn",
+   "tornado",
+   "pymongo",
 ]
 
 [project.optional-dependencies]

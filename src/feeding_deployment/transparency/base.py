@@ -65,6 +65,7 @@ class TransparencyBase(abc.ABC):
             with open(self.execution_log_path, 'r') as f:
                 execution_description = f.read()
 
+        if self.nuc_execution_log_path.exists():
             with open(self.nuc_execution_log_path, 'r') as f:
                 nuc_execution_description = f.read()
             execution_description += nuc_execution_description
