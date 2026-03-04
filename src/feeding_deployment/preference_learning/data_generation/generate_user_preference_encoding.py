@@ -1,10 +1,10 @@
 """
 Generate a structured “user preference encoding” for a robot-assisted mealtime system
-using an LLM, conditioned on a care recipient’s physical functioning profile.
+using an LLM, conditioned on a care recipient’s physical capability profile.
 
 This script:
-- Loads a prompt template from `prompts/user_preference_encoding_prompt.txt` and fills
-  in `{physical_profile}`.
+- Builds the prompt via `get_user_preference_encoding_prompt(...)` (recommended) and
+  validates the output against `PREFERENCE_BUNDLE` (single source of truth).
 - Calls the OpenAI Chat Completions API to produce a JSON object describing the user’s
   default preferences and how those preferences vary across dining context, food type,
   and affective state.
@@ -13,7 +13,7 @@ This script:
     - The JSON must contain exactly the expected preference fields (no missing/extra keys).
     - Each field must be an object with exactly:
         {"default": <string>, "user_tendencies": <non-empty string>}
-    - Each "default" must be one of the allowed options in `PREFERENCE_SCHEMA`.
+    - Each "default" must be one of the allowed options from `PREFERENCE_BUNDLE`.
 
 If the LLM output violates the schema (e.g., truncated JSON, wrong keys, invalid option),
 the script raises an error rather than silently falling back to defaults.
@@ -22,19 +22,16 @@ Usage:
   python generate_user_preference_encoding.py --physical-profile <profile_key> [--model <model_name>]
 
 Requirements:
-- `OPENAI_API_KEY` must be set in the environment (or add wiring to use --api-key).
+- `OPENAI_API_KEY` must be set in the environment (or pass --api-key).
 - `openai` Python package installed.
 """
 
 import argparse
-import csv
 import json
 import os
-import random
+import re
 import sys
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
-from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 try:
     from openai import OpenAI
@@ -42,40 +39,11 @@ except ImportError:
     print("Error: openai package not installed. Install it with: pip install openai", file=sys.stderr)
     sys.exit(1)
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-DEFAULT_MODEL = "gpt-4o"  # or "gpt-4", "gpt-3.5-turbo", etc.
+from feeding_deployment.preference_learning.config.preference_bundle import PREFERENCE_BUNDLE
+from feeding_deployment.preference_learning.config.physical_capabilities import PHYSICAL_CAPABILITY_PROFILES
+from feeding_deployment.preference_learning.data_generation.prompts.user_preference_encoding import get_user_preference_encoding_prompt
 
-from feeding_deployment.preference_learning.config import MEAL_STRUCTURE, MEALS, SETTINGS, TIMES_OF_DAY, AFFECTIVE_STATES, PREFERENCE_BUNDLE, PHYSICAL_CAPABILITY_PROFILES
-
-import json
-import re
-from pathlib import Path
-from typing import Any, Dict, List
-
-
-# Canonical schema (fields + allowed options) based on your final prompt
-PREFERENCE_SCHEMA: Dict[str, List[str]] = {
-    "microwave_time": ["no microwave", "1 min", "2 min", "3 min"],
-    "occlusion_relevance": ["minimize left occlusion", "minimize front occlusion", "do not consider occlusion"],
-    "robot_speed": ["slow", "medium", "fast"],
-    "skewering_axis": ["parallel to major axis", "perpendicular to major axis"],
-    "web_interface_confirmation": ["yes", "no"],
-    "transfer_mode": ["outside mouth transfer", "inside mouth transfer"],
-    "outside_mouth_distance": ["near", "medium", "far"],
-    "robot_ready_cue": ["speech", "LED", "speech + LED", "no cue"],
-    "bite_initiation_feeding": ["open mouth", "button", "autocontinue"],
-    "bite_initiation_drinking": ["open mouth", "button", "autocontinue"],
-    "bite_initiation_wiping": ["open mouth", "button", "autocontinue"],
-    "robot_ready_for_transfer_completion_cue": ["speech", "LED", "speech + LED", "no cue"],
-    "bite_completion_feeding": ["perception", "button", "autocontinue"],
-    "bite_completion_drinking": ["perception", "button", "autocontinue"],
-    "bite_completion_wiping": ["perception", "button", "autocontinue"],
-    "retract_between_bites": ["yes", "no"],
-    "bite_dipping_preference": ["dip food in sauce", "do not dip"],
-    "amount_to_dip": ["not applicable", "less", "more"],
-    # Keep as strings to match your prompt exactly
-    "wait_before_autocontinue_seconds": ["10", "100", "1000"],
-}
+DEFAULT_MODEL = "gpt-4o"
 
 
 def _extract_json_object(text: str) -> str:
@@ -109,20 +77,22 @@ def _extract_json_object(text: str) -> str:
 
 def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
     """
-    Enforce STRICT schema:
+    Validate LLM output against PREFERENCE_BUNDLE (single source of truth).
 
-    prefs must be:
-      Dict[field_name, Dict{"default": <allowed>, "user_tendencies": <non-empty str>}]
+    Expected schema:
+      prefs[field] = {"default": <allowed option>, "user_tendencies": <non-empty str>}
 
-    - No missing fields
-    - No extra fields
-    - No old flat format
-    - default must be one of allowed options
+    Strict checks:
+      - Must be a dict
+      - Must contain exactly all fields in PREFERENCE_BUNDLE (no missing/extra)
+      - Each field must be an object with exactly keys {"default","user_tendencies"}
+      - default must be one of dim.options
+      - user_tendencies must be a non-empty string
     """
     if not isinstance(prefs, dict):
-        raise TypeError(f"Expected a JSON object (dict). Got: {type(prefs).__name__}")
+        raise TypeError(f"Expected JSON object (dict). Got: {type(prefs).__name__}")
 
-    expected_fields = set(PREFERENCE_SCHEMA.keys())
+    expected_fields = {dim.field for dim in PREFERENCE_BUNDLE}
     got_fields = set(prefs.keys())
 
     missing = sorted(expected_fields - got_fields)
@@ -135,7 +105,10 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
 
     out: Dict[str, Dict[str, str]] = {}
 
-    for field, allowed in PREFERENCE_SCHEMA.items():
+    for dim in PREFERENCE_BUNDLE:
+        field = dim.field
+        allowed = dim.options
+
         entry = prefs[field]
         if not isinstance(entry, dict):
             raise TypeError(
@@ -145,7 +118,8 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
 
         if set(entry.keys()) != {"default", "user_tendencies"}:
             raise KeyError(
-                f'Field "{field}" must have exactly keys ["default", "user_tendencies"]. Got keys: {sorted(entry.keys())}'
+                f'Field "{field}" must have exactly keys ["default", "user_tendencies"]. '
+                f"Got keys: {sorted(entry.keys())}"
             )
 
         default_val = entry["default"]
@@ -165,88 +139,86 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
 
     return out
 
-
 def generate_user_preference_encoding_llm(
-    client,
-    physical_profile: str,
-    model: str = "gpt-4o",
+    client: OpenAI,
+    physical_profile_key: str,
+    model: str = DEFAULT_MODEL,
 ) -> Dict[str, Dict[str, str]]:
     """
-    Generate user preference encoding for a physical profile using an LLM.
+    Generate a user preference encoding for the given physical capability profile key.
 
     STRICT behavior:
       - Requires valid JSON object output
       - Requires exact schema, no missing/extra fields
-      - Requires each default to be in allowed options
+      - Requires each default to be in allowed options (from PREFERENCE_BUNDLE)
       - Raises on any violation
-
-    Returns:
-      Dict[field_name, {"default": <allowed option>, "user_tendencies": <string>}]
     """
-    prompt_path = Path(__file__).parent / "prompts" / "user_preference_encoding_prompt.txt"
-    template = prompt_path.read_text(encoding="utf-8")
-
-    prompt = template.format(
-        physical_profile=physical_profile,
-    )
-
+    prompt = get_user_preference_encoding_prompt(physical_profile_key)
+    
     response = client.chat.completions.create(
         model=model,
         messages=[
             {
                 "role": "system",
                 "content": (
-                    "You generate structured user preference encodings for a robot-assisted mealtime system. "
-                    "Return ONLY valid JSON (no markdown, no extra text). "
-                    'Schema: dict[field] = {"default": <one allowed option>, "user_tendencies": <non-empty string>}. '
-                    "You must include all fields and no extra fields."
+                    "You generate structured user preference encodings for a robot-assisted mealtime system.\n"
+                    "Return ONLY valid JSON (no markdown, no extra text).\n"
+                    'Schema: dict[field] = {"default": <one allowed option>, "user_tendencies": <non-empty string>}.\n'
+                    f"You must include all fields and no extra fields.\n"
+                    f"Fields (exact): {[dim.field for dim in PREFERENCE_BUNDLE]}"
                 ),
             },
             {"role": "user", "content": prompt},
         ],
+        # Slight randomness is fine for "personality", but keep it controlled.
         temperature=0.5,
         max_tokens=5000,
-        # If your SDK supports it, this strongly enforces JSON
         response_format={"type": "json_object"},
     )
 
     raw = response.choices[0].message.content
     print("Raw LLM output:")
     print(raw)
+
     json_str = _extract_json_object(raw)
     parsed = json.loads(json_str)
 
     return _validate_preferences_strict(parsed)
 
+
 def parse_args(argv: List[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="LLM-based dataset generator (30-day deployments)."
-    )
+    parser = argparse.ArgumentParser(description="Generate a user preference encoding via an LLM.")
     parser.add_argument(
         "--physical-profile",
         required=True,
-        choices=list(PHYSICAL_CAPABILITY_PROFILES.keys()),
-        help="Physical capability profile key"
+        choices=[p.label for p in PHYSICAL_CAPABILITY_PROFILES],
+        help="Physical capability profile key",
     )
-    parser.add_argument("--api-key", help="OpenAI API key (overrides env/config)")
+    parser.add_argument("--api-key", default=None, help="OpenAI API key (overrides env var)")
     parser.add_argument("--model", default=DEFAULT_MODEL, help=f"OpenAI model (default: {DEFAULT_MODEL})")
     return parser.parse_args(argv)
 
 
 def main(argv: List[str]) -> int:
     args = parse_args(argv)
-    
-    physical_profile = PHYSICAL_CAPABILITY_PROFILES[args.physical_profile]
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    
-    # Generate user preference encoding for the physical profile 
+
+    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY is not set. Set it in the environment or pass --api-key.")
+
+    client = OpenAI(api_key=api_key)
+
     print(f"Generating user preference encoding for physical profile: {args.physical_profile}")
-    user_preference_encoding = generate_user_preference_encoding_llm(
-        client, physical_profile, args.model
+    enc = generate_user_preference_encoding_llm(
+        client=client,
+        physical_profile_key=args.physical_profile,
+        model=args.model,
     )
-    
+
     print("Generated user preference encoding:")
-    print(json.dumps(user_preference_encoding, indent=2))
+    print(json.dumps(enc, indent=2, ensure_ascii=False))
+    return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main(sys.argv[1:]))
