@@ -41,7 +41,6 @@ robot = [
    "pymongo",
 ]
 
-[project.optional-dependencies]
 develop = [
     "black",
     "docformatter",
