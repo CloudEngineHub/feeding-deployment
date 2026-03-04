@@ -6,13 +6,6 @@ from feeding_deployment.preference_learning.data_generation.prompts.system_descr
 
 USER_PREFERENCE_ENCODING_PROMPT_PATH = Path(__file__).parent / "user_preference_encoding.txt"
 
-
-# PHYSICAL_CAPABILITY_PROFILES: List[PhysicalCapability] = [
-#     PhysicalCapability(
-#         label="severe_paralysis_clear_speech",
-#         description="Severe upper-limb paralysis with clear speech. This user has very limited voluntary control of their arms and hands and cannot reliably press buttons or perform gestures. However, they have clear and consistent speech, allowing them to communicate intentions verbally. They can open and close their mouth reliably and tolerate moderate feeding speeds, but require the robot to handle nearly all physical aspects of the task. Fatigue is present but not extreme, so they can sustain interaction through an entire meal with consistent pacing.",
-#     ),
-
 def get_user_preference_encoding_prompt(physical_profile_label: str) -> str:
     template = USER_PREFERENCE_ENCODING_PROMPT_PATH.read_text(encoding="utf-8")
     system_description = get_system_description_prompt()

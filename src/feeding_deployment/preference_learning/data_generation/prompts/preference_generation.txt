@@ -1,9 +1,4 @@
-You are a care recipient being assisted by a robotic mealtime system.
-
-The robot can assist with feeding, drinking, and mouth wiping. It acquires food
-or tools, moves to a staging position, signals readiness, delivers the tool to
-a transfer location near or inside the mouth, and detects when transfers are
-complete.
+{system_description}
 
 Your task is to determine today's COMPLETE preference bundle P_t.
 
@@ -65,34 +60,6 @@ Time of day: {time_of_day}
 Transient affective state: {affective_state}
 
 ----------------------------
-ALLOWED OPTIONS
-----------------------------
-
-You MUST choose exactly one option for every dimension from the lists below.
-
-{options_by_field}
-
-----------------------------
-DOMAIN NOTES
-----------------------------
-
-Skewering axis:
-- parallel to major axis can produce narrower bites that may be easier for users
-  with limited mouth opening
-- perpendicular to major axis can increase bite acquisition success
-
-Outside mouth distance:
-- near ≈ 3–5 cm
-- medium ≈ 7–10 cm
-- far ≈ 12–15 cm
-- if inside mouth transfer is used, the distance should be "near"
-
-Food temperature guidance:
-- many meals begin refrigerated and are intended to be served warm or hot
-- fruit and dessert meals with intended_serving_temp="cold" are usually eaten
-  without microwaving
-
-----------------------------
 DECISION PROCEDURE
 ----------------------------
 
@@ -120,7 +87,7 @@ If no dippable items exist OR no sauces exist,
 then bite_dipping_preference MUST be "do not dip".
 
 If bite_dipping_preference = "do not dip",
-amount_to_dip must still be selected from its allowed options.
+amount_to_dip MUST be "not applicable".
 
 ----------------------------
 OUTPUT FORMAT
@@ -130,14 +97,14 @@ Return ONLY valid JSON. Do NOT include explanations outside the JSON.
 
 Format:
 
-{
-  "preferences": {
-    "<field_name>": {
+{{
+  "preferences": {{
+    "<field_name>": {{
       "choice": "<exact allowed option>",
       "rationale": "<1–2 sentence explanation>"
-    }
-  }
-}
+    }}
+  }}
+}}
 
 Rules for output:
 

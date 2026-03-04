@@ -13,7 +13,7 @@ PREFERENCE_BUNDLE: List[PreferenceDim] = [
         field="microwave_time",
         label="Microwave time",
         options=["no microwave", "1 min", "2 min", "3 min"],
-        description="How long food should be reheated before being served. Some users may prefer hotter food while others prefer food closer to room temperature."
+        description="How long food should be reheated before being served. Some users may prefer hotter food while others prefer food closer to room temperature. Many meals begin refrigerated and are intended to be served warm or hot. fruit and dessert meals with intended_serving_temp=cold are usually eaten without microwaving."
     ),
     PreferenceDim(
         field="occlusion_relevance",
@@ -49,7 +49,7 @@ PREFERENCE_BUNDLE: List[PreferenceDim] = [
         field="outside_mouth_distance",
         label="For outside-mouth transfer: distance from the mouth",
         options=["near", "medium", "far"],
-        description="If using outside-mouth transfer, how far from the mouth the robot stops before the user takes the bite."
+        description="If using outside-mouth transfer, how far from the mouth the robot stops before the user takes the bite (near ≈ 3-5 cm, medium ≈ 7-10 cm, far ≈ 12-15 cm). If inside mouth transfer is used, the distance should be near."
     ),
     PreferenceDim(
         field="robot_ready_cue",
