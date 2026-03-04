@@ -1,0 +1,114 @@
+{system_description}
+
+Your task is to determine today's COMPLETE preference bundle P_t.
+
+P_t = f(U^phys, U^pref, X_t, Y_t)
+
+Where:
+- U^phys is the user’s physical capability profile.
+- U^pref is the user preference encoding describing their preference tendencies.
+- X_t is the current dining context.
+- Y_t is the user's transient affective state.
+
+A preference bundle is the complete configuration of the robot’s behavior
+parameters for a meal. Each parameter corresponds to a preference dimension
+(e.g., robot speed, transfer mode, dipping behavior). A valid bundle assigns
+exactly one allowed option to every dimension.
+
+You must produce exactly one choice for every dimension listed in ALLOWED OPTIONS.
+
+----------------------------
+PHYSICAL CAPABILITY PROFILE (U^phys)
+----------------------------
+{physical_profile}
+
+----------------------------
+USER PREFERENCE ENCODING (U^pref)
+----------------------------
+
+This encoding describes the user's preference tendencies for how the robot-assisted
+system should behave across situations.
+
+For each behavior dimension the encoding specifies:
+- a default setting that applies in a neutral personal dining scenario
+- conditional tendency rules describing how preferences may change depending on
+  dining context, food type, and affective state.
+
+Use these tendencies to infer the most appropriate preference configuration
+for today's situation.
+
+{user_preference_encoding}
+
+----------------------------
+TODAY'S CONTEXT (X_t, Y_t)
+----------------------------
+
+Meal: {meal}
+
+Dippable items: {dippable_items}
+
+Sauces: {sauces}
+
+Storage condition: {storage_condition}
+
+Intended serving temperature: {intended_serving_temp}
+
+Setting: {setting}
+
+Time of day: {time_of_day}
+
+Transient affective state: {affective_state}
+
+----------------------------
+DECISION PROCEDURE
+----------------------------
+
+1. Start from the default setting for each dimension in the user preference encoding.
+
+2. Apply the conditional tendency rules using today's context
+   (dining setting, food type characteristics, and affective state).
+
+3. If multiple rules apply and conflict, resolve them using the tie-break logic
+   implied by the user's tendencies.
+
+4. Ensure the resulting configuration forms a coherent interaction style for
+   the current situation.
+
+5. Apply HARD RULES last.
+
+----------------------------
+HARD RULES (MUST FOLLOW)
+----------------------------
+
+If transfer_mode = "inside mouth transfer",
+then outside_mouth_distance MUST be "near".
+
+If no dippable items exist OR no sauces exist,
+then bite_dipping_preference MUST be "do not dip".
+
+If bite_dipping_preference = "do not dip",
+amount_to_dip MUST be "not applicable".
+
+----------------------------
+OUTPUT FORMAT
+----------------------------
+
+Return ONLY valid JSON. Do NOT include explanations outside the JSON.
+
+Format:
+
+{{
+  "preferences": {{
+    "<field_name>": {{
+      "choice": "<exact allowed option>",
+      "rationale": "<1–2 sentence explanation>"
+    }}
+  }}
+}}
+
+Rules for output:
+
+- Include ALL dimensions exactly once.
+- Each choice must match an allowed option exactly.
+- Do not invent new options.
+- Do not include extra fields.

@@ -9,6 +9,13 @@ description = "Code for 2024 EmPRISE lab feeding deployment."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+   "openai",
+   "matplotlib",
+   "numpy",
+]
+
+[project.optional-dependencies]
+robot = [
    "pybullet_helpers@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=pybullet-helpers",
    "relational_structs@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=relational-structs",
    "prpl-utils@git+https://github.com/Princeton-Robot-Planning-and-Learning/prpl-mono.git#subdirectory=prpl-utils",
@@ -34,7 +41,6 @@ dependencies = [
    "pymongo",
 ]
 
-[project.optional-dependencies]
 develop = [
     "black",
     "docformatter",
