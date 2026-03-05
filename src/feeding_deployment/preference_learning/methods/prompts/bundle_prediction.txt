@@ -23,7 +23,7 @@ Allowed options per dimension (you MUST choose exactly one of the strings for ea
 {options_block}
 
 HARD RULES (must satisfy):
-- If transfer_mode is "inside mouth transfer", outside_mouth_distance MUST be "near".
+- If transfer_mode is "inside mouth transfer", outside_mouth_distance MUST be "not applicable".
 - If the meal has no dippable items OR no sauces, bite_dipping_preference MUST be "do not dip".
 
 Output ONLY valid JSON with exactly these 19 keys:

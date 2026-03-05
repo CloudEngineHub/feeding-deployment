@@ -57,7 +57,7 @@ def _apply_hard_rules(prefs: Dict[str, str], meal: str, corrected: Dict[str, str
     out = dict(prefs)
     meal_info = _get_meal_info(meal)
     if out.get("transfer_mode") == "inside mouth transfer" and "outside_mouth_distance" not in corrected:
-        out["outside_mouth_distance"] = "near"
+        out["outside_mouth_distance"] = "not applicable"
     if (
         "bite_dipping_preference" not in corrected
         and meal_info.get("known_meal", False)
