@@ -1,0 +1,116 @@
+{system_description}
+
+Consider a care recipient with the following physical functioning abilities:
+
+{physical_profile}
+
+The user eats in various contexts over a long time horizon (≥30 meals). Dining scenarios may vary along three factors:
+
+1. Environmental dining context. Examples include:
+- eating alone in a quiet personal setting
+- eating in a social setting with a person to their left
+- eating in a social setting with a person to their right
+- eating while watching television in front of them
+- eating while working on a laptop or tablet in front of them
+
+2. Food items being served. Examples include:
+- meats such as chicken, beef, pork
+- dips such as barbeque sauce, ranch dressing, ketchup
+- desserts such as brownies
+- fruits such as apples, oranges, strawberries
+- foods with sauces or dips
+
+3. Affective state of the user. Examples include:
+- neutral
+- in a hurry
+- relaxed with ample time
+- physically energetic
+- physically fatigued
+
+User preferences may depend on combinations of these factors. For example:
+
+- If the user's physical profile allows it, they may prefer using a button instead of open-mouth detection in social settings to initiate bites, because open-mouth gestures can be confused with talking.
+- However, if the user is fatigued in the same social setting, they might prefer open-mouth detection to reduce effort.
+- Food type may also interact with environmental dining context (for example, users may prefer less dipping in social settings to reduce messiness).
+
+The user participates in approximately 30 days of robot-assisted meals. During each meal, the system observes the dining context and proposes behavioral settings for the robot-assisted feeding system. The user then reviews these settings and explicitly selects the preferences they want the system to follow.
+
+These selections represent the **ground-truth preferences explicitly chosen by the user for that specific meal context**. Each meal therefore produces a reliable record containing:
+
+- the dining context
+- the food being served
+- the user's affective state
+- the final preferences explicitly selected by the user
+
+Across the 30-day period, the system collects many such context–preference records. These records provide evidence about how the user’s preferences vary across different dining situations, food types, and affective states.
+
+Our goal is to **build a day-by-day cumulative user profile** that summarizes the user's stable preference tendencies. This profile represents how the user generally prefers the robot-assisted feeding system to behave across contexts.
+
+We want to generate a representation of the user's stable tendencies that govern how they prefer a robot-assisted mealtime system to behave in different contexts. This representation should capture a coherent personality for the user, including:
+
+- comfort preferences
+- interaction style
+- tolerance for automation vs. explicit control
+- sensitivity to social or environmental distractions
+
+The summaries you generate should account for interactions between dining context, food type, and affective state.
+
+The user profile is built **cumulatively over time**. Each new meal provides additional ground-truth evidence that should be incorporated into the existing profile.
+
+This prompt performs a single update step in that cumulative process.
+
+PREVIOUS SUMMARY:
+{previous_ltm_summary}
+
+NEW EPISODE SINCE THAT SUMMARY (context + final accepted preferences):
+{new_episode}
+
+IMPORTANT UPDATE RULE:
+
+- If the PREVIOUS SUMMARY is "N/A", start from scratch using the information from the NEW EPISODE.
+- Otherwise, update the PREVIOUS SUMMARY using the new ground-truth evidence from the NEW EPISODE.
+- Treat the preferences in the NEW EPISODE as reliable signals chosen by the user.
+- Do not simply restate the new episode. Instead, maintain a coherent set of long-term tendencies that remain stable unless strong new evidence suggests change.
+
+Your output is a learned user profile derived from the ground-truth preferences the user selected. This profile will be used later to predict the user's ground-truth preference selections in new meal contexts. Do NOT invent arbitrary preferences; infer tendencies from the provided ground-truth records. When evidence is missing, choose conservative defaults consistent with physical abilities and indicate uncertainty using cautious, minimal tendencies.
+
+TASK:
+
+Generate a structured representation of the user's preference tendencies. For each dimension:
+
+1. Infer a reasonable default preference that would apply in a quiet personal dining setting with:
+   - neutral affective state
+   - foods without sauces or dips
+
+Ensure the default preference is compatible with the user's physical abilities and supported by the ground-truth evidence so far (or, if evidence is insufficient, choose a conservative default consistent with physical abilities).
+
+2. Provide "user_tendencies", which describes how the preference may change depending on:
+
+- dining context
+- food type
+- affective state
+- combinations of these factors
+
+The description should include clear conditional rules using the following format:
+
+IF <dining context> AND <affective_state> AND <food_condition> THEN <chosen option> BECAUSE <reason>.
+
+Do not copy the entire new episode contents. Instead, summarize patterns and collapse information where appropriate. Do not include speculative rules or future-looking statements (e.g., "if future evidence shows..."). Only write rules supported by observed ground-truth data so far or by physical constraints in the profile. If there is no evidence yet that a dimension varies across contexts, set user_tendencies to "No context-dependent variation observed yet."
+
+Many contexts produce conflicting signals. For example:
+- Social contexts may encourage explicit control to avoid confusion with talking.
+- Fatigue may encourage low-effort automation such as open-mouth detection or autocontinue.
+
+If you've observed such contexts, your rules must explicitly handle such tie-break cases. Infer a consistent tie-break policy for this user (for example, "minimize effort under fatigue" vs. "maintain explicit control in social settings") that is consistent across different preference dimensions.
+
+Respond with a JSON object.
+
+For each field return:
+
+{{
+"default": <one option>,
+"user_tendencies": <description of how preferences change across contexts>
+}}
+
+Use the exact "Field name" values from the dimension definitions as the JSON keys, and include every dimension exactly once.
+Only choose options that appear in the "Allowed options" list for that dimension.

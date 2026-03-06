@@ -2,32 +2,40 @@ from __future__ import annotations
 
 import argparse
 import glob
-import hashlib
 import json
 import os
 import random
 import sys
-import time
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-
-from feeding_deployment.preference_learning.methods.plotting import _generate_plots
+from typing import Any, Dict, List
 
 from openai import OpenAI
 
-from methods.retrieval import RetrievalModel
-from methods.long_term_memory import LongTermMemoryModel
-from memory_model import MemoryModel, PREF_FIELDS
+from feeding_deployment.preference_learning.methods.plotting import _generate_plots
+from feeding_deployment.preference_learning.methods.utils import (
+    _episode_text,
+    _extract_truth_bundle,
+    _resolve_api_key,
+    _retry_on_rate_limit,
+)
+
+from feeding_deployment.preference_learning.methods.retrieval import RetrievalModel
+from feeding_deployment.preference_learning.methods.long_term_memory import LongTermMemoryModel
+from feeding_deployment.preference_learning.methods.memory_model import MemoryModel
+from feeding_deployment.preference_learning.methods.utils import PREF_FIELDS
+
 
 class _Tee:
     def __init__(self, *streams):
         self._streams = streams
+
     def write(self, s: str) -> None:
         for st in self._streams:
             st.write(s)
             st.flush()
+
     def flush(self) -> None:
         for st in self._streams:
             st.flush()
@@ -38,12 +46,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--data-file", help="Path to one JSON dataset file.")
     p.add_argument("--data-dir", help="Directory containing JSON dataset files.")
     p.add_argument("--k-retrieve", type=int, default=10)
-    p.add_argument("--delta", type=int, default=5)
-    p.add_argument("--max-corrections", type=int, default=19)
+    p.add_argument("--max-corrections", type=int, default=18)
     p.add_argument("--max-meals", type=int, default=0)
     p.add_argument("--num-rollouts", type=int, default=1)
     p.add_argument("--seed", type=int, default=0)
-    p.add_argument("--openai-model", default="gpt-4o")
+    p.add_argument("--openai-model", default="gpt-5.4")
     p.add_argument("--embed-model", default="text-embedding-3-small")
     p.add_argument("--api-key", default="")
     p.add_argument("--cache-dir", default=".cache/llm_memory_eval")
@@ -52,14 +59,29 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def main() -> int:
-    args = parse_args()
-
+def _load_files(args: argparse.Namespace) -> List[str]:
     files: List[str] = []
     if args.data_file:
         files.append(args.data_file)
     if args.data_dir:
         files.extend(sorted(glob.glob(os.path.join(args.data_dir, "*.json"))))
+    return files
+
+
+def _day_path(dir_path: Path, day: int) -> Path:
+    return dir_path / f"day_{day:04d}.json"
+
+
+def _write_json(path: Path, obj: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+
+
+def main() -> int:
+    args = parse_args()
+
+    files = _load_files(args)
     if not files:
         print("No input files provided. Use --data-file or --data-dir.")
         return 1
@@ -75,29 +97,33 @@ def main() -> int:
 
     logs_dir = report_dir / "logs"
     logs_dir.mkdir(parents=True, exist_ok=True)
-    retrieved_log_file = open(logs_dir / "retrieved_memory.jsonl", "a", encoding="utf-8")
-    ltm_log_file = open(logs_dir / "ltm_memory.jsonl", "a", encoding="utf-8")
-    wm_log_file = open(logs_dir / "working_memory.jsonl", "a", encoding="utf-8")
+
+    # Per-day logging directories (one file per day)
+    retrieved_dir = logs_dir / "retrieved_memory"
+    ltm_dir = logs_dir / "ltm_memory"
+    wm_dir = logs_dir / "working_memory"
+    retrieved_dir.mkdir(parents=True, exist_ok=True)
+    ltm_dir.mkdir(parents=True, exist_ok=True)
+    wm_dir.mkdir(parents=True, exist_ok=True)
 
     try:
         client = OpenAI(api_key=_resolve_api_key(args.api_key))
         cache_dir = Path(args.cache_dir)
         cache_dir.mkdir(parents=True, exist_ok=True)
 
-        # Models
         retriever = RetrievalModel(
             client=client,
             embed_model=args.embed_model,
             cache_path=cache_dir / "embeddings.json",
             retry_fn=_retry_on_rate_limit,
         )
+
         ltm = LongTermMemoryModel(
             client=client,
             chat_model=args.openai_model,
-            delta=args.delta,
-            cache_path=cache_dir / "ltm_summaries.json",
             retry_fn=_retry_on_rate_limit,
         )
+
         memory_model = MemoryModel(
             client=client,
             chat_model=args.openai_model,
@@ -117,11 +143,14 @@ def main() -> int:
                 data = json.load(f)
 
             user = str(data.get("user", "unknown"))
-            physical_profile = str(data.get("physical_capability_profile", "")).strip()
+            physical_profile_label = str(data.get("physical_profile_label", "")).strip()
+            if not physical_profile_label:
+                raise SystemExit(f"Dataset missing required field: 'physical_profile_label' in {path}")
+
             days: List[Dict[str, Any]] = list(data.get("days", []))
             days.sort(key=lambda r: int(r.get("day", 0)))
 
-            # metrics (same as before)
+            # metrics
             total_meals = 0
             total_corrections = 0
             acc_after_m_sum: Dict[int, float] = {}
@@ -150,36 +179,19 @@ def main() -> int:
                 rng = random.Random(args.seed + rollout_idx)
 
                 history_texts: List[str] = []
-                past_for_ltm: List[str] = []
                 meals_this_rollout = 0
-                previous_ltm_summary = ""
+
+                # Reset LTM for this rollout/user
+                ltm.reset(user=user, physical_profile_label=physical_profile_label)
+                ltm_summary = ""  # start with empty LTM summary for the first day
 
                 for day_rec in days:
                     day = int(day_rec.get("day", 0))
                     ctx = day_rec.get("context", {}) or {}
                     truth = _extract_truth_bundle(day_rec)
 
-                    # Update / get LTM
-                    ltm_summary, boundary, delta, new_episodes = ltm.update_if_needed(
-                        user=user,
-                        day=day,
-                        physical_profile=physical_profile,
-                        previous_ltm_summary=previous_ltm_summary,
-                        past_for_ltm=past_for_ltm,
-                    )
-                    previous_ltm_summary = ltm_summary
-
-                    ltm_log_file.write(json.dumps({
-                        "run_timestamp": run_ts,
-                        "dataset_file": path,
-                        "user": user,
-                        "rollout": rollout_idx,
-                        "day": day,
-                        "boundary": boundary,
-                        "delta": delta,
-                        "ltm_summary": ltm_summary,
-                        "new_episodes": new_episodes,
-                    }, ensure_ascii=False) + "\n")
+                    wm_steps: List[Dict[str, Any]] = []
+                    retrieved_steps: List[Dict[str, Any]] = []
 
                     corrected: Dict[str, str] = {}
                     m = 0
@@ -187,37 +199,46 @@ def main() -> int:
                     affective_state_by_day[day] = affective_state
 
                     while True:
-                        wm_log_file.write(json.dumps({
-                            "run_timestamp": run_ts,
-                            "dataset_file": path,
-                            "user": user,
-                            "rollout": rollout_idx,
-                            "day": day,
-                            "m": m,
-                            "corrected": corrected,
-                        }, ensure_ascii=False) + "\n")
+                        wm_steps.append(
+                            {
+                                "run_timestamp": run_ts,
+                                "dataset_file": path,
+                                "user": user,
+                                "rollout": rollout_idx,
+                                "day": day,
+                                "m": m,
+                                "corrected": dict(corrected),
+                            }
+                        )
 
+                        print(f"  [Predict] Calling OpenAI for bundle (day {day}, m={m}) ...", flush=True)
                         pred, debug = memory_model.predict_bundle(
-                            physical_profile=physical_profile,
+                            physical_profile_label=physical_profile_label,
                             ltm_summary=ltm_summary,
                             history_texts=history_texts,
                             context=ctx,
                             corrected=corrected,
                         )
 
-                        retrieved_log_file.write(json.dumps({
-                            "run_timestamp": run_ts,
-                            "dataset_file": path,
-                            "user": user,
-                            "rollout": rollout_idx,
-                            "day": day,
-                            "m": m,
-                            "ablation": args.ablation,
-                            **debug,
-                        }, ensure_ascii=False) + "\n")
+                        retrieved_steps.append(
+                            {
+                                "run_timestamp": run_ts,
+                                "dataset_file": path,
+                                "user": user,
+                                "rollout": rollout_idx,
+                                "day": day,
+                                "m": m,
+                                "ablation": args.ablation,
+                                **debug,
+                            }
+                        )
 
                         unrevealed = [f for f in PREF_FIELDS if f not in corrected]
-                        acc = (sum(1 for f in unrevealed if pred.get(f) == truth.get(f)) / float(len(unrevealed))) if unrevealed else 1.0
+                        acc = (
+                            (sum(1 for f in unrevealed if pred.get(f) == truth.get(f)) / float(len(unrevealed)))
+                            if unrevealed
+                            else 1.0
+                        )
 
                         acc_after_m_sum[m] = acc_after_m_sum.get(m, 0.0) + acc
                         acc_after_m_n[m] = acc_after_m_n.get(m, 0) + 1
@@ -236,6 +257,16 @@ def main() -> int:
                             acc_m1_n_by_day[day] += 1
 
                         mismatches = [f for f in PREF_FIELDS if f not in corrected and pred.get(f) != truth.get(f)]
+                        
+                        num_mismatches = len(mismatches)
+                        num_retrieved = len(debug.get("retrieved_episodes", []))
+
+                        print(
+                            f"  [user={user}] rollout {rollout_idx+1}/{args.num_rollouts} "
+                            f"day {day} m={m}: acc_unrevealed={acc:.3f} "
+                            f"mismatches={num_mismatches} (retrieved={num_retrieved})",
+                            flush=True,
+                        )
 
                         if not mismatches or m >= args.max_corrections:
                             total_meals += 1
@@ -252,15 +283,57 @@ def main() -> int:
                                 zero_correction_meals_total += 1
                                 if day >= 24:
                                     zero_correction_meals_final_week += 1
+                            print(
+                                f"  Meal finished after {m} corrections\n",
+                                flush=True,
+                            )
                             break
 
                         f_corr = rng.choice(mismatches)
-                        corrected[f_corr] = truth.get(f_corr, "")
-                        m += 1
+                        corrected_value = truth.get(f_corr, "")
 
+                        print(
+                            f"    correcting {f_corr} -> {corrected_value}",
+                            flush=True,
+                        )
+
+                        corrected[f_corr] = corrected_value
+                        m += 1
+                    
+                    # Build episode text (used for LTM update and retrieval history)
                     ep_txt = _episode_text(day=day, context=ctx, prefs=truth)
+
+                    # Update LTM every day
+                    print(f"  [LTM] Updating summary (day {day}) ...", flush=True)
+                    ltm.add_episode(ep_txt)
+                    ltm_summary = ltm.get_ltm()  # JSON string (or empty)
+                    
+                    log_ltm_summary = ltm_summary
+                    try:
+                        log_ltm_summary = json.loads(ltm_summary)
+                    except Exception:
+                        print(f"Warning: LTM summary for logging is not valid JSON. Logging raw string. Summary:\n{ltm_summary}\n", flush=True)
+
+                    # Per-day logs we will write once at the end of the day
+                    ltm_record = {
+                        "run_timestamp": run_ts,
+                        "dataset_file": path,
+                        "user": user,
+                        "physical_profile_label": physical_profile_label,
+                        "rollout": rollout_idx,
+                        "day": day,
+                        "context": ctx,
+                        "episode_text": ep_txt,
+                        "ltm_summary_raw": log_ltm_summary,
+                    }
+
+                    # Write per-day files (one JSON per day per folder)
+                    _write_json(_day_path(ltm_dir, day), ltm_record)
+                    _write_json(_day_path(wm_dir, day), {"steps": wm_steps})
+                    _write_json(_day_path(retrieved_dir, day), {"steps": retrieved_steps})
+
+                    # Update retrieval history after finishing the interactive correction loop
                     history_texts.append(ep_txt)
-                    past_for_ltm.append(ep_txt)
 
                     if args.max_meals and meals_this_rollout >= args.max_meals:
                         break
@@ -293,32 +366,43 @@ def main() -> int:
                 for f in PREF_FIELDS
             }
 
-            # summary stats (same as your original; omitted here for brevity if you want paste it back)
-            summary_statistics = {}
+            summary_statistics = {
+                "zero_correction_meals_total": zero_correction_meals_total,
+                "zero_correction_meals_final_week": zero_correction_meals_final_week,
+            }
 
-            user_reports.append({
-                "file": path,
-                "user": user,
-                "meals": total_meals,
-                "num_rollouts": args.num_rollouts,
-                "mean_corrections_to_stop": mean_corr,
-                "accuracy_after_m": acc_after_m,
-                "per_day_metrics": per_day_metrics,
-                "by_affective_state": by_affective_state,
-                "per_dimension_m0_accuracy": per_dimension_m0_accuracy,
-                "summary_statistics": summary_statistics,
-            })
+            user_reports.append(
+                {
+                    "file": path,
+                    "user": user,
+                    "physical_profile_label": physical_profile_label,
+                    "meals": total_meals,
+                    "num_rollouts": args.num_rollouts,
+                    "mean_corrections_to_stop": mean_corr,
+                    "accuracy_after_m": acc_after_m,
+                    "per_day_metrics": per_day_metrics,
+                    "by_affective_state": by_affective_state,
+                    "per_dimension_m0_accuracy": per_dimension_m0_accuracy,
+                    "summary_statistics": summary_statistics,
+                }
+            )
 
         retriever.flush()
-        ltm.flush()
 
         report_path = report_dir / "report.json"
         with open(report_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "users": user_reports,
-                "run_timestamp": run_ts,
-                "ablation": args.ablation,
-            }, f, ensure_ascii=False, indent=2)
+            json.dump(
+                {
+                    "users": user_reports,
+                    "run_timestamp": run_ts,
+                    "ablation": args.ablation,
+                    "k_retrieve": args.k_retrieve,
+                    "num_rollouts": args.num_rollouts,
+                },
+                f,
+                ensure_ascii=False,
+                indent=2,
+            )
 
         print(f"\nWrote report: {report_path}")
         print(f"Terminal output saved to: {report_txt_path}")
@@ -329,9 +413,6 @@ def main() -> int:
     finally:
         sys.stdout = real_stdout
         report_txt_file.close()
-        retrieved_log_file.close()
-        ltm_log_file.close()
-        wm_log_file.close()
 
 
 if __name__ == "__main__":

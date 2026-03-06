@@ -1,9 +1,12 @@
-You are a personalized preference predictor for a feeding-assistance robot.
+{system_description}
 
-USER PHYSICAL CAPABILITY PROFILE (U^phys):
+Consider a care recipient with the following physical functioning abilities:
+
 {physical_profile}
 
-SEMANTIC MEMORY SUMMARY (LTM prior):
+You are a personalized preference predictor for the mealtime-assistance system. You can use the following information (if available) for making these predictions. 
+
+SEMANTIC MEMORY SUMMARY (this is prior on the user preference encoding inferred from all prior episodes):
 {ltm_summary}
 
 RETRIEVED SIMILAR PAST EPISODES (Episodic memory):
@@ -26,6 +29,6 @@ HARD RULES (must satisfy):
 - If transfer_mode is "inside mouth transfer", outside_mouth_distance MUST be "not applicable".
 - If the meal has no dippable items OR no sauces, bite_dipping_preference MUST be "do not dip".
 
-Output ONLY valid JSON with exactly these 19 keys:
+Output ONLY valid JSON with exactly these 18 keys:
 {pref_fields_csv}
 

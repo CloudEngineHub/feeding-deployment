@@ -9,13 +9,13 @@ import feeding_deployment.preference_learning.config as root_config  # type: ign
 from feeding_deployment.preference_learning.config.preference_bundle import (
     PREFERENCE_BUNDLE as _PREF_BUNDLE_DIMS,
 )
-from feeding_deployment.preference_learning.methods.prompts.bundle_prediction_prompt import (
+
+from feeding_deployment.preference_learning.methods.prompts.bundle_prediction import (
     get_bundle_prediction_prompt,
 )
 
 from feeding_deployment.preference_learning.methods.retrieval import RetrievalModel
-from feeding_deployment.preference_learning.methods.long_term_memory import LongTermMemoryModel, _build_options_block
-
+from feeding_deployment.preference_learning.methods.long_term_memory import LongTermMemoryModel
 from feeding_deployment.preference_learning.methods.utils import PREF_FIELDS
 
 PREF_OPTIONS: Dict[str, List[str]] = {name: opts for (name, _, opts) in root_config.PREFERENCE_BUNDLE}
@@ -56,14 +56,17 @@ def _get_meal_info(meal: str) -> Dict[str, Any]:
 def _apply_hard_rules(prefs: Dict[str, str], meal: str, corrected: Dict[str, str]) -> Dict[str, str]:
     out = dict(prefs)
     meal_info = _get_meal_info(meal)
+
     if out.get("transfer_mode") == "inside mouth transfer" and "outside_mouth_distance" not in corrected:
         out["outside_mouth_distance"] = "not applicable"
+
     if (
         "bite_dipping_preference" not in corrected
         and meal_info.get("known_meal", False)
         and ((not meal_info["has_dippable"]) or (not meal_info["has_sauce"]))
     ):
         out["bite_dipping_preference"] = "do not dip"
+
     return out
 
 
@@ -76,10 +79,32 @@ def _query_text(context: Dict[str, Any], corrected: Dict[str, str]) -> str:
     return f"{ctx}\ncorrected_so_far: {corr}"
 
 
+def _build_options_block() -> str:
+    """
+    Bundle-prediction options block. Match the format used in your prompt-printer script:
+    - field: [opt1, opt2, ...]
+    """
+    lines: List[str] = []
+    for field in PREF_FIELDS:
+        opts = PREF_OPTIONS[field]
+        lines.append(f"- {field}: [{', '.join(opts)}]")
+    return "\n".join(lines)
+
+
+def _format_corrected_block(corrected: Dict[str, str]) -> str:
+    """
+    Match the format used by your get_bundle_prediction_prompt printer:
+    each line is key=value.
+    """
+    if not corrected:
+        return "(none)"
+    return "\n".join(f"{k}={v}" for k, v in corrected.items())
+
+
 class MemoryModel:
     """
     Combines:
-    - LongTermMemoryModel (semantic memory summary updated every Δ)
+    - LongTermMemoryModel (semantic memory summary, as JSON string)
     - RetrievalModel (episodic retrieval over history)
     - Working memory (current context + corrected so far)
     And calls the LLM to predict the preference bundle.
@@ -107,7 +132,7 @@ class MemoryModel:
 
     def predict_bundle(
         self,
-        physical_profile: str,
+        physical_profile_label: str,
         ltm_summary: str,
         history_texts: List[str],
         context: Dict[str, Any],
@@ -115,6 +140,9 @@ class MemoryModel:
     ) -> Tuple[Dict[str, str], Dict[str, Any]]:
         """
         Returns (predicted_bundle, debug_info).
+
+        - physical_profile_label: label string (used by get_bundle_prediction_prompt)
+        - ltm_summary: JSON string from your new LongTermMemoryModel (or "N/A"/"" if absent)
         """
         query = _query_text(context, corrected)
 
@@ -123,20 +151,22 @@ class MemoryModel:
         if use_em and self.k_retrieve > 0 and history_texts:
             retrieved = self.retriever.retrieve(history_texts, query, self.k_retrieve)
 
+        # Ablations
         ltm_for_pred = ltm_summary if self.ablation not in ("em_only", "no_memory") else ""
         retrieved_for_pred = retrieved if self.ablation not in ("ltm_only", "no_memory") else []
 
-        opts_block = _build_options_block()
+        # Prompt blocks
+        options_block = _build_options_block()
         retrieved_block = "\n\n".join(retrieved_for_pred) if retrieved_for_pred else "(none)"
-        corrected_block = "\n".join(f"- {k}: {v}" for k, v in corrected.items()) if corrected else "(none)"
+        corrected_block = _format_corrected_block(corrected)
 
         prompt = get_bundle_prediction_prompt(
-            physical_profile=physical_profile,
+            physical_profile_label=physical_profile_label,
             ltm_summary=ltm_for_pred,
             retrieved_block=retrieved_block,
             context=context,
             corrected_block=corrected_block,
-            options_block=opts_block,
+            options_block=options_block,
         )
 
         def _call() -> Any:
@@ -147,7 +177,7 @@ class MemoryModel:
                     {"role": "user", "content": prompt},
                 ],
                 temperature=0,
-                max_tokens=650,
+                max_completion_tokens=15000,
             )
 
         resp = self._retry(_call)
@@ -155,6 +185,7 @@ class MemoryModel:
         raw = _strip_code_fences(raw)
         data = _safe_json_load(raw) or {}
 
+        # Validate against allowed options, fallback to corrected or default
         out: Dict[str, str] = {}
         for field in PREF_FIELDS:
             val = str(data.get(field, "")).strip()
@@ -165,9 +196,11 @@ class MemoryModel:
 
         out = _apply_hard_rules(out, meal=str(context.get("meal", "")), corrected=corrected)
 
+        # Corrected always overrides
         for k, v in corrected.items():
             out[k] = v
 
+        # Final validation
         for field in PREF_FIELDS:
             if out[field] not in PREF_OPTIONS[field]:
                 out[field] = PREF_OPTIONS[field][0]
@@ -176,5 +209,7 @@ class MemoryModel:
             "query": query,
             "use_em": use_em,
             "retrieved_episodes": retrieved,
+            "ablation": self.ablation,
+            "raw_model_output": raw,
         }
         return out, debug

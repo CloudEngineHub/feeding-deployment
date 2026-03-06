@@ -115,7 +115,7 @@ def generate_user_preference_encoding_llm(
             {"role": "user", "content": prompt},
         ],
         temperature=0.5,
-        max_completion_tokens=5000,
+        max_completion_tokens=15000,
         response_format={"type": "json_object"},
     )
 
