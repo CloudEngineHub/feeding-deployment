@@ -52,11 +52,11 @@ class RVizInterface:
         # Rajat ToDo: Resolve the path error
         # self._add_mesh(self._scene_description.table_pose, str(self._scene_description.table_mesh_path), marker_id=0)
 
-        # Visualize the vention stand.
-        self._add_cube(self._scene_description.robot_holder_pose,
-                self._scene_description.robot_holder_half_extents,
-                self._scene_description.robot_holder_rgba,
-                marker_id=1)
+        # # Visualize the vention stand.
+        # self._add_cube(self._scene_description.robot_holder_pose,
+        #         self._scene_description.robot_holder_half_extents,
+        #         self._scene_description.robot_holder_rgba,
+        #         marker_id=1)
         
         # Visualize the wheelchair.
         # Rajat ToDo: Resolve the path error

@@ -60,7 +60,10 @@ from feeding_deployment.simulation.state import FeedingDeploymentWorldState
 import feeding_deployment.perception.gestures_perception.static_gesture_detectors as static_gesture_detectors
 
 # Define some predicates that can be used for sequencing the high-level actions.
-tool_type = Type("tool")  # utensil, drink, or wiping tool
+tool_type = Type("tool")  
+nav_target_type = Type("nav_target")
+appliance_type = Type("appliance", parent=nav_target_type)
+
 GripperFree = Predicate("GripperFree", [])  # not holding any tool
 Holding = Predicate("Holding", [tool_type])  # holding tool
 ToolTransferDone = Predicate("ToolTransferDone", [tool_type])  # wiped, drank, or ate
@@ -69,6 +72,10 @@ ToolPrepared = Predicate("ToolPrepared", [tool_type])  # e.g., bite acquired
 PlateInView = Predicate("PlateInView", [])  # of the hand camera
 ResetPos = Predicate("ResetPos", [])  # robot in reset position
 IsUtensil = Predicate("IsUtensil", [tool_type])
+
+InFrontOf = Predicate("InFrontOf", [nav_target_type])
+DoorOpen = Predicate("DoorOpen", [appliance_type])
+DoorClosed = Predicate("DoorClosed", [appliance_type])
 
 # Define high-level actions.
 class HighLevelAction(abc.ABC):

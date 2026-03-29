@@ -1,7 +1,4 @@
-FLAIR_PATH = "/home/isacc/deployment_ws/src/FLAIR/bite_acquisition/scripts"
 import sys
-sys.path.append(FLAIR_PATH)
-
 import os
 import rospy
 import imageio

@@ -29,14 +29,14 @@
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
         <arg name="align_depth" value="true"/>
         <arg name="enable_sync" value="true"/>
-        <!-- <arg name="filters" value="pointcloud"/> -->
+        <arg name="filters" value="pointcloud"/>
     </include>
 
     <!-- FT sensor -->
-    <include file="$(find netft_rdt_driver)/launch/ft_sensor.launch">
+    <!-- <include file="$(find netft_rdt_driver)/launch/ft_sensor.launch">
         <arg name="ip_address" value="192.168.1.4"/>
         <arg name="rate" value="1000"/>
-    </include>
+    </include> -->
 
      <!-- RViz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg base_path)/config/real.rviz" required="true" />

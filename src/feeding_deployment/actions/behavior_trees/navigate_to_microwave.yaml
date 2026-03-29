@@ -1,0 +1,12 @@
+name: "NavigateToMicrowave"
+description: "Navigate to the microwave."
+type: "Behavior"
+parameters:
+  - name: "Speed"
+    description: "Speed of the robot during navigation to the microwave."
+    space:
+      type: Enum
+      elements: ["low", "medium", "high"]
+    is_user_editable: True
+    value: "medium"
+fn: !hla navigate_to_microwave
