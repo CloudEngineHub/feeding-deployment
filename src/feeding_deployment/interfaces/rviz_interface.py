@@ -35,7 +35,7 @@ class RVizInterface:
 
         # Create publishers for rviz simulation.
         self.sim_joint_publishers = rospy.Publisher("/sim/robot_joint_states", JointState, queue_size=10)
-        self.marker_pub = rospy.Publisher("/visualization_marker", Marker, queue_size=10)
+        self.marker_pub = rospy.Publisher("/visualization_marker", Marker, queue_size=100)
         self.utensil_visualization_pub = rospy.Publisher('utensil_visualization_marker_array', MarkerArray, queue_size=10)
         self.food_visualization_pub = rospy.Publisher('food_visualization_marker_array', MarkerArray, queue_size=10)
         
@@ -125,6 +125,67 @@ class RVizInterface:
 
         self.static_transform_broadcaster.sendTransform(static_transform_stamped)
 
+    def visualize_poses(self, poses: list[Pose], frame_id: str, ns: str) -> None:
+        """Visualize poses as RGB axis arrows in RViz.
+
+        For each pose:
+        - x-axis: red
+        - y-axis: green
+        - z-axis: blue
+        """
+        axis_length = 0.08
+        shaft_diameter = 0.008
+        head_diameter = 0.015
+        head_length = 0.02
+
+        colors = [
+            (1.0, 0.0, 0.0, 1.0),  # x axis
+            (0.0, 1.0, 0.0, 1.0),  # y axis
+            (0.0, 0.0, 1.0, 1.0),  # z axis
+        ]
+
+        canonical_axes = np.eye(3)  # columns / rows are unit x,y,z
+
+        for i, pose in enumerate(poses):
+            rot = R.from_quat(pose.orientation).as_matrix()
+            origin = np.array(pose.position, dtype=float)
+
+            for axis_idx in range(3):
+                axis_dir = rot @ canonical_axes[:, axis_idx]
+                tip = origin + axis_length * axis_dir
+
+                marker = Marker()
+                marker.header.stamp = rospy.Time.now()
+                marker.header.frame_id = frame_id
+                marker.ns = ns
+                marker.id = 3 * i + axis_idx
+                marker.type = Marker.ARROW
+                marker.action = Marker.ADD
+
+                # Keep markers persistent until replaced/deleted.
+                marker.lifetime = rospy.Duration(0)
+
+                # Arrow defined by start/end points.
+                start = PoseMsg().position
+                start.x, start.y, start.z = origin.tolist()
+
+                end = PoseMsg().position
+                end.x, end.y, end.z = tip.tolist()
+
+                marker.points = [start, end]
+
+                marker.scale.x = shaft_diameter
+                marker.scale.y = head_diameter
+                marker.scale.z = head_length
+
+                r, g, b, a = colors[axis_idx]
+                marker.color.r = r
+                marker.color.g = g
+                marker.color.b = b
+                marker.color.a = a
+
+                self.marker_pub.publish(marker)
+            
     def _add_cube(self, 
                 pose: Pose, half_extents: tuple[float, float, float],
                 rgba: tuple[float, float, float, float],

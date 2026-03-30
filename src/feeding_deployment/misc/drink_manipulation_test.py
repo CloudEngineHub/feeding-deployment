@@ -107,9 +107,9 @@ class TFInterface:
         return (position, orientation)
 
 
-class ArUcoPerception(TFInterface):
+class DrinkPerception(TFInterface):
     def __init__(self, num_perception_samples=10):
-        rospy.init_node('ArUcoPerception')
+        rospy.init_node('DrinkPerception')
 
         self.num_perception_samples = num_perception_samples
         self.bridge = CvBridge()
@@ -370,7 +370,7 @@ if __name__ == '__main__':
     # robot_interface = ArmInterfaceClient()
     # robot_interface.execute_command(cmd)
 
-    aruco_perception = ArUcoPerception()
+    drink_perception = DrinkPerception()
     drink_manipulation = DrinkManipulation()
 
     # NOTE: these are 6dof-specific joint positions, would need to be updated

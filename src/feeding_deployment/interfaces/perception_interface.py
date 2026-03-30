@@ -10,6 +10,7 @@ from scipy.spatial.transform import Rotation as R
 import json
 import pickle
 import serial
+import copy
 
 LED_SERIAL_PORT = '/dev/ttyACM0'
 LED_BAUD_RATE = 115200
@@ -23,7 +24,8 @@ try:
     from netft_rdt_driver.srv import String_cmd
 
     from feeding_deployment.perception.head_perception.ros_wrapper import HeadPerceptionROSWrapper
-    from feeding_deployment.perception.aruco_perception.aruco_perception import ArUcoPerception
+    from feeding_deployment.perception.drink_perception.drink_perception import DrinkPerception
+    from feeding_deployment.perception.handle_perception.handle_perception import HandlePerception
 except ModuleNotFoundError:
     ROSPY_IMPORTED = False
 
@@ -42,7 +44,8 @@ class PerceptionInterface:
         if self.robot_interface is None:
             self.simulation = True
             self._head_perception = None
-            self._aruco_perception = None
+            self._drink_perception = None
+            self._handle_perception = None
         else:
             self.simulation = False
             self.tfBuffer = tf2_ros.Buffer()
@@ -57,7 +60,8 @@ class PerceptionInterface:
                     self._head_perception.run_head_perception()
 
             # Rajat ToDo: pass perception queues to all perception classes instead of having them use ros subscribers which spawn threads
-            self._aruco_perception = ArUcoPerception()
+            self._drink_perception = DrinkPerception()
+            self._handle_perception = HandlePerception()
 
             self.speak_pub = rospy.Publisher('/speak', String, queue_size=1)
 
@@ -298,6 +302,120 @@ class PerceptionInterface:
         T[3,3] = 1
 
         return T
+    
+    def _generate_door_arc_waypoints(
+        self,
+        handle_pose: Pose,
+        hinge_pose: Pose,
+        arc_length_m: float,
+        waypoint_spacing_m: float,
+        direction: int = 1,
+        rotate_orientation: bool = True,
+    ) -> list[Pose]:
+        """Generate end-effector waypoints along a door-opening arc.
+
+        Assumptions:
+        - Door rotates in the xy plane.
+        - Hinge axis is vertical (z-axis).
+        - Arc is centered at hinge_pose.position[:2].
+        """
+        if arc_length_m <= 0:
+            return []
+        if waypoint_spacing_m <= 0:
+            raise ValueError("waypoint_spacing_m must be > 0")
+        if direction not in (-1, 1):
+            raise ValueError("direction must be either +1 or -1")
+
+        hx, hy, hz = handle_pose.position
+        cx, cy, _ = hinge_pose.position
+
+        radius_vec = np.array([hx - cx, hy - cy], dtype=float)
+        radius = np.linalg.norm(radius_vec)
+        if radius < 1e-8:
+            raise ValueError("Handle pose is too close to hinge pose; radius is ~0.")
+
+        start_theta = np.arctan2(radius_vec[1], radius_vec[0])
+        total_angle = arc_length_m / radius
+        num_segments = max(1, int(np.ceil(arc_length_m / waypoint_spacing_m)))
+
+        start_rot = R.from_quat(handle_pose.orientation)
+        waypoints: list[Pose] = []
+
+        for i in range(1, num_segments + 1):
+            frac = i / num_segments
+            delta_angle = direction * frac * total_angle
+            theta = start_theta + delta_angle
+
+            x = cx + radius * np.cos(theta)
+            y = cy + radius * np.sin(theta)
+            z = hz
+
+            if rotate_orientation:
+                yaw_rot = R.from_euler("z", delta_angle)
+                orientation = (yaw_rot * start_rot).as_quat()
+            else:
+                orientation = handle_pose.orientation
+
+            waypoints.append(
+                Pose(
+                    position=(x, y, z),
+                    orientation=orientation,
+                )
+            )
+
+        return waypoints
+    
+    def perceive_handle_opening_poses(self):
+
+        if self.simulation:
+            # load them from a pickle file
+            with open(self.log_dir / 'handle_opening_pos.pkl', 'rb') as f:
+                handle_opening_pos = pickle.load(f)
+            handle_poses = handle_opening_pos["last_handle_poses"]
+
+        else:
+            self._handle_perception.turn_on()
+            # Rajat Hack: Wait three seconds
+            time.sleep(3)
+
+            handle_pose_msg = rospy.wait_for_message("/handle_pose", PoseMsg)
+            hinge_pose_msg = rospy.wait_for_message("/hinge_pose", PoseMsg)
+            self._handle_perception.turn_off()
+
+            grasp_pose = Pose(
+                position=(handle_pose_msg.position.x - 0.02, handle_pose_msg.position.y, handle_pose_msg.position.z),
+                orientation=(handle_pose_msg.orientation.x, handle_pose_msg.orientation.y, handle_pose_msg.orientation.z, handle_pose_msg.orientation.w)
+            )
+
+            hinge_pose = Pose(
+                position=(hinge_pose_msg.position.x, hinge_pose_msg.position.y, hinge_pose_msg.position.z),
+                orientation=(hinge_pose_msg.orientation.x, hinge_pose_msg.orientation.y, hinge_pose_msg.orientation.z, hinge_pose_msg.orientation.w)
+            )
+
+            pre_grasp_pose = Pose(
+                position=(grasp_pose.position[0] - 0.12, grasp_pose.position[1], grasp_pose.position[2]),
+                orientation=(grasp_pose.orientation[0], grasp_pose.orientation[1], grasp_pose.orientation[2], grasp_pose.orientation[3])
+            )
+
+            opening_waypoints = self._generate_door_arc_waypoints(
+                handle_pose=grasp_pose,
+                hinge_pose=hinge_pose,
+                arc_length_m=0.3,
+                waypoint_spacing_m=0.05,
+                direction=1,
+                rotate_orientation=True,
+            )
+
+            handle_poses = {
+                "pre_grasp_pose": pre_grasp_pose,
+                "grasp_pose": grasp_pose,
+                "opening_waypoints": opening_waypoints,
+            }
+
+        self.last_handle_poses = handle_poses
+        self.sync_rviz()
+
+        return handle_poses
 
     def perceive_drink_pickup_poses(self):
 
@@ -348,6 +466,7 @@ class PerceptionInterface:
             drink_poses = drink_pickup_pos["last_drink_poses"]
 
         else:
+            self._drink_perception.turn_on()
             # Rajat Hack: Wait one second for the aruco mean to be correct, does this actually help though?
             time.sleep(3)
 
@@ -355,6 +474,7 @@ class PerceptionInterface:
             position = (aruco_pose_msg.position.x, aruco_pose_msg.position.y, aruco_pose_msg.position.z)
             orientation = (aruco_pose_msg.orientation.x, aruco_pose_msg.orientation.y, aruco_pose_msg.orientation.z, aruco_pose_msg.orientation.w)
             self.aruco_pose = (position, orientation)
+            self._drink_perception.turn_off()
 
             drink_poses  = {}
             drink_poses['drink_pose'] = self.get_aruco_relative_pose(get_drink_transform(), "drink")
@@ -586,9 +706,9 @@ class PerceptionInterface:
     def sync_rviz(self):
         if self.last_plate_poses:
             plate_poses = self.last_plate_poses
-            self._aruco_perception.updateTF("base_link", "plate", self.pose_to_matrix(plate_poses['plate_pose']))
-            self._aruco_perception.updateTF("base_link", "plate_pre", self.pose_to_matrix(plate_poses['pre_grasp_pose']))
+            self._drink_perception.updateTF("base_link", "plate", self.pose_to_matrix(plate_poses['plate_pose']))
+            self._drink_perception.updateTF("base_link", "plate_pre", self.pose_to_matrix(plate_poses['pre_grasp_pose']))
         if self.last_drink_poses:
             drink_poses = self.last_drink_poses
-            self._aruco_perception.updateTF("base_link", "drink", self.pose_to_matrix(drink_poses['drink_pose']))
-            self._aruco_perception.updateTF("base_link", "drink_pre", self.pose_to_matrix(drink_poses['pre_grasp_pose']))
+            self._drink_perception.updateTF("base_link", "drink", self.pose_to_matrix(drink_poses['drink_pose']))
+            self._drink_perception.updateTF("base_link", "drink_pre", self.pose_to_matrix(drink_poses['pre_grasp_pose']))

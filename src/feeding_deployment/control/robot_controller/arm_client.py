@@ -20,7 +20,7 @@ except ModuleNotFoundError as e:
     ROSPY_IMPORTED = False
 
 from feeding_deployment.control.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
-from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
+from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, CartesianTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
 # from feeding_deployment.safety.watchdog import WATCHDOG_MONITOR_FREQUENCY, PeekableQueue
 
 class ArmInterfaceClient:
@@ -83,6 +83,9 @@ class ArmInterfaceClient:
 
         if cmd.__class__.__name__ == "JointTrajectoryCommand":
             return self._arm_interface.set_joint_trajectory(cmd.traj)
+        
+        if cmd.__class__.__name__ == "CartesianTrajectoryCommand":
+            return self._arm_interface.set_cartesian_trajectory(cmd.traj)
 
         if cmd.__class__.__name__ == "JointCommand":
             if self.in_compliant_mode:

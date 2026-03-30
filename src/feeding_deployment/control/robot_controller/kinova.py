@@ -599,6 +599,59 @@ class KinovaArm:
             else:
                 print("Cartesian movement completed")
 
+    def move_cartesian_trajectory(self, trajectory, blocking=True):
+        assert not self.cyclic_running, "Arm must be in high-level servoing mode"
+        assert len(trajectory) > 0, "Invalid trajectory"
+        assert len(trajectory[0][0]) == 3 and len(trajectory[0][1]) == 4, \
+            "Invalid trajectory format"
+
+        waypoints = Base_pb2.WaypointList()
+        waypoints.duration = 0.0
+        waypoints.use_optimal_blending = False
+
+        n = len(trajectory)
+        for index, point in enumerate(trajectory):
+            cartesian_pose = point[0]
+            cartesian_quat = point[1]
+            theta_xyz = R.from_quat(cartesian_quat).as_euler("xyz", degrees=True)
+
+            waypoint = waypoints.waypoints.add()
+            waypoint.name = f"waypoint_{index}"
+            waypoint.cartesian_waypoint.pose.x = cartesian_pose[0]
+            waypoint.cartesian_waypoint.pose.y = cartesian_pose[1]
+            waypoint.cartesian_waypoint.pose.z = cartesian_pose[2]
+            waypoint.cartesian_waypoint.pose.theta_x = theta_xyz[0]
+            waypoint.cartesian_waypoint.pose.theta_y = theta_xyz[1]
+            waypoint.cartesian_waypoint.pose.theta_z = theta_xyz[2]
+            waypoint.cartesian_waypoint.reference_frame = \
+                Base_pb2.CARTESIAN_REFERENCE_FRAME_BASE
+            if index == 0 or index == n - 1:
+                waypoint.cartesian_waypoint.blending_radius = 0.0
+            else:
+                waypoint.cartesian_waypoint.blending_radius = 0.01
+            waypoint.cartesian_waypoint.duration = 0.5
+
+        result = self.base.ValidateWaypointList(waypoints)
+        if len(result.trajectory_error_report.trajectory_error_elements) != 0:
+            print("Error found in trajectory")
+            print(result.trajectory_error_report)
+            return
+
+        print("Reaching cartesian pose trajectory...")
+
+        self.end_or_abort_event.clear()
+        self.base.ExecuteWaypointTrajectory(waypoints)
+
+        if blocking:
+            print("Waiting for trajectory to finish ...")
+            finished = self.end_or_abort_event.wait(
+                KinovaArm.ACTION_TIMEOUT_DURATION
+            )
+            if finished:
+                print("Cartesian movement completed")
+            else:
+                print("Timeout on action notification wait")
+
     def _gripper_position_command(self, value, blocking=True, timeout=1.0):
         assert not self.cyclic_running, "Arm must be in high-level servoing mode"
 

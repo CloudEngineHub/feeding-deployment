@@ -20,6 +20,16 @@ class JointTrajectoryCommand(KinovaCommand):
         num_dof = 7
         assert all(x.shape == (num_dof,) for x in self.traj)
 
+@dataclass(frozen=True)
+class CartesianTrajectoryCommand(KinovaCommand):
+    """Command to follow a cartesian trajectory."""
+
+    traj: list[tuple[NDArray, NDArray]]
+
+    def __init__(self, traj):
+        object.__setattr__(self, "traj", [(np.array(pos), np.array(quat)) for pos, quat in traj])
+        assert all(pos.shape == (3,) and quat.shape == (4,) for pos, quat in self.traj)
+
 
 @dataclass(frozen=True)
 class JointCommand(KinovaCommand):

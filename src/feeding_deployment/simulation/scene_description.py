@@ -67,9 +67,13 @@ class SceneDescription:
     transfer_type: str
 
     # Robot constants
+    home_pos: JointPositions
     initial_joints: JointPositions
     retract_pos: JointPositions
     retract_utensil_forward_pos: JointPositions
+
+    # Fridge
+    fridge_door_gaze_pos: JointPositions
 
     # Feeding task constants
     plate_gaze_pos: JointPositions

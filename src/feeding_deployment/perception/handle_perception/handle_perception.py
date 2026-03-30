@@ -157,8 +157,8 @@ class HandlePerception(TFInterface):
         self.handle_points_pub = rospy.Publisher("/handle_points", Marker, queue_size=1)
         self.handle_center_pub = rospy.Publisher("/handle_center", Marker, queue_size=1)
 
-        # to simulate an aruco being detected
-        self.aruco_pose_publisher_0 = rospy.Publisher("/aruco_pose_0", Pose, queue_size=10)
+        self.handle_pose_publisher = rospy.Publisher("/handle_pose", Pose, queue_size=10)
+        self.hinge_pose_publisher = rospy.Publisher("/hinge_pose", Pose, queue_size=10)
 
         ts = message_filters.TimeSynchronizer(
             [self.color_image_sub,
@@ -198,12 +198,15 @@ class HandlePerception(TFInterface):
 
         detection = self.detect_items(rgb_image, ["white fridge door"])
 
+        if detection is None:
+            print("No detection")
+            return
+
         # create mask using detection
-        if detection is not None:
-             x1, y1, x2, y2 = detection.astype(int)
-             mask = np.zeros(rgb_image.shape[:2], dtype=np.uint8)
-             mask[y1:y2, x1:x2] = 255
-             cv2.imwrite("detection_mask.png", mask)
+        x1, y1, x2, y2 = detection.astype(int)
+        mask = np.zeros(rgb_image.shape[:2], dtype=np.uint8)
+        mask[y1:y2, x1:x2] = 255
+        cv2.imwrite("detection_mask.png", mask)
 
         # -----------------------------
         # Extract ALL 3D points from mask
@@ -309,23 +312,35 @@ class HandlePerception(TFInterface):
         # draw large green circle at handle_centroid_pixel
         print("Handle centroid pixel:", handle_centroid_pixel)
         cv2.circle(vis, (handle_centroid_pixel[0], handle_centroid_pixel[1]), 10, (0, 255, 0), -1)
-        
-        cv2.imwrite("handle_cluster_pixels.png", vis)
+
+        # left most point in bounding_box_points_3d with the same y value as handle_centroid_3d is likely the hinge
+        same_y = np.isclose(bounding_box_points_3d[:, 1], handle_centroid_3d[1], atol=0.02)
+        leftmost_idx = np.argmin(bounding_box_points_3d[same_y][:, 0])
+        hinge_3d = bounding_box_points_3d[same_y][leftmost_idx]
+        hinge_pixel = pixels[same_y][leftmost_idx]
+        cv2.circle(vis, (hinge_pixel[0], hinge_pixel[1]), 10, (255, 0, 0), -1)
+        cv2.imwrite("handle_hinge_pixels.png", vis)
 
         transform = self.get_frame_to_frame_transform(camera_info_msg)
 
         if transform is not None:   
             base_to_camera = self.make_homogeneous_transform(transform)
 
-            # cam to tag homogeneous transform
-            camera_to_tag = np.eye(4)
-            camera_to_tag[:3, 3] = handle_centroid_3d
-            camera_to_tag[3, 3] = 1 
+            camera_to_handle = np.eye(4)
+            camera_to_handle[:3, 3] = handle_centroid_3d
+            camera_to_handle[3, 3] = 1 
+            base_to_handle = np.dot(base_to_camera, camera_to_handle)
+            base_to_handle[:3, :3] = Rotation.from_quat([0.500, 0.500, 0.500, 0.500]).as_matrix()
+            self.updateTF("base_link", "handle", base_to_handle)
+            self.update_handle_pose(base_to_handle)
 
-            # base to tag homogeneous transform and update tf
-            base_to_tag = np.dot(base_to_camera, camera_to_tag)
-            self.updateTF("base_link", "AR_tag_0", base_to_tag)
-            self.update_aruco_pose(base_to_tag)
+            camera_to_hinge = np.eye(4)
+            camera_to_hinge[:3, 3] = hinge_3d
+            camera_to_hinge[3, 3] = 1
+            base_to_hinge = np.dot(base_to_camera, camera_to_hinge)
+            base_to_hinge[:3, :3] = Rotation.from_quat([0.500, 0.500, 0.500, 0.500]).as_matrix()
+            self.updateTF("base_link", "hinge", base_to_hinge)
+            self.update_hinge_pose(base_to_hinge)
 
     def detect_items(self, input_image, classes_being_detected, log_path = None):
 
@@ -427,9 +442,9 @@ class HandlePerception(TFInterface):
         # # save annotated image
         # cv2.imwrite("segmentations.png", annotated_image)
 
-    def update_aruco_pose(self, aruco_pose_mat):
+    def update_handle_pose(self, handle_pose_mat):
 
-        position, orientation = self.matrix_to_pose(aruco_pose_mat)        
+        position, orientation = self.matrix_to_pose(handle_pose_mat)        
         pose_msg = Pose()
         pose_msg.position.x = position[0]
         pose_msg.position.y = position[1]
@@ -438,7 +453,20 @@ class HandlePerception(TFInterface):
         pose_msg.orientation.y = orientation[1]
         pose_msg.orientation.z = orientation[2]
         pose_msg.orientation.w = orientation[3]
-        self.aruco_pose_publisher_0.publish(pose_msg)
+        self.handle_pose_publisher.publish(pose_msg)
+
+    def update_hinge_pose(self, hinge_pose_mat):
+
+        position, orientation = self.matrix_to_pose(hinge_pose_mat)        
+        pose_msg = Pose()
+        pose_msg.position.x = position[0]
+        pose_msg.position.y = position[1]
+        pose_msg.position.z = position[2]
+        pose_msg.orientation.x = orientation[0]
+        pose_msg.orientation.y = orientation[1]
+        pose_msg.orientation.z = orientation[2]
+        pose_msg.orientation.w = orientation[3]
+        self.hinge_pose_publisher.publish(pose_msg)
 
     def detect_handle_color(self, bgr_image):
         hsv = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2HSV)

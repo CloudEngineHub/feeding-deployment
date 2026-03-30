@@ -1,6 +1,10 @@
 # Config file when robot is mounted on vention stand
 
 # Robot constants
+home_pos:
+  description: "Home configuration of the robot"
+  type: "joint_positions"
+  values: [-2.8762139772986473e-05, 0.26193837151853794, -3.1415766746232525, -2.2690119171669654, 4.621619302645493e-06, 0.9598732314221993, 1.5708048489103847]
 retract_pos: 
   description: "Rest configuration of the robot"
   type: "joint_positions"
@@ -13,6 +17,12 @@ initial_joints:
   description: "Initial configuration of the robot"
   type: "joint_positions"
   values: [0.0, -0.34903602299465675, -3.141591055693139, -2.5482592711638783, 0.0, -0.872688061814757, 1.57075917569769, 0.8, 0.8, 0.8, 0.8, -0.8, -0.8]
+
+# Fridge
+fridge_door_gaze_pos:
+  description: "Gaze configuration, the fridge door should be visible from this configuration"
+  type: "joint_positions"
+  values: [1.575451798696464, -1.8338532592607812, 3.1415681525077646, -2.5482659290666034, 1.0329455279146852e-05, -0.8727280092311087, 1.570780081512247]
 
 # Feeding task constants
 plate_gaze_pos:

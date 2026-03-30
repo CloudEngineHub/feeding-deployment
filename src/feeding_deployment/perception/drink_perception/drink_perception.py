@@ -106,9 +106,11 @@ class TFInterface:
         return (position, orientation)
 
 
-class ArUcoPerception(TFInterface):
+class DrinkPerception(TFInterface):
     def __init__(self, num_perception_samples=25):
-        # rospy.init_node('ArUcoPerception')
+        # rospy.init_node('DrinkPerception')
+
+        self.turned_on = False
 
         self.num_perception_samples = num_perception_samples
         self.bridge = CvBridge()
@@ -125,7 +127,17 @@ class ArUcoPerception(TFInterface):
 
         super().__init__()
 
+    def turn_on(self):
+        self.turned_on = True
+
+    def turn_off(self):
+        self.turned_on = False
+
     def rgbdCallback(self, rgb_image_msg, camera_info_msg, depth_image_msg):
+
+        if not self.turned_on:
+            return
+
 
         try:
             # Convert your ROS Image message to OpenCV2
@@ -293,6 +305,6 @@ if __name__ == '__main__':
     # robot_interface = ArmInterfaceClient()
     # robot_interface.execute_command(cmd)
 
-    rospy.init_node('ArUcoPerception')
-    aruco_perception = ArUcoPerception()
+    rospy.init_node('DrinkPerception')
+    drink_perception = DrinkPerception()
     rospy.spin()

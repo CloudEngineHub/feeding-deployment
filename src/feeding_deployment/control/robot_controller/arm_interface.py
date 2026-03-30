@@ -275,6 +275,22 @@ class ArmInterface:
             print(f"Error in set_ee_pose: {e}")
             # Re-raise a simplified exception to avoid pickling issues
             raise Exception(f"Error in set_ee_pose: {str(e)}") from None # suppress original exception
+        
+    def set_cartesian_trajectory(self, trajectory_command):
+
+        assert not self.emergency_stop_active, "Emergency stop is active"
+        assert not self.in_compliant_mode, "In compliant mode"
+
+        print(
+            f"Received cartesian trajectory command with {len(trajectory_command)} waypoints"
+        )
+
+        try:
+            self.arm.move_cartesian_trajectory(trajectory_command)
+        except Exception as e:
+            print(f"Error in set_cartesian_trajectory: {e}")
+            # Re-raise a simplified exception to avoid pickling issues
+            raise Exception(f"Error in set_cartesian_trajectory: {str(e)}") from None # suppress original exception
 
     def set_gripper(self, gripper_pos):
 
