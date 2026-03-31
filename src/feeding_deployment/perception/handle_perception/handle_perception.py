@@ -144,6 +144,7 @@ class HandlePerception(TFInterface):
         self.sam_predictor = SamPredictor(sam)
 
         self.turned_on = False
+        self.handle_type = None # "white fridge door" or "microwave"
         self.num_perception_samples = num_perception_samples
         self.bridge = CvBridge()
 
@@ -168,7 +169,8 @@ class HandlePerception(TFInterface):
 
         super().__init__()
 
-    def turn_on(self):
+    def turn_on(self, handle_type: str):
+        self.handle_type = handle_type
         self.turned_on = True
 
     def turn_off(self):
@@ -179,7 +181,7 @@ class HandlePerception(TFInterface):
         # if hasattr(self, "saved") and self.saved:
             # return
 
-        if not self.turned_on:
+        if not self.turned_on or self.handle_type is None:
             return
 
         try:
@@ -196,7 +198,7 @@ class HandlePerception(TFInterface):
         depth_mm = (depth_image * 1000.0).astype("uint16")
         cv2.imwrite("depth.png", depth_mm)
 
-        detection = self.detect_items(rgb_image, ["white fridge door"])
+        detection = self.detect_items(rgb_image, [self.handle_type])
 
         if detection is None:
             print("No detection")
@@ -299,12 +301,16 @@ class HandlePerception(TFInterface):
         cluster_pixels = handle_pixels[labels == main_label]
         cluster_points_3d = handle_points[labels == main_label]
 
-        handle_centroid = np.mean(cluster_points_3d, axis=0)
-        # find nearest pixel to handle_centroid
-        dists = np.linalg.norm(cluster_points_3d - handle_centroid, axis=1)
-        nearest_idx = np.argmin(dists)
-        handle_centroid_pixel = cluster_pixels[nearest_idx]
-        handle_centroid_3d = cluster_points_3d[nearest_idx]
+        top_most_y = np.max(cluster_points_3d[:, 1])
+
+
+        # for handle_centroid take median in x, y and z to be more robust to outliers
+
+        handle_centroid = np.median(cluster_points_3d, axis=0)
+        handle_centroid[1] = top_most_y - 0.05
+
+        handle_centroid_3d = handle_centroid
+        handle_centroid_pixel = self.world2Pixel(camera_info_msg, handle_centroid[0], handle_centroid[1], handle_centroid[2])
 
         vis = rgb_image.copy()
         for u, v in cluster_pixels:
@@ -314,10 +320,26 @@ class HandlePerception(TFInterface):
         cv2.circle(vis, (handle_centroid_pixel[0], handle_centroid_pixel[1]), 10, (0, 255, 0), -1)
 
         # left most point in bounding_box_points_3d with the same y value as handle_centroid_3d is likely the hinge
-        same_y = np.isclose(bounding_box_points_3d[:, 1], handle_centroid_3d[1], atol=0.02)
-        leftmost_idx = np.argmin(bounding_box_points_3d[same_y][:, 0])
-        hinge_3d = bounding_box_points_3d[same_y][leftmost_idx]
-        hinge_pixel = pixels[same_y][leftmost_idx]
+        # same_y = np.isclose(bounding_box_points_3d[:, 1], handle_centroid_3d[1], atol=0.02)
+        
+        if self.handle_type == "white fridge door":
+            # take a strip of leftmost points on the plane_cloud (0.02 m wide)
+            strip_anchor_point = np.min(plane_cloud.points, axis=0)
+        else:
+            strip_anchor_point = np.max(plane_cloud.points, axis=0)
+
+        hinge_strip_points = []
+        for p in plane_cloud.points:
+            if np.abs(p[0] - strip_anchor_point[0]) < 0.02:
+                hinge_strip_points.append(p)
+        hinge_strip_points = np.array(hinge_strip_points)
+        hinge_idx = np.argmin(np.linalg.norm(hinge_strip_points - handle_centroid_3d, axis=1))
+        hinge_3d = hinge_strip_points[hinge_idx]
+
+        # Hack: hinge y is the same as handle_centroid y
+        hinge_3d[1] = handle_centroid_3d[1]
+
+        hinge_pixel = self.world2Pixel(camera_info_msg, hinge_3d[0], hinge_3d[1], hinge_3d[2])
         cv2.circle(vis, (hinge_pixel[0], hinge_pixel[1]), 10, (255, 0, 0), -1)
         cv2.imwrite("handle_hinge_pixels.png", vis)
 
@@ -578,10 +600,22 @@ class HandlePerception(TFInterface):
         # print("3D Pixel: ", world_x, world_y, world_z)
 
         return True, (world_x, world_y, world_z)
+    
+    def world2Pixel(self, camera_info, world_x, world_y, world_z):
+
+        fx = camera_info.K[0]
+        fy = camera_info.K[4]
+        cx = camera_info.K[2]
+        cy = camera_info.K[5] 
+
+        image_x = world_x * (fx / world_z) + cx
+        image_y = world_y * (fy / world_z) + cy
+
+        return int(image_x), int(image_y)
 
 
 if __name__ == '__main__':
     rospy.init_node('HandlePerception')
     handle_perception = HandlePerception()
-    handle_perception.turn_on()
+    handle_perception.turn_on("microwave") # or "white fridge door"
     rospy.spin()

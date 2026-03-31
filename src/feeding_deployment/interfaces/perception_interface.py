@@ -4,7 +4,7 @@ import threading
 import time
 from pathlib import Path
 import numpy as np
-from pybullet_helpers.geometry import Pose
+from pybullet_helpers.geometry import Pose, Pose3D
 from pybullet_helpers.joint import JointPositions
 from scipy.spatial.transform import Rotation as R
 import json
@@ -305,8 +305,8 @@ class PerceptionInterface:
     
     def _generate_door_arc_waypoints(
         self,
-        handle_pose: Pose,
-        hinge_pose: Pose,
+        start_pose: Pose,
+        hinge_position: Pose3D,
         arc_length_m: float,
         waypoint_spacing_m: float,
         direction: int = 1,
@@ -317,7 +317,7 @@ class PerceptionInterface:
         Assumptions:
         - Door rotates in the xy plane.
         - Hinge axis is vertical (z-axis).
-        - Arc is centered at hinge_pose.position[:2].
+        - Arc is centered at hinge_position[:2].
         """
         if arc_length_m <= 0:
             return []
@@ -326,8 +326,8 @@ class PerceptionInterface:
         if direction not in (-1, 1):
             raise ValueError("direction must be either +1 or -1")
 
-        hx, hy, hz = handle_pose.position
-        cx, cy, _ = hinge_pose.position
+        hx, hy, hz = start_pose.position
+        cx, cy, _ = hinge_position
 
         radius_vec = np.array([hx - cx, hy - cy], dtype=float)
         radius = np.linalg.norm(radius_vec)
@@ -338,7 +338,7 @@ class PerceptionInterface:
         total_angle = arc_length_m / radius
         num_segments = max(1, int(np.ceil(arc_length_m / waypoint_spacing_m)))
 
-        start_rot = R.from_quat(handle_pose.orientation)
+        start_rot = R.from_quat(start_pose.orientation)
         waypoints: list[Pose] = []
 
         for i in range(1, num_segments + 1):
@@ -354,7 +354,7 @@ class PerceptionInterface:
                 yaw_rot = R.from_euler("z", delta_angle)
                 orientation = (yaw_rot * start_rot).as_quat()
             else:
-                orientation = handle_pose.orientation
+                orientation = start_pose.orientation
 
             waypoints.append(
                 Pose(
@@ -365,7 +365,7 @@ class PerceptionInterface:
 
         return waypoints
     
-    def perceive_handle_opening_poses(self):
+    def perceive_handle_opening_poses(self, handle_type: str):
 
         if self.simulation:
             # load them from a pickle file
@@ -374,7 +374,7 @@ class PerceptionInterface:
             handle_poses = handle_opening_pos["last_handle_poses"]
 
         else:
-            self._handle_perception.turn_on()
+            self._handle_perception.turn_on(handle_type)
             # Rajat Hack: Wait three seconds
             time.sleep(3)
 
@@ -382,13 +382,14 @@ class PerceptionInterface:
             hinge_pose_msg = rospy.wait_for_message("/hinge_pose", PoseMsg)
             self._handle_perception.turn_off()
 
+            # hack add 0.01 to y as the perception is slightly off
             grasp_pose = Pose(
-                position=(handle_pose_msg.position.x - 0.02, handle_pose_msg.position.y, handle_pose_msg.position.z),
+                position=(handle_pose_msg.position.x - 0.04, handle_pose_msg.position.y + 0.02, handle_pose_msg.position.z),
                 orientation=(handle_pose_msg.orientation.x, handle_pose_msg.orientation.y, handle_pose_msg.orientation.z, handle_pose_msg.orientation.w)
             )
 
             hinge_pose = Pose(
-                position=(hinge_pose_msg.position.x, hinge_pose_msg.position.y, hinge_pose_msg.position.z),
+                position=(hinge_pose_msg.position.x, hinge_pose_msg.position.y + 0.04, hinge_pose_msg.position.z),
                 orientation=(hinge_pose_msg.orientation.x, hinge_pose_msg.orientation.y, hinge_pose_msg.orientation.z, hinge_pose_msg.orientation.w)
             )
 
@@ -398,18 +399,52 @@ class PerceptionInterface:
             )
 
             opening_waypoints = self._generate_door_arc_waypoints(
-                handle_pose=grasp_pose,
-                hinge_pose=hinge_pose,
-                arc_length_m=0.3,
+                start_pose=grasp_pose,
+                hinge_position=hinge_pose.position,
+                arc_length_m=0.55,
                 waypoint_spacing_m=0.05,
-                direction=1,
+                direction=1 if handle_type == "white fridge door" else -1, # microwave is left hinged
                 rotate_orientation=True,
             )
+
+            post_release_pose = copy.deepcopy(opening_waypoints[-1])
+            offset = np.eye(4)
+            offset[:3, 3] = np.array([0, 0.15, 0])
+            post_release_pose_mat = self.pose_to_matrix(post_release_pose)
+            post_release_pose_mat = post_release_pose_mat @ offset
+            post_release_pose = self.matrix_to_pose(post_release_pose_mat)
+
+            # rotate the sixth-to-last (assuming thickness is 35cm) opening waypoint by 180 degrees so that the gripper can push the door open instead of pulling it
+            push_pose = copy.deepcopy(opening_waypoints[-7])
+            push_pose_mat = self.pose_to_matrix(push_pose)
+            if handle_type == "white fridge door":
+                push_pose_mat[:3, :3] = push_pose_mat[:3, :3] @ R.from_euler("y", -np.pi/2).as_matrix()
+            else:
+                push_pose_mat[:3, :3] = push_pose_mat[:3, :3] @ R.from_euler("y", np.pi/2).as_matrix()
+            push_pose = self.matrix_to_pose(push_pose_mat)
+            
+            push_waypoints = self._generate_door_arc_waypoints(
+                start_pose=push_pose,
+                hinge_position=hinge_pose.position,
+                arc_length_m=0.50,
+                waypoint_spacing_m=0.05,
+                direction=1 if handle_type == "white fridge door" else -1, # microwave is left hinged
+                rotate_orientation=True,
+            )
+
+            pre_push_offset = np.eye(4)
+            pre_push_offset[:3, 3] = np.array([0, 0.15, 0])
+            pre_push_pose_mat = self.pose_to_matrix(push_pose) @ pre_push_offset
+            pre_push_pose = self.matrix_to_pose(pre_push_pose_mat)
 
             handle_poses = {
                 "pre_grasp_pose": pre_grasp_pose,
                 "grasp_pose": grasp_pose,
                 "opening_waypoints": opening_waypoints,
+                "post_release_pose": post_release_pose,
+                "pre_push_pose": pre_push_pose,
+                "push_pose": push_pose,
+                "push_waypoints": push_waypoints,
             }
 
         self.last_handle_poses = handle_poses

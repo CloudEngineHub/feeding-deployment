@@ -70,10 +70,12 @@ class SceneDescription:
     home_pos: JointPositions
     initial_joints: JointPositions
     retract_pos: JointPositions
+    back_retract_pos: JointPositions
     retract_utensil_forward_pos: JointPositions
 
     # Fridge
     fridge_door_gaze_pos: JointPositions
+    fridge_door_intermediate_restract_pos: JointPositions
 
     # Feeding task constants
     plate_gaze_pos: JointPositions

@@ -62,32 +62,70 @@ class OpenDoorHLA(HighLevelAction):
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
         self.move_to_joint_positions(self.sim.scene_description.fridge_door_gaze_pos)
 
-        handle_opening_poses = self.perception_interface.perceive_handle_opening_poses()
+        handle_opening_poses = self.perception_interface.perceive_handle_opening_poses("white fridge door")
 
         # visualize on rviz
         poses = []
         poses.append(handle_opening_poses["pre_grasp_pose"])
         poses.append(handle_opening_poses["grasp_pose"])
         poses.extend(handle_opening_poses["opening_waypoints"])
+        poses.append(handle_opening_poses["post_release_pose"])
+        poses.append(handle_opening_poses["pre_push_pose"])
+        poses.append(handle_opening_poses["push_pose"])
+        poses.extend(handle_opening_poses["push_waypoints"])
         print(f"Visualizing {len(poses)} handle opening poses in RViz ...")
         self.rviz_interface.visualize_poses(poses, frame_id="base_link", ns="handle_opening_poses")
 
-        print(f"Perceived handle opening poses: {handle_opening_poses}")
-
         self.move_to_joint_positions(self.sim.scene_description.home_pos)
-
-        # print current end-effector pose for debugging
-        current_state = self.robot_interface.get_state()
-        ee_pose = current_state["ee_pos"]
-        print(f"Current end-effector pose: {ee_pose}")
-        print(f"Moving to pre-grasp pose: {handle_opening_poses['pre_grasp_pose']}")
 
         self.move_to_ee_pose(handle_opening_poses["pre_grasp_pose"])
         self.open_gripper()
         self.move_to_ee_pose(handle_opening_poses["grasp_pose"])
         self.close_gripper()
-        self.move_to_ee_pose(handle_opening_poses["post_grasp_pose"])
+        # self.move_to_ee_pose(handle_opening_poses["post_grasp_pose"])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["opening_waypoints"])
+        self.open_gripper()
+        self.move_to_ee_pose(handle_opening_poses["post_release_pose"])
+        
+        # self.move_to_joint_positions(self.sim.scene_description.fridge_door_intermediate_restract_pos)
+
+        self.move_to_ee_pose(handle_opening_poses["pre_push_pose"])
+        self.move_to_ee_pose(handle_opening_poses["push_pose"])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["push_waypoints"])
         
     def open_microwave(self, speed: str) -> None:
         assert self.sim.held_object_name is None
         print("Opening microwave door ...")
+        self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+        self.move_to_joint_positions(self.sim.scene_description.fridge_door_gaze_pos)
+
+        handle_opening_poses = self.perception_interface.perceive_handle_opening_poses("microwave")
+
+        # visualize on rviz
+        poses = []
+        poses.append(handle_opening_poses["pre_grasp_pose"])
+        poses.append(handle_opening_poses["grasp_pose"])
+        poses.extend(handle_opening_poses["opening_waypoints"])
+        poses.append(handle_opening_poses["post_release_pose"])
+        poses.append(handle_opening_poses["pre_push_pose"])
+        poses.append(handle_opening_poses["push_pose"])
+        poses.extend(handle_opening_poses["push_waypoints"])
+        print(f"Visualizing {len(poses)} handle opening poses in RViz ...")
+        self.rviz_interface.visualize_poses(poses, frame_id="base_link", ns="handle_opening_poses")
+
+        self.move_to_joint_positions(self.sim.scene_description.home_pos)
+
+        self.move_to_ee_pose(handle_opening_poses["pre_grasp_pose"])
+        self.open_gripper()
+        self.move_to_ee_pose(handle_opening_poses["grasp_pose"])
+        self.close_gripper()
+        # self.move_to_ee_pose(handle_opening_poses["post_grasp_pose"])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["opening_waypoints"])
+        self.open_gripper()
+        self.move_to_ee_pose(handle_opening_poses["post_release_pose"])
+        
+        # self.move_to_joint_positions(self.sim.scene_description.fridge_door_intermediate_restract_pos)
+
+        self.move_to_ee_pose(handle_opening_poses["pre_push_pose"])
+        self.move_to_ee_pose(handle_opening_poses["push_pose"])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["push_waypoints"])

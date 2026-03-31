@@ -9,6 +9,10 @@ retract_pos:
   description: "Rest configuration of the robot"
   type: "joint_positions"
   values: [0.0, -0.34903602299465675, -3.141591055693139, -2.0, 0.0, -0.872688061814757, 1.57075917569769]
+back_retract_pos: 
+  description: "Another rest configuration of the robot"
+  type: "joint_positions"
+  values: [-2.6098978682220775e-05, -1.8305038015577884, 3.1415657556627834, -2.5482749838143097, 4.621619302645493e-06, -0.8727317376566344, 1.5708057810167664]
 retract_utensil_forward_pos:
   description: "Rest configuration of the robot"
   type: "joint_positions"
@@ -23,6 +27,10 @@ fridge_door_gaze_pos:
   description: "Gaze configuration, the fridge door should be visible from this configuration"
   type: "joint_positions"
   values: [1.575451798696464, -1.8338532592607812, 3.1415681525077646, -2.5482659290666034, 1.0329455279146852e-05, -0.8727280092311087, 1.570780081512247]
+fridge_door_intermediate_restract_pos:
+  description: "Intermediate retract configuration of the robot for fridge door opening"
+  type: "joint_positions"
+  values: [0.9720466073439787, -1.8305038015577884, 3.1415657556627834, -2.5482749838143097, 4.621619302645493e-06, -0.8727317376566344, 1.5708057810167664]
 
 # Feeding task constants
 plate_gaze_pos:

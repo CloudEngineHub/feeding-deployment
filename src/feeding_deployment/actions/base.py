@@ -45,6 +45,7 @@ from feeding_deployment.control.robot_controller.arm_client import ArmInterfaceC
 from feeding_deployment.control.wrist_controller.wrist_controller import WristInterface
 from feeding_deployment.control.robot_controller.command_interface import (
     CartesianCommand,
+    CartesianTrajectoryCommand,
     CloseGripperCommand,
     JointCommand,
     KinovaCommand,
@@ -331,6 +332,16 @@ class HighLevelAction(abc.ABC):
             self.sim.visualize_plan(plan)
         else:
             self.execute_robot_command(CartesianCommand(pos=pose.position, quat=pose.orientation), plan)
+
+    def move_to_ee_pose_trajectory(self, traj: list[Pose]) -> None:
+
+        plan = None
+        # if not self.no_waits:
+        #     plan = self.sim.plan_to_ee_pose_trajectory(traj)
+        if self.robot_interface is None:
+            self.sim.visualize_plan(plan)
+        else:
+            self.execute_robot_command(CartesianTrajectoryCommand(traj=traj), plan)
     
     def grasp_tool(self, tool: str) -> None:
         self.sim.grasp_object(tool)
