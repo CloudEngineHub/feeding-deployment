@@ -383,19 +383,24 @@ class PerceptionInterface:
             self._handle_perception.turn_off()
 
             # hack add 0.01 to y as the perception is slightly off
-            grasp_pose = Pose(
-                position=(handle_pose_msg.position.x - 0.04, handle_pose_msg.position.y + 0.02, handle_pose_msg.position.z),
+
+            handle_pose = Pose(
+                position=(handle_pose_msg.position.x, handle_pose_msg.position.y, handle_pose_msg.position.z),
                 orientation=(handle_pose_msg.orientation.x, handle_pose_msg.orientation.y, handle_pose_msg.orientation.z, handle_pose_msg.orientation.w)
             )
 
-            hinge_pose = Pose(
-                position=(hinge_pose_msg.position.x, hinge_pose_msg.position.y + 0.04, hinge_pose_msg.position.z),
-                orientation=(hinge_pose_msg.orientation.x, hinge_pose_msg.orientation.y, hinge_pose_msg.orientation.z, hinge_pose_msg.orientation.w)
-            )
+            handle_transform = self.pose_to_matrix(handle_pose)
+            offset = np.eye(4)
+            offset[:3, 3] = np.array([0.0, 0.0, -0.04]) # x axis is left, y axis is up, z axis is forward. 
+            grasp_pose = self.matrix_to_pose(handle_transform @ offset)
 
-            pre_grasp_pose = Pose(
-                position=(grasp_pose.position[0] - 0.12, grasp_pose.position[1], grasp_pose.position[2]),
-                orientation=(grasp_pose.orientation[0], grasp_pose.orientation[1], grasp_pose.orientation[2], grasp_pose.orientation[3])
+            pre_grasp_offset = np.eye(4)
+            pre_grasp_offset[:3, 3] = np.array([0.0, 0.0, -0.12])
+            pre_grasp_pose = self.matrix_to_pose(handle_transform @ pre_grasp_offset)
+
+            hinge_pose = Pose(
+                position=(hinge_pose_msg.position.x, hinge_pose_msg.position.y, hinge_pose_msg.position.z),
+                orientation=(hinge_pose_msg.orientation.x, hinge_pose_msg.orientation.y, hinge_pose_msg.orientation.z, hinge_pose_msg.orientation.w)
             )
 
             opening_waypoints = self._generate_door_arc_waypoints(
@@ -415,7 +420,7 @@ class PerceptionInterface:
             post_release_pose = self.matrix_to_pose(post_release_pose_mat)
 
             # rotate the sixth-to-last (assuming thickness is 35cm) opening waypoint by 180 degrees so that the gripper can push the door open instead of pulling it
-            push_pose = copy.deepcopy(opening_waypoints[-7])
+            push_pose = copy.deepcopy(opening_waypoints[-6])
             push_pose_mat = self.pose_to_matrix(push_pose)
             if handle_type == "white fridge door":
                 push_pose_mat[:3, :3] = push_pose_mat[:3, :3] @ R.from_euler("y", -np.pi/2).as_matrix()
@@ -423,19 +428,62 @@ class PerceptionInterface:
                 push_pose_mat[:3, :3] = push_pose_mat[:3, :3] @ R.from_euler("y", np.pi/2).as_matrix()
             push_pose = self.matrix_to_pose(push_pose_mat)
             
-            push_waypoints = self._generate_door_arc_waypoints(
+            second_waypoints = self._generate_door_arc_waypoints(
                 start_pose=push_pose,
                 hinge_position=hinge_pose.position,
-                arc_length_m=0.50,
+                arc_length_m=0.5,
                 waypoint_spacing_m=0.05,
                 direction=1 if handle_type == "white fridge door" else -1, # microwave is left hinged
                 rotate_orientation=True,
             )
+            print("Number of second waypoints: ", len(second_waypoints))
+            push_waypoints = second_waypoints[:-6]
+            len_push_waypoints = len(push_waypoints)
+            print("Number of push waypoints: ", len_push_waypoints)
 
             pre_push_offset = np.eye(4)
             pre_push_offset[:3, 3] = np.array([0, 0.15, 0])
             pre_push_pose_mat = self.pose_to_matrix(push_pose) @ pre_push_offset
             pre_push_pose = self.matrix_to_pose(pre_push_pose_mat)
+
+            closing_waypoints = copy.deepcopy(second_waypoints)
+            print("Number of closing waypoints: ", len(closing_waypoints))
+            closing_waypoints.reverse()
+
+            closing_waypoint = closing_waypoints[0]
+
+            last_push = push_waypoints[-1]
+            last_push = self.pose_to_matrix(last_push)
+            offset = np.eye(4)
+            offset[:3, 3] = np.array([0, 0.15, 0])
+            last_push = last_push @ offset
+            last_push = self.matrix_to_pose(last_push)
+
+            above_closing_waypoint = closing_waypoint
+            above_closing_waypoint_mat = self.pose_to_matrix(above_closing_waypoint)
+            offset = np.eye(4)
+            offset[:3, 3] = np.array([0, 0.15, 0])
+            above_closing_waypoint_mat = above_closing_waypoint_mat @ offset
+            above_closing_waypoint = self.matrix_to_pose(above_closing_waypoint_mat)
+
+            more_closing_waypoints = copy.deepcopy(opening_waypoints[:-2])
+            more_closing_waypoints.reverse()
+            more_closing_waypoints.append(copy.deepcopy(grasp_pose))
+
+            offset_closing_waypoints = []
+            offset = np.eye(4)
+            # offset[:3, 3] = np.array([0, 0.0, 0.0])
+            offset[:3, 3] = np.array([0, 0.0, -0.025])
+            for waypoint in more_closing_waypoints:
+                waypoint_mat = self.pose_to_matrix(waypoint)
+                offset_closing_waypoints.append(self.matrix_to_pose(waypoint_mat @ offset))
+
+            # beginning_closing_waypoint = offset_closing_waypoints[0]
+            # beginning_closing_waypoint_mat = self.pose_to_matrix(beginning_closing_waypoint)
+            # offset = np.eye(4)
+            # offset[:3, 3] = np.array([0, 0.0, -0.05])
+            # beginning_closing_waypoint_mat = beginning_closing_waypoint_mat @ offset
+            # beginning_closing_waypoint = self.matrix_to_pose(beginning_closing_waypoint_mat)
 
             handle_poses = {
                 "pre_grasp_pose": pre_grasp_pose,
@@ -445,6 +493,12 @@ class PerceptionInterface:
                 "pre_push_pose": pre_push_pose,
                 "push_pose": push_pose,
                 "push_waypoints": push_waypoints,
+                "before_above_closing_waypoint": last_push,
+                "above_closing_waypoint": above_closing_waypoint,
+                "closing_waypoint": closing_waypoint,
+                "closing_waypoints": closing_waypoints,
+                # "beginning_closing_waypoint": beginning_closing_waypoint,
+                "offset_closing_waypoints": offset_closing_waypoints,
             }
 
         self.last_handle_poses = handle_poses

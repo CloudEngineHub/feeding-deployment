@@ -74,6 +74,7 @@ class SceneDescription:
     retract_utensil_forward_pos: JointPositions
 
     # Fridge
+    fridge_door_staging_pos: JointPositions
     fridge_door_gaze_pos: JointPositions
     fridge_door_intermediate_restract_pos: JointPositions
 

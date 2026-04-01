@@ -76,7 +76,8 @@ class OpenDoorHLA(HighLevelAction):
         print(f"Visualizing {len(poses)} handle opening poses in RViz ...")
         self.rviz_interface.visualize_poses(poses, frame_id="base_link", ns="handle_opening_poses")
 
-        self.move_to_joint_positions(self.sim.scene_description.home_pos)
+        # self.move_to_joint_positions(self.sim.scene_description.home_pos)
+        self.move_to_joint_positions(self.sim.scene_description.fridge_door_staging_pos)
 
         self.move_to_ee_pose(handle_opening_poses["pre_grasp_pose"])
         self.open_gripper()
@@ -110,10 +111,15 @@ class OpenDoorHLA(HighLevelAction):
         poses.append(handle_opening_poses["pre_push_pose"])
         poses.append(handle_opening_poses["push_pose"])
         poses.extend(handle_opening_poses["push_waypoints"])
+        poses.append(handle_opening_poses["before_above_closing_waypoint"])
+        poses.append(handle_opening_poses["above_closing_waypoint"])
+        poses.append(handle_opening_poses["closing_waypoint"])
+        poses.extend(handle_opening_poses["closing_waypoints"])
         print(f"Visualizing {len(poses)} handle opening poses in RViz ...")
         self.rviz_interface.visualize_poses(poses, frame_id="base_link", ns="handle_opening_poses")
 
-        self.move_to_joint_positions(self.sim.scene_description.home_pos)
+        # self.move_to_joint_positions(self.sim.scene_description.home_pos)
+        self.move_to_joint_positions(self.sim.scene_description.fridge_door_staging_pos)
 
         self.move_to_ee_pose(handle_opening_poses["pre_grasp_pose"])
         self.open_gripper()
@@ -129,3 +135,12 @@ class OpenDoorHLA(HighLevelAction):
         self.move_to_ee_pose(handle_opening_poses["pre_push_pose"])
         self.move_to_ee_pose(handle_opening_poses["push_pose"])
         self.move_to_ee_pose_trajectory(handle_opening_poses["push_waypoints"])
+
+        self.move_to_ee_pose(handle_opening_poses["before_above_closing_waypoint"])
+        self.move_to_ee_pose(handle_opening_poses["above_closing_waypoint"])
+        self.move_to_ee_pose(handle_opening_poses["closing_waypoint"])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["closing_waypoints"])
+
+        self.close_gripper()
+        self.move_to_ee_pose(handle_opening_poses["offset_closing_waypoints"][0])
+        self.move_to_ee_pose_trajectory(handle_opening_poses["offset_closing_waypoints"])
