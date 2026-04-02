@@ -11,7 +11,8 @@ from feeding_deployment.actions.base import (
     nav_target_type,
     InFrontOf,
     DoorClosed,
-    SafeToNavigate
+    SafeToNavigate,
+    GripperFree,
 )
 
 
@@ -31,6 +32,7 @@ class NavigateHLA(HighLevelAction):
             preconditions={
                 LiftedAtom(InFrontOf, [src]),
                 LiftedAtom(SafeToNavigate, []),
+                LiftedAtom(GripperFree, []),
             },
             add_effects={
                 LiftedAtom(InFrontOf, [dst]),

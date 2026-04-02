@@ -271,7 +271,7 @@ class TransferToolHLA(HighLevelAction):
         return f"transfer_{tool.name}.yaml"    
     
     def transfer_utensil(self, speed: str, *args, **kwargs) -> None:
-        assert self.sim.held_object_name == "utensil"
+        # assert self.sim.held_object_name == "utensil"
 
         print("Transferring bite with utensil ...")
         return

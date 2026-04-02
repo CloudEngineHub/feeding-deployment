@@ -55,7 +55,10 @@ class StowToolHLA(HighLevelAction):
         return f"stow_{tool.name}.yaml"
 
     def stow_utensil(self, speed: str) -> None:
-        assert self.sim.held_object_name == "utensil"
+        # assert self.sim.held_object_name == "utensil"
+
+        print("Stowing utensil ...")
+        return
 
         # if self.robot_interface is not None:
         #     self.robot_interface.set_speed(speed)

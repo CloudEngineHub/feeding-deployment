@@ -360,7 +360,7 @@ class _Runner:
                     if obj_combo[0].name == "plate" or obj_combo[1].name != "table":
                         # print(f"Skipping invalid HLA grounding: {hla_name} with object {obj_combo[0].name}")
                         continue
-                print(f"Adding ground HLA: {hla_name} with objects {[obj.name for obj in obj_combo]}")
+                # print(f"Adding ground HLA: {hla_name} with objects {[obj.name for obj in obj_combo]}")
                 ground_hla = (hla, obj_combo)
                 self._all_ground_hlas.append(ground_hla)
         # Rewrite the behavior trees to avoid any inconsistencies.
@@ -812,6 +812,7 @@ if __name__ == "__main__":
     if not args.use_interface:
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["OpenDoor"], (runner.fridge,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,runner.table)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PlacePlateInSink"], (runner.plate, runner.sink)))
     else:
         runner.run()
 

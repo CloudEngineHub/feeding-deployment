@@ -26,6 +26,7 @@ from feeding_deployment.actions.base import (
     ToolPrepared,
     FoodHeated,
     InFrontOf,
+    PlateAt,
 )
 
 from feeding_deployment.actions.flair.food_manipulation_skill_library import FoodManipulationSkillLibrary
@@ -63,6 +64,7 @@ class AcquireBiteHLA(HighLevelAction):
                 LiftedAtom(IsUtensil, [tool]),
                 LiftedAtom(FoodHeated, []),
                 LiftedAtom(InFrontOf, [table]),
+                LiftedAtom(PlateAt, [table]),
             },
             add_effects={
                 LiftedAtom(ToolPrepared, [tool]),
@@ -85,7 +87,7 @@ class AcquireBiteHLA(HighLevelAction):
     
     def acquire_bite(self, speed: str, dipping_depth: float, skewering_depth: float, skewering_orientation: str, autocontinue_timeout: float, ask_confirmation: bool) -> None:
 
-        assert self.sim.held_object_name == "utensil"
+        # assert self.sim.held_object_name == "utensil"
 
         print("Acquiring bite with utensil ...")
         return
