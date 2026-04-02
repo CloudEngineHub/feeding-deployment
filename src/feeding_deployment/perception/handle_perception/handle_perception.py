@@ -25,6 +25,8 @@ from feeding_deployment.control.robot_controller.command_interface import Cartes
 from geometry_msgs.msg import TransformStamped
 from collections import deque
 
+from feeding_deployment.perception.handle_perception.remote_molmo import RemoteMolmo
+
 from geometry_msgs.msg import Pose as pose_msg
 
 import supervision as sv
@@ -72,12 +74,10 @@ class TFInterface:
                 rospy.Time(secs=stamp.secs, nsecs=stamp.nsecs),
             )
             return transform
-        except (
-            tf2_ros.LookupException,
-            tf2_ros.ConnectivityException,
-            tf2_ros.ExtrapolationException,
-        ):
-            # print("Exexption finding transform between base_link and", target_frame)
+        except Exception as e:
+            print("Exception finding transform between base_link and", target_frame)
+            print("Error:", e)
+
             return None
 
     def make_homogeneous_transform(self, transform):
@@ -143,6 +143,12 @@ class HandlePerception(TFInterface):
         sam.to(device=self.DEVICE)
         self.sam_predictor = SamPredictor(sam)
 
+        print("Initializing molmo")
+        self.molmo = RemoteMolmo(
+            ssh_host="rj277@bhattacharjee-compute-02.coecis.cornell.edu",
+            remote_dir="/home/rj277/molmo/sensor_msgs",
+        )
+
         self.turned_on = False
         self.handle_type = None # "white fridge door" or "microwave"
         self.num_perception_samples = num_perception_samples
@@ -160,6 +166,7 @@ class HandlePerception(TFInterface):
 
         self.handle_pose_publisher = rospy.Publisher("/handle_pose", Pose, queue_size=10)
         self.hinge_pose_publisher = rospy.Publisher("/hinge_pose", Pose, queue_size=10)
+        self.button_pose_publisher = rospy.Publisher("/button_pose", Pose, queue_size=10)
 
         ts = message_filters.TimeSynchronizer(
             [self.color_image_sub,
@@ -192,11 +199,45 @@ class HandlePerception(TFInterface):
         except CvBridgeError as e:
             print(e)
             return
+        
+        transform = self.get_frame_to_frame_transform(camera_info_msg)
 
+        file_path = os.path.dirname(__file__)
         print("Got images")
-        cv2.imwrite("rgb.png", rgb_image)
+        cv2.imwrite(file_path + "/rgb.png", rgb_image)
         depth_mm = (depth_image * 1000.0).astype("uint16")
-        cv2.imwrite("depth.png", depth_mm)
+        cv2.imwrite(file_path + "/depth.png", depth_mm)
+
+        vis_image, pixel_coords, response = self.molmo.query(
+            image_path=file_path + "/rgb.png",
+            prompt="Point to the center of the start / 30 secs button",
+            save_response_image_to=file_path + "/rgb_keypoint.png",
+        )
+
+        print("Pixel coords from molmo:", pixel_coords)
+
+        ok, button_3d = self.pixel2World(camera_info_msg, pixel_coords[0][0], pixel_coords[0][1], depth_image)
+
+        if not ok:
+            print("Could not get valid 3D point for button")
+            return
+
+        if transform is not None:   
+            print("Got transform between base_link and camera_color_optical_frame")
+            base_to_camera = self.make_homogeneous_transform(transform)
+
+            camera_to_button = np.eye(4)
+            camera_to_button[:3, 3] = button_3d
+            camera_to_button[3, 3] = 1 
+            base_to_button = np.dot(base_to_camera, camera_to_button)
+            base_to_button[:3, :3] = Rotation.from_quat([0.0, 0.7071, 0.7071, 0.0]).as_matrix()
+            self.updateTF("base_link", "button", base_to_button)
+            print("Button in base frame:", base_to_button)
+            self.update_button_pose(base_to_button)
+        else:
+            print("Could not get transform between base_link and camera_color_optical_frame")
+        
+        return
 
         detection = self.detect_items(rgb_image, [self.handle_type])
 
@@ -477,6 +518,19 @@ class HandlePerception(TFInterface):
         pose_msg.orientation.w = orientation[3]
         self.handle_pose_publisher.publish(pose_msg)
 
+    def update_button_pose(self, button_pose_mat):
+
+        position, orientation = self.matrix_to_pose(button_pose_mat)        
+        pose_msg = Pose()
+        pose_msg.position.x = position[0]
+        pose_msg.position.y = position[1]
+        pose_msg.position.z = position[2]
+        pose_msg.orientation.x = orientation[0]
+        pose_msg.orientation.y = orientation[1]
+        pose_msg.orientation.z = orientation[2]
+        pose_msg.orientation.w = orientation[3]
+        self.button_pose_publisher.publish(pose_msg)
+
     def update_hinge_pose(self, hinge_pose_mat):
 
         position, orientation = self.matrix_to_pose(hinge_pose_mat)        
@@ -617,5 +671,5 @@ class HandlePerception(TFInterface):
 if __name__ == '__main__':
     rospy.init_node('HandlePerception')
     handle_perception = HandlePerception()
-    handle_perception.turn_on("microwave") # or "white fridge door"
+    handle_perception.turn_on("Start / 30 SEC button") # "white fridge door" or "microwave"
     rospy.spin()

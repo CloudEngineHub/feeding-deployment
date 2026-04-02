@@ -22,6 +22,11 @@ initial_joints:
   type: "joint_positions"
   values: [0.0, -0.34903602299465675, -3.141591055693139, -2.5482592711638783, 0.0, -0.872688061814757, 1.57075917569769, 0.8, 0.8, 0.8, 0.8, -0.8, -0.8]
 
+button_gaze_pos: 
+  description: "Gaze configuration, the button should be visible from this configuration"
+  type: "joint_positions"
+  values: [1.2299698973345723, -1.5564083326896343, 2.209374019822113, -1.0589580705703874, -0.687205283477355, -1.0834309230915613, 0.6042646600152812]
+
 # Fridge
 fridge_door_staging_pos:
   description: "Staging configuration, the robot should be in front of the fridge in this configuration"
