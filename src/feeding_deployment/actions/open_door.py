@@ -3,13 +3,9 @@ from typing import Any
 import time
 
 from relational_structs import (
-    GroundAtom,
-    GroundOperator,
     LiftedAtom,
     LiftedOperator,
     Object,
-    Predicate,
-    Type,
     Variable,
 )
 from feeding_deployment.actions.base import (
@@ -19,7 +15,9 @@ from feeding_deployment.actions.base import (
     InFrontOf,
     DoorOpen,
     DoorClosed,
+    SafeToNavigate,
 )
+
 
 class OpenDoorHLA(HighLevelAction):
     """Open a door (fridge or microwave)."""
@@ -28,30 +26,33 @@ class OpenDoorHLA(HighLevelAction):
         return "OpenDoor"
 
     def get_operator(self) -> LiftedOperator:
-        obj = Variable("?obj", appliance_type)
+        appliance = Variable("?appliance", appliance_type)
         return LiftedOperator(
             self.get_name(),
-            parameters=[obj],
+            parameters=[appliance],
             preconditions={
                 LiftedAtom(GripperFree, []),
-                LiftedAtom(InFrontOf, [obj]),
-                LiftedAtom(DoorClosed, [obj]),
+                LiftedAtom(InFrontOf, [appliance]),
+                LiftedAtom(DoorClosed, [appliance]),
             },
-            add_effects={LiftedAtom(DoorOpen, [obj])},
-            delete_effects={LiftedAtom(DoorClosed, [obj])},
+            add_effects={LiftedAtom(DoorOpen, [appliance])},
+            delete_effects={
+                LiftedAtom(DoorClosed, [appliance]),
+                LiftedAtom(SafeToNavigate, []),
+            },
         )
-    
+
     def get_behavior_tree_filename(
         self,
         objects: tuple[Object, ...],
         params: dict[str, Any],
     ) -> str:
-        del params  # not used right now
+        del params
         assert len(objects) == 1
-        appliance_type = objects[0]
+        appliance = objects[0]
         assert self.sim.scene_description.scene_label == "vention"
-        assert appliance_type.name in ["fridge", "microwave"]
-        return f"open_{appliance_type.name}.yaml"
+        assert appliance.name in ["fridge", "microwave"]
+        return f"open_{appliance.name}.yaml"
 
     def open_fridge(self, speed: str) -> None:
 
@@ -59,6 +60,7 @@ class OpenDoorHLA(HighLevelAction):
         self.robot_interface.set_speed("high")
         assert self.sim.held_object_name is None
         print("Opening fridge door ...")
+        return
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
         self.move_to_joint_positions(self.sim.scene_description.fridge_door_gaze_pos)
 
@@ -97,6 +99,7 @@ class OpenDoorHLA(HighLevelAction):
     def open_microwave(self, speed: str) -> None:
         assert self.sim.held_object_name is None
         print("Opening microwave door ...")
+        return
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
         self.move_to_joint_positions(self.sim.scene_description.button_gaze_pos)
 

@@ -17,6 +17,8 @@ from feeding_deployment.actions.base import (
     tool_type,
     GripperFree,
     Holding,
+    table_type,
+    InFrontOf,
 )
 
 class StowToolHLA(HighLevelAction):
@@ -27,12 +29,16 @@ class StowToolHLA(HighLevelAction):
 
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
+        table = Variable("?table", table_type)
         return LiftedOperator(
             self.get_name(),
-            parameters=[tool],
-            preconditions={Holding([tool])},
+            parameters=[tool, table],
+            preconditions={
+                LiftedAtom(Holding, [tool]),
+                LiftedAtom(InFrontOf, [table])
+            },
             add_effects={LiftedAtom(GripperFree, [])},
-            delete_effects={Holding([tool])},
+            delete_effects={LiftedAtom(Holding, [tool])},
         )
     
     def get_behavior_tree_filename(
@@ -41,9 +47,11 @@ class StowToolHLA(HighLevelAction):
         params: dict[str, Any],
     ) -> str:
         del params  # not used right now
-        assert len(objects) == 1
+        assert len(objects) == 2
         tool = objects[0]
-        assert tool.name in ["utensil", "drink", "wipe", "plate"]
+        table = objects[1]
+        assert tool.name in ["utensil", "drink", "wipe"]
+        assert table.name == "table"
         return f"stow_{tool.name}.yaml"
 
     def stow_utensil(self, speed: str) -> None:

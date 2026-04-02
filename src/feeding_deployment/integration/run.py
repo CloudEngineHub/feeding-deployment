@@ -42,6 +42,17 @@ from tomsutils.spaces import EnumSpace
 from pybullet_helpers.geometry import Pose
 
 from feeding_deployment.actions.base import (
+    object_type,
+    tool_type,
+    plate_type,
+    plate_location_type,
+    nav_target_type,
+    table_type,
+    sink_type,
+    appliance_type,
+    fridge_type,
+    microwave_type,
+    holder_type,
     GripperFree,
     Holding,
     IsUtensil,
@@ -50,12 +61,12 @@ from feeding_deployment.actions.base import (
     ToolTransferDone,
     EmulateTransferDone,
     ResetPos,
-    tool_type,
-    appliance_type,
-    nav_target_type,
     InFrontOf,
     DoorOpen,
     DoorClosed,
+    PlateAt,
+    FoodHeated,
+    SafeToNavigate,
     GroundHighLevelAction,
     ResetHLA,
     pddl_plan_to_hla_plan,
@@ -65,11 +76,23 @@ from feeding_deployment.actions.base import (
     NodeModificationUserUpdateRequest,
     NodeAdditionUserRequest,
     UserUpdateRequest,
-    ParameterizedActionBehaviorTreeNode
+    ParameterizedActionBehaviorTreeNode,
 )
 from feeding_deployment.actions.navigate import NavigateHLA
 from feeding_deployment.actions.open_door import OpenDoorHLA
 from feeding_deployment.actions.close_door import CloseDoorHLA
+from feeding_deployment.actions.pick_plate import (
+    PickPlateFromApplianceHLA,
+    PickPlateFromHolderHLA,
+    PickPlateFromTableHLA,
+)
+from feeding_deployment.actions.place_plate import (
+    PlacePlateOnHolderHLA,
+    PlacePlateInApplianceHLA,
+    PlacePlateOnTableHLA,
+    PlacePlateInSinkHLA,
+)
+from feeding_deployment.actions.press_microwave_button import PressMicrowaveButtonHLA
 from feeding_deployment.actions.pick_tool import PickToolHLA
 from feeding_deployment.actions.stow_tool import StowToolHLA
 from feeding_deployment.actions.transfer_tool import TransferToolHLA
@@ -91,9 +114,26 @@ from feeding_deployment.simulation.simulator import (
 from feeding_deployment.actions.flair.flair import FLAIR
 from feeding_deployment.transparency.query_llm import TransparencyQuery
 
-
 # All the high level actions we want to consider.
-HLAS = {NavigateHLA, OpenDoorHLA, CloseDoorHLA, PickToolHLA, StowToolHLA, AcquireBiteHLA, TransferToolHLA, EmulateTransferHLA, ResetHLA}
+HLAS = {
+    NavigateHLA,
+    OpenDoorHLA,
+    CloseDoorHLA,
+    PickToolHLA,
+    StowToolHLA,
+    PickPlateFromApplianceHLA,
+    PickPlateFromHolderHLA,
+    PickPlateFromTableHLA,
+    PlacePlateOnHolderHLA,
+    PlacePlateInApplianceHLA,
+    PlacePlateOnTableHLA,
+    PlacePlateInSinkHLA,
+    PressMicrowaveButtonHLA,
+    AcquireBiteHLA,
+    TransferToolHLA,
+    EmulateTransferHLA,
+    ResetHLA,
+}
 
 assert os.environ.get("PYTHONHASHSEED") == "0", \
         "Please add `export PYTHONHASHSEED=0` to your bash profile!"
@@ -218,21 +258,39 @@ class _Runner:
             InFrontOf,
             DoorOpen,
             DoorClosed,
+            PlateAt,
+            FoodHeated,
+            SafeToNavigate,
         }
-        self.types = {tool_type, nav_target_type, appliance_type}
+        self.types = {
+            object_type,
+            plate_type,
+            tool_type,
+            plate_location_type,
+            nav_target_type,
+            sink_type,
+            table_type,
+            appliance_type,
+            fridge_type,
+            microwave_type,
+            holder_type,
+        }
         self.domain = PDDLDomain(
             "AssistedFeeding", self.operators, self.predicates, self.types
         )
+
         self.drink = Object("drink", tool_type)
         self.wipe = Object("wipe", tool_type)
         self.utensil = Object("utensil", tool_type)
-        self.plate = Object("plate", tool_type)
+        self.plate = Object("plate", plate_type)
 
-        self.fridge = Object("fridge", appliance_type)
-        self.microwave = Object("microwave", appliance_type)
+        self.fridge = Object("fridge", fridge_type)
+        self.microwave = Object("microwave", microwave_type)
 
-        self.sink = Object("sink", nav_target_type)
-        self.feeding_table = Object("feeding_table", nav_target_type)
+        self.holder = Object("holder", holder_type)
+
+        self.sink = Object("sink", sink_type)
+        self.table = Object("table", table_type)
 
         self.all_objects = {
             self.drink,
@@ -242,7 +300,8 @@ class _Runner:
             self.fridge,
             self.microwave,
             self.sink,
-            self.feeding_table,
+            self.table,
+            self.holder,
         }
         self.object_name_to_object = {
             "drink": self.drink,
@@ -252,7 +311,8 @@ class _Runner:
             "fridge": self.fridge,
             "microwave": self.microwave,
             "sink": self.sink,
-            "feeding_table": self.feeding_table,
+            "table": self.table,
+            "holder": self.holder,
         }
         # Create all ground HLAs that will be used.
         self._all_ground_hlas = []
@@ -260,11 +320,47 @@ class _Runner:
             types = [p.type for p in hla.get_operator().parameters]
             for obj_combo in get_object_combinations(sorted(self.all_objects), types):
                 # Major hack. The proper way to do this would be to define subtypes
-                # but I am too scared to make any change like that at this point.
                 if "AcquireBite" in hla_name:
-                    assert len(obj_combo) == 1
-                    if obj_combo[0].name != "utensil":
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name != "utensil" or obj_combo[1].name != "table":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with object {obj_combo[0].name}")
                         continue
+                if hla_name == "Navigate":
+                    assert len(obj_combo) == 2
+                    if obj_combo[0] == obj_combo[1]:
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with identical nav targets {obj_combo[0].name}")
+                        continue
+                if hla_name == "PressMicrowaveButton":
+                    assert len(obj_combo) == 1
+                    if obj_combo[0].name != "microwave":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with object {obj_combo[0].name}")
+                        continue
+                if hla_name == "PickPlateFromTable" or hla_name == "PlacePlateOnTable":
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name != "plate" or obj_combo[1].name != "table":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with objects {obj_combo[0].name}, {obj_combo[1].name}")
+                        continue
+                if hla_name == "PickPlateFromHolder" or hla_name == "PlacePlateOnHolder":
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name != "plate" or obj_combo[1].name != "holder":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with objects {obj_combo[0].name}, {obj_combo[1].name}")
+                        continue
+                if hla_name == "PlacePlateInSinkHLA":
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name != "plate" or obj_combo[1].name != "sink":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with objects {obj_combo[0].name}, {obj_combo[1].name}")
+                        continue
+                if hla_name in {"PlacePlateInAppliance", "PickPlateFromAppliance"}:
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name != "plate" or obj_combo[1].name not in {"fridge", "microwave"}:
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with objects {obj_combo[0].name}, {obj_combo[1].name}")
+                        continue
+                if hla_name in {"PickTool", "StowTool", "TransferTool"}:
+                    assert len(obj_combo) == 2
+                    if obj_combo[0].name == "plate" or obj_combo[1].name != "table":
+                        # print(f"Skipping invalid HLA grounding: {hla_name} with object {obj_combo[0].name}")
+                        continue
+                print(f"Adding ground HLA: {hla_name} with objects {[obj.name for obj in obj_combo]}")
                 ground_hla = (hla, obj_combo)
                 self._all_ground_hlas.append(ground_hla)
         # Rewrite the behavior trees to avoid any inconsistencies.
@@ -281,14 +377,15 @@ class _Runner:
 
         # Track the current high-level state.
         self.current_atoms = {
-            LiftedAtom(GripperFree, []),
-            ToolPrepared([self.wipe]),
-            ToolPrepared([self.drink]),
-            ToolPrepared([self.plate]),
-            IsUtensil([self.utensil]),
-            DoorClosed([self.fridge]),
-            DoorClosed([self.microwave]),
-            InFrontOf([self.feeding_table])
+            GroundAtom(GripperFree, []),
+            GroundAtom(ToolPrepared, [self.wipe]),
+            GroundAtom(ToolPrepared, [self.drink]),
+            GroundAtom(IsUtensil, [self.utensil]),
+            GroundAtom(DoorClosed, [self.fridge]),
+            GroundAtom(DoorClosed, [self.microwave]),
+            GroundAtom(InFrontOf, [self.table]),
+            GroundAtom(PlateAt, [self.fridge]),
+            GroundAtom(SafeToNavigate, []),
         }
 
         self.transparency_query = TransparencyQuery(self.log_dir)
@@ -463,17 +560,16 @@ class _Runner:
             self.current_atoms -= operator.delete_effects
             self.current_atoms |= operator.add_effects
 
-            if ground_hla.hla.get_name() == "Navigate":
-                known_nav_targets = {self.fridge, self.microwave, self.sink, self.feeding_table}
-                target = ground_hla.objects[0]
-                for obj in known_nav_targets:
-                    if obj != target:
-                        self.current_atoms.discard(InFrontOf([obj]))
+            # if ground_hla.hla.get_name() == "Navigate":
+            #     known_nav_targets = {self.fridge, self.microwave, self.sink, self.table}
+            #     target = ground_hla.objects[0]
+            #     for obj in known_nav_targets:
+            #         if obj != target:
+            #             self.current_atoms.discard(InFrontOf([obj]))
 
-            # Super hack: the drink, wipe and plate are always prepared.
+            # Super hack: the drink and wipe are always prepared.
             self.current_atoms.add(ToolPrepared([self.wipe]))
             self.current_atoms.add(ToolPrepared([self.drink]))
-            self.current_atoms.add(ToolPrepared([self.plate]))
 
             # Save the latest state in case we want to resume execution
             # after a crash.
@@ -715,7 +811,7 @@ if __name__ == "__main__":
 
     if not args.use_interface:
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["OpenDoor"], (runner.fridge,)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["OpenDoor"], (runner.microwave,)))
+        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,runner.table)))
     else:
         runner.run()
 

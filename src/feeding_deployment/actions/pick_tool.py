@@ -15,8 +15,10 @@ from relational_structs import (
 from feeding_deployment.actions.base import (
     HighLevelAction,
     tool_type,
+    table_type,
     GripperFree,
     Holding,
+    InFrontOf,
 )
 
 class PickToolHLA(HighLevelAction):
@@ -27,11 +29,15 @@ class PickToolHLA(HighLevelAction):
 
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
+        table = Variable("?table", table_type)
         return LiftedOperator(
             self.get_name(),
-            parameters=[tool],
-            preconditions={LiftedAtom(GripperFree, [])},
-            add_effects={Holding([tool])},
+            parameters=[tool, table],
+            preconditions={
+                LiftedAtom(GripperFree, []),
+                LiftedAtom(InFrontOf, [table]),
+            },
+            add_effects={LiftedAtom(Holding, [tool])},
             delete_effects={LiftedAtom(GripperFree, [])},
         )
     
@@ -41,14 +47,19 @@ class PickToolHLA(HighLevelAction):
         params: dict[str, Any],
     ) -> str:
         del params  # not used right now
-        assert len(objects) == 1
+        assert len(objects) == 2
         tool = objects[0]
+        table = objects[1]
         assert self.sim.scene_description.scene_label == "vention"
-        assert tool.name in ["utensil", "drink", "wipe", "plate"]
+        assert tool.name in ["utensil", "drink", "wipe"]
+        assert table.name == "table"
         return f"pick_{tool.name}.yaml"
     
     def pick_utensil(self, speed: str) -> None:
         assert self.sim.held_object_name is None
+
+        print("Picking up utensil ...")
+        return
 
         if self.robot_interface is not None:
             self.robot_interface.set_speed(speed)

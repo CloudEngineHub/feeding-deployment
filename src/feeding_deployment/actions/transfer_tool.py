@@ -27,10 +27,12 @@ from relational_structs import (
 from feeding_deployment.actions.base import (
     HighLevelAction,
     tool_type,
+    table_type,
     GripperFree,
     Holding,
     ToolPrepared,
     ToolTransferDone,
+    InFrontOf,
 )
 
 from feeding_deployment.perception.gestures_perception.static_gesture_detectors import mouth_open, head_nod
@@ -242,12 +244,17 @@ class TransferToolHLA(HighLevelAction):
 
     def get_operator(self) -> LiftedOperator:
         tool = Variable("?tool", tool_type)
+        table = Variable("?table", table_type)
         return LiftedOperator(
             self.get_name(),
-            parameters=[tool],
-            preconditions={Holding([tool]), ToolPrepared([tool])},
+            parameters=[tool, table],
+            preconditions={
+                LiftedAtom(Holding, [tool]),
+                LiftedAtom(ToolPrepared, [tool]),
+                LiftedAtom(InFrontOf, [table])
+            },
             add_effects={LiftedAtom(ToolTransferDone, [tool])},
-            delete_effects={ToolPrepared([tool])},
+            delete_effects={LiftedAtom(ToolPrepared, [tool])},
         )
     
     def get_behavior_tree_filename(
@@ -256,13 +263,18 @@ class TransferToolHLA(HighLevelAction):
         params: dict[str, Any],
     ) -> str:
         del params  # not used right now
-        assert len(objects) == 1
+        assert len(objects) == 2
         tool = objects[0]
+        table = objects[1]
         assert tool.name in ["utensil", "drink", "wipe"]
+        assert table.name == "table"
         return f"transfer_{tool.name}.yaml"    
     
     def transfer_utensil(self, speed: str, *args, **kwargs) -> None:
         assert self.sim.held_object_name == "utensil"
+
+        print("Transferring bite with utensil ...")
+        return
 
         if self.robot_interface is not None:
             self.robot_interface.set_speed(speed)

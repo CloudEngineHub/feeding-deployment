@@ -60,23 +60,46 @@ from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSim
 from feeding_deployment.simulation.state import FeedingDeploymentWorldState
 import feeding_deployment.perception.gestures_perception.static_gesture_detectors as static_gesture_detectors
 
-# Define some predicates that can be used for sequencing the high-level actions.
-tool_type = Type("tool")  
-nav_target_type = Type("nav_target")
-appliance_type = Type("appliance", parent=nav_target_type)
+# Things the robot can hold.
+object_type = Type("object")
+plate_type = Type("plate", parent=object_type)
+tool_type = Type("tool", parent=object_type)
 
-GripperFree = Predicate("GripperFree", [])  # not holding any tool
-Holding = Predicate("Holding", [tool_type])  # holding tool
-ToolTransferDone = Predicate("ToolTransferDone", [tool_type])  # wiped, drank, or ate
-EmulateTransferDone = Predicate("EmulateTransferDone", [])  # emulated transfer
-ToolPrepared = Predicate("ToolPrepared", [tool_type])  # e.g., bite acquired
-PlateInView = Predicate("PlateInView", [])  # of the hand camera
-ResetPos = Predicate("ResetPos", [])  # robot in reset position
-IsUtensil = Predicate("IsUtensil", [tool_type])
+# Places the plate can be.
+plate_location_type = Type("plate_location")
+nav_target_type = Type("nav_target", parent=plate_location_type)
+
+# Navigable surfaces like the table/sink.
+table_type = Type("table", parent=nav_target_type)
+sink_type = Type("sink", parent=nav_target_type)
+
+# Navigable enclosed places.
+appliance_type = Type("appliance", parent=nav_target_type)
+fridge_type = Type("fridge", parent=appliance_type)
+microwave_type = Type("microwave", parent=appliance_type)
+
+# Whether it is safe to navigate 
+SafeToNavigate = Predicate("SafeToNavigate", [])
+
+# Non-navigable plate location attached to the robot.
+holder_type = Type("holder", parent=plate_location_type)
+
+GripperFree = Predicate("GripperFree", [])
+Holding = Predicate("Holding", [object_type])
 
 InFrontOf = Predicate("InFrontOf", [nav_target_type])
 DoorOpen = Predicate("DoorOpen", [appliance_type])
 DoorClosed = Predicate("DoorClosed", [appliance_type])
+
+PlateAt = Predicate("PlateAt", [plate_location_type])
+FoodHeated = Predicate("FoodHeated", [])
+
+ToolTransferDone = Predicate("ToolTransferDone", [tool_type])
+EmulateTransferDone = Predicate("EmulateTransferDone", [])
+ToolPrepared = Predicate("ToolPrepared", [tool_type])
+PlateInView = Predicate("PlateInView", [])
+ResetPos = Predicate("ResetPos", [])
+IsUtensil = Predicate("IsUtensil", [tool_type])
 
 # Define high-level actions.
 class HighLevelAction(abc.ABC):
