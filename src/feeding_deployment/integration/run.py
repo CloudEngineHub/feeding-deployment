@@ -383,8 +383,8 @@ class _Runner:
             GroundAtom(IsUtensil, [self.utensil]),
             GroundAtom(DoorClosed, [self.fridge]),
             GroundAtom(DoorClosed, [self.microwave]),
-            GroundAtom(InFrontOf, [self.table]),
-            GroundAtom(PlateAt, [self.fridge]),
+            GroundAtom(InFrontOf, [self.microwave]),
+            GroundAtom(PlateAt, [self.holder]),
             GroundAtom(SafeToNavigate, []),
         }
 
@@ -522,13 +522,13 @@ class _Runner:
                 goal_atoms,
             )
 
-            print("Current atoms:", sorted(self.current_atoms))
-            print("Goal atoms:", sorted(goal_atoms))
-            print("Operators:", [op.name for op in self.operators])
-            print("DOMAIN:")
-            print(str(self.domain))
-            print("PROBLEM:")
-            print(str(problem))
+            # print("Current atoms:", sorted(self.current_atoms))
+            # print("Goal atoms:", sorted(goal_atoms))
+            # print("Operators:", [op.name for op in self.operators])
+            # print("DOMAIN:")
+            # print(str(self.domain))
+            # print("PROBLEM:")
+            # print(str(problem))
 
             plan_strs = run_pddl_planner(
                 str(self.domain), str(problem), planner="fd-opt",
@@ -812,7 +812,7 @@ if __name__ == "__main__":
     if not args.use_interface:
         # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["OpenDoor"], (runner.fridge,)))
         runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["TransferTool"], (runner.utensil,runner.table)))
-        runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PlacePlateInSink"], (runner.plate, runner.sink)))
+        # runner.process_user_command(GroundHighLevelAction(runner.hla_name_to_hla["PlacePlateInSink"], (runner.plate, runner.sink)))
     else:
         runner.run()
 

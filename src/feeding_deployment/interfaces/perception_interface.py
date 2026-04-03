@@ -365,6 +365,49 @@ class PerceptionInterface:
 
         return waypoints
     
+    def perceive_plate_poses(self):
+
+        if self.simulation:
+            # load them from a pickle file
+            with open(self.log_dir / 'button_pressing_pose.pkl', 'rb') as f:
+                button_pressing_pose = pickle.load(f)
+            handle_poses = button_pressing_pose["last_button_pressing_poses"]
+
+        else:
+            self._handle_perception.turn_on("microwave") # microwave and fridge have the same button, so we can just turn on microwave perception
+            # Rajat Hack: Wait three seconds
+            time.sleep(3)
+
+            # handle_pose_msg = rospy.wait_for_message("/handle_pose", PoseMsg)
+            # hinge_pose_msg = rospy.wait_for_message("/hinge_pose", PoseMsg)
+            button_pose_msg = rospy.wait_for_message("/button_pose", PoseMsg)
+            self._handle_perception.turn_off()
+
+            button_pose = Pose(
+                position=(button_pose_msg.position.x, button_pose_msg.position.y, button_pose_msg.position.z),
+                orientation=(button_pose_msg.orientation.x, button_pose_msg.orientation.y, button_pose_msg.orientation.z, button_pose_msg.orientation.w)
+            )
+
+            button_transform = self.pose_to_matrix(button_pose)
+            offset = np.eye(4)
+            offset[:3, 3] = np.array([0.005, -0.027, -0.042]) # x axis is left, y axis is up, z axis is forward. 
+            press_pose = self.matrix_to_pose(button_transform @ offset)
+
+            pre_press_offset = np.eye(4)
+            pre_press_offset[:3, 3] = np.array([0.005, -0.027, -0.12])
+            pre_press_pose = self.matrix_to_pose(button_transform @ pre_press_offset)
+
+            intermediate_offset = np.eye(4)
+            intermediate_offset[:3, 3] = np.array([0.005, -0.027, -0.08])
+            intermediate_pose = self.matrix_to_pose(button_transform @ intermediate_offset)
+            
+
+            return {
+                "press_pose": press_pose,
+                "pre_press_pose": pre_press_pose,
+                "intermediate_pose": intermediate_pose,
+            }
+    
     def perceive_button_pressing_poses(self):
 
         if self.simulation:

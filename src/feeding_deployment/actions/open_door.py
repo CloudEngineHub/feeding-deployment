@@ -101,7 +101,7 @@ class OpenDoorHLA(HighLevelAction):
         print("Opening microwave door ...")
         return
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
-        self.move_to_joint_positions(self.sim.scene_description.button_gaze_pos)
+        self.move_to_joint_positions(self.sim.scene_description.microwave_closeup_gaze_pos)
 
         time.sleep(5.0) # wait for the robot to stabilize before perception
         press_button_poses = self.perception_interface.perceive_button_pressing_poses()

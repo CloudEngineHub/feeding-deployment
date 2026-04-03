@@ -78,6 +78,9 @@ class PickPlateFromApplianceHLA(HighLevelAction):
         assert self.sim.held_object_name is None
         print("Picking plate from microwave ...")
 
+        self.move_to_joint_positions(self.sim.scene_description.home_pos)
+        self.move_to_joint_positions(self.sim.scene_description.microwave_closeup_gaze_pos)
+
 
 class PickPlateFromHolderHLA(HighLevelAction):
     """Pick the plate from the holder."""
