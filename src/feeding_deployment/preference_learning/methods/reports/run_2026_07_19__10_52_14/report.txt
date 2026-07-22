@@ -1,0 +1,1827 @@
+Evaluating out_manual_run_2026_07_16__15_41_53/manual_1__dep1__30d.json ...
+[user=manual_1] overriding dataset profile 'manual' with --profile-label 'moderate_arms_good_trunk_good_head'
+[user=manual_1] excluding 7 dim(s) missing from dataset: plate_color_fridge, plate_color_microwave, plate_color_table, nav_offset_table, nav_offset_microwave, nav_offset_sink, nav_offset_fridge
+[Day 1] Meal: chicken nuggets | Setting: Personal | Time: evening | Affective state: Slower
+  Ground truth bundle: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec"
+}
+  [Predict] Calling Claude for bundle (day 1, m=0) ...
+[prediction] fast mode is not enabled for this org (quota 0 -- research-preview access not granted); using standard speed from now on.
+  [Predict] round latency: 23.5s (m=0)
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "no",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "perception",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "30 sec",
+  "wait_before_autocontinue_feeding_pickup": "30 sec",
+  "wait_before_autocontinue_mealprep": "15 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=0: acc_unrevealed=0.636 mismatches=8
+    correcting wait_before_autocontinue_feeding_pickup -> no autocontinue
+  [Predict] Calling Claude for bundle (day 1, m=1) ...
+  [Predict] round latency: 24.0s (m=1)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (without any auto-continue)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "perception",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=1: acc_unrevealed=0.714 mismatches=6
+    correcting detect_user_ready_for_initiating_transfer_wiping -> open mouth
+  [Predict] Calling Claude for bundle (day 1, m=2) ...
+  [Predict] round latency: 31.8s (m=2)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (without any auto-continue)",
+  "confirm_navigation_arrival": "yes (without any auto-continue)",
+  "confirm_manipulation": "yes (without any auto-continue)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "perception",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=2: acc_unrevealed=0.750 mismatches=5
+    correcting confirm_feeding_pickup -> yes (with auto-continue countdown)
+  [Predict] Calling Claude for bundle (day 1, m=3) ...
+  [Predict] round latency: 29.2s (m=3)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "perception",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=3: acc_unrevealed=0.842 mismatches=3
+    correcting detect_user_completed_transfer_wiping -> button
+  [Predict] Calling Claude for bundle (day 1, m=4) ...
+  [Predict] round latency: 33.1s (m=4)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=4: acc_unrevealed=0.833 mismatches=3
+    correcting wait_before_autocontinue_mealprep -> 60 sec
+  [Predict] Calling Claude for bundle (day 1, m=5) ...
+  [Predict] round latency: 33.2s (m=5)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=5: acc_unrevealed=0.882 mismatches=2
+    correcting detect_user_completed_transfer_drinking -> perception
+  [Predict] Calling Claude for bundle (day 1, m=6) ...
+  [Predict] round latency: 28.2s (m=6)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=6: acc_unrevealed=0.938 mismatches=1
+    correcting outside_mouth_distance -> near
+  [Predict] Calling Claude for bundle (day 1, m=7) ...
+  [Predict] round latency: 29.6s (m=7)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "slow",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=7: acc_unrevealed=0.933 mismatches=1
+    correcting robot_speed -> medium
+  [Predict] Calling Claude for bundle (day 1, m=8) ...
+  [Predict] round latency: 28.0s (m=8)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=8: acc_unrevealed=0.929 mismatches=1
+    correcting wait_before_autocontinue_task_selection -> no autocontinue
+  [Predict] Calling Claude for bundle (day 1, m=9) ...
+  [Predict] round latency: 25.7s (m=9)
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=9: acc_unrevealed=0.923 mismatches=1
+    correcting microwave_time -> 2 min
+  [Predict] Calling Claude for bundle (day 1, m=10) ...
+  [Predict] round latency: 26.5s (m=10)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 1 m=10: acc_unrevealed=1.000 mismatches=0
+  Meal finished after 10 corrections
+
+  [long_term_memory_model] Updating summary (day 1) ...
+[Day 2] Meal: general tso's chicken and broccoli | Setting: Watching TV with TV in Front | Time: afternoon | Affective state: Neutral
+  Ground truth bundle: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec"
+}
+  [Predict] Calling Claude for bundle (day 2, m=0) ...
+  [Predict] round latency: 27.0s (m=0)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=0: acc_unrevealed=0.636 mismatches=8
+    correcting detect_user_completed_transfer_feeding -> button
+  [Predict] Calling Claude for bundle (day 2, m=1) ...
+  [Predict] round latency: 25.2s (m=1)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=1: acc_unrevealed=0.571 mismatches=9
+    correcting wait_before_autocontinue_mealprep -> 30 sec
+  [Predict] Calling Claude for bundle (day 2, m=2) ...
+  [Predict] round latency: 30.2s (m=2)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=2: acc_unrevealed=0.600 mismatches=8
+    correcting detect_user_ready_for_initiating_transfer_feeding -> open mouth
+  [Predict] Calling Claude for bundle (day 2, m=3) ...
+  [Predict] round latency: 30.0s (m=3)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=3: acc_unrevealed=0.737 mismatches=5
+    correcting convey_robot_ready_for_completing_transfer -> no cue
+  [Predict] Calling Claude for bundle (day 2, m=4) ...
+  [Predict] round latency: 31.2s (m=4)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=4: acc_unrevealed=0.833 mismatches=3
+    correcting microwave_time -> 1 min
+  [Predict] Calling Claude for bundle (day 2, m=5) ...
+  [Predict] round latency: 30.8s (m=5)
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=5: acc_unrevealed=0.882 mismatches=2
+    correcting wait_before_autocontinue_task_selection -> 60 sec
+  [Predict] Calling Claude for bundle (day 2, m=6) ...
+  [Predict] round latency: 31.2s (m=6)
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 2 m=6: acc_unrevealed=1.000 mismatches=0
+  Meal finished after 6 corrections
+
+  [long_term_memory_model] Updating summary (day 2) ...
+[Day 3] Meal: chicken breast strips and hash brown | Setting: Watching TV with TV in Front | Time: afternoon | Affective state: Energetic
+  Ground truth bundle: {
+  "microwave_time": "1 min",
+  "robot_speed": "fast",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec"
+}
+  [Predict] Calling Claude for bundle (day 3, m=0) ...
+  [Predict] round latency: 18.2s (m=0)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 3 m=0: acc_unrevealed=0.909 mismatches=2
+    correcting robot_speed -> fast
+  [Predict] Calling Claude for bundle (day 3, m=1) ...
+  [Predict] round latency: 29.3s (m=1)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "fast",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "30 sec",
+  "wait_before_autocontinue_feeding_pickup": "30 sec",
+  "wait_before_autocontinue_mealprep": "15 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 3 m=1: acc_unrevealed=0.810 mismatches=4
+    correcting wait_before_autocontinue_task_selection -> 60 sec
+  [Predict] Calling Claude for bundle (day 3, m=2) ...
+  [Predict] round latency: 27.1s (m=2)
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "fast",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 3 m=2: acc_unrevealed=0.950 mismatches=1
+    correcting microwave_time -> 1 min
+  [Predict] Calling Claude for bundle (day 3, m=3) ...
+  [Predict] round latency: 23.7s (m=3)
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "fast",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 3 m=3: acc_unrevealed=1.000 mismatches=0
+  Meal finished after 3 corrections
+
+  [long_term_memory_model] Updating summary (day 3) ...
+[Day 4] Meal: cantaloupes, bananas, watermelon | Setting: Personal | Time: morning | Affective state: Neutral
+  Ground truth bundle: {
+  "microwave_time": "no microwave",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec"
+}
+  [Predict] Calling Claude for bundle (day 4, m=0) ...
+  [Predict] round latency: 20.5s (m=0)
+  [Predict] Prediction: {
+  "microwave_time": "no microwave",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 4 m=0: acc_unrevealed=0.636 mismatches=8
+    correcting convey_robot_ready_for_completing_transfer -> no cue
+  [Predict] Calling Claude for bundle (day 4, m=1) ...
+  [Predict] round latency: 25.3s (m=1)
+  [Predict] Prediction: {
+  "microwave_time": "no microwave",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+  "wait_before_autocontinue_mealprep": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 4 m=1: acc_unrevealed=0.714 mismatches=6
+    correcting wait_before_autocontinue_mealprep -> 30 sec
+  [Predict] Calling Claude for bundle (day 4, m=2) ...
+  [Predict] round latency: 27.4s (m=2)
+  [Predict] Prediction: {
+  "microwave_time": "no microwave",
+  "robot_speed": "fast",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "button",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 4 m=2: acc_unrevealed=0.950 mismatches=1
+    correcting robot_speed -> medium
+  [Predict] Calling Claude for bundle (day 4, m=3) ...
+  [Predict] round latency: 29.7s (m=3)
+  [Predict] Prediction: {
+  "microwave_time": "no microwave",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "no cue",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "no cue",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "wait_before_autocontinue_feeding_pickup": "60 sec",
+  "wait_before_autocontinue_mealprep": "30 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=manual_1] rollout 1/1 day 4 m=3: acc_unrevealed=0.842 mismatches=3
+    correcting retract_between_bites -> yes
+  [Predict] Calling Claude for bundle (day 4, m=4) ...

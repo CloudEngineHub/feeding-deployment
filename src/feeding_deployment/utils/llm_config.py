@@ -1,6 +1,17 @@
 """Shared LLM configuration."""
 
-DEFAULT_CLAUDE_MODEL = "claude-haiku-4-5"
+import os
+
+DEFAULT_CLAUDE_MODEL = "claude-opus-4-8"
+
+# Synthetic data generation (user preference encodings + deployment datasets)
+# runs on Opus: the encoding must hold a coherent personality with consistent
+# tie-break policies across ~20 dims, and each day's bundle must apply those
+# rules faithfully -- rule-application slips in the ground truth become noise
+# that every eval arm pays for. Generation is a one-off cost (~155 calls per
+# regen), not a runtime cost, so quality wins over price here. The robot
+# runtime keeps DEFAULT_CLAUDE_MODEL.
+DATA_GENERATION_CLAUDE_MODEL = "claude-opus-4-8"
 
 # Preference learning (bundle prediction + LTM updates) runs on Opus: these run
 # once per user correction / once per meal, and Haiku reasons correctly about
@@ -18,7 +29,19 @@ DEFAULT_CLAUDE_MODEL = "claude-haiku-4-5"
 # future scenario shows under-thinking (propagation misses, shallow latent
 # inference), raise to "high" before "xhigh".
 PREDICTION_CLAUDE_MODEL = "claude-opus-4-8"
-PREDICTION_EFFORT = "medium"
+
+# Default "medium" (see the sweep rationale above). Overridable per-process via
+# the PREDICTION_EFFORT env var so an offline effort sweep can time low/high
+# without editing this file (and without changing the deployment default that
+# run.py reads from the same constant). The robot deployment leaves the env var
+# unset and therefore always runs at "medium".
+_ALLOWED_EFFORT = {"low", "medium", "high", "xhigh", "max"}
+PREDICTION_EFFORT = os.environ.get("PREDICTION_EFFORT", "medium").strip().lower()
+if PREDICTION_EFFORT not in _ALLOWED_EFFORT:
+    raise ValueError(
+        f"PREDICTION_EFFORT must be one of {sorted(_ALLOWED_EFFORT)}; "
+        f"got {os.environ.get('PREDICTION_EFFORT')!r}"
+    )
 
 # Serve the prediction call with fast mode (research preview: same Opus 4.8
 # weights at up to 2.5x output tokens/sec, at 2x price -- $10/$50 per MTok vs

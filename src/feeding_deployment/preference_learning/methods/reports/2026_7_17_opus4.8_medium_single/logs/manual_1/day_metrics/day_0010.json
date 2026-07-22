@@ -1,0 +1,76 @@
+{
+  "day": 10,
+  "affective_state": "Neutral",
+  "context": {
+    "meal": "buffalo chicken bites, potato wedges, and ranch dressing",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.7727272727272727,
+      "mismatches": 5
+    },
+    {
+      "m": 1,
+      "acc": 0.7619047619047619,
+      "mismatches": 5
+    },
+    {
+      "m": 2,
+      "acc": 0.7,
+      "mismatches": 6
+    },
+    {
+      "m": 3,
+      "acc": 0.7368421052631579,
+      "mismatches": 5
+    },
+    {
+      "m": 4,
+      "acc": 0.8333333333333334,
+      "mismatches": 3
+    },
+    {
+      "m": 5,
+      "acc": 0.8823529411764706,
+      "mismatches": 2
+    },
+    {
+      "m": 6,
+      "acc": 0.875,
+      "mismatches": 2
+    },
+    {
+      "m": 7,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": false,
+    "robot_speed": true,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": true,
+    "confirm_navigation_arrival": true,
+    "confirm_manipulation": true,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": false,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": false,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": true,
+    "retract_between_bites": true,
+    "bite_dipping_preference": true,
+    "bite_ordering": false,
+    "wait_before_autocontinue_task_selection": true,
+    "wait_before_autocontinue_feeding_pickup": true,
+    "wait_before_autocontinue_mealprep": false
+  }
+}

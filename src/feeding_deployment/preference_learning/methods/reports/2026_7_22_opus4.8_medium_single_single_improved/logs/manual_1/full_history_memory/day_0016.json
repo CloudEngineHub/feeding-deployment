@@ -1,0 +1,34 @@
+{
+  "day": 16,
+  "context": {
+    "meal": "bite-sized pizza and broccoli",
+    "setting": "Social with person on Left",
+    "time_of_day": "evening",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {},
+  "episode_text": "day=16; meal=bite-sized pizza and broccoli; setting=Social with person on Left; time_of_day=evening;\npreferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=wait for me; confirm_navigation_arrival=skip; confirm_manipulation=skip; transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_bite_selection=wait for me; wait_before_autocontinue_task_selection=wait for me",
+  "ground_truth_bundle": {
+    "microwave_time": "1 min",
+    "robot_speed": "medium",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "wait for me",
+    "confirm_navigation_arrival": "skip",
+    "confirm_manipulation": "skip",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "yes",
+    "bite_dipping_preference": "do not dip",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_bite_selection": "wait for me",
+    "wait_before_autocontinue_task_selection": "wait for me"
+  }
+}

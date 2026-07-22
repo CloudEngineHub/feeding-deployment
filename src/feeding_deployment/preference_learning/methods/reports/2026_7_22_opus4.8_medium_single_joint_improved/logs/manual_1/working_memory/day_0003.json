@@ -1,0 +1,13 @@
+{
+  "day": 3,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "robot_speed": "fast",
+    "wait_before_autocontinue_bite_selection": "countdown (60 sec)"
+  }
+}

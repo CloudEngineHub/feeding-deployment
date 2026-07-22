@@ -1,0 +1,15 @@
+{
+  "day": 10,
+  "context": {
+    "meal": "buffalo chicken bites, potato wedges, and ranch dressing",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "convey_robot_ready_for_completing_transfer": "speech + LED",
+    "retract_between_bites": "no",
+    "convey_robot_ready_for_initiating_transfer": "speech + LED",
+    "microwave_time": "1 min"
+  }
+}

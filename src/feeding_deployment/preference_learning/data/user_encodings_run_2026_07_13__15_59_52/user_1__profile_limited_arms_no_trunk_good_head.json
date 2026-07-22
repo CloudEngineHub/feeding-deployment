@@ -1,0 +1,222 @@
+{
+  "user_index": 1,
+  "physical_profile": "limited_arms_no_trunk_good_head",
+  "encoding": {
+    "microwave_time": {
+      "default": "2 min",
+      "user_tendencies": "IF alone AND neutral AND standard meat/savory THEN 2 min BECAUSE user prefers warm food by default. IF any context AND any state AND dessert/fruit meant cold THEN no microwave BECAUSE cold items should not be heated. IF alone AND relaxed with ample time AND savory THEN 3 min BECAUSE user enjoys hotter food when unhurried. IF any context AND in a hurry AND savory THEN 1 min BECAUSE reducing prep time matters more than heat. IF social AND neutral AND savory THEN 2 min BECAUSE default warmth still applies. IF any context AND fatigued AND savory THEN 2 min BECAUSE warmth is comforting without extra delay."
+    },
+    "robot_speed": {
+      "default": "slow",
+      "user_tendencies": "IF alone AND neutral AND any food THEN slow BECAUSE this cautious user with paralysis feels safest with slow motion near the body and mouth. IF social AND any state AND any food THEN slow BECAUSE slow motion keeps the social partner comfortable too. IF any context AND in a hurry AND any food THEN medium BECAUSE user tolerates a modest speed-up to save time but never fast near the mouth. IF watching TV AND relaxed AND any food THEN slow BECAUSE no reason to rush. IF any context AND fatigued AND any food THEN slow BECAUSE user wants predictable gentle motion when tired. IF working on laptop AND in a hurry AND any food THEN medium BECAUSE efficiency helps but comfort still caps at medium."
+    },
+    "skewering_axis": {
+      "default": "parallel to major axis",
+      "user_tendencies": "IF any context AND any state AND any food THEN parallel to major axis BECAUSE user opens mouth wide but narrower bites are still easier and safer for inside-mouth delivery. IF alone AND relaxed AND tough meat THEN perpendicular to major axis BECAUSE acquisition reliability matters when time is ample and messiness is not a concern. IF social AND any state AND any food THEN parallel to major axis BECAUSE tidy manageable bites reduce social awkwardness. IF any context AND in a hurry AND slippery food THEN perpendicular to major axis BECAUSE fewer failed pickups saves time. IF any context AND fatigued AND any food THEN parallel to major axis BECAUSE smaller controlled bites require less effort to take. IF working AND neutral AND soft food THEN parallel to major axis BECAUSE default narrow bites suffice."
+    },
+    "confirm_feeding_pickup": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "IF alone AND neutral AND any food THEN yes (with auto-continue countdown) BECAUSE user cannot press buttons so hands-free auto-continue balances safety and low effort. IF social AND any state AND any food THEN yes (with auto-continue countdown) BECAUSE avoiding an awkward empty-fork transfer matters, but hands-free countdown avoids demanding manual action. IF alone AND in a hurry AND any food THEN no BECAUSE user trusts the robot and wants to save time when unobserved. IF any context AND fatigued AND any food THEN yes (with auto-continue countdown) BECAUSE user minimizes effort under fatigue and lets it auto-proceed. IF watching TV AND relaxed AND any food THEN yes (with auto-continue countdown) BECAUSE distraction warrants a check window that still self-advances. IF social AND in a hurry AND any food THEN yes (with auto-continue countdown) BECAUSE social propriety outranks haste for this appearance-conscious user."
+    },
+    "confirm_navigation_arrival": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "IF alone AND neutral AND early meals THEN yes (with auto-continue countdown) BECAUSE parking should be refined while remaining hands-free. IF any context AND any state AND parking proven reliable over time THEN no BECAUSE user relaxes navigation checks once positions are trusted. IF any context AND in a hurry AND any food THEN no BECAUSE navigation is low-risk and skipping saves time. IF any context AND fatigued AND any food THEN yes (with auto-continue countdown) BECAUSE low-effort auto-advance is preferred when tired. IF social AND neutral AND any food THEN yes (with auto-continue countdown) BECAUSE a good park position avoids disturbing the partner. IF watching TV AND relaxed AND any food THEN yes (with auto-continue countdown) BECAUSE the countdown accommodates divided attention."
+    },
+    "confirm_manipulation": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "IF alone AND neutral AND any food THEN yes (with auto-continue countdown) BECAUSE user wants perception verification hands-free while safety around plate handling matters. IF any context AND any state AND perception proven reliable THEN no BECAUSE user relaxes checks as trust grows. IF any context AND in a hurry AND any food THEN yes (with auto-continue countdown) BECAUSE manipulation is higher-risk so the check stays but auto-advances. IF any context AND fatigued AND any food THEN yes (with auto-continue countdown) BECAUSE hands-free countdown minimizes effort while retaining a safety window. IF social AND neutral AND any food THEN yes (with auto-continue countdown) BECAUSE a dropped plate would be very disruptive socially. IF watching TV AND relaxed AND any food THEN yes (with auto-continue countdown) BECAUSE distraction warrants keeping the safety check."
+    },
+    "transfer_mode": {
+      "default": "inside mouth transfer",
+      "user_tendencies": "IF any context AND any state AND any food THEN inside mouth transfer BECAUSE user cannot lean forward due to lack of trunk control so the robot must deliver into the mouth. IF social AND any state AND any food THEN inside mouth transfer BECAUSE physical limitation requires it regardless of setting. IF any context AND fatigued AND any food THEN inside mouth transfer BECAUSE it requires the least user movement. IF any context AND relaxed AND any food THEN inside mouth transfer BECAUSE trunk limitation is constant. IF watching TV AND neutral AND any food THEN inside mouth transfer BECAUSE user cannot reach outward. IF working AND in a hurry AND any food THEN inside mouth transfer BECAUSE direct delivery is required and also fastest for this user."
+    },
+    "outside_mouth_distance": {
+      "default": "not applicable",
+      "user_tendencies": "IF any context AND any state AND any food THEN not applicable BECAUSE user always uses inside-mouth transfer given lack of trunk control. IF social AND any state AND any food THEN not applicable BECAUSE transfer mode never switches to outside. IF any context AND fatigued AND any food THEN not applicable BECAUSE inside-mouth remains the only option. IF alone AND relaxed AND any food THEN not applicable BECAUSE outside-mouth is never used. IF watching TV AND neutral AND any food THEN not applicable BECAUSE distance parameter is irrelevant here. IF working AND in a hurry AND any food THEN not applicable BECAUSE the field only applies to outside-mouth transfer."
+    },
+    "convey_robot_ready_for_initiating_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "IF alone AND neutral AND any food THEN speech + LED BECAUSE clear multimodal cue keeps the user informed without needing to watch the arm. IF social AND any state AND any food THEN LED BECAUSE spoken announcements can be intrusive or awkward with a partner present. IF watching TV AND any state AND any food THEN speech + LED BECAUSE audio cue cuts through visual distraction. IF working on laptop AND neutral AND any food THEN speech + LED BECAUSE user is looking at the screen and needs audio. IF any context AND fatigued AND any food THEN speech + LED BECAUSE salient cues reduce the effort of monitoring. IF social AND fatigued AND any food THEN speech + LED BECAUSE under fatigue clarity of cue outweighs social subtlety."
+    },
+    "detect_user_ready_for_initiating_transfer_feeding": {
+      "default": "open mouth",
+      "user_tendencies": "IF alone AND neutral AND any food THEN open mouth BECAUSE user cannot press buttons and open-mouth is natural and low-effort. IF social AND any state AND any food THEN open mouth BECAUSE button is impossible for this user so open-mouth is used despite talking-confusion risk. IF any context AND fatigued AND any food THEN open mouth BECAUSE it minimizes effort. IF working AND in a hurry AND any food THEN open mouth BECAUSE it is the fastest hands-free trigger available. IF watching TV AND relaxed AND any food THEN open mouth BECAUSE user can time their mouth-open around the show. IF social AND neutral AND talkative meal THEN open mouth BECAUSE no button alternative exists though the user takes care to open deliberately."
+    },
+    "detect_user_ready_for_initiating_transfer_drinking": {
+      "default": "open mouth",
+      "user_tendencies": "IF alone AND neutral AND any drink THEN open mouth BECAUSE hands-free and natural given no button ability. IF social AND any state AND any drink THEN open mouth BECAUSE button is unavailable so open-mouth remains the option. IF any context AND fatigued AND any drink THEN open mouth BECAUSE lowest effort. IF working AND in a hurry AND any drink THEN open mouth BECAUSE fastest available hands-free trigger. IF watching TV AND relaxed AND any drink THEN open mouth BECAUSE user controls timing. IF social AND neutral AND talkative meal THEN open mouth BECAUSE it is the only feasible readiness cue for this user."
+    },
+    "detect_user_ready_for_initiating_transfer_wiping": {
+      "default": "open mouth",
+      "user_tendencies": "IF alone AND neutral AND any meal THEN open mouth BECAUSE hands-free readiness is required and consistent with other tasks. IF social AND any state AND any meal THEN open mouth BECAUSE no button possible so open-mouth persists. IF any context AND fatigued AND any meal THEN open mouth BECAUSE least effort. IF working AND in a hurry AND any meal THEN open mouth BECAUSE it is fast and hands-free. IF watching TV AND relaxed AND any meal THEN open mouth BECAUSE user controls timing. IF social AND neutral AND any meal THEN open mouth BECAUSE button alternative is infeasible for this user."
+    },
+    "convey_robot_ready_for_completing_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "IF alone AND neutral AND any food THEN speech + LED BECAUSE clear multimodal signal that the tool has arrived aids timing. IF social AND any state AND any food THEN LED BECAUSE quiet visual cue avoids disrupting conversation. IF watching TV AND any state AND any food THEN speech + LED BECAUSE audio cuts through the show. IF working AND neutral AND any food THEN speech + LED BECAUSE the user is looking at the laptop. IF any context AND fatigued AND any food THEN speech + LED BECAUSE salient cues reduce monitoring effort. IF social AND fatigued AND any food THEN speech + LED BECAUSE fatigue makes clarity outweigh social discretion."
+    },
+    "detect_user_completed_transfer_feeding": {
+      "default": "perception",
+      "user_tendencies": "IF alone AND neutral AND any food THEN perception BECAUSE force-torque detection is reliable and hands-free, ideal since user cannot press buttons. IF social AND any state AND any food THEN perception BECAUSE it is silent, hands-free, and unobtrusive. IF any context AND fatigued AND any food THEN perception BECAUSE it requires no user effort. IF working AND in a hurry AND any food THEN perception BECAUSE reliable automatic completion keeps the meal flowing. IF watching TV AND relaxed AND any food THEN perception BECAUSE hands-free detection lets user stay engaged with the show. IF any context AND neutral AND sticky food THEN perception BECAUSE the fork sensor still reliably detects the bite."
+    },
+    "detect_user_completed_transfer_drinking": {
+      "default": "perception",
+      "user_tendencies": "IF alone AND neutral AND any drink THEN perception BECAUSE head-nod gesture is feasible given good neck control and needs no buttons. IF social AND any state AND any drink THEN autocontinue BECAUSE a head-nod may look unnatural to a partner, so a timeout is less awkward. IF any context AND fatigued AND any drink THEN autocontinue BECAUSE it requires zero effort. IF watching TV AND relaxed AND any drink THEN perception BECAUSE the user can nod comfortably when unobserved. IF working AND in a hurry AND any drink THEN perception BECAUSE deliberate nods give quick reliable completion. IF social AND fatigued AND any drink THEN autocontinue BECAUSE both fatigue and social discretion favor the effortless timeout."
+    },
+    "detect_user_completed_transfer_wiping": {
+      "default": "perception",
+      "user_tendencies": "IF alone AND neutral AND any meal THEN perception BECAUSE head-nod is feasible and hands-free. IF social AND any state AND any meal THEN autocontinue BECAUSE head-nod appears unnatural socially so a timeout is preferred. IF any context AND fatigued AND any meal THEN autocontinue BECAUSE effortless completion when tired. IF watching TV AND relaxed AND any meal THEN perception BECAUSE the user can nod freely when unobserved. IF working AND in a hurry AND any meal THEN perception BECAUSE quick reliable nod completion aids flow. IF social AND fatigued AND any meal THEN autocontinue BECAUSE fatigue and social discretion both favor the timeout."
+    },
+    "retract_between_bites": {
+      "default": "no",
+      "user_tendencies": "IF alone AND neutral AND any food THEN no BECAUSE user prioritizes shorter meals when no one's view is obstructed. IF social AND any state AND any food THEN yes BECAUSE the robot should not block the partner's view or feel intrusive. IF watching TV AND any state AND any food THEN yes BECAUSE user wants an unobstructed view of the screen. IF working on laptop AND neutral AND any food THEN yes BECAUSE the arm should clear the screen between bites. IF alone AND in a hurry AND any food THEN no BECAUSE skipping retraction saves time. IF alone AND fatigued AND any food THEN no BECAUSE fewer movements shorten a tiring meal."
+    },
+    "bite_dipping_preference": {
+      "default": "do not dip",
+      "user_tendencies": "IF alone AND neutral AND no dippable items THEN do not dip BECAUSE there is nothing to dip. IF alone AND relaxed AND food with sauce THEN more BECAUSE user enjoys fuller flavor when unobserved and unhurried. IF social AND any state AND food with sauce THEN less BECAUSE lighter dipping reduces messiness risk in front of others. IF any context AND in a hurry AND food with sauce THEN less BECAUSE lighter dipping speeds acquisition. IF any context AND fatigued AND food with sauce THEN less BECAUSE lighter, cleaner bites are easier to manage when tired. IF watching TV AND relaxed AND food with sauce THEN more BECAUSE user savors flavor while relaxed and unobserved."
+    },
+    "bite_ordering": {
+      "default": "No particular order; feed items one type at a time unless a dip is present, in which case dip the main solid in its accompanying sauce.",
+      "user_tendencies": "IF alone AND relaxed AND meat with sauce THEN feed the meat dipped generously in its sauce, finishing one item before the next BECAUSE user enjoys full flavor when unhurried. IF social AND any state AND meat with sauce THEN feed the meat lightly dipped and alternate with plain sides BECAUSE lighter, tidier eating suits company. IF any context AND neutral AND mixed plate with dessert THEN feed savory items first and the dessert last BECAUSE user prefers to end on something sweet. IF any context AND in a hurry AND any plate THEN feed items in simple grouped order with minimal dipping BECAUSE speed is prioritized. IF alone AND neutral AND fruit only THEN no particular order BECAUSE no strong preference among fruits. IF any context AND fatigued AND food with sauce THEN feed the easiest-to-manage items first with light dipping BECAUSE user conserves effort when tired."
+    },
+    "wait_before_autocontinue_seconds": {
+      "default": "30 sec",
+      "user_tendencies": "IF alone AND neutral AND any food THEN 30 sec BECAUSE a moderate window suits nose-dot web interaction which takes longer than button presses. IF watching TV AND any state AND any food THEN 60 sec BECAUSE divided attention needs more time to intervene. IF working on laptop AND any state AND any food THEN 60 sec BECAUSE the user may be focused elsewhere. IF any context AND in a hurry AND any food THEN 15 sec BECAUSE user wants faster progression when rushed. IF any context AND fatigued AND any food THEN 60 sec BECAUSE slower reactions when tired require more buffer. IF social AND neutral AND any food THEN 60 sec BECAUSE conversation distracts and the user needs longer to react."
+    },
+    "plate_color_fridge": {
+      "default": "h=59,s=177,v=159,range=0.15",
+      "user_tendencies": "IF time_of_day=morning THEN h=55,s=177,v=172,range=0.15 BECAUSE morning lighting shifts the handle's apparent color. IF time_of_day=noon THEN h=59,s=177,v=159,range=0.15 BECAUSE reference lighting. IF time_of_day=evening THEN h=63,s=149,v=136,range=0.15 BECAUSE evening lighting shifts the handle's apparent color. The time-of-day shift is shared across the fridge/microwave/table pickups (same physical handle, one lighting change)."
+    },
+    "plate_color_microwave": {
+      "default": "h=62,s=177,v=195,range=0.15",
+      "user_tendencies": "IF time_of_day=morning THEN h=58,s=177,v=208,range=0.15 BECAUSE morning lighting shifts the handle's apparent color. IF time_of_day=noon THEN h=62,s=177,v=195,range=0.15 BECAUSE reference lighting. IF time_of_day=evening THEN h=66,s=149,v=172,range=0.15 BECAUSE evening lighting shifts the handle's apparent color. The time-of-day shift is shared across the fridge/microwave/table pickups (same physical handle, one lighting change)."
+    },
+    "plate_color_table": {
+      "default": "h=58,s=177,v=192,range=0.15",
+      "user_tendencies": "IF time_of_day=morning THEN h=54,s=177,v=205,range=0.15 BECAUSE morning lighting shifts the handle's apparent color. IF time_of_day=noon THEN h=58,s=177,v=192,range=0.15 BECAUSE reference lighting. IF time_of_day=evening THEN h=62,s=149,v=169,range=0.15 BECAUSE evening lighting shifts the handle's apparent color. The time-of-day shift is shared across the fridge/microwave/table pickups (same physical handle, one lighting change)."
+    },
+    "nav_offset_table": {
+      "default": "dx=0.005,dy=0.174,dyaw=0.264",
+      "user_tendencies": "IF time_of_day=morning AND affective_state=Neutral THEN dx=-0.076,dy=0.087,dyaw=0.358. IF time_of_day=morning AND affective_state=Hurried THEN dx=-0.007,dy=0.148,dyaw=0.479. IF time_of_day=morning AND affective_state=Slower THEN dx=-0.175,dy=-0.002,dyaw=0.209. IF time_of_day=morning AND affective_state=Fatigued THEN dx=-0.137,dy=0.169,dyaw=0.240. IF time_of_day=morning AND affective_state=Energetic THEN dx=0.001,dy=0.178,dyaw=0.508. IF time_of_day=noon AND affective_state=Neutral THEN dx=0.005,dy=0.174,dyaw=0.264. IF time_of_day=noon AND affective_state=Hurried THEN dx=0.074,dy=0.235,dyaw=0.385. IF time_of_day=noon AND affective_state=Slower THEN dx=-0.094,dy=0.085,dyaw=0.115. IF time_of_day=noon AND affective_state=Fatigued THEN dx=-0.056,dy=0.256,dyaw=0.146. IF time_of_day=noon AND affective_state=Energetic THEN dx=0.082,dy=0.265,dyaw=0.414. IF time_of_day=evening AND affective_state=Neutral THEN dx=-0.069,dy=0.066,dyaw=0.390. IF time_of_day=evening AND affective_state=Hurried THEN dx=0.000,dy=0.127,dyaw=0.511. IF time_of_day=evening AND affective_state=Slower THEN dx=-0.168,dy=-0.023,dyaw=0.241. IF time_of_day=evening AND affective_state=Fatigued THEN dx=-0.130,dy=0.148,dyaw=0.272. IF time_of_day=evening AND affective_state=Energetic THEN dx=0.008,dy=0.157,dyaw=0.540. The time-of-day and affective-state components are shared across the table/microwave/sink/fridge offsets (household routine and posture, not the location)."
+    },
+    "nav_offset_microwave": {
+      "default": "dx=0.166,dy=0.191,dyaw=0.116",
+      "user_tendencies": "IF time_of_day=morning AND affective_state=Neutral THEN dx=0.085,dy=0.104,dyaw=0.210. IF time_of_day=morning AND affective_state=Hurried THEN dx=0.154,dy=0.165,dyaw=0.331. IF time_of_day=morning AND affective_state=Slower THEN dx=-0.014,dy=0.015,dyaw=0.061. IF time_of_day=morning AND affective_state=Fatigued THEN dx=0.024,dy=0.186,dyaw=0.092. IF time_of_day=morning AND affective_state=Energetic THEN dx=0.162,dy=0.195,dyaw=0.360. IF time_of_day=noon AND affective_state=Neutral THEN dx=0.166,dy=0.191,dyaw=0.116. IF time_of_day=noon AND affective_state=Hurried THEN dx=0.235,dy=0.252,dyaw=0.237. IF time_of_day=noon AND affective_state=Slower THEN dx=0.067,dy=0.102,dyaw=-0.033. IF time_of_day=noon AND affective_state=Fatigued THEN dx=0.105,dy=0.273,dyaw=-0.002. IF time_of_day=noon AND affective_state=Energetic THEN dx=0.243,dy=0.282,dyaw=0.266. IF time_of_day=evening AND affective_state=Neutral THEN dx=0.092,dy=0.083,dyaw=0.242. IF time_of_day=evening AND affective_state=Hurried THEN dx=0.161,dy=0.144,dyaw=0.363. IF time_of_day=evening AND affective_state=Slower THEN dx=-0.007,dy=-0.006,dyaw=0.093. IF time_of_day=evening AND affective_state=Fatigued THEN dx=0.031,dy=0.165,dyaw=0.124. IF time_of_day=evening AND affective_state=Energetic THEN dx=0.169,dy=0.174,dyaw=0.392. The time-of-day and affective-state components are shared across the table/microwave/sink/fridge offsets (household routine and posture, not the location)."
+    },
+    "nav_offset_sink": {
+      "default": "dx=-0.090,dy=-0.058,dyaw=-0.201",
+      "user_tendencies": "IF time_of_day=morning AND affective_state=Neutral THEN dx=-0.171,dy=-0.145,dyaw=-0.107. IF time_of_day=morning AND affective_state=Hurried THEN dx=-0.102,dy=-0.084,dyaw=0.014. IF time_of_day=morning AND affective_state=Slower THEN dx=-0.270,dy=-0.234,dyaw=-0.256. IF time_of_day=morning AND affective_state=Fatigued THEN dx=-0.232,dy=-0.063,dyaw=-0.225. IF time_of_day=morning AND affective_state=Energetic THEN dx=-0.094,dy=-0.054,dyaw=0.043. IF time_of_day=noon AND affective_state=Neutral THEN dx=-0.090,dy=-0.058,dyaw=-0.201. IF time_of_day=noon AND affective_state=Hurried THEN dx=-0.021,dy=0.003,dyaw=-0.080. IF time_of_day=noon AND affective_state=Slower THEN dx=-0.189,dy=-0.147,dyaw=-0.350. IF time_of_day=noon AND affective_state=Fatigued THEN dx=-0.151,dy=0.024,dyaw=-0.319. IF time_of_day=noon AND affective_state=Energetic THEN dx=-0.013,dy=0.033,dyaw=-0.051. IF time_of_day=evening AND affective_state=Neutral THEN dx=-0.164,dy=-0.166,dyaw=-0.075. IF time_of_day=evening AND affective_state=Hurried THEN dx=-0.095,dy=-0.105,dyaw=0.046. IF time_of_day=evening AND affective_state=Slower THEN dx=-0.263,dy=-0.255,dyaw=-0.224. IF time_of_day=evening AND affective_state=Fatigued THEN dx=-0.225,dy=-0.084,dyaw=-0.193. IF time_of_day=evening AND affective_state=Energetic THEN dx=-0.087,dy=-0.075,dyaw=0.075. The time-of-day and affective-state components are shared across the table/microwave/sink/fridge offsets (household routine and posture, not the location)."
+    },
+    "nav_offset_fridge": {
+      "default": "dx=-0.141,dy=-0.061,dyaw=0.009",
+      "user_tendencies": "IF time_of_day=morning AND affective_state=Neutral THEN dx=-0.222,dy=-0.148,dyaw=0.103. IF time_of_day=morning AND affective_state=Hurried THEN dx=-0.153,dy=-0.087,dyaw=0.224. IF time_of_day=morning AND affective_state=Slower THEN dx=-0.321,dy=-0.237,dyaw=-0.046. IF time_of_day=morning AND affective_state=Fatigued THEN dx=-0.283,dy=-0.066,dyaw=-0.015. IF time_of_day=morning AND affective_state=Energetic THEN dx=-0.145,dy=-0.057,dyaw=0.253. IF time_of_day=noon AND affective_state=Neutral THEN dx=-0.141,dy=-0.061,dyaw=0.009. IF time_of_day=noon AND affective_state=Hurried THEN dx=-0.072,dy=0.000,dyaw=0.130. IF time_of_day=noon AND affective_state=Slower THEN dx=-0.240,dy=-0.150,dyaw=-0.140. IF time_of_day=noon AND affective_state=Fatigued THEN dx=-0.202,dy=0.021,dyaw=-0.109. IF time_of_day=noon AND affective_state=Energetic THEN dx=-0.064,dy=0.030,dyaw=0.159. IF time_of_day=evening AND affective_state=Neutral THEN dx=-0.215,dy=-0.169,dyaw=0.135. IF time_of_day=evening AND affective_state=Hurried THEN dx=-0.146,dy=-0.108,dyaw=0.256. IF time_of_day=evening AND affective_state=Slower THEN dx=-0.314,dy=-0.258,dyaw=-0.014. IF time_of_day=evening AND affective_state=Fatigued THEN dx=-0.276,dy=-0.087,dyaw=0.017. IF time_of_day=evening AND affective_state=Energetic THEN dx=-0.138,dy=-0.078,dyaw=0.285. The time-of-day and affective-state components are shared across the table/microwave/sink/fridge offsets (household routine and posture, not the location)."
+    }
+  },
+  "continuous_tables": {
+    "base_color": {
+      "h": 58,
+      "s": 177,
+      "v": 192,
+      "range": 0.15
+    },
+    "location_color_offsets": {
+      "table": {
+        "dh": 0,
+        "ds": 0,
+        "dv": 0
+      },
+      "fridge": {
+        "dh": 1,
+        "ds": 0,
+        "dv": -33
+      },
+      "microwave": {
+        "dh": 4,
+        "ds": 0,
+        "dv": 3
+      }
+    },
+    "time_color_shifts": {
+      "noon": {
+        "dh": 0,
+        "ds": 0,
+        "dv": 0
+      },
+      "morning": {
+        "dh": -4,
+        "ds": 0,
+        "dv": 13
+      },
+      "evening": {
+        "dh": 4,
+        "ds": -28,
+        "dv": -23
+      }
+    },
+    "base_nav": {
+      "table": {
+        "dx": 0.005,
+        "dy": 0.174,
+        "dyaw": 0.264
+      },
+      "microwave": {
+        "dx": 0.166,
+        "dy": 0.191,
+        "dyaw": 0.116
+      },
+      "sink": {
+        "dx": -0.09,
+        "dy": -0.058,
+        "dyaw": -0.201
+      },
+      "fridge": {
+        "dx": -0.141,
+        "dy": -0.061,
+        "dyaw": 0.009
+      }
+    },
+    "time_nav_shifts": {
+      "morning": {
+        "dx": -0.081,
+        "dy": -0.087,
+        "dyaw": 0.094
+      },
+      "noon": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "evening": {
+        "dx": -0.074,
+        "dy": -0.108,
+        "dyaw": 0.126
+      }
+    },
+    "affect_nav_shifts": {
+      "Neutral": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "Hurried": {
+        "dx": 0.069,
+        "dy": 0.061,
+        "dyaw": 0.121
+      },
+      "Slower": {
+        "dx": -0.099,
+        "dy": -0.089,
+        "dyaw": -0.149
+      },
+      "Fatigued": {
+        "dx": -0.061,
+        "dy": 0.082,
+        "dyaw": -0.118
+      },
+      "Energetic": {
+        "dx": 0.077,
+        "dy": 0.091,
+        "dyaw": 0.15
+      }
+    }
+  }
+}

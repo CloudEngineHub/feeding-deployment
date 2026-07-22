@@ -1,0 +1,61 @@
+{
+  "day": 20,
+  "affective_state": "Hurried",
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Hurried"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.8181818181818182,
+      "mismatches": 4
+    },
+    {
+      "m": 1,
+      "acc": 0.8571428571428571,
+      "mismatches": 3
+    },
+    {
+      "m": 2,
+      "acc": 0.9,
+      "mismatches": 2
+    },
+    {
+      "m": 3,
+      "acc": 0.9473684210526315,
+      "mismatches": 1
+    },
+    {
+      "m": 4,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": true,
+    "robot_speed": false,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": true,
+    "confirm_navigation_arrival": true,
+    "confirm_manipulation": true,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": true,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": true,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": true,
+    "retract_between_bites": true,
+    "bite_dipping_preference": false,
+    "bite_ordering": false,
+    "wait_before_autocontinue_task_selection": true,
+    "wait_before_autocontinue_feeding_pickup": true,
+    "wait_before_autocontinue_mealprep": false
+  }
+}

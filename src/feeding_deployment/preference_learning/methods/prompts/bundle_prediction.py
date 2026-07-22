@@ -79,7 +79,16 @@ def get_bundle_prediction_prompt(
     prior_predictions_block: str = "(none — this is your first prediction this meal)",
     physical_profile_description: str | None = None,
 ) -> str:
-    template = BUNDLE_PREDICTION_PROMPT_PATH.read_text(encoding="utf-8")
+    """Render the joint bundle-prediction prompt.
+
+    ``memory_mode`` selects the memory organization rendered into the
+    template's memory section: "three_layer" (SEMANTIC + EPISODIC blocks from
+    ltm_summary/retrieved_block), "single_full_history" (one chronological
+    FULL HISTORY block from full_history_block), or "no_memory". Everything
+    outside the memory blocks is identical across modes -- the Axis 1
+    manipulation is purely how memory is organized.
+    """
+    template_text = BUNDLE_PREDICTION_PROMPT_PATH.read_text(encoding="utf-8")
 
     system_description = get_system_description_prompt()
 
@@ -93,7 +102,7 @@ def get_bundle_prediction_prompt(
             raise ValueError(f"Unknown physical_profile_label={physical_profile_label!r}. Valid: {valid}")
         desc = _PHYSICAL_CAPABILITY_BY_LABEL[physical_profile_label].description
 
-    return template.format(
+    return template_text.format(
         system_description=system_description,
         physical_profile=desc,
         memory_block=_render_memory_block(

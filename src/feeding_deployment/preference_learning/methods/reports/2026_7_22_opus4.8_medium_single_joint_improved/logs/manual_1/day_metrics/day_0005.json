@@ -1,0 +1,80 @@
+{
+  "day": 5,
+  "affective_state": "Energetic",
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Social with person on Left",
+    "time_of_day": "morning",
+    "transient_affective_state": "Energetic"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.47619047619047616,
+      "mismatches": 11
+    },
+    {
+      "m": 1,
+      "acc": 0.5,
+      "mismatches": 10
+    },
+    {
+      "m": 2,
+      "acc": 0.5263157894736842,
+      "mismatches": 9
+    },
+    {
+      "m": 3,
+      "acc": 0.6111111111111112,
+      "mismatches": 7
+    },
+    {
+      "m": 4,
+      "acc": 0.8235294117647058,
+      "mismatches": 3
+    },
+    {
+      "m": 5,
+      "acc": 0.5625,
+      "mismatches": 7
+    },
+    {
+      "m": 6,
+      "acc": 0.8,
+      "mismatches": 3
+    },
+    {
+      "m": 7,
+      "acc": 0.9285714285714286,
+      "mismatches": 1
+    },
+    {
+      "m": 8,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": false,
+    "robot_speed": false,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": false,
+    "confirm_navigation_arrival": false,
+    "confirm_manipulation": false,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": false,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": false,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": true,
+    "retract_between_bites": true,
+    "bite_dipping_preference": false,
+    "bite_ordering": false,
+    "wait_before_autocontinue_bite_selection": false,
+    "wait_before_autocontinue_task_selection": false
+  }
+}

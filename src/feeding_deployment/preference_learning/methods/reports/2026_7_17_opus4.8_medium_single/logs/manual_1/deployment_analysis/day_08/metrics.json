@@ -1,0 +1,371 @@
+{
+  "ground_truth": {
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_feeding_pickup": "60 sec",
+    "wait_before_autocontinue_mealprep": "60 sec"
+  },
+  "unresolved_dims": [
+    "robot_speed",
+    "microwave_time",
+    "skewering_axis",
+    "confirm_feeding_pickup",
+    "confirm_navigation_arrival",
+    "confirm_manipulation",
+    "transfer_mode",
+    "outside_mouth_distance",
+    "convey_robot_ready_for_initiating_transfer",
+    "detect_user_ready_for_initiating_transfer_feeding",
+    "detect_user_ready_for_initiating_transfer_drinking",
+    "detect_user_ready_for_initiating_transfer_wiping",
+    "convey_robot_ready_for_completing_transfer",
+    "detect_user_completed_transfer_feeding",
+    "detect_user_completed_transfer_drinking",
+    "detect_user_completed_transfer_wiping",
+    "retract_between_bites",
+    "bite_dipping_preference",
+    "wait_before_autocontinue_bite_selection",
+    "wait_before_autocontinue_task_selection",
+    "plate_color_fridge",
+    "plate_color_microwave",
+    "plate_color_table",
+    "nav_offset_table",
+    "nav_offset_microwave",
+    "nav_offset_sink",
+    "nav_offset_fridge"
+  ],
+  "trajectory": [
+    {
+      "idx": 0,
+      "file": "20260717_112716.txt",
+      "ts": "112716",
+      "event": "INIT",
+      "cat_accuracy": 0,
+      "cat_denom": 0,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [],
+      "latent_inference": "No corrections yet this meal; the context is a cold dessert (strawberries with whipped cream) eaten while watching TV at night, implying a relaxed, low-key personal-style meal similar to day 7's dessert-while-watching-TV. The user is capable of buttons, mouth-opening, and head gestures, and prior TV meals show a minimal-cue, no-microwave-for-fruit, dip-more-on-desserts pattern.",
+      "parse_ok": true
+    },
+    {
+      "idx": 1,
+      "file": "20260717_112747.txt",
+      "ts": "112747",
+      "event": "correction",
+      "cat_accuracy": 0,
+      "cat_denom": 0,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "bite_ordering"
+      ],
+      "latent_inference": "The only correction (bite_ordering to 'no particular order') simply confirms this user's persistent lack of ordering/pairing preference and reveals no shift in state; latent factors read as a relaxed, TV-watching night dessert meal, closely matching day 6 (night, TV) and day 7 (dessert, TV).",
+      "parse_ok": true
+    },
+    {
+      "idx": 2,
+      "file": "20260717_112815.txt",
+      "ts": "112815",
+      "event": "correction",
+      "cat_accuracy": 0,
+      "cat_denom": 0,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "bite_ordering",
+        "wait_before_autocontinue_feeding_pickup"
+      ],
+      "latent_inference": "The user is relaxed and unhurried at night watching TV (the 60 sec pickup-wait correction and 'no particular order' both signal a low-pressure, non-social state), matching the day-7 dessert-while-watching-TV pattern; the meal is a cold strawberries-and-whipped-cream dessert, so no reheating is needed.",
+      "parse_ok": true
+    },
+    {
+      "idx": 3,
+      "file": "20260717_112845.txt",
+      "ts": "112845",
+      "event": "correction",
+      "cat_accuracy": 0,
+      "cat_denom": 0,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "bite_ordering",
+        "wait_before_autocontinue_feeding_pickup",
+        "wait_before_autocontinue_mealprep"
+      ],
+      "latent_inference": "The corrections (both auto-continue waits raised to 60 sec, ordering left unconstrained) indicate a relaxed, unhurried user who is distracted watching TV at night and wants the robot to wait longer before proceeding; the meal is a cold dessert (strawberries with whipped cream), matching the relaxed dessert/TV pattern of day 7.",
+      "parse_ok": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "20260717_112716.txt",
+      "to": "20260717_112747.txt",
+      "trigger_fields": [
+        "bite_ordering"
+      ],
+      "trigger_kinds": [
+        "text"
+      ],
+      "direct": [
+        {
+          "field": "bite_ordering",
+          "kind": "text",
+          "old": "Dip each strawberry in whipped cream before feeding.",
+          "new": "no particular order"
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 0,
+      "acc_delta_direct": 0,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    },
+    {
+      "from": "20260717_112747.txt",
+      "to": "20260717_112815.txt",
+      "trigger_fields": [
+        "wait_before_autocontinue_feeding_pickup"
+      ],
+      "trigger_kinds": [
+        "?"
+      ],
+      "direct": [
+        {
+          "field": "wait_before_autocontinue_feeding_pickup",
+          "kind": "?",
+          "old": null,
+          "new": null
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 0,
+      "acc_delta_direct": 0,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    },
+    {
+      "from": "20260717_112815.txt",
+      "to": "20260717_112845.txt",
+      "trigger_fields": [
+        "wait_before_autocontinue_mealprep"
+      ],
+      "trigger_kinds": [
+        "?"
+      ],
+      "direct": [
+        {
+          "field": "wait_before_autocontinue_mealprep",
+          "kind": "?",
+          "old": null,
+          "new": null
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 0,
+      "acc_delta_direct": 0,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    }
+  ],
+  "ledger": {
+    "POSITIVE": 0,
+    "NEGATIVE": 0,
+    "LATERAL": 0
+  },
+  "hedge_candidates": [],
+  "findings": {
+    "self_inflicted": [],
+    "non_bearing_drift": [],
+    "re_corrections": [],
+    "volatility": [
+      {
+        "field": "wait_before_autocontinue_task_selection",
+        "n_changes": 2,
+        "flip_flopped": true,
+        "sequence": [
+          "60 sec",
+          "15 sec",
+          "60 sec",
+          "60 sec"
+        ]
+      }
+    ]
+  },
+  "continuous_drift": {},
+  "stages": {
+    "robot_speed": "Initial",
+    "microwave_time": "Microwave ask",
+    "skewering_axis": "Table prefs / feeding loop",
+    "confirm_feeding_pickup": "Table prefs / feeding loop",
+    "confirm_navigation_arrival": "Initial",
+    "confirm_manipulation": "Initial",
+    "transfer_mode": "Table prefs / feeding loop",
+    "outside_mouth_distance": "Table prefs / feeding loop",
+    "convey_robot_ready_for_initiating_transfer": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_wiping": "Table prefs / feeding loop",
+    "convey_robot_ready_for_completing_transfer": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_wiping": "Table prefs / feeding loop",
+    "retract_between_bites": "Table prefs / feeding loop",
+    "bite_dipping_preference": "Table prefs / feeding loop",
+    "wait_before_autocontinue_bite_selection": "Table prefs / feeding loop",
+    "wait_before_autocontinue_task_selection": "Table prefs / feeding loop",
+    "bite_ordering": "Table prefs / feeding loop",
+    "plate_color_fridge": "Plate pickup (color)",
+    "plate_color_microwave": "Plate pickup (color)",
+    "plate_color_table": "Plate pickup (color)",
+    "nav_offset_table": "Navigation (nav offset)",
+    "nav_offset_microwave": "Navigation (nav offset)",
+    "nav_offset_sink": "Navigation (nav offset)",
+    "nav_offset_fridge": "Navigation (nav offset)"
+  },
+  "meta": {
+    "dir": "src/feeding_deployment/preference_learning/methods/reports/2026_7_17_opus4.8_medium_single/logs/manual_1/prediction_model_llm_calls :: day_0008",
+    "n_files": 4,
+    "files": [
+      "20260717_112716.txt",
+      "20260717_112747.txt",
+      "20260717_112815.txt",
+      "20260717_112845.txt"
+    ],
+    "model_line": "claude-opus-4-8 (speed=standard, effort=medium)",
+    "meal_context": {
+      "meal": "strawberries with whipped cream",
+      "setting": "Watching TV with TV in Front",
+      "time_of_day": "night"
+    },
+    "prior_memory_present": true,
+    "parse_failures": [],
+    "color_tol": 3.0,
+    "nav_tol": 0.02
+  },
+  "explanations_by_file": {
+    "20260717_112716.txt": {
+      "microwave_time": "Cold fruit dessert; day 4 fruit meal used no microwave.",
+      "robot_speed": "Day 7 dessert-while-TV used medium; relaxed dessert context.",
+      "skewering_axis": "Perpendicular in every prior meal.",
+      "confirm_feeding_pickup": "TV meals (days 2,3,7) consistently used yes (with auto-continue countdown).",
+      "confirm_navigation_arrival": "Consistent yes (with auto-continue countdown) in relaxed TV meals.",
+      "confirm_manipulation": "Consistent yes (with auto-continue countdown) in relaxed TV meals.",
+      "transfer_mode": "Deployment default and all prior meals used outside mouth transfer.",
+      "outside_mouth_distance": "Near used in every prior meal.",
+      "convey_robot_ready_for_initiating_transfer": "TV meals consistently used no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV meals used open mouth; user can open mouth wide.",
+      "detect_user_ready_for_initiating_transfer_drinking": "TV meals used open mouth.",
+      "detect_user_ready_for_initiating_transfer_wiping": "TV meals used open mouth.",
+      "convey_robot_ready_for_completing_transfer": "TV meals consistently used no cue.",
+      "detect_user_completed_transfer_feeding": "TV meals consistently used button; user can press buttons.",
+      "detect_user_completed_transfer_drinking": "TV meals consistently used button.",
+      "detect_user_completed_transfer_wiping": "Button used in every prior meal.",
+      "retract_between_bites": "TV/social meals used retract yes.",
+      "bite_dipping_preference": "Day 7 dessert with sauce used more; whipped cream is dippable.",
+      "bite_ordering": "Meal has strawberries and whipped cream; natural pairing is dipping strawberries in cream.",
+      "wait_before_autocontinue_task_selection": "Relaxed dessert TV meals (days 2,3,4,7) used 60 sec.",
+      "wait_before_autocontinue_feeding_pickup": "Same relaxed TV meals used 60 sec.",
+      "wait_before_autocontinue_mealprep": "Relaxed TV meals used 30 sec.",
+      "plate_color_fridge": "No this-meal correction; seed retained.",
+      "plate_color_microwave": "No this-meal correction; seed retained.",
+      "plate_color_table": "No this-meal correction; seed retained.",
+      "nav_offset_table": "No corrections; seed zero offset retained.",
+      "nav_offset_microwave": "No corrections; seed zero offset retained.",
+      "nav_offset_sink": "No corrections; seed zero offset retained.",
+      "nav_offset_fridge": "No corrections; seed zero offset retained."
+    },
+    "20260717_112747.txt": {
+      "microwave_time": "Cold dessert (strawberries/whipped cream) matches day 4's fruit meal with no microwave.",
+      "robot_speed": "Day 7 dessert and other relaxed TV meals used medium; correction doesn't imply a state shift.",
+      "skewering_axis": "Perpendicular in every prior meal; long-term tendency.",
+      "confirm_feeding_pickup": "TV meals (day 2,3,6,7) used yes with auto-continue countdown.",
+      "confirm_navigation_arrival": "TV meals consistently used yes with auto-continue countdown.",
+      "confirm_manipulation": "TV meals consistently used yes with auto-continue countdown.",
+      "transfer_mode": "Deployment does outside-mouth transfer and user never requested inside.",
+      "outside_mouth_distance": "Near in all prior meals; long-term tendency.",
+      "convey_robot_ready_for_initiating_transfer": "All TV-watching meals used no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV meals used open mouth; user has good mouth control.",
+      "detect_user_ready_for_initiating_transfer_drinking": "TV meals used open mouth.",
+      "detect_user_ready_for_initiating_transfer_wiping": "TV meals used open mouth.",
+      "convey_robot_ready_for_completing_transfer": "All TV meals used no cue.",
+      "detect_user_completed_transfer_feeding": "TV meals consistently used button.",
+      "detect_user_completed_transfer_drinking": "TV meals consistently used button.",
+      "detect_user_completed_transfer_wiping": "TV meals consistently used button.",
+      "retract_between_bites": "TV/social meals used yes to avoid obstructing view.",
+      "bite_dipping_preference": "Whipped cream is dippable and day 7 dessert used more dipping.",
+      "wait_before_autocontinue_task_selection": "Day 6 (night, TV) used 15 sec, the closest match.",
+      "wait_before_autocontinue_feeding_pickup": "Day 6 (night, TV) used 15 sec.",
+      "wait_before_autocontinue_mealprep": "Day 6 (night, TV) used 15 sec.",
+      "plate_color_fridge": "No this-meal evidence; keep the saved seed.",
+      "plate_color_microwave": "No this-meal evidence; keep the saved seed.",
+      "plate_color_table": "No this-meal evidence; keep the saved seed.",
+      "nav_offset_table": "No corrections; keep the zero seed.",
+      "nav_offset_microwave": "No corrections; keep the zero seed.",
+      "nav_offset_sink": "No corrections; keep the zero seed.",
+      "nav_offset_fridge": "No corrections; keep the zero seed."
+    },
+    "20260717_112815.txt": {
+      "microwave_time": "Cold strawberry-and-whipped-cream dessert needs no reheating, matching day-4 fruit meal (no microwave).",
+      "robot_speed": "Day-7 TV dessert used medium; relaxed state doesn't push to fast.",
+      "skewering_axis": "Perpendicular is used across all prior meals as a long-term tendency.",
+      "confirm_feeding_pickup": "Non-social TV setting like day 7 keeps countdown confirmation; 60 sec wait fits relaxed state.",
+      "confirm_navigation_arrival": "Day-7 TV meal used countdown confirmation.",
+      "confirm_manipulation": "Day-7 TV meal used countdown confirmation.",
+      "transfer_mode": "Deployment only does outside-mouth transfer; user never asked for inside.",
+      "outside_mouth_distance": "Near is consistent across all prior meals.",
+      "convey_robot_ready_for_initiating_transfer": "TV-watching meals (days 2-7) used no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Non-social TV meals used open mouth, and user can open mouth wide.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Open mouth used in non-social TV meals.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Open mouth used in non-social TV meals.",
+      "convey_robot_ready_for_completing_transfer": "TV-watching meals used no cue.",
+      "detect_user_completed_transfer_feeding": "Button used in all recent non-day-1 meals.",
+      "detect_user_completed_transfer_drinking": "Button used consistently in recent meals.",
+      "detect_user_completed_transfer_wiping": "Button used consistently across meals.",
+      "retract_between_bites": "TV setting meals used retract=yes to avoid obstructing view.",
+      "bite_dipping_preference": "Strawberries with whipped cream is dippable and day-7 dessert used 'more'.",
+      "wait_before_autocontinue_task_selection": "Relaxed 60 sec pickup correction implies matching 60 sec, as in day 7.",
+      "wait_before_autocontinue_mealprep": "Day-7 TV dessert used 30 sec.",
+      "plate_color_fridge": "No this-meal evidence, so seed retained.",
+      "plate_color_microwave": "No this-meal evidence, so seed retained.",
+      "plate_color_table": "No this-meal evidence, so seed retained.",
+      "nav_offset_table": "No correction evidence; seed zero offset.",
+      "nav_offset_microwave": "No correction evidence; seed zero offset.",
+      "nav_offset_sink": "No correction evidence; seed zero offset.",
+      "nav_offset_fridge": "No correction evidence; seed zero offset."
+    },
+    "20260717_112845.txt": {
+      "microwave_time": "Cold dessert of strawberries with whipped cream is eaten without reheating, like the fruit meal on day 4.",
+      "robot_speed": "Relaxed TV/dessert state matches day 7's medium speed.",
+      "skewering_axis": "Perpendicular is the user's constant preference across all meals.",
+      "confirm_feeding_pickup": "TV meals (days 2,3,6,7) use auto-continue countdown; the relaxed state fits this.",
+      "confirm_navigation_arrival": "Consistent with the countdown confirmation used in all TV meals.",
+      "confirm_manipulation": "Consistent with the countdown confirmation used in all TV meals.",
+      "transfer_mode": "Deployment only performs outside-mouth transfer and user never requested inside.",
+      "outside_mouth_distance": "Near is the user's constant outside-mouth distance across every meal.",
+      "convey_robot_ready_for_initiating_transfer": "TV-in-front meals consistently use no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV meals use open mouth; user has good head/mouth control.",
+      "detect_user_ready_for_initiating_transfer_drinking": "TV meals use open mouth for readiness.",
+      "detect_user_ready_for_initiating_transfer_wiping": "TV meals use open mouth for readiness.",
+      "convey_robot_ready_for_completing_transfer": "TV-in-front meals consistently use no cue.",
+      "detect_user_completed_transfer_feeding": "TV meals use button for completion detection.",
+      "detect_user_completed_transfer_drinking": "TV meals use button for completion detection.",
+      "detect_user_completed_transfer_wiping": "Button used across nearly all meals for wiping completion.",
+      "retract_between_bites": "TV/social contexts consistently use retract=yes.",
+      "bite_dipping_preference": "Strawberries pair with whipped cream and the user prefers more dipping on desserts (day 7).",
+      "wait_before_autocontinue_task_selection": "The two corrected waits to 60 sec indicate a relaxed, distracted state, implying 60 sec here too (matching day 7).",
+      "plate_color_fridge": "No this-meal evidence bears on plate color; seed retained.",
+      "plate_color_microwave": "No this-meal evidence bears on plate color; seed retained.",
+      "plate_color_table": "No this-meal evidence bears on plate color; seed retained.",
+      "nav_offset_table": "No navigation correction observed; seed of zero retained.",
+      "nav_offset_microwave": "No navigation correction observed; seed of zero retained.",
+      "nav_offset_sink": "No navigation correction observed; seed of zero retained.",
+      "nav_offset_fridge": "No navigation correction observed; seed of zero retained."
+    }
+  }
+}

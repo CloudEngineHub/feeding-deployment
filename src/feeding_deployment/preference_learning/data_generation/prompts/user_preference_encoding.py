@@ -1,14 +1,18 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from feeding_deployment.preference_learning.config.physical_capabilities import PHYSICAL_CAPABILITY_PROFILES
+from feeding_deployment.preference_learning.config.preference_bundle import PreferenceDim
 from feeding_deployment.preference_learning.data_generation.prompts.system_description import get_system_description_prompt
 
 USER_PREFERENCE_ENCODING_PROMPT_PATH = Path(__file__).parent / "user_preference_encoding.txt"
 
-def get_user_preference_encoding_prompt(physical_profile_label: str) -> str:
+def get_user_preference_encoding_prompt(
+    physical_profile_label: str,
+    dims: Optional[List[PreferenceDim]] = None,
+) -> str:
     template = USER_PREFERENCE_ENCODING_PROMPT_PATH.read_text(encoding="utf-8")
-    system_description = get_system_description_prompt()
+    system_description = get_system_description_prompt(dims=dims)
     
     PHYSICAL_CAPABILITY_BY_LABEL = {p.label: p for p in PHYSICAL_CAPABILITY_PROFILES}
     physical_profile_description = PHYSICAL_CAPABILITY_BY_LABEL[physical_profile_label].description

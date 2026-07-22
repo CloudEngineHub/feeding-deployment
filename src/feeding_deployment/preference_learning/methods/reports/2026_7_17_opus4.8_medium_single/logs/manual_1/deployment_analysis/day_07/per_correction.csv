@@ -1,0 +1,5 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_112508.txt,INIT,,,,,0,,,,
+1,20260717_112540.txt,correction,robot_speed,categorical,Initial,0,1,0,0,0,
+2,20260717_112615.txt,correction,microwave_time,categorical,Microwave ask,1,2,0,0,0,
+3,20260717_112646.txt,correction,bite_ordering,text,Table prefs / feeding loop,2,2,0,0,0,

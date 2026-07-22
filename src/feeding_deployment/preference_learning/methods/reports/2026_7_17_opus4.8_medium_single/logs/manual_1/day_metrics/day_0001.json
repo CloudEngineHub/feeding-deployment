@@ -1,0 +1,86 @@
+{
+  "day": 1,
+  "affective_state": "Slower",
+  "context": {
+    "meal": "chicken nuggets",
+    "setting": "Personal",
+    "time_of_day": "evening",
+    "transient_affective_state": "Slower"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.6818181818181818,
+      "mismatches": 7
+    },
+    {
+      "m": 1,
+      "acc": 0.7619047619047619,
+      "mismatches": 5
+    },
+    {
+      "m": 2,
+      "acc": 0.85,
+      "mismatches": 3
+    },
+    {
+      "m": 3,
+      "acc": 0.8421052631578947,
+      "mismatches": 3
+    },
+    {
+      "m": 4,
+      "acc": 0.8888888888888888,
+      "mismatches": 2
+    },
+    {
+      "m": 5,
+      "acc": 0.8823529411764706,
+      "mismatches": 2
+    },
+    {
+      "m": 6,
+      "acc": 0.6875,
+      "mismatches": 5
+    },
+    {
+      "m": 7,
+      "acc": 0.8666666666666667,
+      "mismatches": 2
+    },
+    {
+      "m": 8,
+      "acc": 0.9285714285714286,
+      "mismatches": 1
+    },
+    {
+      "m": 9,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": false,
+    "robot_speed": true,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": true,
+    "confirm_navigation_arrival": true,
+    "confirm_manipulation": true,
+    "transfer_mode": true,
+    "outside_mouth_distance": false,
+    "convey_robot_ready_for_initiating_transfer": true,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": false,
+    "convey_robot_ready_for_completing_transfer": true,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": false,
+    "retract_between_bites": true,
+    "bite_dipping_preference": true,
+    "bite_ordering": true,
+    "wait_before_autocontinue_task_selection": false,
+    "wait_before_autocontinue_feeding_pickup": false,
+    "wait_before_autocontinue_mealprep": false
+  }
+}

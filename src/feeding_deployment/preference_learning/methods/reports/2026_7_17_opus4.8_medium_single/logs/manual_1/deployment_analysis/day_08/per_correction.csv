@@ -1,0 +1,5 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_112716.txt,INIT,,,,,0,,,,
+1,20260717_112747.txt,correction,bite_ordering,text,Table prefs / feeding loop,0,0,0,0,0,
+2,20260717_112815.txt,correction,wait_before_autocontinue_feeding_pickup,?,?,0,0,0,0,0,
+3,20260717_112845.txt,correction,wait_before_autocontinue_mealprep,?,?,0,0,0,0,0,

@@ -1,0 +1,3 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_135210.txt,INIT,,,,,0,,,,
+1,20260717_135246.txt,correction,detect_user_completed_transfer_wiping,categorical,Table prefs / feeding loop,0,1,0,0,0,

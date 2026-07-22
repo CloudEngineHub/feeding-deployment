@@ -1,0 +1,16 @@
+{
+  "day": 14,
+  "context": {
+    "meal": "bite-sized sandwiches",
+    "setting": "Social with person in Front",
+    "time_of_day": "evening",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "wait_before_autocontinue_mealprep": "30 sec",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+    "robot_speed": "fast"
+  }
+}

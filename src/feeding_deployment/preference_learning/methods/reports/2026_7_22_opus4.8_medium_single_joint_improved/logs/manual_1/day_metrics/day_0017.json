@@ -1,0 +1,45 @@
+{
+  "day": 17,
+  "affective_state": "Fatigued",
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Watching TV with TV on Right",
+    "time_of_day": "morning",
+    "transient_affective_state": "Fatigued"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.8095238095238095,
+      "mismatches": 4
+    },
+    {
+      "m": 1,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": true,
+    "robot_speed": true,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": true,
+    "confirm_navigation_arrival": true,
+    "confirm_manipulation": true,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": true,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": true,
+    "detect_user_completed_transfer_feeding": false,
+    "detect_user_completed_transfer_drinking": false,
+    "detect_user_completed_transfer_wiping": false,
+    "retract_between_bites": true,
+    "bite_dipping_preference": true,
+    "bite_ordering": false,
+    "wait_before_autocontinue_bite_selection": true,
+    "wait_before_autocontinue_task_selection": true
+  }
+}

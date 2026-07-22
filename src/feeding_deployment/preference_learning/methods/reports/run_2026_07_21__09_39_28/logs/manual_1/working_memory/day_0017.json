@@ -1,0 +1,17 @@
+{
+  "day": 17,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Watching TV with TV on Right",
+    "time_of_day": "morning",
+    "transient_affective_state": "Fatigued"
+  },
+  "corrected": {
+    "detect_user_completed_transfer_feeding": "perception",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "bite_ordering": "no particular order",
+    "confirm_navigation_arrival": "no",
+    "confirm_manipulation": "no",
+    "wait_before_autocontinue_task_selection": "60 sec"
+  }
+}

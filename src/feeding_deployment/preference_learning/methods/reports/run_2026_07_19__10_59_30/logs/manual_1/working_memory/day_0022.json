@@ -1,0 +1,13 @@
+{
+  "day": 22,
+  "context": {
+    "meal": "cantaloupes, bananas, watermelon",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "morning",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "robot_speed": "fast",
+    "wait_before_autocontinue_task_selection": "60 sec"
+  }
+}

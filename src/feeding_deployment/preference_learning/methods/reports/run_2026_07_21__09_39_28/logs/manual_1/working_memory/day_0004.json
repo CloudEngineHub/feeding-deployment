@@ -1,0 +1,18 @@
+{
+  "day": 4,
+  "context": {
+    "meal": "cantaloupes, bananas, watermelon",
+    "setting": "Personal",
+    "time_of_day": "morning",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "wait_before_autocontinue_task_selection": "60 sec",
+    "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+    "convey_robot_ready_for_initiating_transfer": "no cue",
+    "detect_user_completed_transfer_drinking": "button",
+    "confirm_manipulation": "yes (with auto-continue countdown)",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "retract_between_bites": "yes"
+  }
+}

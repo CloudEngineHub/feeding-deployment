@@ -1,0 +1,6 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_112915.txt,INIT,,,,,2,,,,
+1,20260717_112951.txt,correction,robot_speed,categorical,Initial,2,3,0,0,0,
+2,20260717_113035.txt,correction,wait_before_autocontinue_mealprep,?,?,3,1,0,2,0,confirm_navigation_arrival:yes (without any auto-continue)->yes (with auto-continue countdown)(NEG); wait_before_autocontinue_task_selection:no autocontinue->60 sec(NEG)
+3,20260717_113137.txt,correction,wait_before_autocontinue_task_selection,categorical,Table prefs / feeding loop,1,2,0,0,0,
+4,20260717_113216.txt,correction,confirm_navigation_arrival,categorical,Initial,2,3,0,0,0,

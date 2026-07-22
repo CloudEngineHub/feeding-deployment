@@ -1,0 +1,11 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_104018.txt,INIT,,,,,3,,,,
+1,20260717_104052.txt,correction,wait_before_autocontinue_mealprep,?,?,3,3,0,0,1,wait_before_autocontinue_task_selection:30 sec->60 sec(LAT)
+2,20260717_104130.txt,correction,wait_before_autocontinue_task_selection,categorical,Table prefs / feeding loop,3,4,1,1,0,confirm_feeding_pickup:yes (with auto-continue countdown)->no(NEG); detect_user_ready_for_initiating_transfer_wiping:button->open mouth(POS)
+3,20260717_104204.txt,correction,outside_mouth_distance,categorical,Table prefs / feeding loop,4,4,0,1,0,robot_speed:medium->slow(NEG)
+4,20260717_104246.txt,correction,robot_speed,categorical,Initial,4,6,1,0,0,confirm_feeding_pickup:no->yes (with auto-continue countdown)(POS)
+5,20260717_104324.txt,correction,wait_before_autocontinue_feeding_pickup,?,?,6,5,0,1,0,confirm_feeding_pickup:yes (with auto-continue countdown)->yes (without any auto-continue)(NEG)
+6,20260717_104403.txt,correction,detect_user_completed_transfer_wiping,categorical,Table prefs / feeding loop,5,4,0,2,0,detect_user_ready_for_initiating_transfer_wiping:open mouth->button(NEG); detect_user_completed_transfer_drinking:perception->button(NEG)
+7,20260717_104441.txt,correction,detect_user_ready_for_initiating_transfer_wiping,categorical,Table prefs / feeding loop,4,5,0,0,0,
+8,20260717_104514.txt,correction,detect_user_completed_transfer_drinking,categorical,Table prefs / feeding loop,5,6,0,0,0,
+9,20260717_104544.txt,correction,confirm_feeding_pickup,categorical,Table prefs / feeding loop,6,7,0,0,0,

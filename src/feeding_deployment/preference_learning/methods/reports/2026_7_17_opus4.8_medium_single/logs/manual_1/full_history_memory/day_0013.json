@@ -1,0 +1,38 @@
+{
+  "day": 13,
+  "context": {
+    "meal": "bite-sized sandwiches",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "confirm_navigation_arrival": "no",
+    "detect_user_completed_transfer_wiping": "button"
+  },
+  "episode_text": "day=13; meal=bite-sized sandwiches; setting=Personal; time_of_day=night;\npreferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=no; confirm_manipulation=no; transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=speech + LED; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=speech + LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=no; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec; wait_before_autocontinue_feeding_pickup=60 sec; wait_before_autocontinue_mealprep=30 sec",
+  "ground_truth_bundle": {
+    "microwave_time": "1 min",
+    "robot_speed": "medium",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "confirm_manipulation": "no",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "speech + LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+    "convey_robot_ready_for_completing_transfer": "speech + LED",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "no",
+    "bite_dipping_preference": "do not dip",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_task_selection": "60 sec",
+    "wait_before_autocontinue_feeding_pickup": "60 sec",
+    "wait_before_autocontinue_mealprep": "30 sec"
+  }
+}

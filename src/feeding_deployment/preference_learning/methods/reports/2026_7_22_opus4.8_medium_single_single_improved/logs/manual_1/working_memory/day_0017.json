@@ -1,0 +1,14 @@
+{
+  "day": 17,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Watching TV with TV on Right",
+    "time_of_day": "morning",
+    "transient_affective_state": "Fatigued"
+  },
+  "corrected": {
+    "detect_user_completed_transfer_feeding": "perception",
+    "detect_user_completed_transfer_drinking": "perception",
+    "detect_user_completed_transfer_wiping": "perception"
+  }
+}

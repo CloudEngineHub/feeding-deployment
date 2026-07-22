@@ -1,0 +1,15 @@
+{
+  "day": 8,
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "night",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "confirm_navigation_arrival": "countdown (60 sec)",
+    "robot_speed": "medium",
+    "confirm_manipulation": "countdown (60 sec)",
+    "bite_ordering": "no particular order"
+  }
+}

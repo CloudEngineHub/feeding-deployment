@@ -1,0 +1,308 @@
+{
+  "ground_truth": {
+    "robot_speed": "fast",
+    "wait_before_autocontinue_mealprep": "30 sec"
+  },
+  "unresolved_dims": [
+    "microwave_time",
+    "skewering_axis",
+    "confirm_feeding_pickup",
+    "confirm_navigation_arrival",
+    "confirm_manipulation",
+    "transfer_mode",
+    "outside_mouth_distance",
+    "convey_robot_ready_for_initiating_transfer",
+    "detect_user_ready_for_initiating_transfer_feeding",
+    "detect_user_ready_for_initiating_transfer_drinking",
+    "detect_user_ready_for_initiating_transfer_wiping",
+    "convey_robot_ready_for_completing_transfer",
+    "detect_user_completed_transfer_feeding",
+    "detect_user_completed_transfer_drinking",
+    "detect_user_completed_transfer_wiping",
+    "retract_between_bites",
+    "bite_dipping_preference",
+    "wait_before_autocontinue_bite_selection",
+    "wait_before_autocontinue_task_selection",
+    "bite_ordering",
+    "plate_color_fridge",
+    "plate_color_microwave",
+    "plate_color_table",
+    "nav_offset_table",
+    "nav_offset_microwave",
+    "nav_offset_sink",
+    "nav_offset_fridge"
+  ],
+  "trajectory": [
+    {
+      "idx": 0,
+      "file": "20260717_105120.txt",
+      "ts": "105120",
+      "event": "INIT",
+      "cat_accuracy": 0,
+      "cat_denom": 1,
+      "remaining_corrections": 1,
+      "confirmed_fields": [],
+      "corrected_fields": [],
+      "latent_inference": "No corrections yet; the current meal (Watching TV with TV in front, afternoon) closely matches day 2's context, suggesting a relaxed but distraction-prone TV-watching state where the user favors buttons over gestures, no attention-cues, retracting between bites, and longer autocontinue waits.",
+      "parse_ok": true
+    },
+    {
+      "idx": 1,
+      "file": "20260717_105203.txt",
+      "ts": "105203",
+      "event": "correction",
+      "cat_accuracy": 1,
+      "cat_denom": 1,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "robot_speed"
+      ],
+      "latent_inference": "The user corrected robot_speed to fast in an identical setting (Watching TV, afternoon) to day 2, signaling a hurried state today aimed at reducing overall meal time; the meal is warm chicken/hash brown with no dips, and the TV setting still favors minimizing on-screen cues while keeping the robot out of the view (retract).",
+      "parse_ok": true
+    },
+    {
+      "idx": 2,
+      "file": "20260717_105235.txt",
+      "ts": "105235",
+      "event": "correction",
+      "cat_accuracy": 1,
+      "cat_denom": 1,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "robot_speed",
+        "wait_before_autocontinue_mealprep"
+      ],
+      "latent_inference": "The user is in a slightly hurried but still distracted state (watching TV in the afternoon): they upgraded robot_speed to fast to keep the meal moving, while keeping wait_before_autocontinue_mealprep at 30 sec exactly as in the comparable day-2 TV meal, so the day-2 TV-setting pattern largely holds with a faster tempo.",
+      "parse_ok": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "20260717_105120.txt",
+      "to": "20260717_105203.txt",
+      "trigger_fields": [
+        "robot_speed"
+      ],
+      "trigger_kinds": [
+        "categorical"
+      ],
+      "direct": [
+        {
+          "field": "robot_speed",
+          "kind": "categorical",
+          "old": "medium",
+          "new": "fast"
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 1,
+      "acc_delta_direct": 1,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    },
+    {
+      "from": "20260717_105203.txt",
+      "to": "20260717_105235.txt",
+      "trigger_fields": [
+        "wait_before_autocontinue_mealprep"
+      ],
+      "trigger_kinds": [
+        "?"
+      ],
+      "direct": [
+        {
+          "field": "wait_before_autocontinue_mealprep",
+          "kind": "?",
+          "old": null,
+          "new": null
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 1,
+      "acc_after": 1,
+      "acc_delta_direct": 0,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    }
+  ],
+  "ledger": {
+    "POSITIVE": 0,
+    "NEGATIVE": 0,
+    "LATERAL": 0
+  },
+  "hedge_candidates": [],
+  "findings": {
+    "self_inflicted": [],
+    "non_bearing_drift": [],
+    "re_corrections": [],
+    "volatility": [
+      {
+        "field": "wait_before_autocontinue_task_selection",
+        "n_changes": 2,
+        "flip_flopped": true,
+        "sequence": [
+          "60 sec",
+          "30 sec",
+          "60 sec"
+        ]
+      },
+      {
+        "field": "robot_speed",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "medium",
+          "fast",
+          "fast"
+        ]
+      }
+    ]
+  },
+  "continuous_drift": {},
+  "stages": {
+    "robot_speed": "Initial",
+    "microwave_time": "Microwave ask",
+    "skewering_axis": "Table prefs / feeding loop",
+    "confirm_feeding_pickup": "Table prefs / feeding loop",
+    "confirm_navigation_arrival": "Initial",
+    "confirm_manipulation": "Initial",
+    "transfer_mode": "Table prefs / feeding loop",
+    "outside_mouth_distance": "Table prefs / feeding loop",
+    "convey_robot_ready_for_initiating_transfer": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_wiping": "Table prefs / feeding loop",
+    "convey_robot_ready_for_completing_transfer": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_wiping": "Table prefs / feeding loop",
+    "retract_between_bites": "Table prefs / feeding loop",
+    "bite_dipping_preference": "Table prefs / feeding loop",
+    "wait_before_autocontinue_bite_selection": "Table prefs / feeding loop",
+    "wait_before_autocontinue_task_selection": "Table prefs / feeding loop",
+    "bite_ordering": "Table prefs / feeding loop",
+    "plate_color_fridge": "Plate pickup (color)",
+    "plate_color_microwave": "Plate pickup (color)",
+    "plate_color_table": "Plate pickup (color)",
+    "nav_offset_table": "Navigation (nav offset)",
+    "nav_offset_microwave": "Navigation (nav offset)",
+    "nav_offset_sink": "Navigation (nav offset)",
+    "nav_offset_fridge": "Navigation (nav offset)"
+  },
+  "meta": {
+    "dir": "src/feeding_deployment/preference_learning/methods/reports/2026_7_17_opus4.8_medium_single/logs/manual_1/prediction_model_llm_calls :: day_0003",
+    "n_files": 3,
+    "files": [
+      "20260717_105120.txt",
+      "20260717_105203.txt",
+      "20260717_105235.txt"
+    ],
+    "model_line": "claude-opus-4-8 (speed=standard, effort=medium)",
+    "meal_context": {
+      "meal": "chicken breast strips and hash brown",
+      "setting": "Watching TV with TV in Front",
+      "time_of_day": "afternoon"
+    },
+    "prior_memory_present": true,
+    "parse_failures": [],
+    "color_tol": 3.0,
+    "nav_tol": 0.02
+  },
+  "explanations_by_file": {
+    "20260717_105120.txt": {
+      "microwave_time": "Day 2 (matching TV/afternoon context) used 1 min for a similar chicken meal.",
+      "robot_speed": "Medium was stable across both prior meals.",
+      "skewering_axis": "Perpendicular was used in both prior meals for bite success.",
+      "confirm_feeding_pickup": "Both prior meals used yes with auto-continue countdown.",
+      "confirm_navigation_arrival": "Both prior meals used yes with auto-continue countdown.",
+      "confirm_manipulation": "Both prior meals used yes with auto-continue countdown.",
+      "transfer_mode": "Deployment only performs outside-mouth and user has not requested inside.",
+      "outside_mouth_distance": "Near was consistent across both prior meals.",
+      "convey_robot_ready_for_initiating_transfer": "Day 2's matching TV context used no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Open mouth used in both prior meals and user can open mouth wide.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Open mouth used in both prior meals.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Open mouth used in both prior meals.",
+      "convey_robot_ready_for_completing_transfer": "Day 2's matching TV context used no cue.",
+      "detect_user_completed_transfer_feeding": "Day 2's matching TV context used button; user can press buttons.",
+      "detect_user_completed_transfer_drinking": "Day 2's matching TV context used button (head-nod may feel unnatural).",
+      "detect_user_completed_transfer_wiping": "Button used in both prior meals.",
+      "retract_between_bites": "Day 2's matching TV context used yes to avoid blocking the TV view.",
+      "bite_dipping_preference": "No dips in this meal, so do not dip is required.",
+      "bite_ordering": "No dips and no known ordering preference in prior meals.",
+      "wait_before_autocontinue_task_selection": "Day 2's matching TV context used 60 sec (distraction-prone).",
+      "wait_before_autocontinue_feeding_pickup": "Day 2's matching TV context used 60 sec.",
+      "wait_before_autocontinue_mealprep": "Day 2's matching TV context used 30 sec.",
+      "plate_color_fridge": "No corrections bear on color; using the saved seed.",
+      "plate_color_microwave": "No corrections bear on color; using the saved seed.",
+      "plate_color_table": "No corrections bear on color; using the saved seed.",
+      "nav_offset_table": "No corrections; seed default of zero.",
+      "nav_offset_microwave": "No corrections; seed default of zero.",
+      "nav_offset_sink": "No corrections; seed default of zero.",
+      "nav_offset_fridge": "No corrections; seed default of zero."
+    },
+    "20260717_105203.txt": {
+      "microwave_time": "Same chicken-type warm meal as day 2 which used 1 min.",
+      "skewering_axis": "Perpendicular in both prior meals; unaffected by the hurried factor.",
+      "confirm_feeding_pickup": "Consistently yes-with-countdown; kept as it still allows auto-progress for a hurried user.",
+      "confirm_navigation_arrival": "Consistently yes-with-countdown across prior meals.",
+      "confirm_manipulation": "Consistently yes-with-countdown across prior meals.",
+      "transfer_mode": "Deployment only does outside-mouth and user can lean forward.",
+      "outside_mouth_distance": "Near in both prior meals; consistent user preference.",
+      "convey_robot_ready_for_initiating_transfer": "Day 2 (same TV setting) used no cue to avoid distraction.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Open mouth in both prior meals; user can open mouth wide.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Open mouth in both prior meals.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Open mouth in both prior meals.",
+      "convey_robot_ready_for_completing_transfer": "Day 2 (same setting) used no cue.",
+      "detect_user_completed_transfer_feeding": "Day 2 (same TV setting) used button; user can press buttons.",
+      "detect_user_completed_transfer_drinking": "Day 2 used button for completion.",
+      "detect_user_completed_transfer_wiping": "Button in both prior meals.",
+      "retract_between_bites": "TV setting (like day 2) favors retracting to avoid obstructing the view.",
+      "bite_dipping_preference": "No dips in this meal, so do not dip is required.",
+      "bite_ordering": "No dips and no evidenced ordering preference in history.",
+      "wait_before_autocontinue_task_selection": "Shortened from day 2's 60 sec because the fast-speed correction signals a hurried, time-saving state.",
+      "wait_before_autocontinue_feeding_pickup": "Shortened from day 2's 60 sec due to the hurried latent factor from the fast-speed correction.",
+      "wait_before_autocontinue_mealprep": "Shortened from day 2's 30 sec to keep meal prep moving given the hurried state.",
+      "plate_color_fridge": "No new color evidence this meal; seed retained.",
+      "plate_color_microwave": "No new color evidence this meal; seed retained.",
+      "plate_color_table": "No new color evidence this meal; seed retained.",
+      "nav_offset_table": "No parking corrections observed; seed of zero retained.",
+      "nav_offset_microwave": "No parking corrections observed; seed of zero retained.",
+      "nav_offset_sink": "No parking corrections observed; seed of zero retained.",
+      "nav_offset_fridge": "No parking corrections observed; seed of zero retained."
+    },
+    "20260717_105235.txt": {
+      "microwave_time": "Matches the day-2 TV/afternoon meal (1 min) for warm chicken and hash brown; the speed correction reflects tempo, not food temperature.",
+      "skewering_axis": "Consistent perpendicular choice across both prior meals for higher acquisition success; unaffected by the hurried tempo.",
+      "confirm_feeding_pickup": "Both prior meals used yes with auto-continue; the distracted TV setting keeps a confirmation page that auto-proceeds.",
+      "confirm_navigation_arrival": "Held at yes with auto-continue as in both prior meals; still refining parking.",
+      "confirm_manipulation": "Held at yes with auto-continue as in both prior meals.",
+      "transfer_mode": "Deployment only does outside-mouth transfer and user can lean forward; no request for inside.",
+      "outside_mouth_distance": "Near in both prior meals; comfort with the robot close remains.",
+      "convey_robot_ready_for_initiating_transfer": "Day-2 TV meal used no cue; the same distracted-TV latent state applies here.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Open mouth used in both prior meals; user has good mouth control.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Open mouth used in both prior meals.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Open mouth used in both prior meals.",
+      "convey_robot_ready_for_completing_transfer": "Day-2 TV meal used no cue, matching this meal's TV setting.",
+      "detect_user_completed_transfer_feeding": "Day-2 TV meal used button, likely to avoid false triggers while watching TV.",
+      "detect_user_completed_transfer_drinking": "Day-2 TV meal used button; head-nod perception feels unnatural while distracted.",
+      "detect_user_completed_transfer_wiping": "Button used in both prior meals.",
+      "retract_between_bites": "Day-2 TV meal used yes so the robot doesn't obstruct the TV view.",
+      "bite_dipping_preference": "No dips in this meal, so do not dip is forced.",
+      "bite_ordering": "No known ordering preference and no dips, so no particular order.",
+      "wait_before_autocontinue_task_selection": "Day-2 TV meal used 60 sec for a distracted user; the fast-speed correction speeds motion but the TV distraction still favors a long wait.",
+      "wait_before_autocontinue_feeding_pickup": "Day-2 TV meal used 60 sec, consistent with the distracted TV setting.",
+      "plate_color_fridge": "No color correction this meal; the shared-latent speed correction doesn't affect lighting, so keep the seed.",
+      "plate_color_microwave": "No color correction; keep the seed.",
+      "plate_color_table": "No color correction; keep the seed.",
+      "nav_offset_table": "No navigation adjustment observed; seed zero retained.",
+      "nav_offset_microwave": "No navigation adjustment observed; seed zero retained.",
+      "nav_offset_sink": "No navigation adjustment observed; seed zero retained.",
+      "nav_offset_fridge": "No navigation adjustment observed; seed zero retained."
+    }
+  }
+}

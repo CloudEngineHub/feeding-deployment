@@ -1,0 +1,15 @@
+{
+  "day": 4,
+  "context": {
+    "meal": "cantaloupes, bananas, watermelon",
+    "setting": "Personal",
+    "time_of_day": "morning",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "wait_before_autocontinue_feeding_pickup": "60 sec",
+    "detect_user_completed_transfer_drinking": "button",
+    "convey_robot_ready_for_initiating_transfer": "no cue",
+    "retract_between_bites": "yes"
+  }
+}

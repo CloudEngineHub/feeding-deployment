@@ -1,0 +1,159 @@
+{
+  "day": 1,
+  "context": {
+    "meal": "chicken nuggets",
+    "setting": "Personal",
+    "time_of_day": "evening",
+    "transient_affective_state": "Slower"
+  },
+  "episode_text": "day=1; meal=chicken nuggets; setting=Personal; time_of_day=evening;\npreferences: microwave_time=2 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=speech + LED; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=speech + LED; detect_user_completed_transfer_feeding=perception; detect_user_completed_transfer_drinking=perception; detect_user_completed_transfer_wiping=button; retract_between_bites=no; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue; wait_before_autocontinue_feeding_pickup=no autocontinue; wait_before_autocontinue_mealprep=60 sec",
+  "ltm_summary_raw": {
+    "microwave_time": {
+      "default": "2 min",
+      "user_tendencies": "IF meal is a hot/savory item like chicken nuggets THEN 2 min BECAUSE user prefers warm food; cold desserts or fruits would use no microwave. No further variation observed yet."
+    },
+    "robot_speed": {
+      "default": "medium",
+      "user_tendencies": "No context-dependent variation observed yet."
+    },
+    "skewering_axis": {
+      "default": "perpendicular to major axis",
+      "user_tendencies": "User can open mouth wide, so perpendicular skewering for higher acquisition success is acceptable. No context-dependent variation observed yet."
+    },
+    "confirm_feeding_pickup": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User keeps confirmation on but with auto-continue in a personal setting, suggesting moderate trust with a safety net. May tighten toward explicit confirmation in social settings to avoid awkward failed transfers, but no direct evidence yet."
+    },
+    "confirm_navigation_arrival": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User keeps meal-prep checks on with auto-continue, indicating a still-calibrating trust level. No context-dependent variation observed yet."
+    },
+    "confirm_manipulation": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User keeps manipulation checks on with auto-continue, consistent with cautious-but-not-blocking style during prep. No context-dependent variation observed yet."
+    },
+    "transfer_mode": {
+      "default": "outside mouth transfer",
+      "user_tendencies": "User can lean forward and deployment only performs outside-mouth transfer; predict inside only if explicitly requested. No context-dependent variation observed yet."
+    },
+    "outside_mouth_distance": {
+      "default": "near",
+      "user_tendencies": "User is comfortable with the robot close to the mouth in a personal setting. May stay near or move closer when fatigued; no evidence of preferring farther yet."
+    },
+    "convey_robot_ready_for_initiating_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "User prefers rich multimodal cues. No context-dependent variation observed yet."
+    },
+    "detect_user_ready_for_initiating_transfer_feeding": {
+      "default": "open mouth",
+      "user_tendencies": "In personal settings user uses open-mouth detection. In social settings user may switch to button to avoid confusion with talking (physical ability supports button); however IF fatigued THEN prefer open mouth to reduce effort — effort-minimization wins under fatigue. No direct social/fatigue evidence yet."
+    },
+    "detect_user_ready_for_initiating_transfer_drinking": {
+      "default": "open mouth",
+      "user_tendencies": "Same pattern as feeding: open mouth in personal settings, likely button in social settings unless fatigued (then open mouth). No direct evidence yet."
+    },
+    "detect_user_ready_for_initiating_transfer_wiping": {
+      "default": "open mouth",
+      "user_tendencies": "Same pattern as feeding: open mouth in personal settings, likely button in social settings unless fatigued. No direct evidence yet."
+    },
+    "convey_robot_ready_for_completing_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "User prefers rich multimodal cues. No context-dependent variation observed yet."
+    },
+    "detect_user_completed_transfer_feeding": {
+      "default": "perception",
+      "user_tendencies": "User prefers reliable automatic perception for bite completion. No context-dependent variation observed yet."
+    },
+    "detect_user_completed_transfer_drinking": {
+      "default": "perception",
+      "user_tendencies": "User accepts head-nod perception for sip completion in personal settings; head gestures may feel unnatural socially and could shift to button, but no social evidence yet."
+    },
+    "detect_user_completed_transfer_wiping": {
+      "default": "button",
+      "user_tendencies": "User chose button for wipe completion (able to press buttons), differing from perception used for feeding/drinking. No context-dependent variation observed yet."
+    },
+    "retract_between_bites": {
+      "default": "no",
+      "user_tendencies": "In personal settings user skips retracting to save time. May prefer retracting in social/TV/working settings to avoid obstructing view, but no such evidence yet."
+    },
+    "bite_dipping_preference": {
+      "default": "do not dip",
+      "user_tendencies": "User did not dip for chicken nuggets in a personal setting. If a meal includes dips/sauces this may change; less dipping likely in social settings to avoid messiness. No direct dipping evidence yet."
+    },
+    "bite_ordering": {
+      "default": "no particular order",
+      "user_tendencies": "No ordering or pairing preference observed yet."
+    },
+    "wait_before_autocontinue_task_selection": {
+      "default": "no autocontinue",
+      "user_tendencies": "User prefers the between-tasks page to wait for explicit selection, indicating they dislike being rushed and want control over pacing. No context-dependent variation observed yet."
+    },
+    "wait_before_autocontinue_feeding_pickup": {
+      "default": "no autocontinue",
+      "user_tendencies": "User wants pickup/bite-selection pages to wait indefinitely for explicit input, consistent with wanting control over each bite. No context-dependent variation observed yet."
+    },
+    "wait_before_autocontinue_mealprep": {
+      "default": "60 sec",
+      "user_tendencies": "User allows a long wait on meal-prep check pages, giving ample time to intervene while still auto-continuing. No context-dependent variation observed yet."
+    },
+    "plate_color_fridge": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "plate_color_microwave": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "plate_color_table": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "nav_offset_table": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_microwave": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_sink": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_fridge": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    }
+  }
+}

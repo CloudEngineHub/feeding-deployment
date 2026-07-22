@@ -1,0 +1,12 @@
+{
+  "day": 20,
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Hurried"
+  },
+  "corrected": {
+    "robot_speed": "fast"
+  }
+}

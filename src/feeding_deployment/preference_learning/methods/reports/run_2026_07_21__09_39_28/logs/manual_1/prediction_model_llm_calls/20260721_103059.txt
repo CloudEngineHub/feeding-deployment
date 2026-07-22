@@ -1,0 +1,406 @@
+===MODEL===
+claude-opus-4-8 (speed=standard, effort=medium)
+
+===PROMPT===
+Consider a care recipient being assisted during meals by a robotic arm. The robot may microwave a meal, set it up on a table, move to the right side of the user, and then assist with feeding, drinking, and mouth wiping.
+
+For each assistance task within feeding, drinking, or mouth wiping:
+1. The robot acquires the appropriate tool (feeding utensil, drink, or mouth wiper).
+2. For feeding, the robot first acquires a food item from the plate (bite acquisition).
+3. The robot then moves to a staging configuration. The staging configuration is a joint configuration that the robot moves to before initiating transfers. From this configuration, the user's head is visible in the robot’s in-hand camera.
+4. The robot signals that it is ready to initiate transfer (it is ready to begin moving toward the user's mouth).
+5. The robot detects or receives a signal from the user that they are ready for initiating transfer.
+6. The robot moves the tool to the transfer location (either near the mouth or inside the mouth).
+7. The robot signals that transfer can be completed (the tool has reached the transfer location and the user can take the bite, sip, or wipe).
+8. The user takes a bite, takes a sip, or performs mouth wiping.
+9. The user signals that the transfer (bite, sip, or wipe) is complete.
+10. The robot returns to the staging configuration.
+
+The robot exposes configurable components called preference dimensions. Each dimension corresponds to a parameter of the mealtime-assistance system that can be selected by the user.
+
+Dimension definitions:
+
+1. Microwave time
+Field name: microwave_time
+Allowed options: [no microwave, 30 secs, 1 min, 2 min]
+How long food should be reheated before being served. Some users may prefer hotter food, while others prefer food closer to room temperature. Many meals begin refrigerated and are intended to be served warm or hot. Fruit and dessert meals with an intended serving temperature of cold are usually eaten without microwaving.
+
+2. Robot speed
+Field name: robot_speed
+Allowed options: [slow, medium, fast]
+The speed at which the robot moves. Some users may prefer a slower speed to feel more comfortable, or to help social partners feel comfortable, while others may prefer a faster speed to reduce overall meal time or because they are less sensitive to the robot's movements.
+
+3. Skewering axis selection
+Field name: skewering_axis
+Allowed options: [parallel to major axis, perpendicular to major axis]
+The direction in which the robot inserts the fork into food when acquiring a bite. Parallel skewering can produce narrower bites that may be easier to eat for users with limited mouth opening. Perpendicular skewering can increase bite acquisition success.
+
+4. After picking up each bite, sip, or wipe — how should the check page behave?
+Field name: confirm_feeding_pickup
+Allowed options: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+How the robot handles the web-interface confirmation page shown after picking up a bite, drink, or mouth wipe, before bringing it toward the user. This page lets the user retry a failed pickup (e.g., an empty fork). 'skip' does not show the page at all to reduce interaction time, even if it means the robot might transfer a failed pickup; 'countdown (N sec)' shows the page but proceeds automatically after N seconds if the user does not intervene; 'wait for me' shows the page and waits indefinitely for the user's explicit confirmation. A user might be comfortable skipping confirmation in some contexts (e.g., eating alone in a personal setting) and prefer it in others (e.g., a social setting where repeated empty-fork transfers would be awkward). Users who trust the robot more tend to use a shorter countdown or skip across the board.
+
+5. After the robot drives somewhere — how should the parking check behave?
+Field name: confirm_navigation_arrival
+Allowed options: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+How the robot handles the position check page shown after driving to a location (fridge, microwave, table, sink), where the user can approve the parked position or fine-adjust it by teleoperating the base. This page is also how the robot learns the user's preferred parking spots over time. 'skip' does not show the page and drives on with the learned parking positions (they stop being refined); 'countdown (N sec)' shows the page but accepts the position automatically after N seconds; 'wait for me' shows the page and waits indefinitely. Users typically start with a countdown or 'wait for me' and move toward skipping as the robot's parking proves reliable.
+
+6. During meal prep and cleaning — how should the grab/press/place checks behave?
+Field name: confirm_manipulation
+Allowed options: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+How the robot handles the web-interface confirmation pages around manipulation: verifying a detection before acting on it (the plate handle before a pickup, the fridge/microwave door handle before opening, the microwave button before pressing, the placement spot before setting the plate down) and confirming it is safe to release the plate at the microwave, table, or sink. The detection pages are also where the user can redo a detection or correct the plate-handle color. 'skip' does not show these pages (successful detections are accepted automatically and the plate is released without asking; detection colors stop being refined); 'countdown (N sec)' shows each page but proceeds automatically after N seconds; 'wait for me' waits indefinitely. Users who trust the robot's perception tend to use a shorter countdown or skip over time.
+
+7. Outside mouth vs inside mouth transfer
+Field name: transfer_mode
+Allowed options: [outside mouth transfer, inside mouth transfer]
+How food is delivered to the mouth: outside-mouth transfer (the robot stops just outside the mouth, and the user leans forward to take the bite) versus inside-mouth transfer (the robot inserts the food directly into the mouth). Preference may depend on the user's physical capabilities (e.g., whether they can lean forward comfortably), their comfort with the robot moving close to their mouth, or their affective state (e.g., preferring inside-mouth transfer when fatigued). This deployment only performs outside-mouth transfer; predict 'inside mouth transfer' only if the user has explicitly asked for it.
+
+8. For outside-mouth transfer: distance from the mouth
+Field name: outside_mouth_distance
+Allowed options: [not applicable, near, medium, far]
+This parameter only applies when transfer_mode is outside mouth transfer. If inside mouth transfer is used, the value should be not applicable. When using outside-mouth transfer, this determines how far from the mouth the robot stops before the user takes the bite. Far refers to the farthest distance the user can comfortably reach, and near refers to very close (2-4 cm away) from the mouth. This depends on the user's comfort with the robot and their affective state (e.g., preferring a closer distance when fatigued).
+
+9. How should the robot signal it's ready to bring a bite, sip, or wipe?
+Field name: convey_robot_ready_for_initiating_transfer
+Allowed options: [speech, LED, speech + LED, no cue]
+How the robot signals to the user that it is ready to initiate transfer of a bite, sip, or mouth wiping.
+
+10. How do you tell the robot you're ready for a bite?
+Field name: detect_user_ready_for_initiating_transfer_feeding
+Allowed options: [open mouth, button, proceed automatically after a pause]
+How the robot determines that the user is ready to initiate bite transfer. open mouth: readiness is detected from the user opening their mouth (this can be a challenge in social settings when a user tends to open their mouth for talking); button: the user explicitly presses a physical button (this can be cumbersome if the user is fatigued); proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a mouth-open or button press.
+
+11. How do you tell the robot you're ready for a sip?
+Field name: detect_user_ready_for_initiating_transfer_drinking
+Allowed options: [open mouth, button, proceed automatically after a pause]
+How the robot determines that the user is ready to initiate sip transfer. open mouth: readiness is detected from the user opening their mouth (this can be a challenge in social settings when a user tends to open their mouth for talking); button: the user explicitly presses a physical button (this can be cumbersome if the user is fatigued); proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a mouth-open or button press.
+
+12. How do you tell the robot you're ready for a mouth wipe?
+Field name: detect_user_ready_for_initiating_transfer_wiping
+Allowed options: [open mouth, button, proceed automatically after a pause]
+How the robot determines that the user is ready to initiate transfer of mouth wiper. open mouth: readiness is detected from the user opening their mouth (this can be a challenge in social settings when a user tends to open their mouth for talking); button: the user explicitly presses a physical button (this can be cumbersome if the user is fatigued); proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a mouth-open or button press.
+
+13. How should the robot signal you can take the bite, sip, or wipe?
+Field name: convey_robot_ready_for_completing_transfer
+Allowed options: [speech, LED, speech + LED, no cue]
+How the robot signals to the user that the tool has reached the transfer location and the user can complete the transfer by taking a bite, sip, or mouth wiping.
+
+14. How does the robot know you've finished a bite?
+Field name: detect_user_completed_transfer_feeding
+Allowed options: [perception, button, proceed automatically after a pause]
+How the robot determines that the user has finished taking a bite. perception: the robot detects completion using a force-torque sensor on the fork (very reliable); button: the user explicitly signals completion by physically pressing a button; proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a button press or head nod.
+
+15. How does the robot know you've finished a sip?
+Field name: detect_user_completed_transfer_drinking
+Allowed options: [perception, button, proceed automatically after a pause]
+How the robot determines that the user has finished drinking. perception: the robot detects completion using a head-nod gesture (which may feel unnatural in social settings); button: the user explicitly signals completion by physically pressing a button; proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a button press or head nod.
+
+16. How does the robot know you've finished wiping?
+Field name: detect_user_completed_transfer_wiping
+Allowed options: [perception, button, proceed automatically after a pause]
+How the robot determines that the user has finished mouth wiping. perception: the robot detects completion using a head-nod gesture (which may feel unnatural in social settings); button: the user explicitly signals completion by physically pressing a button; proceed automatically after a pause: the robot proceeds on its own after a short (5 second) pause, without waiting for a button press or head nod.
+
+17. Retract between bites
+Field name: retract_between_bites
+Allowed options: [yes, no]
+Whether the robot moves to a retract position between tasks to avoid obstructing the user's view. However, moving to this position makes the meal take longer, so some users may prefer to skip this step to reduce meal time, even if it means the robot might obstruct the user's view for a longer duration during the meal. A user might be more comfortable skipping retracting in certain contexts (e.g., when eating alone in a personal setting) and prefer retracting in other contexts (e.g., when working, watching TV, or eating in a social setting with a partner who might feel uncomfortable if the robot obstructs their view for a long duration).
+
+18. Bite dipping preference
+Field name: bite_dipping_preference
+Allowed options: [do not dip, less, more]
+How much sauce should be applied when dipping. This depends on the user's personal preference, as well as the context (e.g., some users might prefer more dipping when eating alone in a personal setting and less dipping when eating in a social setting to avoid messiness). Choose do not dip when the user prefers not to dip or when the meal does not have any dippable items or sauces.
+
+19. Bite ordering
+Field name: bite_ordering
+Value type: free-text string (a single concise natural-language sentence).
+The order in which the food items on the plate should be fed, as a short natural-language instruction grounded in THIS meal's actual foods and dips. Capture both (a) how the solid items are ordered relative to each other (e.g., all of one item before the next, or alternating between items) and (b) which solids should be paired with which dips (e.g., dip a particular item in a particular sauce). Base the prediction on the user's known preferences and the meal contents; if there is no evidence of any ordering or dipping-pairing preference, predict 'no particular order'. Keep it to a single concise sentence. This is separate from bite_dipping_preference, which only controls how much sauce is applied.
+
+20. The bite-choice page: how should it behave?
+Field name: wait_before_autocontinue_bite_selection
+Allowed options: [countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+How the robot handles the bite-selection page, where the user can confirm or change the predicted next bite. 'countdown (N sec)' shows the page but goes with the predicted bite automatically after N seconds; 'wait for me' waits indefinitely for the user to choose. Users who trust the robot's bite predictions prefer a short countdown to reduce meal time; users who like to choose each bite, or are often distracted (e.g., social settings, watching TV), prefer a longer countdown or 'wait for me'. This governs only the bite-choice page; the pickup check is confirm_feeding_pickup and the next-task page is wait_before_autocontinue_task_selection.
+
+21. The next-task page (after a bite or sip): how should it behave?
+Field name: wait_before_autocontinue_task_selection
+Allowed options: [countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+How the robot handles the next-task page after finishing a bite or a sip before automatically starting another of the same (the page pre-selects 'take a bite' after a bite and 'take a sip' after a sip). 'wait for me' means the page never advances on its own — the robot waits for the user to pick the next task, useful for users who chat between bites or dislike being rushed; 'countdown (N sec)' auto-selects after N seconds, keeping the meal moving for users who eat steadily. This governs only the between-tasks page; the bite-choice page is wait_before_autocontinue_bite_selection and the pickup check is confirm_feeding_pickup.
+
+22. Plate handle color (fridge pickup)
+Field name: plate_color_fridge
+Value type: HSV color. Emit an object {"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}.
+HSV color of the plate handle used for attachment detection when picking the plate up from inside the fridge. This is the same physical plate handle as plate_color_microwave and plate_color_table, but the fridge interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+23. Plate handle color (microwave pickup)
+Field name: plate_color_microwave
+Value type: HSV color. Emit an object {"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}.
+HSV color of the plate handle used for attachment detection when picking the plate up from inside the microwave. This is the same physical plate handle as plate_color_fridge and plate_color_table, but microwave interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+24. Plate handle color (table pickup)
+Field name: plate_color_table
+Value type: HSV color. Emit an object {"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}.
+HSV color of the plate handle used for attachment detection when picking the plate up from the table. This is the same physical plate handle as plate_color_fridge and plate_color_microwave, but table lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+25. Navigation offset (table)
+Field name: nav_offset_table
+Value type: navigation pose offset. Emit an object {"dx": <-0.5-0.5 m>, "dy": <-0.5-0.5 m>, "dyaw": <-0.785-0.785 rad>}.
+Learned correction to the robot's parking pose when it navigates to the table, expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the table applies it to the goal. Each location has its own independent offset. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+26. Navigation offset (microwave)
+Field name: nav_offset_microwave
+Value type: navigation pose offset. Emit an object {"dx": <-0.5-0.5 m>, "dy": <-0.5-0.5 m>, "dyaw": <-0.785-0.785 rad>}.
+Learned correction to the robot's parking pose when it navigates to the microwave, expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the microwave applies it to the goal. Each location has its own independent offset. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+27. Navigation offset (sink)
+Field name: nav_offset_sink
+Value type: navigation pose offset. Emit an object {"dx": <-0.5-0.5 m>, "dy": <-0.5-0.5 m>, "dyaw": <-0.785-0.785 rad>}.
+Learned correction to the robot's parking pose when it navigates to the sink, expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the sink applies it to the goal. Each location has its own independent offset. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+28. Navigation offset (fridge)
+Field name: nav_offset_fridge
+Value type: navigation pose offset. Emit an object {"dx": <-0.5-0.5 m>, "dy": <-0.5-0.5 m>, "dyaw": <-0.785-0.785 rad>}.
+Learned correction to the robot's parking pose when it navigates to the fridge, expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the fridge applies it to the goal. Each location has its own independent offset. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally.
+
+Consider a care recipient with the following physical functioning abilities:
+
+This user has moderate voluntary control of their arms and is able to press physical buttons. They can lean forward to reach food during outside-mouth transfers. They have good neck and head control and can open their mouth wide and perform head gestures. They interact with the web interface on their personal device using their arms.
+
+You are a personalized preference predictor for the mealtime-assistance system.
+
+Your task is to predict the user's FINAL accepted preference bundle for the CURRENT MEAL. The FINAL accepted preference bundle is the set of preferences the user is most likely to accept during the current meal.
+
+HOW THE USER INTERACTS WITH YOUR PREDICTIONS: as the meal progresses, the system surfaces each preference dimension one at a time, at the moment it becomes relevant, showing your predicted value. The user either CONFIRMS the prediction (accepts it as-is) or CORRECTS it (replaces it with the value they actually want). Confirmed and corrected dimensions are locked as this meal's ground truth and are listed for you below. You are re-run after every correction; your job each time is to re-predict the remaining OPEN dimensions (every dimension not yet confirmed or corrected).
+
+You may use the following memory blocks. If a memory block is empty or absent, ignore it and rely on the remaining information sources.
+
+=== FULL HISTORY MEMORY: Every prior finalized meal in chronological order, with ground truth user preference bundles ===
+day=1; meal=chicken nuggets; setting=Personal; time_of_day=evening;
+preferences: microwave_time=2 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=speech + LED; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=speech + LED; detect_user_completed_transfer_feeding=perception; detect_user_completed_transfer_drinking=perception; detect_user_completed_transfer_wiping=button; retract_between_bites=no; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue
+
+day=2; meal=general tso's chicken and broccoli; setting=Watching TV with TV in Front; time_of_day=afternoon;
+preferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec
+
+day=3; meal=chicken breast strips and hash brown; setting=Watching TV with TV in Front; time_of_day=afternoon;
+preferences: microwave_time=1 min; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec
+
+day=4; meal=cantaloupes, bananas, watermelon; setting=Personal; time_of_day=morning;
+preferences: microwave_time=no microwave; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec
+
+day=5; meal=chicken nuggets, broccoli, and ketchup; setting=Social with person on Left; time_of_day=morning;
+preferences: microwave_time=2 min; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (without any auto-continue); confirm_navigation_arrival=yes (without any auto-continue); confirm_manipulation=yes (without any auto-continue); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue
+
+day=6; meal=chicken nuggets, broccoli, and ketchup; setting=Watching TV with TV in Front; time_of_day=night;
+preferences: microwave_time=2 min; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=15 sec
+
+day=7; meal=bananas, brownies, and chocolate sauce; setting=Watching TV with TV on Left; time_of_day=evening;
+preferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec
+
+day=8; meal=strawberries with whipped cream; setting=Watching TV with TV in Front; time_of_day=night;
+preferences: microwave_time=no microwave; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec
+
+day=9; meal=general tso's chicken and broccoli; setting=Social with person on Left; time_of_day=afternoon;
+preferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (without any auto-continue); confirm_navigation_arrival=yes (without any auto-continue); confirm_manipulation=yes (without any auto-continue); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue
+======
+
+=== WORKING MEMORY: Current meal context and the user's responses so far ===
+
+Context for current meal:
+- meal: buffalo chicken bites, potato wedges, and ranch dressing
+- setting: Personal
+- time_of_day: night
+
+Contents of the current meal (use these exact food/dip names when predicting any ordering or dipping-pairing preference):
+solid items: buffalo chicken bites, potato wedges
+dips/sauces: ranch dressing
+
+The dimensions in the CONFIRMED and CORRECTED lists below are listed in the fixed order they are asked to the user during the meal (earliest-asked first) — read them as the sequence in which the user actually confirmed or corrected them this meal.
+
+Dimensions the user CONFIRMED this meal (accepted the prediction as-is):
+(none)
+
+Dimensions the user CORRECTED this meal (replaced the prediction with the value they want):
+convey_robot_ready_for_initiating_transfer=speech + LED
+wait_before_autocontinue_task_selection=60 sec
+microwave_time=1 min
+
+Your OWN earlier predictions this meal (oldest first) — NOT user input; this is what YOU predicted and how you reasoned earlier this same meal:
+(none — this is your first prediction this meal)
+
+Use these to catch and correct your OWN bias: where one of your earlier predictions was contradicted by a correction listed above, treat the gap as a same-context signal that you have been mis-reading a latent trait this meal (e.g. under- or over-estimating how hands-off, trusting, close, or communicative the user wants things) — move your latent_scores and open-dim predictions in the direction the correction indicates. Do NOT restate or defend an earlier prediction just to stay consistent with it. These earlier predictions are from THIS meal only; do not carry this self-correction across meals.
+
+IMPORTANT — PREFERENCES ARE CORRELATED: the user's preferences co-vary through latent factors that are not directly observed: the user's current state (e.g., hurried, fatigued, relaxed), the physical conditions of this meal (setting, time of day, lighting and similar environmental factors), and properties of the meal itself. Each CORRECTION is a direct observation of what those latent factors are doing right now. A dimension does NOT need its own correction to change: when the user corrects one dimension, infer which latent factor most plausibly produced that correction, and update every OPEN dimension that same factor influences — categorical and continuous alike. Do not fall back on "this dimension was not itself corrected, so keep its previous value": a seed or memory value carried over from previous meals cannot reflect anything the user revealed DURING this meal, so where a this-meal correction bears on a dimension — even indirectly, through a shared latent factor — it outweighs the carried-over value. Similar prior meals in the memory blocks above (when present) show what the user actually preferred when those latent factors were in a comparable state; weigh them accordingly. Confirmations are weaker evidence: they tell you the prediction was acceptable, not that the latent factors changed.
+
+YOUR OBJECTIVE is to minimize the number of corrections the user still has to make this meal. Every open dimension is still presented to the user before it takes effect, so an updated prediction that turns out wrong costs the user nothing extra — they correct it exactly as they would have corrected the stale value — while keeping a carried-over value that this meal's evidence already contradicts guarantees one more correction. Never hold a value "pending the user's own correction" when a correction already made this meal, combined with a shared latent factor, tells you what the user is going to ask for.
+
+COMMIT to the value your latent-factor inference implies. Do not split the difference between the carried-over value and the implied value: a this-meal correction measures the CURRENT conditions directly, so it outweighs any number of past meals, and averaging guarantees the prediction stays wrong in exactly the direction the user just corrected. When memory shows a stable relationship between two dimensions (for example, one dimension consistently tracking another with a roughly constant offset), apply that relationship to this meal's corrected values instead of reusing the old absolute values.
+======
+
+Use the following information in decreasing order of priority:
+1. User physical functioning abilities (these define feasibility constraints that must not be violated)
+2. WORKING MEMORY
+3. FULL HISTORY MEMORY
+
+Allowed values per dimension. Most dimensions are CATEGORICAL: you MUST choose exactly one of the listed strings. A few dimensions are COLOR dimensions (the plate_color_* fields): for these you MUST output an object {"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}. The three plate_color_* dims are the SAME physical plate handle observed at three pickup locations; their values differ only through observation conditions (e.g., lighting), and such conditions may vary per location, per meal, or for the whole environment at once. Four dimensions are NAV OFFSET dimensions (the nav_offset_* fields): for these you MUST output an object {"dx": <-0.5-0.5 meters>, "dy": <-0.5-0.5 meters>, "dyaw": <-0.785-0.785 radians>} — a correction to the robot's parking pose at that location, expressed in the stored goal pose's local frame; each of the four nav_offset_* dims is a separate per-location value. Each color / nav offset line shows a "seed": the value saved at the end of the previous meal. Treat the seed as one piece of evidence among the others — it is decisive only when neither this meal's corrections nor similar prior meals bear on that dimension. Predict the value the user will actually accept THIS meal. The bite_ordering dimension is a TEXT dimension: output a single concise natural-language sentence describing the order in which the meal's foods should be fed and which solids to pair with which dips, using the exact food/dip names from the meal contents above. If there is no evidence of any ordering or dipping-pairing preference, output "no particular order".
+- microwave_time: [no microwave, 30 secs, 1 min, 2 min]
+- robot_speed: [slow, medium, fast]
+- skewering_axis: [parallel to major axis, perpendicular to major axis]
+- confirm_feeding_pickup: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+- confirm_navigation_arrival: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+- confirm_manipulation: [skip, countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+- transfer_mode: [outside mouth transfer, inside mouth transfer]
+- outside_mouth_distance: [not applicable, near, medium, far]
+- convey_robot_ready_for_initiating_transfer: [speech, LED, speech + LED, no cue]
+- detect_user_ready_for_initiating_transfer_feeding: [open mouth, button, proceed automatically after a pause]
+- detect_user_ready_for_initiating_transfer_drinking: [open mouth, button, proceed automatically after a pause]
+- detect_user_ready_for_initiating_transfer_wiping: [open mouth, button, proceed automatically after a pause]
+- convey_robot_ready_for_completing_transfer: [speech, LED, speech + LED, no cue]
+- detect_user_completed_transfer_feeding: [perception, button, proceed automatically after a pause]
+- detect_user_completed_transfer_drinking: [perception, button, proceed automatically after a pause]
+- detect_user_completed_transfer_wiping: [perception, button, proceed automatically after a pause]
+- retract_between_bites: [yes, no]
+- bite_dipping_preference: [do not dip, less, more]
+- bite_ordering: free-text string (a single concise natural-language sentence grounded in this meal's foods/dips)
+- wait_before_autocontinue_bite_selection: [countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+- wait_before_autocontinue_task_selection: [countdown (15 sec), countdown (30 sec), countdown (60 sec), wait for me]
+- plate_color_fridge: HSV object {"h":0-179,"s":0-255,"v":0-255,"range":0.0-1.0}; seed = h=12,s=223,v=169,range=0.10
+- plate_color_microwave: HSV object {"h":0-179,"s":0-255,"v":0-255,"range":0.0-1.0}; seed = h=12,s=223,v=169,range=0.10
+- plate_color_table: HSV object {"h":0-179,"s":0-255,"v":0-255,"range":0.0-1.0}; seed = h=12,s=223,v=169,range=0.10
+- nav_offset_table: offset object {"dx":-0.5-0.5 (m),"dy":-0.5-0.5 (m),"dyaw":-0.785-0.785 (rad)}; seed = dx=0.000,dy=0.000,dyaw=0.000
+- nav_offset_microwave: offset object {"dx":-0.5-0.5 (m),"dy":-0.5-0.5 (m),"dyaw":-0.785-0.785 (rad)}; seed = dx=0.000,dy=0.000,dyaw=0.000
+- nav_offset_sink: offset object {"dx":-0.5-0.5 (m),"dy":-0.5-0.5 (m),"dyaw":-0.785-0.785 (rad)}; seed = dx=0.000,dy=0.000,dyaw=0.000
+- nav_offset_fridge: offset object {"dx":-0.5-0.5 (m),"dy":-0.5-0.5 (m),"dyaw":-0.785-0.785 (rad)}; seed = dx=0.000,dy=0.000,dyaw=0.000
+
+HARD RULES (must always be satisfied):
+- If transfer_mode is "inside mouth transfer", outside_mouth_distance MUST be "not applicable".
+- If the meal description indicates no dippable items or sauces, bite_dipping_preference MUST be "do not dip".
+
+Determine the most likely value for each preference dimension while satisfying all constraints. Then output the final preference bundle as JSON.
+
+Output ONLY a valid JSON object (strict JSON: double-quoted keys and values, no trailing commas, no entries without a key). Do NOT include markdown formatting or any text outside the JSON.
+
+The JSON object's FIRST key must be "latent_inference": one to three sentences inferring, from the CORRECTED dimensions of this meal (if any), what the meal's latent factors currently are (the user's state, the environmental/observation conditions, the meal) — write this BEFORE any prediction, and make the predictions that follow consistent with it. If nothing has been corrected yet, state the most likely latent factors from the context and memory instead.
+
+The SECOND key must be "latent_scores": your estimate of the user's four stable latent traits, inferred from this meal's corrections/confirmations, the context, and memory. (These are traits you INFER — the user does not tell you them.) Each is scored on a 1-7 scale (the same scale the user self-reports on). Output an object with exactly these four keys, each mapping to {"score": <integer 1-7>, "confidence": "low"|"medium"|"high", "why": "<one short sentence>"}:
+- "pace": how fast-paced the user wants the meal. 1 = slow and unhurried; 7 = quick and efficient. (Expressed through robot_speed, retract_between_bites, and the wait_before_autocontinue_* dims.)
+- "trust": how much the user wants the robot to check with them before/after acting vs. trust it to act on its own. 1 = check with me most of the time; 7 = trust it, no need to check. (Expressed through the confirm_* dims and detect_user_completed_transfer_*.)
+- "proximity": how comfortable the user is with the robot close to them and in their line of sight. 1 = keep its distance and out of my view; 7 = close and in-view is fine. (Expressed through transfer_mode, outside_mouth_distance, retract_between_bites.)
+- "communication": how much of a heads-up / signalling the user wants from the robot. 1 = stay quiet and just proceed; 7 = clearly signal every time. (Expressed through the convey_robot_ready_* dims.)
+Make "latent_scores" consistent with your "latent_inference" and with the bundle you predict below.
+
+After "latent_inference" and "latent_scores", the object must contain exactly these preference-bundle keys (categorical fields take a string value; plate_color_* fields take an HSV object as described above; nav_offset_* fields take a dx/dy/dyaw object as described above):
+microwave_time, robot_speed, skewering_axis, confirm_feeding_pickup, confirm_navigation_arrival, confirm_manipulation, transfer_mode, outside_mouth_distance, convey_robot_ready_for_initiating_transfer, detect_user_ready_for_initiating_transfer_feeding, detect_user_ready_for_initiating_transfer_drinking, detect_user_ready_for_initiating_transfer_wiping, convey_robot_ready_for_completing_transfer, detect_user_completed_transfer_feeding, detect_user_completed_transfer_drinking, detect_user_completed_transfer_wiping, retract_between_bites, bite_dipping_preference, bite_ordering, wait_before_autocontinue_bite_selection, wait_before_autocontinue_task_selection, plate_color_fridge, plate_color_microwave, plate_color_table, nav_offset_table, nav_offset_microwave, nav_offset_sink, nav_offset_fridge
+
+plus ONE final key "explanations": an object whose keys are exactly the OPEN dimensions (every dimension NOT listed in the CONFIRMED or CORRECTED blocks above — include every one of them, omit none) and whose values are ONE short sentence each, naming the evidence behind that prediction (a correction made this meal, a similar prior meal, a long-term tendency, the physical profile, or the seed/default) and — when any correction exists this meal — whether it changes this dimension through a shared latent factor.
+
+
+===RESPONSE===
+{
+  "latent_inference": "The user corrected convey_robot_ready_for_initiating_transfer to speech + LED and task-selection wait to 60 sec, and set microwave to 1 min \u2014 signalling that in this personal night meal they want clear robot signalling and an unhurried, generous pace (echoing the earlier personal day-1 meal). Latent factors: relaxed, personal at-home state wanting communication and time, warm (not hot) food.",
+  "latent_scores": {
+    "pace": {
+      "score": 3,
+      "confidence": "medium",
+      "why": "Corrected task wait to 60 sec, indicating an unhurried meal."
+    },
+    "trust": {
+      "score": 4,
+      "confidence": "medium",
+      "why": "History uses countdown confirmations and perception, a moderate trust level."
+    },
+    "proximity": {
+      "score": 5,
+      "confidence": "medium",
+      "why": "Consistently near outside-mouth transfer in a comfortable personal setting."
+    },
+    "communication": {
+      "score": 6,
+      "confidence": "high",
+      "why": "Explicitly corrected the ready cue to speech + LED this meal."
+    }
+  },
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "more",
+  "bite_ordering": "no particular order, dipping the buffalo chicken bites and potato wedges in ranch dressing",
+  "wait_before_autocontinue_bite_selection": "countdown (60 sec)",
+  "wait_before_autocontinue_task_selection": "60 sec",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "explanations": {
+    "robot_speed": "Personal night meals in history were medium (day 8); unhurried pace this meal supports medium.",
+    "skewering_axis": "Perpendicular in every prior meal, unaffected by current corrections.",
+    "confirm_feeding_pickup": "Personal/TV meals used countdown confirmations; moderate trust implies a mid-length countdown.",
+    "confirm_navigation_arrival": "Same countdown pattern for navigation checks in personal contexts.",
+    "confirm_manipulation": "Same countdown pattern for manipulation checks in personal contexts.",
+    "transfer_mode": "Deployment only does outside-mouth and user can lean forward.",
+    "outside_mouth_distance": "Near in every prior meal.",
+    "detect_user_ready_for_initiating_transfer_feeding": "Personal setting; day-1 personal meal used open mouth and user opens mouth well.",
+    "detect_user_ready_for_initiating_transfer_drinking": "Same open-mouth pattern in personal settings.",
+    "detect_user_ready_for_initiating_transfer_wiping": "Same open-mouth pattern in personal settings.",
+    "convey_robot_ready_for_completing_transfer": "Tracks the initiating cue, which was corrected to speech + LED this meal via the communication latent factor.",
+    "detect_user_completed_transfer_feeding": "Day-1 personal high-communication meal used perception for feeding completion.",
+    "detect_user_completed_transfer_drinking": "Day-1 personal meal used perception for drinking completion.",
+    "detect_user_completed_transfer_wiping": "Day-1 personal meal used button for wiping completion.",
+    "retract_between_bites": "Personal eating-alone setting; day-1 personal meal used no retract.",
+    "bite_dipping_preference": "Ranch dressing is dippable and personal settings historically favored more dipping.",
+    "bite_ordering": "No historical ordering preference; grounded in this meal's ranch-dip items with no specific sequence.",
+    "wait_before_autocontinue_bite_selection": "Corrected task wait to 60 sec signals an unhurried, generous-time state, so a long bite-selection countdown fits.",
+    "plate_color_fridge": "No correction bears on handle color; seed retained.",
+    "plate_color_microwave": "No correction bears on handle color; seed retained.",
+    "plate_color_table": "No correction bears on handle color; seed retained.",
+    "nav_offset_table": "No navigation adjustment observed; seed zero retained.",
+    "nav_offset_microwave": "No navigation adjustment observed; seed zero retained.",
+    "nav_offset_sink": "No navigation adjustment observed; seed zero retained.",
+    "nav_offset_fridge": "No navigation adjustment observed; seed zero retained."
+  }
+}

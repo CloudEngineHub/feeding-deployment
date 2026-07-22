@@ -1,0 +1,16 @@
+{
+  "day": 6,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "night",
+    "transient_affective_state": "Hurried"
+  },
+  "corrected": {
+    "wait_before_autocontinue_bite_selection": "countdown (15 sec)",
+    "confirm_feeding_pickup": "countdown (15 sec)",
+    "wait_before_autocontinue_task_selection": "countdown (15 sec)",
+    "confirm_manipulation": "countdown (15 sec)",
+    "confirm_navigation_arrival": "countdown (15 sec)"
+  }
+}

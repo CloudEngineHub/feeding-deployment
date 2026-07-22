@@ -1,0 +1,44 @@
+{
+  "day": 5,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Social with person on Left",
+    "time_of_day": "morning",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "bite_ordering": "no particular order",
+    "bite_dipping_preference": "more",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+    "confirm_manipulation": "yes (without any auto-continue)",
+    "wait_before_autocontinue_mealprep": "30 sec",
+    "confirm_navigation_arrival": "yes (without any auto-continue)",
+    "robot_speed": "fast"
+  },
+  "episode_text": "day=5; meal=chicken nuggets, broccoli, and ketchup; setting=Social with person on Left; time_of_day=morning;\npreferences: microwave_time=2 min; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (without any auto-continue); confirm_navigation_arrival=yes (without any auto-continue); confirm_manipulation=yes (without any auto-continue); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue; wait_before_autocontinue_feeding_pickup=no autocontinue; wait_before_autocontinue_mealprep=30 sec",
+  "ground_truth_bundle": {
+    "microwave_time": "2 min",
+    "robot_speed": "fast",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "yes (without any auto-continue)",
+    "confirm_navigation_arrival": "yes (without any auto-continue)",
+    "confirm_manipulation": "yes (without any auto-continue)",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "yes",
+    "bite_dipping_preference": "more",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_task_selection": "no autocontinue",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+    "wait_before_autocontinue_mealprep": "30 sec"
+  }
+}

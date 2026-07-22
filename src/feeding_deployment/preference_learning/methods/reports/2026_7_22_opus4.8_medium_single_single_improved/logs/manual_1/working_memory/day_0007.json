@@ -1,0 +1,16 @@
+{
+  "day": 7,
+  "context": {
+    "meal": "bananas, brownies, and chocolate sauce",
+    "setting": "Watching TV with TV on Left",
+    "time_of_day": "evening",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "robot_speed": "medium",
+    "confirm_navigation_arrival": "countdown (30 sec)",
+    "confirm_manipulation": "countdown (30 sec)",
+    "microwave_time": "1 min",
+    "confirm_feeding_pickup": "countdown (60 sec)"
+  }
+}

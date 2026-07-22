@@ -1,0 +1,14 @@
+{
+  "day": 12,
+  "context": {
+    "meal": "general tso's chicken and broccoli",
+    "setting": "Watching TV with TV on Right",
+    "time_of_day": "morning",
+    "transient_affective_state": "Fatigued"
+  },
+  "corrected": {
+    "confirm_manipulation": "skip",
+    "detect_user_completed_transfer_wiping": "perception",
+    "confirm_feeding_pickup": "countdown (60 sec)"
+  }
+}

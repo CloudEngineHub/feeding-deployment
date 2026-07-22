@@ -1,0 +1,14 @@
+{
+  "day": 14,
+  "context": {
+    "meal": "bite-sized sandwiches",
+    "setting": "Social with person in Front",
+    "time_of_day": "evening",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "wait_before_autocontinue_bite_selection": "wait for me",
+    "robot_speed": "fast",
+    "convey_robot_ready_for_completing_transfer": "LED"
+  }
+}

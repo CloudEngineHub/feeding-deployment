@@ -1,0 +1,19 @@
+{
+  "day": 5,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Social with person on Left",
+    "time_of_day": "morning",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "bite_ordering": "no particular order",
+    "bite_dipping_preference": "more",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+    "confirm_manipulation": "yes (without any auto-continue)",
+    "wait_before_autocontinue_mealprep": "30 sec",
+    "confirm_navigation_arrival": "yes (without any auto-continue)",
+    "robot_speed": "fast"
+  }
+}

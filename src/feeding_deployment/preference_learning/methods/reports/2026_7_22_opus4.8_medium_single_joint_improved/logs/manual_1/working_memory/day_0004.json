@@ -1,0 +1,15 @@
+{
+  "day": 4,
+  "context": {
+    "meal": "cantaloupes, bananas, watermelon",
+    "setting": "Personal",
+    "time_of_day": "morning",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_navigation_arrival": "countdown (30 sec)",
+    "detect_user_completed_transfer_feeding": "button",
+    "retract_between_bites": "yes"
+  }
+}

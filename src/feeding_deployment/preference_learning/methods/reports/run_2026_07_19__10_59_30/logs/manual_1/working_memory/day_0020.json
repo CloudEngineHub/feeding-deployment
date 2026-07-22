@@ -1,0 +1,13 @@
+{
+  "day": 20,
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Hurried"
+  },
+  "corrected": {
+    "wait_before_autocontinue_mealprep": "15 sec",
+    "bite_ordering": "no particular order"
+  }
+}

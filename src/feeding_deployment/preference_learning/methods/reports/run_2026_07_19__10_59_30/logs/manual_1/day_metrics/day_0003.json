@@ -1,0 +1,51 @@
+{
+  "day": 3,
+  "affective_state": "Energetic",
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Energetic"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.9545454545454546,
+      "mismatches": 1
+    },
+    {
+      "m": 1,
+      "acc": 0.8095238095238095,
+      "mismatches": 4
+    },
+    {
+      "m": 2,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": true,
+    "robot_speed": false,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": true,
+    "confirm_navigation_arrival": true,
+    "confirm_manipulation": true,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": true,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": true,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": true,
+    "retract_between_bites": true,
+    "bite_dipping_preference": true,
+    "bite_ordering": true,
+    "wait_before_autocontinue_task_selection": true,
+    "wait_before_autocontinue_feeding_pickup": true,
+    "wait_before_autocontinue_mealprep": true
+  }
+}

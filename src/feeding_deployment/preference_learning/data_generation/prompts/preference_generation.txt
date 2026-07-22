@@ -89,3 +89,4 @@ Rules for output:
 - Each choice must match an allowed option exactly.
 - Do not invent new options.
 - Do not include extra fields.
+- For free-text dimensions (bite_ordering): "choice" is one concise sentence grounded in THIS meal's actual foods and dips. Derive it from the user preference encoding's rules and re-use the exact wording those rules imply — do NOT paraphrase or reword across days; the same user in the same situation states their ordering the same way every time. If the encoding implies no ordering or dip-pairing preference, use exactly "no particular order".

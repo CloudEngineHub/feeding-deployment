@@ -1,0 +1,9 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_133138.txt,INIT,,,,,3,,,,
+1,20260717_133222.txt,correction,bite_ordering,text,Table prefs / feeding loop,3,2,0,1,0,retract_between_bites:no->yes(NEG)
+2,20260717_133300.txt,correction,retract_between_bites,categorical,Table prefs / feeding loop,2,2,1,2,0,convey_robot_ready_for_completing_transfer:no cue->speech + LED(POS); detect_user_completed_transfer_drinking:button->perception(NEG); wait_before_autocontinue_task_selection:60 sec->no autocontinue(NEG)
+3,20260717_133356.txt,correction,microwave_time,categorical,Microwave ask,2,3,0,0,0,
+4,20260717_133427.txt,correction,wait_before_autocontinue_task_selection,categorical,Table prefs / feeding loop,3,4,1,1,0,convey_robot_ready_for_completing_transfer:speech + LED->no cue(NEG); detect_user_completed_transfer_drinking:perception->button(POS)
+5,20260717_133459.txt,correction,wait_before_autocontinue_mealprep,?,?,4,4,0,0,0,
+6,20260717_133533.txt,correction,convey_robot_ready_for_completing_transfer,categorical,Table prefs / feeding loop,4,4,0,1,0,detect_user_completed_transfer_drinking:button->perception(NEG)
+7,20260717_133608.txt,correction,detect_user_completed_transfer_drinking,categorical,Table prefs / feeding loop,4,5,0,0,0,

@@ -1,0 +1,13 @@
+{
+  "day": 4,
+  "context": {
+    "meal": "cantaloupes, bananas, watermelon",
+    "setting": "Personal",
+    "time_of_day": "morning",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "retract_between_bites": "yes",
+    "wait_before_autocontinue_task_selection": "60 sec"
+  }
+}

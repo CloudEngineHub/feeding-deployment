@@ -1,0 +1,281 @@
+{
+  "users": [
+    {
+      "file": "out_manual_run_2026_07_16__15_41_53/manual_1__dep1__30d.json",
+      "user": "manual_1",
+      "physical_profile_label": "moderate_arms_good_trunk_good_head",
+      "meals": 22,
+      "num_rollouts": 1,
+      "mean_corrections_to_stop": 3.590909090909091,
+      "accuracy_after_m": {
+        "0": 0.8264462809917353,
+        "1": 0.8476190476190478,
+        "2": 0.8777777777777778,
+        "3": 0.8906882591093118,
+        "4": 0.9135802469135802,
+        "5": 0.8823529411764706,
+        "6": 0.8625,
+        "7": 0.96,
+        "8": 0.9642857142857143,
+        "9": 1.0
+      },
+      "per_day_metrics": [
+        {
+          "day": 1,
+          "affective_state": "Slower",
+          "acc_m0": 0.6818181818181818,
+          "acc_m1": 0.7619047619047619,
+          "mismatches_m0": 7.0,
+          "mismatches_m1": 5.0,
+          "m_star": 9.0
+        },
+        {
+          "day": 2,
+          "affective_state": "Neutral",
+          "acc_m0": 0.6363636363636364,
+          "acc_m1": 0.7142857142857143,
+          "mismatches_m0": 8.0,
+          "mismatches_m1": 6.0,
+          "m_star": 7.0
+        },
+        {
+          "day": 3,
+          "affective_state": "Energetic",
+          "acc_m0": 0.9545454545454546,
+          "acc_m1": 0.8571428571428571,
+          "mismatches_m0": 1.0,
+          "mismatches_m1": 3.0,
+          "m_star": 2.0
+        },
+        {
+          "day": 4,
+          "affective_state": "Neutral",
+          "acc_m0": 0.6363636363636364,
+          "acc_m1": 0.7142857142857143,
+          "mismatches_m0": 8.0,
+          "mismatches_m1": 6.0,
+          "m_star": 4.0
+        },
+        {
+          "day": 5,
+          "affective_state": "Energetic",
+          "acc_m0": 0.5454545454545454,
+          "acc_m1": 0.5238095238095238,
+          "mismatches_m0": 10.0,
+          "mismatches_m1": 10.0,
+          "m_star": 8.0
+        },
+        {
+          "day": 6,
+          "affective_state": "Hurried",
+          "acc_m0": 0.7727272727272727,
+          "acc_m1": 0.9523809523809523,
+          "mismatches_m0": 5.0,
+          "mismatches_m1": 1.0,
+          "m_star": 3.0
+        },
+        {
+          "day": 7,
+          "affective_state": "Neutral",
+          "acc_m0": 0.7272727272727273,
+          "acc_m1": 0.9047619047619048,
+          "mismatches_m0": 6.0,
+          "mismatches_m1": 2.0,
+          "m_star": 3.0
+        },
+        {
+          "day": 8,
+          "affective_state": "Slower",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.8571428571428571,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 3.0,
+          "m_star": 3.0
+        },
+        {
+          "day": 9,
+          "affective_state": "Slower",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.9523809523809523,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 1.0,
+          "m_star": 4.0
+        },
+        {
+          "day": 10,
+          "affective_state": "Neutral",
+          "acc_m0": 0.7727272727272727,
+          "acc_m1": 0.7619047619047619,
+          "mismatches_m0": 5.0,
+          "mismatches_m1": 5.0,
+          "m_star": 7.0
+        },
+        {
+          "day": 11,
+          "affective_state": "Energetic",
+          "acc_m0": 1.0,
+          "acc_m1": 1.0,
+          "mismatches_m0": 0.0,
+          "mismatches_m1": 0.0,
+          "m_star": 0.0
+        },
+        {
+          "day": 12,
+          "affective_state": "Fatigued",
+          "acc_m0": 0.7272727272727273,
+          "acc_m1": 0.8095238095238095,
+          "mismatches_m0": 6.0,
+          "mismatches_m1": 4.0,
+          "m_star": 7.0
+        },
+        {
+          "day": 13,
+          "affective_state": "Neutral",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.8095238095238095,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 4.0,
+          "m_star": 2.0
+        },
+        {
+          "day": 14,
+          "affective_state": "Energetic",
+          "acc_m0": 0.8181818181818182,
+          "acc_m1": 0.7619047619047619,
+          "mismatches_m0": 4.0,
+          "mismatches_m1": 5.0,
+          "m_star": 5.0
+        },
+        {
+          "day": 15,
+          "affective_state": "Neutral",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.9523809523809523,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 1.0,
+          "m_star": 3.0
+        },
+        {
+          "day": 16,
+          "affective_state": "Neutral",
+          "acc_m0": 0.8636363636363636,
+          "acc_m1": 0.8571428571428571,
+          "mismatches_m0": 3.0,
+          "mismatches_m1": 3.0,
+          "m_star": 2.0
+        },
+        {
+          "day": 17,
+          "affective_state": "Fatigued",
+          "acc_m0": 0.8181818181818182,
+          "acc_m1": 1.0,
+          "mismatches_m0": 4.0,
+          "mismatches_m1": 0.0,
+          "m_star": 1.0
+        },
+        {
+          "day": 18,
+          "affective_state": "Hurried",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.9523809523809523,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 1.0,
+          "m_star": 2.0
+        },
+        {
+          "day": 19,
+          "affective_state": "Slower",
+          "acc_m0": 0.9090909090909091,
+          "acc_m1": 0.9523809523809523,
+          "mismatches_m0": 2.0,
+          "mismatches_m1": 1.0,
+          "m_star": 2.0
+        },
+        {
+          "day": 20,
+          "affective_state": "Hurried",
+          "acc_m0": 0.8181818181818182,
+          "acc_m1": 0.8571428571428571,
+          "mismatches_m0": 4.0,
+          "mismatches_m1": 3.0,
+          "m_star": 4.0
+        },
+        {
+          "day": 21,
+          "affective_state": "Neutral",
+          "acc_m0": 1.0,
+          "acc_m1": 1.0,
+          "mismatches_m0": 0.0,
+          "mismatches_m1": 0.0,
+          "m_star": 0.0
+        },
+        {
+          "day": 22,
+          "affective_state": "Energetic",
+          "acc_m0": 0.9545454545454546,
+          "acc_m1": 1.0,
+          "mismatches_m0": 1.0,
+          "mismatches_m1": 0.0,
+          "m_star": 1.0
+        }
+      ],
+      "by_affective_state": {
+        "Energetic": {
+          "acc_m0": 0.8545454545454547,
+          "mean_m_star": 3.2
+        },
+        "Fatigued": {
+          "acc_m0": 0.7727272727272727,
+          "mean_m_star": 4.0
+        },
+        "Hurried": {
+          "acc_m0": 0.8333333333333334,
+          "mean_m_star": 3.0
+        },
+        "Neutral": {
+          "acc_m0": 0.8068181818181818,
+          "mean_m_star": 3.5
+        },
+        "Slower": {
+          "acc_m0": 0.8522727272727273,
+          "mean_m_star": 4.5
+        }
+      },
+      "per_dimension_m0_accuracy": {
+        "microwave_time": 0.8181818181818182,
+        "robot_speed": 0.5,
+        "skewering_axis": 1.0,
+        "confirm_feeding_pickup": 0.8636363636363636,
+        "confirm_navigation_arrival": 0.7727272727272727,
+        "confirm_manipulation": 0.7727272727272727,
+        "transfer_mode": 1.0,
+        "outside_mouth_distance": 0.9545454545454546,
+        "convey_robot_ready_for_initiating_transfer": 0.8181818181818182,
+        "detect_user_ready_for_initiating_transfer_feeding": 1.0,
+        "detect_user_ready_for_initiating_transfer_drinking": 1.0,
+        "detect_user_ready_for_initiating_transfer_wiping": 0.9545454545454546,
+        "convey_robot_ready_for_completing_transfer": 0.8181818181818182,
+        "detect_user_completed_transfer_feeding": 0.7727272727272727,
+        "detect_user_completed_transfer_drinking": 0.8181818181818182,
+        "detect_user_completed_transfer_wiping": 0.8636363636363636,
+        "retract_between_bites": 0.9545454545454546,
+        "bite_dipping_preference": 0.9090909090909091,
+        "bite_ordering": 0.6818181818181818,
+        "wait_before_autocontinue_task_selection": 0.7727272727272727,
+        "wait_before_autocontinue_feeding_pickup": 0.7272727272727273,
+        "wait_before_autocontinue_mealprep": 0.4090909090909091
+      },
+      "summary_statistics": {
+        "zero_correction_meals_total": 2,
+        "zero_correction_meals_final_week": 0
+      }
+    }
+  ],
+  "run_timestamp": "2026_07_17__10_39_51",
+  "memory_mode": "single_full_history",
+  "ablation": "full",
+  "prediction_mode": "joint",
+  "exclude_missing_dims": true,
+  "k_retrieve": 10,
+  "num_rollouts": 1
+}

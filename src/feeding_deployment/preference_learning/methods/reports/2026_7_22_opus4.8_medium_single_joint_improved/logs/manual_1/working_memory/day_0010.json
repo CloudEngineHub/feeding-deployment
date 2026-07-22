@@ -1,0 +1,18 @@
+{
+  "day": 10,
+  "context": {
+    "meal": "buffalo chicken bites, potato wedges, and ranch dressing",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "retract_between_bites": "no",
+    "detect_user_completed_transfer_drinking": "button",
+    "confirm_feeding_pickup": "countdown (60 sec)",
+    "convey_robot_ready_for_completing_transfer": "speech + LED",
+    "microwave_time": "1 min",
+    "bite_ordering": "no particular order",
+    "confirm_navigation_arrival": "countdown (30 sec)"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "day": 13,
+  "affective_state": "Neutral",
+  "context": {
+    "meal": "bite-sized sandwiches",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "steps": [
+    {
+      "m": 0,
+      "acc": 0.8,
+      "mismatches": 4
+    },
+    {
+      "m": 1,
+      "acc": 0.8421052631578947,
+      "mismatches": 3
+    },
+    {
+      "m": 2,
+      "acc": 0.8888888888888888,
+      "mismatches": 2
+    },
+    {
+      "m": 3,
+      "acc": 0.9411764705882353,
+      "mismatches": 1
+    },
+    {
+      "m": 4,
+      "acc": 0.8125,
+      "mismatches": 3
+    },
+    {
+      "m": 5,
+      "acc": 0.9333333333333333,
+      "mismatches": 1
+    },
+    {
+      "m": 6,
+      "acc": 1.0,
+      "mismatches": 0
+    }
+  ],
+  "per_dim_m0": {
+    "microwave_time": true,
+    "robot_speed": true,
+    "skewering_axis": true,
+    "confirm_feeding_pickup": false,
+    "confirm_navigation_arrival": false,
+    "confirm_manipulation": false,
+    "transfer_mode": true,
+    "outside_mouth_distance": true,
+    "convey_robot_ready_for_initiating_transfer": true,
+    "detect_user_ready_for_initiating_transfer_feeding": true,
+    "detect_user_ready_for_initiating_transfer_drinking": true,
+    "detect_user_ready_for_initiating_transfer_wiping": true,
+    "convey_robot_ready_for_completing_transfer": true,
+    "detect_user_completed_transfer_feeding": true,
+    "detect_user_completed_transfer_drinking": true,
+    "detect_user_completed_transfer_wiping": true,
+    "retract_between_bites": true,
+    "bite_dipping_preference": true,
+    "bite_ordering": true,
+    "wait_before_autocontinue_task_selection": false
+  }
+}

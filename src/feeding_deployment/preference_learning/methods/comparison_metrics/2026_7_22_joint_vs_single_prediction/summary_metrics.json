@@ -1,0 +1,30 @@
+{
+  "Joint prediction": {
+    "mean_m_star_all_days": 3.0,
+    "sem_m_star_all_days": 0.5821022034029862,
+    "mean_m_star_first_5_days": 6.2,
+    "sem_m_star_first_5_days": 1.3971399357258385,
+    "mean_m_star_last_5_days": 1.0,
+    "sem_m_star_last_5_days": 0.0,
+    "mean_acc_m0_all_days": 0.7727272727272727,
+    "sem_acc_m0_all_days": 0.043606185256734056,
+    "mean_acc_m0_first_5_days": 0.5809523809523809,
+    "sem_acc_m0_first_5_days": 0.08770182425311496,
+    "mean_acc_m0_last_5_days": 0.8095238095238095,
+    "sem_acc_m0_last_5_days": 0.11741740958036145
+  },
+  "Per-dimension prediction": {
+    "mean_m_star_all_days": 3.6818181818181817,
+    "sem_m_star_all_days": 0.653617914888094,
+    "mean_m_star_first_5_days": 7.6,
+    "sem_m_star_first_5_days": 1.3446189051177289,
+    "mean_m_star_last_5_days": 0.8,
+    "sem_m_star_last_5_days": 0.17888543819998318,
+    "mean_acc_m0_all_days": 0.8246753246753247,
+    "sem_acc_m0_all_days": 0.031124662613718754,
+    "mean_acc_m0_first_5_days": 0.638095238095238,
+    "sem_acc_m0_first_5_days": 0.0640294716722728,
+    "mean_acc_m0_last_5_days": 0.9619047619047618,
+    "sem_acc_m0_last_5_days": 0.008518354199999207
+  }
+}

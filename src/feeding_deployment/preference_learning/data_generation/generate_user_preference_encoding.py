@@ -1,8 +1,10 @@
 import argparse
 import json
 import os
+import random
 import re
 import sys
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 try:
@@ -13,12 +15,23 @@ except ImportError:
 
 from feeding_deployment.preference_learning.config.preference_bundle import PREFERENCE_BUNDLE
 from feeding_deployment.preference_learning.config.physical_capabilities import PHYSICAL_CAPABILITY_PROFILES
+from feeding_deployment.preference_learning.data_generation.continuous_prefs import (
+    render_continuous_tendencies,
+    sample_continuous_tables,
+)
 from feeding_deployment.preference_learning.data_generation.prompts.user_preference_encoding import (
     get_user_preference_encoding_prompt,
 )
-from feeding_deployment.utils.llm_config import DEFAULT_CLAUDE_MODEL
+from feeding_deployment.utils.llm_config import DATA_GENERATION_CLAUDE_MODEL
 
-DEFAULT_MODEL = DEFAULT_CLAUDE_MODEL
+DEFAULT_MODEL = DATA_GENERATION_CLAUDE_MODEL
+
+# The encoding LLM writes defaults/tendencies only for these dims (categorical:
+# option-checked default; text: non-empty default). The 7 continuous dims get
+# seeded component tables instead (continuous_prefs.py); their encoding entries
+# are rendered mirrors of those tables, merged in after the LLM call.
+LLM_DIMS = [dim for dim in PREFERENCE_BUNDLE if dim.kind in ("categorical", "text")]
+LLM_FIELDS = [dim.field for dim in LLM_DIMS]
 
 
 def _extract_json_object(text: str) -> str:
@@ -43,7 +56,7 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
     if not isinstance(prefs, dict):
         raise TypeError(f"Expected JSON object (dict). Got: {type(prefs).__name__}")
 
-    expected_fields = {dim.field for dim in PREFERENCE_BUNDLE}
+    expected_fields = {dim.field for dim in LLM_DIMS}
     got_fields = set(prefs.keys())
 
     missing = sorted(expected_fields - got_fields)
@@ -56,7 +69,7 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
 
     out: Dict[str, Dict[str, str]] = {}
 
-    for dim in PREFERENCE_BUNDLE:
+    for dim in LLM_DIMS:
         field = dim.field
         allowed = dim.options
 
@@ -81,7 +94,11 @@ def _validate_preferences_strict(prefs: Any) -> Dict[str, Dict[str, str]]:
 
         if not isinstance(default_val, str):
             raise TypeError(f'Field "{field}.default" must be a string. Got: {type(default_val).__name__}')
-        if default_val not in allowed:
+        if dim.kind == "text":
+            if not default_val.strip():
+                raise ValueError(f'Field "{field}.default" must be a non-empty string.')
+            default_val = default_val.strip()
+        elif default_val not in allowed:
             raise ValueError(f'Field "{field}.default" must be one of {allowed}. Got: {default_val!r}')
 
         if not isinstance(tendencies, str) or not tendencies.strip():
@@ -98,7 +115,7 @@ def generate_user_preference_encoding_llm(
     model: str = DEFAULT_MODEL,
     print_raw: bool = False,
 ) -> Dict[str, Dict[str, str]]:
-    prompt = get_user_preference_encoding_prompt(physical_profile_key)
+    prompt = get_user_preference_encoding_prompt(physical_profile_key, dims=LLM_DIMS)
 
     response = client.messages.create(
         model=model,
@@ -106,9 +123,10 @@ def generate_user_preference_encoding_llm(
         system=(
             "You generate structured user preference encodings for a robot-assisted mealtime system.\n"
             "Return ONLY valid JSON (no markdown, no extra text).\n"
-            'Schema: dict[field] = {"default": <one allowed option>, "user_tendencies": <non-empty string>}.\n'
+            'Schema: dict[field] = {"default": <one allowed option, or a sentence for free-text fields>, '
+            '"user_tendencies": <non-empty string>}.\n'
             "You must include all fields and no extra fields.\n"
-            f"Fields (exact): {[dim.field for dim in PREFERENCE_BUNDLE]}"
+            f"Fields (exact): {LLM_FIELDS}"
         ),
         messages=[
             {"role": "user", "content": prompt},
@@ -141,6 +159,7 @@ def _write_user_file(
     user_idx: int,
     physical_profile_key: str,
     encoding: Dict[str, Dict[str, str]],
+    continuous_tables: Dict[str, Any],
 ) -> str:
 
     filename = f"user_{user_idx}__profile_{physical_profile_key}.json"
@@ -150,6 +169,10 @@ def _write_user_file(
         "user_index": user_idx,
         "physical_profile": physical_profile_key,
         "encoding": encoding,
+        # Seeded component tables for the 7 continuous dims; the dataset
+        # generator replays these through continuous_truth() to produce exact,
+        # correlated per-day ground truth (see continuous_prefs.py).
+        "continuous_tables": continuous_tables,
     }
 
     with open(filepath, "w", encoding="utf-8") as f:
@@ -167,7 +190,24 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         help="Physical capability profile key. If omitted, cycle through all profiles round-robin.",
     )
     parser.add_argument("--num-users", type=int, required=True, help="Number of user encodings to generate (>= 1).")
-    parser.add_argument("--output-dir", required=True, help="Directory to write output files into.")
+    parser.add_argument(
+        "--output-dir",
+        required=True,
+        help="Base directory for output files. A run timestamp is appended "
+        "(<output-dir>_run_<ts>) so existing generated data is never overwritten.",
+    )
+    parser.add_argument(
+        "--no-timestamp",
+        action="store_true",
+        help="Write into --output-dir exactly as given (may overwrite existing files).",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=0,
+        help="Base seed for the per-user continuous-value tables (default: 0). "
+        "Each user's tables are sampled with random.Random((seed, user_idx)).",
+    )
     parser.add_argument("--api-key", default=None, help="Anthropic API key (overrides env var)")
     parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Claude model (default: {DEFAULT_MODEL})")
     parser.add_argument("--print-raw", action="store_true", help="Print raw model output for debugging.")
@@ -184,7 +224,10 @@ def main(argv: List[str]) -> int:
     if not api_key:
         raise ValueError("ANTHROPIC_API_KEY is not set. Set it in the environment or pass --api-key.")
 
-    output_dir = _ensure_output_dir(args.output_dir)
+    output_dir = args.output_dir
+    if not args.no_timestamp:
+        output_dir = f"{output_dir.rstrip('/')}_run_{datetime.now().strftime('%Y_%m_%d__%H_%M_%S')}"
+    output_dir = _ensure_output_dir(output_dir)
     client = anthropic.Anthropic(api_key=api_key)
 
     all_profiles = _profile_labels()
@@ -214,7 +257,16 @@ def main(argv: List[str]) -> int:
             model=args.model,
             print_raw=args.print_raw,
         )
-        path = _write_user_file(output_dir, i, profile_key, enc)
+
+        # Continuous dims: seeded component tables + rendered encoding mirror,
+        # so all 27 fields keep the standard {default, user_tendencies} shape.
+        # String seed: (seed, user) pair, deterministic across runs (tuple
+        # seeds are not supported on Python >= 3.9).
+        rng = random.Random(f"{args.seed}:{i}")
+        continuous_tables = sample_continuous_tables(rng)
+        enc.update(render_continuous_tendencies(continuous_tables))
+
+        path = _write_user_file(output_dir, i, profile_key, enc, continuous_tables)
         print(f"Wrote: {path}")
 
     return 0

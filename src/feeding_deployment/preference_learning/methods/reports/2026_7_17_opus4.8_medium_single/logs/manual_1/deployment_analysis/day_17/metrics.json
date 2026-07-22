@@ -1,0 +1,242 @@
+{
+  "ground_truth": {
+    "detect_user_completed_transfer_wiping": "perception"
+  },
+  "unresolved_dims": [
+    "robot_speed",
+    "microwave_time",
+    "skewering_axis",
+    "confirm_feeding_pickup",
+    "confirm_navigation_arrival",
+    "confirm_manipulation",
+    "transfer_mode",
+    "outside_mouth_distance",
+    "convey_robot_ready_for_initiating_transfer",
+    "detect_user_ready_for_initiating_transfer_feeding",
+    "detect_user_ready_for_initiating_transfer_drinking",
+    "detect_user_ready_for_initiating_transfer_wiping",
+    "convey_robot_ready_for_completing_transfer",
+    "detect_user_completed_transfer_feeding",
+    "detect_user_completed_transfer_drinking",
+    "retract_between_bites",
+    "bite_dipping_preference",
+    "wait_before_autocontinue_bite_selection",
+    "wait_before_autocontinue_task_selection",
+    "bite_ordering",
+    "plate_color_fridge",
+    "plate_color_microwave",
+    "plate_color_table",
+    "nav_offset_table",
+    "nav_offset_microwave",
+    "nav_offset_sink",
+    "nav_offset_fridge"
+  ],
+  "trajectory": [
+    {
+      "idx": 0,
+      "file": "20260717_135210.txt",
+      "ts": "135210",
+      "event": "INIT",
+      "cat_accuracy": 0,
+      "cat_denom": 1,
+      "remaining_corrections": 1,
+      "confirmed_fields": [],
+      "corrected_fields": [],
+      "latent_inference": "No corrections yet this meal; the context (chicken nuggets, broccoli, ketchup; Watching TV with TV on Right; morning) closely matches day 15 and day 12, indicating a relaxed, TV-watching state with minimal cues, silent operation, and trust in navigation/manipulation (confirmation off).",
+      "parse_ok": true
+    },
+    {
+      "idx": 1,
+      "file": "20260717_135246.txt",
+      "ts": "135246",
+      "event": "correction",
+      "cat_accuracy": 1,
+      "cat_denom": 1,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "detect_user_completed_transfer_wiping"
+      ],
+      "latent_inference": "The user corrected mouth-wipe completion to perception, matching the day-12 pattern (same setting: Watching TV with TV on Right, morning) where all completion detections were perception; this signals a relaxed, trusting state comfortable with head-nod/force-torque perception in a non-social TV context.",
+      "parse_ok": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "20260717_135210.txt",
+      "to": "20260717_135246.txt",
+      "trigger_fields": [
+        "detect_user_completed_transfer_wiping"
+      ],
+      "trigger_kinds": [
+        "categorical"
+      ],
+      "direct": [
+        {
+          "field": "detect_user_completed_transfer_wiping",
+          "kind": "categorical",
+          "old": "button",
+          "new": "perception"
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 1,
+      "acc_delta_direct": 1,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    }
+  ],
+  "ledger": {
+    "POSITIVE": 0,
+    "NEGATIVE": 0,
+    "LATERAL": 0
+  },
+  "hedge_candidates": [],
+  "findings": {
+    "self_inflicted": [],
+    "non_bearing_drift": [],
+    "re_corrections": [],
+    "volatility": [
+      {
+        "field": "detect_user_completed_transfer_feeding",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "button",
+          "perception"
+        ]
+      },
+      {
+        "field": "detect_user_completed_transfer_drinking",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "button",
+          "perception"
+        ]
+      },
+      {
+        "field": "detect_user_completed_transfer_wiping",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "button",
+          "perception"
+        ]
+      }
+    ]
+  },
+  "continuous_drift": {},
+  "stages": {
+    "robot_speed": "Initial",
+    "microwave_time": "Microwave ask",
+    "skewering_axis": "Table prefs / feeding loop",
+    "confirm_feeding_pickup": "Table prefs / feeding loop",
+    "confirm_navigation_arrival": "Initial",
+    "confirm_manipulation": "Initial",
+    "transfer_mode": "Table prefs / feeding loop",
+    "outside_mouth_distance": "Table prefs / feeding loop",
+    "convey_robot_ready_for_initiating_transfer": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_wiping": "Table prefs / feeding loop",
+    "convey_robot_ready_for_completing_transfer": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_wiping": "Table prefs / feeding loop",
+    "retract_between_bites": "Table prefs / feeding loop",
+    "bite_dipping_preference": "Table prefs / feeding loop",
+    "wait_before_autocontinue_bite_selection": "Table prefs / feeding loop",
+    "wait_before_autocontinue_task_selection": "Table prefs / feeding loop",
+    "bite_ordering": "Table prefs / feeding loop",
+    "plate_color_fridge": "Plate pickup (color)",
+    "plate_color_microwave": "Plate pickup (color)",
+    "plate_color_table": "Plate pickup (color)",
+    "nav_offset_table": "Navigation (nav offset)",
+    "nav_offset_microwave": "Navigation (nav offset)",
+    "nav_offset_sink": "Navigation (nav offset)",
+    "nav_offset_fridge": "Navigation (nav offset)"
+  },
+  "meta": {
+    "dir": "src/feeding_deployment/preference_learning/methods/reports/2026_7_17_opus4.8_medium_single/logs/manual_1/prediction_model_llm_calls :: day_0017",
+    "n_files": 2,
+    "files": [
+      "20260717_135210.txt",
+      "20260717_135246.txt"
+    ],
+    "model_line": "claude-opus-4-8 (speed=standard, effort=medium)",
+    "meal_context": {
+      "meal": "chicken nuggets, broccoli, and ketchup",
+      "setting": "Watching TV with TV on Right",
+      "time_of_day": "morning"
+    },
+    "prior_memory_present": true,
+    "parse_failures": [],
+    "color_tol": 3.0,
+    "nav_tol": 0.02
+  },
+  "explanations_by_file": {
+    "20260717_135210.txt": {
+      "microwave_time": "Nugget meals in the morning (day 15) reheated 2 min.",
+      "robot_speed": "Day 15 morning TV meal used medium.",
+      "skewering_axis": "Always perpendicular across all history.",
+      "confirm_feeding_pickup": "Consistently yes with auto-continue countdown in TV/personal settings.",
+      "confirm_navigation_arrival": "Recent meals (days 12-16) relaxed navigation checks to no.",
+      "confirm_manipulation": "Recent meals (days 12-16) relaxed manipulation checks to no.",
+      "transfer_mode": "Deployment only does outside mouth transfer and user never requested inside.",
+      "outside_mouth_distance": "User always prefers near.",
+      "convey_robot_ready_for_initiating_transfer": "TV-watching meals use no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV-watching meals detect readiness via open mouth.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Matches feeding readiness cue in TV settings (open mouth).",
+      "detect_user_ready_for_initiating_transfer_wiping": "Matches other readiness cues in TV settings (open mouth).",
+      "detect_user_completed_transfer_feeding": "Day 15 TV meal used button for completion.",
+      "detect_user_completed_transfer_drinking": "Consistent with button completion in TV settings.",
+      "detect_user_completed_transfer_wiping": "Consistent with button completion in TV settings.",
+      "retract_between_bites": "TV-watching meals prefer retracting to avoid view obstruction.",
+      "bite_dipping_preference": "Nugget+ketchup meals (days 5,6,15) used more dipping.",
+      "bite_ordering": "History always shows no particular order for these foods.",
+      "wait_before_autocontinue_task_selection": "Day 15 similar meal used 60 sec.",
+      "wait_before_autocontinue_feeding_pickup": "Day 15 similar meal used 60 sec.",
+      "wait_before_autocontinue_mealprep": "Day 15 similar meal used 30 sec.",
+      "plate_color_fridge": "No corrections bear on handle color; seed retained.",
+      "plate_color_microwave": "No corrections bear on handle color; seed retained.",
+      "plate_color_table": "No corrections bear on handle color; seed retained.",
+      "nav_offset_table": "No navigation corrections this meal; seed zero retained.",
+      "nav_offset_microwave": "No navigation corrections this meal; seed zero retained.",
+      "nav_offset_sink": "No navigation corrections this meal; seed zero retained.",
+      "nav_offset_fridge": "No navigation corrections this meal; seed zero retained."
+    },
+    "20260717_135246.txt": {
+      "microwave_time": "Nugget meals consistently use 2 min, including day 15 (same meal, morning, TV).",
+      "robot_speed": "Day 12 (same setting) and day 15 (same meal) both used medium.",
+      "skewering_axis": "Perpendicular is used in every prior meal.",
+      "confirm_feeding_pickup": "Recent TV meals (day 15) keep pickup confirmation with auto-continue.",
+      "confirm_navigation_arrival": "Recent TV meals including day 12 (same setting) turned nav confirmation off.",
+      "confirm_manipulation": "Recent TV meals including day 12 (same setting) turned manipulation confirmation off.",
+      "transfer_mode": "Deployment only does outside-mouth and user never requested inside.",
+      "outside_mouth_distance": "Near is the user's invariant choice across all meals.",
+      "convey_robot_ready_for_initiating_transfer": "TV/non-social settings like day 12 and 15 use no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV settings (day 12, 15) use open mouth for readiness.",
+      "detect_user_ready_for_initiating_transfer_drinking": "TV settings use open mouth for readiness.",
+      "detect_user_ready_for_initiating_transfer_wiping": "TV settings use open mouth for readiness.",
+      "convey_robot_ready_for_completing_transfer": "TV/non-social settings use no cue.",
+      "detect_user_completed_transfer_feeding": "The wiping-to-perception correction reflects a trust-in-perception latent factor matching day 12 (same setting), so feeding completion also becomes perception.",
+      "detect_user_completed_transfer_drinking": "Same latent shift toward perception as the wiping correction, matching day 12's all-perception pattern in this setting.",
+      "retract_between_bites": "TV settings consistently use retract yes (day 12, 15).",
+      "bite_dipping_preference": "Nugget+ketchup meals (day 5, 6, 15) use more dipping.",
+      "bite_ordering": "No prior meal showed an ordering/pairing preference.",
+      "wait_before_autocontinue_task_selection": "Day 12 (same setting) used 60 sec.",
+      "wait_before_autocontinue_feeding_pickup": "Day 12 (same setting) used 60 sec.",
+      "wait_before_autocontinue_mealprep": "Day 12 (same exact setting) used 60 sec.",
+      "plate_color_fridge": "No this-meal evidence; seed default retained.",
+      "plate_color_microwave": "No this-meal evidence; seed default retained.",
+      "plate_color_table": "No this-meal evidence; seed default retained.",
+      "nav_offset_table": "No corrections; seed zero offset retained.",
+      "nav_offset_microwave": "No corrections; seed zero offset retained.",
+      "nav_offset_sink": "No corrections; seed zero offset retained.",
+      "nav_offset_fridge": "No corrections; seed zero offset retained."
+    }
+  }
+}

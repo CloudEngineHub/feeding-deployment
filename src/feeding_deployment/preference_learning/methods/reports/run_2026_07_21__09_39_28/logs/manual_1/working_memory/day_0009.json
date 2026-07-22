@@ -1,0 +1,17 @@
+{
+  "day": 9,
+  "context": {
+    "meal": "general tso's chicken and broccoli",
+    "setting": "Social with person on Left",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "wait_before_autocontinue_task_selection": "no autocontinue",
+    "confirm_navigation_arrival": "yes (without any auto-continue)",
+    "detect_user_completed_transfer_feeding": "button",
+    "robot_speed": "medium",
+    "confirm_manipulation": "yes (without any auto-continue)",
+    "confirm_feeding_pickup": "yes (without any auto-continue)"
+  }
+}

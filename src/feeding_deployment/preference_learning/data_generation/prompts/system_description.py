@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from feeding_deployment.preference_learning.config.preference_bundle import PreferenceDim, PREFERENCE_BUNDLE
 
@@ -21,6 +21,8 @@ def render_preference_dimensions(bundle: List[PreferenceDim]) -> str:
                 "Value type: navigation pose offset. Emit an object "
                 '{"dx": <-0.5-0.5 m>, "dy": <-0.5-0.5 m>, "dyaw": <-0.785-0.785 rad>}.'
             )
+        elif getattr(dim, "kind", "categorical") == "text":
+            lines.append("Value type: free-text string (a single concise natural-language sentence).")
         else:
             lines.append(f"Allowed options: [{', '.join(dim.options)}]")
         lines.append(dim.description)
@@ -28,10 +30,13 @@ def render_preference_dimensions(bundle: List[PreferenceDim]) -> str:
 
     return "\n".join(lines).strip()
 
-def get_system_description_prompt() -> str:
+def get_system_description_prompt(dims: Optional[List[PreferenceDim]] = None) -> str:
+    """System description with dimension definitions. ``dims`` restricts which
+    dimensions are rendered (e.g. LLM-generated dims only for data generation,
+    or a single dim for per-dimension prediction); default is the full bundle."""
     template = SYSTEM_DESCRIPTION_PATH.read_text(encoding="utf-8")
 
-    preference_dimensions = render_preference_dimensions(PREFERENCE_BUNDLE)
+    preference_dimensions = render_preference_dimensions(PREFERENCE_BUNDLE if dims is None else dims)
 
     return template.format(
         preference_dimensions=preference_dimensions

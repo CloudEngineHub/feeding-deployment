@@ -1,0 +1,6 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_111156.txt,INIT,,,,,0,,,,
+1,20260717_111234.txt,correction,wait_before_autocontinue_feeding_pickup,?,?,0,0,0,0,0,
+2,20260717_111323.txt,correction,detect_user_completed_transfer_drinking,categorical,Table prefs / feeding loop,0,1,0,0,0,
+3,20260717_111400.txt,correction,convey_robot_ready_for_initiating_transfer,categorical,Table prefs / feeding loop,1,2,0,0,0,
+4,20260717_111435.txt,correction,retract_between_bites,categorical,Table prefs / feeding loop,2,3,0,0,0,

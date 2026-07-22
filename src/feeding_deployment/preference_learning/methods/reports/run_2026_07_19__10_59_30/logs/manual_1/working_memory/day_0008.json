@@ -1,0 +1,13 @@
+{
+  "day": 8,
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "night",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "wait_before_autocontinue_mealprep": "60 sec",
+    "bite_ordering": "no particular order"
+  }
+}

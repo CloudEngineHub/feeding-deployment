@@ -1,0 +1,13 @@
+{
+  "day": 19,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "wait_before_autocontinue_mealprep": "60 sec",
+    "robot_speed": "medium"
+  }
+}

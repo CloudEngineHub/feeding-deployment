@@ -1,0 +1,13 @@
+{
+  "day": 13,
+  "context": {
+    "meal": "bite-sized sandwiches",
+    "setting": "Personal",
+    "time_of_day": "night",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "confirm_navigation_arrival": "no",
+    "detect_user_completed_transfer_wiping": "button"
+  }
+}

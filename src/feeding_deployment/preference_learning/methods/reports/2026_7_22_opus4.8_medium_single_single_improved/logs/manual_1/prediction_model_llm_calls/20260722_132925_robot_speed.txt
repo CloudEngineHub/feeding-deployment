@@ -1,0 +1,94 @@
+===MODEL===
+claude-opus-4-8 (speed=standard, effort=medium)
+
+===PROMPT===
+Consider a care recipient being assisted during meals by a robotic arm. The robot may microwave a meal, set it up on a table, move to the right side of the user, and then assist with feeding, drinking, and mouth wiping.
+
+For each assistance task within feeding, drinking, or mouth wiping:
+1. The robot acquires the appropriate tool (feeding utensil, drink, or mouth wiper).
+2. For feeding, the robot first acquires a food item from the plate (bite acquisition).
+3. The robot then moves to a staging configuration. The staging configuration is a joint configuration that the robot moves to before initiating transfers. From this configuration, the user's head is visible in the robot’s in-hand camera.
+4. The robot signals that it is ready to initiate transfer (it is ready to begin moving toward the user's mouth).
+5. The robot detects or receives a signal from the user that they are ready for initiating transfer.
+6. The robot moves the tool to the transfer location (either near the mouth or inside the mouth).
+7. The robot signals that transfer can be completed (the tool has reached the transfer location and the user can take the bite, sip, or wipe).
+8. The user takes a bite, takes a sip, or performs mouth wiping.
+9. The user signals that the transfer (bite, sip, or wipe) is complete.
+10. The robot returns to the staging configuration.
+
+The robot exposes configurable components called preference dimensions. Each dimension corresponds to a parameter of the mealtime-assistance system that can be selected by the user.
+
+Dimension definitions:
+
+1. Robot speed
+Field name: robot_speed
+Allowed options: [slow, medium, fast]
+The speed at which the robot moves. Some users may prefer a slower speed to feel more comfortable, or to help social partners feel comfortable, while others may prefer a faster speed to reduce overall meal time or because they are less sensitive to the robot's movements.
+
+Consider a care recipient with the following physical functioning abilities:
+
+This user has moderate voluntary control of their arms and is able to press physical buttons. They can lean forward to reach food during outside-mouth transfers. They have good neck and head control and can open their mouth wide and perform head gestures. They interact with the web interface on their personal device using their arms.
+
+You are a personalized preference predictor for the mealtime-assistance system.
+
+Your task is to predict the user's accepted value for exactly ONE preference dimension of the CURRENT MEAL: robot_speed. As the meal progresses, the system surfaces this dimension at the moment it becomes relevant, showing your predicted value; the user either confirms it or corrects it to the value they actually want. Predict the value the user will accept.
+
+You may use the following memory blocks, which cover THIS dimension only. If a memory block is empty, ignore it and rely on the remaining information sources.
+
+=== SEMANTIC MEMORY (this dimension): prior on the user's tendencies for robot_speed, inferred from all prior meals ===
+(empty)
+======
+
+=== EPISODIC MEMORY (this dimension): the user's accepted value for robot_speed in similar prior meals ===
+day=1; meal=chicken nuggets; setting=Personal; time_of_day=evening; robot_speed=medium
+day=2; meal=general tso's chicken and broccoli; setting=Watching TV with TV in Front; time_of_day=afternoon; robot_speed=medium
+day=3; meal=chicken breast strips and hash brown; setting=Watching TV with TV in Front; time_of_day=afternoon; robot_speed=fast (user actively corrected this that day)
+day=4; meal=cantaloupes, bananas, watermelon; setting=Personal; time_of_day=morning; robot_speed=medium (user actively corrected this that day)
+day=5; meal=chicken nuggets, broccoli, and ketchup; setting=Social with person on Left; time_of_day=morning; robot_speed=fast (user actively corrected this that day)
+day=6; meal=chicken nuggets, broccoli, and ketchup; setting=Watching TV with TV in Front; time_of_day=night; robot_speed=fast
+day=7; meal=bananas, brownies, and chocolate sauce; setting=Watching TV with TV on Left; time_of_day=evening; robot_speed=medium (user actively corrected this that day)
+day=8; meal=strawberries with whipped cream; setting=Watching TV with TV in Front; time_of_day=night; robot_speed=medium (user actively corrected this that day)
+day=9; meal=general tso's chicken and broccoli; setting=Social with person on Left; time_of_day=afternoon; robot_speed=medium (user actively corrected this that day)
+day=10; meal=buffalo chicken bites, potato wedges, and ranch dressing; setting=Personal; time_of_day=night; robot_speed=medium
+day=11; meal=chicken breast strips and hash brown; setting=Watching TV with TV on Right; time_of_day=evening; robot_speed=fast (user actively corrected this that day)
+day=12; meal=general tso's chicken and broccoli; setting=Watching TV with TV on Right; time_of_day=morning; robot_speed=medium
+day=13; meal=bite-sized sandwiches; setting=Personal; time_of_day=night; robot_speed=medium
+day=14; meal=bite-sized sandwiches; setting=Social with person in Front; time_of_day=evening; robot_speed=fast (user actively corrected this that day)
+day=15; meal=chicken nuggets, broccoli, and ketchup; setting=Watching TV with TV in Front; time_of_day=morning; robot_speed=medium
+day=16; meal=bite-sized pizza and broccoli; setting=Social with person on Left; time_of_day=evening; robot_speed=medium
+day=17; meal=chicken nuggets, broccoli, and ketchup; setting=Watching TV with TV on Right; time_of_day=morning; robot_speed=medium
+day=18; meal=general tso's chicken and broccoli; setting=Social with person on Right; time_of_day=evening; robot_speed=fast (user actively corrected this that day)
+day=19; meal=chicken breast strips and hash brown; setting=Social with person in Front; time_of_day=afternoon; robot_speed=medium (user actively corrected this that day)
+day=20; meal=strawberries with whipped cream; setting=Social with person in Front; time_of_day=afternoon; robot_speed=fast (user actively corrected this that day)
+======
+
+=== CURRENT MEAL CONTEXT ===
+- meal: bite-sized pizza and broccoli
+- setting: Social with person in Front
+- time_of_day: evening
+
+Contents of the current meal (use these exact food/dip names if this dimension concerns ordering or dipping):
+solid items: bite-sized pizza, broccoli
+dips/sauces: (none)
+======
+
+Use the following information in decreasing order of priority:
+1. User physical functioning abilities (these define feasibility constraints that must not be violated)
+2. CURRENT MEAL CONTEXT
+3. EPISODIC MEMORY (this dimension)
+4. SEMANTIC MEMORY (this dimension)
+
+Allowed value for this dimension. A CATEGORICAL dimension lists its options: you MUST choose exactly one of the listed strings. A COLOR dimension (plate_color_*) requires an object {"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}. A NAV OFFSET dimension (nav_offset_*) requires an object {"dx": <-0.5-0.5 meters>, "dy": <-0.5-0.5 meters>, "dyaw": <-0.785-0.785 radians>}. A TEXT dimension requires a single concise natural-language sentence; if there is no evidence of any preference, output "no particular order". If a seed is shown, it is the value saved at the end of the previous meal: treat it as one piece of evidence among the others — it is decisive only when neither the episodic evidence nor the semantic tendencies bear on this meal's context.
+- robot_speed: [slow, medium, fast]
+
+Determine the most likely value for this dimension while satisfying all constraints.
+
+Output ONLY a valid JSON object (strict JSON: double-quoted keys and string values, no trailing commas). Do NOT include markdown formatting or any text outside the JSON. The object must contain exactly these two keys:
+{"explanation": "<ONE short sentence naming the evidence behind the prediction (a similar prior meal, a long-term tendency, the physical profile, or the seed/default)>", "value": <the predicted value in the format required above>}
+
+
+===RESPONSE===
+{
+  "explanation": "Day 16 was the same meal (bite-sized pizza and broccoli) in a social evening setting with accepted robot_speed=medium.",
+  "value": "medium"
+}

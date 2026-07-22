@@ -1,0 +1,22 @@
+{
+  "day": 1,
+  "context": {
+    "meal": "chicken nuggets",
+    "setting": "Personal",
+    "time_of_day": "evening",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "detect_user_completed_transfer_wiping": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "microwave_time": "2 min",
+    "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+    "detect_user_completed_transfer_drinking": "perception",
+    "outside_mouth_distance": "near",
+    "wait_before_autocontinue_bite_selection": "wait for me",
+    "confirm_navigation_arrival": "countdown (60 sec)",
+    "confirm_feeding_pickup": "wait for me",
+    "confirm_manipulation": "countdown (60 sec)",
+    "robot_speed": "medium"
+  }
+}

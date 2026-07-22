@@ -1,0 +1,40 @@
+{
+  "day": 7,
+  "context": {
+    "meal": "bananas, brownies, and chocolate sauce",
+    "setting": "Watching TV with TV on Left",
+    "time_of_day": "evening",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "robot_speed": "medium",
+    "confirm_navigation_arrival": "countdown (30 sec)",
+    "confirm_manipulation": "countdown (30 sec)",
+    "microwave_time": "1 min",
+    "confirm_feeding_pickup": "countdown (60 sec)"
+  },
+  "episode_text": "day=7; meal=bananas, brownies, and chocolate sauce; setting=Watching TV with TV on Left; time_of_day=evening;\npreferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=countdown (60 sec); confirm_navigation_arrival=countdown (30 sec); confirm_manipulation=countdown (30 sec); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_bite_selection=countdown (60 sec); wait_before_autocontinue_task_selection=countdown (60 sec)",
+  "ground_truth_bundle": {
+    "microwave_time": "1 min",
+    "robot_speed": "medium",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "countdown (60 sec)",
+    "confirm_navigation_arrival": "countdown (30 sec)",
+    "confirm_manipulation": "countdown (30 sec)",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "no cue",
+    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+    "convey_robot_ready_for_completing_transfer": "no cue",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "yes",
+    "bite_dipping_preference": "more",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_bite_selection": "countdown (60 sec)",
+    "wait_before_autocontinue_task_selection": "countdown (60 sec)"
+  }
+}

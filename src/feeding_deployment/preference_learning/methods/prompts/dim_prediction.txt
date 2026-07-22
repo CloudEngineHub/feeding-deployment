@@ -1,0 +1,42 @@
+{system_description}
+
+Consider a care recipient with the following physical functioning abilities:
+
+{physical_profile}
+
+You are a personalized preference predictor for the mealtime-assistance system.
+
+Your task is to predict the user's accepted value for exactly ONE preference dimension of the CURRENT MEAL: {field}. As the meal progresses, the system surfaces this dimension at the moment it becomes relevant, showing your predicted value; the user either confirms it or corrects it to the value they actually want. Predict the value the user will accept.
+
+You may use the following memory blocks, which cover THIS dimension only. If a memory block is empty, ignore it and rely on the remaining information sources.
+
+=== SEMANTIC MEMORY (this dimension): prior on the user's tendencies for {field}, inferred from all prior meals ===
+{ltm_field_block}
+======
+
+=== EPISODIC MEMORY (this dimension): the user's accepted value for {field} in similar prior meals ===
+{episodic_field_block}
+======
+
+=== CURRENT MEAL CONTEXT ===
+- meal: {meal}
+- setting: {setting}
+- time_of_day: {time_of_day}
+
+Contents of the current meal (use these exact food/dip names if this dimension concerns ordering or dipping):
+{meal_contents}
+======
+
+Use the following information in decreasing order of priority:
+1. User physical functioning abilities (these define feasibility constraints that must not be violated)
+2. CURRENT MEAL CONTEXT
+3. EPISODIC MEMORY (this dimension)
+4. SEMANTIC MEMORY (this dimension)
+
+Allowed value for this dimension. A CATEGORICAL dimension lists its options: you MUST choose exactly one of the listed strings. A COLOR dimension (plate_color_*) requires an object {{"h": <0-179>, "s": <0-255>, "v": <0-255>, "range": <0.0-1.0>}}. A NAV OFFSET dimension (nav_offset_*) requires an object {{"dx": <-0.5-0.5 meters>, "dy": <-0.5-0.5 meters>, "dyaw": <-0.785-0.785 radians>}}. A TEXT dimension requires a single concise natural-language sentence; if there is no evidence of any preference, output "no particular order". If a seed is shown, it is the value saved at the end of the previous meal: treat it as one piece of evidence among the others — it is decisive only when neither the episodic evidence nor the semantic tendencies bear on this meal's context.
+{option_line}
+{hard_rule_block}
+Determine the most likely value for this dimension while satisfying all constraints.
+
+Output ONLY a valid JSON object (strict JSON: double-quoted keys and string values, no trailing commas). Do NOT include markdown formatting or any text outside the JSON. The object must contain exactly these two keys:
+{{"explanation": "<ONE short sentence naming the evidence behind the prediction (a similar prior meal, a long-term tendency, the physical profile, or the seed/default)>", "value": <the predicted value in the format required above>}}

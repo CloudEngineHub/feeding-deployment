@@ -1,0 +1,225 @@
+{
+  "ground_truth": {
+    "robot_speed": "fast"
+  },
+  "unresolved_dims": [
+    "microwave_time",
+    "skewering_axis",
+    "confirm_feeding_pickup",
+    "confirm_navigation_arrival",
+    "confirm_manipulation",
+    "transfer_mode",
+    "outside_mouth_distance",
+    "convey_robot_ready_for_initiating_transfer",
+    "detect_user_ready_for_initiating_transfer_feeding",
+    "detect_user_ready_for_initiating_transfer_drinking",
+    "detect_user_ready_for_initiating_transfer_wiping",
+    "convey_robot_ready_for_completing_transfer",
+    "detect_user_completed_transfer_feeding",
+    "detect_user_completed_transfer_drinking",
+    "detect_user_completed_transfer_wiping",
+    "retract_between_bites",
+    "bite_dipping_preference",
+    "wait_before_autocontinue_bite_selection",
+    "wait_before_autocontinue_task_selection",
+    "bite_ordering",
+    "plate_color_fridge",
+    "plate_color_microwave",
+    "plate_color_table",
+    "nav_offset_table",
+    "nav_offset_microwave",
+    "nav_offset_sink",
+    "nav_offset_fridge"
+  ],
+  "trajectory": [
+    {
+      "idx": 0,
+      "file": "20260717_140011.txt",
+      "ts": "140011",
+      "event": "INIT",
+      "cat_accuracy": 0,
+      "cat_denom": 1,
+      "remaining_corrections": 1,
+      "confirmed_fields": [],
+      "corrected_fields": [],
+      "latent_inference": "No corrections yet this meal; latent factors inferred from context: a relaxed morning meal of cold fruit while watching TV in front, matching prior fruit/TV meals \u2014 cold food (no microwave), moderate pace, minimal cueing, and no dips.",
+      "parse_ok": true
+    },
+    {
+      "idx": 1,
+      "file": "20260717_140039.txt",
+      "ts": "140039",
+      "event": "correction",
+      "cat_accuracy": 1,
+      "cat_denom": 1,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "robot_speed"
+      ],
+      "latent_inference": "The user corrected robot_speed to fast, indicating a hurried/efficiency-seeking state this morning while watching TV; the meal is cold fruit (cantaloupes, bananas, watermelon) with no dips, so no microwaving and no dipping apply. The TV-in-front setting favors minimal cues and hands-free readiness detection.",
+      "parse_ok": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "20260717_140011.txt",
+      "to": "20260717_140039.txt",
+      "trigger_fields": [
+        "robot_speed"
+      ],
+      "trigger_kinds": [
+        "categorical"
+      ],
+      "direct": [
+        {
+          "field": "robot_speed",
+          "kind": "categorical",
+          "old": "medium",
+          "new": "fast"
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 0,
+      "acc_after": 1,
+      "acc_delta_direct": 1,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    }
+  ],
+  "ledger": {
+    "POSITIVE": 0,
+    "NEGATIVE": 0,
+    "LATERAL": 0
+  },
+  "hedge_candidates": [],
+  "findings": {
+    "self_inflicted": [],
+    "non_bearing_drift": [],
+    "re_corrections": [],
+    "volatility": [
+      {
+        "field": "robot_speed",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "medium",
+          "fast"
+        ]
+      }
+    ]
+  },
+  "continuous_drift": {},
+  "stages": {
+    "robot_speed": "Initial",
+    "microwave_time": "Microwave ask",
+    "skewering_axis": "Table prefs / feeding loop",
+    "confirm_feeding_pickup": "Table prefs / feeding loop",
+    "confirm_navigation_arrival": "Initial",
+    "confirm_manipulation": "Initial",
+    "transfer_mode": "Table prefs / feeding loop",
+    "outside_mouth_distance": "Table prefs / feeding loop",
+    "convey_robot_ready_for_initiating_transfer": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_wiping": "Table prefs / feeding loop",
+    "convey_robot_ready_for_completing_transfer": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_wiping": "Table prefs / feeding loop",
+    "retract_between_bites": "Table prefs / feeding loop",
+    "bite_dipping_preference": "Table prefs / feeding loop",
+    "wait_before_autocontinue_bite_selection": "Table prefs / feeding loop",
+    "wait_before_autocontinue_task_selection": "Table prefs / feeding loop",
+    "bite_ordering": "Table prefs / feeding loop",
+    "plate_color_fridge": "Plate pickup (color)",
+    "plate_color_microwave": "Plate pickup (color)",
+    "plate_color_table": "Plate pickup (color)",
+    "nav_offset_table": "Navigation (nav offset)",
+    "nav_offset_microwave": "Navigation (nav offset)",
+    "nav_offset_sink": "Navigation (nav offset)",
+    "nav_offset_fridge": "Navigation (nav offset)"
+  },
+  "meta": {
+    "dir": "src/feeding_deployment/preference_learning/methods/reports/2026_7_17_opus4.8_medium_single/logs/manual_1/prediction_model_llm_calls :: day_0022",
+    "n_files": 2,
+    "files": [
+      "20260717_140011.txt",
+      "20260717_140039.txt"
+    ],
+    "model_line": "claude-opus-4-8 (speed=standard, effort=medium)",
+    "meal_context": {
+      "meal": "cantaloupes, bananas, watermelon",
+      "setting": "Watching TV with TV in Front",
+      "time_of_day": "morning"
+    },
+    "prior_memory_present": true,
+    "parse_failures": [],
+    "color_tol": 3.0,
+    "nav_tol": 0.02
+  },
+  "explanations_by_file": {
+    "20260717_140011.txt": {
+      "microwave_time": "Cold fruit meal; day 4 identical fruit meal used no microwave.",
+      "robot_speed": "Morning fruit meal (day 4) and many TV meals used medium.",
+      "skewering_axis": "Perpendicular in every prior meal.",
+      "confirm_feeding_pickup": "Consistently 'yes (with auto-continue countdown)' across recent meals.",
+      "confirm_navigation_arrival": "Recent meals (day 12+) consistently set this to 'no'.",
+      "confirm_manipulation": "Recent meals (day 12+) consistently set this to 'no'.",
+      "transfer_mode": "Deployment only does outside-mouth and user can lean forward.",
+      "outside_mouth_distance": "'near' in every prior meal.",
+      "convey_robot_ready_for_initiating_transfer": "TV-in-front meals consistently used 'no cue'.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Non-social TV meals used open mouth; user can open mouth wide.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Matches feeding readiness cue in non-social TV meals.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Matches feeding readiness cue in non-social TV meals.",
+      "convey_robot_ready_for_completing_transfer": "TV-in-front meals consistently used 'no cue'.",
+      "detect_user_completed_transfer_feeding": "Most TV meals used button; user can press buttons reliably.",
+      "detect_user_completed_transfer_drinking": "Consistent with button-based completion in TV meals.",
+      "detect_user_completed_transfer_wiping": "Consistent with button-based completion in TV meals.",
+      "retract_between_bites": "Most TV/non-personal meals retract to avoid obstructing view.",
+      "bite_dipping_preference": "No dips in this meal; hard rule forces do not dip.",
+      "bite_ordering": "Day 4 identical fruit meal had no ordering preference.",
+      "wait_before_autocontinue_task_selection": "TV meals like day 15/17 used 60 sec.",
+      "wait_before_autocontinue_feeding_pickup": "TV meals like day 15/17 used 60 sec.",
+      "wait_before_autocontinue_mealprep": "Day 15 morning TV-in-front used 30 sec.",
+      "plate_color_fridge": "No corrections bear on it; seed retained.",
+      "plate_color_microwave": "No corrections bear on it; seed retained.",
+      "plate_color_table": "No corrections bear on it; seed retained.",
+      "nav_offset_table": "No adjustment evidence; seed (zero) retained.",
+      "nav_offset_microwave": "No adjustment evidence; seed (zero) retained.",
+      "nav_offset_sink": "No adjustment evidence; seed (zero) retained.",
+      "nav_offset_fridge": "No adjustment evidence; seed (zero) retained."
+    },
+    "20260717_140039.txt": {
+      "microwave_time": "Cold fruit meal; day 4 same fruit meal used no microwave.",
+      "skewering_axis": "Perpendicular in every prior meal; unaffected by speed correction.",
+      "confirm_feeding_pickup": "Consistently 'yes (with auto-continue countdown)' across nearly all meals.",
+      "confirm_navigation_arrival": "Recent meals (day 12+) settled on 'no' as parking proved reliable.",
+      "confirm_manipulation": "Recent meals (day 12+) settled on 'no'.",
+      "transfer_mode": "Always outside mouth transfer; user can lean forward.",
+      "outside_mouth_distance": "Always near across history.",
+      "convey_robot_ready_for_initiating_transfer": "TV-in-front meals consistently use no cue.",
+      "detect_user_ready_for_initiating_transfer_feeding": "TV-in-front meals use open mouth; user has good mouth control.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Matches TV-in-front open-mouth pattern.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Matches TV-in-front open-mouth pattern.",
+      "convey_robot_ready_for_completing_transfer": "TV-in-front meals consistently use no cue.",
+      "detect_user_completed_transfer_feeding": "Button is the dominant completion method in TV meals.",
+      "detect_user_completed_transfer_drinking": "Button dominant in TV meals.",
+      "detect_user_completed_transfer_wiping": "Button dominant in TV meals.",
+      "retract_between_bites": "TV settings consistently prefer retracting to avoid view obstruction.",
+      "bite_dipping_preference": "No dips in this meal; hard rule forces do not dip.",
+      "bite_ordering": "No ordering evidence for these fruits in history.",
+      "wait_before_autocontinue_task_selection": "Same fruit meal (day 4) and TV-in-front meals used 60 sec.",
+      "wait_before_autocontinue_feeding_pickup": "Consistent 60 sec in analogous TV/fruit meals.",
+      "wait_before_autocontinue_mealprep": "Day 4 and typical TV meals used 30 sec.",
+      "plate_color_fridge": "No correction bears on color; seed retained.",
+      "plate_color_microwave": "No correction bears on color; seed retained.",
+      "plate_color_table": "No correction bears on color; seed retained.",
+      "nav_offset_table": "No navigation correction this meal; seed zero retained.",
+      "nav_offset_microwave": "No navigation correction this meal; seed zero retained.",
+      "nav_offset_sink": "No navigation correction this meal; seed zero retained.",
+      "nav_offset_fridge": "No navigation correction this meal; seed zero retained."
+    }
+  }
+}

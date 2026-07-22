@@ -1,0 +1,352 @@
+{
+  "ground_truth": {
+    "confirm_navigation_arrival": "no",
+    "robot_speed": "medium"
+  },
+  "unresolved_dims": [
+    "microwave_time",
+    "skewering_axis",
+    "confirm_feeding_pickup",
+    "confirm_manipulation",
+    "transfer_mode",
+    "outside_mouth_distance",
+    "convey_robot_ready_for_initiating_transfer",
+    "detect_user_ready_for_initiating_transfer_feeding",
+    "detect_user_ready_for_initiating_transfer_drinking",
+    "detect_user_ready_for_initiating_transfer_wiping",
+    "convey_robot_ready_for_completing_transfer",
+    "detect_user_completed_transfer_feeding",
+    "detect_user_completed_transfer_drinking",
+    "detect_user_completed_transfer_wiping",
+    "retract_between_bites",
+    "bite_dipping_preference",
+    "wait_before_autocontinue_bite_selection",
+    "wait_before_autocontinue_task_selection",
+    "bite_ordering",
+    "plate_color_fridge",
+    "plate_color_microwave",
+    "plate_color_table",
+    "nav_offset_table",
+    "nav_offset_microwave",
+    "nav_offset_sink",
+    "nav_offset_fridge"
+  ],
+  "trajectory": [
+    {
+      "idx": 0,
+      "file": "20260717_135022.txt",
+      "ts": "135022",
+      "event": "INIT",
+      "cat_accuracy": 1,
+      "cat_denom": 2,
+      "remaining_corrections": 1,
+      "confirmed_fields": [],
+      "corrected_fields": [],
+      "latent_inference": "No corrections yet this meal; the dominant latent factor is the Social setting (person on Left, evening), which in prior social meals (days 5 and 9) consistently drove explicit-confirmation, button-based, LED-cue, no-autocontinue preferences to reduce awkwardness and reliance on mouth-opening cues while conversing.",
+      "parse_ok": true
+    },
+    {
+      "idx": 1,
+      "file": "20260717_135105.txt",
+      "ts": "135105",
+      "event": "correction",
+      "cat_accuracy": 1,
+      "cat_denom": 2,
+      "remaining_corrections": 1,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "confirm_navigation_arrival"
+      ],
+      "latent_inference": "The user corrected confirm_navigation_arrival to 'no', indicating growing trust in the robot's learned parking (consistent with the recent day 12-15 progression toward relaxed meal-prep confirmation), so confirm_manipulation should also be off. The context is a social evening meal with a person on the left, which in prior social meals (days 5, 9, 14) drove LED cues, button-based readiness/completion, and no-autocontinue waits to avoid social awkwardness.",
+      "parse_ok": true
+    },
+    {
+      "idx": 2,
+      "file": "20260717_135143.txt",
+      "ts": "135143",
+      "event": "correction",
+      "cat_accuracy": 2,
+      "cat_denom": 2,
+      "remaining_corrections": 0,
+      "confirmed_fields": [],
+      "corrected_fields": [
+        "confirm_navigation_arrival",
+        "robot_speed"
+      ],
+      "latent_inference": "The user corrected confirm_navigation_arrival to 'no' and robot_speed to 'medium', indicating a social evening meal (person on Left) where the user trusts the robot's learned parking and is relaxed/not hurried; this matches the recent social meals and the relaxed navigation/manipulation trend. In a social setting the user favors explicit button interactions and LED-only cues to avoid awkward mouth-opening and speech cues.",
+      "parse_ok": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "20260717_135022.txt",
+      "to": "20260717_135105.txt",
+      "trigger_fields": [
+        "confirm_navigation_arrival"
+      ],
+      "trigger_kinds": [
+        "categorical"
+      ],
+      "direct": [
+        {
+          "field": "confirm_navigation_arrival",
+          "kind": "categorical",
+          "old": "yes (without any auto-continue)",
+          "new": "no"
+        }
+      ],
+      "correlated": [
+        {
+          "field": "robot_speed",
+          "old": "medium",
+          "new": "fast",
+          "klass": "NEGATIVE",
+          "gt": "medium"
+        }
+      ],
+      "newly_confirmed": [],
+      "acc_before": 1,
+      "acc_after": 1,
+      "acc_delta_direct": 1,
+      "acc_delta_correlated": -1,
+      "self_check_ok": true
+    },
+    {
+      "from": "20260717_135105.txt",
+      "to": "20260717_135143.txt",
+      "trigger_fields": [
+        "robot_speed"
+      ],
+      "trigger_kinds": [
+        "categorical"
+      ],
+      "direct": [
+        {
+          "field": "robot_speed",
+          "kind": "categorical",
+          "old": "fast",
+          "new": "medium"
+        }
+      ],
+      "correlated": [],
+      "newly_confirmed": [],
+      "acc_before": 1,
+      "acc_after": 2,
+      "acc_delta_direct": 1,
+      "acc_delta_correlated": 0,
+      "self_check_ok": true
+    }
+  ],
+  "ledger": {
+    "POSITIVE": 0,
+    "NEGATIVE": 1,
+    "LATERAL": 0
+  },
+  "hedge_candidates": [],
+  "findings": {
+    "self_inflicted": [
+      {
+        "field": "robot_speed",
+        "init_value": "medium",
+        "drifted_at": "20260717_135105.txt",
+        "corrected_at": "20260717_135143.txt"
+      }
+    ],
+    "non_bearing_drift": [],
+    "re_corrections": [],
+    "volatility": [
+      {
+        "field": "robot_speed",
+        "n_changes": 2,
+        "flip_flopped": true,
+        "sequence": [
+          "medium",
+          "fast",
+          "medium"
+        ]
+      },
+      {
+        "field": "microwave_time",
+        "n_changes": 2,
+        "flip_flopped": true,
+        "sequence": [
+          "1 min",
+          "2 min",
+          "1 min"
+        ]
+      },
+      {
+        "field": "confirm_feeding_pickup",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "yes (without any auto-continue)",
+          "yes (without any auto-continue)",
+          "yes (with auto-continue countdown)"
+        ]
+      },
+      {
+        "field": "confirm_navigation_arrival",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "yes (without any auto-continue)",
+          "no",
+          "no"
+        ]
+      },
+      {
+        "field": "confirm_manipulation",
+        "n_changes": 1,
+        "flip_flopped": false,
+        "sequence": [
+          "yes (without any auto-continue)",
+          "no",
+          "no"
+        ]
+      }
+    ]
+  },
+  "continuous_drift": {},
+  "stages": {
+    "robot_speed": "Initial",
+    "microwave_time": "Microwave ask",
+    "skewering_axis": "Table prefs / feeding loop",
+    "confirm_feeding_pickup": "Table prefs / feeding loop",
+    "confirm_navigation_arrival": "Initial",
+    "confirm_manipulation": "Initial",
+    "transfer_mode": "Table prefs / feeding loop",
+    "outside_mouth_distance": "Table prefs / feeding loop",
+    "convey_robot_ready_for_initiating_transfer": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_ready_for_initiating_transfer_wiping": "Table prefs / feeding loop",
+    "convey_robot_ready_for_completing_transfer": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_feeding": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_drinking": "Table prefs / feeding loop",
+    "detect_user_completed_transfer_wiping": "Table prefs / feeding loop",
+    "retract_between_bites": "Table prefs / feeding loop",
+    "bite_dipping_preference": "Table prefs / feeding loop",
+    "wait_before_autocontinue_bite_selection": "Table prefs / feeding loop",
+    "wait_before_autocontinue_task_selection": "Table prefs / feeding loop",
+    "bite_ordering": "Table prefs / feeding loop",
+    "plate_color_fridge": "Plate pickup (color)",
+    "plate_color_microwave": "Plate pickup (color)",
+    "plate_color_table": "Plate pickup (color)",
+    "nav_offset_table": "Navigation (nav offset)",
+    "nav_offset_microwave": "Navigation (nav offset)",
+    "nav_offset_sink": "Navigation (nav offset)",
+    "nav_offset_fridge": "Navigation (nav offset)"
+  },
+  "meta": {
+    "dir": "src/feeding_deployment/preference_learning/methods/reports/2026_7_17_opus4.8_medium_single/logs/manual_1/prediction_model_llm_calls :: day_0016",
+    "n_files": 3,
+    "files": [
+      "20260717_135022.txt",
+      "20260717_135105.txt",
+      "20260717_135143.txt"
+    ],
+    "model_line": "claude-opus-4-8 (speed=standard, effort=medium)",
+    "meal_context": {
+      "meal": "bite-sized pizza and broccoli",
+      "setting": "Social with person on Left",
+      "time_of_day": "evening"
+    },
+    "prior_memory_present": true,
+    "parse_failures": [],
+    "color_tol": 3.0,
+    "nav_tol": 0.02
+  },
+  "explanations_by_file": {
+    "20260717_135022.txt": {
+      "microwave_time": "Warm savory pizza+broccoli; prior social/savory meals ranged 1-2 min, choosing 1 min as a typical reheat.",
+      "robot_speed": "Social meals varied (day5 fast, day9 medium); medium is the safer central choice.",
+      "skewering_axis": "Perpendicular in every prior meal, a stable long-term tendency.",
+      "confirm_feeding_pickup": "Social setting latent factor drives explicit no-auto-continue confirmation as in days 5 and 9.",
+      "confirm_navigation_arrival": "Social setting consistently used no-auto-continue confirmation (days 5, 9).",
+      "confirm_manipulation": "Social setting consistently used no-auto-continue confirmation (days 5, 9).",
+      "transfer_mode": "Deployment only does outside-mouth transfer and user never requested inside.",
+      "outside_mouth_distance": "Near in every prior meal, a stable tendency.",
+      "convey_robot_ready_for_initiating_transfer": "Social meals used LED cue (days 5, 9).",
+      "detect_user_ready_for_initiating_transfer_feeding": "Social setting favors button over open-mouth to avoid confusion while talking (days 5, 9).",
+      "detect_user_ready_for_initiating_transfer_drinking": "Social setting favors button (days 5, 9).",
+      "detect_user_ready_for_initiating_transfer_wiping": "Social setting favors button (days 5, 9).",
+      "convey_robot_ready_for_completing_transfer": "Social meals used LED cue (days 5, 9).",
+      "detect_user_completed_transfer_feeding": "Button used consistently and especially in social meals to avoid head-nod/force ambiguity.",
+      "detect_user_completed_transfer_drinking": "Social setting favors button over head-nod perception (days 5, 9).",
+      "detect_user_completed_transfer_wiping": "Button used across nearly all meals including social ones.",
+      "retract_between_bites": "Social settings prefer retracting to avoid obstructing the partner's view (days 5, 9).",
+      "bite_dipping_preference": "No dips in this meal, so hard rule forces do not dip.",
+      "bite_ordering": "No evidence of any ordering preference in history; default no particular order.",
+      "wait_before_autocontinue_task_selection": "Social meals used no autocontinue to accommodate conversation (days 5, 9).",
+      "wait_before_autocontinue_feeding_pickup": "Social meals used no autocontinue (days 5, 9).",
+      "wait_before_autocontinue_mealprep": "Social meals used 30-60 sec; choosing 30 sec matching day 5.",
+      "plate_color_fridge": "No corrections or contrary evidence; retain seed.",
+      "plate_color_microwave": "No corrections or contrary evidence; retain seed.",
+      "plate_color_table": "No corrections or contrary evidence; retain seed.",
+      "nav_offset_table": "No corrections; retain zero seed default.",
+      "nav_offset_microwave": "No corrections; retain zero seed default.",
+      "nav_offset_sink": "No corrections; retain zero seed default.",
+      "nav_offset_fridge": "No corrections; retain zero seed default."
+    },
+    "20260717_135105.txt": {
+      "microwave_time": "Pizza is served hot like the chicken-nugget-and-broccoli meals that used 2 min.",
+      "robot_speed": "Closest social evening meal (day 14) used fast.",
+      "skewering_axis": "Perpendicular is used in every prior meal.",
+      "confirm_feeding_pickup": "Prior social meals (days 5, 9) used without-auto-continue to avoid awkward empty-fork transfers.",
+      "confirm_manipulation": "The nav-arrival correction to 'no' reflects trust in perception via a shared meal-prep latent factor, matching days 12-15.",
+      "transfer_mode": "Deployment only performs outside-mouth transfer and user never requested inside.",
+      "outside_mouth_distance": "Near is used in every prior meal.",
+      "convey_robot_ready_for_initiating_transfer": "Social meals (days 5, 9, 14) used LED cues.",
+      "detect_user_ready_for_initiating_transfer_feeding": "Open-mouth is unreliable in social talking settings, so button per prior social meals.",
+      "detect_user_ready_for_initiating_transfer_drinking": "Button per prior social meals for readiness detection.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Button per prior social meals for readiness detection.",
+      "convey_robot_ready_for_completing_transfer": "Social meals used LED cues.",
+      "detect_user_completed_transfer_feeding": "Button used across nearly all meals and all social meals.",
+      "detect_user_completed_transfer_drinking": "Button used in social meals; head-nod feels unnatural socially.",
+      "detect_user_completed_transfer_wiping": "Button used in social meals.",
+      "retract_between_bites": "Social/observed settings prefer retracting to avoid obstructing the partner's view.",
+      "bite_dipping_preference": "Meal has no dips, so do not dip per hard rule.",
+      "bite_ordering": "No dips and no known ordering preference for pizza and broccoli.",
+      "wait_before_autocontinue_task_selection": "Social meals (days 5, 9, 14) used no autocontinue for chatting.",
+      "wait_before_autocontinue_feeding_pickup": "Social meals used no autocontinue on pickup checks.",
+      "wait_before_autocontinue_mealprep": "Social meals days 5 and 14 used 30 sec.",
+      "plate_color_fridge": "No correction bears on handle color, so keep the seed.",
+      "plate_color_microwave": "No correction bears on handle color, so keep the seed.",
+      "plate_color_table": "No correction bears on handle color, so keep the seed.",
+      "nav_offset_table": "Nav confirmation off means offsets stop refining; keep seed zero.",
+      "nav_offset_microwave": "Nav confirmation off means offsets stop refining; keep seed zero.",
+      "nav_offset_sink": "Nav confirmation off means offsets stop refining; keep seed zero.",
+      "nav_offset_fridge": "Nav confirmation off means offsets stop refining; keep seed zero."
+    },
+    "20260717_135143.txt": {
+      "microwave_time": "Pizza is served warm; recent chicken/savory meals used 1 min, so 1 min is most likely.",
+      "skewering_axis": "Perpendicular is the user's invariant choice across all meals.",
+      "confirm_feeding_pickup": "The recent relaxed-social meal (day14) kept pickup confirmation as with-auto-continue even while nav/manip were off.",
+      "confirm_manipulation": "The nav-arrival correction to 'no' reflects the relaxed-trust latent factor that also drives manipulation confirmation to 'no' (matching days 12-15).",
+      "transfer_mode": "User always uses outside-mouth transfer and has not requested inside.",
+      "outside_mouth_distance": "Distance is invariably 'near' across all meals.",
+      "convey_robot_ready_for_initiating_transfer": "Social setting (person on Left) consistently uses LED-only cues (days 5, 9, 14).",
+      "detect_user_ready_for_initiating_transfer_feeding": "Social meals use button since open-mouth is unreliable while talking (days 5, 9, 14).",
+      "detect_user_ready_for_initiating_transfer_drinking": "Same social-setting button pattern as feeding.",
+      "detect_user_ready_for_initiating_transfer_wiping": "Same social-setting button pattern as feeding.",
+      "convey_robot_ready_for_completing_transfer": "Social setting uses LED-only completion cue (days 5, 9, 14).",
+      "detect_user_completed_transfer_feeding": "User overwhelmingly uses button for completion, especially in social settings.",
+      "detect_user_completed_transfer_drinking": "Social button pattern; head-nod perception feels unnatural socially.",
+      "detect_user_completed_transfer_wiping": "Consistent button use for wiping completion.",
+      "retract_between_bites": "Social settings always retract to avoid obstructing the companion (days 5, 9, 14).",
+      "bite_dipping_preference": "No dips in this meal, so hard rule forces 'do not dip'.",
+      "bite_ordering": "No dips and no known ordering preference for pizza/broccoli, so no particular order.",
+      "wait_before_autocontinue_task_selection": "Social meals use 'no autocontinue' to allow chatting between bites (days 5, 9, 14).",
+      "wait_before_autocontinue_feeding_pickup": "Social meals use 'no autocontinue' for pickup checks (days 5, 9, 14).",
+      "wait_before_autocontinue_mealprep": "Recent social/relaxed meals used 30 sec mealprep waits (days 14, 15).",
+      "plate_color_fridge": "No correction bears on plate color; seed retained.",
+      "plate_color_microwave": "No correction bears on plate color; seed retained.",
+      "plate_color_table": "No correction bears on plate color; seed retained.",
+      "nav_offset_table": "No table adjustment observed; seed zero retained.",
+      "nav_offset_microwave": "No microwave adjustment observed; seed zero retained.",
+      "nav_offset_sink": "No sink adjustment observed; seed zero retained.",
+      "nav_offset_fridge": "No fridge adjustment observed; seed zero retained."
+    }
+  }
+}

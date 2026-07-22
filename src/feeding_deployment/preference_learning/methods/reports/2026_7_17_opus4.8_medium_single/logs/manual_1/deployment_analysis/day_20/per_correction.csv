@@ -1,0 +1,6 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_135644.txt,INIT,,,,,0,,,,
+1,20260717_135722.txt,correction,robot_speed,categorical,Initial,0,1,0,0,0,
+2,20260717_135805.txt,correction,wait_before_autocontinue_mealprep,?,?,1,2,1,0,0,bite_dipping_preference:less->more(POS)
+3,20260717_135845.txt,correction,bite_ordering,text,Table prefs / feeding loop,2,1,0,1,0,bite_dipping_preference:more->less(NEG)
+4,20260717_135916.txt,correction,bite_dipping_preference,categorical,Table prefs / feeding loop,1,2,0,0,0,

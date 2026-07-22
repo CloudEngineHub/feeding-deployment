@@ -1,0 +1,7 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_134335.txt,INIT,,,,,1,,,,
+1,20260717_134428.txt,correction,confirm_feeding_pickup,categorical,Table prefs / feeding loop,1,1,0,1,1,confirm_manipulation:yes (without any auto-continue)->yes (with auto-continue countdown)(LAT); wait_before_autocontinue_task_selection:no autocontinue->60 sec(NEG)
+2,20260717_134520.txt,correction,confirm_manipulation,categorical,Initial,1,3,1,0,0,wait_before_autocontinue_task_selection:60 sec->no autocontinue(POS)
+3,20260717_134607.txt,correction,robot_speed,categorical,Initial,3,3,0,1,0,wait_before_autocontinue_task_selection:no autocontinue->15 sec(NEG)
+4,20260717_134653.txt,correction,wait_before_autocontinue_mealprep,?,?,3,3,0,0,1,wait_before_autocontinue_task_selection:15 sec->30 sec(LAT)
+5,20260717_134725.txt,correction,wait_before_autocontinue_task_selection,categorical,Table prefs / feeding loop,3,4,0,0,0,

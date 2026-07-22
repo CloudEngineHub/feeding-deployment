@@ -1,0 +1,14 @@
+{
+  "day": 16,
+  "context": {
+    "meal": "bite-sized pizza and broccoli",
+    "setting": "Social with person on Left",
+    "time_of_day": "evening",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "robot_speed": "medium",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue"
+  }
+}

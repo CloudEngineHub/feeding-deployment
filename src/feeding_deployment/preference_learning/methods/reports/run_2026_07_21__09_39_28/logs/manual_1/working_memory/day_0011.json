@@ -1,0 +1,16 @@
+{
+  "day": 11,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Watching TV with TV on Right",
+    "time_of_day": "evening",
+    "transient_affective_state": "Energetic"
+  },
+  "corrected": {
+    "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "robot_speed": "fast",
+    "confirm_manipulation": "yes (with auto-continue countdown)",
+    "wait_before_autocontinue_task_selection": "60 sec"
+  }
+}

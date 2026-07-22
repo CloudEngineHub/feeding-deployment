@@ -1,0 +1,44 @@
+{
+  "day": 1,
+  "context": {
+    "meal": "chicken nuggets",
+    "setting": "Personal",
+    "time_of_day": "evening",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "detect_user_completed_transfer_drinking": "perception",
+    "wait_before_autocontinue_bite_selection": "wait for me",
+    "microwave_time": "2 min",
+    "confirm_manipulation": "countdown (60 sec)",
+    "wait_before_autocontinue_task_selection": "wait for me",
+    "detect_user_completed_transfer_feeding": "perception",
+    "confirm_navigation_arrival": "countdown (60 sec)",
+    "outside_mouth_distance": "near",
+    "confirm_feeding_pickup": "wait for me"
+  },
+  "episode_text": "day=1; meal=chicken nuggets; setting=Personal; time_of_day=evening;\npreferences: microwave_time=2 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=wait for me; confirm_navigation_arrival=countdown (60 sec); confirm_manipulation=countdown (60 sec); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=speech + LED; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=speech + LED; detect_user_completed_transfer_feeding=perception; detect_user_completed_transfer_drinking=perception; detect_user_completed_transfer_wiping=button; retract_between_bites=no; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_bite_selection=wait for me; wait_before_autocontinue_task_selection=wait for me",
+  "ground_truth_bundle": {
+    "microwave_time": "2 min",
+    "robot_speed": "medium",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "wait for me",
+    "confirm_navigation_arrival": "countdown (60 sec)",
+    "confirm_manipulation": "countdown (60 sec)",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "speech + LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+    "convey_robot_ready_for_completing_transfer": "speech + LED",
+    "detect_user_completed_transfer_feeding": "perception",
+    "detect_user_completed_transfer_drinking": "perception",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "no",
+    "bite_dipping_preference": "do not dip",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_bite_selection": "wait for me",
+    "wait_before_autocontinue_task_selection": "wait for me"
+  }
+}

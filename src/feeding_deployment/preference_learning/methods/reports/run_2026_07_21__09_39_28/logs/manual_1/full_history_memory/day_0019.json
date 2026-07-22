@@ -1,0 +1,39 @@
+{
+  "day": 19,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "robot_speed": "medium",
+    "confirm_manipulation": "no",
+    "wait_before_autocontinue_task_selection": "no autocontinue"
+  },
+  "episode_text": "day=19; meal=chicken breast strips and hash brown; setting=Social with person in Front; time_of_day=afternoon;\npreferences: microwave_time=1 min; robot_speed=medium; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=no; confirm_manipulation=no; transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue",
+  "ground_truth_bundle": {
+    "microwave_time": "1 min",
+    "robot_speed": "medium",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "confirm_manipulation": "no",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "yes",
+    "bite_dipping_preference": "do not dip",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_task_selection": "no autocontinue"
+  }
+}

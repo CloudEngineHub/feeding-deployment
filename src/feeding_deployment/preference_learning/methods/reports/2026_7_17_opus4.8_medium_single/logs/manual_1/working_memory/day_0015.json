@@ -1,0 +1,14 @@
+{
+  "day": 15,
+  "context": {
+    "meal": "chicken nuggets, broccoli, and ketchup",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "morning",
+    "transient_affective_state": "Neutral"
+  },
+  "corrected": {
+    "bite_ordering": "no particular order",
+    "robot_speed": "medium",
+    "confirm_navigation_arrival": "no"
+  }
+}

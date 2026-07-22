@@ -1,0 +1,40 @@
+{
+  "day": 20,
+  "context": {
+    "meal": "strawberries with whipped cream",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Hurried"
+  },
+  "corrected": {
+    "robot_speed": "fast",
+    "wait_before_autocontinue_mealprep": "15 sec",
+    "bite_ordering": "no particular order",
+    "bite_dipping_preference": "more"
+  },
+  "episode_text": "day=20; meal=strawberries with whipped cream; setting=Social with person in Front; time_of_day=afternoon;\npreferences: microwave_time=no microwave; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=no; confirm_manipulation=no; transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=LED; detect_user_ready_for_initiating_transfer_feeding=button; detect_user_ready_for_initiating_transfer_drinking=button; detect_user_ready_for_initiating_transfer_wiping=button; convey_robot_ready_for_completing_transfer=LED; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=more; bite_ordering=no particular order; wait_before_autocontinue_task_selection=no autocontinue; wait_before_autocontinue_feeding_pickup=no autocontinue; wait_before_autocontinue_mealprep=15 sec",
+  "ground_truth_bundle": {
+    "microwave_time": "no microwave",
+    "robot_speed": "fast",
+    "skewering_axis": "perpendicular to major axis",
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "confirm_manipulation": "no",
+    "transfer_mode": "outside mouth transfer",
+    "outside_mouth_distance": "near",
+    "convey_robot_ready_for_initiating_transfer": "LED",
+    "detect_user_ready_for_initiating_transfer_feeding": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "convey_robot_ready_for_completing_transfer": "LED",
+    "detect_user_completed_transfer_feeding": "button",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_completed_transfer_wiping": "button",
+    "retract_between_bites": "yes",
+    "bite_dipping_preference": "more",
+    "bite_ordering": "no particular order",
+    "wait_before_autocontinue_task_selection": "no autocontinue",
+    "wait_before_autocontinue_feeding_pickup": "no autocontinue",
+    "wait_before_autocontinue_mealprep": "15 sec"
+  }
+}

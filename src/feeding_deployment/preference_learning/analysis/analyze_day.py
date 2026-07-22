@@ -23,7 +23,13 @@ pipeline-stage mapping -- and writes:
 No LLM is involved. Interpretation is a separate step (see report_prompt.md).
 
 Usage:
+    # one day (the dir holds a single meal's re-runs):
     python analyze_day.py <prediction_model_llm_calls_dir> [--out <dir>]
+
+    # whole deployment (the dir holds every day's re-runs concatenated): segment
+    # into days and write one folder per day plus a cross-day rollup. Point it at
+    # a prediction_model_llm_calls dir or its manual_X logs parent.
+    python analyze_day.py <dir> --deployment [--out <dir>]
 """
 from __future__ import annotations
 
@@ -568,41 +574,9 @@ def write_tables(files: List[Dict[str, Any]], result: Dict[str, Any], out: Path)
 
 
 # --------------------------------------------------------------------------- #
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("dir", help="path to a prediction_model_llm_calls directory")
-    ap.add_argument("--out", default=None, help="output dir (default: <dir>/../analysis)")
-    ap.add_argument("--no-plots", action="store_true")
-    args = ap.parse_args()
-
-    src = Path(args.dir)
-    paths = sorted(src.glob("*.txt"))
-    if not paths:
-        raise SystemExit(f"No .txt files in {src}")
-    files = [parse_file(p) for p in paths]
-
-    out = Path(args.out) if args.out else src.parent / "analysis"
-    out.mkdir(parents=True, exist_ok=True)
-
-    result = analyze(files)
-    ctx = files[0]["context"]
-    result["meta"] = {
-        "dir": str(src), "n_files": len(files),
-        "files": [f["file"] for f in files],
-        "model_line": files[0]["model_line"],
-        "meal_context": ctx,
-        "prior_memory_present": files[0]["prior_memory_present"],
-        "parse_failures": [f["file"] for f in files if not f["parse_ok"]],
-        "color_tol": COLOR_TOL, "nav_tol": NAV_TOL,
-    }
-    # carry per-file explanations for the LLM step (small, useful for quoting)
-    result["explanations_by_file"] = {f["file"]: f["explanations"] for f in files}
-
-    (out / "metrics.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
-    write_tables(files, result, out)
-
-    # per_correction.csv
-    with open(out / "per_correction.csv", "w", newline="", encoding="utf-8") as fh:
+def write_per_correction_csv(files: List[Dict[str, Any]], result: Dict[str, Any], out: Path) -> Path:
+    path = out / "per_correction.csv"
+    with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["step", "file", "event", "trigger", "trigger_kind", "stage",
                     "acc_before", "acc_after", "pos", "neg", "lat", "correlated_detail"])
@@ -618,15 +592,46 @@ def main() -> int:
                                for c in t["correlated"])
             w.writerow([i, t["to"], "correction", trig, "+".join(t["trigger_kinds"]),
                         stage, t["acc_before"], t["acc_after"], pos, neg, lat, detail])
+    return path
 
-    plots = []
-    if not args.no_plots:
+
+def process_day(paths: List[Path], out: Path, src_label: str, no_plots: bool = False) -> Dict[str, Any]:
+    """Analyze one day's ordered call files, write all artifacts into ``out``,
+    and return the ``result`` dict (with ``meta`` attached)."""
+    files = [parse_file(p) for p in paths]
+    out.mkdir(parents=True, exist_ok=True)
+
+    result = analyze(files)
+    ctx = files[0]["context"]
+    result["meta"] = {
+        "dir": src_label, "n_files": len(files),
+        "files": [f["file"] for f in files],
+        "model_line": files[0]["model_line"],
+        "meal_context": ctx,
+        "prior_memory_present": files[0]["prior_memory_present"],
+        "parse_failures": [f["file"] for f in files if not f["parse_ok"]],
+        "color_tol": COLOR_TOL, "nav_tol": NAV_TOL,
+    }
+    # carry per-file explanations for the LLM step (small, useful for quoting)
+    result["explanations_by_file"] = {f["file"]: f["explanations"] for f in files}
+
+    (out / "metrics.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
+    write_tables(files, result, out)
+    write_per_correction_csv(files, result, out)
+
+    if not no_plots:
         try:
-            plots = make_plots(files, result, out)
+            make_plots(files, result, out)
         except Exception as e:  # never let plotting kill the metrics output
-            print(f"[warn] plotting failed: {e}")
+            print(f"[warn] plotting failed for {out.name}: {e}")
 
-    # ---- console summary ----------------------------------------------------
+    result["_files"] = files  # for callers that want the parsed frames
+    return result
+
+
+def _print_day_summary(src: str, result: Dict[str, Any], out: Path) -> None:
+    files = result["_files"]
+    ctx = result["meta"]["meal_context"]
     tr = result["trajectory"]
     print(f"dir            : {src}")
     print(f"files          : {len(files)}  parse_failures={result['meta']['parse_failures'] or 'none'}")
@@ -643,7 +648,275 @@ def main() -> int:
     if bad:
         print(f"[warn] {len(bad)} transition(s) failed the acc self-check")
     print(f"unresolved dims: {result['unresolved_dims'] or 'none'}")
-    print(f"wrote          : {out}/metrics.json, tables.md, per_correction.csv" + (f", {', '.join(plots)}" if plots else ""))
+    print(f"wrote          : {out}/metrics.json, tables.md, per_correction.csv, plots")
+
+
+# --------------------------------------------------------------------------- #
+# Deployment (multi-day) segmentation + rollup
+# --------------------------------------------------------------------------- #
+def _resolve_call_dir(dir_arg: Path) -> Path:
+    """Accept either a prediction_model_llm_calls dir or a manual_X logs dir."""
+    if dir_arg.name == "prediction_model_llm_calls":
+        return dir_arg
+    cand = dir_arg / "prediction_model_llm_calls"
+    if cand.is_dir():
+        return cand
+    raise SystemExit(f"No prediction_model_llm_calls found at or under {dir_arg}")
+
+
+def _day_metrics_index(call_dir: Path) -> List[Dict[str, Any]]:
+    """Authoritative per-day (context, n_steps) list from sibling day_metrics/,
+    or [] if that folder is absent."""
+    dm = call_dir.parent / "day_metrics"
+    if not dm.is_dir():
+        return []
+    out = []
+    for f in sorted(dm.glob("day_*.json")):
+        j = json.loads(f.read_text(encoding="utf-8"))
+        steps = j.get("steps", [])
+        out.append({"day_file": f.stem, "context": j.get("context", {}),
+                    "n_steps": len(steps),
+                    # True accuracy vs the full ground-truth bundle (matches the
+                    # report's Plot A), unlike the per-day analyzer's pinned-only GT.
+                    "true_init_acc": steps[0].get("acc") if steps else None,
+                    "true_final_acc": steps[-1].get("acc") if steps else None})
+    return out
+
+
+def segment_days(call_dir: Path) -> List[Dict[str, Any]]:
+    """Split a flat call dir into one ordered file-list per day.
+
+    A day starts at each INIT (empty CONFIRMED and CORRECTED). Abandoned/redone
+    attempts of the same day show up as consecutive runs with an identical
+    context (real consecutive days never repeat meal+setting+time), so we keep
+    only the last (complete) attempt in each such block. When day_metrics/ is
+    present it is used to label days and to warn on any step-count mismatch."""
+    paths = sorted(call_dir.glob("*.txt"))
+    if not paths:
+        raise SystemExit(f"No .txt files in {call_dir}")
+
+    runs: List[Dict[str, Any]] = []
+    for p in paths:
+        fr = parse_file(p)
+        is_init = not fr["corrected"] and not fr["confirmed"]
+        if is_init or not runs:
+            runs.append({"context": fr["context"], "paths": []})
+        runs[-1]["paths"].append(p)
+
+    collapsed: List[Dict[str, Any]] = []
+    dropped = 0
+    for r in runs:
+        if collapsed and collapsed[-1]["context"] == r["context"]:
+            dropped += len(collapsed[-1]["paths"])
+            collapsed[-1] = r  # supersede the abandoned attempt
+        else:
+            collapsed.append(r)
+    if dropped:
+        print(f"[info] dropped {dropped} file(s) from superseded/abandoned re-runs")
+
+    dm = _day_metrics_index(call_dir)
+    if dm and len(dm) != len(collapsed):
+        print(f"[warn] segmented {len(collapsed)} day(s) but day_metrics has {len(dm)}; "
+              f"labels may be off — inspect boundaries")
+    for i, r in enumerate(collapsed):
+        meta = dm[i] if i < len(dm) else {}
+        r["day"] = i + 1
+        r["label"] = meta.get("day_file", f"day_{i + 1:04d}")
+        r["true_init_acc"] = meta.get("true_init_acc")
+        r["true_final_acc"] = meta.get("true_final_acc")
+        if meta and meta.get("n_steps") not in (None, len(r["paths"])):
+            print(f"[warn] {r['label']}: {len(r['paths'])} call file(s) but "
+                  f"day_metrics records {meta['n_steps']} step(s)")
+    return collapsed
+
+
+def _deployment_plots(rows: List[Dict[str, Any]], out: Path) -> None:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    days = [r["day"] for r in rows]
+    ncorr = [r["n_corrections"] for r in rows]
+    # Prefer true full-bundle accuracy (day_metrics) for the learning curve; fall
+    # back to the analyzer's pinned-only fraction when day_metrics is unavailable.
+    use_true = all(r.get("true_init_acc") is not None for r in rows)
+    if use_true:
+        init = [r["true_init_acc"] for r in rows]
+        final = [r["true_final_acc"] for r in rows]
+        src_note = "full-bundle accuracy (day_metrics)"
+    else:
+        init = [r["init_acc_frac"] for r in rows]
+        final = [r["final_acc_frac"] for r in rows]
+        src_note = "pinned-only accuracy (reconstructed)"
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True,
+                                   gridspec_kw={"height_ratios": [2, 1]})
+    ax1.plot(days, init, "o-", color="#2a7", label="Cold-start accuracy Acc(day, m=0)")
+    ax1.plot(days, final, "s--", color="#369", label="End-of-meal accuracy", alpha=0.7)
+    ax1.set_ylim(0, 1.02)
+    ax1.set_ylabel("Categorical accuracy (fraction)")
+    ax1.set_title(f"Deployment learning curve — {src_note}")
+    ax1.grid(alpha=0.3); ax1.legend(fontsize=9)
+
+    ax2.bar(days, ncorr, color="#c33", alpha=0.75)
+    ax2.set_ylabel("# corrections")
+    ax2.set_xlabel("Deployment day")
+    ax2.set_xticks(days)
+    ax2.grid(alpha=0.3, axis="y")
+    fig.tight_layout()
+    fig.savefig(out / "deployment_curve.png", dpi=130)
+    plt.close(fig)
+
+
+def _write_deployment_rollup(rows: List[Dict[str, Any]], out: Path, call_dir: Path) -> None:
+    mean = lambda xs: (sum(xs) / len(xs)) if xs else None
+    true_init = [r["true_init_acc"] for r in rows if r.get("true_init_acc") is not None]
+    true_final = [r["true_final_acc"] for r in rows if r.get("true_final_acc") is not None]
+    summary = {
+        "source": str(call_dir),
+        "model_line": rows[0]["model_line"] if rows else "",
+        "n_days": len(rows),
+        # Full-bundle accuracy from day_metrics (authoritative; matches Plot A).
+        "mean_true_init_acc": mean(true_init),
+        "mean_true_final_acc": mean(true_final),
+        # Pinned-only accuracy reconstructed from the call log (denominator varies
+        # per day = dims corrected/confirmed that meal; biased low, see notes).
+        "mean_init_acc_frac": mean([r["init_acc_frac"] for r in rows]),
+        "mean_final_acc_frac": mean([r["final_acc_frac"] for r in rows]),
+        "total_corrections": sum(r["n_corrections"] for r in rows),
+        "total_self_inflicted": sum(r["n_self_inflicted"] for r in rows),
+        "total_non_bearing_drift": sum(r["n_non_bearing"] for r in rows),
+        "total_re_corrections": sum(r["n_re_corrections"] for r in rows),
+        "ledger_positive": sum(r["ledger"]["POSITIVE"] for r in rows),
+        "ledger_negative": sum(r["ledger"]["NEGATIVE"] for r in rows),
+        "ledger_lateral": sum(r["ledger"]["LATERAL"] for r in rows),
+        "days": rows,
+    }
+    (out / "deployment_summary.json").write_text(
+        json.dumps(summary, indent=2, default=str), encoding="utf-8")
+
+    fmt = lambda x: f"{x:.3f}" if isinstance(x, (int, float)) else "n/a"
+    has_true = summary["mean_true_init_acc"] is not None
+    note = ("> **Acc(m=0)/Final** below are the full-bundle accuracies from `day_metrics` "
+            "(same definition as the report's Plot A). The `pinned m=0` column is the "
+            "per-day analyzer's reconstruction, whose denominator is only the dims "
+            "corrected/confirmed that meal — biased low by construction, kept for the "
+            "correction-dynamics view."
+            if has_true else
+            "> **Note:** `day_metrics/` was not found, so Acc(m=0)/Final show the "
+            "reconstructed pinned-only accuracy (denominator = dims pinned that meal).")
+    md = ["# Deployment analysis — per-day rollup", "",
+          f"- source: `{call_dir}`",
+          f"- model: `{summary['model_line']}`",
+          f"- days: **{summary['n_days']}**",
+          f"- mean cold-start accuracy Acc(m=0), full bundle: **{fmt(summary['mean_true_init_acc'])}**",
+          f"- mean end-of-meal accuracy, full bundle: **{fmt(summary['mean_true_final_acc'])}**",
+          f"- total corrections: **{summary['total_corrections']}**",
+          f"- correlated ledger (whole deployment): +{summary['ledger_positive']} / "
+          f"-{summary['ledger_negative']} / ={summary['ledger_lateral']} (pos/neg/lateral)",
+          f"- self-inflicted corrections: {summary['total_self_inflicted']} · "
+          f"non-bearing drifts: {summary['total_non_bearing_drift']} · "
+          f"re-corrections: {summary['total_re_corrections']}",
+          "", note,
+          "", "See `deployment_curve.png` and per-day folders (`day_XX/`).", "",
+          "| Day | Meal | Setting | Time | Steps | Acc(m=0) | Final | pinned m=0 | Corr | +/−/= | self-infl | non-bear |",
+          "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    for r in rows:
+        c = r["context"]
+        ti = fmt(r["true_init_acc"]) if r.get("true_init_acc") is not None else "n/a"
+        tf = fmt(r["true_final_acc"]) if r.get("true_final_acc") is not None else "n/a"
+        md.append(
+            f"| {r['day']} | {c.get('meal','?')} | {c.get('setting','?')} | "
+            f"{c.get('time_of_day','?')} | {r['n_steps']} | {ti} | {tf} | "
+            f"{r['init_acc']}/{r['denom']} | {r['n_corrections']} | "
+            f"+{r['ledger']['POSITIVE']}/-{r['ledger']['NEGATIVE']}/={r['ledger']['LATERAL']} | "
+            f"{r['n_self_inflicted']} | {r['n_non_bearing']} |")
+    (out / "deployment_summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+
+
+def run_deployment(dir_arg: Path, out_arg: Optional[Path], no_plots: bool) -> int:
+    call_dir = _resolve_call_dir(dir_arg)
+    days = segment_days(call_dir)
+    out_root = out_arg if out_arg else call_dir.parent / "deployment_analysis"
+    out_root.mkdir(parents=True, exist_ok=True)
+
+    rows: List[Dict[str, Any]] = []
+    for r in days:
+        day_out = out_root / f"day_{r['day']:02d}"
+        label = f"{call_dir} :: {r['label']}"
+        result = process_day(r["paths"], day_out, label, no_plots)
+        tr = result["trajectory"]
+        denom = tr[0]["cat_denom"] or 1
+        rows.append({
+            "day": r["day"], "label": r["label"], "context": r["context"],
+            "out_dir": f"day_{r['day']:02d}",
+            "model_line": result["meta"]["model_line"],
+            "n_steps": len(result["_files"]),
+            "init_acc": tr[0]["cat_accuracy"], "final_acc": tr[-1]["cat_accuracy"],
+            "denom": tr[0]["cat_denom"],
+            "init_acc_frac": tr[0]["cat_accuracy"] / denom,
+            "final_acc_frac": tr[-1]["cat_accuracy"] / denom,
+            # True accuracy vs the full bundle (from day_metrics); None if absent.
+            "true_init_acc": r.get("true_init_acc"),
+            "true_final_acc": r.get("true_final_acc"),
+            "n_corrections": len(result["transitions"]),
+            "ledger": result["ledger"],
+            "n_self_inflicted": len(result["findings"]["self_inflicted"]),
+            "n_non_bearing": len(result["findings"]["non_bearing_drift"]),
+            "n_re_corrections": len(result["findings"]["re_corrections"]),
+            "parse_failures": result["meta"]["parse_failures"],
+            "unresolved_dims": result["unresolved_dims"],
+        })
+        ai = rows[-1]["true_init_acc"] if rows[-1]["true_init_acc"] is not None else rows[-1]["init_acc_frac"]
+        af = rows[-1]["true_final_acc"] if rows[-1]["true_final_acc"] is not None else rows[-1]["final_acc_frac"]
+        print(f"  day_{r['day']:02d} ({r['label']}): {len(r['paths'])} steps | "
+              f"Acc(m=0)={ai:.2f} final={af:.2f} | {rows[-1]['n_corrections']} corr")
+
+    if not no_plots:
+        try:
+            _deployment_plots(rows, out_root)
+        except Exception as e:
+            print(f"[warn] deployment plot failed: {e}")
+    _write_deployment_rollup(rows, out_root, call_dir)
+
+    ti = [r["true_init_acc"] for r in rows if r.get("true_init_acc") is not None]
+    tf = [r["true_final_acc"] for r in rows if r.get("true_final_acc") is not None]
+    print(f"\ndeployment: {len(rows)} day(s) analyzed")
+    if ti:
+        print(f"mean Acc(m=0) = {sum(ti)/len(ti):.3f} | mean final = {sum(tf)/len(tf):.3f} "
+              f"(full bundle, day_metrics) | total corrections = {sum(r['n_corrections'] for r in rows)}")
+    else:
+        print(f"mean Acc(m=0) = {sum(r['init_acc_frac'] for r in rows)/len(rows):.3f} | "
+              f"mean final = {sum(r['final_acc_frac'] for r in rows)/len(rows):.3f} "
+              f"(pinned-only) | total corrections = {sum(r['n_corrections'] for r in rows)}")
+    print(f"wrote: {out_root}/ (day_XX/, deployment_summary.json, "
+          f"deployment_summary.md, deployment_curve.png)")
+    return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("dir", help="a prediction_model_llm_calls directory (single day), "
+                                 "or --deployment: that dir or its manual_X logs parent")
+    ap.add_argument("--deployment", action="store_true",
+                    help="analyze a whole multi-day deployment: segment the flat call log "
+                         "into days and write one folder per day plus a cross-day rollup")
+    ap.add_argument("--out", default=None,
+                    help="output dir (single-day default: <dir>/../analysis; "
+                         "deployment default: <dir>/../deployment_analysis)")
+    ap.add_argument("--no-plots", action="store_true")
+    args = ap.parse_args()
+
+    if args.deployment:
+        return run_deployment(Path(args.dir), Path(args.out) if args.out else None, args.no_plots)
+
+    src = Path(args.dir)
+    paths = sorted(src.glob("*.txt"))
+    if not paths:
+        raise SystemExit(f"No .txt files in {src}")
+    out = Path(args.out) if args.out else src.parent / "analysis"
+    result = process_day(paths, out, str(src), args.no_plots)
+    _print_day_summary(str(src), result, out)
     return 0
 
 

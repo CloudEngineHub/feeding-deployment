@@ -1,0 +1,16 @@
+{
+  "day": 19,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Social with person in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Slower"
+  },
+  "corrected": {
+    "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+    "confirm_navigation_arrival": "no",
+    "robot_speed": "medium",
+    "confirm_manipulation": "no",
+    "wait_before_autocontinue_task_selection": "no autocontinue"
+  }
+}

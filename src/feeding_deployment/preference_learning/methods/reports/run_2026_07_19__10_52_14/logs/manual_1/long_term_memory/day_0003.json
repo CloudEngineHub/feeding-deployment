@@ -1,0 +1,159 @@
+{
+  "day": 3,
+  "context": {
+    "meal": "chicken breast strips and hash brown",
+    "setting": "Watching TV with TV in Front",
+    "time_of_day": "afternoon",
+    "transient_affective_state": "Energetic"
+  },
+  "episode_text": "day=3; meal=chicken breast strips and hash brown; setting=Watching TV with TV in Front; time_of_day=afternoon;\npreferences: microwave_time=1 min; robot_speed=fast; skewering_axis=perpendicular to major axis; confirm_feeding_pickup=yes (with auto-continue countdown); confirm_navigation_arrival=yes (with auto-continue countdown); confirm_manipulation=yes (with auto-continue countdown); transfer_mode=outside mouth transfer; outside_mouth_distance=near; convey_robot_ready_for_initiating_transfer=no cue; detect_user_ready_for_initiating_transfer_feeding=open mouth; detect_user_ready_for_initiating_transfer_drinking=open mouth; detect_user_ready_for_initiating_transfer_wiping=open mouth; convey_robot_ready_for_completing_transfer=no cue; detect_user_completed_transfer_feeding=button; detect_user_completed_transfer_drinking=button; detect_user_completed_transfer_wiping=button; retract_between_bites=yes; bite_dipping_preference=do not dip; bite_ordering=no particular order; wait_before_autocontinue_task_selection=60 sec; wait_before_autocontinue_feeding_pickup=60 sec; wait_before_autocontinue_mealprep=30 sec",
+  "ltm_summary_raw": {
+    "microwave_time": {
+      "default": "2 min",
+      "user_tendencies": "IF meal is a hot/savory item like chicken nuggets THEN 2 min; IF a moderately-warm dish (general tso's chicken/broccoli, chicken breast strips and hash brown) THEN 1 min BECAUSE user wants it warm but not piping hot; cold desserts or fruits would use no microwave."
+    },
+    "robot_speed": {
+      "default": "medium",
+      "user_tendencies": "IF eating while watching TV THEN fast BECAUSE the user wants the meal to progress efficiently while attention is on the screen; in quiet personal settings medium is the baseline."
+    },
+    "skewering_axis": {
+      "default": "perpendicular to major axis",
+      "user_tendencies": "User can open mouth wide, so perpendicular skewering for higher acquisition success is preferred. No context-dependent variation observed yet."
+    },
+    "confirm_feeding_pickup": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User consistently keeps pickup confirmation on with auto-continue across personal and TV settings, indicating moderate trust with a safety net. No shift observed yet."
+    },
+    "confirm_navigation_arrival": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User keeps meal-prep navigation checks on with auto-continue across settings, indicating a still-calibrating trust level. No context-dependent variation observed yet."
+    },
+    "confirm_manipulation": {
+      "default": "yes (with auto-continue countdown)",
+      "user_tendencies": "User keeps manipulation checks on with auto-continue, consistent with cautious-but-not-blocking prep style. No context-dependent variation observed yet."
+    },
+    "transfer_mode": {
+      "default": "outside mouth transfer",
+      "user_tendencies": "User can lean forward and deployment only performs outside-mouth transfer; predict inside only if explicitly requested. No context-dependent variation observed yet."
+    },
+    "outside_mouth_distance": {
+      "default": "near",
+      "user_tendencies": "User consistently chooses near across personal and TV settings; comfortable with the robot close. No evidence of preferring farther yet."
+    },
+    "convey_robot_ready_for_initiating_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "IF eating while watching TV THEN no cue BECAUSE the user is focused on the screen and finds cues unnecessary/distracting; in quiet personal settings the user prefers rich multimodal (speech + LED) cues."
+    },
+    "detect_user_ready_for_initiating_transfer_feeding": {
+      "default": "open mouth",
+      "user_tendencies": "User uses open-mouth detection in personal and TV-watching settings (no talking partner to confuse it). Tie-break policy: maintain explicit control (button) in social settings with a conversation partner to avoid confusion with talking, UNLESS fatigued, in which case open mouth to minimize effort. No direct social/fatigue evidence yet."
+    },
+    "detect_user_ready_for_initiating_transfer_drinking": {
+      "default": "open mouth",
+      "user_tendencies": "Same pattern as feeding: open mouth in personal and TV settings; button likely in social settings with a partner unless fatigued (then open mouth). No direct social evidence yet."
+    },
+    "detect_user_ready_for_initiating_transfer_wiping": {
+      "default": "open mouth",
+      "user_tendencies": "Same pattern as feeding: open mouth in personal and TV settings; button likely in social settings unless fatigued. No direct social evidence yet."
+    },
+    "convey_robot_ready_for_completing_transfer": {
+      "default": "speech + LED",
+      "user_tendencies": "IF eating while watching TV THEN no cue BECAUSE the user is focused on the screen and finds cues unnecessary; in quiet personal settings the user prefers rich multimodal (speech + LED) cues. Completion and initiation cue settings track together."
+    },
+    "detect_user_completed_transfer_feeding": {
+      "default": "perception",
+      "user_tendencies": "IF eating while watching TV THEN button BECAUSE the user prefers explicit control over pacing when distracted by the screen; in quiet personal settings reliable perception (force-torque) is accepted. User is able to press buttons."
+    },
+    "detect_user_completed_transfer_drinking": {
+      "default": "perception",
+      "user_tendencies": "IF eating while watching TV THEN button BECAUSE head-nod perception is undesirable while attention is on the screen and the user prefers explicit signaling; in quiet personal settings head-nod perception is accepted."
+    },
+    "detect_user_completed_transfer_wiping": {
+      "default": "button",
+      "user_tendencies": "User consistently chooses button for wipe completion (able to press buttons), in both personal and TV settings. No context-dependent variation observed yet."
+    },
+    "retract_between_bites": {
+      "default": "no",
+      "user_tendencies": "IF eating while watching TV (or working/social) THEN yes BECAUSE the user does not want the robot obstructing the screen/view; in quiet personal settings the user skips retracting to save time."
+    },
+    "bite_dipping_preference": {
+      "default": "do not dip",
+      "user_tendencies": "User did not dip for chicken nuggets, general tso's chicken/broccoli, or chicken breast strips and hash brown. No dipping observed in any setting yet; may increase if a meal has dedicated dips, and less in social settings to avoid messiness (no direct evidence)."
+    },
+    "bite_ordering": {
+      "default": "no particular order",
+      "user_tendencies": "No ordering or pairing preference observed yet, including for mixed dishes like chicken and broccoli or chicken strips and hash brown."
+    },
+    "wait_before_autocontinue_task_selection": {
+      "default": "no autocontinue",
+      "user_tendencies": "IF eating while watching TV THEN 60 sec BECAUSE the user is distracted but still wants the meal to eventually progress; in quiet personal settings the user prefers no autocontinue to fully control pacing. Overall the user leans toward long/indefinite waits."
+    },
+    "wait_before_autocontinue_feeding_pickup": {
+      "default": "no autocontinue",
+      "user_tendencies": "IF eating while watching TV THEN 60 sec BECAUSE the user is distracted and wants ample time but allows eventual auto-continue; in quiet personal settings the user prefers no autocontinue to explicitly confirm each bite/pickup."
+    },
+    "wait_before_autocontinue_mealprep": {
+      "default": "60 sec",
+      "user_tendencies": "IF eating while watching TV THEN 30 sec BECAUSE attention is on the screen and prep can proceed more quickly; longer (60 sec) in quiet personal settings to give ample time to intervene on prep pages."
+    },
+    "plate_color_fridge": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "plate_color_microwave": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "plate_color_table": {
+      "default": {
+        "h": 60,
+        "s": 128,
+        "v": 128,
+        "range": 0.15
+      },
+      "user_tendencies": "No color-correction evidence yet; using neutral seed with moderate tolerance."
+    },
+    "nav_offset_table": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_microwave": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_sink": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    },
+    "nav_offset_fridge": {
+      "default": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "dyaw": 0.0
+      },
+      "user_tendencies": "No navigation adjustment evidence yet."
+    }
+  }
+}

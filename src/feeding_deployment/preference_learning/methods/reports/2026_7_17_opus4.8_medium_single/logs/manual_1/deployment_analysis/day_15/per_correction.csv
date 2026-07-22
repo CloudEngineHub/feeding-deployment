@@ -1,0 +1,5 @@
+step,file,event,trigger,trigger_kind,stage,acc_before,acc_after,pos,neg,lat,correlated_detail
+0,20260717_134759.txt,INIT,,,,,1,,,,
+1,20260717_134837.txt,correction,bite_ordering,text,Table prefs / feeding loop,1,1,0,0,0,
+2,20260717_134912.txt,correction,robot_speed,categorical,Initial,1,1,0,1,0,confirm_navigation_arrival:no->yes (with auto-continue countdown)(NEG)
+3,20260717_134952.txt,correction,confirm_navigation_arrival,categorical,Initial,1,2,0,0,0,

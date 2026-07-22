@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import math
 from pathlib import Path
@@ -250,15 +251,39 @@ def generate_comparison_metrics(
 
 
 def main() -> int:
-    method_report_paths: dict[str, str] = {
-        "Ours": "reports/run_2026_03_06__12_53_55/report.json",
-        "Ablation: Long-Term Memory Only": "reports/run_2026_03_06__12_54_17/report.json",
-        "Ablation: Episodic Memory Only": "reports/run_2026_03_06__12_54_36/report.json",
-        "Ablation: No Memory": "reports/run_2026_03_06__12_55_16/report.json",
-    }
+    parser = argparse.ArgumentParser(
+        description="Overlay comparison figures for evaluation reports.",
+        epilog=(
+            "Example (Axis 1): python -m ...compare_metrics "
+            '--out-dir comparison_metrics/axis1_memory_architecture '
+            '--method "3-Layer Memory=reports/run_A/report.json" '
+            '--method "Single Raw-Context Memory=reports/run_B/report.json"'
+        ),
+    )
+    parser.add_argument(
+        "--method",
+        action="append",
+        required=True,
+        metavar='"Name=path/report.json"',
+        help="Method display name and its report.json, separated by the first '='. Repeatable.",
+    )
+    parser.add_argument(
+        "--out-dir",
+        default=str(Path(__file__).parent / "comparison_metrics"),
+        help="Directory for the comparison plots + summary_metrics.json.",
+    )
+    args = parser.parse_args()
 
-    comparison_dir = Path(__file__).parent / "comparison_metrics"
-    generate_comparison_metrics(method_report_paths, comparison_dir)
+    method_report_paths: dict[str, str] = {}
+    for spec in args.method:
+        name, sep, path = spec.partition("=")
+        if not sep or not name.strip() or not path.strip():
+            raise SystemExit(f'--method must look like "Name=path/report.json", got: {spec!r}')
+        if name.strip() in method_report_paths:
+            raise SystemExit(f"Duplicate method name: {name.strip()!r}")
+        method_report_paths[name.strip()] = path.strip()
+
+    generate_comparison_metrics(method_report_paths, Path(args.out_dir))
     return 0
 
 
