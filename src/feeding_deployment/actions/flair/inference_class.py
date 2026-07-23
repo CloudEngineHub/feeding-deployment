@@ -610,9 +610,15 @@ class BiteAcquisitionInference:
                 elif "tater tots" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "individual tater tot piece"
                     food_classes_being_detected.append("individual tater tot piece")
-                elif "chicken" in self.FOOD_CLASSES[i]:
+                elif "chicken nugget" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
                     food_classes_being_detected.append("chicken nugget piece")
+                elif "orange chicken" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "glazed fried chicken piece"
+                    food_classes_being_detected.append("glazed fried chicken piece")
+                elif "teriyaki chicken breast" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "teriyaki chicken breast piece"
+                    food_classes_being_detected.append("teriyaki chicken breast piece")
                 elif "hash" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "round hash brown piece"
                     food_classes_being_detected.append("round hash brown piece")

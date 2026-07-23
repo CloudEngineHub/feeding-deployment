@@ -1,0 +1,546 @@
+Evaluating src/feeding_deployment/preference_learning/data/deployment_datasets/user_2__profile_moderate_arms_good_trunk_good_head.json ...
+[Day 1] Meal: breaded fish bites, roasted potatoes, tartar sauce | Setting: Social with person on Right | Time: morning | Affective state: Neutral
+  Ground truth bundle: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "",
+  "confirm_navigation_arrival": "",
+  "confirm_manipulation": "",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "",
+  "wait_before_autocontinue_bite_selection": "",
+  "wait_before_autocontinue_task_selection": "",
+  "plate_color_fridge": "h=12,s=223,v=169,range=0.10",
+  "plate_color_microwave": "h=12,s=223,v=169,range=0.10",
+  "plate_color_table": "h=12,s=223,v=169,range=0.10",
+  "nav_offset_table": "",
+  "nav_offset_microwave": "",
+  "nav_offset_sink": "",
+  "nav_offset_fridge": ""
+}
+  [Predict] Calling Claude for bundle (day 1, m=0) ...
+[prediction] fast mode is not enabled for this org (quota 0 -- research-preview access not granted); using standard speed from now on.
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=0: acc_unrevealed=0.429 mismatches=16
+    correcting nav_offset_table -> 
+  [Predict] Calling Claude for bundle (day 1, m=1) ...
+  [Predict] Prediction: {
+  "microwave_time": "30 secs",
+  "robot_speed": "slow",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=1: acc_unrevealed=0.407 mismatches=16
+    correcting nav_offset_microwave -> 
+  [Predict] Calling Claude for bundle (day 1, m=2) ...
+  [Predict] Prediction: {
+  "microwave_time": "1 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (15 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=2: acc_unrevealed=0.462 mismatches=14
+    correcting microwave_time -> 2 min
+  [Predict] Calling Claude for bundle (day 1, m=3) ...
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (15 sec)",
+  "confirm_navigation_arrival": "countdown (15 sec)",
+  "confirm_manipulation": "countdown (15 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=3: acc_unrevealed=0.480 mismatches=13
+    correcting convey_robot_ready_for_completing_transfer -> LED
+  [Predict] Calling Claude for bundle (day 1, m=4) ...
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=4: acc_unrevealed=0.542 mismatches=11
+    correcting plate_color_table -> h=12,s=223,v=169,range=0.10
+  [Predict] Calling Claude for bundle (day 1, m=5) ...
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (60 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=5: acc_unrevealed=0.565 mismatches=10
+    correcting plate_color_microwave -> h=12,s=223,v=169,range=0.10
+  [Predict] Calling Claude for bundle (day 1, m=6) ...
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "wait for me",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=6: acc_unrevealed=0.591 mismatches=9
+    correcting plate_color_fridge -> h=12,s=223,v=169,range=0.10
+  [Predict] Calling Claude for bundle (day 1, m=7) ...
+  [Predict] Prediction: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "countdown (30 sec)",
+  "confirm_navigation_arrival": "countdown (30 sec)",
+  "confirm_manipulation": "countdown (30 sec)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "medium",
+  "convey_robot_ready_for_initiating_transfer": "LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "button",
+  "detect_user_ready_for_initiating_transfer_drinking": "button",
+  "detect_user_ready_for_initiating_transfer_wiping": "button",
+  "convey_robot_ready_for_completing_transfer": "LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "button",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "yes",
+  "bite_dipping_preference": "less",
+  "bite_ordering": "Alternate between breaded fish bites and roasted potatoes, dipping the breaded fish bites in tartar sauce.",
+  "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
+  "wait_before_autocontinue_task_selection": "countdown (30 sec)",
+  "plate_color_fridge": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_microwave": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "plate_color_table": {
+    "h": 12,
+    "s": 223,
+    "v": 169,
+    "range": 0.1
+  },
+  "nav_offset_table": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_microwave": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_sink": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  },
+  "nav_offset_fridge": {
+    "dx": 0.0,
+    "dy": 0.0,
+    "dyaw": 0.0
+  }
+}
+  [user=2] rollout 1/1 day 1 m=7: acc_unrevealed=0.619 mismatches=8
+    correcting wait_before_autocontinue_bite_selection -> 
+  [Predict] Calling Claude for bundle (day 1, m=8) ...

@@ -1,0 +1,33 @@
+Evaluating /home/isacc/deployment_ws/src/feeding-deployment/out_manual_run_2026_07_16__20_01_49/manual_1__dep1__30d.json ...
+[Day 1] Meal: chicken nuggets | Setting: Personal | Time: evening | Affective state: Slower
+  Ground truth bundle: {
+  "microwave_time": "2 min",
+  "robot_speed": "medium",
+  "skewering_axis": "perpendicular to major axis",
+  "confirm_feeding_pickup": "yes (with auto-continue countdown)",
+  "confirm_navigation_arrival": "yes (with auto-continue countdown)",
+  "confirm_manipulation": "yes (with auto-continue countdown)",
+  "transfer_mode": "outside mouth transfer",
+  "outside_mouth_distance": "near",
+  "convey_robot_ready_for_initiating_transfer": "speech + LED",
+  "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+  "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+  "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
+  "convey_robot_ready_for_completing_transfer": "speech + LED",
+  "detect_user_completed_transfer_feeding": "perception",
+  "detect_user_completed_transfer_drinking": "perception",
+  "detect_user_completed_transfer_wiping": "button",
+  "retract_between_bites": "no",
+  "bite_dipping_preference": "do not dip",
+  "bite_ordering": "no particular order",
+  "wait_before_autocontinue_bite_selection": "",
+  "wait_before_autocontinue_task_selection": "no autocontinue",
+  "plate_color_fridge": "h=12,s=223,v=169,range=0.10",
+  "plate_color_microwave": "h=12,s=223,v=169,range=0.10",
+  "plate_color_table": "h=12,s=223,v=169,range=0.10",
+  "nav_offset_table": "",
+  "nav_offset_microwave": "",
+  "nav_offset_sink": "",
+  "nav_offset_fridge": ""
+}
+  [Predict] Calling Claude for bundle (day 1, m=0) ...
