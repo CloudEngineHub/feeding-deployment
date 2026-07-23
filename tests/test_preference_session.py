@@ -120,7 +120,8 @@ _FIXTURE_YAMLS = [
     "navigate_to_fridge.yaml",
     "navigate_to_microwave.yaml",
     "navigate_to_sink.yaml",
-    "navigate_to_table.yaml",
+    "navigate_to_dining_table.yaml",
+    "navigate_to_movable_table.yaml",
     "open_fridge.yaml",
     "open_microwave.yaml",
     "pick_plate_from_fridge.yaml",
@@ -274,9 +275,14 @@ def test_finalize_meal_one_update_with_full_bundle(bt_dir):
     assert len(model.update_calls) == 1
     call = model.update_calls[0]
     assert call["day"] == 7
-    assert set(call["gt"].keys()) >= set(PREF_FIELDS)
-    # Every dim is finalized (unasked dims confirmed at the prediction).
-    assert all(f in s.finalized for f in PREF_FIELDS)
+    # The unused table is "not observed": for a Personal meal the robot drives to
+    # the movable table, so the dining table is excluded from the record and left
+    # unfinalized. Every OTHER dim is present and finalized (unasked dims confirmed).
+    skipped = {"nav_offset_dining_table"}  # CTX setting is "Personal" -> movable table
+    assert set(call["gt"].keys()) >= set(PREF_FIELDS) - skipped
+    assert "nav_offset_dining_table" not in call["gt"]
+    assert all(f in s.finalized for f in PREF_FIELDS if f not in skipped)
+    assert "nav_offset_dining_table" not in s.finalized
 
 
 def test_pinned_split_orders_by_ask_order(bt_dir):
@@ -688,7 +694,7 @@ def test_repredict_triggers_coalesce(bt_dir):
 def test_bt_consumes_predictions_predicate():
     from feeding_deployment.integration.preference_session import bt_consumes_predictions
 
-    for name in ("pick_plate_from_fridge", "navigate_to_table", "transfer_utensil",
+    for name in ("pick_plate_from_fridge", "navigate_to_dining_table", "transfer_utensil",
                  "transfer_drink", "acquire_bite"):
         assert bt_consumes_predictions(name), name
     for name in ("place_plate_on_holder", "open_fridge", "close_microwave",
@@ -732,7 +738,10 @@ def test_confirmation_dims_shape_and_staging():
     assert "wait_before_autocontinue_mealprep" not in PREF_FIELDS
     assert "wait_before_autocontinue_feeding_pickup" not in PREF_FIELDS
     assert "web_interface_confirmation" not in PREF_FIELDS
-    assert len(PREF_FIELDS) == 28
+    # nav_offset_table was split into nav_offset_dining_table + nav_offset_movable_table (+1).
+    assert "nav_offset_table" not in PREF_FIELDS
+    assert {"nav_offset_dining_table", "nav_offset_movable_table"} <= set(PREF_FIELDS)
+    assert len(PREF_FIELDS) == 29
     for f in ("confirm_feeding_pickup", "confirm_navigation_arrival", "confirm_manipulation"):
         assert PREF_OPTIONS[f] == [
             "skip", "countdown (15 sec)", "countdown (30 sec)",

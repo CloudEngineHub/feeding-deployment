@@ -193,11 +193,11 @@ class TestPerDimPrediction:
         with patch.object(pm, "_create_prediction_message", side_effect=AssertionError("no LLM calls allowed")):
             out = pm.reapply_constraints(
                 pred, CONTEXT,
-                corrected={"transfer_mode": "inside mouth transfer", "nav_offset_table": "dx=0.213,dy=-0.081,dyaw=0.140"},
+                corrected={"transfer_mode": "inside mouth transfer", "nav_offset_dining_table": "dx=0.213,dy=-0.081,dyaw=0.140"},
             )
         assert out["transfer_mode"] == "inside mouth transfer"
         assert out["outside_mouth_distance"] == "not applicable"  # rule fires from the correction
-        assert out["nav_offset_table"] == parse_nav_offset("dx=0.213,dy=-0.081,dyaw=0.140")
+        assert out["nav_offset_dining_table"] == parse_nav_offset("dx=0.213,dy=-0.081,dyaw=0.140")
         # untouched open dims stay frozen
         assert out["robot_speed"] == pred["robot_speed"]
 

@@ -3,6 +3,9 @@ from typing import Dict, List, Tuple
 from .preference_bundle import PREFERENCE_BUNDLE as _PREFERENCE_BUNDLE_DATACLASSES
 from .mealtime_context import (
     SETTINGS,
+    SOCIAL_SETTINGS,
+    active_table_for_setting,
+    inactive_table_for_setting,
     TIMES_OF_DAY,
     MEAL_CONTENTS_BY_LABEL,
     MEALS,
@@ -35,6 +38,9 @@ __all__ = [
     "MEAL_STRUCTURE",
     "MEALS",
     "SETTINGS",
+    "SOCIAL_SETTINGS",
+    "active_table_for_setting",
+    "inactive_table_for_setting",
     "TIMES_OF_DAY",
     "AFFECTIVE_STATES",
     "PHYSICAL_CAPABILITY_PROFILES",

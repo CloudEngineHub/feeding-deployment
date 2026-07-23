@@ -114,7 +114,8 @@ _ALL_BT_YAMLS: list[str] = [
     "navigate_to_fridge.yaml",
     "navigate_to_microwave.yaml",
     "navigate_to_sink.yaml",
-    "navigate_to_table.yaml",
+    "navigate_to_dining_table.yaml",
+    "navigate_to_movable_table.yaml",
     "open_fridge.yaml",
     "open_microwave.yaml",
     "pick_drink.yaml",
@@ -172,7 +173,8 @@ _BT_MAPPING: list[tuple[str, list[str], str, dict | Any]] = [
     # Navigation arrival confirmation (post-arrival position check/adjust page)
     ("confirm_navigation_arrival",
      ["navigate_to_fridge.yaml", "navigate_to_microwave.yaml",
-      "navigate_to_sink.yaml", "navigate_to_table.yaml"],
+      "navigate_to_sink.yaml", "navigate_to_dining_table.yaml",
+      "navigate_to_movable_table.yaml"],
      "ArrivalConfirm", _CONFIRM_MAP),
 
     # Manipulation confirmation (detection confirms at pickups / door handles /

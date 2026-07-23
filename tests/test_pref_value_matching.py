@@ -44,8 +44,8 @@ class TestFormatPrefValue:
         assert _format_pref_value("plate_color_fridge", COLOR_STR) == COLOR_STR
 
     def test_nav_dict_and_string_agree(self):
-        assert _format_pref_value("nav_offset_table", NAV_DICT) == NAV_STR
-        assert _format_pref_value("nav_offset_table", NAV_STR) == NAV_STR
+        assert _format_pref_value("nav_offset_dining_table", NAV_DICT) == NAV_STR
+        assert _format_pref_value("nav_offset_dining_table", NAV_STR) == NAV_STR
 
     def test_categorical_passthrough(self):
         assert _format_pref_value("robot_speed", "slow") == "slow"
@@ -92,10 +92,10 @@ class TestCorrectedBlockRendering:
     def test_string_corrections_render_faithfully(self):
         """A pinned truth string must render as itself, not the factory default."""
         block = _format_corrected_block(
-            {"plate_color_fridge": COLOR_STR, "nav_offset_table": NAV_STR}
+            {"plate_color_fridge": COLOR_STR, "nav_offset_dining_table": NAV_STR}
         )
         assert f"plate_color_fridge={COLOR_STR}" in block
-        assert f"nav_offset_table={NAV_STR}" in block
+        assert f"nav_offset_dining_table={NAV_STR}" in block
         assert format_color(DEFAULT_COLOR) not in block
 
     def test_dict_corrections_render_faithfully(self):
