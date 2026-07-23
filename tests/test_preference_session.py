@@ -21,6 +21,7 @@ from feeding_deployment.integration.apply_preferences import (
     _load_yaml,
     _save_yaml,
     _set_param_value,
+    bt_consumed_pref_fields,
 )
 from feeding_deployment.preference_learning.config.preference_bundle import (
     COLOR_FIELDS,
@@ -691,17 +692,6 @@ def test_repredict_triggers_coalesce(bt_dir):
     }
 
 
-def test_bt_consumes_predictions_predicate():
-    from feeding_deployment.integration.preference_session import bt_consumes_predictions
-
-    for name in ("pick_plate_from_fridge", "navigate_to_dining_table", "transfer_utensil",
-                 "transfer_drink", "acquire_bite"):
-        assert bt_consumes_predictions(name), name
-    for name in ("place_plate_on_holder", "open_fridge", "close_microwave",
-                 "press_microwave_button", "gaze_at_table", "place_plate_in_sink"):
-        assert not bt_consumes_predictions(name), name
-
-
 def test_repredictions_do_not_write_memory(bt_dir):
     model = FakeModel()
     web = FakeWeb({"robot_speed": "fast"})
@@ -747,3 +737,46 @@ def test_confirmation_dims_shape_and_staging():
             "skip", "countdown (15 sec)", "countdown (30 sec)",
             "countdown (60 sec)", "wait for me",
         ]
+
+
+def test_should_wait_only_when_a_consumed_dim_is_open(bt_dir):
+    """The relevance gate joins the background reprediction only when the skill
+    reads a still-open (unfinalized) dim -- so an irrelevant reprediction (e.g. an
+    open plate color) never stalls a feeding skill whose dims are all finalized."""
+    s = PreferenceSession(FakeModel(), bt_dir, CTX)
+
+    # Fresh session, nothing finalized: a pickup reads its (open) plate color, and
+    # a feeding skill reads open categoricals -> both would wait.
+    assert s.should_wait_for_reprediction("pick_plate_from_table") is True
+    assert s.should_wait_for_reprediction("acquire_bite") is True
+
+    # Finalize exactly what acquire_bite consumes (as the pre-feeding ask does).
+    for f in bt_consumed_pref_fields("acquire_bite"):
+        s.finalized.add(f)
+
+    # acquire_bite now reads only finalized dims -> no wait, even though the plate
+    # color is still open (a reprediction of it can't touch a feeding YAML).
+    assert "plate_color_table" not in s.finalized
+    assert s.should_wait_for_reprediction("acquire_bite") is False
+    # ...while the pickup, whose color is still open, still waits.
+    assert s.should_wait_for_reprediction("pick_plate_from_table") is True
+
+
+def test_should_wait_scopes_per_physical_table(bt_dir):
+    """Only the active table is driven each meal; the inactive table's offset
+    stays open all meal but must not stall anything. The gate is per-table."""
+    s = PreferenceSession(FakeModel(), bt_dir, CTX)
+    s.finalized.update({"confirm_navigation_arrival", "robot_speed",
+                        "nav_offset_dining_table"})
+    # dining-table nav: all its consumed dims finalized -> no wait.
+    assert s.should_wait_for_reprediction("navigate_to_dining_table") is False
+    # movable-table nav still reads its own open offset -> would wait (per-table).
+    assert s.should_wait_for_reprediction("navigate_to_movable_table") is True
+
+
+def test_should_wait_false_for_untracked_skill(bt_dir):
+    """A skill that reads no preference-driven param (or the pre-split table name /
+    an HLA-name fallback) never joins."""
+    s = PreferenceSession(FakeModel(), bt_dir, CTX)
+    assert s.should_wait_for_reprediction("navigate_to_table") is False
+    assert s.should_wait_for_reprediction("SomeHlaName") is False

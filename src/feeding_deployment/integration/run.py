@@ -130,7 +130,6 @@ from feeding_deployment.integration.preference_session import (
     INITIAL_PREF_DIMS as _INITIAL_PREF_DIMS,
     PreferenceSession,
     TABLE_PREF_DIMS as _TABLE_PREF_DIMS,
-    bt_consumes_predictions,
 )
 from feeding_deployment.preference_learning.methods.prediction_model import PredictionModel, PREF_OPTIONS, MEMORY_MODES, DEFAULT_MEMORY_MODE
 from feeding_deployment.preference_learning.config.physical_capabilities import (
@@ -1184,12 +1183,14 @@ class _Runner:
                 )
             if self._pref_session is not None:
                 # Corrections repredict in the BACKGROUND (the robot keeps
-                # moving); join here only before skills whose BT reads
-                # prediction-produced parameters (pickup colors, nav offsets,
-                # feeding dims) so they never execute on half-updated YAMLs.
-                # The join runs after the settings stall (edits made while the
-                # panel was open have scheduled their reprediction by now).
-                if bt_consumes_predictions(skill_plan_names[i]):
+                # moving); join here only when this skill reads a dim that is
+                # still OPEN, i.e. one the pending reprediction could still
+                # rewrite -- so a skill never executes on half-updated YAMLs, but
+                # an irrelevant reprediction (e.g. an open plate color while
+                # feeding) does not stall it. The join runs after the settings
+                # stall (edits made while the panel was open have scheduled their
+                # reprediction by now).
+                if self._pref_session.should_wait_for_reprediction(skill_plan_names[i]):
                     self._pref_session.wait_for_reprediction()
 
             # Execute the high-level plan in simulation. On a mid-skill takeover
