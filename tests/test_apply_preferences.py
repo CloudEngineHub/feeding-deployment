@@ -220,7 +220,7 @@ class TestApplyBundleToBehaviorTrees:
 
         for fname in ["transfer_utensil.yaml", "transfer_drink.yaml", "transfer_wipe.yaml"]:
             data = _load(bt_dir, fname)
-            assert _get_param_value(data, "OutsideMouthDistance") == 0.07
+            assert _get_param_value(data, "OutsideMouthDistance") == 0.05
 
     def test_outside_mouth_distance_not_applicable_skips(self, bt_dir: Path):
         original = _get_param_value(_load(bt_dir, "transfer_utensil.yaml"), "OutsideMouthDistance")

@@ -110,6 +110,11 @@ def _run_eval(monkeypatch, base: Path, argv_extra: list) -> dict:
 def _strip_volatile(report: dict) -> dict:
     out = dict(report)
     out.pop("run_timestamp", None)
+    # Wall-clock prediction timings: an aggregate summary and the per-prediction
+    # list. Both are inherently run-dependent (and only the live day is timed on
+    # resume), so they are not part of the reproducible metrics.
+    out.pop("prediction_timing", None)
+    out.pop("prediction_timings", None)
     return out
 
 

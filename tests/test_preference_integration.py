@@ -1057,6 +1057,7 @@ def _bare_prediction_model(client):
     m = PredictionModel.__new__(PredictionModel)
     m.client = client
     m.chat_model = "claude-opus-4-8"
+    m.provider = "anthropic"
     m._fast_mode_unavailable = False
     return m
 

@@ -1,4 +1,4 @@
-"""Tests for the Axis 1 (single_memory) and Axis 2 (per_dim) experiment arms.
+"""Tests for the Axis 1 (single_full_history) and Axis 2 (per_dim) experiment arms.
 All LLM/embedding calls are mocked -- these tests verify information flow,
 not model quality.
 
@@ -205,7 +205,7 @@ class TestPerDimPrediction:
 class TestSingleMemoryMode:
     def test_prompt_contains_all_episodes_chronologically(self, tmp_path):
         pm = PredictionModel(user="u1", physical_profile_label=PROFILE, logs_dir=tmp_path,
-                             memory_mode="single_memory")
+                             memory_mode="single_full_history")
         truth = _fake_truth()
         for day in (1, 2, 3):
             ctx = dict(CONTEXT, meal=f"meal{day}")
@@ -221,6 +221,6 @@ class TestSingleMemoryMode:
             pm.predict_bundle(context=CONTEXT, corrected={})
 
         p = captured["prompt"]
-        assert "MEMORY: all prior meals in chronological order" in p
+        assert "FULL HISTORY MEMORY: Every prior finalized meal in chronological order" in p
         assert p.index("meal=meal1") < p.index("meal=meal2") < p.index("meal=meal3")
         assert "SEMANTIC MEMORY" not in p and "EPISODIC MEMORY" not in p
