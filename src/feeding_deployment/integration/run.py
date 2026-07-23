@@ -212,6 +212,10 @@ class _Runner:
         # record goes in log/<user>/day_<NN>/ (see self.data_logger below).
         self.log_dir = Path(__file__).parent / "log" / user
         self.execution_log = Path(__file__).parent / "log" / "execution_log.txt" # in root log directory
+        # NUC bulldog SFTPs its anomaly log here in APPEND mode, so nothing on the
+        # NUC ever resets it -- we truncate it below on a fresh run (see the
+        # resume_from_state == "" block) alongside the compute execution log.
+        self.nuc_execution_log = Path(__file__).parent / "log" / "nuc_execution_log.txt"
         self.run_behavior_tree_dir = self.log_dir / "behavior_trees"
         self.gesture_detectors_dir = self.log_dir / "gesture_detectors"
         self._gesture_detection_filepath = self.gesture_detectors_dir / "synthesized_gesture_detectors.py"
@@ -239,6 +243,15 @@ class _Runner:
         # Disabled (no-op for release logging) when --day is omitted.
         self.data_logger = DataLogger(state_dir=self.log_dir, day=day)
 
+        # Record the active per-day dir (absolute) so teardown (feeding-compute.sh
+        # collect) can archive the execution logs into log/<user>/day_<NN>/. Cleared
+        # when per-day logging is disabled so a stale day never receives them.
+        run_ptr = Path(__file__).parent / "log" / ".current_run"
+        if self.data_logger.day_dir is not None:
+            run_ptr.write_text(str(self.data_logger.day_dir.resolve()) + "\n")
+        elif run_ptr.exists():
+            run_ptr.unlink()
+
         # Checkpointing. The store owns saved_states/: numbered NN_<skill>.p
         # checkpoints track the deterministic plate journey (prep + finish), the
         # four after_*_pickup.p are the feeding recovery points, and last_state.p
@@ -255,9 +268,11 @@ class _Runner:
         self._resume_day: int | None = None
 
         if resume_from_state == "":
-            # clear behavior tree execution log
-            with open(self.execution_log, "w") as f:
-                f.write("")
+            # clear behavior tree execution log (compute) and the NUC anomaly log
+            # (append-only on the NUC side) so a fresh run inherits no prior trace.
+            for _log in (self.execution_log, self.nuc_execution_log):
+                with open(_log, "w") as f:
+                    f.write("")
             # Fresh run: drop the previous meal's numbered checkpoints (their
             # numbering is only valid within one meal's plan). last_state.p,
             # after_*_pickup.p, and manual *.pkl files are preserved.
