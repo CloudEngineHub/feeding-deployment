@@ -267,19 +267,37 @@ class _Runner:
         self._resume_physical_profile: str | None = None
         self._resume_day: int | None = None
 
+        # Both execution logs are one-shot anomaly ledgers: bulldog (NUC) and
+        # watchdog (compute) each write a single "Anomaly Detected: ..." line and
+        # then their run() loop exits. A relaunched bulldog/watchdog re-reports
+        # anything still active, so clearing stale anomalies here can't hide a live
+        # fault -- it only stops the transparency explanation from replaying an
+        # already-cleared one (e.g. "emergency stop is active" after a resume).
+        #
+        # NUC log is purely an anomaly ledger, so wipe it on EVERY run start
+        # (fresh AND resume). It lives on compute (the SFTP destination), so a
+        # local truncate is effective.
+        with open(self.nuc_execution_log, "w") as f:
+            f.write("")
+
         if resume_from_state == "":
-            # clear behavior tree execution log (compute) and the NUC anomaly log
-            # (append-only on the NUC side) so a fresh run inherits no prior trace.
-            for _log in (self.execution_log, self.nuc_execution_log):
-                with open(_log, "w") as f:
-                    f.write("")
-            # Fresh run: drop the previous meal's numbered checkpoints (their
-            # numbering is only valid within one meal's plan). last_state.p,
-            # after_*_pickup.p, and manual *.pkl files are preserved.
+            # Fresh run: wipe the compute behavior-tree trace entirely.
+            with open(self.execution_log, "w") as f:
+                f.write("")
+            # Drop the previous meal's numbered checkpoints (their numbering is only
+            # valid within one meal's plan). last_state.p, after_*_pickup.p, and
+            # manual *.pkl files are preserved.
             self._ckpt.clear_ephemeral()
             # Also drop the standalone preference snapshot so a new meal never
             # inherits the previous meal's in-progress corrections.
             self._ckpt.clear_pref()
+        elif self.execution_log.exists():
+            # Resume: keep the "Starting/Finished node" trace for continuity, but
+            # drop stale "Anomaly Detected: ..." lines so a pre-resume, already-
+            # cleared watchdog fault isn't replayed in the explanation.
+            kept = [ln for ln in self.execution_log.read_text().splitlines(keepends=True)
+                    if not ln.lstrip().startswith("Anomaly Detected")]
+            self.execution_log.write_text("".join(kept))
 
         # Initialize the interface to the robot.
         if run_on_robot:
