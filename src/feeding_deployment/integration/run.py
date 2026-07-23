@@ -361,12 +361,17 @@ class _Runner:
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
+        # Observable mealtime context for this meal; set later (meal start / resume).
+        # Declared here so the init-time behavior-tree pass below can read it before
+        # any meal context is collected.
+        self.preference_context: dict[str, str] | None = None
         # Let the Navigate HLA read the current mealtime setting so the "table"
         # destination resolves to the dining table (social) vs the movable table
-        # (everything else). Reads self.preference_context lazily at nav time, so it
-        # reflects both fresh collection and resume-from-state.
+        # (everything else). getattr guards the init-time pass (context is None ->
+        # movable table); at nav time it returns the live context (fresh collection
+        # or resume-from-state).
         self.hla_name_to_hla["Navigate"].set_context_provider(
-            lambda: self.preference_context
+            lambda: getattr(self, "preference_context", None)
         )
         self.operators = {hla.get_operator() for hla in self.hlas}
         self.predicates: set[Predicate] = {
@@ -562,7 +567,6 @@ class _Runner:
 
         print("Runner is ready.")
         self.active = True
-        self.preference_context: dict[str, str] | None = None
 
     def _reconcile_user_behavior_trees(self) -> None:
         """Ensure the per-user behavior-tree dir has every factory tree, seeding
