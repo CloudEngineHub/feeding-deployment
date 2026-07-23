@@ -18,6 +18,8 @@ from relational_structs import (
 )
 from feeding_deployment.actions.base import (
     HighLevelAction,
+    MID_SKILL_TAKEOVER_ENABLED,
+    TeleopTakeoverException,
     tool_type,
     table_type,
     GripperFree,
@@ -31,11 +33,56 @@ from feeding_deployment.actions.base import (
 )
 
 from feeding_deployment.actions.flair.food_manipulation_skill_library import FoodManipulationSkillLibrary
+from feeding_deployment.interfaces.web_interface import WebInterfaceTakeoverInterrupt
 
 # After this many consecutive detection cycles with no actionable bite, stop
 # silently retrying and show the bite selection page in no-detection mode so
 # the user can fall back to manual skill selection.
 MAX_CONSECUTIVE_FAILED_DETECTIONS = 3
+
+
+class TakeoverAwareArmInterface:
+    """Wraps the arm interface handed to FLAIR so a mid-skill takeover preempts
+    bite-acquisition motion the same way it preempts every other skill.
+
+    FLAIR's FoodManipulationSkillLibrary commands the arm directly through
+    execute_command, bypassing HighLevelAction.execute_robot_command (which polls
+    the takeover flag before and after each move). Without this, a takeover pressed
+    mid-pickup only aborts the one in-flight waypoint; FLAIR, unaware, immediately
+    re-commands the next waypoint and finishes the pickup, so redo/next only takes
+    effect afterward.
+
+    This proxy re-adds that polling at the single chokepoint every FLAIR motion
+    funnels through -- execute_command -- checking the takeover flag before and
+    after each move and raising WebInterfaceTakeoverInterrupt, which execute_action
+    (base.py) converts into the TeleopTakeoverException the executive already
+    handles. It only peeks the event (never consumes it); execute_action owns the
+    consume + teleop recovery, exactly like the webapp-wait path in web_interface.
+    Every other attribute/method is delegated unchanged.
+    """
+
+    def __init__(self, inner, web_interface):
+        self._inner = inner
+        self._web_interface = web_interface
+
+    def _raise_if_takeover(self):
+        web = self._web_interface
+        if web is not None and web.takeover_event.is_set():
+            raise WebInterfaceTakeoverInterrupt()
+
+    def execute_command(self, *args, **kwargs):
+        self._raise_if_takeover()  # takeover requested before this move
+        result = self._inner.execute_command(*args, **kwargs)
+        # A takeover during the move fires stop_action, which aborts it; the move
+        # returns here early, so we catch the still-latched event before FLAIR can
+        # command the next waypoint.
+        self._raise_if_takeover()
+        return result
+
+    def __getattr__(self, name):
+        # Only reached for attributes not defined on the proxy itself.
+        return getattr(self._inner, name)
+
 
 class AcquireBiteHLA(HighLevelAction):
     """Bite acquisition; other tools are always prepared."""
@@ -43,9 +90,24 @@ class AcquireBiteHLA(HighLevelAction):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # FLAIR commands the arm directly through execute_command, bypassing the
+        # takeover polling in HighLevelAction.execute_robot_command. Wrap the
+        # interface so a mid-skill takeover preempts the pickup like any other
+        # skill. Fall back to the raw interface where takeover cannot apply (sim /
+        # no web interface / feature disabled) so those paths are unchanged.
+        flair_robot_interface = self.robot_interface
+        if (
+            MID_SKILL_TAKEOVER_ENABLED
+            and self.robot_interface is not None
+            and self.web_interface is not None
+        ):
+            flair_robot_interface = TakeoverAwareArmInterface(
+                self.robot_interface, self.web_interface
+            )
+
         self.food_manipulation_skill_library = FoodManipulationSkillLibrary(
             self.sim,
-            self.robot_interface,
+            flair_robot_interface,
             self.wrist_interface,
             self.perception_interface,
             self.rviz_interface,
@@ -201,6 +263,10 @@ class AcquireBiteHLA(HighLevelAction):
 
                     except FileNotFoundError:
                         raise FileNotFoundError("No logged data found for bite acquisition")
+            except (TeleopTakeoverException, WebInterfaceTakeoverInterrupt):
+                # A takeover must reach execute_action (base.py), not be swallowed
+                # here as a failed-detection retry.
+                raise
             except Exception as e:
                 print("Failed to detect items:", e)
                 continue
@@ -401,6 +467,10 @@ class AcquireBiteHLA(HighLevelAction):
                     # delay the bite hand-off.
                     self.settle_camera()
                     continue
+            except (TeleopTakeoverException, WebInterfaceTakeoverInterrupt):
+                # A takeover must reach execute_action (base.py), not be swallowed
+                # here as a failed-bite retry.
+                raise
             except Exception as e:
                 print(
                     f"Failed to acquire bite: {type(e).__name__}: {e}"
