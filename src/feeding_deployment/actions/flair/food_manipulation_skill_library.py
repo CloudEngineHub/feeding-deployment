@@ -51,7 +51,8 @@ class FoodManipulationSkillLibrary:
             # self.plate_height = 0.185
             # self.plate_height = 0.197 # green table
             # self.plate_height = 0.221
-            self.plate_height = 0.215
+            # self.plate_height = 0.215 # movable table
+            self.plate_height = 0.225 # dining table (used in social meals)
         else:
             raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 

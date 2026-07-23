@@ -297,9 +297,9 @@ class PlacePlateOnTableHLA(HighLevelAction):
         placement_poses = self.perception_interface.get_perceived_table_placement_poses()
 
         self.report_activity("Lowering the plate onto the table")
-        self.move_to_ee_pose(placement_poses["pre_table_placement_pose"])
 
         with self.low_speed(restore=speed):
+            self.move_to_ee_pose(placement_poses["pre_table_placement_pose"])
             self.move_to_ee_pose(placement_poses["table_placement_pose"])
             self.confirm_plate_release("table", manip_confirm)
             self.close_gripper()

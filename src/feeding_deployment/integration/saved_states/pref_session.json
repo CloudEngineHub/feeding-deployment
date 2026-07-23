@@ -2,7 +2,7 @@
   "bundle": {
     "bite_dipping_preference": "do not dip",
     "bite_ordering": "no particular order",
-    "confirm_feeding_pickup": "skip",
+    "confirm_feeding_pickup": "countdown (15 sec)",
     "confirm_manipulation": "countdown (15 sec)",
     "confirm_navigation_arrival": "skip",
     "convey_robot_ready_for_completing_transfer": "LED",
@@ -66,6 +66,7 @@
     "time_of_day": "evening"
   },
   "corrected": {
+    "confirm_feeding_pickup": "countdown (15 sec)",
     "confirm_manipulation": "countdown (15 sec)",
     "confirm_navigation_arrival": "skip",
     "convey_robot_ready_for_initiating_transfer": "LED",
