@@ -4,53 +4,50 @@
   <arg name="config_basename" default="vention_2lidar_localization.lua"/>
   <arg name="load_state_filename" default="/tmp/vention_map.pbstream"/>
   <arg name="load_frozen_state" default="true"/>
-  <!-- Coverage floor for the scan gate (occupied 0.2 m cells). Healthy scans
-       measure 36-114 across the jul14_2 trigger bags; feeding-occlusion sits
-       around 10-20 per Cartographer's node point counts. Retune from the
-       scan_gate stats lines after the first gated table session. -->
-  <arg name="gate_min_cells" default="25"/>
-  <!-- Also freeze map->odom once the base has sat this many seconds with
-       nothing on /cmd_vel[_teleop] (parked). A parked base has ~zero odom
-       drift, so any scan-match correction is the spurious feeding-occlusion
-       yank; this covers the person walking up to the table before feeding even
-       starts, without knowing the feeding state. Deliberately LONGER than the
-       15 s goal-confirm settle (navigate.py _GOAL_CONFIRM_SETTLE_S): the base
-       is parked-but-silent through that settle and we WANT Cartographer to
-       catch up and replan then, so the freeze must not arm until we are past
-       it. Occlusion inside the unfrozen window is still caught by
-       gate_min_cells. Set 0 to disable and fall back to coverage-only. -->
-  <arg name="gate_park_freeze_s" default="30.0"/>
-  <!-- One-time startup warmup: the parked freeze is held off for this long
-       after the first scan, so it never starves Cartographer while it is still
-       establishing its INITIAL global lock on the loaded pbstream (that can
-       take well over a minute; 30 s is not enough). Kept separate from the
-       30 s steady-state park_freeze_s so feeding protection stays snappy every
-       meal (do NOT just inflate park_freeze_s for this). Set 0 to disable. -->
-  <arg name="gate_startup_grace_s" default="120.0"/>
+  <!-- map_odom_clamp params. Cartographer's map_frame is renamed to "map_carto"
+       (see config/vention_2lidar_localization.lua); this node owns map->map_carto
+       and absorbs spurious parked jumps so consumers keep using "map".
+       NOTE: scan_gate (which "froze" map->odom by DROPPING scans) is retired;
+       starving Cartographer wedged it and killed the map frame
+       (session_20260723 14:48:41). Cartographer now always gets raw scans. -->
+  <!-- Parked = no /cmd_vel[_teleop] for this long. LONGER than navigate.py's
+       15 s goal-confirm settle so the fine-parking catch-up correction reaches
+       move_base before the clamp engages. 0 disables the parked clamp. -->
+  <arg name="clamp_park_freeze_s" default="30.0"/>
+  <!-- One-time startup warmup (from the first update): the clamp stays fully
+       transparent this long so Cartographer's INITIAL global lock on the loaded
+       pbstream (large corrections, up to a few minutes) flows to the output and
+       is never pinned/absorbed. Longer than park_freeze_s on purpose; 300 s
+       matches the observed initial-lock time. 0 disables the warmup. -->
+  <arg name="clamp_startup_grace_s" default="300.0"/>
+  <!-- While parked, a single map_carto->odom step bigger than these is absorbed
+       (held). Feeding yanks are 2-7 m; real parked drift is sub-cm. 0 = pin. -->
+  <arg name="clamp_lin_jump_m" default="0.05"/>
+  <arg name="clamp_ang_jump_rad" default="0.03"/>
+  <!-- false -> node publishes map->map_carto = identity forever = raw
+       Cartographer (jumpy but correct): the safe fallback / A-B toggle. -->
+  <arg name="clamp_enabled" default="true"/>
 
-  <!-- Scan gate: drops BOTH lidars' scans whenever either is too occluded to
-       localize on (person/arm at the table gutted scans -> Cartographer
-       matched them 4-7 m off at 90% score and yanked map->odom 2-7 m every
-       optimization; both table stays, session jul14_2), OR the base has been
-       parked (no cmd_vel) for gate_park_freeze_s. Starved, Cartographer
-       freezes map->odom on the last good pose and the robot rides wheel+IMU
-       odom until it drives again. Costmaps/diagnostics keep the raw topics;
-       only Cartographer subscribes to the gated ones. -->
-  <node pkg="feeding_deployment" type="scan_gate.py" name="scan_gate"
+  <!-- Owns map->map_carto (identity by default). Must run continuously: the
+       global_costmap StaticLayer and every map-frame TF lookup depend on it. -->
+  <node pkg="feeding_deployment" type="map_odom_clamp.py" name="map_odom_clamp"
         output="screen" respawn="true" respawn_delay="2">
-    <param name="min_cells" value="$(arg gate_min_cells)"/>
-    <param name="park_freeze_s" value="$(arg gate_park_freeze_s)"/>
-    <param name="startup_grace_s" value="$(arg gate_startup_grace_s)"/>
+    <param name="park_freeze_s" value="$(arg clamp_park_freeze_s)"/>
+    <param name="startup_grace_s" value="$(arg clamp_startup_grace_s)"/>
+    <param name="lin_jump_m" value="$(arg clamp_lin_jump_m)"/>
+    <param name="ang_jump_rad" value="$(arg clamp_ang_jump_rad)"/>
+    <param name="enabled" value="$(arg clamp_enabled)"/>
   </node>
 
-  <!-- Cartographer node in localization mode. -->
+  <!-- Cartographer node in localization mode. Subscribes to RAW scans now
+       (scan_gate retired): starving it wedged it and killed the map frame. -->
   <node pkg="cartographer_ros" type="cartographer_node" name="cartographer_node" output="screen"
         args="-configuration_directory $(arg config_dir)
               -configuration_basename $(arg config_basename)
               -load_state_filename $(arg load_state_filename)
               -load_frozen_state $(arg load_frozen_state)">
-    <remap from="scan_2" to="/lidar_l/scan_gated"/>
-    <remap from="scan_1" to="/lidar_r/scan_gated"/>
+    <remap from="scan_2" to="/lidar_l/scan"/>
+    <remap from="scan_1" to="/lidar_r/scan"/>
     <!-- Fused wheel+IMU odometry (ekf_fused_imu_wheel in sensors.launch, which
          also owns the odom->vention_base_link TF). child_frame_id equals the
          tracking_frame, so no TF hop. Was the sanitized ZED VIO
