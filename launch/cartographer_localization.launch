@@ -20,6 +20,13 @@
        it. Occlusion inside the unfrozen window is still caught by
        gate_min_cells. Set 0 to disable and fall back to coverage-only. -->
   <arg name="gate_park_freeze_s" default="30.0"/>
+  <!-- One-time startup warmup: the parked freeze is held off for this long
+       after the first scan, so it never starves Cartographer while it is still
+       establishing its INITIAL global lock on the loaded pbstream (that can
+       take well over a minute; 30 s is not enough). Kept separate from the
+       30 s steady-state park_freeze_s so feeding protection stays snappy every
+       meal (do NOT just inflate park_freeze_s for this). Set 0 to disable. -->
+  <arg name="gate_startup_grace_s" default="300.0"/>
 
   <!-- Scan gate: drops BOTH lidars' scans whenever either is too occluded to
        localize on (person/arm at the table gutted scans -> Cartographer
@@ -33,6 +40,7 @@
         output="screen" respawn="true" respawn_delay="2">
     <param name="min_cells" value="$(arg gate_min_cells)"/>
     <param name="park_freeze_s" value="$(arg gate_park_freeze_s)"/>
+    <param name="startup_grace_s" value="$(arg gate_startup_grace_s)"/>
   </node>
 
   <!-- Cartographer node in localization mode. -->

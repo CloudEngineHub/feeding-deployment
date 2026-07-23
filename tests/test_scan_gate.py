@@ -95,7 +95,11 @@ def test_startup_opens_without_any_command():
 
 
 def test_parked_freezes_even_with_clear_view():
+<<<<<<< HEAD
     core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0)
+=======
+    core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0, startup_grace_s=0.0)
+>>>>>>> carto-park-freeze
     _drive_open(core)
     assert core.open
     # Base stops being commanded; keep feeding healthy scans. Once we cross
@@ -117,7 +121,7 @@ def test_parked_freezes_even_with_clear_view():
 
 
 def test_parked_reopens_when_commanded_again():
-    core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0)
+    core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0, startup_grace_s=0.0)
     _drive_open(core)
     # let it park-freeze
     t = core.last_cmd_t + 6.0
@@ -126,6 +130,27 @@ def test_parked_reopens_when_commanded_again():
     # command motion again -> reopens after the hysteresis
     reopened = _drive_open(core, t0=t + 0.5)
     assert core.open and reopened is not None
+
+
+def test_startup_grace_holds_open_through_initial_localization():
+    """The parked freeze must NOT engage during the startup warmup, even after
+    an early command -- Cartographer's initial global lock can take far longer
+    than park_freeze_s, and freezing then would starve it."""
+    core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0, startup_grace_s=30.0)
+    _drive_open(core)                 # localizes; last cmd ~t=2, start_t=0
+    assert core.open
+    # No more commands. Feed healthy well past park_freeze_s but inside the
+    # 30 s grace -> must stay OPEN.
+    t = core.last_cmd_t
+    while t < core.start_t + 25.0:
+        t += 0.5
+        _feed(core, t)
+    assert core.open, "startup grace should hold the gate open during warmup"
+    # Past the grace and still parked -> now it freezes.
+    while t < core.start_t + 33.0:
+        t += 0.5
+        _feed(core, t)
+    assert not core.open
 
 
 def test_park_freeze_disabled_when_zero():

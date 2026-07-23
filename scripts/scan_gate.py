@@ -59,8 +59,18 @@ caught by the coverage trigger above. ANY cmd_vel message (even a trailing
 zero) counts as "commanded" and resets the timer -- we never want a false
 freeze mid-parking, and nothing streams continuous zeros to defeat it.
 
+<<<<<<< HEAD
 The trigger is disabled until the first command arrives, so startup still
 locks onto the loaded map on coverage alone.
+=======
+Two startup guards keep the parked trigger from starving Cartographer's
+INITIAL localization (the first global lock against the loaded pbstream can
+take well over a minute): it is disabled until the first command ever arrives
+(so a robot parked at its dock localizes on coverage alone, unlimited time),
+AND disabled for startup_grace_s (default 120 s) after the first scan (so it
+still holds off even if you drive/teleop mid-warmup and then park). Both are
+one-time; steady-state parks use park_freeze_s only.
+>>>>>>> carto-park-freeze
 
 Starved of range data, Cartographer creates no nodes and adds no constraints,
 so map->odom freezes at its last good value and the pose rides wheel+IMU odom
@@ -123,15 +133,28 @@ class GateCore:
     """
 
     def __init__(self, lidars=("l", "r"), min_cells=25, reopen_after_s=2.0,
+<<<<<<< HEAD
                  stale_s=1.0, park_freeze_s=30.0):
+=======
+                 stale_s=1.0, park_freeze_s=30.0, startup_grace_s=120.0):
+>>>>>>> carto-park-freeze
         self.min_cells = min_cells
         self.reopen_after_s = reopen_after_s
         self.stale_s = stale_s
         self.park_freeze_s = park_freeze_s            # 0/None disables the
                                                       # parked-freeze trigger
+<<<<<<< HEAD
         self.last_t = {k: None for k in lidars}       # last scan arrival
         self.last_cov = {k: None for k in lidars}     # last coverage
         self.last_cmd_t = None                        # last nonzero base cmd
+=======
+        self.startup_grace_s = startup_grace_s        # one-time warmup; 0/None
+                                                      # disables it
+        self.last_t = {k: None for k in lidars}       # last scan arrival
+        self.last_cov = {k: None for k in lidars}     # last coverage
+        self.last_cmd_t = None                        # last base cmd (any msg)
+        self.start_t = None                           # first scan seen
+>>>>>>> carto-park-freeze
         self.open = False                             # start closed; opens
         self.healthy_since = None                     # after reopen_after_s
         self.transition = None                        # set by update() when
@@ -146,12 +169,32 @@ class GateCore:
 
         A parked base accumulates ~zero odometry drift, so a scan-match
         correction here can only be spurious (the feeding-occlusion yank).
+<<<<<<< HEAD
         Freeze until motion is commanded again. Disabled until the first
         command arrives, so startup still locks onto the loaded map on
         coverage alone (and a robot parked-at-startup keeps current behavior).
         """
         if not self.park_freeze_s or self.last_cmd_t is None:
             return False
+=======
+        Freeze until motion is commanded again.
+
+        Two startup guards keep this from starving Cartographer's INITIAL
+        localization (establishing the first global lock against the loaded
+        pbstream can take well over a minute):
+          - Disabled until the first command ever arrives, so a robot parked
+            at its dock at launch localizes on coverage alone, unlimited time.
+          - Disabled for startup_grace_s after the first scan, so even if a
+            command is issued mid-warmup (driving/teleop while it converges),
+            the freeze still holds off until convergence is comfortably done.
+        Both are one-time; steady-state parks use park_freeze_s only.
+        """
+        if not self.park_freeze_s or self.last_cmd_t is None:
+            return False
+        if (self.startup_grace_s and self.start_t is not None
+                and t - self.start_t < self.startup_grace_s):
+            return False
+>>>>>>> carto-park-freeze
         return t - self.last_cmd_t > self.park_freeze_s
 
     def _all_healthy(self, t):
@@ -166,6 +209,8 @@ class GateCore:
     def update(self, lidar, coverage, t):
         """Record one scan; returns True if the gate is open for it."""
         self.transition = None
+        if self.start_t is None:
+            self.start_t = t
         self.last_t[lidar] = t
         self.last_cov[lidar] = coverage
         healthy, why = self._all_healthy(t)
@@ -201,7 +246,12 @@ class ScanGateNode:
             min_cells=rospy.get_param("~min_cells", 25),
             reopen_after_s=rospy.get_param("~reopen_after_s", 2.0),
             stale_s=rospy.get_param("~stale_s", 1.0),
+<<<<<<< HEAD
             park_freeze_s=rospy.get_param("~park_freeze_s", 30.0))
+=======
+            park_freeze_s=rospy.get_param("~park_freeze_s", 30.0),
+            startup_grace_s=rospy.get_param("~startup_grace_s", 120.0))
+>>>>>>> carto-park-freeze
         self.lock = threading.Lock()
         self.n_fwd = {"l": 0, "r": 0}
         self.n_drop = {"l": 0, "r": 0}
@@ -224,10 +274,18 @@ class ScanGateNode:
         rospy.Subscriber("/cmd_vel_teleop", Twist, self.cb_cmd, queue_size=10)
         rospy.Timer(rospy.Duration(self.stats_period_s), self.cb_stats)
         rospy.loginfo("scan_gate: up (min_cells=%d cell=%.2fm reopen=%.1fs "
+<<<<<<< HEAD
                       "park_freeze=%.1fs); gate starts CLOSED until both "
                       "lidars are healthy",
                       self.core.min_cells, self.cell_m,
                       self.core.reopen_after_s, self.core.park_freeze_s)
+=======
+                      "park_freeze=%.1fs startup_grace=%.1fs); gate starts "
+                      "CLOSED until both lidars are healthy",
+                      self.core.min_cells, self.cell_m,
+                      self.core.reopen_after_s, self.core.park_freeze_s,
+                      self.core.startup_grace_s)
+>>>>>>> carto-park-freeze
 
     def cb_cmd(self, _msg):
         # ANY command message (even a trailing zero) means navigation is live,
