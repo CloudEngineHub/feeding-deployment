@@ -53,7 +53,7 @@ class TransferToolHLA(HighLevelAction):
         if self.sim.scene_description.transfer_type == "inside":
             self.transfer = InsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir)
         elif self.sim.scene_description.transfer_type == "outside":
-            self.transfer = OutsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir)
+            self.transfer = OutsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir, web_interface=self.web_interface)
         else:
             raise ValueError("Bite transfer type not recognized")
 
@@ -220,44 +220,48 @@ class TransferToolHLA(HighLevelAction):
         self.perception_interface.set_head_perception_tool(self.tool)
         print("--- Starting head perception thread ---")
         self.perception_interface.start_head_perception_thread()
-        if self.robot_interface is not None:
-            time.sleep(2.0) # let head perception thread warmstart / robot to stabilize
-            self.robot_interface.set_tool(self.tool)
-            self.perception_interface.zero_ft_sensor()
-        else:
-            time.sleep(1.0) # let sim head perception thread warmstart
+        try:
+            if self.robot_interface is not None:
+                time.sleep(2.0) # let head perception thread warmstart / robot to stabilize
+                self.robot_interface.set_tool(self.tool)
+                self.perception_interface.zero_ft_sensor()
+            else:
+                time.sleep(1.0) # let sim head perception thread warmstart
 
-        if self.sim.scene_description.transfer_type == "inside" and self.robot_interface is not None:
-            # only for CBTL: move to absolute transfer pos before switching to compliant mode
-            self.move_to_joint_positions(self.sim.scene_description.absolute_before_transfer_pos)
-            self.disable_collision_sensor_pub.publish(Bool(data=True))
-            print("Sent message to turn off collision sensor")
-            time.sleep(0.5) # let collision sensor turn off
-            if not self.no_waits:
-                input("Press enter to switch to task compliant mode")
-            self.robot_interface.switch_to_task_compliant_mode()
-            time.sleep(2.0) # let the robot stabilize
+            if self.sim.scene_description.transfer_type == "inside" and self.robot_interface is not None:
+                # only for CBTL: move to absolute transfer pos before switching to compliant mode
+                self.move_to_joint_positions(self.sim.scene_description.absolute_before_transfer_pos)
+                self.disable_collision_sensor_pub.publish(Bool(data=True))
+                print("Sent message to turn off collision sensor")
+                time.sleep(0.5) # let collision sensor turn off
+                if not self.no_waits:
+                    input("Press enter to switch to task compliant mode")
+                self.robot_interface.switch_to_task_compliant_mode()
+                time.sleep(2.0) # let the robot stabilize
 
-        if self.robot_interface is not None:
-            self.relay_ready_to_initiate_transfer(ready_to_initiate_mode, initiate_transfer_mode)
-            self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
-        elif self.web_interface is not None and initiate_transfer_mode == "button":
-            # In simulation (no real robot) the button interaction still runs via the
-            # webapp; the physical relay + non-button sensing modes need the real robot
-            # and stay under the guard above.
-            self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
+            if self.robot_interface is not None:
+                self.relay_ready_to_initiate_transfer(ready_to_initiate_mode, initiate_transfer_mode)
+                self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
+            elif self.web_interface is not None and initiate_transfer_mode == "button":
+                # In simulation (no real robot) the button interaction still runs via the
+                # webapp; the physical relay + non-button sensing modes need the real robot
+                # and stay under the guard above.
+                self.detect_initiate_transfer(initiate_transfer_mode, ready_to_initiate_mode)
 
-        self.transfer.set_tool(self.tool)
-        self.transfer.move_to_transfer_state(outside_mouth_distance, maintain_position_at_goal)
+            self.transfer.set_tool(self.tool)
+            self.transfer.move_to_transfer_state(outside_mouth_distance, maintain_position_at_goal)
 
-        if self.robot_interface is not None:
-            self.relay_ready_for_transfer(ready_to_transfer_mode)
-            self.detect_transfer_complete(transfer_complete_mode, ready_to_transfer_mode)
-        elif self.web_interface is not None and transfer_complete_mode == "button":
-            self.detect_transfer_complete(transfer_complete_mode, ready_to_transfer_mode)
-
-        # shutdown the head perception thread
-        self.perception_interface.stop_head_perception_thread()
+            if self.robot_interface is not None:
+                self.relay_ready_for_transfer(ready_to_transfer_mode)
+                self.detect_transfer_complete(transfer_complete_mode, ready_to_transfer_mode)
+            elif self.web_interface is not None and transfer_complete_mode == "button":
+                self.detect_transfer_complete(transfer_complete_mode, ready_to_transfer_mode)
+        finally:
+            # Always tear down the head perception thread, even if the transfer
+            # aborted (e.g. a mid-skill takeover raised while waiting for a valid
+            # head-perception reading). Otherwise it keeps running and the next
+            # start_head_perception_thread() asserts, crashing redo / the next bite.
+            self.perception_interface.stop_head_perception_thread()
 
         self.transfer.move_to_before_transfer_state()        
         
