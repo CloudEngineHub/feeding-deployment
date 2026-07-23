@@ -179,6 +179,24 @@ HLAS = {
 assert os.environ.get("PYTHONHASHSEED") == "0", \
         "Please add `export PYTHONHASHSEED=0` to your bash profile!"
 
+
+def _retarget_table_bt(old_text: str, node_name: str, fn_name: str) -> str:
+    """Copy a navigate_to_table.yaml's text, rewriting only the top-level name and
+    the fn tag to target a specific physical table. Preserves all learned parameter
+    values (and the !hla tag) verbatim -- a text transform, because the BT YAML uses
+    a custom !hla tag that plain yaml.safe_load cannot round-trip."""
+    out = []
+    for line in old_text.splitlines(keepends=True):
+        nl = "\n" if line.endswith("\n") else ""
+        if line.startswith("name:"):
+            out.append(f'name: "{node_name}"{nl}')
+        elif line.startswith("fn:"):
+            out.append(f'fn: !hla {fn_name}{nl}')
+        else:
+            out.append(line)
+    return "".join(out)
+
+
 class _Runner:
     """A class for running the integrated system."""
 
@@ -233,6 +251,13 @@ class _Runner:
             original_gesture_detection_filepath = Path(__file__).parents[1] / "perception" / "gestures_perception" / "synthesized_gesture_detectors.py"
             assert original_gesture_detection_filepath.exists()
             shutil.copy(original_gesture_detection_filepath, self.gesture_detectors_dir)
+
+        # Runs for BOTH new and existing users (the seed block above runs only for
+        # brand-new users): make sure the per-user behavior-tree dir has every
+        # factory tree, including trees added since the user was provisioned. This
+        # must happen before the ground-HLA BT loop below (which loads each tree and
+        # would otherwise crash on a missing file for an existing user).
+        self._reconcile_user_behavior_trees()
 
         # Single logs handle: owns the shared state dir (== self.log_dir) and, when
         # --day is given, the per-day release record under log/<user>/day_<NN>/.
@@ -336,6 +361,13 @@ class _Runner:
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
+        # Let the Navigate HLA read the current mealtime setting so the "table"
+        # destination resolves to the dining table (social) vs the movable table
+        # (everything else). Reads self.preference_context lazily at nav time, so it
+        # reflects both fresh collection and resume-from-state.
+        self.hla_name_to_hla["Navigate"].set_context_provider(
+            lambda: self.preference_context
+        )
         self.operators = {hla.get_operator() for hla in self.hlas}
         self.predicates: set[Predicate] = {
             ToolPrepared,
@@ -531,6 +563,44 @@ class _Runner:
         print("Runner is ready.")
         self.active = True
         self.preference_context: dict[str, str] | None = None
+
+    def _reconcile_user_behavior_trees(self) -> None:
+        """Ensure the per-user behavior-tree dir has every factory tree, seeding
+        trees added since the user was provisioned (the new-user seed in __init__
+        runs only once). Idempotent; never overwrites an existing (possibly
+        user-edited) tree.
+
+        Table split (2026-07): navigate_to_table.yaml was replaced by
+        navigate_to_dining_table.yaml / navigate_to_movable_table.yaml. For an
+        existing user we build the two new trees from their old navigate_to_table
+        .yaml so accumulated learning (ParkingOffset/Speed/ArrivalConfirm) carries
+        into both physical tables, rather than copying the zeroed factory defaults."""
+        bt_dir = self.run_behavior_tree_dir
+        bt_dir.mkdir(parents=True, exist_ok=True)
+        factory_dir = Path(__file__).parents[1] / "actions" / "behavior_trees"
+
+        # 1) Table split: seed the two new table trees from the user's old one.
+        old_table = bt_dir / "navigate_to_table.yaml"
+        if old_table.exists():
+            old_text = old_table.read_text(encoding="utf-8")
+            for fn_name, node_name in (
+                ("navigate_to_dining_table", "NavigateToDiningTable"),
+                ("navigate_to_movable_table", "NavigateToMovableTable"),
+            ):
+                dst = bt_dir / f"{fn_name}.yaml"
+                if not dst.exists():
+                    dst.write_text(
+                        _retarget_table_bt(old_text, node_name, fn_name),
+                        encoding="utf-8",
+                    )
+
+        # 2) Generic backfill: copy any factory tree still missing (the two table
+        #    trees above are already present, so they are not overwritten with the
+        #    zeroed factory versions).
+        for factory_bt in factory_dir.glob("*.yaml"):
+            dst = bt_dir / factory_bt.name
+            if not dst.exists():
+                shutil.copy(factory_bt, dst)
 
     def ensure_preference_context(self) -> dict[str, str]:
         """Require a valid preference context before the web session; no implicit defaults."""
@@ -1159,7 +1229,8 @@ class _Runner:
                 # back and finalize the location's offset dim.
                 elif bt_name.startswith("navigate_to_"):
                     location = bt_name[len("navigate_to_"):]
-                    if location in ("fridge", "microwave", "sink", "table"):
+                    if location in ("fridge", "microwave", "sink",
+                                    "dining_table", "movable_table"):
                         self._pref_session.record_nav_offset(location)
 
             # Save the latest state in case we want to resume execution

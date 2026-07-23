@@ -214,11 +214,18 @@ PREFERENCE_BUNDLE: List[PreferenceDim] = [
     # colors, the four locations are independent: a correction at one location
     # is only weak evidence for the others.
     PreferenceDim(
-        field="nav_offset_table",
-        label="Navigation offset (table)",
+        field="nav_offset_dining_table",
+        label="Navigation offset (dining table)",
         options=[],
         kind="nav_offset",
-        description="Learned correction to the robot's parking pose when it navigates to the table, expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the table applies it to the goal. Each location has its own independent offset. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+        description="Learned correction to the robot's parking pose when it navigates to the DINING table (used in social meals), expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the dining table applies it to the goal. The dining table and movable table are separate physical locations with independent offsets. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+    ),
+    PreferenceDim(
+        field="nav_offset_movable_table",
+        label="Navigation offset (movable table)",
+        options=[],
+        kind="nav_offset",
+        description="Learned correction to the robot's parking pose when it navigates to the MOVABLE table (used in non-social meals -- personal or watching TV), expressed in the stored goal pose's local frame: dx (meters, forward), dy (meters, left), dyaw (radians, counter-clockwise). After autonomous navigation the user may teleoperate the base to fine-adjust its position; the measured adjustment accumulates into this total offset, and the next navigation to the movable table applies it to the goal. The dining table and movable table are separate physical locations with independent offsets. Predict the current total offset; the provided seed is the accumulated offset saved so far -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
     ),
     PreferenceDim(
         field="nav_offset_microwave",
@@ -360,8 +367,11 @@ DEFAULT_NAV_OFFSET: dict = {"dx": 0.0, "dy": 0.0, "dyaw": 0.0}
 NAV_OFFSET_BOUNDS: dict = {"dx": 0.5, "dy": 0.5, "dyaw": 0.7853981633974483}  # +/- 0.5 m, +/- 45 deg
 
 # navigation location <-> offset field (location names match navigate_to_<loc>.yaml).
+# The table is split into two independent physical locations selected by context:
+# the dining table (social meals) and the movable table (everything else).
 OFFSET_FIELD_BY_LOCATION: dict = {
-    "table": "nav_offset_table",
+    "dining_table": "nav_offset_dining_table",
+    "movable_table": "nav_offset_movable_table",
     "microwave": "nav_offset_microwave",
     "sink": "nav_offset_sink",
     "fridge": "nav_offset_fridge",

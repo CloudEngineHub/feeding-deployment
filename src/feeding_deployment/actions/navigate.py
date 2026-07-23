@@ -37,12 +37,21 @@ from feeding_deployment.actions.base import (
     GripperFree,
 )
 from feeding_deployment.interfaces.web_interface import WebInterfaceTakeoverInterrupt
+from feeding_deployment.preference_learning.config.mealtime_context import (
+    active_table_for_setting,
+)
 
 
 class NavigateHLA(HighLevelAction):
     """Navigate from one target to another."""
 
-    _VALID_TARGETS = ("fridge", "microwave", "sink", "table")
+    # "table" is the PDDL destination the planner grounds; it is resolved at
+    # behavior-tree-selection time (by the current mealtime setting) to one of the
+    # two physical tables. The physical names are also valid targets because the
+    # post-arrival offset write-back grounds objects with the physical name.
+    _VALID_TARGETS = (
+        "fridge", "microwave", "sink", "table", "dining_table", "movable_table",
+    )
 
     # Frames used for the post-nav refinement window.
     _MAP_FRAME = "map"
@@ -1646,7 +1655,9 @@ class NavigateHLA(HighLevelAction):
             Object(location_name, nav_target_type),
             Object(location_name, nav_target_type),
         )
-        node_name = f"NavigateTo{location_name.capitalize()}"
+        # Title-case across underscores so multi-token locations map to their BT
+        # node name: "dining_table" -> "NavigateToDiningTable".
+        node_name = "NavigateTo" + "".join(w.capitalize() for w in location_name.split("_"))
         result = self.process_behavior_tree_parameter_update(
             objects, {}, node_name, "ParkingOffset",
             [float(clamped[0]), float(clamped[1]), float(clamped[2])],
@@ -1747,6 +1758,22 @@ class NavigateHLA(HighLevelAction):
             },
         )
 
+    def set_context_provider(self, provider) -> None:
+        """Register a zero-arg callable returning the current preference context
+        (a dict with a "setting" key), or None. Used to pick which physical table
+        the "table" destination resolves to. Optional -- when unset, table
+        navigation defaults to the movable table."""
+        self._context_provider = provider
+
+    def _resolve_table_bt(self) -> str:
+        """Physical table ("dining_table"/"movable_table") for the current
+        mealtime setting. Defaults to the movable table when no context is
+        available (no provider, or provider returns None)."""
+        provider = getattr(self, "_context_provider", None)
+        context = provider() if provider is not None else None
+        setting = context.get("setting") if isinstance(context, dict) else None
+        return active_table_for_setting(setting)
+
     def get_behavior_tree_filename(
         self,
         objects: Tuple[Object, ...],
@@ -1756,6 +1783,12 @@ class NavigateHLA(HighLevelAction):
         assert len(objects) == 2
         _, dst = objects
         assert self.sim.scene_description.scene_label == "vention"
+        # The planner grounds the single PDDL object "table"; resolve it to the
+        # context-appropriate physical table here (the one place the setting drives
+        # table selection). The post-arrival offset write-back instead grounds the
+        # physical name directly, which falls through to the assert branch.
+        if dst.name == "table":
+            return f"navigate_to_{self._resolve_table_bt()}.yaml"
         assert dst.name in self._VALID_TARGETS
         return f"navigate_to_{dst.name}.yaml"
 
@@ -1821,7 +1854,20 @@ class NavigateHLA(HighLevelAction):
             autocontinue_seconds=autocontinue_seconds,
         )
 
-    def navigate_to_table(self, speed: str, position_offset, arrival_confirm) -> None:
+    def navigate_to_dining_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        self._navigate_table_leg("dining_table", speed, position_offset, arrival_confirm)
+
+    def navigate_to_movable_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        self._navigate_table_leg("movable_table", speed, position_offset, arrival_confirm)
+
+    def _navigate_table_leg(
+        self, destination: str, speed: str, position_offset, arrival_confirm
+    ) -> None:
+        """Drive the table leg to one of the two physical tables ("dining_table"
+        or "movable_table"). The kitchen egress (staging waypoint / logged-nav
+        scripted egress) is identical for both -- only the final destination pose,
+        the learned parking offset, and the post-arrival write-back differ, all
+        keyed off `destination`."""
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
         # microwave -> table is the kitchen egress: reverse out through the narrow
         # corridor to the open staging area, then turn and drive to the table.
@@ -1863,7 +1909,7 @@ class NavigateHLA(HighLevelAction):
             # inside the corridor -> full normal route incl. staging.
             via = [] if outcome == "completed" else [self._STAGING_WAYPOINT]
             self._navigate_to_target(
-                "table", speed, via=via, position_offset=position_offset,
+                destination, speed, via=via, position_offset=position_offset,
                 arrival_confirm_mode=arrival_confirm_mode,
                 autocontinue_seconds=autocontinue_seconds,
             )
@@ -1874,7 +1920,7 @@ class NavigateHLA(HighLevelAction):
                 "defined) -- using normal autonomous navigation."
             )
         self._navigate_to_target(
-            "table", speed, via=[self._STAGING_WAYPOINT], position_offset=position_offset,
+            destination, speed, via=[self._STAGING_WAYPOINT], position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
         )

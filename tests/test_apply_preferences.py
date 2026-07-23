@@ -161,7 +161,8 @@ class TestApplyBundleToBehaviorTrees:
     ]
     _NAV_CONFIRM_YAMLS = [
         "navigate_to_fridge.yaml", "navigate_to_microwave.yaml",
-        "navigate_to_sink.yaml", "navigate_to_table.yaml",
+        "navigate_to_sink.yaml", "navigate_to_dining_table.yaml",
+        "navigate_to_movable_table.yaml",
     ]
 
     def test_feeding_confirmation_skip(self, bt_dir: Path):
@@ -412,7 +413,7 @@ class TestApplyBundleFullBundle:
         assert _get_param_value(data, "BiteSelectionAutocontinueSeconds") == 60.0
         ut = _load(bt_dir, "transfer_utensil.yaml")
         assert _get_param_value(ut, "TaskReselectionAutocontinueSeconds") == 0.0   # wait for me
-        nav = _load(bt_dir, "navigate_to_table.yaml")
+        nav = _load(bt_dir, "navigate_to_dining_table.yaml")
         assert _get_param_value(nav, "ArrivalConfirm") == 15.0           # countdown 15 s
         pk = _load(bt_dir, "pick_plate_from_fridge.yaml")
         assert _get_param_value(pk, "ManipulationConfirm") == 0.0        # wait for me

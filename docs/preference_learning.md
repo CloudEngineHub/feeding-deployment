@@ -65,15 +65,19 @@ corrections over days.
 | `categorical` (19) | `microwave_time`, `robot_speed`, `skewering_axis`, `confirm_feeding_pickup`, `confirm_navigation_arrival`, `confirm_manipulation`, `transfer_mode`, `outside_mouth_distance`, `convey_robot_ready_for_initiating_transfer`, `detect_user_ready_for_initiating_transfer_{feeding,drinking,wiping}`, `convey_robot_ready_for_completing_transfer`, `detect_user_completed_transfer_{feeding,drinking,wiping}`, `retract_between_bites`, `bite_dipping_preference`, `wait_before_autocontinue_seconds` | finite option list | iPad "ask" pages + settings overlay |
 | `text` (1) | `bite_ordering` | free natural-language sentence | iPad ask page, "Other…" editor (typed or speech) |
 | `color` (3) | `plate_color_{fridge,microwave,table}` | HSV + tolerance `{h∈[0,179], s,v∈[0,255], range∈[0,1]}` | live camera color picker during the pickup |
-| `nav_offset` (4) | `nav_offset_{table,microwave,sink,fridge}` | SE(2) `{dx,dy∈[−0.5,0.5] m, dyaw∈[−45°,45°]}` in the stored goal's local frame | physical teleop adjustment after arrival |
+| `nav_offset` (5) | `nav_offset_{dining_table,movable_table,microwave,sink,fridge}` | SE(2) `{dx,dy∈[−0.5,0.5] m, dyaw∈[−45°,45°]}` in the stored goal's local frame | physical teleop adjustment after arrival |
 
 Two structural facts the method exploits:
 
 - The three color dims are the **same physical plate handle** seen under three lightings —
   a correction to one is strong evidence for the others (stated to the LLM,
   `bundle_prediction.txt:43`).
-- The four nav offsets are **independent** per location — a correction at one is only weak
-  evidence for the others.
+- The five nav offsets are **independent** per location — a correction at one is only weak
+  evidence for the others. The "table" navigation destination resolves by mealtime setting
+  to two distinct physical tables — `dining_table` (social settings) vs `movable_table`
+  (personal / watching TV) — each with its own offset; `NavigateHLA.get_behavior_tree_filename`
+  picks the tree, and the unused table each meal is treated as "not observed" (excluded from
+  that day's record, its saved offset left untouched).
 
 **Confirmation-page modes.** The three `confirm_*` dims share one option vocabulary —
 `"no"` (page skipped), `"yes (with auto-continue countdown)"` (page counts down for the global wait pref,

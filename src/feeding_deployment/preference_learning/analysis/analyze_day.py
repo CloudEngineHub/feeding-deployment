@@ -61,7 +61,10 @@ CATEGORICAL = [
 ]
 TEXT = ["bite_ordering"]
 COLOR = ["plate_color_fridge", "plate_color_microwave", "plate_color_table"]
-NAV = ["nav_offset_table", "nav_offset_microwave", "nav_offset_sink", "nav_offset_fridge"]
+# nav_offset_table is retained for pre-split (days before the dining/movable split)
+# historical logs; new days use the two per-table fields.
+NAV = ["nav_offset_dining_table", "nav_offset_movable_table", "nav_offset_table",
+       "nav_offset_microwave", "nav_offset_sink", "nav_offset_fridge"]
 
 KIND = {**{f: "categorical" for f in CATEGORICAL}, **{f: "text" for f in TEXT},
         **{f: "color" for f in COLOR}, **{f: "nav" for f in NAV}}
