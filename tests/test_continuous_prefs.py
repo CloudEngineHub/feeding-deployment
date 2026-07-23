@@ -19,6 +19,7 @@ from feeding_deployment.preference_learning.config.preference_bundle import (
 )
 from feeding_deployment.preference_learning.data_generation.continuous_prefs import (
     CONTINUOUS_FIELDS,
+    REFERENCE_TOD,
     continuous_truth,
     render_continuous_tendencies,
     sample_continuous_tables,
@@ -47,8 +48,8 @@ class TestSampling:
 
     def test_reference_components_are_zero(self):
         tables = sample_continuous_tables(random.Random(0))
-        assert all(v == 0 for v in tables["time_color_shifts"]["noon"].values())
-        assert all(v == 0.0 for v in tables["time_nav_shifts"]["noon"].values())
+        assert all(v == 0 for v in tables["time_color_shifts"][REFERENCE_TOD].values())
+        assert all(v == 0.0 for v in tables["time_nav_shifts"][REFERENCE_TOD].values())
         assert all(v == 0.0 for v in tables["affect_nav_shifts"]["Neutral"].values())
         assert all(v == 0 for v in tables["location_color_offsets"]["table"].values())
 
@@ -72,10 +73,10 @@ class TestTruth:
 
     def test_color_time_shift_shared_across_locations(self):
         tables = sample_continuous_tables(random.Random(7))
-        noon = continuous_truth(tables, "noon", "Neutral")
+        ref = continuous_truth(tables, REFERENCE_TOD, "Neutral")
         morning = continuous_truth(tables, "morning", "Neutral")
         deltas = {
-            f: (morning[f]["h"] - noon[f]["h"], morning[f]["s"] - noon[f]["s"], morning[f]["v"] - noon[f]["v"])
+            f: (morning[f]["h"] - ref[f]["h"], morning[f]["s"] - ref[f]["s"], morning[f]["v"] - ref[f]["v"])
             for f in COLOR_FIELDS
         }
         assert len(set(deltas.values())) == 1  # one shared lighting shift
@@ -83,15 +84,15 @@ class TestTruth:
 
     def test_color_has_no_affect_term(self):
         tables = sample_continuous_tables(random.Random(7))
-        a = continuous_truth(tables, "noon", "Neutral")
-        b = continuous_truth(tables, "noon", "Fatigued")
+        a = continuous_truth(tables, REFERENCE_TOD, "Neutral")
+        b = continuous_truth(tables, REFERENCE_TOD, "Fatigued")
         for f in COLOR_FIELDS:
             assert a[f] == b[f]
 
     def test_nav_affect_shift_shared_across_locations(self):
         tables = sample_continuous_tables(random.Random(7))
-        neutral = continuous_truth(tables, "noon", "Neutral")
-        fatigued = continuous_truth(tables, "noon", "Fatigued")
+        neutral = continuous_truth(tables, REFERENCE_TOD, "Neutral")
+        fatigued = continuous_truth(tables, REFERENCE_TOD, "Fatigued")
         deltas = {
             f: tuple(round(fatigued[f][k] - neutral[f][k], 3) for k in ("dx", "dy", "dyaw"))
             for f in NAV_FIELDS
@@ -101,7 +102,7 @@ class TestTruth:
 
     def test_nav_bases_independent_across_locations(self):
         tables = sample_continuous_tables(random.Random(7))
-        neutral = continuous_truth(tables, "noon", "Neutral")
+        neutral = continuous_truth(tables, REFERENCE_TOD, "Neutral")
         bases = {tuple(neutral[f].values()) for f in NAV_FIELDS}
         assert len(bases) == len(NAV_FIELDS)
 
@@ -110,7 +111,7 @@ class TestTruth:
         with pytest.raises(KeyError):
             continuous_truth(tables, "midnight", "Neutral")
         with pytest.raises(KeyError):
-            continuous_truth(tables, "noon", "Grumpy")
+            continuous_truth(tables, REFERENCE_TOD, "Grumpy")
 
 
 class TestRenderTendencies:

@@ -130,7 +130,6 @@ from feeding_deployment.integration.preference_session import (
     INITIAL_PREF_DIMS as _INITIAL_PREF_DIMS,
     PreferenceSession,
     TABLE_PREF_DIMS as _TABLE_PREF_DIMS,
-    bt_consumes_predictions,
 )
 from feeding_deployment.preference_learning.methods.prediction_model import PredictionModel, PREF_OPTIONS, MEMORY_MODES, DEFAULT_MEMORY_MODE
 from feeding_deployment.preference_learning.config.physical_capabilities import (
@@ -394,12 +393,17 @@ class _Runner:
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
+        # Observable mealtime context for this meal; set later (meal start / resume).
+        # Declared here so the init-time behavior-tree pass below can read it before
+        # any meal context is collected.
+        self.preference_context: dict[str, str] | None = None
         # Let the Navigate HLA read the current mealtime setting so the "table"
         # destination resolves to the dining table (social) vs the movable table
-        # (everything else). Reads self.preference_context lazily at nav time, so it
-        # reflects both fresh collection and resume-from-state.
+        # (everything else). getattr guards the init-time pass (context is None ->
+        # movable table); at nav time it returns the live context (fresh collection
+        # or resume-from-state).
         self.hla_name_to_hla["Navigate"].set_context_provider(
-            lambda: self.preference_context
+            lambda: getattr(self, "preference_context", None)
         )
         self.operators = {hla.get_operator() for hla in self.hlas}
         self.predicates: set[Predicate] = {
@@ -595,7 +599,6 @@ class _Runner:
 
         print("Runner is ready.")
         self.active = True
-        self.preference_context: dict[str, str] | None = None
 
     def _reconcile_user_behavior_trees(self) -> None:
         """Ensure the per-user behavior-tree dir has every factory tree, seeding
@@ -1184,12 +1187,14 @@ class _Runner:
                 )
             if self._pref_session is not None:
                 # Corrections repredict in the BACKGROUND (the robot keeps
-                # moving); join here only before skills whose BT reads
-                # prediction-produced parameters (pickup colors, nav offsets,
-                # feeding dims) so they never execute on half-updated YAMLs.
-                # The join runs after the settings stall (edits made while the
-                # panel was open have scheduled their reprediction by now).
-                if bt_consumes_predictions(skill_plan_names[i]):
+                # moving); join here only when this skill reads a dim that is
+                # still OPEN, i.e. one the pending reprediction could still
+                # rewrite -- so a skill never executes on half-updated YAMLs, but
+                # an irrelevant reprediction (e.g. an open plate color while
+                # feeding) does not stall it. The join runs after the settings
+                # stall (edits made while the panel was open have scheduled their
+                # reprediction by now).
+                if self._pref_session.should_wait_for_reprediction(skill_plan_names[i]):
                     self._pref_session.wait_for_reprediction()
 
             # Execute the high-level plan in simulation. On a mid-skill takeover

@@ -30,9 +30,9 @@ Threading: repredictions triggered by corrections run on a single coalescing
 BACKGROUND worker so the robot is not stationary during the LLM call. Every
 consumer of predictions joins first -- ``ask()`` before showing each step,
 ``record_color``/``record_nav_offset`` on entry, ``finalize_meal`` on entry,
-and run.py via ``wait_for_reprediction()`` before executing any skill whose
-behavior tree reads prediction-produced parameters (see
-``bt_consumes_predictions``). All BT-YAML writers serialize on a dedicated
+and run.py via ``wait_for_reprediction()`` before executing any skill that reads
+a still-open prediction-produced parameter (see
+``should_wait_for_reprediction``). All BT-YAML writers serialize on a dedicated
 mutex (acquired BEFORE the session lock, always in that order) so concurrent
 appliers can never interleave lost-update file writes.
 """
@@ -87,6 +87,7 @@ from feeding_deployment.integration.apply_preferences import (
     apply_dip_preference,
     apply_microwave_preference,
     apply_transfer_mode,
+    bt_consumed_pref_fields,
 )
 
 _COLOR_FIELD_SET = set(COLOR_FIELDS)
@@ -132,27 +133,6 @@ INITIAL_PREF_DIMS = [
     "confirm_navigation_arrival",
     "confirm_manipulation",
 ]
-
-# Behavior trees whose parameters come from (re)prediction: plate pickups read
-# PlateHandleColor/PlateHandleColorTolerance, navigations read ParkingOffset, and the feeding
-# skills read the table dims. run.py joins the background reprediction before
-# executing these; every other skill only reads dims that are finalized before
-# it can run (Speed, confirm_navigation_arrival and confirm_manipulation from
-# the initial ask, MicrowaveDuration from the locked microwave ask), which
-# repredictions never touch. If a new dim is ever consumed by a skill BEFORE
-# its ask step, add that skill's BT prefix here.
-_PREDICTION_CONSUMING_BT_PREFIXES = (
-    "pick_plate_from_",
-    "navigate_to_",
-    "transfer_",
-    "acquire_bite",
-)
-
-
-def bt_consumes_predictions(bt_name: str) -> bool:
-    """True if the skill's behavior tree reads parameters that a pending
-    background reprediction may still be about to (re)write."""
-    return str(bt_name).startswith(_PREDICTION_CONSUMING_BT_PREFIXES)
 
 
 # Preference dimensions asked at the table, just before feeding begins.
@@ -651,6 +631,23 @@ class PreferenceSession:
                 lambda: not self._repredict_running and not self._repredict_dirty,
                 timeout,
             )
+
+    def should_wait_for_reprediction(self, bt_name: str) -> bool:
+        """True iff the skill ``bt_name`` reads a dim that is still OPEN (not
+        finalized) -- i.e. a dim a pending background reprediction could still
+        (re)write.
+
+        A reprediction only ever changes open dims (finalized dims are pinned and
+        skipped by _repredict_open), so a skill whose consumed dims are all
+        finalized can never be affected by one in flight and need not join
+        wait_for_reprediction. Callers gate the join on this so an irrelevant
+        reprediction (e.g. an open plate color / inactive-table offset) does not
+        stall a feeding skill that reads none of it."""
+        consumed = bt_consumed_pref_fields(bt_name)
+        if not consumed:
+            return False
+        with self._lock:
+            return any(f not in self.finalized for f in consumed)
 
     # ------------------------------------------------------------------ #
     # Apply
