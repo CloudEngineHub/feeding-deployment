@@ -30,10 +30,42 @@ What this node does:
   - Gate CLOSED: forward NOTHING. Dropping only the bad lidar would desync
     Cartographer's ordered multi-queue (it stalls on the silent topic and
     dumps a stale backlog on resume), so both are always gated together.
-  - OPEN -> CLOSED on a single unhealthy scan (coverage < min_cells) or on
-    partner staleness (> stale_s). One dropped scan is harmless.
-  - CLOSED -> OPEN only after BOTH lidars are continuously healthy for
-    reopen_after_s (hysteresis; don't flap mid-bite).
+  - OPEN -> CLOSED on a single unhealthy scan (coverage < min_cells), on
+    partner staleness (> stale_s), or once the base has gone park_freeze_s
+    (default 30 s) with nothing on /cmd_vel[_teleop]. One dropped scan is
+    harmless.
+  - CLOSED -> OPEN only after BOTH lidars are continuously healthy AND the
+    base is being commanded, for reopen_after_s (hysteresis; don't flap
+    mid-bite).
+
+The parked trigger is the cheap, robust version of "don't let Cartographer
+jump during feeding." A parked base accumulates ~zero odometry drift, so any
+scan-match correction while parked is spurious -- exactly the feeding-occlusion
+yank this node exists to kill -- and freezing loses nothing real. It needs no
+knowledge of the feeding state machine: navigation goes fully silent on
+/cmd_vel once the base is parked for a bite -- no held goal and no streamed
+zeros (the NUC's 0.3 s lost-command watchdog holds the wheels) -- so "topic
+silent for a while" == "parked".
+
+park_freeze_s is deliberately LONG (30 s), not short. The parked-goal fine-
+parking sequence stops at the goal and sits still through a 15 s pure-sleep
+window (navigate.py _GOAL_CONFIRM_SETTLE_S) precisely so Cartographer CAN catch
+up and the goal can be replanned -- those early post-park corrections are
+WANTED, and that window is itself cmd_vel-silent. So the freeze must not start
+until we are past all such settle windows and confidently into the parked-for-
+feeding regime; 30 s clears the 15 s settle (plus the 10 s adjust / 5 s refine
+settles) with margin. Any occlusion yank inside the unfrozen window is still
+caught by the coverage trigger above. ANY cmd_vel message (even a trailing
+zero) counts as "commanded" and resets the timer -- we never want a false
+freeze mid-parking, and nothing streams continuous zeros to defeat it.
+
+Two startup guards keep the parked trigger from starving Cartographer's
+INITIAL localization (the first global lock against the loaded pbstream can
+take well over a minute): it is disabled until the first command ever arrives
+(so a robot parked at its dock localizes on coverage alone, unlimited time),
+AND disabled for startup_grace_s (default 120 s) after the first scan (so it
+still holds off even if you drive/teleop mid-warmup and then park). Both are
+one-time; steady-state parks use park_freeze_s only.
 
 Starved of range data, Cartographer creates no nodes and adds no constraints,
 so map->odom freezes at its last good value and the pose rides wheel+IMU odom
@@ -65,6 +97,7 @@ import threading
 
 import numpy as np
 import rospy
+from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Bool
 
@@ -95,16 +128,50 @@ class GateCore:
     """
 
     def __init__(self, lidars=("l", "r"), min_cells=25, reopen_after_s=2.0,
-                 stale_s=1.0):
+                 stale_s=1.0, park_freeze_s=30.0, startup_grace_s=120.0):
         self.min_cells = min_cells
         self.reopen_after_s = reopen_after_s
         self.stale_s = stale_s
+        self.park_freeze_s = park_freeze_s            # 0/None disables the
+                                                      # parked-freeze trigger
+        self.startup_grace_s = startup_grace_s        # one-time warmup; 0/None
+                                                      # disables it
         self.last_t = {k: None for k in lidars}       # last scan arrival
         self.last_cov = {k: None for k in lidars}     # last coverage
+        self.last_cmd_t = None                        # last base cmd (any msg)
+        self.start_t = None                           # first scan seen
         self.open = False                             # start closed; opens
         self.healthy_since = None                     # after reopen_after_s
         self.transition = None                        # set by update() when
                                                       # state flips: (open, why)
+
+    def note_cmd(self, t):
+        """Record a base velocity command (any /cmd_vel* message, incl. zero)."""
+        self.last_cmd_t = t
+
+    def _parked(self, t):
+        """True once the base has gone park_freeze_s with nothing on /cmd_vel.
+
+        A parked base accumulates ~zero odometry drift, so a scan-match
+        correction here can only be spurious (the feeding-occlusion yank).
+        Freeze until motion is commanded again.
+
+        Two startup guards keep this from starving Cartographer's INITIAL
+        localization (establishing the first global lock against the loaded
+        pbstream can take well over a minute):
+          - Disabled until the first command ever arrives, so a robot parked
+            at its dock at launch localizes on coverage alone, unlimited time.
+          - Disabled for startup_grace_s after the first scan, so even if a
+            command is issued mid-warmup (driving/teleop while it converges),
+            the freeze still holds off until convergence is comfortably done.
+        Both are one-time; steady-state parks use park_freeze_s only.
+        """
+        if not self.park_freeze_s or self.last_cmd_t is None:
+            return False
+        if (self.startup_grace_s and self.start_t is not None
+                and t - self.start_t < self.startup_grace_s):
+            return False
+        return t - self.last_cmd_t > self.park_freeze_s
 
     def _all_healthy(self, t):
         for k in self.last_t:
@@ -118,9 +185,15 @@ class GateCore:
     def update(self, lidar, coverage, t):
         """Record one scan; returns True if the gate is open for it."""
         self.transition = None
+        if self.start_t is None:
+            self.start_t = t
         self.last_t[lidar] = t
         self.last_cov[lidar] = coverage
         healthy, why = self._all_healthy(t)
+        if self._parked(t):
+            # Parked overrides coverage: freeze even when the view is clear.
+            healthy = False
+            why = "parked %.1fs (no cmd_vel)" % (t - self.last_cmd_t)
         if self.open:
             if not healthy:
                 self.open = False
@@ -148,7 +221,9 @@ class ScanGateNode:
         self.core = GateCore(
             min_cells=rospy.get_param("~min_cells", 25),
             reopen_after_s=rospy.get_param("~reopen_after_s", 2.0),
-            stale_s=rospy.get_param("~stale_s", 1.0))
+            stale_s=rospy.get_param("~stale_s", 1.0),
+            park_freeze_s=rospy.get_param("~park_freeze_s", 30.0),
+            startup_grace_s=rospy.get_param("~startup_grace_s", 120.0))
         self.lock = threading.Lock()
         self.n_fwd = {"l": 0, "r": 0}
         self.n_drop = {"l": 0, "r": 0}
@@ -165,11 +240,26 @@ class ScanGateNode:
                          self.cb_scan, callback_args="l", queue_size=5)
         rospy.Subscriber("/lidar_r/scan", LaserScan,
                          self.cb_scan, callback_args="r", queue_size=5)
+        # Both base-command sources (autonomous + teleop) feed the same
+        # parked-freeze timer; see cmd_vel_bridge_basicmicro.py for the topics.
+        rospy.Subscriber("/cmd_vel", Twist, self.cb_cmd, queue_size=10)
+        rospy.Subscriber("/cmd_vel_teleop", Twist, self.cb_cmd, queue_size=10)
         rospy.Timer(rospy.Duration(self.stats_period_s), self.cb_stats)
-        rospy.loginfo("scan_gate: up (min_cells=%d cell=%.2fm reopen=%.1fs); "
-                      "gate starts CLOSED until both lidars are healthy",
+        rospy.loginfo("scan_gate: up (min_cells=%d cell=%.2fm reopen=%.1fs "
+                      "park_freeze=%.1fs startup_grace=%.1fs); gate starts "
+                      "CLOSED until both lidars are healthy",
                       self.core.min_cells, self.cell_m,
-                      self.core.reopen_after_s)
+                      self.core.reopen_after_s, self.core.park_freeze_s,
+                      self.core.startup_grace_s)
+
+    def cb_cmd(self, _msg):
+        # ANY command message (even a trailing zero) means navigation is live,
+        # so it holds the gate open -- see the module docstring on why we don't
+        # filter jitter. The 15 s goal-confirm settle is cmd_vel-SILENT, so no
+        # message-based trick can protect it; that is what park_freeze_s (long)
+        # is for. Nothing streams continuous zeros to keep this pinned open.
+        with self.lock:
+            self.core.note_cmd(rospy.Time.now().to_sec())
 
     def cb_scan(self, msg, lidar):
         cov = scan_coverage(msg, self.cell_m, self.range_lo, self.range_hi)

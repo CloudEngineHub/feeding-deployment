@@ -9,17 +9,38 @@
        around 10-20 per Cartographer's node point counts. Retune from the
        scan_gate stats lines after the first gated table session. -->
   <arg name="gate_min_cells" default="25"/>
+  <!-- Also freeze map->odom once the base has sat this many seconds with
+       nothing on /cmd_vel[_teleop] (parked). A parked base has ~zero odom
+       drift, so any scan-match correction is the spurious feeding-occlusion
+       yank; this covers the person walking up to the table before feeding even
+       starts, without knowing the feeding state. Deliberately LONGER than the
+       15 s goal-confirm settle (navigate.py _GOAL_CONFIRM_SETTLE_S): the base
+       is parked-but-silent through that settle and we WANT Cartographer to
+       catch up and replan then, so the freeze must not arm until we are past
+       it. Occlusion inside the unfrozen window is still caught by
+       gate_min_cells. Set 0 to disable and fall back to coverage-only. -->
+  <arg name="gate_park_freeze_s" default="30.0"/>
+  <!-- One-time startup warmup: the parked freeze is held off for this long
+       after the first scan, so it never starves Cartographer while it is still
+       establishing its INITIAL global lock on the loaded pbstream (that can
+       take well over a minute; 30 s is not enough). Kept separate from the
+       30 s steady-state park_freeze_s so feeding protection stays snappy every
+       meal (do NOT just inflate park_freeze_s for this). Set 0 to disable. -->
+  <arg name="gate_startup_grace_s" default="120.0"/>
 
   <!-- Scan gate: drops BOTH lidars' scans whenever either is too occluded to
        localize on (person/arm at the table gutted scans -> Cartographer
        matched them 4-7 m off at 90% score and yanked map->odom 2-7 m every
-       optimization; both table stays, session jul14_2). Starved, Cartographer
+       optimization; both table stays, session jul14_2), OR the base has been
+       parked (no cmd_vel) for gate_park_freeze_s. Starved, Cartographer
        freezes map->odom on the last good pose and the robot rides wheel+IMU
-       odom until the view clears. Costmaps/diagnostics keep the raw topics;
+       odom until it drives again. Costmaps/diagnostics keep the raw topics;
        only Cartographer subscribes to the gated ones. -->
   <node pkg="feeding_deployment" type="scan_gate.py" name="scan_gate"
         output="screen" respawn="true" respawn_delay="2">
     <param name="min_cells" value="$(arg gate_min_cells)"/>
+    <param name="park_freeze_s" value="$(arg gate_park_freeze_s)"/>
+    <param name="startup_grace_s" value="$(arg gate_startup_grace_s)"/>
   </node>
 
   <!-- Cartographer node in localization mode. -->
