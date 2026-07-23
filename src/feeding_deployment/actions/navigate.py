@@ -81,6 +81,17 @@ class NavigateHLA(HighLevelAction):
     # rules as _STAGING_WAYPOINT.
     _INGRESS_WAYPOINT = "kitchen_enter"
 
+    # Table-approach waypoints, driven AFTER the kitchen-exit staging pose on the
+    # microwave->table egress so the base threads the open area to the table
+    # along a mapped path instead of letting TEB pick its own line across the
+    # room. Keyed by destination: only the dining table has these; the movable
+    # table is still approached directly from the staging pose. Same
+    # yaml/placeholder skip rules as _STAGING_WAYPOINT (_resolve_via drops any
+    # that are missing or still placeholders, falling back to the shorter route).
+    _TABLE_APPROACH_WAYPOINTS = {
+        "dining_table": ("dining_table_waypoint1", "dining_table_waypoint2"),
+    }
+
     # On a failed leg (move_base aborted, or localization lost past the watchdog
     # window) we hand the base to the user via the navigation teleop screen and
     # re-try, up to this many times, before giving up (fatal).
@@ -1869,6 +1880,10 @@ class NavigateHLA(HighLevelAction):
         the learned parking offset, and the post-arrival write-back differ, all
         keyed off `destination`."""
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
+        # Destination-specific approach waypoints, appended after the staging
+        # pose so the route is: staging -> approach... -> table. Empty for
+        # destinations without any (e.g. movable_table).
+        approach = list(self._TABLE_APPROACH_WAYPOINTS.get(destination, ()))
         # microwave -> table is the kitchen egress: reverse out through the narrow
         # corridor to the open staging area, then turn and drive to the table.
         # Routing via the staging waypoint stops TEB from oscillating as it tries
@@ -1903,11 +1918,12 @@ class NavigateHLA(HighLevelAction):
                 # park is final -- the leg ends here.
                 print("[logged-nav] table: human parked via Done; leg ends.")
                 return
-            # completed: the egress replaced kitchen_exit -> go direct.
+            # completed: the egress replaced kitchen_exit -> skip staging but
+            # still thread the approach waypoints to the table.
             # teleop_fallback / slip_fallback: the egress was interrupted
             # (human intervention or wheel slip) and the base may still be
             # inside the corridor -> full normal route incl. staging.
-            via = [] if outcome == "completed" else [self._STAGING_WAYPOINT]
+            via = approach if outcome == "completed" else [self._STAGING_WAYPOINT] + approach
             self._navigate_to_target(
                 destination, speed, via=via, position_offset=position_offset,
                 arrival_confirm_mode=arrival_confirm_mode,
@@ -1920,7 +1936,8 @@ class NavigateHLA(HighLevelAction):
                 "defined) -- using normal autonomous navigation."
             )
         self._navigate_to_target(
-            destination, speed, via=[self._STAGING_WAYPOINT], position_offset=position_offset,
+            destination, speed, via=[self._STAGING_WAYPOINT] + approach,
+            position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
         )
