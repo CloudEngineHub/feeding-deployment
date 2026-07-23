@@ -18,9 +18,12 @@ publishes a fresh transform:
 
   Cartographer's map_frame is renamed to "map_carto" (it publishes map_carto->
   odom at ~100 Hz, unchanged). This node owns the map->map_carto edge (planar
-  SE2), broadcast at pub_rate_hz with a fresh stamp so the "map" frame is always
-  current. Every downstream consumer keeps using "map" and resolves the chain
-  map -> map_carto -> odom -> base.
+  SE2), broadcast at pub_rate_hz with the stamp post-dated by
+  publish_lookahead_s -- matching the lua's tf_publish_lookahead_sec on
+  map_carto->odom, so the composed map->odom chain never lags a now()-stamped
+  move_base/TEB plan lookup (otherwise TEB gets "extrapolation into the future"
+  and can't transform the global plan). Every downstream consumer keeps using
+  "map" and resolves the chain map -> map_carto -> odom -> base.
 
   - The correction starts at IDENTITY (map == map_carto), so the loaded pbstream
     and every stored map-frame goal stay numerically valid.
@@ -168,6 +171,15 @@ class MapOdomClampNode:
         self.map_carto_frame = rospy.get_param("~map_carto_frame", "map_carto")
         self.odom_frame = rospy.get_param("~odom_frame", "odom")
         self.pub_rate_hz = rospy.get_param("~pub_rate_hz", 50.0)
+        # Post-date the published map->map_carto stamp, exactly like
+        # Cartographer's tf_publish_lookahead_sec does for map_carto->odom.
+        # move_base/TEB looks up the map->odom CHAIN at a plan freshly stamped
+        # now(); the chain is only as fresh as its stalest edge, so if this edge
+        # sits at now() it lags Cartographer's post-dated edge by a few ms and
+        # TEB gets "extrapolation into the future" (can't transform the global
+        # plan -> stalls). Must be >= Cartographer's lookahead AND > our publish
+        # period (1/pub_rate). Default 0.05 s matches the lua tf_publish_lookahead_sec.
+        self.publish_lookahead_s = rospy.get_param("~publish_lookahead_s", 0.05)
         self.enabled = rospy.get_param("~enabled", True)
         self.core = ClampCore(
             park_freeze_s=rospy.get_param("~park_freeze_s", 30.0),
@@ -233,7 +245,7 @@ class MapOdomClampNode:
                      absorbed[0], absorbed[1])
 
         t = TransformStamped()
-        t.header.stamp = now
+        t.header.stamp = now + rospy.Duration(self.publish_lookahead_s)
         t.header.frame_id = self.map_frame
         t.child_frame_id = self.map_carto_frame
         t.transform.translation.x = corr[0]

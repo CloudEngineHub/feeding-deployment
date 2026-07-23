@@ -24,6 +24,16 @@
        (held). Feeding yanks are 2-7 m; real parked drift is sub-cm. 0 = pin. -->
   <arg name="clamp_lin_jump_m" default="0.05"/>
   <arg name="clamp_ang_jump_rad" default="0.03"/>
+<<<<<<< HEAD
+=======
+  <!-- Post-date the published map->map_carto stamp, like the lua's
+       tf_publish_lookahead_sec does for map_carto->odom. The map->odom chain is
+       only as fresh as its stalest edge; if this edge sits at now() it lags
+       Cartographer's post-dated edge and TEB gets "extrapolation into the
+       future" transforming the global plan (nav stalls). Keep >= the lua
+       tf_publish_lookahead_sec (0.05) and > 1/pub_rate. -->
+  <arg name="clamp_publish_lookahead_s" default="0.05"/>
+>>>>>>> carto-park-freeze
   <!-- false -> node publishes map->map_carto = identity forever = raw
        Cartographer (jumpy but correct): the safe fallback / A-B toggle. -->
   <arg name="clamp_enabled" default="true"/>
@@ -36,6 +46,7 @@
     <param name="startup_grace_s" value="$(arg clamp_startup_grace_s)"/>
     <param name="lin_jump_m" value="$(arg clamp_lin_jump_m)"/>
     <param name="ang_jump_rad" value="$(arg clamp_ang_jump_rad)"/>
+    <param name="publish_lookahead_s" value="$(arg clamp_publish_lookahead_s)"/>
     <param name="enabled" value="$(arg clamp_enabled)"/>
   </node>
 
