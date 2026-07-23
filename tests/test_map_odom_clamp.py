@@ -101,7 +101,8 @@ def test_flows_when_not_parked():
 
 
 def test_absorbs_jump_while_parked():
-    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03)
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=0.0)
     core.note_cmd(0.0)
     core.update((1.0, 0.0, 0.0), 1.0)          # adopt; net = (1,0,0)
     core.update((1.0, 0.0, 0.0), 2.0)          # not parked yet, no change
@@ -114,7 +115,8 @@ def test_absorbs_jump_while_parked():
 
 
 def test_small_change_flows_while_parked():
-    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03)
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=0.0)
     core.note_cmd(0.0)
     core.update((1.0, 0.0, 0.0), 1.0)
     core.update((1.02, 0.0, 0.0), 6.0)         # parked, 2 cm < 5 cm threshold
@@ -124,7 +126,8 @@ def test_small_change_flows_while_parked():
 
 
 def test_release_is_continuous_then_follows():
-    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03)
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=0.0)
     core.note_cmd(0.0)
     core.update((1.0, 0.0, 0.0), 1.0)
     core.update((3.0, 0.0, 0.0), 6.0)          # parked jump absorbed -> held at (1,0,0)
@@ -137,6 +140,25 @@ def test_release_is_continuous_then_follows():
     # As Cartographer now moves with the base, net follows 1:1 from the held pose.
     core.update((3.5, 0.0, 0.0), 11.0)
     assert _close(_net(core, (3.5, 0.0, 0.0)), (1.5, 0.0, 0.0))
+
+
+def test_startup_grace_keeps_clamp_transparent_during_warmup():
+    """During the startup warmup the clamp must NOT absorb, even after a command
+    and past park_freeze_s -- so Cartographer's initial global lock flows to the
+    output. After the grace, parked jumps are absorbed as usual."""
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=30.0)
+    core.note_cmd(0.0)
+    core.update((1.0, 0.0, 0.0), 1.0)          # start_t = 1.0
+    # Parked (t-cmd > 5) but still inside the 30 s grace -> a big jump FLOWS.
+    core.update((4.0, 0.0, 0.0), 20.0)
+    assert core.last_absorbed is None
+    assert core.correction == IDENT
+    assert _close(_net(core, (4.0, 0.0, 0.0)), (4.0, 0.0, 0.0))
+    # Past the grace (t - start_t > 30) and parked -> now a jump is absorbed.
+    core.update((9.0, 0.0, 0.0), 40.0)
+    assert core.last_absorbed is not None
+    assert _close(_net(core, (9.0, 0.0, 0.0)), (4.0, 0.0, 0.0))  # held
 
 
 def test_park_freeze_zero_disables_clamp():

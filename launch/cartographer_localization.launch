@@ -14,6 +14,12 @@
        15 s goal-confirm settle so the fine-parking catch-up correction reaches
        move_base before the clamp engages. 0 disables the parked clamp. -->
   <arg name="clamp_park_freeze_s" default="30.0"/>
+  <!-- One-time startup warmup (from the first update): the clamp stays fully
+       transparent this long so Cartographer's INITIAL global lock on the loaded
+       pbstream (large corrections, up to a few minutes) flows to the output and
+       is never pinned/absorbed. Longer than park_freeze_s on purpose; 300 s
+       matches the observed initial-lock time. 0 disables the warmup. -->
+  <arg name="clamp_startup_grace_s" default="300.0"/>
   <!-- While parked, a single map_carto->odom step bigger than these is absorbed
        (held). Feeding yanks are 2-7 m; real parked drift is sub-cm. 0 = pin. -->
   <arg name="clamp_lin_jump_m" default="0.05"/>
@@ -27,6 +33,7 @@
   <node pkg="feeding_deployment" type="map_odom_clamp.py" name="map_odom_clamp"
         output="screen" respawn="true" respawn_delay="2">
     <param name="park_freeze_s" value="$(arg clamp_park_freeze_s)"/>
+    <param name="startup_grace_s" value="$(arg clamp_startup_grace_s)"/>
     <param name="lin_jump_m" value="$(arg clamp_lin_jump_m)"/>
     <param name="ang_jump_rad" value="$(arg clamp_ang_jump_rad)"/>
     <param name="enabled" value="$(arg clamp_enabled)"/>

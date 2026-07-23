@@ -37,10 +37,14 @@ publishes a fresh transform:
     the clamp releases and corrections flow again, continuously (no snap).
 
 Parked detection mirrors scan_gate: disabled until the first command ever
-arrives (so startup localization flows through the identity clamp unclamped),
-then "parked" == park_freeze_s elapsed since the last /cmd_vel[_teleop] message.
-No startup_grace is needed here -- Cartographer is never starved, so its initial
-global lock proceeds normally and flows through the transparent clamp.
+arrives (so a dock-parked robot's initial lock flows through unclamped), and
+disabled for startup_grace_s (default 300 s) after the first update -- so even
+if you drive mid-convergence and then park, the clamp won't pin/absorb the
+initial global lock (large corrections that can take a few minutes). After that
+warmup, "parked" == park_freeze_s elapsed since the last /cmd_vel[_teleop].
+Missing the grace is not fatal here (unlike scan_gate, Cartographer is never
+starved; a mid-convergence pin self-heals on the next move), but it avoids a
+confusing "map stuck wrong" during bring-up.
 
 Failure behavior: with ~enabled false this publishes identity forever, so
 map == map_carto == raw Cartographer (jumpy but correct) -- the safe fallback.
@@ -90,13 +94,16 @@ class ClampCore:
     t is float seconds. Feed nonzero base commands via note_cmd(t).
     """
 
-    def __init__(self, park_freeze_s=30.0, lin_jump_m=0.05, ang_jump_rad=0.03):
+    def __init__(self, park_freeze_s=30.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                 startup_grace_s=300.0):
         self.park_freeze_s = park_freeze_s     # 0/None disables the parked clamp
         self.lin_jump_m = lin_jump_m           # step in map_carto->odom above
         self.ang_jump_rad = ang_jump_rad       # which (while parked) is absorbed
+        self.startup_grace_s = startup_grace_s  # one-time warmup; 0/None disables
         self.correction = (0.0, 0.0, 0.0)      # map->map_carto, starts identity
         self.last_carto = None                 # last map_carto->odom seen
         self.last_cmd_t = None                 # last /cmd_vel* message time
+        self.start_t = None                    # first update() time
         self.last_absorbed = None              # (delta_m, delta_rad) or None
 
     def note_cmd(self, t):
@@ -106,10 +113,22 @@ class ClampCore:
     def _parked(self, t):
         """True once the base has gone park_freeze_s with no command.
 
-        Disabled until the first command ever arrives, so startup localization
-        (Cartographer's initial global lock) flows through the identity clamp.
+        Two one-time startup guards keep the clamp from pinning/absorbing
+        Cartographer's INITIAL global lock (which can make large corrections for
+        up to a few minutes against the loaded pbstream):
+          - disabled until the first command ever arrives (a robot parked at its
+            dock at boot converges with the clamp fully transparent), and
+          - disabled for startup_grace_s after the first update, so even if you
+            drive/teleop mid-convergence and then park, the clamp still holds off
+            until the lock is comfortably done.
+        Unlike scan_gate, missing these is not fatal (Cartographer is never
+        starved; a mid-convergence pin self-heals on the next move) -- but the
+        grace avoids a confusing "map stuck wrong" during bring-up.
         """
         if not self.park_freeze_s or self.last_cmd_t is None:
+            return False
+        if (self.startup_grace_s and self.start_t is not None
+                and t - self.start_t < self.startup_grace_s):
             return False
         return t - self.last_cmd_t > self.park_freeze_s
 
@@ -121,6 +140,8 @@ class ClampCore:
         Otherwise the correction is unchanged and Cartographer's change flows.
         """
         self.last_absorbed = None
+        if self.start_t is None:
+            self.start_t = t
         if self.last_carto is None:
             self.last_carto = carto
             return self.correction
@@ -151,7 +172,8 @@ class MapOdomClampNode:
         self.core = ClampCore(
             park_freeze_s=rospy.get_param("~park_freeze_s", 30.0),
             lin_jump_m=rospy.get_param("~lin_jump_m", 0.05),
-            ang_jump_rad=rospy.get_param("~ang_jump_rad", 0.03))
+            ang_jump_rad=rospy.get_param("~ang_jump_rad", 0.03),
+            startup_grace_s=rospy.get_param("~startup_grace_s", 300.0))
         self.lock = threading.Lock()
 
         self.tf_buffer = tf2_ros.Buffer()
@@ -165,10 +187,11 @@ class MapOdomClampNode:
         rospy.Subscriber("/cmd_vel_teleop", Twist, self.cb_cmd, queue_size=10)
         rospy.Timer(rospy.Duration(1.0 / self.pub_rate_hz), self.cb_timer)
         rospy.loginfo("map_odom_clamp: up (%s->%s, park_freeze=%.1fs "
-                      "lin_jump=%.3fm ang_jump=%.3frad enabled=%s); correction "
-                      "starts IDENTITY", self.map_frame, self.map_carto_frame,
-                      self.core.park_freeze_s, self.core.lin_jump_m,
-                      self.core.ang_jump_rad, self.enabled)
+                      "startup_grace=%.1fs lin_jump=%.3fm ang_jump=%.3frad "
+                      "enabled=%s); correction starts IDENTITY",
+                      self.map_frame, self.map_carto_frame,
+                      self.core.park_freeze_s, self.core.startup_grace_s,
+                      self.core.lin_jump_m, self.core.ang_jump_rad, self.enabled)
 
     def cb_cmd(self, _msg):
         # Any command message means navigation is live -> not parked; see
