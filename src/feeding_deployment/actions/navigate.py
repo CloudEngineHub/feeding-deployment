@@ -70,9 +70,16 @@ class NavigateHLA(HighLevelAction):
     # the robot cannot turn around in. The microwave->table leg (navigate_to_
     # table) is therefore routed through an intermediate "open area" waypoint, so
     # TEB drives it as "reverse out to the open area, then turn and go" instead
-    # of oscillating while trying to turn inside the corridor. The staging pose
-    # lives in nav_named_locations.yaml; until a real pose is captured there
+    # of oscillating while trying to turn inside the corridor. The staging poses
+    # live in nav_named_locations.yaml; until a real pose is captured there
     # (placeholder: false) the via-waypoint is skipped and we go direct.
+    #
+    # The egress is driven as an ordered sequence: first a mid-corridor pose
+    # (_PRE_STAGING_WAYPOINT) then the corridor-mouth staging pose
+    # (_STAGING_WAYPOINT), so the route out of the kitchen is
+    # microwave -> kitchen_exit_waypoint -> kitchen_exit -> table. Both physical
+    # tables use the same egress sequence (see _navigate_table_leg).
+    _PRE_STAGING_WAYPOINT = "kitchen_exit_waypoint"
     _STAGING_WAYPOINT = "kitchen_exit"
     # Kitchen-ingress staging: the mirror of the egress, for the table->sink
     # leg (navigate_to_sink). Drive to the open area in front of the corridor
@@ -1880,8 +1887,11 @@ class NavigateHLA(HighLevelAction):
         the learned parking offset, and the post-arrival write-back differ, all
         keyed off `destination`."""
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
+        # Kitchen-egress staging sequence (both tables): mid-corridor pose then
+        # corridor-mouth pose. Driven in order before the table.
+        staging = [self._PRE_STAGING_WAYPOINT, self._STAGING_WAYPOINT]
         # Destination-specific approach waypoints, appended after the staging
-        # pose so the route is: staging -> approach... -> table. Empty for
+        # poses so the route is: staging... -> approach... -> table. Empty for
         # destinations without any (e.g. movable_table).
         approach = list(self._TABLE_APPROACH_WAYPOINTS.get(destination, ()))
         # microwave -> table is the kitchen egress: reverse out through the narrow
@@ -1918,12 +1928,12 @@ class NavigateHLA(HighLevelAction):
                 # park is final -- the leg ends here.
                 print("[logged-nav] table: human parked via Done; leg ends.")
                 return
-            # completed: the egress replaced kitchen_exit -> skip staging but
-            # still thread the approach waypoints to the table.
+            # completed: the scripted egress replaced the staging sequence ->
+            # skip staging but still thread the approach waypoints to the table.
             # teleop_fallback / slip_fallback: the egress was interrupted
             # (human intervention or wheel slip) and the base may still be
             # inside the corridor -> full normal route incl. staging.
-            via = approach if outcome == "completed" else [self._STAGING_WAYPOINT] + approach
+            via = approach if outcome == "completed" else staging + approach
             self._navigate_to_target(
                 destination, speed, via=via, position_offset=position_offset,
                 arrival_confirm_mode=arrival_confirm_mode,
@@ -1936,7 +1946,7 @@ class NavigateHLA(HighLevelAction):
                 "defined) -- using normal autonomous navigation."
             )
         self._navigate_to_target(
-            destination, speed, via=[self._STAGING_WAYPOINT] + approach,
+            destination, speed, via=staging + approach,
             position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
