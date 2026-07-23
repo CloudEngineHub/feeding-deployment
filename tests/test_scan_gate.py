@@ -95,11 +95,7 @@ def test_startup_opens_without_any_command():
 
 
 def test_parked_freezes_even_with_clear_view():
-<<<<<<< HEAD
-    core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0)
-=======
     core = GateCore(reopen_after_s=2.0, park_freeze_s=5.0, startup_grace_s=0.0)
->>>>>>> carto-park-freeze
     _drive_open(core)
     assert core.open
     # Base stops being commanded; keep feeding healthy scans. Once we cross
