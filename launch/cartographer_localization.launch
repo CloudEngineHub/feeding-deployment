@@ -4,6 +4,14 @@
   <arg name="config_basename" default="vention_2lidar_localization.lua"/>
   <arg name="load_state_filename" default="/tmp/vention_map.pbstream"/>
   <arg name="load_frozen_state" default="true"/>
+  <!-- Debug viz only: also publish the /map occupancy grid split into its frozen
+       (loaded pbstream) and live (current-trajectory submaps) halves on separate
+       topics, so RViz can shade the reference map and the live submaps
+       differently (see rviz/vention.rviz "Frozen Map"/"Live Submaps" displays).
+       Off by default: each extra node re-fetches submap textures via
+       /submap_query every publish cycle, which is needless load during a meal.
+       Nav is untouched either way; it always reads the combined /map. -->
+  <arg name="split_map_viz" default="false"/>
   <!-- Coverage floor for the scan gate (occupied 0.2 m cells). Healthy scans
        measure 36-114 across the jul14_2 trigger bags; feeding-occlusion sits
        around 10-20 per Cartographer's node point counts. Retune from the
@@ -38,9 +46,26 @@
     <remap from="odom" to="/odometry/fused_imu_wheel"/>
   </node>
 
-  <!-- Publish occupancy grid as /map. -->
+  <!-- Publish occupancy grid as /map (frozen + live submaps combined; this is
+       what nav's global_costmap static layer reads). NB: resolution /
+       publish_period_sec are gflags on this node, not ROS params; these
+       <param> tags are no-ops that happen to match the gflag defaults. -->
   <node pkg="cartographer_ros" type="cartographer_occupancy_grid_node" name="occupancy_grid_node" output="screen">
     <param name="resolution" value="0.05"/>
     <param name="publish_period_sec" value="1.0"/>
   </node>
+
+  <!-- Debug viz only (split_map_viz): republish the same submaps split by frozen
+       state so RViz can shade them differently. /map_frozen = the loaded pbstream
+       (the map we localize against); /map_live = the up-to-3 current-trajectory
+       submaps (what fills in as scans come now). include_frozen/unfrozen_submaps
+       and occupancy_grid_topic are gflags -> passed via args=, not <param>. -->
+  <group if="$(arg split_map_viz)">
+    <node pkg="cartographer_ros" type="cartographer_occupancy_grid_node"
+          name="occupancy_grid_node_frozen" output="screen"
+          args="-occupancy_grid_topic=map_frozen -include_unfrozen_submaps=false"/>
+    <node pkg="cartographer_ros" type="cartographer_occupancy_grid_node"
+          name="occupancy_grid_node_live" output="screen"
+          args="-occupancy_grid_topic=map_live -include_frozen_submaps=false"/>
+  </group>
 </launch>
