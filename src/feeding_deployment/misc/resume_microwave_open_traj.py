@@ -359,6 +359,11 @@ def _summary(report, n, args, reproduced) -> None:
         print("  [dry-run] no arm activity; re-run without --dry-run on the robot.")
         print("=" * 78)
         return
+    if not report:
+        # e.g. --mode reproduce: nothing was resumed/localised, so there is no
+        # point-to-point result to report and no hunch verdict to draw.
+        print("=" * 78)
+        return
     if args.mode in ("localize",) or args.resume_strategy == "stepwise":
         reached = [r for r in report if r.get("reached")]
         print(f"  waypoints reached point-to-point: {len(reached)}/{len(report)} attempted")
