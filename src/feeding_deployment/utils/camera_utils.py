@@ -48,7 +48,7 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2, depth
 
     if depth is None:
         depth = depth_image[image_y, image_x]
-    elif math.isnan(depth) or depth < 50 or depth > 1000:
+    elif math.isnan(depth) or depth < 50 or depth > 1500:
         # A supplied distance still has to be physically plausible.
         return False, None
     else:
@@ -59,7 +59,7 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2, depth
     # the depth. Deliberately left alone: "correcting" the units here would go
     # back to trusting the single centre pixel, which is exactly the reading that
     # tends to be a hole.
-    if math.isnan(depth) or depth < 0.05 or depth > 1.0:
+    if math.isnan(depth) or depth < 0.05 or depth > 1.5:
 
         depth_samples = []
         for i in range(-box_width, box_width + 1):
@@ -73,7 +73,7 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2, depth
                 if sample_y >= depth_image.shape[0] or sample_x >= depth_image.shape[1]:
                     continue
                 pixel_depth = depth_image[sample_y, sample_x]
-                if not (math.isnan(pixel_depth) or pixel_depth < 50 or pixel_depth > 1000):
+                if not (math.isnan(pixel_depth) or pixel_depth < 50 or pixel_depth > 1500):
                     depth_samples.append(pixel_depth)
 
         if len(depth_samples) == 0:
