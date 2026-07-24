@@ -32,7 +32,7 @@ def load_robot_config(config_path: str) -> types.SimpleNamespace:
     return types.SimpleNamespace(**parsed)
 
 from feeding_deployment.control.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
-from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, CartesianTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
+from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, CartesianTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand, SetGripperCommand
 # from feeding_deployment.safety.watchdog import WATCHDOG_MONITOR_FREQUENCY, PeekableQueue
 from feeding_deployment.safety.collision_threshold import collision_threshold
 
@@ -129,6 +129,9 @@ class ArmInterfaceClient:
 
         if cmd.__class__.__name__ == "CloseGripperCommand":
             return self._arm_interface.close_gripper()
+
+        if cmd.__class__.__name__ == "SetGripperCommand":
+            return self._arm_interface.set_gripper(cmd.pos)
 
         raise NotImplementedError(f"Unrecognized command: {cmd}")
 
