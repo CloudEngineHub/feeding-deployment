@@ -778,7 +778,7 @@ class HeadPerception:
                     if not (
                         math.isnan(pixel_depth)
                         or pixel_depth < 50
-                        or pixel_depth > 1000
+                        or pixel_depth > 1500
                     ):
                         depth += [pixel_depth]
 

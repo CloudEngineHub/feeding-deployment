@@ -68,6 +68,7 @@ class PickToolHLA(HighLevelAction):
 
         with self.low_speed(restore=speed):
             self.move_to_ee_pose(self.sim.scene_description.utensil_inside_mount_pose)
+            time.sleep(1.0) # Wait a bit for the robot to settle
             self.grasp_tool("utensil")
 
             if self.wrist_interface is not None:

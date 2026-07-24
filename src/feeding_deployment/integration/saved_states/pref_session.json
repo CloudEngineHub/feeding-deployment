@@ -1,7 +1,7 @@
 {
   "bundle": {
-    "bite_dipping_preference": "do not dip",
-    "bite_ordering": "no particular order",
+    "bite_dipping_preference": "less",
+    "bite_ordering": "Dip each strawberry in whipped cream before eating.",
     "confirm_feeding_pickup": "skip",
     "confirm_manipulation": "countdown (15 sec)",
     "confirm_navigation_arrival": "skip",
@@ -13,7 +13,7 @@
     "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
     "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
     "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
-    "microwave_time": "30 secs",
+    "microwave_time": "no microwave",
     "nav_offset_dining_table": {
       "dx": 0.0,
       "dy": 0.0,
@@ -35,28 +35,28 @@
       "dyaw": 0.0
     },
     "nav_offset_sink": {
-      "dx": 0.0,
-      "dy": 0.0,
-      "dyaw": 0.0
+      "dx": -0.233,
+      "dy": 0.051,
+      "dyaw": 0.054
     },
-    "outside_mouth_distance": "near",
+    "outside_mouth_distance": "far",
     "plate_color_fridge": {
-      "h": 11,
-      "range": 0.13,
-      "s": 196,
-      "v": 130
+      "h": 8,
+      "range": 0.15,
+      "s": 175,
+      "v": 168
     },
     "plate_color_microwave": {
       "h": 11,
       "range": 0.24,
-      "s": 210,
-      "v": 215
+      "s": 225,
+      "v": 210
     },
     "plate_color_table": {
-      "h": 13,
-      "range": 0.23,
-      "s": 199,
-      "v": 248
+      "h": 7,
+      "range": 0.18,
+      "s": 146,
+      "v": 155
     },
     "retract_between_bites": "no",
     "robot_speed": "fast",
@@ -66,23 +66,13 @@
     "wait_before_autocontinue_task_selection": "countdown (15 sec)"
   },
   "context": {
-    "meal": "chicken nuggets",
+    "meal": "strawberries with whipped cream",
     "setting": "Personal",
-    "time_of_day": "evening"
+    "time_of_day": "night"
   },
   "corrected": {
-    "plate_color_fridge": {
-      "h": 11,
-      "range": 0.13,
-      "s": 196,
-      "v": 130
-    },
-    "plate_color_table": {
-      "h": 13,
-      "range": 0.23,
-      "s": 199,
-      "v": 248
-    }
+    "bite_dipping_preference": "less",
+    "outside_mouth_distance": "far"
   },
   "finalized": [
     "bite_dipping_preference",
@@ -99,13 +89,10 @@
     "detect_user_ready_for_initiating_transfer_feeding",
     "detect_user_ready_for_initiating_transfer_wiping",
     "microwave_time",
-    "nav_offset_fridge",
-    "nav_offset_microwave",
     "nav_offset_movable_table",
     "nav_offset_sink",
     "outside_mouth_distance",
     "plate_color_fridge",
-    "plate_color_microwave",
     "plate_color_table",
     "retract_between_bites",
     "robot_speed",

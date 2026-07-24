@@ -74,13 +74,27 @@ class NavigateHLA(HighLevelAction):
     # live in nav_named_locations.yaml; until a real pose is captured there
     # (placeholder: false) the via-waypoint is skipped and we go direct.
     #
-    # The egress is driven as an ordered sequence: first a mid-corridor pose
-    # (_PRE_STAGING_WAYPOINT) then the corridor-mouth staging pose
-    # (_STAGING_WAYPOINT), so the route out of the kitchen is
-    # microwave -> kitchen_exit_waypoint -> kitchen_exit -> table. Both physical
-    # tables use the same egress sequence (see _navigate_table_leg).
+    # The egress is driven as an ordered sequence of staging poses ending at the
+    # corridor-mouth pose (_STAGING_WAYPOINT); a mid-corridor pose
+    # (_PRE_STAGING_WAYPOINT) is prepended only when the origin is deep enough in
+    # the kitchen to need it. From the microwave the route out is
+    # microwave -> kitchen_exit_waypoint -> kitchen_exit -> table; from the fridge
+    # (which already sits at the corridor mouth) the pre-staging hop is dropped --
+    # fridge -> kitchen_exit -> table -- because routing via the mid-corridor pose
+    # would drive the base backward into the kitchen first. See
+    # _SKIP_PRE_STAGING_ORIGINS and _navigate_table_leg. For a given origin both
+    # physical tables use the same egress sequence.
     _PRE_STAGING_WAYPOINT = "kitchen_exit_waypoint"
     _STAGING_WAYPOINT = "kitchen_exit"
+    # Origins from which the mid-corridor pre-staging pose is skipped on the table
+    # egress (see above). Keyed by the true PDDL origin execute_action stashes in
+    # _nav_origin. The fridge (map x=-1.35) sits between _PRE_STAGING_WAYPOINT
+    # (x=-0.72) and _STAGING_WAYPOINT (x=-1.55) -- already past the pre-staging
+    # pose -- so it drives straight to the corridor mouth. The microwave (x=+0.07)
+    # is deep inside and passes the pre-staging pose on the way out, so it is NOT
+    # listed (keeps the full pair). Unknown origins (None, e.g. after a resume)
+    # also keep the full pair -- the conservative default.
+    _SKIP_PRE_STAGING_ORIGINS = frozenset({"fridge"})
     # Kitchen-ingress staging: the mirror of the egress, for the table->sink
     # leg (navigate_to_sink). Drive to the open area in front of the corridor
     # mouth first, turn there, then enter the corridor straight-on -- instead
@@ -1882,14 +1896,28 @@ class NavigateHLA(HighLevelAction):
         self, destination: str, speed: str, position_offset, arrival_confirm
     ) -> None:
         """Drive the table leg to one of the two physical tables ("dining_table"
-        or "movable_table"). The kitchen egress (staging waypoint / logged-nav
-        scripted egress) is identical for both -- only the final destination pose,
-        the learned parking offset, and the post-arrival write-back differ, all
-        keyed off `destination`."""
+        or "movable_table"). The kitchen egress (staging waypoints / logged-nav
+        scripted egress) is the same for both tables -- it varies by the leg's
+        ORIGIN, not the destination table (see _SKIP_PRE_STAGING_ORIGINS and the
+        scripted-reverse distances). Keyed off `destination`: only the final
+        destination pose, the learned parking offset, the destination-specific
+        approach waypoints, and the post-arrival write-back."""
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
-        # Kitchen-egress staging sequence (both tables): mid-corridor pose then
-        # corridor-mouth pose. Driven in order before the table.
-        staging = [self._PRE_STAGING_WAYPOINT, self._STAGING_WAYPOINT]
+        # True PDDL origin stashed by execute_action (None after a resume / when
+        # ungrounded). Selects the egress staging sequence here and the logged-nav
+        # scripted-egress reverse distance below.
+        origin = getattr(self, "_nav_origin", None)
+        # Kitchen-egress staging sequence, in drive order before the table. Both
+        # tables share it for a given origin; the origin decides whether the
+        # mid-corridor pre-staging pose is threaded first. From the fridge (already
+        # at the corridor mouth) it is skipped -- straight to the corridor-mouth
+        # pose -- since routing via the mid-corridor pose would drive the base
+        # backward into the kitchen. Everything else (microwave, unknown origin)
+        # keeps the full pair. See _SKIP_PRE_STAGING_ORIGINS.
+        if origin in self._SKIP_PRE_STAGING_ORIGINS:
+            staging = [self._STAGING_WAYPOINT]
+        else:
+            staging = [self._PRE_STAGING_WAYPOINT, self._STAGING_WAYPOINT]
         # Destination-specific approach waypoints, appended after the staging
         # poses so the route is: staging... -> approach... -> table. Empty for
         # destinations without any (e.g. movable_table).
@@ -1904,7 +1932,6 @@ class NavigateHLA(HighLevelAction):
         # origin-specific distance, rotate 90 deg CW, then drive autonomously
         # DIRECT to the table (the scripted egress replaces the staging
         # waypoint). Unknown origins keep the fully autonomous route.
-        origin = getattr(self, "_nav_origin", None)
         reverse_m = self._SCRIPTED_TABLE_EGRESS_REVERSE_M.get(origin)
         if self._logged_nav_enabled() and reverse_m is not None:
             self._prepare_for_navigation(speed, need_move_base=False)
