@@ -37,7 +37,11 @@
             @click="addMarker"
             ref="imageMarkerContainer"
           >
-            <img :src="imageSrc" class="mark-img" alt="Plate" ref="markImage" />
+            <!-- Manual picking happens on the whole camera frame (so an item off
+                 the plate can be reached); falls back to the plate image when the
+                 backend sent no manual frame. The bite-selection view above still
+                 shows the plate crop. -->
+            <img :src="manualImageSrc || imageSrc" class="mark-img" alt="Camera view" ref="markImage" />
             <div
               v-for="(marker, index) in markers"
               :key="index"
@@ -195,6 +199,11 @@ export default {
       nFoodTypes: 0,
       noDetections: false,
       imageSrc: '',
+      // Whole-camera-frame image used by the manual skill step (step 2), kept
+      // separate from imageSrc (the plate crop the bite view shows). Set when an
+      // image arrives right after a "manual_image" status.
+      manualImageSrc: '',
+      expectManualImage: false,
       showModal: false,
       currentStep: 1,
       markerVisible: false,
@@ -444,6 +453,11 @@ export default {
           }
         } else {
         }
+        if (parsedMessage.state === 'bite_selection' && parsedMessage.status === 'manual_image') {
+          // The next image on /camera/image/compressed is the manual-selection
+          // frame (whole camera view), not a new plate image.
+          this.expectManualImage = true;
+        }
         if (parsedMessage.state === 'bite_selection' && parsedMessage.status === 'no_detections') {
           // Manual-only mode: detection found nothing actionable. Stop the
           // countdown unconditionally (also sets countdownCancelled, so a
@@ -686,11 +700,11 @@ export default {
         // would shift the ratio by ~1px and scale it by w/(w+2). The marker dot,
         // the connecting line, and the backend all treat the ratio as relative
         // to the image content, so the image rect is the correct reference and
-        // makes the picked pixel map 1:1 onto the plate pixels acquisition
-        // samples (point = ratio * plate_bounds + plate_bounds_origin). The 180
-        // CSS flip leaves getBoundingClientRect unchanged (point-symmetric), and
-        // it cancels the backend's 180 rotation so the displayed image is the raw
-        // camera-frame plate crop.
+        // makes the picked pixel map 1:1 onto the pixels acquisition samples
+        // (point = ratio * manual-frame size, i.e. the whole camera frame). The
+        // 180 CSS flip leaves getBoundingClientRect unchanged (point-symmetric),
+        // and it cancels the backend's 180 rotation so the displayed image is the
+        // raw camera frame.
         const img = this.$refs.markImage;
         if (!img) {
           return;
@@ -813,13 +827,18 @@ export default {
           state: 'bite_skill_selection',
           status: index,
           // The displayed image is rotated back to upright (scaleX(-1) scaleY(-1)),
-          // so markers are captured directly in the upright plate frame - which is
-          // exactly the frame the backend maps ratios to camera pixels in. Send the
-          // ratios through unchanged.
+          // so markers are captured directly in the upright manual-selection frame
+          // (the whole camera view) - exactly the frame the backend maps ratios to
+          // camera pixels in. Send the ratios through unchanged.
           positions: positions.map((position, positionIndex) => ({
             index: positionIndex + 1,
             x: position.x,
-            y: position.y
+            y: position.y,
+            // Which image the ratios are relative to, so the backend scales them
+            // against the same frame even if the manual image never arrived (the
+            // step then showed the plate crop, as it did before manual selection
+            // moved to the whole frame).
+            frame: this.manualImageSrc ? 'manual' : 'plate'
           }))
         }) 
       });
@@ -843,6 +862,15 @@ export default {
             img.src = base64Image;
 
             img.onload = () => {
+
+              if (this.expectManualImage) {
+                // Manual-selection frame: store it for step 2 only. Must not
+                // touch imageSrc / the natural dimensions the box overlay is
+                // scaled against, nor re-run the bite data parsing.
+                this.manualImageSrc = base64Image;
+                this.expectManualImage = false;
+                return;
+              }
 
               this.imageSrc = base64Image;
 

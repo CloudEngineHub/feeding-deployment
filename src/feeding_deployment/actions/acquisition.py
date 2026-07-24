@@ -41,6 +41,31 @@ from feeding_deployment.interfaces.web_interface import WebInterfaceTakeoverInte
 MAX_CONSECUTIVE_FAILED_DETECTIONS = 3
 
 
+def _manual_point_to_pixel(pos: dict, manual_image, plate_bounds) -> tuple[int, int]:
+    """Convert a point the user tapped on the webapp's manual skill step into a
+    camera pixel.
+
+    The page reports the tap as ratios in [0, 1] of the image it displayed, and
+    tags which image that was: 'manual' is the whole camera frame (what
+    WebInterface.get_next_bite_selection sends as the manual-selection image, so
+    an item off the plate can be tapped), 'plate' is the plate crop it falls back
+    to if that frame never arrived. Scaling against the wrong one would send the
+    utensil to a completely different place, so honour the tag rather than
+    assuming -- and treat a missing tag as 'plate', which is what a frontend
+    predating the manual frame always displayed.
+
+    Clamped to the last valid pixel so a tap exactly on the right/bottom edge
+    cannot index out of the image."""
+    if pos.get("frame") == "manual":
+        height, width = manual_image.shape[:2]
+        x_origin, y_origin = 0, 0
+    else:
+        x_origin, y_origin, width, height = plate_bounds
+    point_x = min(round(pos["x"] * width), width - 1) + x_origin
+    point_y = min(round(pos["y"] * height), height - 1) + y_origin
+    return point_x, point_y
+
+
 class TakeoverAwareArmInterface:
     """Wraps the arm interface handed to FLAIR so a mid-skill takeover preempts
     bite-acquisition motion the same way it preempts every other skill.
@@ -294,6 +319,7 @@ class AcquireBiteHLA(HighLevelAction):
                     skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(
                         items_detection['plate_image'], 0, [], None, 1, ["No dip"],
                         autocontinue_timeout=0.0, no_detections=True,
+                        manual_image=camera_color_data,
                     )
                     # Only manual skills are valid with no detections (a
                     # task-selection jump returns None); anything else goes back
@@ -348,7 +374,7 @@ class AcquireBiteHLA(HighLevelAction):
                     n_dip_food_types = len(dip_data)
 
                     if self.web_interface is not None:
-                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds)
+                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds, manual_image=camera_color_data)
                     else:
                         # params must be set to the autonomously selected values
                         skill_type = "autonomous"
@@ -393,15 +419,15 @@ class AcquireBiteHLA(HighLevelAction):
                 
                 elif skill_type == "manual_skewering":
 
-                    plate_bounds = items_detection["plate_bounds"]
                     pos = skill_params[0]
 
-                    # round (not int/truncate) so the picked point maps to the
-                    # nearest plate pixel rather than biasing toward the top-left.
-                    point_x = round(pos["x"]*plate_bounds[2]) + plate_bounds[0]
-                    point_y = round(pos["y"]*plate_bounds[3]) + plate_bounds[1]
+                    # The webapp's manual skill step shows the whole camera frame
+                    # (not the plate crop), so the ratios it returns are relative
+                    # to that frame -- scale them by the frame size, no plate
+                    # offset. round (not int/truncate) so the picked point maps to
+                    # the nearest pixel rather than biasing toward the top-left.
+                    point_x, point_y = _manual_point_to_pixel(pos, camera_color_data, items_detection["plate_bounds"])
 
-                    print("Plate Bounds:", plate_bounds)
                     print("Positions:", skill_params)
                     print("Point:", point_x, point_y)
 
@@ -424,15 +450,13 @@ class AcquireBiteHLA(HighLevelAction):
                     raise NotImplementedError("Scoop skill not yet implemented")
                 elif skill_type == "manual_dipping":
 
-                    plate_bounds = items_detection["plate_bounds"]
                     pos = skill_params[0]
 
-                    # round (not int/truncate) so the picked point maps to the
-                    # nearest plate pixel rather than biasing toward the top-left.
-                    point_x = round(pos["x"]*plate_bounds[2]) + plate_bounds[0]
-                    point_y = round(pos["y"]*plate_bounds[3]) + plate_bounds[1]
+                    # Ratios are relative to the whole camera frame the manual step
+                    # shows -- this is what lets the user tap a dipping sauce that
+                    # sits next to the plate rather than on it.
+                    point_x, point_y = _manual_point_to_pixel(pos, camera_color_data, items_detection["plate_bounds"])
 
-                    print("Plate Bounds:", plate_bounds)
                     print("Positions:", skill_params)
                     print("Point:", point_x, point_y)
 
