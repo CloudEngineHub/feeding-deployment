@@ -1,0 +1,36 @@
+{
+  "incident": "OpenMicrowave 'Arm did not reach desired position' stall on the door-opening pull arc",
+  "when": "2026-07-23T18:17:26-04:00",
+  "attempt_note": "Second OpenMicrowave attempt of the run (a redo), Speed=high.",
+  "source_bundle": "src/feeding_deployment/integration/log/system_logs/session_20260723_173323_jul23_deployment_day4",
+  "source_lines": {
+    "executive_failing_command": "compute/tmux/feeding_w0.p7_432.log:733",
+    "nuc_arm_server": "nuc/robot/tmux/robot_w0.p0_0.log:468-486"
+  },
+  "frame": "arm_base_link",
+  "quat_order": "xyzw",
+  "speed": "high",
+  "failure_mode": "Post-execution endpoint check in kinova.py:729-734 -- move_cartesian_trajectory sends all 11 waypoints as ONE ExecuteWaypointTrajectory, then checks only whether the FINAL EE position is within 1 cm of the last waypoint. It was not, so it printed 'Arm did not reach desired position' and returned False. The real firmware abort reason (protective stop / joint limit / following error) is swallowed: kinova.py:247-256 treats ACTION_END and ACTION_ABORT identically. The executive (base.py:704-731) turned the False into a teleop hand-off ('joint limit/reachability' is its own generic guess, not a firmware code).",
+  "attributed_waypoint": "11 of 11 (final). Physically the arm stalled somewhere along the arc; only the endpoint is checked, so the exact stall waypoint is not in the logs and must be measured on replay.",
+  "defined_in": "actions/open_door.py:217 open_microwave -> move_to_ee_pose_trajectory(handle_opening_poses['opening_waypoints']); waypoints generated at runtime from the perceived handle by perception_interface.py:646 _generate_door_arc_waypoints (constant-z planar door arc, so these values are specific to this run's handle detection).",
+  "preamble": {
+    "comment": "Commands the arm server received immediately before the failing arc (NUC pane). Replaying these puts the arm in the same starting configuration/IK branch. In free space (no microwave) the gripper simply closes on nothing; recreate_joint_limit.py notes this class of stall is kinematic and needs no door contact -- but if the real cause was the door physically resisting, a free-space replay will NOT reproduce it.",
+    "set_speed": "high",
+    "staging_joint_pos": [1.89032133, 0.84311512, -1.22897374, -2.5269673, 0.56253199, 1.28505153, 0.43600251],
+    "pre_grasp_pose": {"pos": [-0.55531326, 0.23762547, 0.51575692], "quat": [0.5, -0.5, -0.5, 0.5], "then": "open_gripper"},
+    "grasp_pose": {"pos": [-0.63031326, 0.23762547, 0.51575692], "quat": [0.5, -0.5, -0.5, 0.5], "then": "close_gripper"}
+  },
+  "opening_waypoints": [
+    {"pos": [-0.58136515, 0.22753774, 0.51575692], "quat": [0.47292802, -0.52567965, -0.52567965, 0.47292802]},
+    {"pos": [-0.53375227, 0.21234915, 0.51575692], "quat": [0.44453908, -0.54989545, -0.54989545, 0.44453908]},
+    {"pos": [-0.48800459, 0.19222878, 0.51575692], "quat": [0.41491225, -0.57257997, -0.57257997, 0.41491225]},
+    {"pos": [-0.44463133, 0.16740057, 0.51575692], "quat": [0.38413002, -0.59367005, -0.59367005, 0.38413002]},
+    {"pos": [-0.40411526, 0.13814090, 0.51575692], "quat": [0.35227812, -0.61310694, -0.61310694, 0.35227812]},
+    {"pos": [-0.36690739, 0.10477544, 0.51575692], "quat": [0.31944524, -0.63083654, -0.63083654, 0.31944524]},
+    {"pos": [-0.33342185, 0.06767559, 0.51575692], "quat": [0.28572281, -0.64680946, -0.64680946, 0.28572281]},
+    {"pos": [-0.30403138, 0.02725431, 0.51575692], "quat": [0.25120473, -0.66098123, -0.66098123, 0.25120473]},
+    {"pos": [-0.27906313, -0.01603848, 0.51575692], "quat": [0.21598713, -0.67331238, -0.67331238, 0.21598713]},
+    {"pos": [-0.25879500, -0.06172090, 0.51575692], "quat": [0.18016807, -0.68376858, -0.68376858, 0.18016807]},
+    {"pos": [-0.24345261, -0.10928444, 0.51575692], "quat": [0.14384731, -0.69232070, -0.69232070, 0.14384731]}
+  ]
+}
