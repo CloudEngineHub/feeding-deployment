@@ -6,11 +6,7 @@ options = {
   map_builder = MAP_BUILDER,
   trajectory_builder = TRAJECTORY_BUILDER,
 
-  -- Cartographer publishes map_carto->odom (NOT map->odom). The map_odom_clamp
-  -- node owns map->map_carto (identity by default) and absorbs spurious jumps
-  -- while parked, so consumers keep using "map" unchanged. See
-  -- scripts/map_odom_clamp.py and launch/cartographer_localization.launch.
-  map_frame = "map_carto",
+  map_frame = "map",
   tracking_frame = "vention_base_link",
   published_frame = "odom",
   odom_frame = "odom",
