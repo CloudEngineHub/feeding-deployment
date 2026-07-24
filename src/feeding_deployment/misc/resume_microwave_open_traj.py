@@ -214,6 +214,18 @@ def nearest_waypoint(client, waypoints) -> int:
     return k
 
 
+def first_unreached_waypoint(client, waypoints, tol_cm) -> int:
+    """Index of the first waypoint the arm is NOT already within tol of. Used to
+    start a resume sub-trajectory: starting at the waypoint the arm is basically
+    already on (a near-zero first segment) makes Kinova abort a blended
+    WAYPOINT_TRAJECTORY at init, so we skip past it."""
+    cur = ee_xyz(client)
+    for i, (pos, _) in enumerate(waypoints):
+        if dist_cm(cur, pos) > tol_cm:
+            return i
+    return len(waypoints)  # already within tol of every waypoint
+
+
 def stepwise_resume(sender, waypoints, start_index, args):
     """Send waypoints[start_index:] one at a time, re-sending each on failure and
     continuing past any that stay unreachable. Returns a per-waypoint report."""
@@ -335,17 +347,29 @@ def main() -> None:
             report.append({"attempt": attempt, "ok": ok, "dist_cm": d})
             if ok or d <= args.tol_cm:
                 break
-    else:
-        start_index = 0 if args.dry_run else nearest_waypoint(client, waypoints)
-        if args.resume_strategy == "subtrajectory":
+    elif args.resume_strategy == "subtrajectory":
+        if args.dry_run:
+            start_index = 0
+        else:
+            nearest_waypoint(client, waypoints)  # report the stall point
+            # Start from the first NOT-already-reached waypoint. Starting on the
+            # waypoint the arm is basically already at gives a ~0 first segment,
+            # which makes Kinova abort the blended trajectory at init.
+            start_index = first_unreached_waypoint(client, waypoints, args.tol_cm)
+            print(f"  Resuming sub-trajectory from first unreached waypoint {start_index + 1}/{n} "
+                  f"(skips waypoints already within {args.tol_cm} cm).")
+        if start_index >= n:
+            print("  Every waypoint already within tolerance; nothing to resume.")
+        else:
             rest = waypoints[start_index:]
             ok, _ = sender.cartesian_traj(rest, label=f"send the rest as one sub-trajectory (wp {start_index + 1}..{n})")
             if not args.dry_run:
                 d = dist_cm(ee_xyz(client), waypoints[-1][0])
                 print(f"    final {d:.2f} cm from goal, driver_ok={ok}")
                 report.append({"start_index": start_index, "ok": ok, "dist_cm": d})
-        else:  # stepwise
-            report = stepwise_resume(sender, waypoints, start_index, args)
+    else:  # stepwise: re-sending the stall waypoint is harmless, so start at nearest
+        start_index = 0 if args.dry_run else nearest_waypoint(client, waypoints)
+        report = stepwise_resume(sender, waypoints, start_index, args)
 
     _summary(report, n, args, reproduced=reproduced)
 
