@@ -32,12 +32,13 @@ from feeding_deployment.control.robot_controller.command_interface import (
 
 from pybullet_helpers.geometry import Pose
 
-# Height of the dipping bowl's rim above the surface the plate-depth sample sees
-# (measured: the bowl is 4 cm tall). The camera looks down, so the rim is that
-# much CLOSER than the plate -- hence plate_depth - this = rim depth. Re-measure
-# if the bowl changes; if the plate sample reads the plate's inner surface rather
-# than the table, subtract only the bowl's height above THAT surface.
-BOWL_RIM_ABOVE_PLATE_MM = 40.0
+# Height of the dipping sauce's surface above the surface the plate-depth sample
+# sees. The camera looks down, so the sauce is that much CLOSER than the plate --
+# hence plate_depth - this = sauce depth. The bowl measures 4 cm tall; 43 mm is
+# what the whipped cream actually read in the Jul 24 test_actions frames (the
+# valid depths inside the sauce mask cluster at 358-362 mm against a 404 mm plate,
+# i.e. 42-46 mm above it). Re-measure if the bowl or the plate changes.
+BOWL_RIM_ABOVE_PLATE_MM = 43.0
 
 
 def plate_surface_depth_mm(depth_image, plate_bounds):
