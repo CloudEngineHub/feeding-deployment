@@ -214,16 +214,6 @@ def nearest_waypoint(client, waypoints) -> int:
     return k
 
 
-def first_unreached_waypoint(client, waypoints, tol_cm) -> int:
-    """Index of the first waypoint the arm is NOT already within tol of. Used to
-    start a resume sub-trajectory: starting at the waypoint the arm is basically
-    already on (a near-zero first segment) makes Kinova abort a blended
-    WAYPOINT_TRAJECTORY at init, so we skip past it."""
-    cur = ee_xyz(client)
-    for i, (pos, _) in enumerate(waypoints):
-        if dist_cm(cur, pos) > tol_cm:
-            return i
-    return len(waypoints)  # already within tol of every waypoint
 
 
 def stepwise_resume(sender, waypoints, start_index, args):
@@ -349,17 +339,17 @@ def main() -> None:
                 break
     elif args.resume_strategy == "subtrajectory":
         if args.dry_run:
-            start_index = 0
+            start_index = 1
         else:
-            nearest_waypoint(client, waypoints)  # report the stall point
-            # Start from the first NOT-already-reached waypoint. Starting on the
-            # waypoint the arm is basically already at gives a ~0 first segment,
-            # which makes Kinova abort the blended trajectory at init.
-            start_index = first_unreached_waypoint(client, waypoints, args.tol_cm)
-            print(f"  Resuming sub-trajectory from first unreached waypoint {start_index + 1}/{n} "
-                  f"(skips waypoints already within {args.tol_cm} cm).")
+            # The stall point is the nearest waypoint; the arm has effectively
+            # traversed everything up to it. Resume from the NEXT waypoint: sending
+            # the tail only, and skipping the coincident stall waypoint (a ~0 first
+            # segment makes Kinova abort a blended trajectory at init).
+            stall = nearest_waypoint(client, waypoints)
+            start_index = min(stall + 1, n)
+            print(f"  Resuming sub-trajectory from waypoint {start_index + 1}/{n} (the tail past the stall).")
         if start_index >= n:
-            print("  Every waypoint already within tolerance; nothing to resume.")
+            print("  Stall was at the final waypoint; nothing left to resume as a trajectory.")
         else:
             rest = waypoints[start_index:]
             ok, _ = sender.cartesian_traj(rest, label=f"send the rest as one sub-trajectory (wp {start_index + 1}..{n})")
