@@ -36,8 +36,14 @@ publishes a fresh transform:
     map_carto->odom larger than {lin,ang}_jump is ABSORBED into the correction,
     so the net map->odom holds steady -- a parked robot's localization can no
     longer be yanked (the feeding-occlusion jump). Steps below the threshold
-    still flow; set the threshold to 0 to pin fully. On the next commanded move
-    the clamp releases and corrections flow again, continuously (no snap).
+    still flow; set the threshold to 0 to pin fully.
+  - On release (base commanded again) the accumulated correction WASHES OUT
+    back to identity at washout_{lin,ang} rates, so localization re-converges
+    to Cartographer's truth. This clamp DEFERS corrections during feeding, it
+    does not discard them: a frozen correction would leave the map frame
+    permanently shifted and every later goal would be executed at an offset
+    spot (observed 2026-07-24 -- 42 absorptions over a 17 min table stay, then
+    the robot parked well off the sink).
 
 Parked detection mirrors scan_gate: disabled until the first command ever
 arrives (so a dock-parked robot's initial lock flows through unclamped), and
@@ -60,7 +66,7 @@ import threading
 
 import rospy
 import tf2_ros
-from geometry_msgs.msg import Twist, TransformStamped
+from geometry_msgs.msg import Twist, TransformStamped, Vector3
 from std_msgs.msg import Bool
 
 
@@ -98,16 +104,56 @@ class ClampCore:
     """
 
     def __init__(self, park_freeze_s=30.0, lin_jump_m=0.05, ang_jump_rad=0.03,
-                 startup_grace_s=300.0):
+                 startup_grace_s=300.0, washout_lin_mps=0.15,
+                 washout_ang_rps=0.15):
         self.park_freeze_s = park_freeze_s     # 0/None disables the parked clamp
         self.lin_jump_m = lin_jump_m           # step in map_carto->odom above
         self.ang_jump_rad = ang_jump_rad       # which (while parked) is absorbed
         self.startup_grace_s = startup_grace_s  # one-time warmup; 0/None disables
+        self.washout_lin_mps = washout_lin_mps  # rate the correction decays back
+        self.washout_ang_rps = washout_ang_rps  # to identity once NOT parked
         self.correction = (0.0, 0.0, 0.0)      # map->map_carto, starts identity
         self.last_carto = None                 # last map_carto->odom seen
         self.last_cmd_t = None                 # last /cmd_vel* message time
         self.start_t = None                    # first update() time
+        self.last_t = None                     # previous update() time (for dt)
         self.last_absorbed = None              # (delta_m, delta_rad) or None
+
+    def correction_magnitude(self):
+        """(meters, radians) of the accumulated correction, for diagnostics."""
+        return (math.hypot(self.correction[0], self.correction[1]),
+                abs(self.correction[2]))
+
+    def _washout(self, dt):
+        """Decay the correction toward identity at the washout rates.
+
+        THE reason this exists: absorbing a jump only DEFERS it. Cartographer
+        keeps its own (thrashing) estimate, and once the base drives with a clear
+        view it re-converges to the truth. If the correction stayed frozen at the
+        absorbed value, that stale offset would remain composed on top forever --
+        the map frame would sit shifted from reality and every subsequent goal
+        would be executed at a physically offset spot (observed 2026-07-24: a
+        17 min, 42-absorption storm at the table, then the robot parked well off
+        the sink). So once we are no longer parked, bleed the correction back to
+        identity: the clamp defers corrections during feeding, it never discards
+        them. Slew-limited so the pose slides back smoothly instead of snapping.
+        """
+        if dt <= 0.0:
+            return
+        x, y, yaw = self.correction
+        d = math.hypot(x, y)
+        max_d = self.washout_lin_mps * dt
+        if d <= max_d:
+            x, y = 0.0, 0.0
+        elif d > 0.0:
+            scale = (d - max_d) / d
+            x, y = x * scale, y * scale
+        max_a = self.washout_ang_rps * dt
+        if abs(yaw) <= max_a:
+            yaw = 0.0
+        else:
+            yaw -= math.copysign(max_a, yaw)
+        self.correction = (x, y, yaw)
 
     def note_cmd(self, t):
         """Record a base velocity command (any /cmd_vel* message)."""
@@ -138,13 +184,16 @@ class ClampCore:
     def update(self, carto, t):
         """Fold in the latest map_carto->odom; return the map->map_carto SE2.
 
-        While parked, a step in map_carto->odom bigger than the jump thresholds
+        While PARKED, a step in map_carto->odom bigger than the jump thresholds
         is absorbed into the correction so the net map->odom does not move.
-        Otherwise the correction is unchanged and Cartographer's change flows.
+        While NOT parked, the correction washes out toward identity (see
+        _washout) and Cartographer's changes flow straight through.
         """
         self.last_absorbed = None
         if self.start_t is None:
             self.start_t = t
+        dt = 0.0 if self.last_t is None else max(0.0, t - self.last_t)
+        self.last_t = t
         if self.last_carto is None:
             self.last_carto = carto
             return self.correction
@@ -153,14 +202,18 @@ class ClampCore:
         delta = se2_compose(se2_inverse(self.last_carto), carto)
         d_lin = math.hypot(delta[0], delta[1])
         d_ang = abs(delta[2])
-        if self._parked(t) and (d_lin > self.lin_jump_m
-                                or d_ang > self.ang_jump_rad):
-            # Absorb: correction_new = correction . last_carto . carto^-1, which
-            # keeps map->odom = correction . carto constant across the step.
-            self.correction = se2_compose(
-                se2_compose(self.correction, self.last_carto),
-                se2_inverse(carto))
-            self.last_absorbed = (d_lin, d_ang)
+        if self._parked(t):
+            if d_lin > self.lin_jump_m or d_ang > self.ang_jump_rad:
+                # Absorb: correction_new = correction . last_carto . carto^-1,
+                # keeping map->odom = correction . carto constant across the step.
+                self.correction = se2_compose(
+                    se2_compose(self.correction, self.last_carto),
+                    se2_inverse(carto))
+                self.last_absorbed = (d_lin, d_ang)
+        else:
+            # Moving (or still in startup grace): give the deferred correction
+            # back so localization re-converges to Cartographer's truth.
+            self._washout(dt)
         self.last_carto = carto
         return self.correction
 
@@ -185,7 +238,10 @@ class MapOdomClampNode:
             park_freeze_s=rospy.get_param("~park_freeze_s", 30.0),
             lin_jump_m=rospy.get_param("~lin_jump_m", 0.05),
             ang_jump_rad=rospy.get_param("~ang_jump_rad", 0.03),
-            startup_grace_s=rospy.get_param("~startup_grace_s", 300.0))
+            startup_grace_s=rospy.get_param("~startup_grace_s", 300.0),
+            washout_lin_mps=rospy.get_param("~washout_lin_mps", 0.15),
+            washout_ang_rps=rospy.get_param("~washout_ang_rps", 0.15))
+        self.stats_period_s = rospy.get_param("~stats_period_s", 30.0)
         self.lock = threading.Lock()
 
         self.tf_buffer = tf2_ros.Buffer()
@@ -194,16 +250,36 @@ class MapOdomClampNode:
         self.pub_absorb = rospy.Publisher("/map_odom_clamp/absorbing", Bool,
                                           queue_size=1, latch=True)
         self.pub_absorb.publish(Bool(False))
+        # The accumulated map->map_carto correction (x, y, yaw). Publishing this
+        # is what was missing when the 2026-07-24 off-target parking had to be
+        # diagnosed from absorb WARNs alone -- always log the state you clamp.
+        self.pub_corr = rospy.Publisher("/map_odom_clamp/correction", Vector3,
+                                        queue_size=1, latch=True)
+        self.pub_corr.publish(Vector3(0.0, 0.0, 0.0))
 
         rospy.Subscriber("/cmd_vel", Twist, self.cb_cmd, queue_size=10)
         rospy.Subscriber("/cmd_vel_teleop", Twist, self.cb_cmd, queue_size=10)
         rospy.Timer(rospy.Duration(1.0 / self.pub_rate_hz), self.cb_timer)
+        rospy.Timer(rospy.Duration(self.stats_period_s), self.cb_stats)
         rospy.loginfo("map_odom_clamp: up (%s->%s, park_freeze=%.1fs "
                       "startup_grace=%.1fs lin_jump=%.3fm ang_jump=%.3frad "
-                      "enabled=%s); correction starts IDENTITY",
-                      self.map_frame, self.map_carto_frame,
+                      "washout=%.2fm/s,%.2frad/s enabled=%s); correction starts "
+                      "IDENTITY", self.map_frame, self.map_carto_frame,
                       self.core.park_freeze_s, self.core.startup_grace_s,
-                      self.core.lin_jump_m, self.core.ang_jump_rad, self.enabled)
+                      self.core.lin_jump_m, self.core.ang_jump_rad,
+                      self.core.washout_lin_mps, self.core.washout_ang_rps,
+                      self.enabled)
+
+    def cb_stats(self, _evt):
+        with self.lock:
+            corr = self.core.correction
+            d_lin, d_ang = self.core.correction_magnitude()
+            parked = self.core._parked(rospy.Time.now().to_sec())
+        self.pub_corr.publish(Vector3(corr[0], corr[1], corr[2]))
+        rospy.loginfo("map_odom_clamp: %s | correction %.3f m / %.3f rad "
+                      "(x=%.3f y=%.3f yaw=%.3f)",
+                      "PARKED (absorbing)" if parked else "moving (washing out)",
+                      d_lin, d_ang, corr[0], corr[1], corr[2])
 
     def cb_cmd(self, _msg):
         # Any command message means navigation is live -> not parked; see

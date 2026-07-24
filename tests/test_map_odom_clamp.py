@@ -33,7 +33,8 @@ def _stub(name, **attrs):
 _stub("rospy")
 _stub("tf2_ros")
 _stub("geometry_msgs")
-_stub("geometry_msgs.msg", Twist=object, TransformStamped=object)
+_stub("geometry_msgs.msg", Twist=object, TransformStamped=object,
+      Vector3=object)
 _stub("std_msgs")
 _stub("std_msgs.msg", Bool=object)
 
@@ -125,21 +126,59 @@ def test_small_change_flows_while_parked():
     assert _close(_net(core, (1.02, 0.0, 0.0)), (1.02, 0.0, 0.0))
 
 
-def test_release_is_continuous_then_follows():
+def test_release_washes_out_to_identity():
+    """THE regression guard: after release the deferred correction must bleed
+    back to identity, so the map frame re-converges to Cartographer's truth.
+    A frozen correction left the robot parking off-target (2026-07-24)."""
     core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
-                     startup_grace_s=0.0)
+                     startup_grace_s=0.0, washout_lin_mps=0.5,
+                     washout_ang_rps=0.5)
     core.note_cmd(0.0)
     core.update((1.0, 0.0, 0.0), 1.0)
-    core.update((3.0, 0.0, 0.0), 6.0)          # parked jump absorbed -> held at (1,0,0)
+    core.update((3.0, 0.0, 0.0), 6.0)          # parked jump absorbed -> held
     assert _close(_net(core, (3.0, 0.0, 0.0)), (1.0, 0.0, 0.0))
-    # Commanded motion again -> released. At the release instant (carto still
-    # (3,0,0)) net is unchanged (continuous, no snap).
-    core.note_cmd(10.0)
-    core.update((3.0, 0.0, 0.0), 10.0)
-    assert _close(_net(core, (3.0, 0.0, 0.0)), (1.0, 0.0, 0.0))
-    # As Cartographer now moves with the base, net follows 1:1 from the held pose.
-    core.update((3.5, 0.0, 0.0), 11.0)
-    assert _close(_net(core, (3.5, 0.0, 0.0)), (1.5, 0.0, 0.0))
+    assert core.correction_magnitude()[0] > 1.9   # ~2 m deferred
+    # Release: drive again. The correction must decay, not stay frozen.
+    t = 6.0
+    for _ in range(20):                        # 20 x 0.5 s at 0.5 m/s = 5 m of decay
+        t += 0.5
+        core.note_cmd(t)
+        core.update((3.0, 0.0, 0.0), t)
+    assert core.correction_magnitude()[0] < 1e-9
+    # ...and the presented pose now equals Cartographer's truth again.
+    assert _close(_net(core, (3.0, 0.0, 0.0)), (3.0, 0.0, 0.0))
+
+
+def test_washout_is_slew_limited_not_a_snap():
+    """The washout must be gradual (bounded rate), not an instant jump back."""
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=0.0, washout_lin_mps=0.1,
+                     washout_ang_rps=0.1)
+    core.note_cmd(0.0)
+    core.update((1.0, 0.0, 0.0), 1.0)
+    core.update((3.0, 0.0, 0.0), 6.0)          # 2 m deferred
+    before = core.correction_magnitude()[0]
+    core.note_cmd(6.5)
+    core.update((3.0, 0.0, 0.0), 6.5)          # one 0.5 s step at 0.1 m/s = 5 cm
+    after = core.correction_magnitude()[0]
+    assert abs((before - after) - 0.05) < 1e-6
+    assert after > 1.9                          # nowhere near a snap to identity
+
+
+def test_washout_also_decays_yaw():
+    core = ClampCore(park_freeze_s=5.0, lin_jump_m=0.05, ang_jump_rad=0.03,
+                     startup_grace_s=0.0, washout_lin_mps=1.0,
+                     washout_ang_rps=0.5)
+    core.note_cmd(0.0)
+    core.update((0.0, 0.0, 0.0), 1.0)
+    core.update((0.0, 0.0, 1.0), 6.0)          # parked 1 rad yank absorbed
+    assert core.correction_magnitude()[1] > 0.9
+    t = 6.0
+    for _ in range(10):                        # 10 x 0.5 s at 0.5 rad/s = 2.5 rad
+        t += 0.5
+        core.note_cmd(t)
+        core.update((0.0, 0.0, 1.0), t)
+    assert core.correction_magnitude()[1] < 1e-9
 
 
 def test_startup_grace_keeps_clamp_transparent_during_warmup():

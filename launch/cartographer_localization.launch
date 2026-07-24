@@ -31,6 +31,14 @@
        future" transforming the global plan (nav stalls). Keep >= the lua
        tf_publish_lookahead_sec (0.05) and > 1/pub_rate. -->
   <arg name="clamp_publish_lookahead_s" default="0.05"/>
+  <!-- Rate the accumulated correction bleeds back to identity once the base is
+       moving again. Absorbing a jump only DEFERS it; if the correction stayed
+       frozen, the map frame would sit permanently shifted and later goals would
+       be executed at an offset spot (2026-07-24: 42 absorptions at the table,
+       then parked well off the sink). Must be >> the robot's own speed so it
+       re-converges within a leg; 0 disables washout (NOT recommended). -->
+  <arg name="clamp_washout_lin_mps" default="0.15"/>
+  <arg name="clamp_washout_ang_rps" default="0.15"/>
   <!-- false -> node publishes map->map_carto = identity forever = raw
        Cartographer (jumpy but correct): the safe fallback / A-B toggle. -->
   <arg name="clamp_enabled" default="true"/>
@@ -44,6 +52,8 @@
     <param name="lin_jump_m" value="$(arg clamp_lin_jump_m)"/>
     <param name="ang_jump_rad" value="$(arg clamp_ang_jump_rad)"/>
     <param name="publish_lookahead_s" value="$(arg clamp_publish_lookahead_s)"/>
+    <param name="washout_lin_mps" value="$(arg clamp_washout_lin_mps)"/>
+    <param name="washout_ang_rps" value="$(arg clamp_washout_ang_rps)"/>
     <param name="enabled" value="$(arg clamp_enabled)"/>
   </node>
 
