@@ -230,13 +230,16 @@ class FoodManipulationSkillLibrary:
         # cv2.destroyAllWindows()
         # input("Press enter to continue...")
 
-        # get 3D point from depth image
-        validity, point = pixel2World(camera_info, center_x, center_y, depth_image)
+        # get 3D point from depth image, sampling an 11x11 patch centred on the dip
+        # point instead of the default 5x5. Sauces are shiny and near-textureless,
+        # so the depth right at the picked pixel is often a hole; the wider patch
+        # finds a valid median nearby instead of failing the skill outright.
+        validity, point = pixel2World(camera_info, center_x, center_y, depth_image, box_width=5)
         # breakpoint()
         if not validity:
             print("Invalid point")
             return False
-        
+
         print("Getting transformation from base_link to camera_color_optical_frame")
         base_to_camera_transform = self.get_transform('arm_base_link', 'camera_color_optical_frame')
         print("Base to camera transform: ", base_to_camera_transform)
