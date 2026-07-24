@@ -32,6 +32,39 @@ from feeding_deployment.control.robot_controller.command_interface import (
 
 from pybullet_helpers.geometry import Pose
 
+# Height of the dipping bowl's rim above the surface the plate-depth sample sees
+# (measured: the bowl is 4 cm tall). The camera looks down, so the rim is that
+# much CLOSER than the plate -- hence plate_depth - this = rim depth. Re-measure
+# if the bowl changes; if the plate sample reads the plate's inner surface rather
+# than the table, subtract only the bowl's height above THAT surface.
+BOWL_RIM_ABOVE_PLATE_MM = 40.0
+
+
+def plate_surface_depth_mm(depth_image, plate_bounds):
+    """Median valid depth (mm) over the middle of the detected plate, or None.
+
+    The plate is the most reliable depth target in the scene -- large, matte and
+    always in frame -- which is what makes it a usable stand-in for a dipping
+    sauce, whose white, glossy surface routinely returns nothing. Only the central
+    half of the plate's bounding box is sampled, so the rim and the table just
+    outside it stay out of the median."""
+    if plate_bounds is None:
+        return None
+    x, y, w, h = (int(v) for v in plate_bounds)
+    if w <= 0 or h <= 0:
+        return None
+    height, width = depth_image.shape[:2]
+    x0, x1 = max(x + w // 4, 0), min(x + 3 * w // 4, width)
+    y0, y1 = max(y + h // 4, 0), min(y + 3 * h // 4, height)
+    if x1 <= x0 or y1 <= y0:
+        return None
+    region = depth_image[y0:y1, x0:x1]
+    valid = region[np.isfinite(region) & (region > 50) & (region < 1000)]
+    if valid.size == 0:
+        return None
+    return float(np.median(valid))
+
+
 class FoodManipulationSkillLibrary:
     def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, wrist_interface: WristInterface, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False):
         
@@ -211,7 +244,7 @@ class FoodManipulationSkillLibrary:
 
         return True
 
-    def dipping_skill(self, color_image, depth_image, camera_info, keypoint=None, dipping_depth=0.02):
+    def dipping_skill(self, color_image, depth_image, camera_info, keypoint=None, dipping_depth=0.02, plate_bounds=None):
         """ Dipping amount must be between 0.02 and 0.05"""
 
         if keypoint is not None:
@@ -235,6 +268,41 @@ class FoodManipulationSkillLibrary:
         # so the depth right at the picked pixel is often a hole; the wider patch
         # finds a valid median nearby instead of failing the skill outright.
         validity, point = pixel2World(camera_info, center_x, center_y, depth_image, box_width=5)
+
+        # Geometric fallback for when even the patch comes back empty (glare on
+        # white sauce). The plate and the bowl stand on the same table and the
+        # camera looks down at it, so the bowl rim sits at the plate's depth minus
+        # the bowl height. Depth here is perpendicular distance along the optical
+        # axis, so this transfers across the frame: the table is within a couple of
+        # degrees of fronto-parallel, which costs ~2 mm laterally, while the rim
+        # offset below is the term that actually matters.
+        plate_depth_mm = plate_surface_depth_mm(depth_image, plate_bounds)
+        fallback_depth_mm = None if plate_depth_mm is None else plate_depth_mm - BOWL_RIM_ABOVE_PLATE_MM
+
+        measured_depth_mm = point[2] * 1000 if validity else None
+        measured_str = f"{measured_depth_mm:.1f} mm" if validity else "INVALID (hole/glare)"
+        if plate_depth_mm is None:
+            fallback_str = "unavailable (no plate depth)"
+        else:
+            fallback_str = f"{fallback_depth_mm:.1f} mm (plate {plate_depth_mm:.1f} - bowl {BOWL_RIM_ABOVE_PLATE_MM:.0f})"
+
+        if not validity and fallback_depth_mm is not None:
+            validity, point = pixel2World(camera_info, center_x, center_y, depth_image,
+                                          depth=fallback_depth_mm)
+            using = "FALLBACK (plate depth - bowl height)" if validity else "NEITHER (fallback implausible)"
+        elif validity:
+            using = "measured patch"
+        else:
+            using = "NEITHER (no measurement, no plate depth)"
+
+        print(f"[dip depth] measured: {measured_str} | fallback: {fallback_str} | using: {using}")
+        if measured_depth_mm is not None and fallback_depth_mm is not None:
+            # Both available: worth watching, since a large gap means either the
+            # bowl height constant or the patch reading is off (a dark bowl
+            # interior can read its bottom rather than the sauce surface).
+            print(f"[dip depth] measured-vs-fallback disagreement: "
+                  f"{abs(measured_depth_mm - fallback_depth_mm):.1f} mm")
+
         # breakpoint()
         if not validity:
             print("Invalid point")

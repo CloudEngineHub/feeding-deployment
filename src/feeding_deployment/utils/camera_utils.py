@@ -23,7 +23,7 @@ def angle_between_pixels(source_px, target_px, image_width, image_height, orient
     return angle + robot_angle_offset
 
 
-def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
+def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2, depth = None):
     """Back-project a pixel to a 3D point in the camera frame.
 
     box_width is the half-width of the square patch of depth pixels sampled
@@ -31,7 +31,14 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
     of its valid readings supplies the depth. Sampling a patch (rather than the
     one pixel) is what makes this survive the depth holes RealSense leaves on
     shiny, low-texture surfaces -- a dipping sauce being the worst case, which is
-    why the dipping skill passes a wider box_width than the default."""
+    why the dipping skill passes a wider box_width than the default.
+
+    depth (millimetres) skips the depth image entirely and back-projects along the
+    pixel's ray at that distance -- for callers that know the distance
+    geometrically (e.g. a surface of known height) and cannot trust, or do not
+    have, a depth reading at that pixel. Note this is perpendicular distance along
+    the optical axis, not range from the sensor: that is the convention the
+    deprojection below (and the RealSense depth image) uses."""
 
     # print("(image_y,image_x): ",image_y,image_x)
     # print("depth image: ", depth_image.shape[0], depth_image.shape[1])
@@ -39,7 +46,13 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
     if image_y >= depth_image.shape[0] or image_x >= depth_image.shape[1]:
         return False, None
 
-    depth = depth_image[image_y, image_x]
+    if depth is None:
+        depth = depth_image[image_y, image_x]
+    elif math.isnan(depth) or depth < 50 or depth > 1000:
+        # A supplied distance still has to be physically plausible.
+        return False, None
+    else:
+        return True, _deproject(camera_info, image_x, image_y, depth)
 
     # NOTE: these bounds are metres while depth_image is millimetres, so this is
     # true for every real reading and the patch below is what actually supplies
@@ -70,19 +83,26 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
         # few stray readings should still report the surface the point is on.
         depth = float(np.median(np.array(depth_samples)))
 
+    return True, _deproject(camera_info, image_x, image_y, depth)
+
+
+def _deproject(camera_info, image_x, image_y, depth):
+    """Pinhole back-projection of a pixel at `depth` millimetres into the camera
+    frame (metres). `depth` is perpendicular distance along the optical axis."""
+
     depth = depth/1000.0 # Convert from mm to m
 
     fx = camera_info.fx
     fy = camera_info.fy
     cx = camera_info.cx
-    cy = camera_info.cy 
+    cy = camera_info.cy
 
     # Convert to world space
     world_x = (depth / fx) * (image_x - cx)
     world_y = (depth / fy) * (image_y - cy)
     world_z = depth
 
-    return True, np.array([world_x, world_y, world_z])
+    return np.array([world_x, world_y, world_z])
 
 def world2Pixel(camera_info, world_x, world_y, world_z):
 
