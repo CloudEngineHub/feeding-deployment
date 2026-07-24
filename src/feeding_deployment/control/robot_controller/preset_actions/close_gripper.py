@@ -49,5 +49,5 @@ if __name__ == "__main__":
 
     # This will now use the single, shared instance of ArmInterface
     arm_interface = manager.ArmInterface()
-    # Compact close (0.04 open) to match the deployment, not a full slam to the hard stop.
+    # Close all the way, matching the deployment's GRIPPER_CLOSE_OPEN_AMOUNT.
     arm_interface.set_gripper(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT))
