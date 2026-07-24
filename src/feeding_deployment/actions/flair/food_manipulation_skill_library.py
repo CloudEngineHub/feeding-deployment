@@ -32,6 +32,10 @@ from feeding_deployment.control.robot_controller.command_interface import (
 
 from pybullet_helpers.geometry import Pose
 
+from feeding_deployment.preference_learning.config.mealtime_context import (
+    active_table_for_setting,
+)
+
 # Height of the dipping sauce's surface above the surface the plate-depth sample
 # sees. The camera looks down, so the sauce is that much CLOSER than the plate --
 # hence plate_depth - this = sauce depth. The bowl measures 4 cm tall; 43 mm is
@@ -72,6 +76,15 @@ def plate_surface_depth_mm(depth_image, plate_bounds):
 
 
 class FoodManipulationSkillLibrary:
+    # Plate height (m) per physical table, for the "vention" scene. The dining
+    # table (social meals) and the movable table (everything else) differ, and the
+    # value hard-anchors the z of every skewer and dip -- so it is resolved per
+    # meal from the mealtime setting rather than hand-edited between deployments.
+    _PLATE_HEIGHT_BY_TABLE = {
+        "movable_table": 0.215,
+        "dining_table": 0.225,
+    }
+
     def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, wrist_interface: WristInterface, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False):
         
         self.sim = sim
@@ -84,14 +97,13 @@ class FoodManipulationSkillLibrary:
         if self.sim.scene_description.scene_label == "wheelchair":
             self.plate_height = 0.12
         elif self.sim.scene_description.scene_label == "vention":
-            # self.plate_height = 0.155 # for silicone fork
-            # self.plate_height = 0.158 # for metal fork
-            # self.plate_height = 0.16 # for metal fork
-            # self.plate_height = 0.185
-            # self.plate_height = 0.197 # green table
-            # self.plate_height = 0.221
-            self.plate_height = 0.215 # movable table
-            # self.plate_height = 0.225 # dining table (used in social meals)
+            # Historical hand-tuned values, kept for reference:
+            # 0.155 (silicone fork), 0.158/0.16 (metal fork), 0.185, 0.197 (green
+            # table), 0.221.
+            # The two physical tables differ in height, so the value used is chosen
+            # per meal from the mealtime setting -- see _active_plate_height().
+            # self.plate_height is the fallback when no context is available.
+            self.plate_height = self._PLATE_HEIGHT_BY_TABLE["movable_table"]
         else:
             raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 
@@ -107,6 +119,27 @@ class FoodManipulationSkillLibrary:
         )
 
         print("Skill library initialized")
+
+    def set_context_provider(self, provider) -> None:
+        """Register a zero-arg callable returning the current preference context
+        (a dict with a "setting" key), or None. Used to pick the active table's
+        plate height. Optional: without it the constructor default is used."""
+        self._context_provider = provider
+
+    def _active_plate_height(self) -> float:
+        """Plate height for the table in use this meal.
+
+        Resolved lazily (not at construction): the skill library is built during
+        runner init, long before any meal context exists. Falls back to
+        self.plate_height when there is no context or the scene has no per-table
+        values (e.g. the wheelchair scene)."""
+        provider = getattr(self, "_context_provider", None)
+        context = provider() if provider is not None else None
+        setting = context.get("setting") if isinstance(context, dict) else None
+        if setting is None or self.sim.scene_description.scene_label != "vention":
+            return self.plate_height
+        table = active_table_for_setting(setting)
+        return self._PLATE_HEIGHT_BY_TABLE.get(table, self.plate_height)
 
     def move_to_joint_positions(self, joint_positions):
 
@@ -205,10 +238,11 @@ class FoodManipulationSkillLibrary:
         food_base = np.eye(4)
         food_base[:3,3] = point.reshape(1,3)
         food_base = base_to_camera_transform @ food_base
+        plate_height = self._active_plate_height()
         print("Depth to skewer: ", food_base[2,3] - skewering_depth)
-        print("Plate height: ", self.plate_height)
-        # food_base[2,3] = max(food_base[2,3] - skewering_depth, self.plate_height) 
-        food_base[2,3] = self.plate_height
+        print("Plate height: ", plate_height)
+        # food_base[2,3] = max(food_base[2,3] - skewering_depth, plate_height)
+        food_base[2,3] = plate_height
         # magic number for skewering offset
         food_base[0,3] += 0.004 # positive moves away from the robot
         food_base[1,3] += 0.005 # positive moves left from the robot
@@ -335,12 +369,13 @@ class FoodManipulationSkillLibrary:
         food_base = np.eye(4)
         food_base[:3,3] = point.reshape(1,3)
         food_base = base_to_camera_transform @ food_base
+        plate_height = self._active_plate_height()
         print("Food height detected: ", food_base[2,3])
-        print("Plate height: ", self.plate_height)
+        print("Plate height: ", plate_height)
         print("Using dipping depth: ", dipping_depth)
-        food_base[2,3] = self.plate_height + 0.035 - dipping_depth
+        food_base[2,3] = plate_height + 0.035 - dipping_depth
         print("Food height after plate update: ", food_base[2,3])
-        # food_base[2,3] = max(food_base[2,3] - dipping_depth, self.plate_height) 
+        # food_base[2,3] = max(food_base[2,3] - dipping_depth, plate_height)
         # magic number for skewering offset
         # food_base[0,3] += 0.012 # positive moves away from the robot
         # keep the orientation of the food base fixed

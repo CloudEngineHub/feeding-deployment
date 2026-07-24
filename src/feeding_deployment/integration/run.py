@@ -180,10 +180,11 @@ assert os.environ.get("PYTHONHASHSEED") == "0", \
 
 
 def _retarget_table_bt(old_text: str, node_name: str, fn_name: str) -> str:
-    """Copy a navigate_to_table.yaml's text, rewriting only the top-level name and
-    the fn tag to target a specific physical table. Preserves all learned parameter
-    values (and the !hla tag) verbatim -- a text transform, because the BT YAML uses
-    a custom !hla tag that plain yaml.safe_load cannot round-trip."""
+    """Copy a single-table behavior tree's text (navigate_to_table.yaml or
+    pick_plate_from_table.yaml), rewriting only the top-level name and the fn tag to
+    target a specific physical table. Preserves all learned parameter values (and the
+    !hla tag) verbatim -- a text transform, because the BT YAML uses a custom !hla tag
+    that plain yaml.safe_load cannot round-trip."""
     out = []
     for line in old_text.splitlines(keepends=True):
         nl = "\n" if line.endswith("\n") else ""
@@ -397,14 +398,16 @@ class _Runner:
         # Declared here so the init-time behavior-tree pass below can read it before
         # any meal context is collected.
         self.preference_context: dict[str, str] | None = None
-        # Let the Navigate HLA read the current mealtime setting so the "table"
-        # destination resolves to the dining table (social) vs the movable table
-        # (everything else). getattr guards the init-time pass (context is None ->
-        # movable table); at nav time it returns the live context (fresh collection
-        # or resume-from-state).
-        self.hla_name_to_hla["Navigate"].set_context_provider(
-            lambda: getattr(self, "preference_context", None)
-        )
+        # Let the table-dependent HLAs read the current mealtime setting so the
+        # "table" resolves to the dining table (social) vs the movable table
+        # (everything else): Navigate picks the parking pose + learned offset,
+        # PickPlateFromTable picks the learned handle color, and AcquireBiteWithTool
+        # picks the table height. getattr guards the init-time behavior-tree pass
+        # (context is None -> movable table); at skill time each returns the live
+        # context (fresh collection or resume-from-state).
+        _context_provider = lambda: getattr(self, "preference_context", None)
+        for _hla_name in ("Navigate", "PickPlateFromTable", "AcquireBiteWithTool"):
+            self.hla_name_to_hla[_hla_name].set_context_provider(_context_provider)
         self.operators = {hla.get_operator() for hla in self.hlas}
         self.predicates: set[Predicate] = {
             ToolPrepared,
@@ -606,23 +609,37 @@ class _Runner:
         runs only once). Idempotent; never overwrites an existing (possibly
         user-edited) tree.
 
-        Table split (2026-07): navigate_to_table.yaml was replaced by
-        navigate_to_dining_table.yaml / navigate_to_movable_table.yaml. For an
-        existing user we build the two new trees from their old navigate_to_table
-        .yaml so accumulated learning (ParkingOffset/Speed/ArrivalConfirm) carries
-        into both physical tables, rather than copying the zeroed factory defaults."""
+        Table split (2026-07): the single-table trees navigate_to_table.yaml and
+        pick_plate_from_table.yaml were replaced by dining/movable pairs. For an
+        existing user we build each new pair from their old single-table tree so
+        accumulated learning carries into both physical tables (the navigation's
+        ParkingOffset/Speed/ArrivalConfirm, the pickup's PlateHandleColor/
+        Tolerance) rather than copying the zeroed factory defaults.
+
+        Note the pickup pair deliberately keeps the SAME node name
+        ("PickPlateFromTable") in both trees: pick_plate.py writes the user's
+        color correction back with that name hardcoded, so renaming it would
+        silently drop the correction."""
         bt_dir = self.run_behavior_tree_dir
         bt_dir.mkdir(parents=True, exist_ok=True)
         factory_dir = Path(__file__).parents[1] / "actions" / "behavior_trees"
 
-        # 1) Table split: seed the two new table trees from the user's old one.
-        old_table = bt_dir / "navigate_to_table.yaml"
-        if old_table.exists():
-            old_text = old_table.read_text(encoding="utf-8")
-            for fn_name, node_name in (
+        # 1) Table split: seed each new table pair from the user's old single tree.
+        for old_name, new_trees in (
+            ("navigate_to_table.yaml", (
                 ("navigate_to_dining_table", "NavigateToDiningTable"),
                 ("navigate_to_movable_table", "NavigateToMovableTable"),
-            ):
+            )),
+            ("pick_plate_from_table.yaml", (
+                ("pick_plate_from_dining_table", "PickPlateFromTable"),
+                ("pick_plate_from_movable_table", "PickPlateFromTable"),
+            )),
+        ):
+            old_tree = bt_dir / old_name
+            if not old_tree.exists():
+                continue
+            old_text = old_tree.read_text(encoding="utf-8")
+            for fn_name, node_name in new_trees:
                 dst = bt_dir / f"{fn_name}.yaml"
                 if not dst.exists():
                     dst.write_text(
@@ -1259,7 +1276,8 @@ class _Runner:
                     bt_name = ""
                 if bt_name.startswith("pick_plate_from_"):
                     location = bt_name[len("pick_plate_from_"):]
-                    if location in ("fridge", "microwave", "table"):
+                    if location in ("fridge", "microwave",
+                                    "dining_table", "movable_table"):
                         self._pref_session.record_color(location)
                 # Nav offset is a preference dimension: after a navigation, the
                 # HLA has already written any post-arrival teleop adjustment

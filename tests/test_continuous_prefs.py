@@ -51,7 +51,8 @@ class TestSampling:
         assert all(v == 0 for v in tables["time_color_shifts"][REFERENCE_TOD].values())
         assert all(v == 0.0 for v in tables["time_nav_shifts"][REFERENCE_TOD].values())
         assert all(v == 0.0 for v in tables["affect_nav_shifts"]["Neutral"].values())
-        assert all(v == 0 for v in tables["location_color_offsets"]["table"].values())
+        # The movable table is the reference pickup location for color shifts.
+        assert all(v == 0 for v in tables["location_color_offsets"]["movable_table"].values())
 
 
 class TestTruth:

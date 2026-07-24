@@ -27,6 +27,9 @@ from feeding_deployment.actions.base import (
 )
 
 from feeding_deployment.safety.collision_threshold import collision_threshold
+from feeding_deployment.preference_learning.config.mealtime_context import (
+    active_table_for_setting,
+)
 
 class PickPlateFromApplianceHLA(HighLevelAction):
     """Pick the plate from an appliance (fridge or microwave)."""
@@ -272,6 +275,22 @@ class PickPlateFromTableHLA(HighLevelAction):
             },
         )
 
+    def set_context_provider(self, provider) -> None:
+        """Register a zero-arg callable returning the current preference context
+        (a dict with a "setting" key), or None. Selects which physical table's
+        pickup tree -- and therefore which learned handle color -- is used.
+        Optional: with no provider the movable table is assumed."""
+        self._context_provider = provider
+
+    def _resolve_table_bt(self) -> str:
+        """Physical table ("dining_table"/"movable_table") for the current
+        mealtime setting; defaults to the movable table when no context is
+        available (no provider, or provider returns None)."""
+        provider = getattr(self, "_context_provider", None)
+        context = provider() if provider is not None else None
+        setting = context.get("setting") if isinstance(context, dict) else None
+        return active_table_for_setting(setting)
+
     def get_behavior_tree_filename(
         self,
         objects: tuple[Object, ...],
@@ -283,9 +302,17 @@ class PickPlateFromTableHLA(HighLevelAction):
         assert self.sim.scene_description.scene_label == "vention"
         assert plate.name == "plate"
         assert table.name == "table"
-        return "pick_plate_from_table.yaml"
+        # The planner grounds the single PDDL object "table"; the mealtime setting
+        # decides which physical table (and its own learned color) it means.
+        return f"pick_plate_from_{self._resolve_table_bt()}.yaml"
 
-    def pick_plate_from_table(self, speed: str, handle_color, color_range, manip_confirm) -> None:
+    def pick_plate_from_dining_table(self, speed: str, handle_color, color_range, manip_confirm) -> None:
+        self._pick_plate_from_table(speed, handle_color, color_range, manip_confirm)
+
+    def pick_plate_from_movable_table(self, speed: str, handle_color, color_range, manip_confirm) -> None:
+        self._pick_plate_from_table(speed, handle_color, color_range, manip_confirm)
+
+    def _pick_plate_from_table(self, speed: str, handle_color, color_range, manip_confirm) -> None:
         assert self.sim.held_object_name is None
 
         if self.robot_interface is not None:
