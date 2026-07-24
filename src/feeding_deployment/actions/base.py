@@ -59,10 +59,14 @@ from feeding_deployment.control.wrist_controller.wrist_controller import WristIn
 from feeding_deployment.control.robot_controller.command_interface import (
     CartesianCommand,
     CartesianTrajectoryCommand,
-    CloseGripperCommand,
+    GRASP_OPEN_AMOUNTS,
+    GRIPPER_CLOSE_OPEN_AMOUNT,
+    GRIPPER_OPEN_AMOUNT,
     JointCommand,
     KinovaCommand,
     OpenGripperCommand,
+    SetGripperCommand,
+    open_amount_to_gripper_pos,
 )
 
 from feeding_deployment.simulation.planning import (
@@ -462,15 +466,26 @@ class HighLevelAction(abc.ABC):
                 self._validate_ee_pose(pose)
             self.execute_robot_command(CartesianTrajectoryCommand(traj=traj), plan)
     
-    def grasp_tool(self, tool: str) -> None:
+    def grasp_tool(self, tool: str, open_amount: float = None) -> None:
         self.sim.grasp_object(tool)
         if self.robot_interface is not None:
-            self.execute_robot_command(OpenGripperCommand(), tool_update=tool)
+            # A tool is held by opening INTO its mount slot. The utensil opens only
+            # partway (GRASP_OPEN_AMOUNTS) so the fingertips seat in the slot instead
+            # of jamming against the extreme; other tools keep the full-open grasp.
+            if open_amount is None:
+                open_amount = GRASP_OPEN_AMOUNTS.get(tool, GRIPPER_OPEN_AMOUNT)
+            self.execute_robot_command(
+                SetGripperCommand(open_amount_to_gripper_pos(open_amount)), tool_update=tool
+            )
 
     def ungrasp_tool(self, tool: str) -> None:
         self.sim.ungrasp_object()
         if self.robot_interface is not None:
-            self.execute_robot_command(CloseGripperCommand(), tool_update=tool)
+            # Release: close to the generic-close amount (not the hard stop) to clear the slot.
+            self.execute_robot_command(
+                SetGripperCommand(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT)),
+                tool_update=tool,
+            )
 
     def open_gripper(self) -> None:
         if self.robot_interface is None:
@@ -482,7 +497,10 @@ class HighLevelAction(abc.ABC):
         if self.robot_interface is None:
             self.sim.robot.close_fingers()
         else:
-            self.execute_robot_command(CloseGripperCommand())
+            # Compact close (not driven to the hard stop) to avoid stressing the fingers.
+            self.execute_robot_command(
+                SetGripperCommand(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT))
+            )
 
     @contextmanager
     def low_speed(self, restore: str):
