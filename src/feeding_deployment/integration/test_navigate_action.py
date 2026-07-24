@@ -54,6 +54,21 @@ def _read_position_offset(bt_dir: Path, location: str) -> list[float] | None:
     return None
 
 
+def _read_arrival_confirm(bt_dir: Path, location: str) -> float:
+    """ArrivalConfirm from navigate_to_<location>.yaml (-1 skip / 0 wait / >0
+    countdown seconds); factory default 0.0 if the file/param is missing. Only
+    consumed when --use_interface shows the HLA's own post-arrival page."""
+    fpath = bt_dir / f"navigate_to_{location}.yaml"
+    if not fpath.exists():
+        return 0.0
+    with open(fpath, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f.read().replace("!hla", "")) or {}
+    for param in data.get("parameters", []):
+        if param.get("name") == "ArrivalConfirm":
+            return float(param.get("value", 0.0))
+    return 0.0
+
+
 def _terminal_adjustment(
     hla: NavigateHLA,
     location: str,
@@ -120,7 +135,8 @@ def _terminal_adjustment(
         )
 
     objects = (Object(location, nav_target_type), Object(location, nav_target_type))
-    node_name = f"NavigateTo{location.capitalize()}"
+    # Title-case across underscores: "dining_table" -> "NavigateToDiningTable".
+    node_name = "NavigateTo" + "".join(w.capitalize() for w in location.split("_"))
     result = hla.process_behavior_tree_parameter_update(
         objects, {}, node_name, "ParkingOffset",
         [float(clamped[0]), float(clamped[1]), float(clamped[2])],
@@ -254,6 +270,7 @@ def test_navigate_action(
     )
 
     position_offset = None if ignore_offset else _read_position_offset(behavior_tree_dir, location)
+    arrival_confirm = _read_arrival_confirm(behavior_tree_dir, location)
     if position_offset is not None:
         print(
             f"[nav-offset] applying stored offset from {behavior_tree_dir}/"
@@ -269,11 +286,18 @@ def test_navigate_action(
         # kitchen_enter) and any origin-gated logged-nav branches live there,
         # not in _navigate_to_target(). The harness has no PDDL executive, so
         # --assume_from substitutes the origin execute_action() would stash.
-        navigate_method = getattr(navigate_hla, f"navigate_to_{location}")
+        method_name = f"navigate_to_{location}"
+        if not hasattr(navigate_hla, method_name):
+            raise SystemExit(
+                f"No nav method '{method_name}'. Valid --location values: fridge, "
+                "microwave, sink, dining_table, movable_table. (The old 'table' is "
+                "now split into dining_table [social] and movable_table [other].)"
+            )
+        navigate_method = getattr(navigate_hla, method_name)
         if assume_from is not None:
             navigate_hla._nav_origin = assume_from
             print(f"[nav] harness: assumed origin = {assume_from!r}")
-        navigate_method(speed, position_offset=position_offset)
+        navigate_method(speed, position_offset=position_offset, arrival_confirm=arrival_confirm)
         scripted_terminal_leg = (
             navigate_hla._logged_nav_enabled()
             and location == "microwave"

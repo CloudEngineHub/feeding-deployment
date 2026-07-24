@@ -19,7 +19,9 @@ from typing import Any
 import yaml
 
 from feeding_deployment.preference_learning.config.preference_bundle import (
+    COLOR_FIELD_BY_LOCATION,
     DEFAULT_BITE_ORDERING,
+    OFFSET_FIELD_BY_LOCATION,
 )
 
 # ---------------------------------------------------------------------------
@@ -114,14 +116,16 @@ _ALL_BT_YAMLS: list[str] = [
     "navigate_to_fridge.yaml",
     "navigate_to_microwave.yaml",
     "navigate_to_sink.yaml",
-    "navigate_to_table.yaml",
+    "navigate_to_dining_table.yaml",
+    "navigate_to_movable_table.yaml",
     "open_fridge.yaml",
     "open_microwave.yaml",
     "pick_drink.yaml",
     "pick_plate_from_fridge.yaml",
     "pick_plate_from_holder.yaml",
     "pick_plate_from_microwave.yaml",
-    "pick_plate_from_table.yaml",
+    "pick_plate_from_dining_table.yaml",
+    "pick_plate_from_movable_table.yaml",
     "pick_utensil.yaml",
     "pick_wipe.yaml",
     "place_plate_in_fridge.yaml",
@@ -172,7 +176,8 @@ _BT_MAPPING: list[tuple[str, list[str], str, dict | Any]] = [
     # Navigation arrival confirmation (post-arrival position check/adjust page)
     ("confirm_navigation_arrival",
      ["navigate_to_fridge.yaml", "navigate_to_microwave.yaml",
-      "navigate_to_sink.yaml", "navigate_to_table.yaml"],
+      "navigate_to_sink.yaml", "navigate_to_dining_table.yaml",
+      "navigate_to_movable_table.yaml"],
      "ArrivalConfirm", _CONFIRM_MAP),
 
     # Manipulation confirmation (detection confirms at pickups / door handles /
@@ -183,7 +188,8 @@ _BT_MAPPING: list[tuple[str, list[str], str, dict | Any]] = [
     # door closing uses cached poses (no page), so close_* are excluded.
     ("confirm_manipulation",
      ["pick_plate_from_fridge.yaml", "pick_plate_from_microwave.yaml",
-      "pick_plate_from_table.yaml", "place_plate_in_microwave.yaml",
+      "pick_plate_from_dining_table.yaml", "pick_plate_from_movable_table.yaml",
+      "place_plate_in_microwave.yaml",
       "place_plate_on_table.yaml", "place_plate_in_sink.yaml",
       "press_microwave_button.yaml", "gaze_at_table.yaml",
       "open_fridge.yaml", "open_microwave.yaml"],
@@ -239,6 +245,57 @@ _BT_MAPPING: list[tuple[str, list[str], str, dict | Any]] = [
     # Retract between bites (utensil only — drink/wipe don't have repeated transfer loops)
     ("retract_between_bites", ["transfer_utensil.yaml"], "RetractAfterTransfer", _RETRACT_MAP),
 ]
+
+
+# ---------------------------------------------------------------------------
+# Reverse index:  behavior-tree name  →  preference fields it reads at run time.
+#
+# Derived (not hand-written) so it stays in lockstep with the apply logic above:
+#   - categorical dims come from inverting _BT_MAPPING (field → yaml files);
+#   - dict-valued dims come from the location maps (colors/nav-offsets are written
+#     straight to per-location YAMLs by PreferenceSession, not via _BT_MAPPING);
+#   - bite_ordering is the one dim consumed via FLAIR (acquire_bite reads it through
+#     flair.get_preference()) rather than a BT param.
+# Keys are exact BT names (basename minus ".yaml"), matching skill_plan_names in
+# run.py. Consumed by PreferenceSession.should_wait_for_reprediction to join the
+# background reprediction only before a skill that reads a still-open dim.
+# ---------------------------------------------------------------------------
+
+def _build_consumed_fields_by_bt() -> dict[str, frozenset[str]]:
+    acc: dict[str, set[str]] = {}
+
+    def _add(bt_name: str, field: str) -> None:
+        acc.setdefault(bt_name, set()).add(field)
+
+    # Categorical dims: invert _BT_MAPPING (bundle field → the YAMLs it writes).
+    for bundle_field, yaml_files, _param, _translator in _BT_MAPPING:
+        for yaml_file in yaml_files:
+            _add(yaml_file.removesuffix(".yaml"), bundle_field)
+
+    # Plate-handle color dims: plate_color_<loc> → pick_plate_from_<loc>.
+    for location, field in COLOR_FIELD_BY_LOCATION.items():
+        _add(f"pick_plate_from_{location}", field)
+
+    # Nav-offset dims: nav_offset_<loc> → navigate_to_<loc> (incl. dining/movable table).
+    for location, field in OFFSET_FIELD_BY_LOCATION.items():
+        _add(f"navigate_to_{location}", field)
+
+    # bite_ordering is read by acquire_bite via FLAIR, not written to any YAML.
+    # (bite_dipping_preference is already covered by its FoodDippingDepth entry.)
+    _add("acquire_bite", "bite_ordering")
+
+    return {bt: frozenset(fields) for bt, fields in acc.items()}
+
+
+_CONSUMED_FIELDS_BY_BT: dict[str, frozenset[str]] = _build_consumed_fields_by_bt()
+
+
+def bt_consumed_pref_fields(bt_name: str) -> frozenset[str]:
+    """Preference fields whose value the named skill's BT/FLAIR reads at run time.
+
+    Empty for skills that read no preference-driven parameter (see
+    _CONSUMED_FIELDS_BY_BT for how the map is derived)."""
+    return _CONSUMED_FIELDS_BY_BT.get(str(bt_name), frozenset())
 
 
 # ---------------------------------------------------------------------------

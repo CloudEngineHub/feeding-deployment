@@ -20,9 +20,9 @@ from pybullet_helpers.geometry import Pose
 
 class OutsideMouthTransfer(Transfer):
 
-    def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False, log_dir=None):
-            
-        super().__init__(sim, robot_interface, perception_interface, rviz_interface, no_waits)
+    def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False, log_dir=None, web_interface=None):
+
+        super().__init__(sim, robot_interface, perception_interface, rviz_interface, no_waits, web_interface)
 
         self.log_dir = log_dir
 
@@ -31,8 +31,11 @@ class OutsideMouthTransfer(Transfer):
         if self.robot_interface is not None:
             self.set_filter_noisy_readings_pub.publish(Bool(data=True))
 
-        # move to infront of mouth
-        head_perception_data = self.perception_interface.get_head_perception_data()
+        # move to infront of mouth. A DECA frame can be None (no face detected,
+        # too few depth landmarks, or a reading rejected as noisy by the filter
+        # enabled just above); block until a valid reading arrives instead of
+        # dereferencing None and crashing the executive.
+        head_perception_data = self.wait_for_head_perception_data()
         forque_target_base = head_perception_data["tool_tip_target_pose"]
         head_pose = head_perception_data["head_pose"]
 
@@ -62,7 +65,7 @@ class OutsideMouthTransfer(Transfer):
         forque_target_base[:3, :3] = Rotation.from_quat([0.523, -0.503, -0.469, 0.503]).as_matrix()
         
         servo_point_forque_target = np.identity(4)
-        servo_point_forque_target[:3,3] = np.array([0, -0.04, -outside_mouth_distance]).reshape(1,3)
+        servo_point_forque_target[:3,3] = np.array([0, -0.01, -outside_mouth_distance]).reshape(1,3) # +y is up in the real world
         infront_mouth_target = forque_target_base @ servo_point_forque_target
 
         # # mouth is assumed to be facing away from the wheelchair

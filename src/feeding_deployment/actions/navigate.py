@@ -37,12 +37,21 @@ from feeding_deployment.actions.base import (
     GripperFree,
 )
 from feeding_deployment.interfaces.web_interface import WebInterfaceTakeoverInterrupt
+from feeding_deployment.preference_learning.config.mealtime_context import (
+    active_table_for_setting,
+)
 
 
 class NavigateHLA(HighLevelAction):
     """Navigate from one target to another."""
 
-    _VALID_TARGETS = ("fridge", "microwave", "sink", "table")
+    # "table" is the PDDL destination the planner grounds; it is resolved at
+    # behavior-tree-selection time (by the current mealtime setting) to one of the
+    # two physical tables. The physical names are also valid targets because the
+    # post-arrival offset write-back grounds objects with the physical name.
+    _VALID_TARGETS = (
+        "fridge", "microwave", "sink", "table", "dining_table", "movable_table",
+    )
 
     # Frames used for the post-nav refinement window.
     _MAP_FRAME = "map"
@@ -61,16 +70,48 @@ class NavigateHLA(HighLevelAction):
     # the robot cannot turn around in. The microwave->table leg (navigate_to_
     # table) is therefore routed through an intermediate "open area" waypoint, so
     # TEB drives it as "reverse out to the open area, then turn and go" instead
-    # of oscillating while trying to turn inside the corridor. The staging pose
-    # lives in nav_named_locations.yaml; until a real pose is captured there
+    # of oscillating while trying to turn inside the corridor. The staging poses
+    # live in nav_named_locations.yaml; until a real pose is captured there
     # (placeholder: false) the via-waypoint is skipped and we go direct.
+    #
+    # The egress is driven as an ordered sequence of staging poses ending at the
+    # corridor-mouth pose (_STAGING_WAYPOINT); a mid-corridor pose
+    # (_PRE_STAGING_WAYPOINT) is prepended only when the origin is deep enough in
+    # the kitchen to need it. From the microwave the route out is
+    # microwave -> kitchen_exit_waypoint -> kitchen_exit -> table; from the fridge
+    # (which already sits at the corridor mouth) the pre-staging hop is dropped --
+    # fridge -> kitchen_exit -> table -- because routing via the mid-corridor pose
+    # would drive the base backward into the kitchen first. See
+    # _SKIP_PRE_STAGING_ORIGINS and _navigate_table_leg. For a given origin both
+    # physical tables use the same egress sequence.
+    _PRE_STAGING_WAYPOINT = "kitchen_exit_waypoint"
     _STAGING_WAYPOINT = "kitchen_exit"
+    # Origins from which the mid-corridor pre-staging pose is skipped on the table
+    # egress (see above). Keyed by the true PDDL origin execute_action stashes in
+    # _nav_origin. The fridge (map x=-1.35) sits between _PRE_STAGING_WAYPOINT
+    # (x=-0.72) and _STAGING_WAYPOINT (x=-1.55) -- already past the pre-staging
+    # pose -- so it drives straight to the corridor mouth. The microwave (x=+0.07)
+    # is deep inside and passes the pre-staging pose on the way out, so it is NOT
+    # listed (keeps the full pair). Unknown origins (None, e.g. after a resume)
+    # also keep the full pair -- the conservative default.
+    _SKIP_PRE_STAGING_ORIGINS = frozenset({"fridge"})
     # Kitchen-ingress staging: the mirror of the egress, for the table->sink
     # leg (navigate_to_sink). Drive to the open area in front of the corridor
     # mouth first, turn there, then enter the corridor straight-on -- instead
     # of TEB turning at the corridor entrance. Same yaml/placeholder skip
     # rules as _STAGING_WAYPOINT.
     _INGRESS_WAYPOINT = "kitchen_enter"
+
+    # Table-approach waypoints, driven AFTER the kitchen-exit staging pose on the
+    # microwave->table egress so the base threads the open area to the table
+    # along a mapped path instead of letting TEB pick its own line across the
+    # room. Keyed by destination: only the dining table has these; the movable
+    # table is still approached directly from the staging pose. Same
+    # yaml/placeholder skip rules as _STAGING_WAYPOINT (_resolve_via drops any
+    # that are missing or still placeholders, falling back to the shorter route).
+    _TABLE_APPROACH_WAYPOINTS = {
+        "dining_table": ("dining_table_waypoint1", "dining_table_waypoint2"),
+    }
 
     # On a failed leg (move_base aborted, or localization lost past the watchdog
     # window) we hand the base to the user via the navigation teleop screen and
@@ -1646,7 +1687,9 @@ class NavigateHLA(HighLevelAction):
             Object(location_name, nav_target_type),
             Object(location_name, nav_target_type),
         )
-        node_name = f"NavigateTo{location_name.capitalize()}"
+        # Title-case across underscores so multi-token locations map to their BT
+        # node name: "dining_table" -> "NavigateToDiningTable".
+        node_name = "NavigateTo" + "".join(w.capitalize() for w in location_name.split("_"))
         result = self.process_behavior_tree_parameter_update(
             objects, {}, node_name, "ParkingOffset",
             [float(clamped[0]), float(clamped[1]), float(clamped[2])],
@@ -1747,6 +1790,22 @@ class NavigateHLA(HighLevelAction):
             },
         )
 
+    def set_context_provider(self, provider) -> None:
+        """Register a zero-arg callable returning the current preference context
+        (a dict with a "setting" key), or None. Used to pick which physical table
+        the "table" destination resolves to. Optional -- when unset, table
+        navigation defaults to the movable table."""
+        self._context_provider = provider
+
+    def _resolve_table_bt(self) -> str:
+        """Physical table ("dining_table"/"movable_table") for the current
+        mealtime setting. Defaults to the movable table when no context is
+        available (no provider, or provider returns None)."""
+        provider = getattr(self, "_context_provider", None)
+        context = provider() if provider is not None else None
+        setting = context.get("setting") if isinstance(context, dict) else None
+        return active_table_for_setting(setting)
+
     def get_behavior_tree_filename(
         self,
         objects: Tuple[Object, ...],
@@ -1756,6 +1815,12 @@ class NavigateHLA(HighLevelAction):
         assert len(objects) == 2
         _, dst = objects
         assert self.sim.scene_description.scene_label == "vention"
+        # The planner grounds the single PDDL object "table"; resolve it to the
+        # context-appropriate physical table here (the one place the setting drives
+        # table selection). The post-arrival offset write-back instead grounds the
+        # physical name directly, which falls through to the assert branch.
+        if dst.name == "table":
+            return f"navigate_to_{self._resolve_table_bt()}.yaml"
         assert dst.name in self._VALID_TARGETS
         return f"navigate_to_{dst.name}.yaml"
 
@@ -1821,8 +1886,42 @@ class NavigateHLA(HighLevelAction):
             autocontinue_seconds=autocontinue_seconds,
         )
 
-    def navigate_to_table(self, speed: str, position_offset, arrival_confirm) -> None:
+    def navigate_to_dining_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        self._navigate_table_leg("dining_table", speed, position_offset, arrival_confirm)
+
+    def navigate_to_movable_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        self._navigate_table_leg("movable_table", speed, position_offset, arrival_confirm)
+
+    def _navigate_table_leg(
+        self, destination: str, speed: str, position_offset, arrival_confirm
+    ) -> None:
+        """Drive the table leg to one of the two physical tables ("dining_table"
+        or "movable_table"). The kitchen egress (staging waypoints / logged-nav
+        scripted egress) is the same for both tables -- it varies by the leg's
+        ORIGIN, not the destination table (see _SKIP_PRE_STAGING_ORIGINS and the
+        scripted-reverse distances). Keyed off `destination`: only the final
+        destination pose, the learned parking offset, the destination-specific
+        approach waypoints, and the post-arrival write-back."""
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
+        # True PDDL origin stashed by execute_action (None after a resume / when
+        # ungrounded). Selects the egress staging sequence here and the logged-nav
+        # scripted-egress reverse distance below.
+        origin = getattr(self, "_nav_origin", None)
+        # Kitchen-egress staging sequence, in drive order before the table. Both
+        # tables share it for a given origin; the origin decides whether the
+        # mid-corridor pre-staging pose is threaded first. From the fridge (already
+        # at the corridor mouth) it is skipped -- straight to the corridor-mouth
+        # pose -- since routing via the mid-corridor pose would drive the base
+        # backward into the kitchen. Everything else (microwave, unknown origin)
+        # keeps the full pair. See _SKIP_PRE_STAGING_ORIGINS.
+        if origin in self._SKIP_PRE_STAGING_ORIGINS:
+            staging = [self._STAGING_WAYPOINT]
+        else:
+            staging = [self._PRE_STAGING_WAYPOINT, self._STAGING_WAYPOINT]
+        # Destination-specific approach waypoints, appended after the staging
+        # poses so the route is: staging... -> approach... -> table. Empty for
+        # destinations without any (e.g. movable_table).
+        approach = list(self._TABLE_APPROACH_WAYPOINTS.get(destination, ()))
         # microwave -> table is the kitchen egress: reverse out through the narrow
         # corridor to the open staging area, then turn and drive to the table.
         # Routing via the staging waypoint stops TEB from oscillating as it tries
@@ -1833,7 +1932,6 @@ class NavigateHLA(HighLevelAction):
         # origin-specific distance, rotate 90 deg CW, then drive autonomously
         # DIRECT to the table (the scripted egress replaces the staging
         # waypoint). Unknown origins keep the fully autonomous route.
-        origin = getattr(self, "_nav_origin", None)
         reverse_m = self._SCRIPTED_TABLE_EGRESS_REVERSE_M.get(origin)
         if self._logged_nav_enabled() and reverse_m is not None:
             self._prepare_for_navigation(speed, need_move_base=False)
@@ -1857,13 +1955,14 @@ class NavigateHLA(HighLevelAction):
                 # park is final -- the leg ends here.
                 print("[logged-nav] table: human parked via Done; leg ends.")
                 return
-            # completed: the egress replaced kitchen_exit -> go direct.
+            # completed: the scripted egress replaced the staging sequence ->
+            # skip staging but still thread the approach waypoints to the table.
             # teleop_fallback / slip_fallback: the egress was interrupted
             # (human intervention or wheel slip) and the base may still be
             # inside the corridor -> full normal route incl. staging.
-            via = [] if outcome == "completed" else [self._STAGING_WAYPOINT]
+            via = approach if outcome == "completed" else staging + approach
             self._navigate_to_target(
-                "table", speed, via=via, position_offset=position_offset,
+                destination, speed, via=via, position_offset=position_offset,
                 arrival_confirm_mode=arrival_confirm_mode,
                 autocontinue_seconds=autocontinue_seconds,
             )
@@ -1874,7 +1973,8 @@ class NavigateHLA(HighLevelAction):
                 "defined) -- using normal autonomous navigation."
             )
         self._navigate_to_target(
-            "table", speed, via=[self._STAGING_WAYPOINT], position_offset=position_offset,
+            destination, speed, via=staging + approach,
+            position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
         )

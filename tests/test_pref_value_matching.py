@@ -44,8 +44,8 @@ class TestFormatPrefValue:
         assert _format_pref_value("plate_color_fridge", COLOR_STR) == COLOR_STR
 
     def test_nav_dict_and_string_agree(self):
-        assert _format_pref_value("nav_offset_table", NAV_DICT) == NAV_STR
-        assert _format_pref_value("nav_offset_table", NAV_STR) == NAV_STR
+        assert _format_pref_value("nav_offset_dining_table", NAV_DICT) == NAV_STR
+        assert _format_pref_value("nav_offset_dining_table", NAV_STR) == NAV_STR
 
     def test_categorical_passthrough(self):
         assert _format_pref_value("robot_speed", "slow") == "slow"
@@ -55,13 +55,13 @@ class TestExtractTruthBundle:
     def test_color_and_nav_are_compact_strings(self):
         day_rec = {
             "preferences": {
-                "plate_color_table": {"choice": COLOR_DICT, "rationale": ""},
+                "plate_color_dining_table": {"choice": COLOR_DICT, "rationale": ""},
                 "nav_offset_sink": {"choice": NAV_DICT, "rationale": ""},
                 "robot_speed": {"choice": "medium", "rationale": ""},
             }
         }
         truth = _extract_truth_bundle(day_rec)
-        assert truth["plate_color_table"] == COLOR_STR
+        assert truth["plate_color_dining_table"] == COLOR_STR
         assert truth["nav_offset_sink"] == NAV_STR
         assert truth["robot_speed"] == "medium"
         # Never a Python dict repr.
@@ -70,9 +70,9 @@ class TestExtractTruthBundle:
 
 class TestPredMatchesTruth:
     def test_color_dict_pred_vs_string_truth(self):
-        assert _pred_matches_truth("plate_color_table", COLOR_DICT, COLOR_STR)
+        assert _pred_matches_truth("plate_color_dining_table", COLOR_DICT, COLOR_STR)
         wrong = dict(COLOR_DICT, v=100)
-        assert not _pred_matches_truth("plate_color_table", wrong, COLOR_STR)
+        assert not _pred_matches_truth("plate_color_dining_table", wrong, COLOR_STR)
 
     def test_nav_dict_pred_vs_string_truth(self):
         assert _pred_matches_truth("nav_offset_fridge", NAV_DICT, NAV_STR)
@@ -92,10 +92,10 @@ class TestCorrectedBlockRendering:
     def test_string_corrections_render_faithfully(self):
         """A pinned truth string must render as itself, not the factory default."""
         block = _format_corrected_block(
-            {"plate_color_fridge": COLOR_STR, "nav_offset_table": NAV_STR}
+            {"plate_color_fridge": COLOR_STR, "nav_offset_dining_table": NAV_STR}
         )
         assert f"plate_color_fridge={COLOR_STR}" in block
-        assert f"nav_offset_table={NAV_STR}" in block
+        assert f"nav_offset_dining_table={NAV_STR}" in block
         assert format_color(DEFAULT_COLOR) not in block
 
     def test_dict_corrections_render_faithfully(self):

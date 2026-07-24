@@ -1,7 +1,8 @@
 '''
-Entrypoint for controlling the robot arm on compute machine. Additionally runs two important threads:
-1. A thread that checks no safety anomalies have occurred using the watchdog
-2. A thread that publishes joint states to ROS
+Preset: open the gripper to the calibrated utensil-grasp amount (the openness that
+engages the utensil-mount slot). Matches what grasp_tool("utensil") commands in the
+deployment. Like the other preset gripper actions, it waits on the watchdog and talks
+to the arm over the RPC manager.
 '''
 
 import sys
@@ -21,19 +22,14 @@ except ModuleNotFoundError as e:
     ROSPY_IMPORTED = False
 
 from feeding_deployment.control.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
-from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
-# from feeding_deployment.safety.watchdog import WATCHDOG_MONITOR_FREQUENCY, PeekableQueue
+from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand, GRIPPER_GRASP_OPEN_AMOUNT, open_amount_to_gripper_pos
 
 
 if __name__ == "__main__":
 
-    # Optional calibration arg: how far to open, 0.0 -> 1.0.
-    #   1.0 = fully open (default, same as no arg)
-    #   lower values open less, so the fingertips fit the utensil slot snugly
-    #   instead of jamming against the extreme and stressing the fingers.
-    # The Kinova gripper uses the opposite convention (0 = open, 1 = closed),
-    # so we send gripper_pos = 1.0 - open_amount.
-    open_amount = None
+    # Defaults to the calibrated utensil-grasp amount so this stays in sync with the
+    # deployment. Optional arg overrides it (0.0 -> 1.0) for re-calibration.
+    open_amount = GRIPPER_GRASP_OPEN_AMOUNT
     if len(sys.argv) > 1:
         try:
             open_amount = float(sys.argv[1])
@@ -45,15 +41,12 @@ if __name__ == "__main__":
             sys.exit(1)
 
     assert ROSPY_IMPORTED, "ROS is required to run on the real robot"
-    rospy.init_node("open_gripper_action")
+    rospy.init_node("open_gripper_utensil_action")
 
     # make sure watchdog is running
     print("Waiting for Watchdog status...")
     rospy.wait_for_message("/watchdog_status", Bool)
-    if open_amount is None:
-        print("Watchdog is running, opening gripper (full)...")
-    else:
-        print(f"Watchdog is running, opening gripper to {open_amount:.3f} of full...")
+    print(f"Watchdog is running, opening gripper to utensil-grasp amount {open_amount:.3f}...")
 
     # Register ArmInterface (no lambda needed on the client-side)
     ArmManager.register("ArmInterface")
@@ -64,7 +57,4 @@ if __name__ == "__main__":
 
     # This will now use the single, shared instance of ArmInterface
     arm_interface = manager.ArmInterface()
-    if open_amount is None:
-        arm_interface.open_gripper()
-    else:
-        arm_interface.set_gripper(1.0 - open_amount)
+    arm_interface.set_gripper(open_amount_to_gripper_pos(open_amount))

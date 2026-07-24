@@ -18,6 +18,8 @@ from relational_structs import (
 )
 from feeding_deployment.actions.base import (
     HighLevelAction,
+    MID_SKILL_TAKEOVER_ENABLED,
+    TeleopTakeoverException,
     tool_type,
     table_type,
     GripperFree,
@@ -31,11 +33,81 @@ from feeding_deployment.actions.base import (
 )
 
 from feeding_deployment.actions.flair.food_manipulation_skill_library import FoodManipulationSkillLibrary
+from feeding_deployment.interfaces.web_interface import WebInterfaceTakeoverInterrupt
 
 # After this many consecutive detection cycles with no actionable bite, stop
 # silently retrying and show the bite selection page in no-detection mode so
 # the user can fall back to manual skill selection.
 MAX_CONSECUTIVE_FAILED_DETECTIONS = 3
+
+
+def _manual_point_to_pixel(pos: dict, manual_image, plate_bounds) -> tuple[int, int]:
+    """Convert a point the user tapped on the webapp's manual skill step into a
+    camera pixel.
+
+    The page reports the tap as ratios in [0, 1] of the image it displayed, and
+    tags which image that was: 'manual' is the whole camera frame (what
+    WebInterface.get_next_bite_selection sends as the manual-selection image, so
+    an item off the plate can be tapped), 'plate' is the plate crop it falls back
+    to if that frame never arrived. Scaling against the wrong one would send the
+    utensil to a completely different place, so honour the tag rather than
+    assuming -- and treat a missing tag as 'plate', which is what a frontend
+    predating the manual frame always displayed.
+
+    Clamped to the last valid pixel so a tap exactly on the right/bottom edge
+    cannot index out of the image."""
+    if pos.get("frame") == "manual":
+        height, width = manual_image.shape[:2]
+        x_origin, y_origin = 0, 0
+    else:
+        x_origin, y_origin, width, height = plate_bounds
+    point_x = min(round(pos["x"] * width), width - 1) + x_origin
+    point_y = min(round(pos["y"] * height), height - 1) + y_origin
+    return point_x, point_y
+
+
+class TakeoverAwareArmInterface:
+    """Wraps the arm interface handed to FLAIR so a mid-skill takeover preempts
+    bite-acquisition motion the same way it preempts every other skill.
+
+    FLAIR's FoodManipulationSkillLibrary commands the arm directly through
+    execute_command, bypassing HighLevelAction.execute_robot_command (which polls
+    the takeover flag before and after each move). Without this, a takeover pressed
+    mid-pickup only aborts the one in-flight waypoint; FLAIR, unaware, immediately
+    re-commands the next waypoint and finishes the pickup, so redo/next only takes
+    effect afterward.
+
+    This proxy re-adds that polling at the single chokepoint every FLAIR motion
+    funnels through -- execute_command -- checking the takeover flag before and
+    after each move and raising WebInterfaceTakeoverInterrupt, which execute_action
+    (base.py) converts into the TeleopTakeoverException the executive already
+    handles. It only peeks the event (never consumes it); execute_action owns the
+    consume + teleop recovery, exactly like the webapp-wait path in web_interface.
+    Every other attribute/method is delegated unchanged.
+    """
+
+    def __init__(self, inner, web_interface):
+        self._inner = inner
+        self._web_interface = web_interface
+
+    def _raise_if_takeover(self):
+        web = self._web_interface
+        if web is not None and web.takeover_event.is_set():
+            raise WebInterfaceTakeoverInterrupt()
+
+    def execute_command(self, *args, **kwargs):
+        self._raise_if_takeover()  # takeover requested before this move
+        result = self._inner.execute_command(*args, **kwargs)
+        # A takeover during the move fires stop_action, which aborts it; the move
+        # returns here early, so we catch the still-latched event before FLAIR can
+        # command the next waypoint.
+        self._raise_if_takeover()
+        return result
+
+    def __getattr__(self, name):
+        # Only reached for attributes not defined on the proxy itself.
+        return getattr(self._inner, name)
+
 
 class AcquireBiteHLA(HighLevelAction):
     """Bite acquisition; other tools are always prepared."""
@@ -43,9 +115,24 @@ class AcquireBiteHLA(HighLevelAction):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # FLAIR commands the arm directly through execute_command, bypassing the
+        # takeover polling in HighLevelAction.execute_robot_command. Wrap the
+        # interface so a mid-skill takeover preempts the pickup like any other
+        # skill. Fall back to the raw interface where takeover cannot apply (sim /
+        # no web interface / feature disabled) so those paths are unchanged.
+        flair_robot_interface = self.robot_interface
+        if (
+            MID_SKILL_TAKEOVER_ENABLED
+            and self.robot_interface is not None
+            and self.web_interface is not None
+        ):
+            flair_robot_interface = TakeoverAwareArmInterface(
+                self.robot_interface, self.web_interface
+            )
+
         self.food_manipulation_skill_library = FoodManipulationSkillLibrary(
             self.sim,
-            self.robot_interface,
+            flair_robot_interface,
             self.wrist_interface,
             self.perception_interface,
             self.rviz_interface,
@@ -55,6 +142,11 @@ class AcquireBiteHLA(HighLevelAction):
 
         self.food_detection_log_dir = self.log_dir / "food_detection_log"
         self.food_detection_log_dir.mkdir(exist_ok=True)
+
+    def set_context_provider(self, provider) -> None:
+        """Forward the current-preference-context accessor to the skill library,
+        which uses the mealtime setting to pick the active table's plate height."""
+        self.food_manipulation_skill_library.set_context_provider(provider)
 
     def get_name(self) -> str:
         return "AcquireBiteWithTool"
@@ -201,6 +293,10 @@ class AcquireBiteHLA(HighLevelAction):
 
                     except FileNotFoundError:
                         raise FileNotFoundError("No logged data found for bite acquisition")
+            except (TeleopTakeoverException, WebInterfaceTakeoverInterrupt):
+                # A takeover must reach execute_action (base.py), not be swallowed
+                # here as a failed-detection retry.
+                raise
             except Exception as e:
                 print("Failed to detect items:", e)
                 continue
@@ -228,6 +324,7 @@ class AcquireBiteHLA(HighLevelAction):
                     skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(
                         items_detection['plate_image'], 0, [], None, 1, ["No dip"],
                         autocontinue_timeout=0.0, no_detections=True,
+                        manual_image=camera_color_data,
                     )
                     # Only manual skills are valid with no detections (a
                     # task-selection jump returns None); anything else goes back
@@ -281,8 +378,18 @@ class AcquireBiteHLA(HighLevelAction):
                             dip_data.extend([k for k in dip_food_type_to_data.keys() if k != next_dip_item])
                     n_dip_food_types = len(dip_data)
 
+                    # Thumbnails for the dip options on the bite selection page.
+                    # Full-frame boxes (not the plate-relative ones the solid
+                    # bites use): a dip can sit next to the plate rather than on
+                    # it, so the page crops these out of the whole-frame image it
+                    # already has for manual selection.
+                    dip_boxes = {
+                        label: items_detection['food_type_to_bounding_boxes'][label]
+                        for label in dip_food_type_to_data
+                    }
+
                     if self.web_interface is not None:
-                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds)
+                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds, manual_image=camera_color_data, dip_boxes=dip_boxes)
                     else:
                         # params must be set to the autonomously selected values
                         skill_type = "autonomous"
@@ -322,20 +429,20 @@ class AcquireBiteHLA(HighLevelAction):
                         dip_mask = food_type_to_masks[dip_type][0]
                         dip_point = self.flair.inference_server.get_dip_action(dip_mask)
                         self.food_manipulation_skill_library.robot_reset()
-                        skill_success = self.food_manipulation_skill_library.dipping_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = dip_point, dipping_depth=dipping_depth)
+                        skill_success = self.food_manipulation_skill_library.dipping_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = dip_point, dipping_depth=dipping_depth, plate_bounds=items_detection["plate_bounds"])
                         bite_event["dip_success"] = bool(skill_success)
                 
                 elif skill_type == "manual_skewering":
 
-                    plate_bounds = items_detection["plate_bounds"]
                     pos = skill_params[0]
 
-                    # round (not int/truncate) so the picked point maps to the
-                    # nearest plate pixel rather than biasing toward the top-left.
-                    point_x = round(pos["x"]*plate_bounds[2]) + plate_bounds[0]
-                    point_y = round(pos["y"]*plate_bounds[3]) + plate_bounds[1]
+                    # The webapp's manual skill step shows the whole camera frame
+                    # (not the plate crop), so the ratios it returns are relative
+                    # to that frame -- scale them by the frame size, no plate
+                    # offset. round (not int/truncate) so the picked point maps to
+                    # the nearest pixel rather than biasing toward the top-left.
+                    point_x, point_y = _manual_point_to_pixel(pos, camera_color_data, items_detection["plate_bounds"])
 
-                    print("Plate Bounds:", plate_bounds)
                     print("Positions:", skill_params)
                     print("Point:", point_x, point_y)
 
@@ -358,15 +465,13 @@ class AcquireBiteHLA(HighLevelAction):
                     raise NotImplementedError("Scoop skill not yet implemented")
                 elif skill_type == "manual_dipping":
 
-                    plate_bounds = items_detection["plate_bounds"]
                     pos = skill_params[0]
 
-                    # round (not int/truncate) so the picked point maps to the
-                    # nearest plate pixel rather than biasing toward the top-left.
-                    point_x = round(pos["x"]*plate_bounds[2]) + plate_bounds[0]
-                    point_y = round(pos["y"]*plate_bounds[3]) + plate_bounds[1]
+                    # Ratios are relative to the whole camera frame the manual step
+                    # shows -- this is what lets the user tap a dipping sauce that
+                    # sits next to the plate rather than on it.
+                    point_x, point_y = _manual_point_to_pixel(pos, camera_color_data, items_detection["plate_bounds"])
 
-                    print("Plate Bounds:", plate_bounds)
                     print("Positions:", skill_params)
                     print("Point:", point_x, point_y)
 
@@ -383,7 +488,7 @@ class AcquireBiteHLA(HighLevelAction):
 
                     bite_event.update(mode="manual_dipping",
                                       point=[point_x, point_y])
-                    skill_success = self.food_manipulation_skill_library.dipping_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = dip_point, dipping_depth=dipping_depth)
+                    skill_success = self.food_manipulation_skill_library.dipping_skill(camera_color_data, camera_depth_data, camera_info_data, keypoint = dip_point, dipping_depth=dipping_depth, plate_bounds=items_detection["plate_bounds"])
 
                 # The bite-level agency record: one event per attempt, logged
                 # only when a skill actually ran (mode set above; a page jump
@@ -401,6 +506,10 @@ class AcquireBiteHLA(HighLevelAction):
                     # delay the bite hand-off.
                     self.settle_camera()
                     continue
+            except (TeleopTakeoverException, WebInterfaceTakeoverInterrupt):
+                # A takeover must reach execute_action (base.py), not be swallowed
+                # here as a failed-bite retry.
+                raise
             except Exception as e:
                 print(
                     f"Failed to acquire bite: {type(e).__name__}: {e}"

@@ -23,7 +23,22 @@ def angle_between_pixels(source_px, target_px, image_width, image_height, orient
     return angle + robot_angle_offset
 
 
-def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
+def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2, depth = None):
+    """Back-project a pixel to a 3D point in the camera frame.
+
+    box_width is the half-width of the square patch of depth pixels sampled
+    around (image_x, image_y): the patch is 2*box_width+1 per side and the median
+    of its valid readings supplies the depth. Sampling a patch (rather than the
+    one pixel) is what makes this survive the depth holes RealSense leaves on
+    shiny, low-texture surfaces -- a dipping sauce being the worst case, which is
+    why the dipping skill passes a wider box_width than the default.
+
+    depth (millimetres) skips the depth image entirely and back-projects along the
+    pixel's ray at that distance -- for callers that know the distance
+    geometrically (e.g. a surface of known height) and cannot trust, or do not
+    have, a depth reading at that pixel. Note this is perpendicular distance along
+    the optical axis, not range from the sensor: that is the convention the
+    deprojection below (and the RealSense depth image) uses."""
 
     # print("(image_y,image_x): ",image_y,image_x)
     # print("depth image: ", depth_image.shape[0], depth_image.shape[1])
@@ -31,37 +46,63 @@ def pixel2World(camera_info, image_x, image_y, depth_image, box_width = 2):
     if image_y >= depth_image.shape[0] or image_x >= depth_image.shape[1]:
         return False, None
 
-    depth = depth_image[image_y, image_x]
+    if depth is None:
+        depth = depth_image[image_y, image_x]
+    elif math.isnan(depth) or depth < 50 or depth > 1500:
+        # A supplied distance still has to be physically plausible.
+        return False, None
+    else:
+        return True, _deproject(camera_info, image_x, image_y, depth)
 
-    if math.isnan(depth) or depth < 0.05 or depth > 1.0:
+    # NOTE: these bounds are metres while depth_image is millimetres, so this is
+    # true for every real reading and the patch below is what actually supplies
+    # the depth. Deliberately left alone: "correcting" the units here would go
+    # back to trusting the single centre pixel, which is exactly the reading that
+    # tends to be a hole.
+    if math.isnan(depth) or depth < 0.05 or depth > 1.5:
 
-        depth = []
-        for i in range(-box_width,box_width):
-            for j in range(-box_width,box_width):
-                if image_y+i >= depth_image.shape[0] or image_x+j >= depth_image.shape[1]:
-                    return False, None
-                pixel_depth = depth_image[image_y+i, image_x+j]
-                if not (math.isnan(pixel_depth) or pixel_depth < 50 or pixel_depth > 1000):
-                    depth += [pixel_depth]
+        depth_samples = []
+        for i in range(-box_width, box_width + 1):
+            for j in range(-box_width, box_width + 1):
+                sample_y, sample_x = image_y + i, image_x + j
+                # Skip neighbours outside the frame rather than failing the whole
+                # lookup, and never let a negative index wrap around to the
+                # opposite edge (which would sample an unrelated part of the scene).
+                if sample_y < 0 or sample_x < 0:
+                    continue
+                if sample_y >= depth_image.shape[0] or sample_x >= depth_image.shape[1]:
+                    continue
+                pixel_depth = depth_image[sample_y, sample_x]
+                if not (math.isnan(pixel_depth) or pixel_depth < 50 or pixel_depth > 1500):
+                    depth_samples.append(pixel_depth)
 
-        if len(depth) == 0:
+        if len(depth_samples) == 0:
             return False, None
 
-        depth = np.mean(np.array(depth))
+        # Median, not mean: a patch that straddles a container rim or catches a
+        # few stray readings should still report the surface the point is on.
+        depth = float(np.median(np.array(depth_samples)))
+
+    return True, _deproject(camera_info, image_x, image_y, depth)
+
+
+def _deproject(camera_info, image_x, image_y, depth):
+    """Pinhole back-projection of a pixel at `depth` millimetres into the camera
+    frame (metres). `depth` is perpendicular distance along the optical axis."""
 
     depth = depth/1000.0 # Convert from mm to m
 
     fx = camera_info.fx
     fy = camera_info.fy
     cx = camera_info.cx
-    cy = camera_info.cy 
+    cy = camera_info.cy
 
     # Convert to world space
     world_x = (depth / fx) * (image_x - cx)
     world_y = (depth / fy) * (image_y - cy)
     world_z = depth
 
-    return True, np.array([world_x, world_y, world_z])
+    return np.array([world_x, world_y, world_z])
 
 def world2Pixel(camera_info, world_x, world_y, world_z):
 

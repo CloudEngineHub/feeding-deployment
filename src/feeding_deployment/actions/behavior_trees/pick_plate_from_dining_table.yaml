@@ -1,0 +1,39 @@
+# NOTE: the top-level name stays "PickPlateFromTable" (shared with the movable
+# table tree) because pick_plate.py writes the user's color correction back with
+# that node name hardcoded; renaming it would silently drop the correction.
+name: "PickPlateFromTable"
+description: "Pick up the plate from the dining table (used in social meals)."
+type: "Behavior"
+parameters:
+  - name: "Speed"
+    description: "Speed of the robot during picking up the plate."
+    space:
+      type: Enum
+      elements: ["low", "medium", "high"]
+    is_user_editable: True
+    value: "medium"
+  - name: "PlateHandleColor"
+    description: "Target HSV color of the attachment to detect (H: 0-179, S: 0-255, V: 0-255)."
+    space:
+      type: Box
+      lower: [0, 0, 0]
+      upper: [179, 255, 255]
+    is_user_editable: True
+    value: [12, 223, 169]
+  - name: "PlateHandleColorTolerance"
+    description: "Tolerance fraction (0.0-1.0) applied proportionally across all HSV channels."
+    space:
+      type: Box
+      lower: 0.0
+      upper: 1.0
+    is_user_editable: True
+    value: 0.1
+  - name: "ManipulationConfirm"
+    description: "Manipulation confirmation page (detection confirm / plate release): -1 = skip, 0 = show and wait for the user, >0 = show and count down that many seconds before continuing."
+    space:
+      type: Box
+      lower: -1.0
+      upper: 1000.0
+    is_user_editable: True
+    value: 0.0
+fn: !hla pick_plate_from_dining_table

@@ -1,5 +1,8 @@
+# NOTE: the top-level name stays "PickPlateFromTable" (shared with the dining
+# table tree) because pick_plate.py writes the user's color correction back with
+# that node name hardcoded; renaming it would silently drop the correction.
 name: "PickPlateFromTable"
-description: "Pick up the plate from the table."
+description: "Pick up the plate from the movable table (used in non-social meals)."
 type: "Behavior"
 parameters:
   - name: "Speed"
@@ -33,4 +36,4 @@ parameters:
       upper: 1000.0
     is_user_editable: True
     value: 0.0
-fn: !hla pick_plate_from_table
+fn: !hla pick_plate_from_movable_table

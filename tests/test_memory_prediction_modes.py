@@ -1,4 +1,4 @@
-"""Tests for the Axis 1 (single_memory) and Axis 2 (per_dim) experiment arms.
+"""Tests for the Axis 1 (single_full_history) and Axis 2 (per_dim) experiment arms.
 All LLM/embedding calls are mocked -- these tests verify information flow,
 not model quality.
 
@@ -146,13 +146,13 @@ class TestPerDimPrediction:
                 value = OPTIONS_BY_FIELD[field][-1]
             return _fake_response({"explanation": "test", "value": value})
 
-        corrected = {"robot_speed": "slow", "plate_color_table": "h=90,s=200,v=150,range=0.10"}
+        corrected = {"robot_speed": "slow", "plate_color_dining_table": "h=90,s=200,v=150,range=0.10"}
         with patch.object(pm, "_create_prediction_message", side_effect=fake_create):
             pred = pm.predict_bundle(context=CONTEXT, corrected=corrected)
 
         assert sorted(called) == sorted(f for f in PREF_FIELDS if f not in corrected)
         assert pred["robot_speed"] == "slow"  # pinned verbatim
-        assert pred["plate_color_table"] == parse_color("h=90,s=200,v=150,range=0.10")  # string pin canonicalized
+        assert pred["plate_color_dining_table"] == parse_color("h=90,s=200,v=150,range=0.10")  # string pin canonicalized
         assert pred["bite_ordering"] == "chicken first"
         assert pm.last_latent_inference == ""
         assert pm.last_explanations["microwave_time"] == "test"
@@ -193,11 +193,11 @@ class TestPerDimPrediction:
         with patch.object(pm, "_create_prediction_message", side_effect=AssertionError("no LLM calls allowed")):
             out = pm.reapply_constraints(
                 pred, CONTEXT,
-                corrected={"transfer_mode": "inside mouth transfer", "nav_offset_table": "dx=0.213,dy=-0.081,dyaw=0.140"},
+                corrected={"transfer_mode": "inside mouth transfer", "nav_offset_dining_table": "dx=0.213,dy=-0.081,dyaw=0.140"},
             )
         assert out["transfer_mode"] == "inside mouth transfer"
         assert out["outside_mouth_distance"] == "not applicable"  # rule fires from the correction
-        assert out["nav_offset_table"] == parse_nav_offset("dx=0.213,dy=-0.081,dyaw=0.140")
+        assert out["nav_offset_dining_table"] == parse_nav_offset("dx=0.213,dy=-0.081,dyaw=0.140")
         # untouched open dims stay frozen
         assert out["robot_speed"] == pred["robot_speed"]
 
@@ -205,7 +205,7 @@ class TestPerDimPrediction:
 class TestSingleMemoryMode:
     def test_prompt_contains_all_episodes_chronologically(self, tmp_path):
         pm = PredictionModel(user="u1", physical_profile_label=PROFILE, logs_dir=tmp_path,
-                             memory_mode="single_memory")
+                             memory_mode="single_full_history")
         truth = _fake_truth()
         for day in (1, 2, 3):
             ctx = dict(CONTEXT, meal=f"meal{day}")
@@ -221,6 +221,6 @@ class TestSingleMemoryMode:
             pm.predict_bundle(context=CONTEXT, corrected={})
 
         p = captured["prompt"]
-        assert "MEMORY: all prior meals in chronological order" in p
+        assert "FULL HISTORY MEMORY: Every prior finalized meal in chronological order" in p
         assert p.index("meal=meal1") < p.index("meal=meal2") < p.index("meal=meal3")
         assert "SEMANTIC MEMORY" not in p and "EPISODIC MEMORY" not in p

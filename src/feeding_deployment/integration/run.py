@@ -130,7 +130,6 @@ from feeding_deployment.integration.preference_session import (
     INITIAL_PREF_DIMS as _INITIAL_PREF_DIMS,
     PreferenceSession,
     TABLE_PREF_DIMS as _TABLE_PREF_DIMS,
-    bt_consumes_predictions,
 )
 from feeding_deployment.preference_learning.methods.prediction_model import PredictionModel, PREF_OPTIONS, MEMORY_MODES, DEFAULT_MEMORY_MODE
 from feeding_deployment.preference_learning.config.physical_capabilities import (
@@ -179,6 +178,25 @@ HLAS = {
 assert os.environ.get("PYTHONHASHSEED") == "0", \
         "Please add `export PYTHONHASHSEED=0` to your bash profile!"
 
+
+def _retarget_table_bt(old_text: str, node_name: str, fn_name: str) -> str:
+    """Copy a single-table behavior tree's text (navigate_to_table.yaml or
+    pick_plate_from_table.yaml), rewriting only the top-level name and the fn tag to
+    target a specific physical table. Preserves all learned parameter values (and the
+    !hla tag) verbatim -- a text transform, because the BT YAML uses a custom !hla tag
+    that plain yaml.safe_load cannot round-trip."""
+    out = []
+    for line in old_text.splitlines(keepends=True):
+        nl = "\n" if line.endswith("\n") else ""
+        if line.startswith("name:"):
+            out.append(f'name: "{node_name}"{nl}')
+        elif line.startswith("fn:"):
+            out.append(f'fn: !hla {fn_name}{nl}')
+        else:
+            out.append(line)
+    return "".join(out)
+
+
 class _Runner:
     """A class for running the integrated system."""
 
@@ -212,6 +230,10 @@ class _Runner:
         # record goes in log/<user>/day_<NN>/ (see self.data_logger below).
         self.log_dir = Path(__file__).parent / "log" / user
         self.execution_log = Path(__file__).parent / "log" / "execution_log.txt" # in root log directory
+        # NUC bulldog SFTPs its anomaly log here in APPEND mode, so nothing on the
+        # NUC ever resets it -- we truncate it below on a fresh run (see the
+        # resume_from_state == "" block) alongside the compute execution log.
+        self.nuc_execution_log = Path(__file__).parent / "log" / "nuc_execution_log.txt"
         self.run_behavior_tree_dir = self.log_dir / "behavior_trees"
         self.gesture_detectors_dir = self.log_dir / "gesture_detectors"
         self._gesture_detection_filepath = self.gesture_detectors_dir / "synthesized_gesture_detectors.py"
@@ -234,10 +256,26 @@ class _Runner:
             assert original_gesture_detection_filepath.exists()
             shutil.copy(original_gesture_detection_filepath, self.gesture_detectors_dir)
 
+        # Runs for BOTH new and existing users (the seed block above runs only for
+        # brand-new users): make sure the per-user behavior-tree dir has every
+        # factory tree, including trees added since the user was provisioned. This
+        # must happen before the ground-HLA BT loop below (which loads each tree and
+        # would otherwise crash on a missing file for an existing user).
+        self._reconcile_user_behavior_trees()
+
         # Single logs handle: owns the shared state dir (== self.log_dir) and, when
         # --day is given, the per-day release record under log/<user>/day_<NN>/.
         # Disabled (no-op for release logging) when --day is omitted.
         self.data_logger = DataLogger(state_dir=self.log_dir, day=day)
+
+        # Record the active per-day dir (absolute) so teardown (feeding-compute.sh
+        # collect) can archive the execution logs into log/<user>/day_<NN>/. Cleared
+        # when per-day logging is disabled so a stale day never receives them.
+        run_ptr = Path(__file__).parent / "log" / ".current_run"
+        if self.data_logger.day_dir is not None:
+            run_ptr.write_text(str(self.data_logger.day_dir.resolve()) + "\n")
+        elif run_ptr.exists():
+            run_ptr.unlink()
 
         # Checkpointing. The store owns saved_states/: numbered NN_<skill>.p
         # checkpoints track the deterministic plate journey (prep + finish), the
@@ -254,17 +292,37 @@ class _Runner:
         self._resume_physical_profile: str | None = None
         self._resume_day: int | None = None
 
+        # Both execution logs are one-shot anomaly ledgers: bulldog (NUC) and
+        # watchdog (compute) each write a single "Anomaly Detected: ..." line and
+        # then their run() loop exits. A relaunched bulldog/watchdog re-reports
+        # anything still active, so clearing stale anomalies here can't hide a live
+        # fault -- it only stops the transparency explanation from replaying an
+        # already-cleared one (e.g. "emergency stop is active" after a resume).
+        #
+        # NUC log is purely an anomaly ledger, so wipe it on EVERY run start
+        # (fresh AND resume). It lives on compute (the SFTP destination), so a
+        # local truncate is effective.
+        with open(self.nuc_execution_log, "w") as f:
+            f.write("")
+
         if resume_from_state == "":
-            # clear behavior tree execution log
+            # Fresh run: wipe the compute behavior-tree trace entirely.
             with open(self.execution_log, "w") as f:
                 f.write("")
-            # Fresh run: drop the previous meal's numbered checkpoints (their
-            # numbering is only valid within one meal's plan). last_state.p,
-            # after_*_pickup.p, and manual *.pkl files are preserved.
+            # Drop the previous meal's numbered checkpoints (their numbering is only
+            # valid within one meal's plan). last_state.p, after_*_pickup.p, and
+            # manual *.pkl files are preserved.
             self._ckpt.clear_ephemeral()
             # Also drop the standalone preference snapshot so a new meal never
             # inherits the previous meal's in-progress corrections.
             self._ckpt.clear_pref()
+        elif self.execution_log.exists():
+            # Resume: keep the "Starting/Finished node" trace for continuity, but
+            # drop stale "Anomaly Detected: ..." lines so a pre-resume, already-
+            # cleared watchdog fault isn't replayed in the explanation.
+            kept = [ln for ln in self.execution_log.read_text().splitlines(keepends=True)
+                    if not ln.lstrip().startswith("Anomaly Detected")]
+            self.execution_log.write_text("".join(kept))
 
         # Initialize the interface to the robot.
         if run_on_robot:
@@ -336,6 +394,20 @@ class _Runner:
         }
         print("HLAs created.")
         self.hla_name_to_hla = {hla.get_name(): hla for hla in self.hlas}
+        # Observable mealtime context for this meal; set later (meal start / resume).
+        # Declared here so the init-time behavior-tree pass below can read it before
+        # any meal context is collected.
+        self.preference_context: dict[str, str] | None = None
+        # Let the table-dependent HLAs read the current mealtime setting so the
+        # "table" resolves to the dining table (social) vs the movable table
+        # (everything else): Navigate picks the parking pose + learned offset,
+        # PickPlateFromTable picks the learned handle color, and AcquireBiteWithTool
+        # picks the table height. getattr guards the init-time behavior-tree pass
+        # (context is None -> movable table); at skill time each returns the live
+        # context (fresh collection or resume-from-state).
+        _context_provider = lambda: getattr(self, "preference_context", None)
+        for _hla_name in ("Navigate", "PickPlateFromTable", "AcquireBiteWithTool"):
+            self.hla_name_to_hla[_hla_name].set_context_provider(_context_provider)
         self.operators = {hla.get_operator() for hla in self.hlas}
         self.predicates: set[Predicate] = {
             ToolPrepared,
@@ -530,7 +602,58 @@ class _Runner:
 
         print("Runner is ready.")
         self.active = True
-        self.preference_context: dict[str, str] | None = None
+
+    def _reconcile_user_behavior_trees(self) -> None:
+        """Ensure the per-user behavior-tree dir has every factory tree, seeding
+        trees added since the user was provisioned (the new-user seed in __init__
+        runs only once). Idempotent; never overwrites an existing (possibly
+        user-edited) tree.
+
+        Table split (2026-07): the single-table trees navigate_to_table.yaml and
+        pick_plate_from_table.yaml were replaced by dining/movable pairs. For an
+        existing user we build each new pair from their old single-table tree so
+        accumulated learning carries into both physical tables (the navigation's
+        ParkingOffset/Speed/ArrivalConfirm, the pickup's PlateHandleColor/
+        Tolerance) rather than copying the zeroed factory defaults.
+
+        Note the pickup pair deliberately keeps the SAME node name
+        ("PickPlateFromTable") in both trees: pick_plate.py writes the user's
+        color correction back with that name hardcoded, so renaming it would
+        silently drop the correction."""
+        bt_dir = self.run_behavior_tree_dir
+        bt_dir.mkdir(parents=True, exist_ok=True)
+        factory_dir = Path(__file__).parents[1] / "actions" / "behavior_trees"
+
+        # 1) Table split: seed each new table pair from the user's old single tree.
+        for old_name, new_trees in (
+            ("navigate_to_table.yaml", (
+                ("navigate_to_dining_table", "NavigateToDiningTable"),
+                ("navigate_to_movable_table", "NavigateToMovableTable"),
+            )),
+            ("pick_plate_from_table.yaml", (
+                ("pick_plate_from_dining_table", "PickPlateFromTable"),
+                ("pick_plate_from_movable_table", "PickPlateFromTable"),
+            )),
+        ):
+            old_tree = bt_dir / old_name
+            if not old_tree.exists():
+                continue
+            old_text = old_tree.read_text(encoding="utf-8")
+            for fn_name, node_name in new_trees:
+                dst = bt_dir / f"{fn_name}.yaml"
+                if not dst.exists():
+                    dst.write_text(
+                        _retarget_table_bt(old_text, node_name, fn_name),
+                        encoding="utf-8",
+                    )
+
+        # 2) Generic backfill: copy any factory tree still missing (the two table
+        #    trees above are already present, so they are not overwritten with the
+        #    zeroed factory versions).
+        for factory_bt in factory_dir.glob("*.yaml"):
+            dst = bt_dir / factory_bt.name
+            if not dst.exists():
+                shutil.copy(factory_bt, dst)
 
     def ensure_preference_context(self) -> dict[str, str]:
         """Require a valid preference context before the web session; no implicit defaults."""
@@ -1081,12 +1204,14 @@ class _Runner:
                 )
             if self._pref_session is not None:
                 # Corrections repredict in the BACKGROUND (the robot keeps
-                # moving); join here only before skills whose BT reads
-                # prediction-produced parameters (pickup colors, nav offsets,
-                # feeding dims) so they never execute on half-updated YAMLs.
-                # The join runs after the settings stall (edits made while the
-                # panel was open have scheduled their reprediction by now).
-                if bt_consumes_predictions(skill_plan_names[i]):
+                # moving); join here only when this skill reads a dim that is
+                # still OPEN, i.e. one the pending reprediction could still
+                # rewrite -- so a skill never executes on half-updated YAMLs, but
+                # an irrelevant reprediction (e.g. an open plate color while
+                # feeding) does not stall it. The join runs after the settings
+                # stall (edits made while the panel was open have scheduled their
+                # reprediction by now).
+                if self._pref_session.should_wait_for_reprediction(skill_plan_names[i]):
                     self._pref_session.wait_for_reprediction()
 
             # Execute the high-level plan in simulation. On a mid-skill takeover
@@ -1151,7 +1276,8 @@ class _Runner:
                     bt_name = ""
                 if bt_name.startswith("pick_plate_from_"):
                     location = bt_name[len("pick_plate_from_"):]
-                    if location in ("fridge", "microwave", "table"):
+                    if location in ("fridge", "microwave",
+                                    "dining_table", "movable_table"):
                         self._pref_session.record_color(location)
                 # Nav offset is a preference dimension: after a navigation, the
                 # HLA has already written any post-arrival teleop adjustment
@@ -1159,7 +1285,8 @@ class _Runner:
                 # back and finalize the location's offset dim.
                 elif bt_name.startswith("navigate_to_"):
                     location = bt_name[len("navigate_to_"):]
-                    if location in ("fridge", "microwave", "sink", "table"):
+                    if location in ("fridge", "microwave", "sink",
+                                    "dining_table", "movable_table"):
                         self._pref_session.record_nav_offset(location)
 
             # Save the latest state in case we want to resume execution

@@ -549,7 +549,7 @@ class AttachmentPerception(TFInterface):
         depth = depth / 1000 # convert from mm to m
         # print("Depth: ", depth)
 
-        if math.isnan(depth) or depth < 0.05 or depth > 1.0:
+        if math.isnan(depth) or depth < 0.05 or depth > 1.5:
             return False, None
 
         fx = camera_info.K[0]

@@ -764,7 +764,7 @@ class HeadPerception:
 
         depth = depth_image[image_y, image_x]
 
-        if math.isnan(depth) or depth < 0.05 or depth > 1.0:
+        if math.isnan(depth) or depth < 0.05 or depth > 1.5:
 
             depth = []
             for i in range(-2, 2):
@@ -778,7 +778,7 @@ class HeadPerception:
                     if not (
                         math.isnan(pixel_depth)
                         or pixel_depth < 50
-                        or pixel_depth > 1000
+                        or pixel_depth > 1500
                     ):
                         depth += [pixel_depth]
 

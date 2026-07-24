@@ -30,9 +30,9 @@ Threading: repredictions triggered by corrections run on a single coalescing
 BACKGROUND worker so the robot is not stationary during the LLM call. Every
 consumer of predictions joins first -- ``ask()`` before showing each step,
 ``record_color``/``record_nav_offset`` on entry, ``finalize_meal`` on entry,
-and run.py via ``wait_for_reprediction()`` before executing any skill whose
-behavior tree reads prediction-produced parameters (see
-``bt_consumes_predictions``). All BT-YAML writers serialize on a dedicated
+and run.py via ``wait_for_reprediction()`` before executing any skill that reads
+a still-open prediction-produced parameter (see
+``should_wait_for_reprediction``). All BT-YAML writers serialize on a dedicated
 mutex (acquired BEFORE the session lock, always in that order) so concurrent
 appliers can never interleave lost-update file writes.
 """
@@ -65,6 +65,7 @@ from feeding_deployment.preference_learning.config.preference_bundle import (
 )
 from feeding_deployment.preference_learning.config.mealtime_context import (
     food_items_for_flair,
+    inactive_table_for_setting,
 )
 from feeding_deployment.preference_learning.methods.prediction_model import (
     PREF_KIND,
@@ -86,6 +87,7 @@ from feeding_deployment.integration.apply_preferences import (
     apply_dip_preference,
     apply_microwave_preference,
     apply_transfer_mode,
+    bt_consumed_pref_fields,
 )
 
 _COLOR_FIELD_SET = set(COLOR_FIELDS)
@@ -131,27 +133,6 @@ INITIAL_PREF_DIMS = [
     "confirm_navigation_arrival",
     "confirm_manipulation",
 ]
-
-# Behavior trees whose parameters come from (re)prediction: plate pickups read
-# PlateHandleColor/PlateHandleColorTolerance, navigations read ParkingOffset, and the feeding
-# skills read the table dims. run.py joins the background reprediction before
-# executing these; every other skill only reads dims that are finalized before
-# it can run (Speed, confirm_navigation_arrival and confirm_manipulation from
-# the initial ask, MicrowaveDuration from the locked microwave ask), which
-# repredictions never touch. If a new dim is ever consumed by a skill BEFORE
-# its ask step, add that skill's BT prefix here.
-_PREDICTION_CONSUMING_BT_PREFIXES = (
-    "pick_plate_from_",
-    "navigate_to_",
-    "transfer_",
-    "acquire_bite",
-)
-
-
-def bt_consumes_predictions(bt_name: str) -> bool:
-    """True if the skill's behavior tree reads parameters that a pending
-    background reprediction may still be about to (re)write."""
-    return str(bt_name).startswith(_PREDICTION_CONSUMING_BT_PREFIXES)
 
 
 # Preference dimensions asked at the table, just before feeding begins.
@@ -304,7 +285,7 @@ class PreferenceSession:
         days it is the last corrected/confirmed value (the tree persists across
         days). Falls back to DEFAULT_COLOR if the YAML/param is missing.
         """
-        location = field.rsplit("_", 1)[-1]  # plate_color_fridge -> fridge
+        location = field[len("plate_color_"):]  # plate_color_dining_table -> dining_table
         fpath = self._bt_dir / _pickup_yaml_name(location)
         if not fpath.exists():
             return dict(DEFAULT_COLOR)
@@ -323,7 +304,7 @@ class PreferenceSession:
 
     def _write_color_to_bt(self, field: str, color: Dict[str, Any]) -> None:
         """Write a canonical color into its pickup BT YAML (PlateHandleColor/PlateHandleColorTolerance)."""
-        location = field.rsplit("_", 1)[-1]
+        location = field[len("plate_color_"):]
         fpath = self._bt_dir / _pickup_yaml_name(location)
         if not fpath.exists():
             return
@@ -335,12 +316,25 @@ class PreferenceSession:
         if changed:
             _save_yaml(fpath, data)
 
+    def _skip_color_field(self) -> Optional[str]:
+        """The plate-color field for the physical table NOT used this meal.
+
+        Mirrors _skip_nav_offset_field: the dining table (social) and movable
+        table (everything else) are mutually exclusive per meal, so the unused
+        table's color is "not observed" -- its saved color is never rewritten and
+        it is excluded from the meal record, rather than being recorded as a
+        confirmation of a color that was never actually seen."""
+        setting = self.context.get("setting")
+        return COLOR_FIELD_BY_LOCATION.get(inactive_table_for_setting(setting))
+
     def _write_open_colors_to_bt(self) -> None:
         """Push current predictions for still-open color dims into their BT YAML
         so the next pickup uses the latest prediction. Finalized colors are left
-        as-is (they already hold the user's ground truth)."""
+        as-is (they already hold the user's ground truth); the unused table's
+        color is never touched (see _skip_color_field)."""
+        skip = self._skip_color_field()
         for field in COLOR_FIELDS:
-            if field in self.finalized:
+            if field in self.finalized or field == skip:
                 continue
             color = self.bundle.get(field)
             if isinstance(color, dict):
@@ -358,7 +352,7 @@ class PreferenceSession:
         DEFAULT_NAV_OFFSET if the YAML/param is missing (e.g. a per-user tree
         that predates the parameter).
         """
-        location = field.rsplit("_", 1)[-1]  # nav_offset_fridge -> fridge
+        location = field[len("nav_offset_"):]  # nav_offset_dining_table -> dining_table
         fpath = self._bt_dir / _nav_yaml_name(location)
         if not fpath.exists():
             return dict(DEFAULT_NAV_OFFSET)
@@ -378,7 +372,7 @@ class PreferenceSession:
         Unlike colors (whose params shipped in the factory YAMLs from day one),
         a pre-existing per-user tree may lack the parameter entirely -- upsert
         the full block in that case so the value isn't silently dropped."""
-        location = field.rsplit("_", 1)[-1]
+        location = field[len("nav_offset_"):]
         fpath = self._bt_dir / _nav_yaml_name(location)
         if not fpath.exists():
             return
@@ -390,12 +384,26 @@ class PreferenceSession:
             data.setdefault("parameters", []).append({**_NAV_OFFSET_PARAM, "value": value})
             _save_yaml(fpath, data)
 
+    def _skip_nav_offset_field(self) -> Optional[str]:
+        """The nav-offset field for the physical table NOT used this meal.
+
+        The dining table (social) and movable table (everything else) are mutually
+        exclusive per meal -- the setting selects one. The unused table is treated
+        as "not observed": its saved offset is never rewritten and it is excluded
+        from the meal record, so the learner sees no entry for it that day rather
+        than a fake zero confirmation. Always keyed off the same setting rule the
+        navigation uses, so the skipped table is exactly the one not driven to."""
+        setting = self.context.get("setting")
+        return OFFSET_FIELD_BY_LOCATION.get(inactive_table_for_setting(setting))
+
     def _write_open_nav_offsets_to_bt(self) -> None:
         """Push current predictions for still-open nav-offset dims into their
         BT YAML so the next navigation uses the latest prediction. Finalized
-        offsets are left as-is (they already hold the user's ground truth)."""
+        offsets are left as-is (they already hold the user's ground truth); the
+        unused table's offset is never touched (see _skip_nav_offset_field)."""
+        skip = self._skip_nav_offset_field()
         for field in NAV_OFFSET_FIELDS:
-            if field in self.finalized:
+            if field in self.finalized or field == skip:
                 continue
             offset = self.bundle.get(field)
             if isinstance(offset, dict):
@@ -554,14 +562,16 @@ class PreferenceSession:
                         continue
                     if field in pred:
                         self.bundle[field] = pred[field]
+                skip_color = self._skip_color_field()
                 for field in COLOR_FIELDS:
-                    if field in self.finalized or field in stale:
+                    if field in self.finalized or field in stale or field == skip_color:
                         continue
                     color = self.bundle.get(field)
                     if isinstance(color, dict):
                         self._write_color_to_bt(field, color)
+                skip_nav = self._skip_nav_offset_field()
                 for field in NAV_OFFSET_FIELDS:
-                    if field in self.finalized or field in stale:
+                    if field in self.finalized or field in stale or field == skip_nav:
                         continue
                     offset = self.bundle.get(field)
                     if isinstance(offset, dict):
@@ -635,6 +645,23 @@ class PreferenceSession:
                 lambda: not self._repredict_running and not self._repredict_dirty,
                 timeout,
             )
+
+    def should_wait_for_reprediction(self, bt_name: str) -> bool:
+        """True iff the skill ``bt_name`` reads a dim that is still OPEN (not
+        finalized) -- i.e. a dim a pending background reprediction could still
+        (re)write.
+
+        A reprediction only ever changes open dims (finalized dims are pinned and
+        skipped by _repredict_open), so a skill whose consumed dims are all
+        finalized can never be affected by one in flight and need not join
+        wait_for_reprediction. Callers gate the join on this so an irrelevant
+        reprediction (e.g. an open plate color / inactive-table offset) does not
+        stall a feeding skill that reads none of it."""
+        consumed = bt_consumed_pref_fields(bt_name)
+        if not consumed:
+            return False
+        with self._lock:
+            return any(f not in self.finalized for f in consumed)
 
     # ------------------------------------------------------------------ #
     # Apply
@@ -978,12 +1005,19 @@ class PreferenceSession:
         # The ground truth must include the final repredicted values for the
         # never-asked open dims -- settle the background worker first.
         self.wait_for_reprediction()
+        # The physical table NOT used this meal is "not observed": don't confirm
+        # its dims and exclude them from the record, so the learner sees no entry
+        # for that table this day (rather than a fake confirmation of a pose/color
+        # it never saw) and its saved values stay untouched.
+        skipped = {self._skip_nav_offset_field(), self._skip_color_field()} - {None}
         for field in PREF_FIELDS:
+            if field in skipped:
+                continue
             if field not in self.finalized and field in self.bundle:
                 self._finalize(field, self.bundle[field], changed=False)
 
         with self._lock:
-            ground_truth = dict(self.bundle)
+            ground_truth = {k: v for k, v in self.bundle.items() if k not in skipped}
         self._model.update(
             day=day,
             context=self.context,

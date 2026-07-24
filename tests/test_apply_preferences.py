@@ -30,6 +30,8 @@ from feeding_deployment.integration.apply_preferences import (
     _dipping_depth_translate,
     _microwave_duration_translate,
     _load_yaml,
+    bt_consumed_pref_fields,
+    _CONSUMED_FIELDS_BY_BT,
 )
 from feeding_deployment.preference_learning.methods.utils import PREF_FIELDS
 
@@ -154,14 +156,15 @@ class TestApplyBundleToBehaviorTrees:
     # countdown=N) written by each confirm_* dim.
     _MANIPULATION_CONFIRM_YAMLS = [
         "pick_plate_from_fridge.yaml", "pick_plate_from_microwave.yaml",
-        "pick_plate_from_table.yaml", "place_plate_in_microwave.yaml",
+        "pick_plate_from_dining_table.yaml", "place_plate_in_microwave.yaml",
         "place_plate_on_table.yaml", "place_plate_in_sink.yaml",
         "press_microwave_button.yaml", "gaze_at_table.yaml",
         "open_fridge.yaml", "open_microwave.yaml",
     ]
     _NAV_CONFIRM_YAMLS = [
         "navigate_to_fridge.yaml", "navigate_to_microwave.yaml",
-        "navigate_to_sink.yaml", "navigate_to_table.yaml",
+        "navigate_to_sink.yaml", "navigate_to_dining_table.yaml",
+        "navigate_to_movable_table.yaml",
     ]
 
     def test_feeding_confirmation_skip(self, bt_dir: Path):
@@ -217,7 +220,7 @@ class TestApplyBundleToBehaviorTrees:
 
         for fname in ["transfer_utensil.yaml", "transfer_drink.yaml", "transfer_wipe.yaml"]:
             data = _load(bt_dir, fname)
-            assert _get_param_value(data, "OutsideMouthDistance") == 0.07
+            assert _get_param_value(data, "OutsideMouthDistance") == 0.05
 
     def test_outside_mouth_distance_not_applicable_skips(self, bt_dir: Path):
         original = _get_param_value(_load(bt_dir, "transfer_utensil.yaml"), "OutsideMouthDistance")
@@ -412,7 +415,7 @@ class TestApplyBundleFullBundle:
         assert _get_param_value(data, "BiteSelectionAutocontinueSeconds") == 60.0
         ut = _load(bt_dir, "transfer_utensil.yaml")
         assert _get_param_value(ut, "TaskReselectionAutocontinueSeconds") == 0.0   # wait for me
-        nav = _load(bt_dir, "navigate_to_table.yaml")
+        nav = _load(bt_dir, "navigate_to_dining_table.yaml")
         assert _get_param_value(nav, "ArrivalConfirm") == 15.0           # countdown 15 s
         pk = _load(bt_dir, "pick_plate_from_fridge.yaml")
         assert _get_param_value(pk, "ManipulationConfirm") == 0.0        # wait for me
@@ -551,3 +554,57 @@ class TestApplyDipPreference:
 
     def test_none_flair_is_noop(self):
         apply_dip_preference({"bite_dipping_preference": "do not dip"}, None)
+
+
+class TestConsumedFieldsByBt:
+    """The behavior-tree -> consumed-preference-fields reverse index that drives
+    the reprediction-wait relevance gate (PreferenceSession.should_wait_for_reprediction).
+    Derived from _BT_MAPPING + the color/nav location maps, so it must track the
+    dining/movable-table split for free."""
+
+    def test_acquire_bite_consumes_feeding_dims_and_no_color_or_nav(self):
+        got = bt_consumed_pref_fields("acquire_bite")
+        assert {
+            "skewering_axis", "bite_dipping_preference", "bite_ordering",
+            "confirm_feeding_pickup", "wait_before_autocontinue_bite_selection",
+            "robot_speed",
+        } <= got
+        # A feeding skill must read no plate-color / nav-offset dim, so an open
+        # color/offset never drags it into a reprediction wait.
+        assert not any(f.startswith(("plate_color_", "nav_offset_")) for f in got)
+
+    def test_transfer_skills_consume_no_color_or_nav(self):
+        for bt in ("transfer_utensil", "transfer_drink", "transfer_wipe"):
+            got = bt_consumed_pref_fields(bt)
+            assert not any(f.startswith(("plate_color_", "nav_offset_")) for f in got), bt
+        assert {
+            "outside_mouth_distance", "retract_between_bites",
+            "detect_user_ready_for_initiating_transfer_feeding",
+            "detect_user_completed_transfer_feeding",
+            "wait_before_autocontinue_task_selection", "robot_speed",
+        } <= bt_consumed_pref_fields("transfer_utensil")
+
+    def test_pickup_consumes_own_color_only(self):
+        got = bt_consumed_pref_fields("pick_plate_from_dining_table")
+        assert {"plate_color_dining_table", "confirm_manipulation", "robot_speed"} <= got
+        assert "plate_color_fridge" not in got
+        assert not any(f.startswith("nav_offset_") for f in got)
+
+    def test_table_nav_offsets_are_per_table(self):
+        dining = bt_consumed_pref_fields("navigate_to_dining_table")
+        movable = bt_consumed_pref_fields("navigate_to_movable_table")
+        assert "nav_offset_dining_table" in dining
+        assert "nav_offset_movable_table" not in dining
+        assert "nav_offset_movable_table" in movable
+        assert "nav_offset_dining_table" not in movable
+        for got in (dining, movable):
+            assert {"confirm_navigation_arrival", "robot_speed"} <= got
+
+    def test_every_pref_field_except_transfer_mode_is_consumed(self):
+        covered = set().union(*_CONSUMED_FIELDS_BY_BT.values())
+        assert [f for f in PREF_FIELDS if f not in covered] == ["transfer_mode"]
+
+    def test_unknown_or_presplit_bt_name_returns_empty(self):
+        # The pre-split name and any HLA-name fallback read nothing we track.
+        assert bt_consumed_pref_fields("navigate_to_table") == frozenset()
+        assert bt_consumed_pref_fields("SomeHlaName") == frozenset()

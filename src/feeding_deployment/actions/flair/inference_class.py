@@ -613,6 +613,9 @@ class BiteAcquisitionInference:
                 elif "chicken nugget" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
                     food_classes_being_detected.append("chicken nugget piece")
+                elif "chicken kebab" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "cubed chicken piece"
+                    food_classes_being_detected.append("cubed chicken piece")
                 elif "orange chicken" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "glazed fried chicken piece"
                     food_classes_being_detected.append("glazed fried chicken piece")
@@ -645,18 +648,54 @@ class BiteAcquisitionInference:
         # food_classes_being_detected.append('blue plate')
         print("Food Classes being detected: ", food_classes_being_detected)
 
-        if report is not None:
-            report("Scanning the plate for food")
-        # detect objects
-        detections = self.grounding_dino_model.predict_with_classes(
-            image=cropped_image,
-            classes=food_classes_being_detected,
-            box_threshold=self.BOX_THRESHOLD,
-            text_threshold=self.TEXT_THRESHOLD
-        )
+        def detect_classes(scene, class_ids, x_offset=0, y_offset=0):
+            """Run Grounding DINO over `scene` for a subset of the food classes.
+
+            Boxes come back in full-image coordinates (the offsets locate `scene`
+            in the camera image) and class_id is mapped back onto
+            food_classes_being_detected, so everything below is indifferent to
+            which region a detection came from. Unmatched phrases keep the
+            class_id None that predict_with_classes returns."""
+            dets = self.grounding_dino_model.predict_with_classes(
+                image=scene,
+                classes=[food_classes_being_detected[i] for i in class_ids],
+                box_threshold=self.BOX_THRESHOLD,
+                text_threshold=self.TEXT_THRESHOLD
+            )
+            if len(dets.xyxy):
+                dets.xyxy[:, [0, 2]] += x_offset
+                dets.xyxy[:, [1, 3]] += y_offset
+                dets.class_id = np.array(
+                    [None if cid is None else class_ids[int(cid)] for cid in dets.class_id]
+                )
+            return dets
+
+        # Solids are searched for on the plate only; dips are searched for across
+        # the whole camera image, so a dipping sauce in its own container next to
+        # the plate (not on it) is still found. Two Grounding DINO passes, each
+        # with only its region's classes, merged in full-image coordinates for the
+        # shared NMS + SAM below. Note the crop is where the *solid* class prompts
+        # pay off -- prompting the full image for them would pick up food
+        # elsewhere on the table.
+        solid_class_ids = [i for i, category in enumerate(self.FOOD_CATEGORIES) if category != 'dip']
+        dip_class_ids = [i for i, category in enumerate(self.FOOD_CATEGORIES) if category == 'dip']
+
+        detections_per_region = []
+        if solid_class_ids:
+            if report is not None:
+                report("Scanning the plate for food")
+            detections_per_region.append(
+                detect_classes(cropped_image, solid_class_ids, x_offset=plate_bounds[0], y_offset=plate_bounds[1])
+            )
+        if dip_class_ids:
+            if report is not None:
+                report("Looking around for the dipping sauce")
+            detections_per_region.append(detect_classes(image, dip_class_ids))
+        detections = sv.Detections.merge(detections_per_region)
+
         if report is not None:
             report(f"Found {len(detections.xyxy)} possible food regions — filtering…")
-        
+
         # if IS_NOODLE:
         #     filtered_idxs = []
         #     for i in range(len(detections)):
@@ -666,38 +705,17 @@ class BiteAcquisitionInference:
         #             filtered_idxs.append(i)
         #     detections = sv.Detections(xyxy=detections.xyxy[filtered_idxs], class_id=np.array(detections.class_id[filtered_idxs]), confidence=detections.confidence[filtered_idxs])
 
-        # annotate image with detections
-        box_annotator = sv.BoxAnnotator()
-        labels = [
-            f"{food_classes_being_detected[class_id]} {confidence:0.2f}" 
-            for _, _, confidence, class_id, _, _
-            in detections]
-        annotated_frame = box_annotator.annotate(scene=cropped_image.copy(), detections=detections, labels=labels)
-
         # NMS post process
         #print(f"Before NMS: {len(detections.xyxy)} boxes")
         nms_idx = torchvision.ops.nms(
-            torch.from_numpy(detections.xyxy), 
-            torch.from_numpy(detections.confidence), 
+            torch.from_numpy(detections.xyxy),
+            torch.from_numpy(detections.confidence),
             self.NMS_THRESHOLD
         ).numpy().tolist()
 
         # remove boxes which are union of two boxes
-        
+
         detections.xyxy = detections.xyxy[nms_idx]
-
-        # recover detections in original image
-        detections.xyxy[:,0] += plate_bounds[0]
-        detections.xyxy[:,1] += plate_bounds[1]
-        detections.xyxy[:,2] += plate_bounds[0]
-        detections.xyxy[:,3] += plate_bounds[1]
-
-        # detections.xyxy[:,0] += 550
-        # detections.xyxy[:,1] += 0
-        # detections.xyxy[:,2] += 550
-        # detections.xyxy[:,3] += 0
-
-
         detections.confidence = detections.confidence[nms_idx]
         detections.class_id = detections.class_id[nms_idx]
         #print(f"After NMS: {len(detections.xyxy)} boxes")

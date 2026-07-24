@@ -40,7 +40,7 @@ INTER_DELAY="${INTER_DELAY:-5}"                   # after cartographer (6), befo
 SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
 
 INTEGRATION_DIR="$HOME/deployment_ws/src/feeding-deployment/src/feeding_deployment/integration"
-MAP_FILE="$HOME/deployment_ws/src/feeding-deployment/maps/aimee-7-15-2.pbstream"
+MAP_FILE="$HOME/deployment_ws/src/feeding-deployment/maps/aimee-7-22.pbstream"
 
 # Shared pane-logging helper (deployed on both machines via the repo).
 SCRIPT_DIR="$(dirname "$SELF")"
@@ -319,6 +319,17 @@ do_collect() {
   echo "collect: snapshotting compute logs ..."
   cp -f "$INTEGRATION_DIR/log/execution_log.txt"     "$cdir/"   2>/dev/null || true
   cp -f "$INTEGRATION_DIR/log/nuc_execution_log.txt" "$bundle/" 2>/dev/null || true
+
+  # Also archive both execution logs into the run's per-user/day dir, if run.py
+  # recorded one (.current_run holds the absolute log/<user>/day_NN path; absent
+  # when --day was omitted). Best-effort, like the bundle copies above.
+  local day_dir; day_dir="$(cat "$INTEGRATION_DIR/log/.current_run" 2>/dev/null || true)"
+  if [[ -n "$day_dir" && -d "$day_dir" ]]; then
+    cp -f "$INTEGRATION_DIR/log/execution_log.txt"     "$day_dir/" 2>/dev/null || true
+    cp -f "$INTEGRATION_DIR/log/nuc_execution_log.txt" "$day_dir/" 2>/dev/null || true
+    echo "collect: archived execution logs -> $day_dir"
+  fi
+
   cp -f "$SESS_ROOT/health_monitor.log"              "$cdir/"   2>/dev/null || true
   local slog; slog="$(ls -dt "$SESS_ROOT"/sensorlog_* 2>/dev/null | head -1)"
   [[ -n "$slog" ]] && cp -a "$slog" "$cdir/" 2>/dev/null || true

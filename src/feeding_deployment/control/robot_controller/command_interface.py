@@ -4,6 +4,26 @@ import numpy as np
 from numpy.typing import NDArray
 
 
+# Gripper openness expressed as "open amount": 1.0 = fully open, 0.0 = fully closed.
+# The Kinova driver uses the opposite raw convention (0.0 = open, 1.0 = closed),
+# so raw gripper position = 1.0 - open_amount (see open_amount_to_gripper_pos).
+GRIPPER_OPEN_AMOUNT = 1.0        # generic open / release into free space
+GRIPPER_GRASP_OPEN_AMOUNT = 0.3  # engage the utensil-mount slot to hold the utensil
+GRIPPER_CLOSE_OPEN_AMOUNT = 0.0  # generic close — all the way shut
+
+# Per-tool grasp openness. grasp_tool holds a tool by opening INTO its mount slot;
+# tools not listed here keep the full-open grasp (current behavior).
+GRASP_OPEN_AMOUNTS = {
+    "utensil": GRIPPER_GRASP_OPEN_AMOUNT,
+}
+
+
+def open_amount_to_gripper_pos(open_amount):
+    """Convert an 'open amount' (1.0 = open, 0.0 = closed) to the Kinova raw
+    gripper position (0.0 = open, 1.0 = closed)."""
+    return 1.0 - open_amount
+
+
 class KinovaCommand:
     """Establish an interface for commands that can be sent to the robot."""
 
@@ -65,3 +85,14 @@ class OpenGripperCommand(KinovaCommand):
 
 class CloseGripperCommand(KinovaCommand):
     """Command to close the gripper."""
+
+
+@dataclass(frozen=True)
+class SetGripperCommand(KinovaCommand):
+    """Command to set the gripper to a specific raw position (0.0=open, 1.0=closed)."""
+
+    pos: float
+
+    def __init__(self, pos):
+        object.__setattr__(self, "pos", float(pos))
+        assert 0.0 <= self.pos <= 1.0, f"gripper pos out of range [0,1]: {self.pos}"

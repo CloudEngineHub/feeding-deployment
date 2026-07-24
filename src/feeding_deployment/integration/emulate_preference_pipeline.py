@@ -75,6 +75,9 @@ from feeding_deployment.preference_learning.config.preference_bundle import (
     nav_offset_from_bt,
     parse_color,
 )
+from feeding_deployment.preference_learning.config.mealtime_context import (
+    active_table_for_setting,
+)
 from feeding_deployment.preference_learning.methods.prediction_model import (
     DEFAULT_MEMORY_MODE,
     MEMORY_MODES,
@@ -326,6 +329,9 @@ def _build_prediction_model(
 # ---------------------------------------------------------------------------
 
 def run_emulated_meal(session: PreferenceSession, bt_dir: Path, day: int) -> dict:
+    # Which physical table this meal uses (dining for social settings, movable
+    # otherwise) -- same rule the real navigation and pickup skills apply.
+    table = active_table_for_setting(session.context.get("setting"))
     session.start()
     print(
         "Predicted preference bundle (initial):",
@@ -359,7 +365,7 @@ def run_emulated_meal(session: PreferenceSession, bt_dir: Path, day: int) -> dic
         print("=== [skill] close_microwave (emulated) ===")
 
     # To the table; table dims just before feeding.
-    _emulate_navigation(session, bt_dir, "table")
+    _emulate_navigation(session, bt_dir, table)
     print("=== [skill] place_plate_on_table (emulated) ===")
     session.ask(TABLE_PREF_DIMS)
     _print_explanations(session)
@@ -368,7 +374,7 @@ def run_emulated_meal(session: PreferenceSession, bt_dir: Path, day: int) -> dic
 
     # Finish: pick plate from table (table color) -> sink (mirrors
     # PlacePlateInSink planning PickPlateFromTable first).
-    _emulate_pickup_color(session, bt_dir, "table")
+    _emulate_pickup_color(session, bt_dir, table)
     _emulate_navigation(session, bt_dir, "sink")
     print("=== [skill] place_plate_in_sink (emulated) ===")
 

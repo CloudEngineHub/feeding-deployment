@@ -574,7 +574,36 @@ class WebInterface:
     # preference is predicted/corrected via the preference session, so FLAIR is
     # already configured before bite acquisition begins.
 
-    def get_next_bite_selection(self, plate_image, n_solid_food_types, bite_data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout, no_detections: bool = False) -> None:
+    def _send_manual_selection_image(self, manual_image) -> None:
+        """Send the frame the bite-selection page uses for manual point picking.
+
+        The page stores the next image it receives as its manual-selection image
+        (instead of replacing the bite-selection image) when this status precedes
+        it -- the same status-then-image handshake the color correction page uses
+        for "pick_update". No-op when there is no manual frame: the page then keeps
+        showing the plate image for manual picking, as it did before."""
+        if manual_image is None:
+            return
+        self._send_message({"state": "bite_selection", "status": "manual_image"})
+        time.sleep(0.2)
+        self._send_image(manual_image)
+        time.sleep(0.2)
+
+    def get_next_bite_selection(self, plate_image, n_solid_food_types, bite_data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout, no_detections: bool = False, manual_image=None, dip_boxes=None) -> None:
+        """plate_image is what the page shows for bite selection (the plate crop,
+        which the detection boxes are drawn against). manual_image is the frame
+        the manual skill pages let the user tap a point on -- the whole camera
+        frame, so an item off the plate (e.g. a dipping sauce in its own
+        container) can be reached. Both go through _send_image, so both are
+        rotated the same way and the ratios the page returns map 1:1 onto that
+        image's pixels; the caller scales them against whichever image it sent
+        here. When manual_image is None the page falls back to showing the plate
+        image for manual selection.
+
+        dip_boxes maps each detected dip label to its [x, y, w, h] boxes in
+        whole-frame pixels, so the page can show a thumbnail of the dip beside its
+        name (it crops them out of manual_image). Omit it and the dip options stay
+        text-only."""
 
         self.current_page = "meal_assistance"
 
@@ -614,6 +643,7 @@ class WebInterface:
                 # the mode and the image, and the robot is idle while this wait
                 # blocks, so re-sending both is idempotent and lets the
                 # remounted page recover.
+                self._send_manual_selection_image(manual_image)
                 self._send_image(plate_image)
                 self._send_message(no_detections_msg)
 
@@ -634,12 +664,16 @@ class WebInterface:
                 return "manual_skewering", msg_dict["positions"], None
             return "manual_dipping", msg_dict["positions"], None
 
-        # Send required data for the next bite selection page
+        # Send required data for the next bite selection page. The manual-selection
+        # frame goes first so the plate image is still the last image the page
+        # receives -- it is the one the main bite view (and its box overlay) shows.
+        self._send_manual_selection_image(manual_image)
         self._send_image(plate_image)
         time.sleep(0.2)
         self._send_message({"n_food_types": n_solid_food_types, "data": bite_data, "current_bite": predicted_bite})
         time.sleep(0.2)
-        self._send_message({"n_ordering": n_dip_food_types, "data": dip_data})
+        self._send_message({"n_ordering": n_dip_food_types, "data": dip_data,
+                            "dip_boxes": dip_boxes if dip_boxes else {}})
         # set autocontinue timeout
         time.sleep(0.2)
         self._send_message({"state": "auto_time", "status": str(autocontinue_timeout)})

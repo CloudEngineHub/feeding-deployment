@@ -52,7 +52,9 @@ CONTINUOUS_FIELDS = sorted(
 )
 
 _NEUTRAL_STATE = "Neutral"
-_REFERENCE_TOD = "noon"
+# The zero-shift baseline time-of-day. Must be a member of TIMES_OF_DAY;
+# "afternoon" is the midday, neutral-lighting reference.
+REFERENCE_TOD = "afternoon"
 
 _ZERO_COLOR_SHIFT = {"dh": 0, "ds": 0, "dv": 0}
 _ZERO_NAV_SHIFT = {"dx": 0.0, "dy": 0.0, "dyaw": 0.0}
@@ -68,10 +70,11 @@ def sample_continuous_tables(rng: random.Random) -> Dict[str, Any]:
     the encoding payload under "continuous_tables" and replayed verbatim by
     the dataset generator.
 
-    Sums stay strictly inside the clip bounds by construction:
+    Sums stay strictly inside the clip bounds (h in [0,179], s/v in [0,255]) by
+    construction, over all four times of day:
       h: base [10,165] + microwave [4,8] + evening [2,5] <= 178;  min 10-3-5 = 2
       s: base [150,235] + evening [-40,-20]              -> [110, 235]
-      v: base [120,195] - fridge 50 - evening 35 >= 35;  + morning 25 + mw 10 <= 230
+      v: base [120,195] - fridge 50 - night 45 >= 25;    + morning 25 + mw 10 <= 230
       nav dx/dy: 0.20 + 0.12 + 0.10 = 0.42 < 0.5;  dyaw: 0.30 + 0.15 + 0.15 = 0.60 < 0.785
     (Base hue is [10,165], not the plan's [10,169] -- 169+8+5 = 182 would clip.)
     """
@@ -82,14 +85,18 @@ def sample_continuous_tables(rng: random.Random) -> Dict[str, Any]:
         "range": rng.choice((0.05, 0.10, 0.15)),
     }
     location_color_offsets = {
-        "table": dict(_ZERO_COLOR_SHIFT),  # reference location
+        "movable_table": dict(_ZERO_COLOR_SHIFT),  # reference location
+        # The dining table sits elsewhere, so its lighting differs slightly from
+        # the movable table (the reference).
+        "dining_table": {"dh": rng.randint(-4, 4), "ds": 0, "dv": rng.randint(-20, 20)},
         "fridge": {"dh": rng.randint(-3, 3), "ds": 0, "dv": rng.randint(-50, -30)},
         "microwave": {"dh": rng.randint(4, 8), "ds": 0, "dv": rng.randint(-10, 10)},
     }
     time_color_shifts = {
-        "noon": dict(_ZERO_COLOR_SHIFT),  # reference time
+        "afternoon": dict(_ZERO_COLOR_SHIFT),  # reference time (midday, neutral light)
         "morning": {"dh": rng.randint(-5, -2), "ds": 0, "dv": rng.randint(10, 25)},
         "evening": {"dh": rng.randint(2, 5), "ds": rng.randint(-40, -20), "dv": rng.randint(-35, -15)},
+        "night": {"dh": rng.randint(-5, -2), "ds": rng.randint(-30, -10), "dv": rng.randint(-45, -25)},
     }
 
     base_nav = {
@@ -103,7 +110,7 @@ def sample_continuous_tables(rng: random.Random) -> Dict[str, Any]:
     time_nav_shifts = {
         tod: (
             dict(_ZERO_NAV_SHIFT)
-            if tod == _REFERENCE_TOD
+            if tod == REFERENCE_TOD
             else {
                 "dx": _signed(rng, 0.06, 0.12),
                 "dy": _signed(rng, 0.06, 0.12),
@@ -124,6 +131,13 @@ def sample_continuous_tables(rng: random.Random) -> Dict[str, Any]:
         )
         for state in AFFECTIVE_STATES
     }
+
+    # Guard against time-of-day vocabulary drift: every shift table must cover
+    # exactly TIMES_OF_DAY, and the zero-shift baseline must be one of them.
+    # (continuous_truth looks up an arbitrary tod in both tables at runtime.)
+    assert REFERENCE_TOD in TIMES_OF_DAY, (REFERENCE_TOD, TIMES_OF_DAY)
+    assert set(time_color_shifts) == set(TIMES_OF_DAY), set(time_color_shifts)
+    assert set(time_nav_shifts) == set(TIMES_OF_DAY), set(time_nav_shifts)
 
     return {
         "base_color": base_color,
@@ -186,7 +200,7 @@ def render_continuous_tendencies(tables: Dict[str, Any]) -> Dict[str, Dict[str, 
         for tod in TIMES_OF_DAY:
             val = continuous_truth(tables, tod, neutral)[field]
             because = (
-                "reference lighting" if tod == _REFERENCE_TOD else f"{tod} lighting shifts the handle's apparent color"
+                "reference lighting" if tod == REFERENCE_TOD else f"{tod} lighting shifts the handle's apparent color"
             )
             rules.append(f"IF time_of_day={tod} THEN {format_color(val)} BECAUSE {because}.")
         rules.append(
@@ -194,7 +208,7 @@ def render_continuous_tendencies(tables: Dict[str, Any]) -> Dict[str, Dict[str, 
             "(same physical handle, one lighting change)."
         )
         out[field] = {
-            "default": format_color(continuous_truth(tables, _REFERENCE_TOD, neutral)[field]),
+            "default": format_color(continuous_truth(tables, REFERENCE_TOD, neutral)[field]),
             "user_tendencies": " ".join(rules),
         }
 
@@ -211,7 +225,7 @@ def render_continuous_tendencies(tables: Dict[str, Any]) -> Dict[str, Dict[str, 
             "table/microwave/sink/fridge offsets (household routine and posture, not the location)."
         )
         out[field] = {
-            "default": format_nav_offset(continuous_truth(tables, _REFERENCE_TOD, neutral)[field]),
+            "default": format_nav_offset(continuous_truth(tables, REFERENCE_TOD, neutral)[field]),
             "user_tendencies": " ".join(rules),
         }
 

@@ -20,7 +20,7 @@ except ModuleNotFoundError as e:
     ROSPY_IMPORTED = False
 
 from feeding_deployment.control.robot_controller.arm_interface import ArmInterface, ArmManager, NUC_HOSTNAME, ARM_RPC_PORT, RPC_AUTHKEY
-from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand
+from feeding_deployment.control.robot_controller.command_interface import KinovaCommand, JointTrajectoryCommand, JointCommand, CartesianCommand, OpenGripperCommand, CloseGripperCommand, GRIPPER_CLOSE_OPEN_AMOUNT, open_amount_to_gripper_pos
 # from feeding_deployment.safety.watchdog import WATCHDOG_MONITOR_FREQUENCY, PeekableQueue
 
 
@@ -49,4 +49,5 @@ if __name__ == "__main__":
 
     # This will now use the single, shared instance of ArmInterface
     arm_interface = manager.ArmInterface()
-    arm_interface.close_gripper()
+    # Close all the way, matching the deployment's GRIPPER_CLOSE_OPEN_AMOUNT.
+    arm_interface.set_gripper(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT))

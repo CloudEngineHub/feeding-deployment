@@ -14,6 +14,36 @@ SETTINGS = [
     # "Working on laptop with laptop on Right",
 ]
 
+# The settings that count as a "social" meal for navigation. We match these three
+# exact strings (not a "Social" prefix/substring) so that any future setting that
+# merely begins with "Social" is never silently treated as social.
+SOCIAL_SETTINGS = (
+    "Social with person on Left",
+    "Social with person in Front",
+    "Social with person on Right",
+)
+assert all(s in SETTINGS for s in SOCIAL_SETTINGS), \
+    "SOCIAL_SETTINGS out of sync with SETTINGS"
+
+
+def active_table_for_setting(setting: Optional[str]) -> str:
+    """The physical table the robot drives to for a given mealtime setting.
+
+    Social settings use the dining table; everything else (Personal, Watching TV,
+    and any unknown/None setting) uses the movable table.
+    """
+    return "dining_table" if setting in SOCIAL_SETTINGS else "movable_table"
+
+
+def inactive_table_for_setting(setting: Optional[str]) -> str:
+    """The physical table NOT used for a given setting (the counterpart of
+    active_table_for_setting)."""
+    return (
+        "movable_table"
+        if active_table_for_setting(setting) == "dining_table"
+        else "dining_table"
+    )
+
 TIMES_OF_DAY = [
     "morning", 
     "afternoon", 
@@ -31,6 +61,13 @@ class MealContents:
 
 
 MEAL_CONTENTS: List[MealContents] = [
+    MealContents(
+        label="chicken kebabs",
+        dippable_items=["chicken kebabs"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
     MealContents(
         label="chicken nuggets",
         dippable_items=["chicken nuggets"],
