@@ -51,8 +51,8 @@ class FoodManipulationSkillLibrary:
             # self.plate_height = 0.185
             # self.plate_height = 0.197 # green table
             # self.plate_height = 0.221
-            # self.plate_height = 0.215 # movable table
-            self.plate_height = 0.225 # dining table (used in social meals)
+            self.plate_height = 0.215 # movable table
+            # self.plate_height = 0.225 # dining table (used in social meals)
         else:
             raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 
@@ -246,7 +246,7 @@ class FoodManipulationSkillLibrary:
         food_base = base_to_camera_transform @ food_base
         print("Food height detected: ", food_base[2,3])
         print("Plate height: ", self.plate_height)
-        food_base[2,3] = self.plate_height + 0.08 - dipping_depth
+        food_base[2,3] = self.plate_height + 0.06 - dipping_depth
         print("Food height after plate update: ", food_base[2,3])
         # food_base[2,3] = max(food_base[2,3] - dipping_depth, self.plate_height) 
         # magic number for skewering offset
@@ -272,20 +272,20 @@ class FoodManipulationSkillLibrary:
         waypoint_1_tip = np.copy(food_base)
         waypoint_1_tip[2,3] -= 0.07
         waypoint_1_tip[2,3] += 0.13
-        waypoint_1_tip[0,3] += 0.11
+        waypoint_1_tip[0,3] += 0.15
         self.move_utensil_to_pose(waypoint_1_tip, self.cached_reset_tip_to_wrist)
 
         # Action 2: Dip
         waypoint_2_tip = np.copy(food_base)
         waypoint_2_tip[2,3] -= 0.07
-        waypoint_2_tip[0,3] += 0.11
+        waypoint_2_tip[0,3] += 0.15
         self.move_utensil_to_pose(waypoint_2_tip, self.cached_reset_tip_to_wrist)
 
         # Action 3: Move above food
         waypoint_3_tip = np.copy(food_base)
         waypoint_3_tip[2,3] -= 0.07
         waypoint_3_tip[2,3] += 0.13
-        waypoint_3_tip[0,3] += 0.11
+        waypoint_3_tip[0,3] += 0.15
         self.move_utensil_to_pose(waypoint_3_tip, self.cached_reset_tip_to_wrist)
 
         # Action 4: Set scooping state
