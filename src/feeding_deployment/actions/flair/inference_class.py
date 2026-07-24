@@ -614,8 +614,8 @@ class BiteAcquisitionInference:
                     replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
                     food_classes_being_detected.append("chicken nugget piece")
                 elif "chicken kebab" in self.FOOD_CLASSES[i]:
-                    replacement_dict[self.FOOD_CLASSES[i]] = "chicken kebab piece"
-                    food_classes_being_detected.append("chicken kebab piece")
+                    replacement_dict[self.FOOD_CLASSES[i]] = "cubed chicken piece"
+                    food_classes_being_detected.append("cubed chicken piece")
                 elif "orange chicken" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "glazed fried chicken piece"
                     food_classes_being_detected.append("glazed fried chicken piece")

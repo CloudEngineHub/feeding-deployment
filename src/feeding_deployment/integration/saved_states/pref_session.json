@@ -2,17 +2,17 @@
   "bundle": {
     "bite_dipping_preference": "do not dip",
     "bite_ordering": "no particular order",
-    "confirm_feeding_pickup": "countdown (15 sec)",
+    "confirm_feeding_pickup": "skip",
     "confirm_manipulation": "countdown (15 sec)",
-    "confirm_navigation_arrival": "countdown (15 sec)",
+    "confirm_navigation_arrival": "skip",
     "convey_robot_ready_for_completing_transfer": "LED",
     "convey_robot_ready_for_initiating_transfer": "LED",
-    "detect_user_completed_transfer_drinking": "button",
-    "detect_user_completed_transfer_feeding": "perception",
-    "detect_user_completed_transfer_wiping": "button",
-    "detect_user_ready_for_initiating_transfer_drinking": "button",
-    "detect_user_ready_for_initiating_transfer_feeding": "button",
-    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "detect_user_completed_transfer_drinking": "perception",
+    "detect_user_completed_transfer_feeding": "proceed automatically after a pause",
+    "detect_user_completed_transfer_wiping": "perception",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
+    "detect_user_ready_for_initiating_transfer_wiping": "open mouth",
     "microwave_time": "30 secs",
     "nav_offset_dining_table": {
       "dx": 0.0,
@@ -41,41 +41,51 @@
     },
     "outside_mouth_distance": "near",
     "plate_color_fridge": {
-      "h": 8,
-      "range": 0.15,
-      "s": 175,
-      "v": 168
+      "h": 11,
+      "range": 0.13,
+      "s": 196,
+      "v": 130
     },
     "plate_color_microwave": {
       "h": 11,
       "range": 0.24,
-      "s": 225,
-      "v": 210
+      "s": 210,
+      "v": 215
     },
     "plate_color_table": {
-      "h": 7,
-      "range": 0.18,
-      "s": 146,
-      "v": 155
+      "h": 6,
+      "range": 0.16,
+      "s": 140,
+      "v": 160
     },
-    "retract_between_bites": "yes",
+    "retract_between_bites": "no",
     "robot_speed": "fast",
     "skewering_axis": "perpendicular to major axis",
     "transfer_mode": "outside mouth transfer",
-    "wait_before_autocontinue_bite_selection": "countdown (30 sec)",
-    "wait_before_autocontinue_task_selection": "countdown (30 sec)"
+    "wait_before_autocontinue_bite_selection": "countdown (15 sec)",
+    "wait_before_autocontinue_task_selection": "countdown (15 sec)"
   },
   "context": {
-    "meal": "chicken kebabs",
-    "setting": "Social with person on Right",
-    "time_of_day": "afternoon"
+    "meal": "chicken nuggets",
+    "setting": "Personal",
+    "time_of_day": "evening"
   },
-  "corrected": {},
+  "corrected": {
+    "plate_color_fridge": {
+      "h": 11,
+      "range": 0.13,
+      "s": 196,
+      "v": 130
+    }
+  },
   "finalized": [
     "confirm_manipulation",
     "confirm_navigation_arrival",
     "microwave_time",
+    "nav_offset_microwave",
+    "nav_offset_movable_table",
     "plate_color_fridge",
+    "plate_color_microwave",
     "robot_speed"
   ]
 }

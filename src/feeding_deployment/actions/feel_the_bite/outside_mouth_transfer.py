@@ -65,7 +65,7 @@ class OutsideMouthTransfer(Transfer):
         forque_target_base[:3, :3] = Rotation.from_quat([0.523, -0.503, -0.469, 0.503]).as_matrix()
         
         servo_point_forque_target = np.identity(4)
-        servo_point_forque_target[:3,3] = np.array([0, -0.04, -outside_mouth_distance]).reshape(1,3)
+        servo_point_forque_target[:3,3] = np.array([0, -0.01, -outside_mouth_distance]).reshape(1,3) # +y is up in the real world
         infront_mouth_target = forque_target_base @ servo_point_forque_target
 
         # # mouth is assumed to be facing away from the wheelchair
