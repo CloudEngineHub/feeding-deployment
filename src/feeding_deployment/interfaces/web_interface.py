@@ -589,7 +589,7 @@ class WebInterface:
         self._send_image(manual_image)
         time.sleep(0.2)
 
-    def get_next_bite_selection(self, plate_image, n_solid_food_types, bite_data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout, no_detections: bool = False, manual_image=None) -> None:
+    def get_next_bite_selection(self, plate_image, n_solid_food_types, bite_data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout, no_detections: bool = False, manual_image=None, dip_boxes=None) -> None:
         """plate_image is what the page shows for bite selection (the plate crop,
         which the detection boxes are drawn against). manual_image is the frame
         the manual skill pages let the user tap a point on -- the whole camera
@@ -598,7 +598,12 @@ class WebInterface:
         rotated the same way and the ratios the page returns map 1:1 onto that
         image's pixels; the caller scales them against whichever image it sent
         here. When manual_image is None the page falls back to showing the plate
-        image for manual selection."""
+        image for manual selection.
+
+        dip_boxes maps each detected dip label to its [x, y, w, h] boxes in
+        whole-frame pixels, so the page can show a thumbnail of the dip beside its
+        name (it crops them out of manual_image). Omit it and the dip options stay
+        text-only."""
 
         self.current_page = "meal_assistance"
 
@@ -667,7 +672,8 @@ class WebInterface:
         time.sleep(0.2)
         self._send_message({"n_food_types": n_solid_food_types, "data": bite_data, "current_bite": predicted_bite})
         time.sleep(0.2)
-        self._send_message({"n_ordering": n_dip_food_types, "data": dip_data})
+        self._send_message({"n_ordering": n_dip_food_types, "data": dip_data,
+                            "dip_boxes": dip_boxes if dip_boxes else {}})
         # set autocontinue timeout
         time.sleep(0.2)
         self._send_message({"state": "auto_time", "status": str(autocontinue_timeout)})

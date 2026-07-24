@@ -373,8 +373,18 @@ class AcquireBiteHLA(HighLevelAction):
                             dip_data.extend([k for k in dip_food_type_to_data.keys() if k != next_dip_item])
                     n_dip_food_types = len(dip_data)
 
+                    # Thumbnails for the dip options on the bite selection page.
+                    # Full-frame boxes (not the plate-relative ones the solid
+                    # bites use): a dip can sit next to the plate rather than on
+                    # it, so the page crops these out of the whole-frame image it
+                    # already has for manual selection.
+                    dip_boxes = {
+                        label: items_detection['food_type_to_bounding_boxes'][label]
+                        for label in dip_food_type_to_data
+                    }
+
                     if self.web_interface is not None:
-                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds, manual_image=camera_color_data)
+                        skill_type, skill_params, dip_type = self.web_interface.get_next_bite_selection(items_detection['plate_image'], n_food_types, data, predicted_bite, n_dip_food_types, dip_data, autocontinue_timeout=bite_selection_autocontinue_seconds, manual_image=camera_color_data, dip_boxes=dip_boxes)
                     else:
                         # params must be set to the autonomously selected values
                         skill_type = "autonomous"

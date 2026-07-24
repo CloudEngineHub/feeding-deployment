@@ -144,7 +144,13 @@
                 :class="{ sel: selectedOption === index + 1 }"
                 @click="selectOption(index + 1)"
               >
-                <span>{{ option }}</span>
+                <div class="dip-opt-main">
+                  <!-- Thumbnail of the detected dip, cropped from the whole-frame
+                       image (the dip can sit off the plate). Absent for "No dip"
+                       and whenever the backend sent no dip boxes. -->
+                  <img v-if="dipImages[option]" :src="dipImages[option]" class="dip-img" :alt="option" />
+                  <span>{{ option }}</span>
+                </div>
                 <div class="och" style="width:16px;height:16px;font-size:9px" v-if="selectedOption === index + 1">✓</div>
               </div>
             </div>
@@ -204,6 +210,10 @@ export default {
       // image arrives right after a "manual_image" status.
       manualImageSrc: '',
       expectManualImage: false,
+      // Dip label -> [x, y, w, h] boxes in whole-frame pixels (from the backend),
+      // and label -> cropped thumbnail data URL rendered beside the dip name.
+      dipBoxes: {},
+      dipImages: {},
       showModal: false,
       currentStep: 1,
       markerVisible: false,
@@ -555,6 +565,31 @@ export default {
       } catch (error) {
       }
     },
+    async refreshDipImages() {
+      // Crop each detected dip out of the whole-frame image for its option row.
+      // Called both when the dip payload arrives and when the manual frame does,
+      // since either can land first; without that frame there is nothing correct
+      // to crop from (the boxes are whole-frame, not plate-relative), so the
+      // options stay text-only.
+      if (!this.manualImageSrc) {
+        return;
+      }
+      const images = {};
+      for (const [label, boxes] of Object.entries(this.dipBoxes || {})) {
+        const box = Array.isArray(boxes) ? boxes[0] : null;
+        if (!Array.isArray(box) || box.length < 4) {
+          continue;
+        }
+        // Bigger than the bite thumbnail (cropImage defaults to 100) so the dip
+        // reads clearly in the space under "Choose your dip".
+        images[label] = await this.cropImage(
+          this.manualImageSrc,
+          { left: box[0], top: box[1], width: box[2], height: box[3] },
+          200, 200
+        );
+      }
+      this.dipImages = images;
+    },
     calculateBoxRatios(box, imageWidth, imageHeight) {
       box.Pwidth = imageWidth;
       box.Pheight = imageHeight;
@@ -869,6 +904,8 @@ export default {
                 // scaled against, nor re-run the bite data parsing.
                 this.manualImageSrc = base64Image;
                 this.expectManualImage = false;
+                // Dip payload may have arrived before this frame did.
+                this.refreshDipImages();
                 return;
               }
 
@@ -927,6 +964,8 @@ export default {
         if (data && data.n_ordering) {
           const updatedOptionTexts = data.data.map((option) => `${option}`);
           this.optionTexts = [...updatedOptionTexts];
+          this.dipBoxes = data.dip_boxes || {};
+          this.refreshDipImages();
         }
       });
     },
@@ -1269,6 +1308,24 @@ export default {
 .dip-opt.sel {
   border-color: var(--a);
   background: rgba(240, 165, 0, .08);
+}
+
+/* Name + thumbnail sit together on the left of each option row; the ✓ stays right. */
+.dip-opt-main {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  min-width: 0;
+}
+
+/* Deliberately larger than the bite thumbnail (.bc-img, 6vh) -- there is room
+   under "Choose your dip" and the dip is harder to recognize than a bite. */
+.dip-img {
+  width: 9vh;
+  height: 9vh;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .skill-fallback {
