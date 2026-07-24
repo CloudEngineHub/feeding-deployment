@@ -285,7 +285,7 @@ class PreferenceSession:
         days it is the last corrected/confirmed value (the tree persists across
         days). Falls back to DEFAULT_COLOR if the YAML/param is missing.
         """
-        location = field.rsplit("_", 1)[-1]  # plate_color_fridge -> fridge
+        location = field[len("plate_color_"):]  # plate_color_dining_table -> dining_table
         fpath = self._bt_dir / _pickup_yaml_name(location)
         if not fpath.exists():
             return dict(DEFAULT_COLOR)
@@ -304,7 +304,7 @@ class PreferenceSession:
 
     def _write_color_to_bt(self, field: str, color: Dict[str, Any]) -> None:
         """Write a canonical color into its pickup BT YAML (PlateHandleColor/PlateHandleColorTolerance)."""
-        location = field.rsplit("_", 1)[-1]
+        location = field[len("plate_color_"):]
         fpath = self._bt_dir / _pickup_yaml_name(location)
         if not fpath.exists():
             return
@@ -316,12 +316,25 @@ class PreferenceSession:
         if changed:
             _save_yaml(fpath, data)
 
+    def _skip_color_field(self) -> Optional[str]:
+        """The plate-color field for the physical table NOT used this meal.
+
+        Mirrors _skip_nav_offset_field: the dining table (social) and movable
+        table (everything else) are mutually exclusive per meal, so the unused
+        table's color is "not observed" -- its saved color is never rewritten and
+        it is excluded from the meal record, rather than being recorded as a
+        confirmation of a color that was never actually seen."""
+        setting = self.context.get("setting")
+        return COLOR_FIELD_BY_LOCATION.get(inactive_table_for_setting(setting))
+
     def _write_open_colors_to_bt(self) -> None:
         """Push current predictions for still-open color dims into their BT YAML
         so the next pickup uses the latest prediction. Finalized colors are left
-        as-is (they already hold the user's ground truth)."""
+        as-is (they already hold the user's ground truth); the unused table's
+        color is never touched (see _skip_color_field)."""
+        skip = self._skip_color_field()
         for field in COLOR_FIELDS:
-            if field in self.finalized:
+            if field in self.finalized or field == skip:
                 continue
             color = self.bundle.get(field)
             if isinstance(color, dict):
@@ -549,8 +562,9 @@ class PreferenceSession:
                         continue
                     if field in pred:
                         self.bundle[field] = pred[field]
+                skip_color = self._skip_color_field()
                 for field in COLOR_FIELDS:
-                    if field in self.finalized or field in stale:
+                    if field in self.finalized or field in stale or field == skip_color:
                         continue
                     color = self.bundle.get(field)
                     if isinstance(color, dict):
@@ -992,17 +1006,18 @@ class PreferenceSession:
         # never-asked open dims -- settle the background worker first.
         self.wait_for_reprediction()
         # The physical table NOT used this meal is "not observed": don't confirm
-        # it and exclude it from the record, so the learner sees no entry for it
-        # this day (not a fake zero) and its saved offset stays untouched.
-        skip_nav = self._skip_nav_offset_field()
+        # its dims and exclude them from the record, so the learner sees no entry
+        # for that table this day (rather than a fake confirmation of a pose/color
+        # it never saw) and its saved values stay untouched.
+        skipped = {self._skip_nav_offset_field(), self._skip_color_field()} - {None}
         for field in PREF_FIELDS:
-            if field == skip_nav:
+            if field in skipped:
                 continue
             if field not in self.finalized and field in self.bundle:
                 self._finalize(field, self.bundle[field], changed=False)
 
         with self._lock:
-            ground_truth = {k: v for k, v in self.bundle.items() if k != skip_nav}
+            ground_truth = {k: v for k, v in self.bundle.items() if k not in skipped}
         self._model.update(
             day=day,
             context=self.context,

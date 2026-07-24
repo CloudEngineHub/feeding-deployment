@@ -60,7 +60,11 @@ CATEGORICAL = [
     "wait_before_autocontinue_task_selection",
 ]
 TEXT = ["bite_ordering"]
-COLOR = ["plate_color_fridge", "plate_color_microwave", "plate_color_table"]
+# plate_color_table is retained for pre-split historical logs (see NAV below);
+# new days use the two per-table fields.
+COLOR = ["plate_color_fridge", "plate_color_microwave",
+         "plate_color_dining_table", "plate_color_movable_table",
+         "plate_color_table"]
 # nav_offset_table is retained for pre-split (days before the dining/movable split)
 # historical logs; new days use the two per-table fields.
 NAV = ["nav_offset_dining_table", "nav_offset_movable_table", "nav_offset_table",

@@ -146,13 +146,13 @@ class TestPerDimPrediction:
                 value = OPTIONS_BY_FIELD[field][-1]
             return _fake_response({"explanation": "test", "value": value})
 
-        corrected = {"robot_speed": "slow", "plate_color_table": "h=90,s=200,v=150,range=0.10"}
+        corrected = {"robot_speed": "slow", "plate_color_dining_table": "h=90,s=200,v=150,range=0.10"}
         with patch.object(pm, "_create_prediction_message", side_effect=fake_create):
             pred = pm.predict_bundle(context=CONTEXT, corrected=corrected)
 
         assert sorted(called) == sorted(f for f in PREF_FIELDS if f not in corrected)
         assert pred["robot_speed"] == "slow"  # pinned verbatim
-        assert pred["plate_color_table"] == parse_color("h=90,s=200,v=150,range=0.10")  # string pin canonicalized
+        assert pred["plate_color_dining_table"] == parse_color("h=90,s=200,v=150,range=0.10")  # string pin canonicalized
         assert pred["bite_ordering"] == "chicken first"
         assert pm.last_latent_inference == ""
         assert pm.last_explanations["microwave_time"] == "test"

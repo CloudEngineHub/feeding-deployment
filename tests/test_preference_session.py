@@ -127,7 +127,8 @@ _FIXTURE_YAMLS = [
     "open_microwave.yaml",
     "pick_plate_from_fridge.yaml",
     "pick_plate_from_microwave.yaml",
-    "pick_plate_from_table.yaml",
+    "pick_plate_from_dining_table.yaml",
+    "pick_plate_from_movable_table.yaml",
     "place_plate_in_microwave.yaml",
     "place_plate_in_sink.yaml",
     "place_plate_on_table.yaml",
@@ -276,14 +277,15 @@ def test_finalize_meal_one_update_with_full_bundle(bt_dir):
     assert len(model.update_calls) == 1
     call = model.update_calls[0]
     assert call["day"] == 7
-    # The unused table is "not observed": for a Personal meal the robot drives to
-    # the movable table, so the dining table is excluded from the record and left
-    # unfinalized. Every OTHER dim is present and finalized (unasked dims confirmed).
-    skipped = {"nav_offset_dining_table"}  # CTX setting is "Personal" -> movable table
+    # The unused table is "not observed": for a Personal meal the robot uses the
+    # movable table, so BOTH dining-table dims (parking offset and plate color) are
+    # excluded from the record and left unfinalized. Every OTHER dim is present and
+    # finalized (unasked dims confirmed at their prediction).
+    skipped = {"nav_offset_dining_table", "plate_color_dining_table"}  # CTX is "Personal"
     assert set(call["gt"].keys()) >= set(PREF_FIELDS) - skipped
-    assert "nav_offset_dining_table" not in call["gt"]
+    assert not (skipped & set(call["gt"]))
     assert all(f in s.finalized for f in PREF_FIELDS if f not in skipped)
-    assert "nav_offset_dining_table" not in s.finalized
+    assert not (skipped & s.finalized)
 
 
 def test_pinned_split_orders_by_ask_order(bt_dir):
@@ -728,10 +730,13 @@ def test_confirmation_dims_shape_and_staging():
     assert "wait_before_autocontinue_mealprep" not in PREF_FIELDS
     assert "wait_before_autocontinue_feeding_pickup" not in PREF_FIELDS
     assert "web_interface_confirmation" not in PREF_FIELDS
-    # nav_offset_table was split into nav_offset_dining_table + nav_offset_movable_table (+1).
+    # The table split turned nav_offset_table and plate_color_table into per-table
+    # pairs (dining/movable), so the bundle grew by two dims overall.
     assert "nav_offset_table" not in PREF_FIELDS
-    assert {"nav_offset_dining_table", "nav_offset_movable_table"} <= set(PREF_FIELDS)
-    assert len(PREF_FIELDS) == 29
+    assert "plate_color_table" not in PREF_FIELDS
+    assert {"nav_offset_dining_table", "nav_offset_movable_table",
+            "plate_color_dining_table", "plate_color_movable_table"} <= set(PREF_FIELDS)
+    assert len(PREF_FIELDS) == 30
     for f in ("confirm_feeding_pickup", "confirm_navigation_arrival", "confirm_manipulation"):
         assert PREF_OPTIONS[f] == [
             "skip", "countdown (15 sec)", "countdown (30 sec)",
@@ -747,7 +752,7 @@ def test_should_wait_only_when_a_consumed_dim_is_open(bt_dir):
 
     # Fresh session, nothing finalized: a pickup reads its (open) plate color, and
     # a feeding skill reads open categoricals -> both would wait.
-    assert s.should_wait_for_reprediction("pick_plate_from_table") is True
+    assert s.should_wait_for_reprediction("pick_plate_from_dining_table") is True
     assert s.should_wait_for_reprediction("acquire_bite") is True
 
     # Finalize exactly what acquire_bite consumes (as the pre-feeding ask does).
@@ -756,10 +761,10 @@ def test_should_wait_only_when_a_consumed_dim_is_open(bt_dir):
 
     # acquire_bite now reads only finalized dims -> no wait, even though the plate
     # color is still open (a reprediction of it can't touch a feeding YAML).
-    assert "plate_color_table" not in s.finalized
+    assert "plate_color_dining_table" not in s.finalized
     assert s.should_wait_for_reprediction("acquire_bite") is False
     # ...while the pickup, whose color is still open, still waits.
-    assert s.should_wait_for_reprediction("pick_plate_from_table") is True
+    assert s.should_wait_for_reprediction("pick_plate_from_dining_table") is True
 
 
 def test_should_wait_scopes_per_physical_table(bt_dir):

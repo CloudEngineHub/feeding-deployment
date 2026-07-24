@@ -172,33 +172,43 @@ PREFERENCE_BUNDLE: List[PreferenceDim] = [
     ),
     # --- Color dimensions (kind="color") -------------------------------------
     # The robot picks up the plate by detecting a colored handle. The detection
-    # color is an HSV value (+ a tolerance range). These three dims are the
-    # SAME physical plate handle seen at three pickup locations under different
-    # lighting/backgrounds (fridge, microwave, table), so a correction at one
-    # location is strong evidence for the others. Values are continuous HSV, not
-    # a fixed option-list: predictions are seeded from the user's current saved
-    # color in the dynamic behavior tree (factory default on day 1) and the user
-    # corrects them with the on-screen color picker during pickup.
+    # color is an HSV value (+ a tolerance range). These four dims are the
+    # SAME physical plate handle seen at four pickup locations under different
+    # lighting/backgrounds (fridge, microwave, and the two physical tables), so a
+    # correction at one location is strong evidence for the others. Values are
+    # continuous HSV, not a fixed option-list: predictions are seeded from the
+    # user's current saved color in the dynamic behavior tree (factory default on
+    # day 1) and the user corrects them with the on-screen color picker during
+    # pickup. The dining table (social settings) and movable table (everything
+    # else) are separate physical places with different lighting, so each keeps
+    # its own color; only one of the two is used in any given meal.
     PreferenceDim(
         field="plate_color_fridge",
         label="Plate handle color (fridge pickup)",
         options=[],
         kind="color",
-        description="HSV color of the plate handle used for attachment detection when picking the plate up from inside the fridge. This is the same physical plate handle as plate_color_microwave and plate_color_table, but the fridge interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+        description="HSV color of the plate handle used for attachment detection when picking the plate up from inside the fridge. This is the same physical plate handle as plate_color_microwave, plate_color_dining_table and plate_color_movable_table, but the fridge interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
     ),
     PreferenceDim(
         field="plate_color_microwave",
         label="Plate handle color (microwave pickup)",
         options=[],
         kind="color",
-        description="HSV color of the plate handle used for attachment detection when picking the plate up from inside the microwave. This is the same physical plate handle as plate_color_fridge and plate_color_table, but microwave interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+        description="HSV color of the plate handle used for attachment detection when picking the plate up from inside the microwave. This is the same physical plate handle as plate_color_fridge, plate_color_dining_table and plate_color_movable_table, but microwave interior lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
     ),
     PreferenceDim(
-        field="plate_color_table",
-        label="Plate handle color (table pickup)",
+        field="plate_color_dining_table",
+        label="Plate handle color (dining table pickup)",
         options=[],
         kind="color",
-        description="HSV color of the plate handle used for attachment detection when picking the plate up from the table. This is the same physical plate handle as plate_color_fridge and plate_color_microwave, but table lighting may shift its apparent color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+        description="HSV color of the plate handle used for attachment detection when picking the plate up from the DINING table (used in social meals). This is the same physical plate handle as plate_color_fridge, plate_color_microwave and plate_color_movable_table, but the dining table's lighting may shift its apparent color. The dining table and movable table are separate physical places, so each has its own color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
+    ),
+    PreferenceDim(
+        field="plate_color_movable_table",
+        label="Plate handle color (movable table pickup)",
+        options=[],
+        kind="color",
+        description="HSV color of the plate handle used for attachment detection when picking the plate up from the MOVABLE table (used in non-social meals -- personal or watching TV). This is the same physical plate handle as plate_color_fridge, plate_color_microwave and plate_color_dining_table, but the movable table's lighting may shift its apparent color. The dining table and movable table are separate physical places, so each has its own color. Predict the handle's HSV color and a tolerance range; the provided seed is the currently saved value from previous meals -- a reasonable default, to be weighed against this meal's corrections and similar prior meals rather than kept unconditionally."
     ),
     # --- Navigation-offset dimensions (kind="nav_offset") --------------------
     # Offsets arise between the mapped named locations and where the robot
@@ -281,10 +291,13 @@ DEFAULT_BITE_ORDERING: str = "no particular order"
 DEFAULT_COLOR: dict = {"h": 12, "s": 223, "v": 169, "range": 0.1}
 
 # pickup location <-> color field (location names match HLA/perception usage).
+# The table is split into two physical locations selected by context: the dining
+# table (social meals) and the movable table (everything else).
 COLOR_FIELD_BY_LOCATION: dict = {
     "fridge": "plate_color_fridge",
     "microwave": "plate_color_microwave",
-    "table": "plate_color_table",
+    "dining_table": "plate_color_dining_table",
+    "movable_table": "plate_color_movable_table",
 }
 
 

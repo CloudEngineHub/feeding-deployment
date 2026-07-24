@@ -143,6 +143,11 @@ class AcquireBiteHLA(HighLevelAction):
         self.food_detection_log_dir = self.log_dir / "food_detection_log"
         self.food_detection_log_dir.mkdir(exist_ok=True)
 
+    def set_context_provider(self, provider) -> None:
+        """Forward the current-preference-context accessor to the skill library,
+        which uses the mealtime setting to pick the active table's plate height."""
+        self.food_manipulation_skill_library.set_context_provider(provider)
+
     def get_name(self) -> str:
         return "AcquireBiteWithTool"
 

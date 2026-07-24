@@ -156,7 +156,7 @@ class TestApplyBundleToBehaviorTrees:
     # countdown=N) written by each confirm_* dim.
     _MANIPULATION_CONFIRM_YAMLS = [
         "pick_plate_from_fridge.yaml", "pick_plate_from_microwave.yaml",
-        "pick_plate_from_table.yaml", "place_plate_in_microwave.yaml",
+        "pick_plate_from_dining_table.yaml", "place_plate_in_microwave.yaml",
         "place_plate_on_table.yaml", "place_plate_in_sink.yaml",
         "press_microwave_button.yaml", "gaze_at_table.yaml",
         "open_fridge.yaml", "open_microwave.yaml",
@@ -585,8 +585,8 @@ class TestConsumedFieldsByBt:
         } <= bt_consumed_pref_fields("transfer_utensil")
 
     def test_pickup_consumes_own_color_only(self):
-        got = bt_consumed_pref_fields("pick_plate_from_table")
-        assert {"plate_color_table", "confirm_manipulation", "robot_speed"} <= got
+        got = bt_consumed_pref_fields("pick_plate_from_dining_table")
+        assert {"plate_color_dining_table", "confirm_manipulation", "robot_speed"} <= got
         assert "plate_color_fridge" not in got
         assert not any(f.startswith("nav_offset_") for f in got)
 

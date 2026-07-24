@@ -85,7 +85,10 @@ def sample_continuous_tables(rng: random.Random) -> Dict[str, Any]:
         "range": rng.choice((0.05, 0.10, 0.15)),
     }
     location_color_offsets = {
-        "table": dict(_ZERO_COLOR_SHIFT),  # reference location
+        "movable_table": dict(_ZERO_COLOR_SHIFT),  # reference location
+        # The dining table sits elsewhere, so its lighting differs slightly from
+        # the movable table (the reference).
+        "dining_table": {"dh": rng.randint(-4, 4), "ds": 0, "dv": rng.randint(-20, 20)},
         "fridge": {"dh": rng.randint(-3, 3), "ds": 0, "dv": rng.randint(-50, -30)},
         "microwave": {"dh": rng.randint(4, 8), "ds": 0, "dv": rng.randint(-10, 10)},
     }
