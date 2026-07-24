@@ -40,6 +40,11 @@ from pybullet_helpers.geometry import Pose
 # i.e. 42-46 mm above it). Re-measure if the bowl or the plate changes.
 BOWL_RIM_ABOVE_PLATE_MM = 43.0
 
+# How far a measured dip depth may sit from the plate-derived expectation before it
+# is treated as a bad reading and the geometric value is used instead. See the
+# rationale at the check itself in dipping_skill.
+DIP_DEPTH_FALLBACK_TOLERANCE_MM = 10.0
+
 
 def plate_surface_depth_mm(depth_image, plate_bounds):
     """Median valid depth (mm) over the middle of the detected plate, or None.
@@ -287,12 +292,26 @@ class FoodManipulationSkillLibrary:
         else:
             fallback_str = f"{fallback_depth_mm:.1f} mm (plate {plate_depth_mm:.1f} - bowl {BOWL_RIM_ABOVE_PLATE_MM:.0f})"
 
-        if not validity and fallback_depth_mm is not None:
+        # A reading is only trusted when it AGREES with the geometry, not merely
+        # when it exists. On blown-out white sauce the stereo match often settles
+        # on a background-like disparity and reports the table depth from pixels
+        # well inside the bowl -- a plausible-looking value ~43 mm too far, which
+        # at a dip point far off the optical axis is ~20 mm of lateral error and
+        # nothing else would catch it. Measured on the Jul 24 frames: real sauce
+        # readings sit ~2 mm from this fallback (17.5 mm worst case) while the
+        # table-valued ones are >=34 mm away, so the tolerance separates them with
+        # room to spare. Widening it is safe up to ~25 mm if the sauce level drops
+        # over a meal and correct readings start getting rejected.
+        deviation_mm = None if (not validity or fallback_depth_mm is None) else abs(measured_depth_mm - fallback_depth_mm)
+        if fallback_depth_mm is not None and (not validity or deviation_mm > DIP_DEPTH_FALLBACK_TOLERANCE_MM):
+            reason = ("no measurement" if not validity
+                      else f"measured off by {deviation_mm:.1f} mm > {DIP_DEPTH_FALLBACK_TOLERANCE_MM:.0f} mm")
             validity, point = pixel2World(camera_info, center_x, center_y, depth_image,
                                           depth=fallback_depth_mm)
-            using = "FALLBACK (plate depth - bowl height)" if validity else "NEITHER (fallback implausible)"
+            using = f"FALLBACK ({reason})" if validity else "NEITHER (fallback implausible)"
         elif validity:
-            using = "measured patch"
+            using = ("measured patch" if fallback_depth_mm is not None
+                     else "measured patch (no plate depth to cross-check against)")
         else:
             using = "NEITHER (no measurement, no plate depth)"
 
