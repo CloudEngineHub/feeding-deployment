@@ -17,11 +17,15 @@ from pybullet_helpers.geometry import Pose
 from pybullet_helpers.link import get_relative_link_pose
 
 from feeding_deployment.actions.base import tool_type, table_type, plate_type, appliance_type
+from feeding_deployment.actions.acquisition import AcquireBiteHLA
+from feeding_deployment.actions.flair.flair import FLAIR
 from feeding_deployment.actions.pick_tool import PickToolHLA
 from feeding_deployment.actions.pick_plate import PickPlateFromApplianceHLA, PickPlateFromTableHLA
 from feeding_deployment.actions.close_door import CloseDoorHLA
 from feeding_deployment.actions.open_door import OpenDoorHLA
 from feeding_deployment.actions.stow_tool import StowToolHLA
+from feeding_deployment.preference_learning.config.mealtime_context import MEALS, food_items_for_flair
+from feeding_deployment.preference_learning.config.preference_bundle import DEFAULT_BITE_ORDERING
 from feeding_deployment.interfaces.perception_interface import PerceptionInterface
 from feeding_deployment.interfaces.web_interface import WebInterface
 from feeding_deployment.integration.data_logger import DataLogger
@@ -30,6 +34,15 @@ from feeding_deployment.control.robot_controller.arm_client import ArmInterfaceC
 from feeding_deployment.control.wrist_controller.wrist_controller import WristInterface
 from feeding_deployment.simulation.scene_description import create_scene_description_from_config
 from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSimulator
+
+
+# Standalone bite-acquisition test defaults: the strawberries + whipped cream
+# meal exercises skewer-then-dip, and the ordering preference asks for the dip
+# explicitly (with the deployment default, "no particular order", FLAIR's
+# preference planner may return a bare bite and never dip). Pass
+# --bite_ordering to test other orderings, e.g. DEFAULT_BITE_ORDERING.
+DEFAULT_TEST_MEAL = "strawberries with whipped cream"
+DEFAULT_TEST_BITE_ORDERING = "dip every strawberry in the whipped cream"
 
 
 def _tool_id(sim, tool: str) -> int:
@@ -122,6 +135,49 @@ def test_OpenDoorHLA(location, sim, robot_interface, perception_interface, rviz_
     high_level_action.execute_action(objects=[appliance_obj], params={})
 
 
+def test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, flair, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir):
+
+    high_level_action = AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, flair, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+
+    # AcquireBite runs with the utensil already held (normally after PickUtensil).
+    _attach_tool_to_gripper(sim, "utensil")
+    if robot_interface is not None:
+        rviz_interface.tool_update(True, sim.held_object_name, Pose((0, 0, 0), (0, 0, 0, 1)))
+
+    utensil_obj = Object("utensil", tool_type)
+    table_obj = Object("table", table_type)
+    # Speed / FoodDippingDepth / SkeweringDepth / SkeweringOrientation /
+    # BiteSelectionAutocontinueSeconds / PickupConfirm come from the behavior
+    # tree's parameter defaults.
+    high_level_action.execute_action(objects=[utensil_obj, table_obj], params={})
+
+
+def _make_flair(log_dir: Path, perception_interface, meal: str, bite_ordering: str, allow_dip: bool, use_interface: bool):
+    """Build a FLAIR instance set up the way the preference session sets it up
+    before feeding (food items derived from the meal, bite-ordering preference,
+    dip allowed), so AcquireBite can run standalone without a preference session.
+
+    AcquireBite asserts flair.is_preference_set(); food items + preference are
+    normally pushed by PreferenceSession._apply_food_items / apply_bite_ordering."""
+    grounded_sam = getattr(perception_interface, "_grounded_sam", None)
+    flair = FLAIR(log_dir, grounded_sam=grounded_sam, history_dir=log_dir)
+
+    food_items = food_items_for_flair(meal)  # raises KeyError if not in the catalog
+    flair.set_food_items(food_items)
+    flair.set_preference(bite_ordering)
+    flair.set_allow_dip(allow_dip)
+    print(f"FLAIR set up for meal {meal!r}: solids={food_items['solid']}, dips={food_items['dip']}")
+    print(f"  bite ordering: {bite_ordering!r}; dipping {'allowed' if allow_dip else 'suppressed'}")
+    if food_items["dip"] and allow_dip and not use_interface:
+        # acquire_bite's no-web-interface branch selects the bite autonomously
+        # with dip_type hardcoded to "No dip", so the dip skill never runs. The
+        # dip only happens via the web app's bite-selection page (it defaults to
+        # the predicted dip and auto-continues after
+        # BiteSelectionAutocontinueSeconds).
+        print("  WARNING: without --use_interface the dip is skipped (skewer only) -- rerun with --use_interface to test dipping")
+    return flair
+
+
 def _seed_handle_opening_poses(log_dir: Path, handle_poses_pkl: str | None) -> None:
     """Copy a handle_opening_pos.pkl into this run's log dir so CloseDoorHLA can
     run without OpenDoor first: perceive_handle_closing_poses does no perception,
@@ -148,7 +204,7 @@ def _seed_handle_opening_poses(log_dir: Path, handle_poses_pkl: str | None) -> N
 
 
 def _main(
-    scene_config: str, transfer_type: str, run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, max_motion_planning_time: float = 10, tool: str = "utensil", no_waits: bool = False, action: str = "tool", location: str = "table", handle_poses_pkl: str = None
+    scene_config: str, transfer_type: str, run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, max_motion_planning_time: float = 10, tool: str = "utensil", no_waits: bool = False, action: str = "tool", location: str = "table", handle_poses_pkl: str = None, meal: str = DEFAULT_TEST_MEAL, bite_ordering: str = DEFAULT_TEST_BITE_ORDERING, no_dip: bool = False
 ) -> None:
     """Testing pick and stow tool actions."""
 
@@ -210,7 +266,15 @@ def _main(
 
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
 
-    if action == "pick_plate":
+    if action == "acquire_bite":
+        # Acquire one bite with the utensil already held: real detection +
+        # FLAIR's next-bite prediction, then skewer (and dip, if the planner
+        # picks one). No preference session runs here, so FLAIR is set up from
+        # --meal / --bite_ordering directly.
+        assert run_on_robot, "acquire_bite needs --run_on_robot (real detection + FLAIR prediction)"
+        flair = _make_flair(log_dir, perception_interface, meal, bite_ordering, allow_dip=not no_dip, use_interface=use_interface)
+        test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, flair, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+    elif action == "pick_plate":
         # Pick the plate from the given location (table / fridge / microwave).
         test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "close_door":
@@ -254,9 +318,12 @@ if __name__ == "__main__":
     parser.add_argument("--max_motion_planning_time", type=float, default=10.0)
     parser.add_argument("--tool", type=str, default="utensil")
     parser.add_argument("--no_waits", action="store_true")
-    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door"])
+    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door", "acquire_bite"])
     parser.add_argument("--location", type=str, default="table", choices=["table", "fridge", "microwave"])
     parser.add_argument("--handle_poses_pkl", type=str, default=None, help="handle_opening_pos.pkl to close from (default: newest under integration/log/*/)")
+    parser.add_argument("--meal", type=str, default=DEFAULT_TEST_MEAL, choices=MEALS, help="acquire_bite: catalog meal whose items FLAIR detects (solids + sauces)")
+    parser.add_argument("--bite_ordering", type=str, default=DEFAULT_TEST_BITE_ORDERING, help=f"acquire_bite: bite-ordering preference given to FLAIR's planner (deployment default is {DEFAULT_BITE_ORDERING!r})")
+    parser.add_argument("--no_dip", action="store_true", help="acquire_bite: suppress dipping (the 'do not dip' preference)")
     args = parser.parse_args()
 
-    _main(args.scene_config, args.transfer_type, args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.max_motion_planning_time, args.tool, args.no_waits, args.action, args.location, args.handle_poses_pkl)
+    _main(args.scene_config, args.transfer_type, args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.max_motion_planning_time, args.tool, args.no_waits, args.action, args.location, args.handle_poses_pkl, args.meal, args.bite_ordering, args.no_dip)
