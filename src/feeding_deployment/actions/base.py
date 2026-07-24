@@ -481,7 +481,7 @@ class HighLevelAction(abc.ABC):
     def ungrasp_tool(self, tool: str) -> None:
         self.sim.ungrasp_object()
         if self.robot_interface is not None:
-            # Release: close to the generic-close amount (not the hard stop) to clear the slot.
+            # Release: close to the generic-close amount to clear the slot.
             self.execute_robot_command(
                 SetGripperCommand(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT)),
                 tool_update=tool,
@@ -497,7 +497,6 @@ class HighLevelAction(abc.ABC):
         if self.robot_interface is None:
             self.sim.robot.close_fingers()
         else:
-            # Compact close (not driven to the hard stop) to avoid stressing the fingers.
             self.execute_robot_command(
                 SetGripperCommand(open_amount_to_gripper_pos(GRIPPER_CLOSE_OPEN_AMOUNT))
             )

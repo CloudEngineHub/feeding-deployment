@@ -9,7 +9,7 @@ from numpy.typing import NDArray
 # so raw gripper position = 1.0 - open_amount (see open_amount_to_gripper_pos).
 GRIPPER_OPEN_AMOUNT = 1.0        # generic open / release into free space
 GRIPPER_GRASP_OPEN_AMOUNT = 0.3  # engage the utensil-mount slot to hold the utensil
-GRIPPER_CLOSE_OPEN_AMOUNT = 0.04  # generic close — compact, not driven to the hard stop
+GRIPPER_CLOSE_OPEN_AMOUNT = 0.0  # generic close — all the way shut
 
 # Per-tool grasp openness. grasp_tool holds a tool by opening INTO its mount slot;
 # tools not listed here keep the full-open grasp (current behavior).
