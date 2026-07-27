@@ -103,7 +103,7 @@ class FoodManipulationSkillLibrary:
             # The two physical tables differ in height, so the value used is chosen
             # per meal from the mealtime setting -- see _active_plate_height().
             # self.plate_height is the fallback when no context is available.
-            self.plate_height = self._PLATE_HEIGHT_BY_TABLE["movable_table"]
+            self.plate_height = self._PLATE_HEIGHT_BY_TABLE["dining_table"]
         else:
             raise NotImplementedError("Scene label not recognized; plate height required for bite acquisition")
 

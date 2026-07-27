@@ -62,6 +62,13 @@ class MealContents:
 
 MEAL_CONTENTS: List[MealContents] = [
     MealContents(
+        label="chicken nuggets and ketchup",
+        dippable_items=["chicken nuggets"],
+        sauces=["ketchup"],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
         label="sausage and hash brown",
         dippable_items=["sausage", "hash brown"],
         sauces=[],
@@ -71,13 +78,6 @@ MEAL_CONTENTS: List[MealContents] = [
     MealContents(
         label="chicken kebabs",
         dippable_items=["chicken kebabs"],
-        sauces=[],
-        storage_condition="refrigerated_leftover",
-        intended_serving_temp="hot",
-    ),
-    MealContents(
-        label="chicken nuggets",
-        dippable_items=["chicken nuggets"],
         sauces=[],
         storage_condition="refrigerated_leftover",
         intended_serving_temp="hot",
@@ -99,6 +99,13 @@ MEAL_CONTENTS: List[MealContents] = [
     MealContents(
         label="beef bites and broccoli",
         dippable_items=["beef bites", "broccoli"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
+        label="chicken nuggets",
+        dippable_items=["chicken nuggets"],
         sauces=[],
         storage_condition="refrigerated_leftover",
         intended_serving_temp="hot",

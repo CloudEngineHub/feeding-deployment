@@ -180,7 +180,7 @@ plate_gaze_pos:
 above_plate_pos: 
   description: "Above plate configuration"
   type: "joint_positions"
-  values: [-3.086733931979142, -1.4848561184180396, -2.4547698000449736, -1.381959563380648, 1.375716714311339, -0.8903863651549875, -3.008976818683771]
+  values: [-2.9162916222140707, -1.2999182228396666, -2.094591377365534, -1.3888449000629386, 0.9010541229544912, -0.586933540010345, -2.801091795572731]
 before_transfer_pos: 
   description: "Ready to transfer configuration, the user's face should be visible from this configuration"
   type: "joint_positions"

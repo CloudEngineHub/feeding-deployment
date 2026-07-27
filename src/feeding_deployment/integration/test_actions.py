@@ -41,9 +41,8 @@ from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSim
 # explicitly (with the deployment default, "no particular order", FLAIR's
 # preference planner may return a bare bite and never dip). Pass
 # --bite_ordering to test other orderings, e.g. DEFAULT_BITE_ORDERING.
-DEFAULT_TEST_MEAL = "strawberries with whipped cream"
-DEFAULT_TEST_BITE_ORDERING = "dip every strawberry in the whipped cream"
-
+DEFAULT_TEST_MEAL = "chicken nuggets and ketchup"
+DEFAULT_TEST_BITE_ORDERING = "dip every chicken nugget in ketchup"
 
 def _tool_id(sim, tool: str) -> int:
     return {"utensil": sim.utensil_id, "drink": sim.drink_id, "wipe": sim.wipe_id}[tool]
