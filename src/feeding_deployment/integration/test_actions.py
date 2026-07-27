@@ -24,6 +24,7 @@ from feeding_deployment.actions.pick_plate import PickPlateFromApplianceHLA, Pic
 from feeding_deployment.actions.close_door import CloseDoorHLA
 from feeding_deployment.actions.open_door import OpenDoorHLA
 from feeding_deployment.actions.stow_tool import StowToolHLA
+from feeding_deployment.actions.transfer_tool import TransferToolHLA
 from feeding_deployment.preference_learning.config.mealtime_context import MEALS, food_items_for_flair
 from feeding_deployment.preference_learning.config.preference_bundle import DEFAULT_BITE_ORDERING
 from feeding_deployment.interfaces.perception_interface import PerceptionInterface
@@ -152,6 +153,27 @@ def test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interfa
     high_level_action.execute_action(objects=[utensil_obj, table_obj], params={})
 
 
+def test_TransferToolHLA(tool, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir):
+
+    assert tool in ["utensil", "drink", "wipe"], f"Tool {tool} not recognized"
+
+    high_level_action = TransferToolHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, None, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+
+    # Transfer runs with the tool held (normally after PickTool + AcquireBite).
+    # Harmless to re-attach when AcquireBite already did it.
+    _attach_tool_to_gripper(sim, tool)
+    if robot_interface is not None:
+        rviz_interface.tool_update(True, sim.held_object_name, Pose((0, 0, 0), (0, 0, 0, 1)))
+
+    tool_obj = Object(tool, tool_type)
+    table_obj = Object("table", table_type)
+    # Speed / the transfer cues and signals / OutsideMouthDistance /
+    # TaskReselectionAutocontinueSeconds / RetractAfterTransfer come from the
+    # behavior tree's parameter defaults. Inside- vs outside-mouth transfer is
+    # the scene description's transfer_type (--transfer_type, default outside).
+    high_level_action.execute_action(objects=[tool_obj, table_obj], params={})
+
+
 def _make_flair(log_dir: Path, perception_interface, meal: str, bite_ordering: str, allow_dip: bool, use_interface: bool):
     """Build a FLAIR instance set up the way the preference session sets it up
     before feeding (food items derived from the meal, bite-ordering preference,
@@ -266,14 +288,23 @@ def _main(
 
     hla_hyperparams = {"max_motion_planning_time": max_motion_planning_time}
 
-    if action == "acquire_bite":
+    if action in ("acquire_bite", "acquire_transfer_bite"):
         # Acquire one bite with the utensil already held: real detection +
         # FLAIR's next-bite prediction, then skewer (and dip, if the planner
         # picks one). No preference session runs here, so FLAIR is set up from
         # --meal / --bite_ordering directly.
-        assert run_on_robot, "acquire_bite needs --run_on_robot (real detection + FLAIR prediction)"
+        assert run_on_robot, f"{action} needs --run_on_robot (real detection + FLAIR prediction)"
         flair = _make_flair(log_dir, perception_interface, meal, bite_ordering, allow_dip=not no_dip, use_interface=use_interface)
         test_AcquireBiteHLA(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, flair, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+        if action == "acquire_transfer_bite":
+            # Straight into the transfer, the way the executive sequences them:
+            # the bite is on the fork and the gripper state carries over.
+            print("Bite acquired -- transferring it now")
+            test_TransferToolHLA("utensil", sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+    elif action == "transfer":
+        # Bring the held tool to the user's mouth. Nothing is acquired first, so
+        # for the utensil put a bite on the fork by hand to test with food.
+        test_TransferToolHLA(tool, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "pick_plate":
         # Pick the plate from the given location (table / fridge / microwave).
         test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
@@ -318,7 +349,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_motion_planning_time", type=float, default=10.0)
     parser.add_argument("--tool", type=str, default="utensil")
     parser.add_argument("--no_waits", action="store_true")
-    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door", "acquire_bite"])
+    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door", "acquire_bite", "transfer", "acquire_transfer_bite"])
     parser.add_argument("--location", type=str, default="table", choices=["table", "fridge", "microwave"])
     parser.add_argument("--handle_poses_pkl", type=str, default=None, help="handle_opening_pos.pkl to close from (default: newest under integration/log/*/)")
     parser.add_argument("--meal", type=str, default=DEFAULT_TEST_MEAL, choices=MEALS, help="acquire_bite: catalog meal whose items FLAIR detects (solids + sauces)")
