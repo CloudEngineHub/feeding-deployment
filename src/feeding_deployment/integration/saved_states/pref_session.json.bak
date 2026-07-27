@@ -8,7 +8,7 @@
     "convey_robot_ready_for_completing_transfer": "LED",
     "convey_robot_ready_for_initiating_transfer": "LED",
     "detect_user_completed_transfer_drinking": "perception",
-    "detect_user_completed_transfer_feeding": "perception",
+    "detect_user_completed_transfer_feeding": "proceed automatically after a pause",
     "detect_user_completed_transfer_wiping": "perception",
     "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
     "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
@@ -39,7 +39,7 @@
       "dy": 0.0,
       "dyaw": 0.0
     },
-    "outside_mouth_distance": "near",
+    "outside_mouth_distance": "medium",
     "plate_color_dining_table": {
       "h": 7,
       "range": 0.18,
@@ -47,10 +47,10 @@
       "v": 155
     },
     "plate_color_fridge": {
-      "h": 10,
+      "h": 9,
       "range": 0.15,
-      "s": 200,
-      "v": 129
+      "s": 180,
+      "v": 160
     },
     "plate_color_microwave": {
       "h": 11,
@@ -59,10 +59,10 @@
       "v": 210
     },
     "plate_color_movable_table": {
-      "h": 3,
-      "range": 0.17,
-      "s": 89,
-      "v": 97
+      "h": 8,
+      "range": 0.18,
+      "s": 160,
+      "v": 165
     },
     "retract_between_bites": "no",
     "robot_speed": "fast",
@@ -77,14 +77,7 @@
     "time_of_day": "afternoon"
   },
   "corrected": {
-    "detect_user_completed_transfer_feeding": "perception",
-    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
-    "plate_color_movable_table": {
-      "h": 3,
-      "range": 0.17,
-      "s": 89,
-      "v": 97
-    }
+    "outside_mouth_distance": "medium"
   },
   "finalized": [
     "bite_dipping_preference",
@@ -101,14 +94,11 @@
     "detect_user_ready_for_initiating_transfer_feeding",
     "detect_user_ready_for_initiating_transfer_wiping",
     "microwave_time",
-    "nav_offset_fridge",
     "nav_offset_microwave",
     "nav_offset_movable_table",
-    "nav_offset_sink",
     "outside_mouth_distance",
     "plate_color_fridge",
     "plate_color_microwave",
-    "plate_color_movable_table",
     "retract_between_bites",
     "robot_speed",
     "skewering_axis",

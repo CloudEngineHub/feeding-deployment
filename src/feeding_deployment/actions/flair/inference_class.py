@@ -631,9 +631,9 @@ class BiteAcquisitionInference:
                 elif "apple" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "cut white apple slice piece"
                     food_classes_being_detected.append("cut white apple slice piece")
-                # elif "strawberry" in self.FOOD_CLASSES[i]:
-                #     replacement_dict[self.FOOD_CLASSES[i]] = "red strawberry individual piece"
-                #     food_classes_being_detected.append("red strawberry individual piece")
+                elif "strawberry" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "fresh strawberry"
+                    food_classes_being_detected.append("fresh strawberry")
                 # elif "cantaloupe" in self.FOOD_CLASSES[i]:
                 #     replacement_dict[self.FOOD_CLASSES[i]] = "cut square orange cantaloupe individual piece"
                 #     food_classes_being_detected.append("cut square orange cantaloupe individual piece")
