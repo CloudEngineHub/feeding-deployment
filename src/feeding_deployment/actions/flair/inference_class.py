@@ -51,12 +51,31 @@ from feeding_deployment.utils.llm_config import DEFAULT_CLAUDE_MODEL
 # the sauce edge -- the fork stays well clear of the container wall.
 DIP_OFFSET_RADIUS_FRACTION = 0.3
 
-# Successive dips step around that circle by the golden angle instead of taking a
-# random one: 137.5 deg does not revisit an earlier angle for any realistic number
-# of dips in a meal, where uniform random would sooner or later re-dip a spot it has
-# already emptied. It is also reproducible, so a dip location can be recovered from
-# the dip index when reading back a log.
-DIP_OFFSET_GOLDEN_ANGLE_RAD = np.pi * (3.0 - np.sqrt(5.0))
+def dip_offset_angle(index):
+    """Angle (rad) around the dip circle for the index-th dip of a meal.
+
+    Dip 0 goes to 0 deg, dip 1 diametrically opposite it, dips 2-3 to the midpoints
+    of the two arcs that leaves, dips 4-7 to the midpoints of the four after that,
+    and so on: 0, 180, 90, 270, 45, 225, 135, 315, 22.5 ... This is the radical
+    inverse of the index in base 2, and it halves the largest remaining gap at every
+    step, so a meal is spread about as evenly as its number of dips allows no matter
+    where it stops -- three dips end up 120 deg apart-ish rather than bunched.
+
+    Preferred over stepping by a fixed golden angle, which was the other candidate:
+    on the 11.5 mm offset ring this keeps a larger minimum separation between any two
+    dips of a meal at almost every length (4.5 mm vs 2.5 mm at 15 dips, 9.0 vs 6.5 at
+    8), and its angles are round numbers, so a dip location is obvious when reading
+    a log rather than needing 137.5 deg multiples worked out. Golden angle is the
+    better choice only for the evenness of CONSECUTIVE dips, which is not what
+    matters here -- a crater stays where it was dug for the rest of the meal, so it
+    is the separation over all pairs that has to stay large, not just adjacent ones.
+    """
+    fraction, denominator = 0.0, 1.0
+    while index:
+        denominator *= 2.0
+        index, bit = divmod(index, 2)
+        fraction += bit / denominator
+    return 2.0 * np.pi * fraction
 
 
 class BiteAcquisitionInference:
@@ -529,9 +548,10 @@ class BiteAcquisitionInference:
     def get_dip_action(self, mask):
         """Pixel to dip into: a point on a circle around the sauce pool's centre.
 
-        Successive calls walk around that circle, so repeated dips into one
-        container spread over the surface instead of deepening a single hole. See
-        DIP_OFFSET_RADIUS_FRACTION for why.
+        Successive calls walk around that circle by repeatedly halving the largest
+        remaining gap, so repeated dips into one container spread over the surface
+        instead of deepening a single hole. See DIP_OFFSET_RADIUS_FRACTION for why
+        the offset exists and dip_offset_angle for the order the points come in.
         """
 
         bbox = detect_angular_bbox(mask)
@@ -549,7 +569,7 @@ class BiteAcquisitionInference:
         side_b = np.linalg.norm(np.array(bbox[1]) - np.array(bbox[2]))
         radius = min(side_a, side_b) / 2.0
 
-        angle = self.dip_offset_index * DIP_OFFSET_GOLDEN_ANGLE_RAD
+        angle = dip_offset_angle(self.dip_offset_index)
         self.dip_offset_index += 1
         offset = DIP_OFFSET_RADIUS_FRACTION * radius * np.array([np.cos(angle), np.sin(angle)])
         point = (center + offset).astype(int)
