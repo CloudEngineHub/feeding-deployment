@@ -42,6 +42,23 @@ from feeding_deployment.actions.flair.preference_planner import PreferencePlanne
 from feeding_deployment.utils.llm_config import DEFAULT_CLAUDE_MODEL
 # from feeding_deployment.actions.flair.food_identification import GPT4VFoodIdentification
 
+# A meal dips into the same container many times, and dipping_skill drives the fork
+# to a height fixed off the plate rather than off the sauce surface -- so dipping at
+# the mask centre every time re-enters one flat-bottomed crater and later dips come
+# up with less sauce each time. Offsetting each dip onto a circle around the centre
+# keeps every dip in sauce that is still at the surface. On the Jul 27 ketchup frame
+# (pool radius 99 px at 0.387 mm/px) 0.3 is ~11.5 mm of offset, leaving ~27 mm to
+# the sauce edge -- the fork stays well clear of the container wall.
+DIP_OFFSET_RADIUS_FRACTION = 0.3
+
+# Successive dips step around that circle by the golden angle instead of taking a
+# random one: 137.5 deg does not revisit an earlier angle for any realistic number
+# of dips in a meal, where uniform random would sooner or later re-dip a spot it has
+# already emptied. It is also reproducible, so a dip location can be recovered from
+# the dip index when reading back a log.
+DIP_OFFSET_GOLDEN_ANGLE_RAD = np.pi * (3.0 - np.sqrt(5.0))
+
+
 class BiteAcquisitionInference:
     def __init__(self, mode, grounded_sam=None):
 
@@ -122,6 +139,11 @@ class BiteAcquisitionInference:
 
         self.mode = mode
         self.allow_dip = True
+
+        # Counts dips this session, to walk the dip point around the circle. Not
+        # per-container: with one sauce per meal the distinction never shows up, and
+        # a shared counter still spreads dips evenly if a second one appears.
+        self.dip_offset_index = 0
 
     # def recognize_items(self, image):
     #     response = self.gpt4v_client.prompt(image).strip()
@@ -505,14 +527,55 @@ class BiteAcquisitionInference:
         return center, skewering_angle
     
     def get_dip_action(self, mask):
+        """Pixel to dip into: a point on a circle around the sauce pool's centre.
+
+        Successive calls walk around that circle, so repeated dips into one
+        container spread over the surface instead of deepening a single hole. See
+        DIP_OFFSET_RADIUS_FRACTION for why.
+        """
 
         bbox = detect_angular_bbox(mask)
 
         center = np.array([bbox[0][0], bbox[0][1]]) + np.array([bbox[1][0], bbox[1][1]]) + np.array([bbox[2][0], bbox[2][1]]) + np.array([bbox[3][0], bbox[3][1]])
         center = center / 4
-        center = center.astype(int)
 
-        return center
+        # Radius from the SHORT side of the bounding box, not from the mask area: if
+        # the pool is not round -- sauce squeezed into a streak, or a segmentation
+        # that smears up the container wall -- the short side is what limits how far
+        # the fork can move and still be in sauce, so this errs small. On a circular
+        # pool the two measures agree to ~2 px anyway. The box tracks the pool as it
+        # is consumed, so the offset shrinks with the remaining sauce for free.
+        side_a = np.linalg.norm(np.array(bbox[0]) - np.array(bbox[1]))
+        side_b = np.linalg.norm(np.array(bbox[1]) - np.array(bbox[2]))
+        radius = min(side_a, side_b) / 2.0
+
+        angle = self.dip_offset_index * DIP_OFFSET_GOLDEN_ANGLE_RAD
+        self.dip_offset_index += 1
+        offset = DIP_OFFSET_RADIUS_FRACTION * radius * np.array([np.cos(angle), np.sin(angle)])
+        point = (center + offset).astype(int)
+
+        # The circle assumes every direction off the centre is as good as any other,
+        # which a concave pool breaks -- a crescent, or sauce the fork has already
+        # pushed to one side -- and there the offset point can land on bare
+        # container. Note the centre is no refuge in that case: for a crescent the
+        # bounding-box centre sits in the gap too, which is something today's centre
+        # dip already gets wrong. Falling back to the point furthest from any edge is
+        # inside the sauce by construction and is the deepest spot available.
+        height, width = mask.shape[:2]
+        if not (0 <= point[0] < width and 0 <= point[1] < height and mask[point[1], point[0]] > 0):
+            distance_to_edge = cv2.distanceTransform((mask > 0).astype(np.uint8), cv2.DIST_L2, 5)
+            deepest_y, deepest_x = np.unravel_index(np.argmax(distance_to_edge), distance_to_edge.shape)
+            fallback = np.array([deepest_x, deepest_y])
+            print("[dip] offset point %s is outside the dip mask (pool is not convex); "
+                  "dipping at its deepest interior point %s instead"
+                  % (point.tolist(), fallback.tolist()))
+            return fallback
+
+        print("[dip] dip %d: centre %s -> %s (%.0f%% of %.0f px radius at %.0f deg)"
+              % (self.dip_offset_index - 1, center.astype(int).tolist(), point.tolist(),
+                 100 * DIP_OFFSET_RADIUS_FRACTION, radius, np.degrees(angle) % 360.0))
+
+        return point
 
     def food_on_fork(self, image, visualize=False, log_path = None):
         image = image[:300, 600:900, :]
