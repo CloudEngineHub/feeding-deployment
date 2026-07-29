@@ -49,6 +49,22 @@ BOWL_RIM_ABOVE_PLATE_MM = 43.0
 # rationale at the check itself in dipping_skill.
 DIP_DEPTH_FALLBACK_TOLERANCE_MM = 10.0
 
+# Nominal height of a food item's top surface above the plate, used to place the
+# skewering fallback plane. Only the LATERAL position depends on it (skewering_skill
+# overwrites the measured z with plate_height regardless), and it enters as
+# tan(angle off the optical axis) * (true thickness - this), so a tall item being
+# 25 mm out costs a handful of mm at the edge of the plate and ~0 near its centre.
+# A flat-ish slice is what this is tuned for; no need to re-measure per food.
+FOOD_TOP_ABOVE_PLATE_MM = 5.0
+
+# How far a measured skewer depth may sit from the plate-derived expectation before
+# the reading is rejected as not-food. Deliberately far wider than the dip's
+# tolerance: a plate-level misread and a real food surface are only a food-thickness
+# apart and cannot be told apart, so this window exists to catch readings that are
+# not on the table at all (the fork tine, a hand crossing frame, a background
+# latch), not to adjudicate millimetres. A tall floret is ~30-40 mm.
+SKEWER_DEPTH_TOLERANCE_MM = 50.0
+
 
 def plate_surface_depth_mm(depth_image, plate_bounds):
     """Median valid depth (mm) over the middle of the detected plate, or None.
@@ -225,21 +241,68 @@ class FoodManipulationSkillLibrary:
         print(f"Center x {center_x}, Center y {center_y}, Action index {action_index}")
 
 
-        # get 3D point from depth image
-        validity, point = pixel2World(camera_info, center_x, center_y, depth_image)
-        # breakpoint()
+        print("Getting transformation from base_link to camera_color_optical_frame")
+        base_to_camera_transform = self.get_transform('arm_base_link', 'camera_color_optical_frame')
+        print("Base to camera transform: ", base_to_camera_transform)
+        plate_height = self._active_plate_height()
+
+        # get 3D point from depth image, sampling an 11x11 patch centred on the
+        # skewer point instead of the default 5x5 -- the same widening dipping does.
+        # A wet or glossy item leaves the picked pixel a hole often enough to matter,
+        # and a miss here used to abort the whole bite and re-run detection against
+        # the same unchanged scene.
+        validity, point = pixel2World(camera_info, center_x, center_y, depth_image, box_width=5)
+
+        # Geometric fallback for when even the wider patch comes back empty, and the
+        # sanity check for when it comes back wrong. The food sits on the plate,
+        # whose height above the base is known per table, and the camera looks down
+        # at it -- so the camera's height above the food's top surface IS the depth
+        # to that surface. Depth here is perpendicular distance along the optical
+        # axis, so this transfers across the frame while the table stays near
+        # fronto-parallel (the same approximation dipping_skill relies on, a couple
+        # of mm). The disagreement printed below is what measures that in practice.
+        #
+        # Note this can only move the point LATERALLY: the z is overwritten with
+        # plate_height below either way, so a wrong fallback cannot drive the fork
+        # deeper or shallower than a measured reading would.
+        fallback_depth_mm = (base_to_camera_transform[2,3] - plate_height) * 1000 - FOOD_TOP_ABOVE_PLATE_MM
+
+        measured_depth_mm = point[2] * 1000 if validity else None
+        measured_str = f"{measured_depth_mm:.1f} mm" if validity else "INVALID (hole/glare)"
+
+        # A reading is trusted when it is plausibly ON the table, not merely when it
+        # exists: nothing else here would catch a match that latched onto the fork
+        # tine, a hand crossing the frame, or the background behind the plate, and
+        # such a reading yields a confidently wrong x,y to drive the fork at. The
+        # tolerance is wide on purpose -- see SKEWER_DEPTH_TOLERANCE_MM.
+        deviation_mm = None if not validity else abs(measured_depth_mm - fallback_depth_mm)
+        if not validity or deviation_mm > SKEWER_DEPTH_TOLERANCE_MM:
+            reason = ("no measurement" if not validity
+                      else f"measured off by {deviation_mm:.1f} mm > {SKEWER_DEPTH_TOLERANCE_MM:.0f} mm")
+            validity, point = pixel2World(camera_info, center_x, center_y, depth_image,
+                                          depth=fallback_depth_mm)
+            using = f"FALLBACK ({reason})" if validity else "NEITHER (fallback implausible)"
+        else:
+            using = "measured patch"
+
+        print(f"[skewer depth] measured: {measured_str} | fallback: {fallback_depth_mm:.1f} mm "
+              f"(camera {base_to_camera_transform[2,3] * 1000:.1f} - plate {plate_height * 1000:.1f} "
+              f"- food {FOOD_TOP_ABOVE_PLATE_MM:.0f}) | using: {using}")
+        if deviation_mm is not None:
+            # Worth watching on healthy readings: this single number checks both that
+            # plate_height matches the table in use and that the camera is close
+            # enough to straight-down for the fallback to hold. Real food thickness
+            # plus depth noise puts it in the low tens of mm; a consistently larger
+            # value means one of those two is off, not that the fallback is wrong.
+            print(f"[skewer depth] measured-vs-fallback disagreement: {deviation_mm:.1f} mm")
+
         if not validity:
             print("Invalid point")
             return False
 
-        print("Getting transformation from base_link to camera_color_optical_frame")
-        base_to_camera_transform = self.get_transform('arm_base_link', 'camera_color_optical_frame')
-        print("Base to camera transform: ", base_to_camera_transform)
-
         food_base = np.eye(4)
         food_base[:3,3] = point.reshape(1,3)
         food_base = base_to_camera_transform @ food_base
-        plate_height = self._active_plate_height()
         print("Depth to skewer: ", food_base[2,3] - skewering_depth)
         print("Plate height: ", plate_height)
         # food_base[2,3] = max(food_base[2,3] - skewering_depth, plate_height)
