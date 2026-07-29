@@ -18,11 +18,10 @@
           class="talk-input"
           @focus="handleFocus"
         ></textarea>
-        <button @click="startSpeechRecognition"
+        <button @click="toggleSpeechRecognition"
                 class="icon-btn"
                 :class="{ 'amber-ic': isRecognizing }"
-                :disabled="isRecognizing"
-                title="voice">
+                :title="isRecognizing ? 'stop voice' : 'voice'">
           <img alt="voice" src="../assets/voice.png">
         </button>
         <button @click="cleartheinput" class="icon-btn" title="clear">
@@ -51,6 +50,7 @@
 <script>
 import ROSLIB from 'roslib'
 import { ROS_URL, USER} from '@/config/parameterConfig';
+import { createDictation, releaseTakeoverMic } from '@/utils/dictation';
 export default {
   data () {
     return {
@@ -58,7 +58,6 @@ export default {
       username: USER,
       listener: null,
       publisher: null,
-      recognition: null,
       transcript: '',
       isRecognizing: false,
       customOrder: '',
@@ -71,12 +70,23 @@ export default {
     this.ros = new ROSLIB.Ros({ url: ROS_URL })
     this.initPublisher()
     this.initRosConnection()
-    this.releaseTakeoverMic()
+    releaseTakeoverMic()
+    // Kept off `data` on purpose: the controller wraps a live SpeechRecognition
+    // object, which Vue's reactive proxy has no business touching.
+    this._dictation = createDictation({
+      onText: (text) => { this.transcript += text },
+      onStatus: (status) => { this.voiceStatus = status },
+      onActive: (active) => {
+        this.isRecognizing = active
+        if (!active) this.focusTextarea()
+      }
+    })
+  },
+  beforeUnmount () {
+    if (this._dictation) this._dictation.destroy()
   },
   beforeRouteLeave (to, from, next) {
-    if (this.recognition && this.isRecognizing) {
-      this.recognition.stop();
-    }
+    if (this._dictation) this._dictation.destroy()
 
     if (this.listener) {
       this.listener.unsubscribe();
@@ -130,92 +140,18 @@ export default {
       this.transcript = '';
     },
 
-    releaseTakeoverMic() {
-      return new Promise((resolve) => {
-        let settled = false;
-        const done = () => {
-          if (settled) return;
-          settled = true;
-          resolve();
-        };
-
-        window.dispatchEvent(new CustomEvent('release-takeover-mic', {
-          detail: { done }
-        }));
-
-        setTimeout(done, 300);
-      });
-    },
-
-    async startSpeechRecognition() {
-      if (this.isRecognizing) {
-        return;
-      }
-
-      if (this.$refs.textarea) {
+    // Tap to dictate, tap again to stop: dictation stays open across pauses
+    // instead of ending on the first one.
+    toggleSpeechRecognition() {
+      if (!this._dictation) return;
+      if (!this._dictation.isActive() && this.$refs.textarea) {
         this.$refs.textarea.blur();
       }
-
-      await this.releaseTakeoverMic();
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        this.voiceStatus = 'speech recognition not supported in this browser';
-        return;
-      }
-
-      if (!this.recognition) {
-        this.recognition = new SpeechRecognition();
-        this.recognition.lang = 'en-US';
-        this.recognition.continuous = false;
-
-        this.recognition.onstart = () => {
-          this.voiceStatus = 'listening…';
-        };
-
-        this.recognition.onresult = (event) => {
-
-          this.transcript += event.results[0][0].transcript;
-          this.isRecognizing = false;
-          this.voiceStatus = '';
-        };
-
-        this.recognition.onerror = (event) => {
-          this.isRecognizing = false;
-          // Surface the raw error so we can tell the failure mode apart:
-          // 'not-allowed'/'service-not-allowed' -> mic blocked (often the
-          // takeover button still holding it, or no HTTPS/permission);
-          // 'no-speech' -> mic worked but heard nothing; 'aborted' -> stopped.
-          this.voiceStatus = 'error: ' + (event.error || 'unknown') +
-            (event.message ? ' — ' + event.message : '');
-          // eslint-disable-next-line no-console
-          console.error('[transparency] speech recognition error:', event.error, event.message);
-          this.focusTextarea();
-        };
-
-        this.recognition.onend = () => {
-          this.isRecognizing = false;
-          if (this.voiceStatus === 'listening…') this.voiceStatus = 'no speech captured';
-          this.focusTextarea();
-        };
-      }
-
-      this.isRecognizing = true;
-      this.voiceStatus = 'starting…';
-      try {
-        this.recognition.start();
-      } catch (e) {
-        // start() throws if called while a previous session is still active.
-        this.isRecognizing = false;
-        this.voiceStatus = 'start failed: ' + (e && e.message ? e.message : e);
-        // eslint-disable-next-line no-console
-        console.error('[transparency] recognition.start() threw:', e);
-      }
+      this._dictation.toggle();
     },
 
     focusTextarea() {
-
-      this.$refs.textarea.focus();
+      if (this.$refs.textarea) this.$refs.textarea.focus();
     },
     initPublisher() {
 

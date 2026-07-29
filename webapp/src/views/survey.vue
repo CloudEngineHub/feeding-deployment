@@ -42,11 +42,10 @@
                 ref="answerTextarea"
                 class="field-input"
               ></textarea>
-              <button @click="startSpeech"
+              <button @click="toggleSpeech"
                       class="icon-btn"
                       :class="{ 'amber-ic': isRecognizing }"
-                      :disabled="isRecognizing"
-                      title="voice">
+                      :title="isRecognizing ? 'stop voice' : 'voice'">
                 <img alt="voice" src="../assets/voice.png">
               </button>
               <button @click="answerText = ''" class="icon-btn" title="clear">
@@ -92,6 +91,7 @@
 import ROSLIB from 'roslib'
 import routeMap from '@/router/routeMap'
 import { ROS_URL, USER } from '@/config/parameterConfig'
+import { createDictation } from '@/utils/dictation'
 
 export default {
   name: 'SurveyPage',
@@ -106,7 +106,6 @@ export default {
       selected: null,
       answerText: '',
       isRecognizing: false,
-      recognition: null,
       voiceStatus: '',
       // The question just answered; the backend resends the current question
       // every second until it processes our response, so without this a resend
@@ -136,6 +135,12 @@ export default {
     }
   },
   mounted() {
+    // Non-reactive on purpose: it holds a live SpeechRecognition object.
+    this._dictation = createDictation({
+      onText: (text) => { this.answerText += text },
+      onStatus: (status) => { this.voiceStatus = status },
+      onActive: (active) => { this.isRecognizing = active }
+    })
     this.ros = new ROSLIB.Ros({ url: ROS_URL })
     this.initPublisher()
     this.initSubscriber()
@@ -229,76 +234,20 @@ export default {
       this.isSubmitting = false
       this.stopSpeech()
     },
-    releaseTakeoverMic() {
-      // App.vue holds a persistent mic stream (physical-button detection);
-      // SpeechRecognition can't start while it's open. Ask App.vue to release
-      // it and wait briefly (same handshake as adaptability/transparency).
-      return new Promise((resolve) => {
-        let settled = false
-        const done = () => {
-          if (settled) return
-          settled = true
-          resolve()
-        }
-        window.dispatchEvent(new CustomEvent('release-takeover-mic', {
-          detail: { done }
-        }))
-        setTimeout(done, 300)
-      })
-    },
-    async startSpeech() {
-      if (this.isRecognizing) return
-
-      if (this.$refs.answerTextarea) {
+    // Tap to dictate, tap again to stop: dictation stays open across pauses
+    // instead of ending on the first one.
+    toggleSpeech() {
+      if (!this._dictation) return
+      if (!this._dictation.isActive() && this.$refs.answerTextarea) {
         this.$refs.answerTextarea.blur()
       }
-
-      await this.releaseTakeoverMic()
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-      if (!SpeechRecognition) {
-        this.voiceStatus = 'speech recognition not supported in this browser'
-        return
-      }
-
-      if (!this.recognition) {
-        this.recognition = new SpeechRecognition()
-        this.recognition.lang = 'en-US'
-        this.recognition.continuous = false
-        this.recognition.onstart = () => {
-          this.voiceStatus = 'listening...'
-        }
-        this.recognition.onresult = (event) => {
-          this.answerText += event.results[0][0].transcript
-          this.isRecognizing = false
-          this.voiceStatus = ''
-        }
-        this.recognition.onerror = (event) => {
-          this.isRecognizing = false
-          this.voiceStatus = 'error: ' + (event.error || 'unknown') +
-            (event.message ? ' - ' + event.message : '')
-        }
-        this.recognition.onend = () => {
-          this.isRecognizing = false
-          if (this.voiceStatus === 'listening...') this.voiceStatus = 'no speech captured'
-        }
-      }
-
-      this.isRecognizing = true
-      this.voiceStatus = 'starting...'
-      try {
-        this.recognition.start()
-      } catch (e) {
-        this.isRecognizing = false
-        this.voiceStatus = 'start failed: ' + (e && e.message ? e.message : e)
-      }
+      this._dictation.toggle()
     },
+    // Used when the answer box itself goes away (next question, answer sent),
+    // so a phrase still in flight can't land in the following answer.
     stopSpeech() {
-      this.isRecognizing = false
+      if (this._dictation) this._dictation.cancel()
       this.voiceStatus = ''
-      if (this.recognition) {
-        try { this.recognition.abort() } catch (e) { /* ignore */ }
-      }
     },
     confirmStep() {
       if (!this.publisher || !this.current || !this.canSubmit) return
@@ -334,7 +283,7 @@ export default {
       }
     },
     teardownRos() {
-      this.stopSpeech()
+      if (this._dictation) this._dictation.destroy()
       if (this.listener) {
         this.listener.unsubscribe()
         if (this.listener.ros) this.listener.ros.close()
