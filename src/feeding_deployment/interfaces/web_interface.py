@@ -18,7 +18,7 @@ from pathlib import Path
 try:
     import rospy
     from sensor_msgs.msg import CompressedImage
-    from std_msgs.msg import String, Empty
+    from std_msgs.msg import String, Empty, Bool
     from cv_bridge import CvBridge
 
 except ModuleNotFoundError:
@@ -96,6 +96,21 @@ class WebInterface:
             "/shared_autonomy/resume",
             Empty,
             self._on_base_resume,
+            queue_size=1,
+        )
+
+        # --- Transfer button, second source ---
+        # The physical button normally reaches us through the iPad (App.vue detects
+        # the click, robot_executing relays it on /webapp_to_robot), which fails
+        # intermittently and silently. safety/transfer_button_listener.py reads a
+        # button wired straight into the compute box and publishes /transfer_button;
+        # detect_button_press() races both, so either one satisfies a transfer.
+        # Gated by the same arm window as the webapp path (see _on_transfer_button).
+        self._physical_button_armed = threading.Event()
+        self.transfer_button_sub = rospy.Subscriber(
+            "/transfer_button",
+            Bool,
+            self._on_transfer_button,
             queue_size=1,
         )
 
@@ -341,6 +356,27 @@ class WebInterface:
     def _on_base_resume(self, _msg: "Empty") -> None:
         print("User resumed autonomous navigation after base teleoperation.")
 
+    def _on_transfer_button(self, msg: "Bool") -> None:
+        """Compute-side transfer button (safety/transfer_button_listener.py).
+
+        Injects exactly the dict the iPad relay would have produced, so nothing
+        above the queue can tell which source fired -- the takeover interrupt,
+        the disarm in detect_button_press's ``finally``, and the received-message
+        logging all keep working unchanged.
+
+        Dropped unless detect_button_press() has us armed, mirroring how
+        robot_executing.vue drops unarmed presses: a press outside the wait must
+        not be able to satisfy the next one.
+        """
+        if not self._physical_button_armed.is_set():
+            return
+        if not msg.data:
+            return
+        print("Transfer button press received on /transfer_button (compute-side).")
+        self.received_web_interface_messages.put(
+            {"state": "button_press", "status": "pressed"}
+        )
+
     def register_takeover_stop(self, fn) -> None:
         """Register a function (e.g. robot_interface.stop_action) called the moment
         a takeover is requested, to best-effort abort the in-flight move."""
@@ -531,14 +567,20 @@ class WebInterface:
                 continue
 
     def detect_button_press(self) -> bool:
-        """Block until the user presses the physical transfer button, relayed by the webapp.
+        """Block until the user presses the physical transfer button, from EITHER source.
 
-        The button is detected in the browser (App.vue audio input) and handled on the
-        robot_executing page, which publishes ``{state:'button_press', status:'pressed'}``
-        on /webapp_to_robot -- but only while armed. We arm it here by sending
-        ``{state:'button_arm', status:'on'}`` (and re-send the robot_executing jump so the
-        page is present on the non-latched topic), then block for the press, disarming in a
-        ``finally``. This replaces the old ``/transfer_button`` path.
+        Two independent paths deliver the same ``{state:'button_press', status:'pressed'}``
+        dict into ``received_web_interface_messages``, and the first to arrive wins:
+
+        * iPad -- App.vue detects the click in the browser and robot_executing relays it on
+          /webapp_to_robot. Armed by sending ``{state:'button_arm', status:'on'}`` (plus a
+          re-sent robot_executing jump, since that topic is not latched).
+        * Compute box -- safety/transfer_button_listener.py publishes /transfer_button and
+          _on_transfer_button injects it. Armed by ``_physical_button_armed``.
+
+        Both are disarmed in the ``finally`` so a stray press cannot satisfy a later wait.
+        Running both concurrently is the point: the iPad path fails intermittently and
+        silently, and a fallback you have to notice and switch to is barely a fallback.
 
         There is deliberately no ``no_waits`` short-circuit: the button is a genuine user
         input, not a developer press-enter prompt. ``get_required_web_interface_message``
@@ -552,6 +594,13 @@ class WebInterface:
             self._send_message(jump_msg)
             self._send_message(arm_msg)
 
+        # Drop anything already queued before arming. A leftover button_press (e.g. a
+        # double press during the previous wait) would otherwise satisfy this one
+        # instantly -- and transfer-initiate is immediately followed by
+        # transfer-complete, so that misfire lands where it does the most damage.
+        # Non-button messages would have been discarded by the wait loop anyway.
+        self.clear_received_messages()
+        self._physical_button_armed.set()
         resend()
         try:
             self.get_required_web_interface_message(
@@ -564,6 +613,7 @@ class WebInterface:
             )
         finally:
             # Always disarm so a later stray press can't satisfy the next wait.
+            self._physical_button_armed.clear()
             self._send_message({"state": "button_arm", "status": "off"})
         return True
 

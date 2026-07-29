@@ -12,10 +12,9 @@ cleanup() {
     if kill -0 $collision_sensor_pid 2>/dev/null; then
         kill $collision_sensor_pid
     fi
-    # Transfer button disabled (using iPad button instead).
-    # if kill -0 $transfer_button_pid 2>/dev/null; then
-    #     kill $transfer_button_pid
-    # fi
+    if kill -0 $transfer_button_pid 2>/dev/null; then
+        kill $transfer_button_pid
+    fi
     if kill -0 $watchdog_pid 2>/dev/null; then
         kill $watchdog_pid
     fi
@@ -38,10 +37,11 @@ speaker_pid=$!  # Store the PID of speaker
 # move to safety directory
 cd /home/isacc/deployment_ws/src/feeding-deployment/src/feeding_deployment/safety
 
-# Start transfer button
-# Disabled: we currently use a button connected to the iPad instead.
-# python transfer_button_listener.py --button_id -1 &
-# transfer_button_pid=$!  # Store the PID of transfer_button_listener
+# Start transfer button (compute-side fallback for the iPad button; both run at
+# once and either satisfies a transfer). Resolves its audio device by name, and
+# stays quiet if no button is plugged in, so this is safe to always start.
+python transfer_button_listener.py &
+transfer_button_pid=$!  # Store the PID of transfer_button_listener
 
 # Start collision sensor
 python collision_sensor.py &
@@ -57,4 +57,4 @@ cleanup  # Ensure cleanup is called when bulldog finishes
 wait $joint_states_publisher_pid
 wait $speaker_pid
 wait $collision_sensor_pid
-# wait $transfer_button_pid  # Transfer button disabled (using iPad button instead).
+wait $transfer_button_pid
