@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Button Mic Route Test</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111827; --panel: #172033; --panel2: #202b42; --line: #31405f;
+      --text: #f4f7fb; --muted: #aab6ca;
+      --amber: #f0a500; --teal: #2ec4b6; --red: #ef4444; --green: #22c55e;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { width: min(900px, calc(100vw - 24px)); margin: 0 auto; padding: 20px 0 60px; }
+    h1 { font-size: clamp(24px, 3.4vw, 34px); margin: 0; }
+    h2 { font-size: 19px; margin: 0 0 4px; }
+    .sub { color: var(--muted); font-size: 15px; line-height: 1.45; margin: 8px 0 0; }
+    section {
+      margin-top: 16px; padding: 16px; border: 1px solid var(--line);
+      background: var(--panel); border-radius: 10px;
+    }
+    .rows { margin-top: 10px; }
+    .row {
+      display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+      padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15px;
+    }
+    .row:last-child { border-bottom: 0; }
+    .row span { color: var(--muted); flex-shrink: 0; }
+    .row b { text-align: right; word-break: break-all; font-variant-numeric: tabular-nums; }
+    .btnrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .btn {
+      flex: 1 1 auto; min-height: 48px; padding: 12px 16px; font-size: 16px; font-weight: 600;
+      color: #0b1220; background: var(--amber); border: 0; border-radius: 8px; cursor: pointer;
+    }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .btn.teal { background: var(--teal); }
+    .btn.sm { min-height: 38px; font-size: 14px; padding: 8px 12px; }
+    .btn:disabled { opacity: .45; }
+    .dev {
+      margin-top: 10px; padding: 12px; background: var(--panel2);
+      border: 1px solid var(--line); border-radius: 8px;
+    }
+    .dev.sel { border-color: var(--amber); }
+    .dev-lbl { font-size: 16px; font-weight: 600; word-break: break-word; }
+    .dev-id { font-size: 12px; color: var(--muted); margin-top: 3px; word-break: break-all; }
+    .pill {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px;
+      font-weight: 700; margin-left: 6px; vertical-align: middle;
+    }
+    .pill.hit { background: var(--green); color: #06210f; }
+    .pill.warn { background: var(--amber); color: #241800; }
+    .pill.bad { background: var(--red); color: #2b0707; }
+    .meterwrap {
+      height: 22px; margin-top: 12px; background: #0d1524;
+      border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+    }
+    .meter { height: 100%; width: 0; background: var(--teal); transition: width .04s linear; }
+    .phase {
+      margin-top: 12px; padding: 16px; text-align: center; font-size: 20px; font-weight: 700;
+      background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+    }
+    .verdict {
+      margin-top: 12px; padding: 16px; border-radius: 8px; font-size: 17px;
+      line-height: 1.45; border: 2px solid var(--line);
+    }
+    .verdict.good { border-color: var(--green); background: #0d2a17; }
+    .verdict.bad { border-color: var(--red); background: #2a0f0f; }
+    .verdict.warn { border-color: var(--amber); background: #2a2109; }
+    .verdict h3 { margin: 0 0 8px; font-size: 19px; }
+    .log {
+      margin-top: 10px; max-height: 260px; overflow-y: auto; padding: 10px;
+      background: #0d1524; border: 1px solid var(--line); border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.5;
+    }
+    .log div { border-bottom: 1px solid #1b2740; padding: 2px 0; word-break: break-all; }
+    .log .err { color: var(--red); } .log .ok { color: var(--green); } .log .hi { color: var(--amber); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Button Mic Route Test</h1>
+  <p class="sub">
+    Finds out which audio input Safari <em>actually</em> hands over, and proves whether it is the
+    switch button or the iPad's built-in mic. The button is a switch on a mic jack — it cannot hear
+    speech, so "responds to my voice" always means the wrong input is open.
+  </p>
+
+  <section>
+    <h2>1 &middot; Environment</h2>
+    <div id="envRows" class="rows"></div>
+  </section>
+
+  <section>
+    <h2>2 &middot; Inputs</h2>
+    <p class="sub">Labels stay hidden until mic permission is granted once, so Enumerate asks for it.</p>
+    <div class="btnrow">
+      <button id="btnEnum" class="btn">Enumerate inputs</button>
+      <button id="btnRelease" class="btn ghost">Release mic</button>
+    </div>
+    <div id="devList"></div>
+  </section>
+
+  <section>
+    <h2>3 &middot; Active capture</h2>
+    <div id="capRows" class="rows"><div class="row"><span>state</span><b>nothing open</b></div></div>
+    <div class="meterwrap"><div id="meter" class="meter"></div></div>
+    <div class="rows">
+      <div class="row"><span>peak (click height)</span><b id="pk">0.000</b></div>
+      <div class="row"><span>max seen</span><b id="mx">0.000</b></div>
+      <div class="row"><span>rms (steady loudness)</span><b id="rms">0.000</b></div>
+    </div>
+    <div class="btnrow"><button id="btnResetMax" class="btn ghost sm">Reset max</button></div>
+  </section>
+
+  <section>
+    <h2>4 &middot; Guided verdict</h2>
+    <p class="sub">Three timed phases — stay quiet, then talk, then press the button. It decides for you.</p>
+    <div class="btnrow"><button id="btnGuided" class="btn">Start guided test</button></div>
+    <div id="phase" class="phase">&mdash; idle &mdash;</div>
+    <div id="verdict"></div>
+  </section>
+
+  <section>
+    <h2>5 &middot; Save to the app</h2>
+    <p class="sub">
+      Writes <code>takeoverMicDeviceId</code> / <code>takeoverMicDeviceLabel</code> to localStorage on
+      this origin — the same keys the real app reads. Only press this once a test passes.
+    </p>
+    <div class="btnrow"><button id="btnSave" class="btn teal">Save active input as app button adapter</button></div>
+    <div id="savedNow" class="rows"></div>
+  </section>
+
+  <section>
+    <h2>Log</h2>
+    <p class="sub">Screenshot this — it is the record of what happened.</p>
+    <div id="log" class="log"></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var devices = [];
+  var stream = null, ctx = null, analyser = null, buf = null, raf = null;
+  var requestedId = null, requestedLabel = '', activeLabel = '';
+  var peak = 0, maxSeen = 0, rms = 0;
+  var t0 = Date.now();
+
+  function log(msg, cls) {
+    var d = document.createElement('div');
+    if (cls) d.className = cls;
+    d.textContent = '+' + ((Date.now() - t0) / 1000).toFixed(1) + 's  ' + msg;
+    $('log').insertBefore(d, $('log').firstChild);
+  }
+
+  function rows(el, pairs) {
+    el.innerHTML = '';
+    pairs.forEach(function (p) {
+      var r = document.createElement('div');
+      r.className = 'row';
+      var s = document.createElement('span'); s.textContent = p[0];
+      var b = document.createElement('b'); b.textContent = p[1];
+      if (p[2]) b.innerHTML += ' <span class="pill ' + p[2] + '">' + p[3] + '</span>';
+      r.appendChild(s); r.appendChild(b); el.appendChild(r);
+    });
+  }
+
+  // ---------- 1. environment ----------
+  function showEnv() {
+    var ua = navigator.userAgent;
+    var m = ua.match(/(?:iPhone )?OS (\d+[_\d]*) like Mac/);
+    var iosVer = m ? m[1].replace(/_/g, '.') : 'not iOS-style UA';
+    var secure = window.isSecureContext;
+    var hasMD = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    rows($('envRows'), [
+      ['secure context (HTTPS)', String(secure), secure ? 'hit' : 'bad', secure ? 'ok' : 'mic will fail'],
+      ['mediaDevices API', String(hasMD), hasMD ? 'hit' : 'bad', hasMD ? 'ok' : 'missing'],
+      ['iOS/iPadOS version', iosVer],
+      ['origin', location.origin],
+      ['user agent', ua]
+    ]);
+    if (!secure) log('NOT a secure context — getUserMedia will be blocked. Use the https:// URL.', 'err');
+    if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) {
+      navigator.mediaDevices.addEventListener('devicechange', function () {
+        log('devicechange fired — the device list just changed (replug?). Re-enumerating.', 'hi');
+        enumerate(false);
+      });
+    }
+  }
+
+  // ---------- 2. enumerate ----------
+  function enumerate(mayPrompt) {
+    if (!navigator.mediaDevices) { log('no mediaDevices', 'err'); return Promise.resolve(); }
+    return navigator.mediaDevices.enumerateDevices().then(function (all) {
+      var ins = all.filter(function (d) { return d.kind === 'audioinput'; });
+      var unlabeled = ins.length === 0 || ins.every(function (d) { return !d.label; });
+      if (unlabeled && mayPrompt !== false) {
+        log('labels hidden — requesting one-shot permission to reveal them', 'hi');
+        return navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+          s.getTracks().forEach(function (t) { t.stop(); });   // release immediately, do not hold the route
+          log('permission granted, throwaway stream released');
+          return enumerate(false);
+        }).catch(function (e) {
+          log('permission request failed: ' + e.name + ' — ' + e.message, 'err');
+          devices = ins; render();
+        });
+      }
+      devices = ins;
+      log('found ' + ins.length + ' audio input(s)', ins.length > 1 ? 'ok' : 'hi');
+      ins.forEach(function (d, i) {
+        log('  [' + i + '] "' + (d.label || '(no label)') + '" id=' + (d.deviceId || '(empty)').slice(0, 12) + '…');
+      });
+      if (ins.length === 1) {
+        log('only ONE input listed — the USB adapter is not separately selectable here, so the only ' +
+            'way to reach it is to make iOS route it as the default input.', 'hi');
+      }
+      render();
+    }).catch(function (e) { log('enumerate failed: ' + e.name, 'err'); });
+  }
+
+  function render() {
+    var list = $('devList');
+    list.innerHTML = '';
+    list.appendChild(devCard('', 'DEFAULT input (no deviceId constraint)',
+      'What the app gets when nothing is saved. If iOS routes the USB device, this is the one that works.'));
+    devices.forEach(function (d, i) {
+      var looksPlugable = /plugable|usb/i.test(d.label || '');
+      list.appendChild(devCard(d.deviceId, '[' + i + '] ' + (d.label || '(no label)'),
+        looksPlugable ? 'Looks like the button adapter.' : '', looksPlugable));
+    });
+  }
+
+  function devCard(id, label, note, highlight) {
+    var wrap = document.createElement('div');
+    wrap.className = 'dev' + (highlight ? ' sel' : '');
+    var l = document.createElement('div'); l.className = 'dev-lbl'; l.textContent = label;
+    wrap.appendChild(l);
+    var idl = document.createElement('div'); idl.className = 'dev-id';
+    idl.textContent = id ? ('deviceId ' + id) : 'no deviceId constraint sent';
+    wrap.appendChild(idl);
+    if (note) { var n = document.createElement('div'); n.className = 'dev-id'; n.textContent = note; wrap.appendChild(n); }
+    var br = document.createElement('div'); br.className = 'btnrow';
+    var b = document.createElement('button'); b.className = 'btn sm'; b.textContent = 'Open this input';
+    b.onclick = function () { open(id, label); };
+    br.appendChild(b); wrap.appendChild(br);
+    return wrap;
+  }
+
+  // ---------- 3. open a stream and measure ----------
+  function open(id, label) {
+    release(false).then(function () {
+      requestedId = id; requestedLabel = label;
+      var audio = { echoCancellation: false, noiseSuppression: false, autoGainControl: false };
+      if (id) audio.deviceId = { exact: id };
+      log('opening: ' + (id ? 'deviceId exact=' + id.slice(0, 12) + '…' : 'DEFAULT (no constraint)'), 'hi');
+      return navigator.mediaDevices.getUserMedia({ audio: audio });
+    }).then(function (s) {
+      stream = s;
+      var track = s.getAudioTracks()[0];
+      var st = (track.getSettings && track.getSettings()) || {};
+      activeLabel = track.label || '(no label)';
+
+      // The decisive check: did we get the device we asked for, or a silent substitution?
+      var honored = !id || (st.deviceId && st.deviceId === id);
+      var pills = honored
+        ? ['hit', 'HONORED']
+        : ['bad', 'SUBSTITUTED'];
+
+      rows($('capRows'), [
+        ['requested', id ? id.slice(0, 16) + '…' : 'default (none)'],
+        ['got deviceId', st.deviceId ? String(st.deviceId).slice(0, 16) + '…' : '(not reported)', pills[0], pills[1]],
+        ['track label', activeLabel],
+        ['sampleRate', String(st.sampleRate || '?')],
+        ['channelCount', String(st.channelCount || '?')],
+        ['autoGainControl', String(st.autoGainControl),
+          st.autoGainControl ? 'warn' : 'hit', st.autoGainControl ? 'AGC forced ON' : 'off as asked'],
+        ['echoCancellation', String(st.echoCancellation)],
+        ['noiseSuppression', String(st.noiseSuppression)]
+      ]);
+
+      log('got track "' + activeLabel + '" ' + (honored ? '(deviceId honored)' : '(deviceId SUBSTITUTED!)'),
+        honored ? 'ok' : 'err');
+      if (!honored) {
+        log('Safari ignored the exact deviceId and opened a different input. Selecting the adapter ' +
+            'by id cannot work on this device — iOS must route it as the default input instead.', 'err');
+      }
+      if (st.autoGainControl) log('AGC is on despite asking for off — click height will drift between runs.', 'hi');
+
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      return ctx.resume().then(function () {
+        analyser = ctx.createAnalyser();
+        analyser.fftSize = 2048;
+        buf = new Float32Array(analyser.fftSize);
+        ctx.createMediaStreamSource(stream).connect(analyser);
+        maxSeen = 0;
+        loop();
+        log('measuring — watch peak while you talk vs press', 'ok');
+      });
+    }).catch(function (e) {
+      rows($('capRows'), [['state', 'FAILED'], ['error', e.name + ': ' + e.message]]);
+      log('open failed: ' + e.name + ' — ' + e.message, 'err');
+      if (e.name === 'OverconstrainedError') {
+        log('OverconstrainedError means that deviceId no longer exists — ids rotate across replugs ' +
+            'and sessions on iOS. Re-enumerate and try the fresh id.', 'hi');
+      }
+    });
+  }
+
+  function loop() {
+    if (!analyser || !buf) return;
+    analyser.getFloatTimeDomainData(buf);
+    var p = 0, sum = 0;
+    for (var i = 0; i < buf.length; i++) {
+      var a = Math.abs(buf[i]);
+      if (a > p) p = a;
+      sum += buf[i] * buf[i];
+    }
+    peak = p; rms = Math.sqrt(sum / buf.length);
+    if (p > maxSeen) maxSeen = p;
+    $('pk').textContent = p.toFixed(3);
+    $('mx').textContent = maxSeen.toFixed(3);
+    $('rms').textContent = rms.toFixed(3);
+    $('meter').style.width = Math.min(100, p * 100) + '%';
+    raf = requestAnimationFrame(loop);
+  }
+
+  function release(verbose) {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    var done = ctx ? ctx.close().catch(function () {}) : Promise.resolve();
+    ctx = null; analyser = null; buf = null; peak = 0; rms = 0;
+    $('meter').style.width = '0%';
+    if (verbose !== false) {
+      log('released mic and closed audio context');
+      rows($('capRows'), [['state', 'nothing open']]);
+    }
+    return Promise.resolve(done);
+  }
+
+  // ---------- 4. guided verdict ----------
+  var PHASES = [
+    { name: 'Stay completely SILENT', secs: 3, key: 'noise' },
+    { name: 'TALK normally — do NOT press', secs: 4, key: 'voice' },
+    { name: 'PRESS the button 3× — do NOT talk', secs: 6, key: 'click' }
+  ];
+
+  function guided() {
+    if (!analyser) { log('open an input first (section 2)', 'err'); return; }
+    $('verdict').innerHTML = '';
+    $('btnGuided').disabled = true;
+    var res = {};
+    var idx = 0;
+
+    function runPhase() {
+      if (idx >= PHASES.length) {
+        $('phase').textContent = '— done —';
+        $('btnGuided').disabled = false;
+        decide(res);
+        return;
+      }
+      var ph = PHASES[idx];
+      var left = ph.secs;
+      var localMax = 0;
+      $('phase').textContent = ph.name + '  (' + left + ')';
+      log('phase: ' + ph.name, 'hi');
+      var sample = setInterval(function () { if (peak > localMax) localMax = peak; }, 16);
+      var tick = setInterval(function () {
+        left--;
+        $('phase').textContent = ph.name + '  (' + left + ')';
+        if (left <= 0) {
+          clearInterval(tick); clearInterval(sample);
+          res[ph.key] = localMax;
+          log('  ' + ph.key + ' max = ' + localMax.toFixed(4));
+          idx++; runPhase();
+        }
+      }, 1000);
+    }
+    runPhase();
+  }
+
+  function decide(r) {
+    var noise = r.noise || 0, voice = r.voice || 0, click = r.click || 0;
+    var cls, title, body;
+
+    if (click < 0.02 && voice < 0.02) {
+      cls = 'warn'; title = 'NO SIGNAL AT ALL';
+      body = 'The input opened but is silent to both voice and the button (click max ' +
+        click.toFixed(3) + '). Either nothing is arriving over USB, or the switch is not seated in the ' +
+        'adapter’s mic jack. Check the 3.5&nbsp;mm plug and that the charger is in the adapter’s ' +
+        'pass-through port, then re-open the input.';
+    } else if (voice > 0.15 && click <= voice * 1.5) {
+      cls = 'bad'; title = 'WRONG INPUT — this is the built-in mic';
+      body = 'Voice reached ' + voice.toFixed(3) + ' while the button only reached ' + click.toFixed(3) +
+        '. A switch on a mic jack cannot hear speech, so this stream is the iPad’s own microphone. ' +
+        'Nothing about the threshold will help. Try the ordered recovery steps below the verdict.';
+    } else if (click > 0.5 && voice < 0.15) {
+      cls = 'good'; title = 'CORRECT INPUT — the button is routed';
+      body = 'The button peaked at ' + click.toFixed(3) + ' (it clips, as expected) while speech only ' +
+        'reached ' + voice.toFixed(3) + '. This is the configuration you want. Save it to the app in ' +
+        'section&nbsp;5, and note exactly how you got here so it can be reproduced.';
+    } else if (click > voice * 3 && click > 0.2) {
+      cls = 'good'; title = 'LIKELY CORRECT — button is much louder than voice';
+      body = 'Button ' + click.toFixed(3) + ' vs voice ' + voice.toFixed(3) + '. The button is clearly ' +
+        'the dominant source, but quieter than the ~1.0 clipping seen on the compute box. Usable — ' +
+        'set the app threshold near ' + Math.max(0.02, (noise + click) / 4).toFixed(3) + '.';
+    } else {
+      cls = 'warn'; title = 'AMBIGUOUS';
+      body = 'noise ' + noise.toFixed(3) + ' / voice ' + voice.toFixed(3) + ' / button ' + click.toFixed(3) +
+        '. Not a clean separation. Re-run holding still and pressing firmly; if voice and button stay ' +
+        'comparable, treat it as the built-in mic.';
+    }
+
+    $('verdict').innerHTML =
+      '<div class="verdict ' + cls + '"><h3>' + title + '</h3><div>' + body + '</div>' +
+      '<div style="margin-top:10px;color:var(--muted);font-size:14px">' +
+      'silence ' + noise.toFixed(4) + ' &nbsp;·&nbsp; voice ' + voice.toFixed(4) +
+      ' &nbsp;·&nbsp; button ' + click.toFixed(4) + '</div></div>';
+    log('VERDICT: ' + title, cls === 'good' ? 'ok' : (cls === 'bad' ? 'err' : 'hi'));
+  }
+
+  // ---------- 5. save ----------
+  function save() {
+    if (requestedId === null) { log('open an input first', 'err'); return; }
+    try {
+      localStorage.setItem('takeoverMicDeviceId', requestedId || '');
+      localStorage.setItem('takeoverMicDeviceLabel', activeLabel || requestedLabel || 'Browser default microphone');
+      rows($('savedNow'), [
+        ['takeoverMicDeviceId', requestedId || '(empty — app will use default input)'],
+        ['takeoverMicDeviceLabel', activeLabel || requestedLabel]
+      ]);
+      log('saved to localStorage for the app', 'ok');
+      if (!requestedId) {
+        log('saved as DEFAULT (empty id). That is the more robust choice on iOS, because it cannot ' +
+            'go stale when device ids rotate.', 'hi');
+      }
+    } catch (e) { log('save failed: ' + e.message, 'err'); }
+  }
+
+  $('btnEnum').onclick = function () { enumerate(true); };
+  $('btnRelease').onclick = function () { release(true); };
+  $('btnResetMax').onclick = function () { maxSeen = 0; };
+  $('btnGuided').onclick = guided;
+  $('btnSave').onclick = save;
+
+  showEnv();
+  log('ready — tap "Enumerate inputs" to start');
+})();
+</script>
+</body>
+</html>
