@@ -25,6 +25,11 @@ from feeding_deployment.perception.tf_interface import TFInterface
 
 
 class AttachmentPerception(TFInterface):
+    # Largest physical span (m, along any axis) a color cluster may have and
+    # still be the attachment: the two orange tabs span ~10 cm x 5 cm, so with
+    # margin for depth noise anything bigger is background scenery.
+    _MAX_CLUSTER_EXTENT_M = 0.15
+
     def __init__(self, num_perception_samples=25, data_logger=None):
         super().__init__()
 
@@ -119,7 +124,22 @@ class AttachmentPerception(TFInterface):
             return
 
         unique, counts = np.unique(labels[valid], return_counts=True)
-        main_label = unique[np.argmax(counts)]
+
+        # Pick the biggest cluster that is physically small enough to be the
+        # attachment. Without the size gate, a large warm-lit surface (fridge
+        # wall / door edge) passing the color filter forms one huge cluster
+        # that outvotes the real attachment.
+        main_label = None
+        for idx in np.argsort(counts)[::-1]:
+            extent = float(np.ptp(points_3d[labels == unique[idx]], axis=0).max())
+            if extent <= self._MAX_CLUSTER_EXTENT_M:
+                main_label = unique[idx]
+                break
+            print(f"[attachment] rejected {counts[idx]}-pt cluster: extent "
+                  f"{extent:.2f} m > {self._MAX_CLUSTER_EXTENT_M} m")
+        if main_label is None:
+            print("No cluster within attachment size limit.")
+            return
 
         cluster_pixels = pixels[labels == main_label]
         cluster_points_3d = points_3d[labels == main_label]
