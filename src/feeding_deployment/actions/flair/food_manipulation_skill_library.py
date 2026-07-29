@@ -224,6 +224,7 @@ class FoodManipulationSkillLibrary:
         
         print(f"Center x {center_x}, Center y {center_y}, Action index {action_index}")
 
+
         # get 3D point from depth image
         validity, point = pixel2World(camera_info, center_x, center_y, depth_image)
         # breakpoint()
@@ -249,14 +250,22 @@ class FoodManipulationSkillLibrary:
         # keep the orientation of the food base fixed
         food_base[:3,:3] = Rotation.from_quat([-0.7071068, 0.7071068, 0, 0]).as_matrix()
 
+        SKEWER_AXIS_OFFSET_M = 0.005 
+        axis = np.array([np.sin(major_axis), np.cos(major_axis)])
+        if axis[0] < 0:
+            axis = -axis    # both ends are the same axis; take the one with +X,
+                            # i.e. the end further from the robot
+        food_base[0,3] += SKEWER_AXIS_OFFSET_M * axis[0]
+        food_base[1,3] += SKEWER_AXIS_OFFSET_M * axis[1]
+
+        if major_axis < np.pi/2:
+            major_axis = major_axis + np.pi/2
+
         # print("Food base: ", food_base)
 
         if self.robot_interface is not None:
             self.tf_utils.publishTransformationToTF('arm_base_link', 'food_frame', food_base)
             self.rviz_interface.visualize_food(food_base)
-
-        if major_axis < np.pi/2:
-            major_axis = major_axis + np.pi/2
 
         # caching this so that the robot doesn't rotate the wrist again
         tip_to_wrist = self.get_transform('arm_fork_tip', 'arm_tool_frame')
