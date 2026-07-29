@@ -19,11 +19,10 @@
             ref="textarea1"
             class="field-input"
           >
-          <button @click="startSpeechRecognition1"
+          <button @click="toggleSpeechRecognition1"
                   class="icon-btn"
                   :class="{ 'amber-ic': isRecognizing1 }"
-                  :disabled="isRecognizing1"
-                  title="voice">
+                  :title="isRecognizing1 ? 'stop voice' : 'voice'">
             <img alt="voice" src="../assets/voice.png">
           </button>
           <button @click="cleartheinput1" class="icon-btn" title="clear">
@@ -44,11 +43,10 @@
             ref="textarea2"
             class="field-input"
           ></textarea>
-          <button @click="startSpeechRecognition2"
+          <button @click="toggleSpeechRecognition2"
                   class="icon-btn"
                   :class="{ 'amber-ic': isRecognizing2 }"
-                  :disabled="isRecognizing2"
-                  title="voice">
+                  :title="isRecognizing2 ? 'stop voice' : 'voice'">
             <img alt="voice" src="../assets/voice.png">
           </button>
           <button @click="cleartheinput2" class="icon-btn" title="clear">
@@ -73,6 +71,7 @@
 import ROSLIB from 'roslib'
 import routeMap from '@/router/routeMap';
 import { ROS_URL, USER} from '@/config/parameterConfig';
+import { createDictation } from '@/utils/dictation';
 export default {
   data () {
     return {
@@ -80,8 +79,6 @@ export default {
       username: USER,
       isRecognizing1: false,
       isRecognizing2: false,
-      recognition1: null,
-      recognition2: null,
       listener: null,
       publisher: null,
       transcript: '',
@@ -94,15 +91,26 @@ export default {
     this.ros = new ROSLIB.Ros({ url: ROS_URL })
     this.initSubscriber()
     this.initPublisher()
+    // Two independent fields, so two recognizers. Non-reactive on purpose:
+    // they hold live SpeechRecognition objects.
+    this._dictation1 = createDictation({
+      onText: (text) => { this.transcript += text },
+      onStatus: (status) => { this.voiceStatus1 = status },
+      onActive: (active) => { this.isRecognizing1 = active }
+    })
+    this._dictation2 = createDictation({
+      onText: (text) => { this.transcriptDes += text },
+      onStatus: (status) => { this.voiceStatus2 = status },
+      onActive: (active) => { this.isRecognizing2 = active }
+    })
+  },
+  beforeUnmount () {
+    if (this._dictation1) this._dictation1.destroy()
+    if (this._dictation2) this._dictation2.destroy()
   },
   beforeRouteLeave (to, from, next) {
-    if (this.recognition1 && this.isRecognizing1) {
-      this.recognition1.stop();
-    }
-
-    if (this.recognition2 && this.isRecognizing2) {
-      this.recognition2.stop();
-    }
+    if (this._dictation1) this._dictation1.destroy()
+    if (this._dictation2) this._dictation2.destroy()
 
     if (this.listener) {
       this.listener.unsubscribe();
@@ -125,129 +133,25 @@ export default {
       this.transcriptDes = '';
     },
 
-    releaseTakeoverMic() {
-      return new Promise((resolve) => {
-        let settled = false;
-        const done = () => {
-          if (settled) return;
-          settled = true;
-          resolve();
-        };
-
-        window.dispatchEvent(new CustomEvent('release-takeover-mic', {
-          detail: { done }
-        }));
-
-        setTimeout(done, 300);
-      });
+    // Tap to dictate, tap again to stop: dictation stays open across pauses
+    // instead of ending on the first one. Only one field at a time -- the two
+    // recognizers would otherwise fight over the same microphone.
+    toggleSpeechRecognition1() {
+      if (!this._dictation1) return;
+      if (!this._dictation1.isActive()) {
+        if (this._dictation2) this._dictation2.stop();
+        if (this.$refs.textarea1) this.$refs.textarea1.blur();
+      }
+      this._dictation1.toggle();
     },
 
-    async startSpeechRecognition1() {
-      if (this.isRecognizing1) {
-        return;
+    toggleSpeechRecognition2() {
+      if (!this._dictation2) return;
+      if (!this._dictation2.isActive()) {
+        if (this._dictation1) this._dictation1.stop();
+        if (this.$refs.textarea2) this.$refs.textarea2.blur();
       }
-
-      if (this.$refs.textarea1) {
-        this.$refs.textarea1.blur();
-      }
-
-      await this.releaseTakeoverMic();
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        this.voiceStatus1 = 'speech recognition not supported in this browser';
-        return;
-      }
-
-      if (!this.recognition1) {
-        this.recognition1 = new SpeechRecognition();
-        this.recognition1.lang = 'en-US';
-        this.recognition1.continuous = false;
-
-        this.recognition1.onstart = () => {
-          this.voiceStatus1 = 'listening...';
-        };
-
-        this.recognition1.onresult = (event) => {
-          this.transcript += event.results[0][0].transcript;
-          this.isRecognizing1 = false;
-          this.voiceStatus1 = '';
-        };
-
-        this.recognition1.onerror = (event) => {
-          this.isRecognizing1 = false;
-          this.voiceStatus1 = 'error: ' + (event.error || 'unknown') +
-            (event.message ? ' - ' + event.message : '');
-        };
-
-        this.recognition1.onend = () => {
-          this.isRecognizing1 = false;
-          if (this.voiceStatus1 === 'listening...') this.voiceStatus1 = 'no speech captured';
-        };
-      }
-
-      this.isRecognizing1 = true;
-      this.voiceStatus1 = 'starting...';
-      try {
-        this.recognition1.start();
-      } catch (e) {
-        this.isRecognizing1 = false;
-        this.voiceStatus1 = 'start failed: ' + (e && e.message ? e.message : e);
-      }
-    },
-
-    async startSpeechRecognition2() {
-      if (this.isRecognizing2) {
-        return;
-      }
-
-      if (this.$refs.textarea2) {
-        this.$refs.textarea2.blur();
-      }
-
-      await this.releaseTakeoverMic();
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        this.voiceStatus2 = 'speech recognition not supported in this browser';
-        return;
-      }
-
-      if (!this.recognition2) {
-        this.recognition2 = new SpeechRecognition();
-        this.recognition2.lang = 'en-US';
-        this.recognition2.continuous = false;
-
-        this.recognition2.onstart = () => {
-          this.voiceStatus2 = 'listening...';
-        };
-
-        this.recognition2.onresult = (event) => {
-          this.transcriptDes += event.results[0][0].transcript;
-          this.isRecognizing2 = false;
-          this.voiceStatus2 = '';
-        };
-
-        this.recognition2.onerror = (event) => {
-          this.isRecognizing2 = false;
-          this.voiceStatus2 = 'error: ' + (event.error || 'unknown') +
-            (event.message ? ' - ' + event.message : '');
-        };
-
-        this.recognition2.onend = () => {
-          this.isRecognizing2 = false;
-          if (this.voiceStatus2 === 'listening...') this.voiceStatus2 = 'no speech captured';
-        };
-      }
-
-      this.isRecognizing2 = true;
-      this.voiceStatus2 = 'starting...';
-      try {
-        this.recognition2.start();
-      } catch (e) {
-        this.isRecognizing2 = false;
-        this.voiceStatus2 = 'start failed: ' + (e && e.message ? e.message : e);
-      }
+      this._dictation2.toggle();
     },
     handleRosMessage(message) {
       try {

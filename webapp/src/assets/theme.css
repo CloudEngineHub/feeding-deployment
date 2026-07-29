@@ -295,6 +295,14 @@ input, textarea {
   font-size: 2vh;
   line-height: 1.2;
 }
+/* The status line echoes the phrase being recognized; keep a long one on a
+   single line so the layout under the text box doesn't jump. */
+.voice-status span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .voice-status img {
   width: 2vh;
   height: 2vh;

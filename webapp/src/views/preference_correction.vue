@@ -52,11 +52,10 @@
                 class="field-input"
                 @input="userInteracted = true"
               ></textarea>
-              <button @click="startOtherSpeech"
+              <button @click="toggleOtherSpeech"
                       class="icon-btn"
                       :class="{ 'amber-ic': isRecognizingOther }"
-                      :disabled="isRecognizingOther"
-                      title="voice">
+                      :title="isRecognizingOther ? 'stop voice' : 'voice'">
                 <img alt="voice" src="../assets/voice.png">
               </button>
               <button @click="otherText = ''" class="icon-btn" title="clear">
@@ -98,6 +97,7 @@
 import ROSLIB from 'roslib'
 import routeMap from '@/router/routeMap'
 import { ROS_URL, USER } from '@/config/parameterConfig'
+import { createDictation } from '@/utils/dictation'
 
 const DEFAULT_AUTOCONTINUE_SECONDS = 10
 
@@ -120,7 +120,6 @@ export default {
       otherMode: false,
       otherText: '',
       isRecognizingOther: false,
-      recognitionOther: null,
       // Set ONLY by the countdown-expiry path so the response carries
       // user_action: 'tap' | 'autocontinue' (engaged vs passive confirms are
       // otherwise indistinguishable to the robot -- needed for learning analysis).
@@ -140,6 +139,14 @@ export default {
     }
   },
   mounted() {
+    // Non-reactive on purpose: it holds a live SpeechRecognition object.
+    this._dictation = createDictation({
+      onText: (text) => {
+        this.otherText += text
+        this.userInteracted = true
+      },
+      onActive: (active) => { this.isRecognizingOther = active }
+    })
     this.ros = new ROSLIB.Ros({ url: ROS_URL })
     this.initPublisher()
     this.initSubscriber()
@@ -289,30 +296,20 @@ export default {
         if (this.$refs.otherTextarea) this.$refs.otherTextarea.focus()
       })
     },
-    startOtherSpeech() {
-      if (this.isRecognizingOther) return
-      if (!this.recognitionOther) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-        if (!SpeechRecognition) return
-        this.recognitionOther = new SpeechRecognition()
-        this.recognitionOther.lang = 'en-US'
-        this.recognitionOther.continuous = false
-        this.recognitionOther.onresult = (event) => {
-          this.otherText += event.results[0][0].transcript
-          this.isRecognizingOther = false
-        }
-        this.recognitionOther.onerror = () => { this.isRecognizingOther = false }
-        this.recognitionOther.onend = () => { this.isRecognizingOther = false }
-      }
+    // Tap to dictate, tap again to stop: dictation stays open across pauses
+    // instead of ending on the first one.
+    toggleOtherSpeech() {
+      if (!this._dictation) return
       this.userInteracted = true
-      this.isRecognizingOther = true
-      this.recognitionOther.start()
-    },
-    stopOtherSpeech() {
-      this.isRecognizingOther = false
-      if (this.recognitionOther) {
-        try { this.recognitionOther.abort() } catch (e) { /* ignore */ }
+      if (!this._dictation.isActive() && this.$refs.otherTextarea) {
+        this.$refs.otherTextarea.blur()
       }
+      this._dictation.toggle()
+    },
+    // Used when the editor itself goes away (next dim, choice sent), so a
+    // phrase still in flight can't land in the following step's text.
+    stopOtherSpeech() {
+      if (this._dictation) this._dictation.cancel()
     },
     confirmStep() {
       if (!this.publisher || !this.current || this.isSubmitting) return
@@ -370,7 +367,7 @@ export default {
     },
     teardownRos() {
       this.clearCountdownTimer()
-      this.stopOtherSpeech()
+      if (this._dictation) this._dictation.destroy()
       if (this.listener) {
         this.listener.unsubscribe()
         if (this.listener.ros) this.listener.ros.close()
