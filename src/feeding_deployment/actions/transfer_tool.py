@@ -70,9 +70,9 @@ class TransferToolHLA(HighLevelAction):
 
     def detect_initiate_transfer(self, initiate_transfer_interaction: str, ready_to_initiate_mode: str):
         if initiate_transfer_interaction == "button":
-            # Route the button through the webapp (robot_executing page), NOT the old
-            # /transfer_button / perception path. With no web interface, the button is
-            # simply skipped (no perception fallback).
+            # detect_button_press() races both button sources: the iPad (webapp relay)
+            # and the compute-side listener on /transfer_button. With no web interface
+            # the button is simply skipped (no perception fallback).
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Waiting for button press to initiate transfer")
                 self.web_interface.detect_button_press()
@@ -108,9 +108,9 @@ class TransferToolHLA(HighLevelAction):
 
     def detect_transfer_complete(self, transfer_complete_interaction: str, ready_for_transfer_interaction: str):
         if transfer_complete_interaction == "button":
-            # Route the button through the webapp (robot_executing page), NOT the old
-            # /transfer_button / perception path. With no web interface, the button is
-            # simply skipped (no perception fallback).
+            # detect_button_press() races both button sources: the iPad (webapp relay)
+            # and the compute-side listener on /transfer_button. With no web interface
+            # the button is simply skipped (no perception fallback).
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Waiting for button press to complete transfer")
                 self.web_interface.detect_button_press()

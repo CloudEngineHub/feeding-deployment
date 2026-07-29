@@ -4,8 +4,9 @@
 Runs four quick checks, in order, and prints a PASS/FAIL summary:
 
   1. Speaker   -- publish to /speak (voiced on the USB speaker AND the iPad).
-  2. Transfer  -- exercise the real button path: arm the robot_executing page and
-                  wait for the webapp to relay the press on /webapp_to_robot.
+  2. Transfer  -- exercise both button paths: arm the robot_executing page for the
+                  iPad relay AND listen on /transfer_button for the compute-side
+                  listener, reporting which sources are available and which fired.
   3. LED       -- drive the Feather LED ON for N seconds, then OFF.
   4. Molmo     -- HTTP-probe the molmo /predict endpoint to confirm it is up.
 
@@ -30,7 +31,7 @@ from pathlib import Path
 import serial
 
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import String, Bool
 
 # The Feather LED is the same device/protocol used by PerceptionInterface
 # (see interfaces/perception_interface.py) and misc/control_feather.py.
@@ -48,6 +49,7 @@ MOLMO_URL_FALLBACK = "https://exponent-sediment-professed.ngrok-free.dev/predict
 
 WEBAPP_TO_ROBOT_TOPIC = "/webapp_to_robot"   # iPad -> robot
 ROBOT_TO_WEBAPP_TOPIC = "/robot_to_webapp"   # robot -> iPad
+TRANSFER_BUTTON_TOPIC = "/transfer_button"   # compute-side button listener -> robot
 SPEAK_TOPIC = "/speak"
 
 
@@ -102,29 +104,36 @@ def test_speaker(text):
 
 
 def test_transfer_button(timeout_s):
-    """Verify the physical button end-to-end via the real (webapp) path.
+    """Verify the physical transfer button, through whichever source it is wired to.
 
-    The iPad button never touches /transfer_button. App.vue detects it and the
-    robot_executing page relays it to /webapp_to_robot as
-    {state:'button_press', status:'pressed'} -- but only while the robot has armed it.
-    Here we play the robot: route the iPad to robot_executing and send button_arm:on on
-    /robot_to_webapp (re-sent until the press arrives, since the topic isn't latched),
-    then wait for the relayed press on /webapp_to_robot.
+    Two independent paths can deliver a press, and the real transfer
+    (WebInterface.detect_button_press) accepts either:
 
-    Prereq: the webapp must be open/connected on the iPad. For pure button-hardware
-    calibration (audio device id + threshold) use the webapp's /mictest screen instead.
+      * iPad -- App.vue detects the click and robot_executing relays it to
+        /webapp_to_robot as {state:'button_press', status:'pressed'}, but only while
+        armed. Here we play the robot: route the iPad to robot_executing and send
+        button_arm:on on /robot_to_webapp (re-sent until the press arrives, since the
+        topic isn't latched).
+      * Compute box -- safety/transfer_button_listener.py publishes /transfer_button.
+        Nothing to arm; we just listen.
+
+    Each path's availability is reported up front (is the webapp subscribed? is the
+    listener publishing?) and the press is then attributed to whichever source
+    delivered it -- so a dead path shows up at startup instead of mid-meal. Only one
+    press is needed: you cannot press a single button on both hosts at once.
+
+    Prereq: for the iPad path the webapp must be open/connected. For pure
+    button-hardware calibration use the webapp's /mictest screen, or
+    safety/button_diagnose.py on the compute box.
     """
     _hr()
-    print("[2/4] TRANSFER BUTTON -- exercising the real webapp path")
-    print("  Impersonating the robot: routing iPad to robot_executing, arming the button,")
-    print("  and showing the 'Waiting for button press' prompt (as the real transfer does).")
-    print(f"  >>> The iPad should show 'Waiting for button press'; press the button (timeout {timeout_s:.0f}s) ...")
+    print("[2/4] TRANSFER BUTTON -- iPad path and compute path")
 
     # queue_size must cover the jump+arm+expl burst below: at 1, rospy's outbound
     # queue drops the older messages and only 'explanation' reaches subscribers
     # (the arm then only gets through by luck). WebInterface uses 10 for this topic.
     to_robot = rospy.Publisher(ROBOT_TO_WEBAPP_TOPIC, String, queue_size=10)
-    pressed = {"ok": False}
+    pressed = {"ipad": False, "compute": False}
 
     def on_msg(msg):
         try:
@@ -132,9 +141,15 @@ def test_transfer_button(timeout_s):
         except (ValueError, TypeError):
             return
         if d.get("state") == "button_press" and d.get("status") == "pressed":
-            pressed["ok"] = True
+            pressed["ipad"] = True
+
+    def on_transfer_button(msg):
+        if msg.data:
+            pressed["compute"] = True
 
     sub = rospy.Subscriber(WEBAPP_TO_ROBOT_TOPIC, String, on_msg, queue_size=10)
+    button_sub = rospy.Subscriber(TRANSFER_BUTTON_TOPIC, Bool, on_transfer_button,
+                                  queue_size=10)
     jump = String(data=json.dumps({"state": "robot_executing", "status": "jump"}))
     arm = String(data=json.dumps({"state": "button_arm", "status": "on"}))
     # Mirror the real transfer flow, which fix_explanation()s this before blocking so
@@ -142,30 +157,51 @@ def test_transfer_button(timeout_s):
     expl = String(data=json.dumps({"state": "explanation",
                                    "status": "Waiting for button press (startup self-test)"}))
     try:
-        time.sleep(0.5)  # let pub/sub connect over rosbridge
+        time.sleep(1.0)  # let pub/sub connect (the iPad comes in over rosbridge)
+
+        # Availability of each path, before we ask for a press. A subscriber's
+        # connection count is the number of PUBLISHERS feeding it, so this tells us
+        # whether transfer_button_listener.py is up with a button attached.
+        ipad_up = to_robot.get_num_connections() > 0
+        compute_up = button_sub.get_num_connections() > 0
+        print(f"  iPad path    : {'webapp subscribed' if ipad_up else 'NO subscriber on ' + ROBOT_TO_WEBAPP_TOPIC + ' (webapp open? rosbridge up?)'}")
+        print(f"  compute path : {'listener publishing' if compute_up else 'nothing publishing ' + TRANSFER_BUTTON_TOPIC + ' (listener running? button plugged in?)'}")
+        if not ipad_up and not compute_up:
+            print("  [!] neither path is available -- a press cannot reach the robot.")
+        print(f"  >>> Press the transfer button once, on whichever host it is plugged into (timeout {timeout_s:.0f}s) ...")
+
         deadline = time.time() + timeout_s
-        while not pressed["ok"] and time.time() < deadline and not rospy.is_shutdown():
+        while (not any(pressed.values())) and time.time() < deadline and not rospy.is_shutdown():
             # Re-send jump + arm + explanation (~1.5s cadence) so a late-mounting
             # robot_executing page still gets routed, armed, and shows the prompt.
             to_robot.publish(jump)
             to_robot.publish(arm)
             to_robot.publish(expl)
             next_resend = time.time() + 1.5
-            while time.time() < next_resend and not pressed["ok"]:
+            while time.time() < next_resend and not any(pressed.values()):
                 time.sleep(0.05)
     finally:
         to_robot.publish(String(data=json.dumps({"state": "button_arm", "status": "off"})))
         # Replace the prompt so the page doesn't sit on a stale "waiting" line.
-        done_text = "Button press received (self-test)" if pressed["ok"] else "Self-test: button wait ended"
+        done_text = ("Button press received (self-test)" if any(pressed.values())
+                     else "Self-test: button wait ended")
         to_robot.publish(String(data=json.dumps({"state": "explanation", "status": done_text})))
         sub.unregister()
+        button_sub.unregister()
 
-    if pressed["ok"]:
-        print("  [ok] press relayed on /webapp_to_robot (button_press:pressed).")
+    if any(pressed.values()):
+        sources = []
+        if pressed["ipad"]:
+            sources.append(f"iPad (relayed on {WEBAPP_TO_ROBOT_TOPIC})")
+        if pressed["compute"]:
+            sources.append(f"compute ({TRANSFER_BUTTON_TOPIC})")
+        print(f"  [ok] press received via {' and '.join(sources)}.")
         return True
-    print(f"  [x] no button_press received within {timeout_s:.0f}s.")
-    print("      Check: webapp open on the iPad? rosbridge_websocket running?")
+    print(f"  [x] no button press received within {timeout_s:.0f}s, on either path.")
+    print("      iPad path -- webapp open on the iPad? rosbridge_websocket running?")
     print("      button adapter selected/calibrated on the webapp /mictest screen?")
+    print("      compute path -- is transfer_button_listener.py running (launch_robot.sh),")
+    print("      and does the button show up in `python transfer_button_listener.py --list_devices`?")
     return False
 
 
