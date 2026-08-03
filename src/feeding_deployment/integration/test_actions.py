@@ -273,26 +273,26 @@ def _main(
 
     # logs are saved in user/scenario directory
     log_dir = Path(__file__).parent / "log" / "test_actions"
-    if log_dir.exists():
-        shutil.rmtree(log_dir)
-    log_dir.mkdir(parents=True, exist_ok=True)
+    # if log_dir.exists():
+    #     shutil.rmtree(log_dir)
+    # log_dir.mkdir(parents=True, exist_ok=True)
 
     execution_log = Path(__file__).parent / "log" / "execution_log.txt" # in root log directory
     run_behavior_tree_dir = log_dir / "behavior_trees"
     gesture_detectors_dir = log_dir / "gesture_detectors"
 
-    # Copy the initial behavior trees into a directory for this run.
-    run_behavior_tree_dir.mkdir(exist_ok=True)
-    original_behavior_tree_dir = Path(__file__).parents[1] / "actions" / "behavior_trees"
-    assert original_behavior_tree_dir.exists()
-    for original_bt_filename in original_behavior_tree_dir.glob("*.yaml"):
-        shutil.copy(original_bt_filename, run_behavior_tree_dir)
+    # # Copy the initial behavior trees into a directory for this run.
+    # run_behavior_tree_dir.mkdir(exist_ok=True)
+    # original_behavior_tree_dir = Path(__file__).parents[1] / "actions" / "behavior_trees"
+    # assert original_behavior_tree_dir.exists()
+    # for original_bt_filename in original_behavior_tree_dir.glob("*.yaml"):
+    #     shutil.copy(original_bt_filename, run_behavior_tree_dir)
 
-    # Copy the initial gesture detection file into a directory for this run.
-    gesture_detectors_dir.mkdir(exist_ok=True)
-    original_gesture_detection_filepath = Path(__file__).parents[1] / "perception" / "gestures_perception" / "synthesized_gesture_detectors.py"
-    assert original_gesture_detection_filepath.exists()
-    shutil.copy(original_gesture_detection_filepath, gesture_detectors_dir)
+    # # Copy the initial gesture detection file into a directory for this run.
+    # gesture_detectors_dir.mkdir(exist_ok=True)
+    # original_gesture_detection_filepath = Path(__file__).parents[1] / "perception" / "gestures_perception" / "synthesized_gesture_detectors.py"
+    # assert original_gesture_detection_filepath.exists()
+    # shutil.copy(original_gesture_detection_filepath, gesture_detectors_dir)
 
     # Initialize the interface to the robot.
     if run_on_robot:
@@ -353,10 +353,11 @@ def _main(
         # Pick the plate up and set it down somewhere else, back to back --
         # default table -> holder, the sequence the executive runs at the end of
         # a meal. The pick leaves the plate in the gripper for the place.
-        print(f"Picking the plate from the {location}, then placing it on the {place_location}")
-        test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
-        print(f"Plate picked from the {location} -- placing it on the {place_location} now")
-        test_PlacePlateHLA(place_location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+        for i in range(10):
+            print(f"Picking the plate from the {location}, then placing it on the {place_location}")
+            test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+            print(f"Plate picked from the {location} -- placing it on the {place_location} now")
+            test_PlacePlateHLA(place_location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "close_door":
         # Close the door of the given appliance (fridge / microwave), reusing
         # opening poses perceived by an earlier OpenDoor run.

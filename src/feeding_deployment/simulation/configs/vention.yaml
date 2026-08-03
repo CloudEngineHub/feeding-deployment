@@ -58,19 +58,19 @@ inside_plate_holder_pose:
 above_plate_holder_pos: 
   description: "Above plate holder configuration, the robot should be above the plate holder in this configuration"
   type: "joint_positions"
-  values: [3.08287981, -1.72083563, 1.30501565, -1.73029571, -0.15930177, -1.44136084, -0.23696754]
+  values: [3.0697810474280245, -1.594116563196284, 1.4156184574498325, -1.797991664653992, -0.031368841847824847, -1.4202148071752, -0.14781023418936012]
 above_plate_holder_pose: 
   description: "Above plate holder configuration, the robot should be above the plate holder in this configuration"
   type: "ee_pose"
-  values: [0.08334321, -0.26446328, 0.13953131, -0.50053809, 0.48791783, 0.5102406, -0.50105124]
+  values: [0.08334321, -0.26446328, 0.22, -0.50053809, 0.48791783, 0.5102406, -0.50105124]
 intermediate_plate_holder_pos: 
   description: "Intermediate plate holder configuration"
   type: "joint_positions"
-  values: [3.089357411968979, -1.6792567579816815, 1.3260800521241694, -1.4341063880532712, -0.1493175833663445, -1.734502969530939, -0.26281724796777794]
+  values: [3.069187162504937, -1.5688639371079347, 1.419595888537866, -1.4941127337349371, -0.03900146153199202, -1.7241896118934985, -0.15534644744206627]
 intermediate_plate_holder_pose: 
   description: "Intermediate plate holder configuration"
   type: "ee_pose"
-  values: [0.18077898025512695, -0.2641909718513489, 0.1410924196243286, -0.5071388682913235, 0.49506331260138825, 0.5030548764813569, -0.4946294330432256]
+  values: [0.18077898025512695, -0.2641909718513489, 0.22, -0.5071388682913235, 0.49506331260138825, 0.5030548764813569, -0.4946294330432256]
 
 # Drink holder
 inside_drink_holder_pose: 

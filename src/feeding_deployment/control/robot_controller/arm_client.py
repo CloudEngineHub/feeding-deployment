@@ -159,6 +159,7 @@ if __name__ == "__main__":
     
     ee_pose, joint_positions = get_state()
 
+    arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
     # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
     # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
     # arm_client_interface.execute_command(JointCommand(config.outside_drink_holder_pos))
@@ -170,11 +171,11 @@ if __name__ == "__main__":
     # arm_client_interface.execute_command(JointCommand(config.intermediate_drink_holder_pos))
     # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
 
-    arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
-    arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
-    arm_client_interface.execute_command(JointCommand(config.behind_back_retract_pos))
-    arm_client_interface.execute_command(JointCommand(config.right_back_retract_pos))
-    arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.behind_back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.right_back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
 
     # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
     # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))

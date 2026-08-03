@@ -64,8 +64,19 @@ class OutsideMouthTransfer(Transfer):
         # set mouth pose to be facing away from the wheelchair
         forque_target_base[:3, :3] = Rotation.from_quat([0.523, -0.503, -0.469, 0.503]).as_matrix()
         
+        if self.tool == "utensil":
+            calibrated_outside_mouth_distance = outside_mouth_distance
+        elif self.tool == "drink":
+            calibrated_outside_mouth_distance = outside_mouth_distance - 0.02
+        elif self.tool == "wipe":
+            calibrated_outside_mouth_distance = outside_mouth_distance - 0.02
+        else:
+            raise ValueError(f"Unknown tool: {self.tool}")
+        
+        print(f"Moving to transfer state with outside_mouth_distance={outside_mouth_distance}, calibrated_outside_mouth_distance={calibrated_outside_mouth_distance}")
+
         servo_point_forque_target = np.identity(4)
-        servo_point_forque_target[:3,3] = np.array([0, -0.01, -outside_mouth_distance]).reshape(1,3) # +y is up in the real world
+        servo_point_forque_target[:3,3] = np.array([0, -0.01, -calibrated_outside_mouth_distance]).reshape(1,3) # +y is up in the real world
         infront_mouth_target = forque_target_base @ servo_point_forque_target
 
         # # mouth is assumed to be facing away from the wheelchair
