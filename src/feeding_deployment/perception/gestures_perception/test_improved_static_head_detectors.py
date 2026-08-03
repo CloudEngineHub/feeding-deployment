@@ -15,6 +15,7 @@ import inspect
 import io
 import math
 import pickle
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -35,59 +36,47 @@ def _load_module_under_test():
 
 MODULE = _load_module_under_test()
 
-NOD_SETTINGS = dict(
-    primary_index=MODULE._PITCH_INDEX,
-    cross_index=MODULE._YAW_INDEX,
-    enter_deg=MODULE.NOD_ENTER_DEG,
-    required_half_cycles=MODULE.NOD_REQUIRED_HALF_CYCLES,
-    window=MODULE.NOD_WINDOW_SECONDS,
-    dominance=MODULE.NOD_DOMINANCE,
-    min_amplitude_deg=MODULE.NOD_MIN_AMPLITUDE_DEG,
-)
-
-SHAKE_SETTINGS = dict(
-    primary_index=MODULE._YAW_INDEX,
-    cross_index=MODULE._PITCH_INDEX,
-    enter_deg=MODULE.SHAKE_ENTER_DEG,
-    required_half_cycles=MODULE.SHAKE_REQUIRED_HALF_CYCLES,
-    window=MODULE.SHAKE_WINDOW_SECONDS,
-    dominance=MODULE.SHAKE_DOMINANCE,
-    min_amplitude_deg=MODULE.SHAKE_MIN_AMPLITUDE_DEG,
-)
+# Taken from the module under test, so the tests always score what deployment runs.
+NOD_SETTINGS = dict(MODULE.NOD_PARAMETERS)
+SHAKE_SETTINGS = dict(MODULE.SHAKE_PARAMETERS)
 
 QUIET_GESTURES = ("blinking", "eyebrows_raised", "open_mouth")
 
 
+def _dataset_path(dataset):
+    """Accept either a bare name from gestures_examples/ or a path to a recorded file."""
+    if str(dataset).endswith(".pkl"):
+        return Path(dataset)
+    return _EXAMPLES / f"{dataset}.pkl"
+
+
 def _clips(dataset, kind):
     """Head-pose arrays for one dataset ('positive' or 'negative' examples)."""
-    with open(_EXAMPLES / f"{dataset}.pkl", "rb") as handle:
+    with open(_dataset_path(dataset), "rb") as handle:
         data = pickle.load(handle)
     clips = []
-    for example in data[f"{kind}_examples"]:
+    for example in data.get(f"{kind}_examples", []):
         poses = np.asarray(example["head_pose"], dtype=float)
         if poses.ndim == 2 and poses.shape[1] >= 6:
             clips.append(poses)
     return clips
 
 
-def _replay(poses, primary_index, cross_index, **parameters):
+def _replay(poses, **settings):
     """Drive the tracker over one clip; return the detection time, or None."""
-    tracker = MODULE._HeadOscillationTracker(**parameters)
-    for frame, pose in enumerate(poses):
-        timestamp = frame * _FRAME_PERIOD
-        if tracker.update(timestamp, float(pose[primary_index]), float(pose[cross_index])):
-            return timestamp
-    return None
+    detected_at, _ = MODULE._HeadOscillationTracker.replay(
+        poses, frame_period=_FRAME_PERIOD, **settings)
+    return detected_at
+
+
+def _tracker_settings(settings):
+    """Strip the axis indices, leaving just the tracker's own thresholds."""
+    return {key: value for key, value in settings.items()
+            if key not in ("primary_index", "cross_index")}
 
 
 def _detections(dataset, kind, settings):
-    settings = dict(settings)
-    primary_index = settings.pop("primary_index")
-    cross_index = settings.pop("cross_index")
-    return [
-        _replay(poses, primary_index, cross_index, **settings) is not None
-        for poses in _clips(dataset, kind)
-    ]
+    return [_replay(poses, **settings) is not None for poses in _clips(dataset, kind)]
 
 
 # --------------------------------------------------------------------------------------
@@ -143,13 +132,13 @@ def test_branch_flip_alone_is_not_a_nod():
     for frame in range(200):
         pitch = 179.6 if frame % 2 else -179.6  # ~0.8 deg of real motion
         poses.append([0.0, 0.0, 0.0, 0.0, pitch, 1.0])
-    assert _replay(np.asarray(poses), **_positional(NOD_SETTINGS)) is None
+    assert _replay(np.asarray(poses), **NOD_SETTINGS) is None
 
 
 def test_monotonic_sweep_is_not_a_nod():
     """Leaning in or looking down is one-way motion, however large."""
     poses = [[0.0, 0.0, 0.0, 0.0, -40.0 + 0.8 * frame, 1.0] for frame in range(100)]
-    assert _replay(np.asarray(poses), **_positional(NOD_SETTINGS)) is None
+    assert _replay(np.asarray(poses), **NOD_SETTINGS) is None
 
 
 def test_synthetic_nod_is_detected_across_the_seam():
@@ -157,7 +146,7 @@ def test_synthetic_nod_is_detected_across_the_seam():
         [0.0, 0.0, 0.0, 0.0, _nodding_pitch(frame * _FRAME_PERIOD), 1.0]
         for frame in range(100)
     ]
-    detected_at = _replay(np.asarray(poses), **_positional(NOD_SETTINGS))
+    detected_at = _replay(np.asarray(poses), **NOD_SETTINGS)
     assert detected_at is not None
     assert detected_at < 3.0, f"nod took {detected_at:.1f}s to confirm"
 
@@ -165,7 +154,7 @@ def test_synthetic_nod_is_detected_across_the_seam():
 def test_evidence_does_not_span_a_long_dropout():
     """Half a nod, a 5 s gap, then the other half must not add up to a gesture."""
     tracker = MODULE._HeadOscillationTracker(
-        **{k: v for k, v in NOD_SETTINGS.items() if k not in ("primary_index", "cross_index")}
+        **_tracker_settings(NOD_SETTINGS)
     )
     fired = False
     for frame in range(10):
@@ -174,16 +163,6 @@ def test_evidence_does_not_span_a_long_dropout():
         timestamp = 5.0 + frame * _FRAME_PERIOD
         fired |= tracker.update(timestamp, _nodding_pitch(timestamp), 1.0)
     assert not fired
-
-
-def _positional(settings):
-    """Turn a settings dict into `_replay` kwargs."""
-    settings = dict(settings)
-    return dict(
-        primary_index=settings.pop("primary_index"),
-        cross_index=settings.pop("cross_index"),
-        **settings,
-    )
 
 
 # --------------------------------------------------------------------------------------
@@ -325,8 +304,7 @@ def test_debug_stream_survives_dropouts_and_reports_gap_resets():
 
 def test_slew_gate_is_frame_rate_independent():
     """The velocity limit is deg/s, so slower frames must not turn real motion into a glitch."""
-    settings = {key: value for key, value in NOD_SETTINGS.items()
-                if key not in ("primary_index", "cross_index")}
+    settings = _tracker_settings(NOD_SETTINGS)
 
     # 60 deg between frames 0.1 s apart is 600 deg/s -- beyond any neck, so a glitch.
     fast = MODULE._HeadOscillationTracker(**settings)
@@ -343,12 +321,45 @@ def test_slew_gate_is_frame_rate_independent():
 
 def test_anchoring_frame_never_reports_a_detection():
     """After a reset the window is empty, so no gate combination may read as a hit."""
-    settings = {key: value for key, value in NOD_SETTINGS.items()
-                if key not in ("primary_index", "cross_index")}
+    settings = _tracker_settings(NOD_SETTINGS)
     tracker = MODULE._HeadOscillationTracker(**settings)
     assert tracker.update(0.0, 178.0, 1.0) is False
     assert tracker.update(9.0, 178.0, 1.0) is False  # gap reset
     assert tracker.last_reading["blocked_by"].startswith("GAP RESET")
+
+
+# --------------------------------------------------------------------------------------
+# The format contract with record_head_gestures.py
+# --------------------------------------------------------------------------------------
+
+def test_recorded_dataset_format_round_trips():
+    """A file shaped like record_head_gestures.py writes must score without special-casing."""
+    positive = [(0.0, 0.0, 0.0, 5.0, _nodding_pitch(frame * _FRAME_PERIOD), 1.0)
+                for frame in range(40)]
+    negative = [(0.0, 0.0, 0.0, 5.0, 179.6 if frame % 2 else -179.6, 1.0)
+                for frame in range(40)]
+    dataset = {
+        "gesture_label": "detect_head_nod",
+        "gesture_description": "nodding head up and down",
+        "positive_examples": [{"head_pose": positive,
+                               "face_keypoints": [np.zeros((68, 2))] * len(positive)}],
+        "negative_examples": [{"head_pose": negative,
+                               "face_keypoints": [np.zeros((68, 2))] * len(negative)}],
+    }
+
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "recorded.pkl"
+        with open(path, "wb") as handle:
+            pickle.dump(dataset, handle)
+
+        assert _detections(str(path), "positive", NOD_SETTINGS) == [True]
+        assert _detections(str(path), "negative", NOD_SETTINGS) == [False]
+
+        # MockPerceptionInterface keys off face_keypoints for its frame count, so the two
+        # lists have to stay the same length for the synthesizer harness to replay it.
+        for kind in ("positive", "negative"):
+            for example in dataset[f"{kind}_examples"]:
+                assert len(example["head_pose"]) == len(example["face_keypoints"])
 
 
 # --------------------------------------------------------------------------------------
@@ -368,23 +379,72 @@ def _summarise():
     print("\nDetection latency on the target gesture:")
     for dataset, settings, label in (("head_nod", NOD_SETTINGS, "nod"),
                                      ("shake_my_head_from_left_to_right", SHAKE_SETTINGS, "shake")):
-        kwargs = _positional(settings)
-        times = [_replay(poses, **kwargs) for poses in _clips(dataset, "positive")]
+        times = [_replay(poses, **settings) for poses in _clips(dataset, "positive")]
         hit = [t for t in times if t is not None]
         print(f"  {label:6s} recall {len(hit)}/{len(times)}  "
               f"median {np.median(hit):.1f}s  max {max(hit):.1f}s")
 
 
+def _score_recorded(path, gesture):
+    """Score one recorded dataset (from record_head_gestures.py) clip by clip."""
+    settings = SHAKE_SETTINGS if gesture == "shake" else NOD_SETTINGS
+    print(f"\n{'=' * 78}\n{path}  scored as '{gesture}'\n{'=' * 78}")
+    for kind, want in (("positive", True), ("negative", False)):
+        clips = _clips(path, kind)
+        if not clips:
+            continue
+        correct = 0
+        print(f"\n{kind} examples ({len(clips)}):")
+        for index, poses in enumerate(clips):
+            detected_at, blocked_by = MODULE._HeadOscillationTracker.replay(
+                poses, frame_period=_FRAME_PERIOD, **settings)
+            fired = detected_at is not None
+            correct += int(fired == want)
+            primary = settings["primary_index"]
+            cross = settings["cross_index"]
+            verdict = f"fired at {detected_at:.1f}s" if fired else f"no fire ({blocked_by})"
+            print(f"  {index:2d}  {len(poses):4d} frames  "
+                  f"primary p2p {_unwrapped_extent(poses[:, primary]):6.1f}  "
+                  f"cross p2p {_unwrapped_extent(poses[:, cross]):6.1f}  {verdict}"
+                  f"{'' if fired == want else '   <-'}")
+        print(f"  {'recall' if want else 'correctly rejected'}: {correct}/{len(clips)}")
+
+
+def _unwrapped_extent(angles):
+    """Peak-to-peak after +-180 unwrapping, matching what the detector sees."""
+    angles = np.asarray(angles, dtype=float)
+    if angles.size < 2:
+        return 0.0
+    steps = ((np.diff(angles) + 180.0) % 360.0) - 180.0
+    return float(np.ptp(np.concatenate([[0.0], np.cumsum(steps)]) + angles[0]))
+
+
 if __name__ == "__main__":
-    _summarise()
-    print()
-    failures = 0
-    for name, test in sorted(globals().items()):
-        if name.startswith("test_") and callable(test):
-            try:
-                test()
-                print(f"  PASS  {name}")
-            except AssertionError as error:
-                failures += 1
-                print(f"  FAIL  {name}: {error}")
-    print(f"\n{failures} failure(s)")
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Offline checks and dataset scoring.")
+    parser.add_argument("--data", type=str, default=None,
+                        help="score a recorded .pkl (from record_head_gestures.py) instead "
+                             "of printing the built-in summary")
+    parser.add_argument("--gesture", type=str, default="nod", choices=["nod", "shake"],
+                        help="which detector to score --data with")
+    parser.add_argument("--skip_tests", action="store_true")
+    arguments = parser.parse_args()
+
+    if arguments.data:
+        _score_recorded(arguments.data, arguments.gesture)
+    else:
+        _summarise()
+
+    if not arguments.skip_tests:
+        print()
+        failures = 0
+        for name, test in sorted(globals().items()):
+            if name.startswith("test_") and callable(test):
+                try:
+                    test()
+                    print(f"  PASS  {name}")
+                except AssertionError as error:
+                    failures += 1
+                    print(f"  FAIL  {name}: {error}")
+        print(f"\n{failures} failure(s)")

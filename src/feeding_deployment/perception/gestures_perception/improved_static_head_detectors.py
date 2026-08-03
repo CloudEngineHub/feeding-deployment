@@ -80,6 +80,29 @@ SHAKE_WINDOW_SECONDS = 2.5
 SHAKE_DOMINANCE = 1.5
 SHAKE_MIN_AMPLITUDE_DEG = 24.0
 
+# Single source of truth for what each detector runs with, so calibration is one edit here
+# and the offline tools (`test_improved_static_head_detectors.py`,
+# `record_head_gestures.py`) score exactly what deployment would do.
+NOD_PARAMETERS = dict(
+    primary_index=_PITCH_INDEX,
+    cross_index=_YAW_INDEX,
+    enter_deg=NOD_ENTER_DEG,
+    required_half_cycles=NOD_REQUIRED_HALF_CYCLES,
+    window=NOD_WINDOW_SECONDS,
+    dominance=NOD_DOMINANCE,
+    min_amplitude_deg=NOD_MIN_AMPLITUDE_DEG,
+)
+
+SHAKE_PARAMETERS = dict(
+    primary_index=_YAW_INDEX,
+    cross_index=_PITCH_INDEX,
+    enter_deg=SHAKE_ENTER_DEG,
+    required_half_cycles=SHAKE_REQUIRED_HALF_CYCLES,
+    window=SHAKE_WINDOW_SECONDS,
+    dominance=SHAKE_DOMINANCE,
+    min_amplitude_deg=SHAKE_MIN_AMPLITUDE_DEG,
+)
+
 
 class _HeadOscillationTracker:
     """Streaming test for a deliberate repeated head oscillation on one axis.
@@ -289,6 +312,23 @@ class _HeadOscillationTracker:
                 f"{verdict}")
 
     @classmethod
+    def replay(cls, head_poses, primary_index, cross_index, frame_period=_POLL_PERIOD,
+               **parameters):
+        """Score a recorded clip offline, exactly as the live loop would.
+
+        `head_poses` is a sequence of head_pose tuples in capture order. Returns
+        `(detected_at_seconds, blocking_gate)`, where a detection gives
+        `(time, None)` and a miss gives `(None, reason)`.
+        """
+        tracker = cls(**parameters)
+        for frame, head_pose in enumerate(head_poses):
+            timestamp = frame * frame_period
+            if tracker.update(timestamp, float(head_pose[primary_index]),
+                              float(head_pose[cross_index])):
+                return timestamp, None
+        return None, tracker.last_reading.get("blocked_by")
+
+    @classmethod
     def poll_until_detected(cls, perception_interface, termination_event, timeout,
                             primary_index, cross_index, label, debug=False,
                             continuous=False, **parameters):
@@ -409,16 +449,10 @@ def head_nod(perception_interface, termination_event, timeout, debug=False, cont
         perception_interface,
         termination_event,
         timeout,
-        primary_index=_PITCH_INDEX,
-        cross_index=_YAW_INDEX,
         label="head nod",
         debug=debug,
         continuous=continuous,
-        enter_deg=NOD_ENTER_DEG,
-        required_half_cycles=NOD_REQUIRED_HALF_CYCLES,
-        window=NOD_WINDOW_SECONDS,
-        dominance=NOD_DOMINANCE,
-        min_amplitude_deg=NOD_MIN_AMPLITUDE_DEG,
+        **NOD_PARAMETERS,
     )
     if detected and not debug:
         print("Head nod detected")
@@ -434,16 +468,10 @@ def head_shake(perception_interface, termination_event, timeout, debug=False, co
         perception_interface,
         termination_event,
         timeout,
-        primary_index=_YAW_INDEX,
-        cross_index=_PITCH_INDEX,
         label="head shake",
         debug=debug,
         continuous=continuous,
-        enter_deg=SHAKE_ENTER_DEG,
-        required_half_cycles=SHAKE_REQUIRED_HALF_CYCLES,
-        window=SHAKE_WINDOW_SECONDS,
-        dominance=SHAKE_DOMINANCE,
-        min_amplitude_deg=SHAKE_MIN_AMPLITUDE_DEG,
+        **SHAKE_PARAMETERS,
     )
     if detected and not debug:
         print("Head shake detected")
