@@ -319,6 +319,7 @@ class PickPlateFromTableHLA(HighLevelAction):
             self.robot_interface.set_speed(speed)
 
         print("Picking plate from table ...")
+        input("Is the recording camera setup to face the table? Press enter to continue ...")
 
         self.report_activity("Recording a picture of the plate after feeding")
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)

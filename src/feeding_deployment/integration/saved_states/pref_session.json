@@ -41,16 +41,16 @@
     },
     "outside_mouth_distance": "near",
     "plate_color_dining_table": {
-      "h": 10,
-      "range": 0.18,
-      "s": 180,
-      "v": 207
+      "h": 16,
+      "range": 0.15,
+      "s": 136,
+      "v": 253
     },
     "plate_color_fridge": {
-      "h": 8,
+      "h": 10,
       "range": 0.17,
-      "s": 170,
-      "v": 160
+      "s": 207,
+      "v": 123
     },
     "plate_color_microwave": {
       "h": 11,
@@ -60,7 +60,7 @@
     },
     "plate_color_movable_table": {
       "h": 7,
-      "range": 0.24,
+      "range": 0.2,
       "s": 172,
       "v": 175
     },
@@ -72,12 +72,17 @@
     "wait_before_autocontinue_task_selection": "countdown (30 sec)"
   },
   "context": {
-    "meal": "orange chicken",
+    "meal": "sausage and hash brown",
     "setting": "Watching TV with TV in Front",
-    "time_of_day": "evening"
+    "time_of_day": "night"
   },
   "corrected": {
-    "confirm_navigation_arrival": "skip"
+    "plate_color_fridge": {
+      "h": 10,
+      "range": 0.17,
+      "s": 207,
+      "v": 123
+    }
   },
   "finalized": [
     "bite_dipping_preference",

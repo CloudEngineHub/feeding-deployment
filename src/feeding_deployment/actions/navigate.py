@@ -1871,6 +1871,7 @@ class NavigateHLA(HighLevelAction):
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
         )
+        input("Is the recording camera setup to face the microwave? Press enter to continue ...")
 
     def navigate_to_sink(self, speed: str, position_offset, arrival_confirm) -> None:
         arrival_confirm_mode, autocontinue_seconds = self._confirm_page_args(arrival_confirm)
@@ -1879,18 +1880,23 @@ class NavigateHLA(HighLevelAction):
         # into the corridor -- the mirror of the microwave->table egress via
         # kitchen_exit. (Auto-skipped while the staging pose is missing or a
         # placeholder.)
-        input("Is the FT sensor wire tucked in? Press Enter to continue...")
+        input("[Reminder: Tuck in FT sensor wire] Is the recording camera setup for recording navigation to the sink? Press enter to continue ...")
         self._navigate_to_target(
             "sink", speed, via=[self._INGRESS_WAYPOINT], position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,
         )
+        input("Is the recording camera setup to face the sink? Press enter to continue ...")
 
     def navigate_to_dining_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        input("Is the recording camera setup for recording navigation to the dining table? Press enter to continue ...")
         self._navigate_table_leg("dining_table", speed, position_offset, arrival_confirm)
+        input("Is the recording camera setup to face the dining table? Press enter to continue ...")
 
     def navigate_to_movable_table(self, speed: str, position_offset, arrival_confirm) -> None:
+        input("Is the recording camera setup for recording navigation to the movable table? Press enter to continue ...")
         self._navigate_table_leg("movable_table", speed, position_offset, arrival_confirm)
+        input("Is the recording camera setup to face the movable table? Press enter to continue ...")
 
     def _navigate_table_leg(
         self, destination: str, speed: str, position_offset, arrival_confirm

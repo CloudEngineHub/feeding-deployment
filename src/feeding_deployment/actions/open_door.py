@@ -139,7 +139,9 @@ class OpenDoorHLA(HighLevelAction):
         
         self.move_to_ee_pose(handle_opening_poses["post_release_pose"])
         self.move_to_ee_pose(handle_opening_poses["pre_push_pose"])
+        self.close_gripper()
         self.move_to_ee_pose(handle_opening_poses["push_pose"])
+        self.open_gripper()
 
         with slight_push_threshold:
             self.move_to_ee_pose_trajectory(handle_opening_poses["push_waypoints"])

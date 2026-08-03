@@ -98,7 +98,7 @@ class FoodManipulationSkillLibrary:
     # meal from the mealtime setting rather than hand-edited between deployments.
     _PLATE_HEIGHT_BY_TABLE = {
         "movable_table": 0.215,
-        "dining_table": 0.225,
+        "dining_table": 0.223,
     }
 
     def __init__(self, sim : FeedingDeploymentPyBulletSimulator, robot_interface: ArmInterfaceClient, wrist_interface: WristInterface, perception_interface: PerceptionInterface, rviz_interface: RVizInterface, no_waits=False):
