@@ -16,11 +16,12 @@ from relational_structs import Object
 from pybullet_helpers.geometry import Pose
 from pybullet_helpers.link import get_relative_link_pose
 
-from feeding_deployment.actions.base import tool_type, table_type, plate_type, appliance_type
+from feeding_deployment.actions.base import tool_type, table_type, plate_type, appliance_type, holder_type
 from feeding_deployment.actions.acquisition import AcquireBiteHLA
 from feeding_deployment.actions.flair.flair import FLAIR
 from feeding_deployment.actions.pick_tool import PickToolHLA
-from feeding_deployment.actions.pick_plate import PickPlateFromApplianceHLA, PickPlateFromTableHLA
+from feeding_deployment.actions.pick_plate import PickPlateFromApplianceHLA, PickPlateFromHolderHLA, PickPlateFromTableHLA
+from feeding_deployment.actions.place_plate import PlacePlateInApplianceHLA, PlacePlateOnHolderHLA, PlacePlateOnTableHLA
 from feeding_deployment.actions.close_door import CloseDoorHLA
 from feeding_deployment.actions.open_door import OpenDoorHLA
 from feeding_deployment.actions.stow_tool import StowToolHLA
@@ -91,19 +92,55 @@ def test_StowToolHLA(tool, sim, robot_interface, perception_interface, rviz_inte
     high_level_action.execute_action(objects=[tool_obj, table_obj], params={})
 
 
+# Plate locations and the HLA + PDDL type that go with each, for both directions.
+# The table entry covers whichever physical table the mealtime setting resolves to
+# (the HLA picks pick_plate_from_{dining,movable}_table.yaml itself; with no
+# preference context in this harness that is the movable table).
+_PICK_PLATE_HLAS = {
+    "table": (PickPlateFromTableHLA, table_type),
+    "holder": (PickPlateFromHolderHLA, holder_type),
+    "fridge": (PickPlateFromApplianceHLA, appliance_type),
+    "microwave": (PickPlateFromApplianceHLA, appliance_type),
+}
+_PLACE_PLATE_HLAS = {
+    "table": (PlacePlateOnTableHLA, table_type),
+    "holder": (PlacePlateOnHolderHLA, holder_type),
+    "fridge": (PlacePlateInApplianceHLA, appliance_type),
+    "microwave": (PlacePlateInApplianceHLA, appliance_type),
+}
+
+
 def test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir):
 
-    assert location in ["table", "fridge", "microwave"], f"Location {location} not recognized"
+    assert location in _PICK_PLATE_HLAS, f"Location {location} not recognized"
 
-    hla_cls = PickPlateFromTableHLA if location == "table" else PickPlateFromApplianceHLA
+    hla_cls, location_type = _PICK_PLATE_HLAS[location]
     high_level_action = hla_cls(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, None, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
 
-    # PickPlate requires an empty gripper.
+    # PickPlate requires an empty gripper (the pick skills assert this).
     sim.held_object_name = None
 
     plate_obj = Object("plate", plate_type)
-    location_obj = Object(location, table_type if location == "table" else appliance_type)
+    location_obj = Object(location, location_type)
     # Speed / PlateHandleColor / PlateHandleColorTolerance come from the behavior tree's parameter defaults.
+    high_level_action.execute_action(objects=[plate_obj, location_obj], params={})
+
+
+def test_PlacePlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir):
+
+    assert location in _PLACE_PLATE_HLAS, f"Location {location} not recognized"
+
+    hla_cls, location_type = _PLACE_PLATE_HLAS[location]
+    high_level_action = hla_cls(sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, None, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+
+    # PlacePlate runs with the plate held. The place skills don't assert on it
+    # (their held-object asserts are commented out), but keep the sim state
+    # honest so a pick chained afterwards sees a full gripper.
+    sim.held_object_name = "plate"
+
+    plate_obj = Object("plate", plate_type)
+    location_obj = Object(location, location_type)
+    # Speed comes from the behavior tree's parameter defaults.
     high_level_action.execute_action(objects=[plate_obj, location_obj], params={})
 
 
@@ -225,7 +262,7 @@ def _seed_handle_opening_poses(log_dir: Path, handle_poses_pkl: str | None) -> N
 
 
 def _main(
-    scene_config: str, transfer_type: str, run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, max_motion_planning_time: float = 10, tool: str = "utensil", no_waits: bool = False, action: str = "tool", location: str = "table", handle_poses_pkl: str = None, meal: str = DEFAULT_TEST_MEAL, bite_ordering: str = DEFAULT_TEST_BITE_ORDERING, no_dip: bool = False
+    scene_config: str, transfer_type: str, run_on_robot: bool, use_interface: bool, simulate_head_perception: bool, use_gui: bool, max_motion_planning_time: float = 10, tool: str = "utensil", no_waits: bool = False, action: str = "tool", location: str = "table", handle_poses_pkl: str = None, meal: str = DEFAULT_TEST_MEAL, bite_ordering: str = DEFAULT_TEST_BITE_ORDERING, no_dip: bool = False, place_location: str = "holder"
 ) -> None:
     """Testing pick and stow tool actions."""
 
@@ -305,8 +342,21 @@ def _main(
         # for the utensil put a bite on the fork by hand to test with food.
         test_TransferToolHLA(tool, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "pick_plate":
-        # Pick the plate from the given location (table / fridge / microwave).
+        # Pick the plate from the given location (table / holder / fridge / microwave).
         test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+    elif action == "place_plate":
+        # Place the held plate at the given location (table / holder / fridge /
+        # microwave). Nothing picks it up first, so start with the plate in the
+        # gripper.
+        test_PlacePlateHLA(place_location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+    elif action == "pick_place_plate":
+        # Pick the plate up and set it down somewhere else, back to back --
+        # default table -> holder, the sequence the executive runs at the end of
+        # a meal. The pick leaves the plate in the gripper for the place.
+        print(f"Picking the plate from the {location}, then placing it on the {place_location}")
+        test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+        print(f"Plate picked from the {location} -- placing it on the {place_location} now")
+        test_PlacePlateHLA(place_location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "close_door":
         # Close the door of the given appliance (fridge / microwave), reusing
         # opening poses perceived by an earlier OpenDoor run.
@@ -348,12 +398,15 @@ if __name__ == "__main__":
     parser.add_argument("--max_motion_planning_time", type=float, default=10.0)
     parser.add_argument("--tool", type=str, default="utensil")
     parser.add_argument("--no_waits", action="store_true")
-    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door", "acquire_bite", "transfer", "acquire_transfer_bite"])
-    parser.add_argument("--location", type=str, default="table", choices=["table", "fridge", "microwave"])
+    parser.add_argument("--action", type=str, default="tool", choices=["tool", "pick_plate", "open_door", "close_door", "open_close_door", "acquire_bite", "transfer", "acquire_transfer_bite", "place_plate", "pick_place_plate"])
+    parser.add_argument("--location", type=str, default="table", choices=["table", "holder", "fridge", "microwave"],
+                        help="where the plate is picked from (pick_plate / pick_place_plate); the appliance for the door actions")
+    parser.add_argument("--place_location", type=str, default="holder", choices=["table", "holder", "fridge", "microwave"],
+                        help="where the plate is put down (place_plate / pick_place_plate)")
     parser.add_argument("--handle_poses_pkl", type=str, default=None, help="handle_opening_pos.pkl to close from (default: newest under integration/log/*/)")
     parser.add_argument("--meal", type=str, default=DEFAULT_TEST_MEAL, choices=MEALS, help="acquire_bite: catalog meal whose items FLAIR detects (solids + sauces)")
     parser.add_argument("--bite_ordering", type=str, default=DEFAULT_TEST_BITE_ORDERING, help=f"acquire_bite: bite-ordering preference given to FLAIR's planner (deployment default is {DEFAULT_BITE_ORDERING!r})")
     parser.add_argument("--no_dip", action="store_true", help="acquire_bite: suppress dipping (the 'do not dip' preference)")
     args = parser.parse_args()
 
-    _main(args.scene_config, args.transfer_type, args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.max_motion_planning_time, args.tool, args.no_waits, args.action, args.location, args.handle_poses_pkl, args.meal, args.bite_ordering, args.no_dip)
+    _main(args.scene_config, args.transfer_type, args.run_on_robot, args.use_interface, args.simulate_head_perception, args.use_gui, args.max_motion_planning_time, args.tool, args.no_waits, args.action, args.location, args.handle_poses_pkl, args.meal, args.bite_ordering, args.no_dip, args.place_location)
