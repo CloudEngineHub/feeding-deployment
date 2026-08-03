@@ -9,7 +9,10 @@ without ROS, DECA, or a robot:
     pytest test_improved_static_head_detectors.py
 """
 
+import contextlib
 import importlib.util
+import inspect
+import io
 import math
 import pickle
 from pathlib import Path
@@ -228,11 +231,11 @@ def _scripted_nod(frames=120):
     return payloads
 
 
-def _run_loop(payloads, detector, timeout=20.0):
+def _run_loop(payloads, detector, timeout=20.0, perception=None, **kwargs):
     real_time = MODULE.time
     MODULE.time = _FakeClock()
     try:
-        return detector(_FakePerception(payloads), None, timeout)
+        return detector(perception or _FakePerception(payloads), None, timeout, **kwargs)
     finally:
         MODULE.time = real_time
 
@@ -262,6 +265,90 @@ def test_polling_loop_honours_the_termination_event():
         assert perception.polls == 0, "returned only after polling perception"
     finally:
         MODULE.time = real_time
+
+
+# --------------------------------------------------------------------------------------
+# Debug streaming and continuous mode
+# --------------------------------------------------------------------------------------
+
+def test_detectors_stay_callable_with_three_positional_arguments():
+    """Gesture discovery calls detectors as fn(perception, event, timeout) and nothing more."""
+    for detector in (MODULE.head_nod, MODULE.head_shake, MODULE.mouth_open):
+        parameters = list(inspect.signature(detector).parameters.values())
+        assert [p.name for p in parameters[:3]] == ["perception_interface", "termination_event", "timeout"]
+        assert all(p.default is not inspect.Parameter.empty for p in parameters[3:]), \
+            f"{detector.__name__} grew a required argument"
+
+
+def test_continuous_mode_keeps_watching_after_a_detection():
+    payloads = _scripted_nod(frames=400)
+    perception = _FakePerception(payloads)
+    assert _run_loop(payloads, MODULE.head_nod, timeout=60.0,
+                     perception=perception, continuous=True) is True
+    assert perception.polls == len(payloads), \
+        "continuous mode stopped early instead of watching the whole stream"
+
+
+def test_default_mode_returns_on_the_first_detection():
+    payloads = _scripted_nod(frames=400)
+    perception = _FakePerception(payloads)
+    assert _run_loop(payloads, MODULE.head_nod, timeout=60.0, perception=perception) is True
+    assert perception.polls < len(payloads), \
+        "default mode should return at the first detection, not keep polling"
+
+
+def test_debug_stream_prints_the_columns_and_the_blocking_gate():
+    stream = io.StringIO()
+    with contextlib.redirect_stdout(stream):
+        assert _run_loop(_scripted_nod(), MODULE.head_nod, debug=True) is True
+    output = stream.getvalue()
+    for column in ("roll", "pitch", "yaw", "unwrap", "step", "deg/s", "base", "dev",
+                   "p2p_pri", "p2p_crs", "ratio", "verdict"):
+        assert column in output, f"debug stream is missing the {column!r} column"
+    assert "half-cycles" in output, "debug stream never named the blocking gate"
+    assert "*** DETECTED ***" in output
+    assert "enter +-4.0 deg" in output, "debug stream did not report the thresholds in use"
+
+
+def test_debug_stream_survives_dropouts_and_reports_gap_resets():
+    """A long face loss must print a GAP RESET rather than blow up on missing fields."""
+    payloads = ([{"head_pose": (0.0, 0.0, 0.0, 5.0, _nodding_pitch(i * _FRAME_PERIOD), 1.0)}
+                 for i in range(5)]
+                + [None] * 30
+                + [{"head_pose": (0.0, 0.0, 0.0, 5.0, _nodding_pitch(i * _FRAME_PERIOD), 1.0)}
+                   for i in range(5, 60)])
+    stream = io.StringIO()
+    with contextlib.redirect_stdout(stream):
+        _run_loop(payloads, MODULE.head_nod, debug=True, continuous=True)
+    assert "GAP RESET" in stream.getvalue()
+
+
+def test_slew_gate_is_frame_rate_independent():
+    """The velocity limit is deg/s, so slower frames must not turn real motion into a glitch."""
+    settings = {key: value for key, value in NOD_SETTINGS.items()
+                if key not in ("primary_index", "cross_index")}
+
+    # 60 deg between frames 0.1 s apart is 600 deg/s -- beyond any neck, so a glitch.
+    fast = MODULE._HeadOscillationTracker(**settings)
+    for timestamp, pitch in ((0.0, 0.0), (0.1, 5.0), (0.2, 65.0)):
+        fast.update(timestamp, pitch, 0.0)
+    assert fast.last_reading["blocked_by"].startswith("SLEW RESET"), fast.last_reading
+
+    # The same 60 deg across 0.2 s is 300 deg/s -- a fast shake, and must be kept.
+    slow = MODULE._HeadOscillationTracker(**settings)
+    for timestamp, pitch in ((0.0, 0.0), (0.2, 5.0), (0.4, 65.0)):
+        slow.update(timestamp, pitch, 0.0)
+    assert not str(slow.last_reading.get("blocked_by")).startswith("SLEW RESET"), slow.last_reading
+
+
+def test_anchoring_frame_never_reports_a_detection():
+    """After a reset the window is empty, so no gate combination may read as a hit."""
+    settings = {key: value for key, value in NOD_SETTINGS.items()
+                if key not in ("primary_index", "cross_index")}
+    tracker = MODULE._HeadOscillationTracker(**settings)
+    assert tracker.update(0.0, 178.0, 1.0) is False
+    assert tracker.update(9.0, 178.0, 1.0) is False  # gap reset
+    assert tracker.last_reading["blocked_by"].startswith("GAP RESET")
 
 
 # --------------------------------------------------------------------------------------
