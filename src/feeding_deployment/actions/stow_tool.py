@@ -83,24 +83,17 @@ class StowToolHLA(HighLevelAction):
             self.robot_interface.set_speed(speed)
         
         self.report_activity("Putting the drink back")
-        last_drink_poses, last_drink_pickup_joint_pos = self.perception_interface.get_last_drink_pickup_configs()
-        x_movement, y_movement = self.sim.scene_description.drink_delta_xy
-        self.sim.scene_description.drink_delta_xy = (0, 0)
-
-        for value in ['drink_pose', 'inside_top_pose', 'place_inside_bottom_pose', 'place_pre_grasp_pose']:
-            last_drink_poses[value].position[0] += y_movement
-            last_drink_poses[value].position[1] -= x_movement
-
-        if abs(x_movement) < 0.01 and abs(y_movement) < 0.01:
-            self.move_to_joint_positions(last_drink_pickup_joint_pos)
+        self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)
+        self.move_to_joint_positions(self.sim.scene_description.intermediate_drink_holder_pos)
+        self.move_to_joint_positions(self.sim.scene_description.above_drink_holder_pos)
 
         with self.low_speed(restore=speed):
-            self.move_to_ee_pose(last_drink_poses['inside_top_pose'])
+            self.move_to_ee_pose(self.sim.scene_description.inside_drink_holder_pose)
             self.ungrasp_tool("drink")
-            self.move_to_ee_pose(last_drink_poses['place_inside_bottom_pose'])
-            self.move_to_ee_pose(last_drink_poses['place_pre_grasp_pose'])
-
-        self.move_to_joint_positions(self.sim.scene_description.drink_staging_pos)
+            self.move_to_ee_pose(self.sim.scene_description.below_drink_holder_pose)
+        
+        self.move_to_ee_pose(self.sim.scene_description.outside_drink_holder_pose)
+        self.move_to_joint_positions(self.sim.scene_description.intermediate_drink_holder_pos)
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
     def stow_wipe(self, speed: str) -> None:

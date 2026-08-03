@@ -159,8 +159,41 @@ if __name__ == "__main__":
     
     ee_pose, joint_positions = get_state()
 
-    arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
-    arm_client_interface.execute_command(JointCommand(config.above_plate_pos))
+    # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
+    # arm_client_interface.execute_command(JointCommand(config.outside_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.intermediate_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.outside_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.intermediate_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
+
+    arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.behind_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.right_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+
+    # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
+    # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
+    # arm_client_interface.execute_command(JointCommand(config.home_pos))
+
+    # arm_client_interface.execute_command(CartesianCommand(config.above_drink_holder_pose[:3], config.above_drink_holder_pose[3:]))
+    # arm_client_interface.execute_command(CartesianCommand(config.inside_drink_holder_pose[:3], config.inside_drink_holder_pose[3:]))
+    # arm_client_interface.execute_command(CloseGripperCommand())
+    # arm_client_interface.execute_command(CartesianCommand(config.below_drink_holder_pose[:3], config.below_drink_holder_pose[3:]))
+    # arm_client_interface.execute_command(CartesianCommand(config.outside_drink_holder_pose[:3], config.outside_drink_holder_pose[3:]))
+    # get_state()
+    # arm_client_interface.execute_command(CartesianCommand(config.below_drink_holder_pose[:3], config.below_drink_holder_pose[3:]))
+    # arm_client_interface.execute_command(CartesianCommand(config.slightly_above_drink_holder_pose[:3], config.slightly_above_drink_holder_pose[3:]))
+    # arm_client_interface.execute_command(OpenGripperCommand())
+    # arm_client_interface.execute_command(CartesianCommand(config.above_drink_holder_pose[:3], config.above_drink_holder_pose[3:]))
+
+    # arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.above_plate_pos))
 
     # before_transfer_pos = [-3.0854968936528, -1.483771146589941, -2.4555141535696507, -1.3825566440970434, 1.3751202993852156, -0.8903261777143525, 1.7401439441938908]
     # acq_pos = [-3.0854968936528, -1.483771146589941, -2.4555141535696507, -1.3825566440970434, 1.3751202993852156, -0.8903261777143525, -3.008976818683771]

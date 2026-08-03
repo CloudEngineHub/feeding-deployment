@@ -72,6 +72,40 @@ intermediate_plate_holder_pose:
   type: "ee_pose"
   values: [0.18077898025512695, -0.2641909718513489, 0.1410924196243286, -0.5071388682913235, 0.49506331260138825, 0.5030548764813569, -0.4946294330432256]
 
+# Drink holder
+inside_drink_holder_pose: 
+  description: "Inside drink holder configuration, the robot should be inside the drink holder in this configuration"
+  type: "ee_pose"
+  values: [0.07632755488157272, -0.3840244710445404, 0.09230344742536545, -0.5008859108528795, 0.48738189783645397, 0.510721262236378, -0.5007354413960514]
+slightly_above_drink_holder_pose: 
+  description: "Slightly above drink holder configuration, the robot should be slightly above the drink holder in this configuration"
+  type: "ee_pose"
+  values: [0.07632755488157272, -0.3840244710445404, 0.10230344742536545, -0.5008859108528795, 0.48738189783645397, 0.510721262236378, -0.5007354413960514]
+above_drink_holder_pose: 
+  description: "Above drink holder configuration, the robot should be above the drink holder in this configuration"
+  type: "ee_pose"
+  values: [0.07632755488157272, -0.3840244710445404, 0.19230344742536545, -0.5008859108528795, 0.48738189783645397, 0.510721262236378, -0.5007354413960514]
+above_drink_holder_pos: 
+  description: "Above drink holder configuration, the robot should be above the drink holder in this configuration"
+  type: "joint_positions"
+  values: [-2.928166124882516, -1.6599658843095835, 1.4323191406457194, -1.5070658166448645, -0.05460758551985645, -1.4198659330723995, -0.14655801584480432]
+below_drink_holder_pose: 
+  description: "Below drink holder configuration, the robot should be below the drink holder in this configuration"
+  type: "ee_pose"
+  values: [0.07632755488157272, -0.3840244710445404, 0.05230344742536545, -0.5008859108528795, 0.48738189783645397, 0.510721262236378, -0.5007354413960514]
+outside_drink_holder_pose: 
+  description: "Outside drink holder configuration, the robot should be outside the drink holder in this configuration"
+  type: "ee_pose"
+  values: [0.17632755488157272, -0.3840244710445404, 0.05230344742536545, -0.5008859108528795, 0.48738189783645397, 0.510721262236378, -0.5007354413960514]
+outside_drink_holder_pos: 
+  description: "Outside drink holder configuration, the robot should be outside the drink holder in this configuration"
+  type: "joint_positions"
+  values: [-2.8601702959306126, -1.840095442539818, 1.317391755383895, -0.9923044748078844, -0.18873609592504348, -1.8115365019581349, -0.36349965087487757]
+intermediate_drink_holder_pos:
+  description: "Intermediate drink holder configuration"
+  type: "joint_positions"
+  values: [3.154449522913983, -1.6191614627196076, -3.1270874803965674, -1.3690783858201527, -0.008180698236505357, -1.837042927298369, 1.5863739549590972]
+
 microwave_push_starting_pos: 
   description: "Starting configuration for pushing the microwave door"
   type: "joint_positions"

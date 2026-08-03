@@ -142,6 +142,16 @@ class SceneDescription:
     intermediate_plate_holder_pos: JointPositions
     intermediate_plate_holder_pose: Pose
 
+    # Drink holder constants
+    inside_drink_holder_pose: Pose
+    slightly_above_drink_holder_pose: Pose
+    above_drink_holder_pose: Pose
+    above_drink_holder_pos: JointPositions
+    below_drink_holder_pose: Pose
+    outside_drink_holder_pose: Pose
+    outside_drink_holder_pos: JointPositions
+    intermediate_drink_holder_pos: JointPositions
+
     # Plate constants
     plate_staging_pos: JointPositions
     plate_delta_xy: tuple[float, float] = (0.0, 0.0)

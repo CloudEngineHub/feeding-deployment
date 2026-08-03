@@ -89,25 +89,20 @@ class PickToolHLA(HighLevelAction):
         if self.robot_interface is not None:
             self.robot_interface.set_speed(speed)
 
-        self.report_activity("Looking for the drink")
+        self.report_activity("Picking up the drink")
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
         self.close_gripper()
-        self.move_to_joint_positions(self.sim.scene_description.drink_gaze_pos)
-
-        drink_poses = self.perception_interface.perceive_drink_pickup_poses()
-
-        self.report_activity("Picking up the drink")
-        self.move_to_joint_positions(self.sim.scene_description.drink_staging_pos)
-        self.move_to_ee_pose(drink_poses['pre_grasp_pose'])
-
+        self.move_to_joint_positions(self.sim.scene_description.intermediate_drink_holder_pos)
+        self.move_to_joint_positions(self.sim.scene_description.outside_drink_holder_pos)
+        self.move_to_ee_pose(self.sim.scene_description.below_drink_holder_pose)
+        
         with self.low_speed(restore=speed):
-            self.move_to_ee_pose(drink_poses['inside_bottom_pose'])
-            self.move_to_ee_pose(drink_poses['inside_top_pose'])
-
+            self.move_to_ee_pose(self.sim.scene_description.slightly_above_drink_holder_pose)
             self.grasp_tool("drink")
-            self.move_to_ee_pose(drink_poses['post_grasp_pose'])
-
-        self.perception_interface.record_drink_pickup_joint_pos()
+            self.move_to_ee_pose(self.sim.scene_description.above_drink_holder_pose)
+        
+        self.move_to_joint_positions(self.sim.scene_description.intermediate_drink_holder_pos)
+        self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)        
 
     def pick_wipe(self, speed: str) -> None:
         assert self.sim.held_object_name is None
