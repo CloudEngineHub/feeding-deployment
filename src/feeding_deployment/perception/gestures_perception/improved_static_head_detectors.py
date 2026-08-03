@@ -64,16 +64,24 @@ _MIN_HALF_PERIOD = 0.15
 
 _MIN_WINDOW_SAMPLES = 3
 
-# Nod is the stricter of the two on purpose: its amplitude is small (~17 deg), and a false
-# positive drives the arm toward the user's face, so it asks for about two nods. A shake
-# swings +-28 deg, where three half-cycles are already unambiguous -- demanding four there
-# costs real detections.
-NOD_ENTER_DEG = 4.0
-NOD_REQUIRED_HALF_CYCLES = 4
+# Three half-cycles is one and a half nods, which is what a real confirmation looks like.
+# These started at four half-cycles past +-4 deg, tuned on gestures_examples/head_nod.pkl,
+# where each clip runs ~4.7 s and holds 8 half-cycles -- someone nodding continuously for
+# five seconds. A live session (gestures_examples/nod_recorded.pkl) nods for ~2.0 s with a
+# median of 3 half-cycles, so the old pair recognised 2 of 10 real nods. Amplitudes agreed
+# across both sets (10-22 deg peak-to-peak), so only the count and the enter threshold
+# moved; dropping enter to 3 deg is what lifts the smallest nods (9.7 deg p2p, so barely
+# +-4.9 about the median) over the line. Verified on both sets at once: 10/10 and 5/5
+# recall, 10/10 live non-nods rejected, still nothing on shakes.
+NOD_ENTER_DEG = 3.0
+NOD_REQUIRED_HALF_CYCLES = 3
 NOD_WINDOW_SECONDS = 3.0
 NOD_DOMINANCE = 1.2
 NOD_MIN_AMPLITUDE_DEG = 8.0
 
+# Shake is left at three half-cycles: it swings +-28 deg, where three is already
+# unambiguous. Not yet checked against a live recording -- run record_head_gestures.py
+# --gesture shake to confirm these hold up the way the nod thresholds did not.
 SHAKE_ENTER_DEG = 12.0
 SHAKE_REQUIRED_HALF_CYCLES = 3
 SHAKE_WINDOW_SECONDS = 2.5
@@ -117,10 +125,12 @@ class _HeadOscillationTracker:
     axis moving more than the other one. Every call also leaves a snapshot in
     `last_reading` naming the gate that blocked detection.
 
-    Measured against `gestures_examples/*.pkl` with the tuned constants above: 5/5 recall
-    on both nod and shake clips, neither detector firing on the other's gesture, ~2 s
-    latency. The detector it replaces managed 3/5 on nods -- and those three were exactly
-    the three clips containing a +-180 branch flip.
+    Measured with the tuned constants above: nod 10/10 on a live recording
+    (`gestures_examples/nod_recorded.pkl`, median latency 1.1 s) and 5/5 on the older
+    `head_nod.pkl` clips, with all 10 live non-nod examples rejected; shake 5/5 on
+    `shake_my_head_from_left_to_right.pkl`; neither detector fires on the other's gesture.
+    The detector this replaces managed 3/5 on the old nod clips -- and those three were
+    exactly the three containing a +-180 branch flip.
     """
 
     def __init__(self, enter_deg, required_half_cycles, window, dominance, min_amplitude_deg):

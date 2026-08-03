@@ -42,6 +42,10 @@ SHAKE_SETTINGS = dict(MODULE.SHAKE_PARAMETERS)
 
 QUIET_GESTURES = ("blinking", "eyebrows_raised", "open_mouth")
 
+# Recorded on the robot by record_head_gestures.py; the set the nod thresholds are
+# actually justified by. Tests using it no-op if it is absent.
+_LIVE_NOD = "nod_recorded"
+
 
 def _dataset_path(dataset):
     """Accept either a bare name from gestures_examples/ or a path to a recorded file."""
@@ -102,6 +106,33 @@ def test_nod_does_not_fire_on_shakes():
 def test_shake_does_not_fire_on_nods():
     detected = _detections("head_nod", "positive", SHAKE_SETTINGS)
     assert not any(detected), f"shake fired on nod clips: {detected}"
+
+
+def test_nod_detects_every_nod_in_the_live_recording():
+    """The live set is the one that matters: shorter, ~2 s gestures as actually performed.
+
+    The thresholds originally tuned on head_nod.pkl (clips of ~4.7 s holding 8 half-cycles)
+    recognised only 2 of these 10.
+    """
+    if not _dataset_path(_LIVE_NOD).exists():
+        return  # optional dataset; recorded by record_head_gestures.py
+    detected = _detections(_LIVE_NOD, "positive", NOD_SETTINGS)
+    assert all(detected), f"missed live nods: {detected}"
+
+
+def test_nod_rejects_every_negative_in_the_live_recording():
+    if not _dataset_path(_LIVE_NOD).exists():
+        return
+    detected = _detections(_LIVE_NOD, "negative", NOD_SETTINGS)
+    assert not any(detected), f"nod fired on live negatives: {detected}"
+
+
+def test_live_nods_are_confirmed_promptly():
+    """A confirmation gesture the user has to hold for 3 s is a broken interaction."""
+    if not _dataset_path(_LIVE_NOD).exists():
+        return
+    times = [_replay(poses, **NOD_SETTINGS) for poses in _clips(_LIVE_NOD, "positive")]
+    assert all(t is not None and t < 2.5 for t in times), f"slow confirmations: {times}"
 
 
 def test_neither_detector_fires_on_other_facial_gestures():
@@ -286,7 +317,9 @@ def test_debug_stream_prints_the_columns_and_the_blocking_gate():
         assert column in output, f"debug stream is missing the {column!r} column"
     assert "half-cycles" in output, "debug stream never named the blocking gate"
     assert "*** DETECTED ***" in output
-    assert "enter +-4.0 deg" in output, "debug stream did not report the thresholds in use"
+    assert f"enter +-{MODULE.NOD_ENTER_DEG:.1f} deg" in output, \
+        "debug stream did not report the thresholds in use"
+    assert f"{MODULE.NOD_REQUIRED_HALF_CYCLES} half-cycles" in output
 
 
 def test_debug_stream_survives_dropouts_and_reports_gap_resets():
