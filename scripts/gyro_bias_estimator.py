@@ -13,6 +13,10 @@ This node republishes the IMU with the gyro bias subtracted:
 
   /zed_mini/zed_node/imu/data  ->  /zed_mini/zed_node/imu/data_debiased
 
+It also RE-STAMPS the output with arrival time, which fixes the separate
+fused-odom-drops-to-10 Hz failure (zed_wrapper's per-bringup stamp offset makes
+robot_localization silently discard every gyro sample). See _cb_imu.
+
 Bias estimation (all three gyro axes, z is the one that matters in 2D):
   - Stillness = |wheel vx| < vx_still AND |gyro z| < wz_still, continuously for
     still_window_s, both streams fresh -- the same dual criterion as
@@ -145,7 +149,21 @@ class GyroBiasEstimator:
                     "bias z = %+.4f deg/s (%+.1f deg/h)",
                     math.degrees(bz), math.degrees(bz) * 3600.0)
         out = Imu()
-        out.header = msg.header
+        # Re-stamp with arrival time instead of forwarding the wrapper's stamp.
+        # zed_wrapper's IMU header.stamp carries a per-bringup offset vs ROS time
+        # that is a lottery (measured 0 / +173 / +1400 / -1100 ms, and it can jump
+        # mid-session). Once the stamp lags more than ~80 ms in the past, the
+        # fresher 10 Hz /wheel_odom always owns the EKF's filter time, so
+        # robot_localization SILENTLY discards every gyro sample as stale: fused
+        # odom collapses 20 Hz -> 10 Hz and yaw falls back to skid-steer wheels
+        # (~35 deg full-turn under-rotation). Bench-verified 2026-08-05: a -174 ms
+        # offset gives 9.7 Hz, the same stream re-stamped gives 20.1 Hz.
+        # Safe: the EKF fuses only vyaw (a rate, not an absolute), and this node
+        # already treats arrival time as truth for its own bias math above.
+        # Assign the two header fields individually rather than rebinding the
+        # whole header, so the incoming msg's header is never mutated.
+        out.header.frame_id = msg.header.frame_id
+        out.header.stamp = rospy.Time.now()
         out.orientation = msg.orientation
         out.orientation_covariance = msg.orientation_covariance
         out.angular_velocity.x = av.x - bx
