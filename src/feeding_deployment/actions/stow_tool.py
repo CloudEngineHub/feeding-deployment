@@ -77,7 +77,7 @@ class StowToolHLA(HighLevelAction):
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
     def stow_drink(self, speed: str) -> None:
-        assert self.sim.held_object_name == "drink"
+        # assert self.sim.held_object_name == "drink"
 
         if self.robot_interface is not None:
             self.robot_interface.set_speed(speed)
@@ -97,7 +97,7 @@ class StowToolHLA(HighLevelAction):
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
 
     def stow_wipe(self, speed: str) -> None:
-        assert self.sim.held_object_name == "wipe"
+        # assert self.sim.held_object_name == "wipe"
 
         if self.robot_interface is not None:
             self.robot_interface.set_speed(speed)

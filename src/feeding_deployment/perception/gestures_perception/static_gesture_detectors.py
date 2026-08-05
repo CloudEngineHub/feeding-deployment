@@ -44,7 +44,7 @@ def mouth_open(perception_interface, termination_event, timeout):
     return gesture_detector(perception_interface, termination_event, timeout, threshold)
 
 def head_nod(perception_interface, termination_event, timeout):
-    head_nod_threshold = 25.0
+    head_nod_threshold = 15.0
     required_direction_changes = 3
 
     start_time = time.time()
@@ -60,8 +60,6 @@ def head_nod(perception_interface, termination_event, timeout):
             time.sleep(0.1) # Maintain 10 Hz rate
         head_pose = head_perception_data["head_pose"]
         (_, _, _, _, head_pitch, _) = head_pose
-
-        print(f"Movement detected: {head_pitch - last_min_extreme} threshold: {head_nod_threshold}, direction_changes: {direction_changes}")
 
         if head_pitch - last_min_extreme > head_nod_threshold:
             direction_changes += 1

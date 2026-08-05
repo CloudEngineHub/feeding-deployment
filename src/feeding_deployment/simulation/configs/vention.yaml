@@ -54,15 +54,15 @@ initial_joints:
 inside_plate_holder_pose: 
   description: "Inside plate holder configuration, the robot should be inside the plate holder in this configuration"
   type: "ee_pose"
-  values: [0.08340261, -0.26447317, 0.03960313, -0.50058021, 0.48796258, 0.51017947, -0.50102783]
+  values: [0.07883421331644058, -0.26393580436706543, 0.0408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
 above_plate_holder_pos: 
   description: "Above plate holder configuration, the robot should be above the plate holder in this configuration"
   type: "joint_positions"
-  values: [3.0697810474280245, -1.594116563196284, 1.4156184574498325, -1.797991664653992, -0.031368841847824847, -1.4202148071752, -0.14781023418936012]
+  values: [3.0392889182110534, -1.5661911886379318, 1.4518263961563864, -1.8449093725262449, -2.9827404208759845e-05, -1.3686160610549152, -0.11901294069011481]
 above_plate_holder_pose: 
   description: "Above plate holder configuration, the robot should be above the plate holder in this configuration"
   type: "ee_pose"
-  values: [0.08334321, -0.26446328, 0.22, -0.50053809, 0.48791783, 0.5102406, -0.50105124]
+  values: [0.07883421331644058, -0.26393580436706543, 0.2408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
 intermediate_plate_holder_pos: 
   description: "Intermediate plate holder configuration"
   type: "joint_positions"

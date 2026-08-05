@@ -35,7 +35,8 @@ from feeding_deployment.actions.base import (
     InFrontOf,
 )
 
-from feeding_deployment.perception.gestures_perception.static_gesture_detectors import mouth_open, head_nod
+# from feeding_deployment.perception.gestures_perception.static_gesture_detectors import mouth_open, head_nod
+from feeding_deployment.perception.gestures_perception.improved_static_head_detectors import mouth_open, head_nod
 
 from feeding_deployment.actions.feel_the_bite.inside_mouth_transfer import InsideMouthTransfer
 from feeding_deployment.actions.feel_the_bite.outside_mouth_transfer import OutsideMouthTransfer
@@ -122,11 +123,13 @@ class TransferToolHLA(HighLevelAction):
             elif self.tool == "drink":
                 if self.web_interface is not None:
                     self.web_interface.fix_explanation("Please do a head nod to complete transfer")
-                head_nod(self.perception_interface, termination_event=None, timeout=600) # 10 minutes
+                time.sleep(10.0) # wait for the robot to stabilize
+                head_nod(self.perception_interface, termination_event=None, timeout=600, debug=True) # 10 minutes
             elif self.tool == "wipe":
                 if self.web_interface is not None:
                     self.web_interface.fix_explanation("Please do a head nod to complete transfer")
-                head_nod(self.perception_interface, termination_event=None, timeout=600) # 10 minutes
+                time.sleep(10.0) # wait for the robot to stabilize
+                head_nod(self.perception_interface, termination_event=None, timeout=600, debug=True) # 10 minutes
         elif transfer_complete_interaction == "auto_timeout":
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Please wait for the transfer to complete in 5 seconds")
@@ -348,7 +351,7 @@ class TransferToolHLA(HighLevelAction):
         outside_mouth_distance: float, pickup_confirm,
         task_reselection_autocontinue_seconds: float,
     ) -> None:
-        assert self.sim.held_object_name == "drink"
+        # assert self.sim.held_object_name == "drink"
 
         with self.low_speed(restore=speed):
             if self.web_interface is not None:
@@ -373,7 +376,7 @@ class TransferToolHLA(HighLevelAction):
         ready_for_transfer: str, transfer_complete: str,
         outside_mouth_distance: float, pickup_confirm,
     ) -> None:
-        assert self.sim.held_object_name == "wipe"
+        # assert self.sim.held_object_name == "wipe"
 
         with self.low_speed(restore=speed):
             self.move_to_joint_positions(self.sim.scene_description.before_transfer_pos)

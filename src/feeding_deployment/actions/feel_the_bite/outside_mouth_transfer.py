@@ -64,12 +64,12 @@ class OutsideMouthTransfer(Transfer):
         # set mouth pose to be facing away from the wheelchair
         forque_target_base[:3, :3] = Rotation.from_quat([0.523, -0.503, -0.469, 0.503]).as_matrix()
         
-        if self.tool == "utensil":
+        if self.tool == "fork":
             calibrated_outside_mouth_distance = outside_mouth_distance
         elif self.tool == "drink":
-            calibrated_outside_mouth_distance = outside_mouth_distance - 0.02
+            calibrated_outside_mouth_distance = outside_mouth_distance + 0.01
         elif self.tool == "wipe":
-            calibrated_outside_mouth_distance = outside_mouth_distance - 0.02
+            calibrated_outside_mouth_distance = outside_mouth_distance + 0.02
         else:
             raise ValueError(f"Unknown tool: {self.tool}")
         

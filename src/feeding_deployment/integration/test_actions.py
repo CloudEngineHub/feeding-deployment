@@ -43,8 +43,8 @@ from feeding_deployment.simulation.simulator import FeedingDeploymentPyBulletSim
 # explicitly (with the deployment default, "no particular order", FLAIR's
 # preference planner may return a bare bite and never dip). Pass
 # --bite_ordering to test other orderings, e.g. DEFAULT_BITE_ORDERING.
-DEFAULT_TEST_MEAL = "chicken nuggets and ketchup"
-DEFAULT_TEST_BITE_ORDERING = "dip every chicken nugget in ketchup"
+DEFAULT_TEST_MEAL = "hash browns, chicken popcorn and ranch dressing"
+DEFAULT_TEST_BITE_ORDERING = "dip every chicken popcorn in ranch dressing"
 
 def _tool_id(sim, tool: str) -> int:
     return {"utensil": sim.utensil_id, "drink": sim.drink_id, "wipe": sim.wipe_id}[tool]
@@ -340,7 +340,8 @@ def _main(
     elif action == "transfer":
         # Bring the held tool to the user's mouth. Nothing is acquired first, so
         # for the utensil put a bite on the fork by hand to test with food.
-        test_TransferToolHLA(tool, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
+        for i in range(5):
+            test_TransferToolHLA(tool, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
     elif action == "pick_plate":
         # Pick the plate from the given location (table / holder / fridge / microwave).
         test_PickPlateHLA(location, sim, robot_interface, perception_interface, rviz_interface, web_interface, hla_hyperparams, wrist_interface, no_waits, log_dir, run_behavior_tree_dir, execution_log, gesture_detectors_dir)
