@@ -53,7 +53,7 @@ CMD2='launch_sensors'
 CMD3='launch_app'
 CMD4='launch_utensil'
 CMD5='launch_watchdog'
-CMD6="roslaunch feeding_deployment cartographer_localization.launch load_state_filename:=$MAP_FILE"
+CMD6="roslaunch feeding_deployment cartographer_localization.launch load_state_filename:=$MAP_FILE split_map_viz:=true"
 CMD7='roslaunch feeding_deployment shared_autonomy.launch'
 CMD8='python run.py --user aimee --run_on_robot --use_interface --no_waits --day 1'
 

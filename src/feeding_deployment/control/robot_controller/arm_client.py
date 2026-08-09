@@ -159,13 +159,13 @@ if __name__ == "__main__":
     
     ee_pose, joint_positions = get_state()
 
-    inside_pose = [0.07883421331644058, -0.26393580436706543, 0.0408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
-    above_pose = [0.07883421331644058, -0.26393580436706543, 0.2408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
+    # inside_pose = [0.07883421331644058, -0.26393580436706543, 0.0408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
+    # above_pose = [0.07883421331644058, -0.26393580436706543, 0.2408918559551239, -0.5102654597504978, 0.4783280635647934, 0.5001110873986087, -0.5106077990522174]
 
     # inside_pose = [0.08389504253864288, -0.2624289393424988, 0.03942343592643738, -0.5102503363699538, 0.4782626801095757, 0.5001531665865582, -0.5106429408130433]
     # above_pose = [0.08389504253864288, -0.2624289393424988, 0.23942343592643738, -0.5102503363699538, 0.4782626801095757, 0.5001531665865582, -0.5106429408130433]
 
-    arm_client_interface.execute_command(CartesianCommand(above_pose[:3], above_pose[3:]))
+    # arm_client_interface.execute_command(CartesianCommand(above_pose[:3], above_pose[3:]))
     # arm_client_interface.execute_command(CartesianCommand(inside_pose[:3], inside_pose[3:]))
 
     # for i in range(5):
@@ -194,12 +194,12 @@ if __name__ == "__main__":
     # arm_client_interface.execute_command(JointCommand(config.intermediate_drink_holder_pos))
     # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
 
-    # print("Moving to left back retract position")
-    # arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
-    # arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
-    # arm_client_interface.execute_command(JointCommand(config.right_back_retract_pos))
-    # arm_client_interface.execute_command(JointCommand(config.behind_back_retract_pos))
-    # arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
+    print("Moving to left back retract position")
+    arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.right_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.behind_back_retract_pos))
+    arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
 
     # arm_client_interface.execute_command(JointCommand(config.above_drink_holder_pos))
     # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))

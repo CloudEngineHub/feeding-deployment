@@ -1,17 +1,17 @@
 {
   "bundle": {
-    "bite_dipping_preference": "do not dip",
-    "bite_ordering": "no particular order",
+    "bite_dipping_preference": "less",
+    "bite_ordering": "Dip each pancake in maple syrup before feeding, and feed the sausage without syrup.",
     "confirm_feeding_pickup": "skip",
-    "confirm_manipulation": "skip",
+    "confirm_manipulation": "countdown (15 sec)",
     "confirm_navigation_arrival": "skip",
-    "convey_robot_ready_for_completing_transfer": "LED",
-    "convey_robot_ready_for_initiating_transfer": "LED",
+    "convey_robot_ready_for_completing_transfer": "speech",
+    "convey_robot_ready_for_initiating_transfer": "speech",
     "detect_user_completed_transfer_drinking": "button",
     "detect_user_completed_transfer_feeding": "perception",
     "detect_user_completed_transfer_wiping": "button",
-    "detect_user_ready_for_initiating_transfer_drinking": "button",
-    "detect_user_ready_for_initiating_transfer_feeding": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
+    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
     "detect_user_ready_for_initiating_transfer_wiping": "button",
     "microwave_time": "30 secs",
     "nav_offset_dining_table": {
@@ -30,9 +30,9 @@
       "dyaw": 0.0
     },
     "nav_offset_movable_table": {
-      "dx": 0.0,
-      "dy": 0.0,
-      "dyaw": 0.0
+      "dx": 0.031,
+      "dy": -0.077,
+      "dyaw": -0.032
     },
     "nav_offset_sink": {
       "dx": 0.0,
@@ -49,7 +49,7 @@
     "plate_color_fridge": {
       "h": 9,
       "range": 0.16,
-      "s": 185,
+      "s": 188,
       "v": 150
     },
     "plate_color_microwave": {
@@ -59,25 +59,34 @@
       "v": 210
     },
     "plate_color_movable_table": {
-      "h": 13,
-      "range": 0.2,
-      "s": 216,
-      "v": 255
+      "h": 4,
+      "range": 0.3,
+      "s": 52,
+      "v": 118
     },
-    "retract_between_bites": "yes",
+    "retract_between_bites": "no",
     "robot_speed": "fast",
     "skewering_axis": "perpendicular to major axis",
     "transfer_mode": "outside mouth transfer",
     "wait_before_autocontinue_bite_selection": "countdown (15 sec)",
-    "wait_before_autocontinue_task_selection": "wait for me"
+    "wait_before_autocontinue_task_selection": "countdown (15 sec)"
   },
   "context": {
-    "meal": "orange chicken",
-    "setting": "Social with person on Right",
-    "time_of_day": "night"
+    "meal": "pancake, sausage and maple syrup",
+    "setting": "Personal",
+    "time_of_day": "morning"
   },
   "corrected": {
-    "confirm_manipulation": "skip"
+    "bite_dipping_preference": "less",
+    "convey_robot_ready_for_initiating_transfer": "speech",
+    "detect_user_completed_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
+    "plate_color_movable_table": {
+      "h": 4,
+      "range": 0.3,
+      "s": 52,
+      "v": 118
+    }
   },
   "finalized": [
     "bite_dipping_preference",
@@ -94,14 +103,14 @@
     "detect_user_ready_for_initiating_transfer_feeding",
     "detect_user_ready_for_initiating_transfer_wiping",
     "microwave_time",
-    "nav_offset_dining_table",
     "nav_offset_fridge",
     "nav_offset_microwave",
+    "nav_offset_movable_table",
     "nav_offset_sink",
     "outside_mouth_distance",
-    "plate_color_dining_table",
     "plate_color_fridge",
     "plate_color_microwave",
+    "plate_color_movable_table",
     "retract_between_bites",
     "robot_speed",
     "skewering_axis",

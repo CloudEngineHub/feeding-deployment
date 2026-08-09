@@ -1967,7 +1967,6 @@ class NavigateHLA(HighLevelAction):
             # (human intervention or wheel slip) and the base may still be
             # inside the corridor -> full normal route incl. staging.
             via = approach if outcome == "completed" else staging + approach
-            via = ["dining_table_waypoint2"]
             self._navigate_to_target(
                 destination, speed, via=via, position_offset=position_offset,
                 arrival_confirm_mode=arrival_confirm_mode,
@@ -1980,7 +1979,7 @@ class NavigateHLA(HighLevelAction):
                 "defined) -- using normal autonomous navigation."
             )
         self._navigate_to_target(
-            destination, speed, via=["dining_table_waypoint2"],
+            destination, speed, via=staging + approach,
             position_offset=position_offset,
             arrival_confirm_mode=arrival_confirm_mode,
             autocontinue_seconds=autocontinue_seconds,

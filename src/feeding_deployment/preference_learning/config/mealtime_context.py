@@ -62,6 +62,13 @@ class MealContents:
 
 MEAL_CONTENTS: List[MealContents] = [
     MealContents(
+        label="pancake, sausage and maple syrup",
+        dippable_items=["pancake", "sausage"],
+        sauces=["maple syrup"],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
         label="hash browns, chicken popcorn and ranch dressing",
         dippable_items=["hash browns", "chicken popcorn"],
         sauces=["ranch dressing"],
