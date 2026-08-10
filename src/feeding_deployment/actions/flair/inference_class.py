@@ -720,6 +720,12 @@ class BiteAcquisitionInference:
                 if "potato" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "yellow potato wedge piece"
                     food_classes_being_detected.append("yellow potato wedge piece")
+                elif "steak" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "red cooked steak piece"
+                    food_classes_being_detected.append("red cooked steak piece")
+                elif "mozzarella stick" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "golden breaded fried cheese stick piece"
+                    food_classes_being_detected.append("golden breaded fried cheese stick piece")
                 elif "tater tots" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "individual tater tot piece"
                     food_classes_being_detected.append("individual tater tot piece")
