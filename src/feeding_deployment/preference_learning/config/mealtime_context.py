@@ -3,12 +3,8 @@ from typing import Dict, List, Optional, Tuple
 
 SETTINGS = [
     "Personal",
-    "Social with person on Left",
-    "Social with person in Front",
-    "Social with person on Right",
-    "Watching TV with TV on Left",
-    "Watching TV with TV in Front",
-    "Watching TV with TV on Right",
+    "Social",
+    "Watching TV",
     # "Working on laptop with laptop on Left",
     # "Working on laptop with laptop in Front",
     # "Working on laptop with laptop on Right",
@@ -18,9 +14,7 @@ SETTINGS = [
 # exact strings (not a "Social" prefix/substring) so that any future setting that
 # merely begins with "Social" is never silently treated as social.
 SOCIAL_SETTINGS = (
-    "Social with person on Left",
-    "Social with person in Front",
-    "Social with person on Right",
+    "Social",
 )
 assert all(s in SETTINGS for s in SOCIAL_SETTINGS), \
     "SOCIAL_SETTINGS out of sync with SETTINGS"
@@ -61,6 +55,13 @@ class MealContents:
 
 
 MEAL_CONTENTS: List[MealContents] = [
+    MealContents(
+        label="steak and mozzarella sticks",
+        dippable_items=["steak", "mozzarella sticks"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
     MealContents(
         label="pancake, sausage and maple syrup",
         dippable_items=["pancake", "sausage"],
