@@ -75,7 +75,10 @@ def test_phrases():
         "hash brown": "round hash brown piece",
         "apple": "cut white apple slice piece",
         "cantaloupe": "small cut up cantaloupe piece",   # generic fallback
-        "steak": "small cut up steak piece",             # generic fallback
+        # Added on main in "Day 16" and merged through the refactor -- these
+        # assertions are what proves the merge put them back in the right place.
+        "steak": "red cooked steak piece",
+        "mozzarella stick": "golden breaded fried cheese stick piece",
     }
     for food, expected in cases.items():
         phrases, repl = build(_Stub([food], ["solid"]))
@@ -182,6 +185,18 @@ def test_scoring():
         [pale, dark], [conf(16, 0.42), conf(8, 0.42)], crop, plate_area, 0, 24)
     check("a full plate beats one tidy piece", full > sparse,
           f"full={full:.3f} {full_info} sparse={sparse:.3f} {sparse_info}")
+
+    # (f2) REGRESSION: one abundant food must not mask another's collapse.
+    #      Observed for real on the pancake+sausage frame -- 16 pancakes alone
+    #      saturated a total-based recall term, so the search happily traded
+    #      sausage down from 8 boxes to 3 for a separability gain. The collapsed
+    #      side is given *better* conf here to make the test strict.
+    balanced, bal_info = score_detection(
+        [pale, dark], [conf(16, 0.42), conf(8, 0.42)], crop, plate_area, 0, 24)
+    lopsided, lop_info = score_detection(
+        [pale, dark[:3]], [conf(16, 0.55), conf(3, 0.55)], crop, plate_area, 0, 19)
+    check("an abundant food cannot mask another's collapse", balanced > lopsided,
+          f"balanced={balanced:.3f} {bal_info} lopsided={lopsided:.3f} {lop_info}")
 
     # (g) ...but recall saturates, so shattering food into boxes is not rewarded.
     many = np.repeat(pale, 4, axis=0)   # 64 boxes -- over-segmentation

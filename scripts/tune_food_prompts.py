@@ -55,6 +55,34 @@ SUITE = [
      {"steak": "red cooked steak piece"}),
 ]
 
+INFERENCE_PY = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..",
+    "src", "feeding_deployment", "actions", "flair", "inference_class.py")
+
+
+def production_phrases(food_names, categories):
+    """The phrases detect_items would use right now, from the live source.
+
+    Read out of inference_class.py rather than reimplemented, so this stays the
+    real baseline as prompts are added on main (Day 16 added steak and
+    mozzarella; a hardcoded generic baseline here would be a strawman).
+    """
+    src = open(INFERENCE_PY).read()
+    start = src.index("    def build_detection_phrases(self):")
+    end = src.index("    def detect_items(self,")
+    body = "\n".join(l[4:] if l.startswith("    ") else l
+                     for l in src[start:end].split("\n"))
+    ns: dict = {}
+    exec(body, ns)
+
+    class _Stub:
+        FOOD_CLASSES = list(food_names)
+        FOOD_CATEGORIES = list(categories)
+        PROMPT_OVERRIDES: dict = {}
+
+    phrases, _ = ns["build_detection_phrases"](_Stub())
+    return phrases
+
 
 def load_dino():
     from groundingdino.util.inference import Model  # deferred: see note at top
@@ -113,8 +141,8 @@ def run_one(dino, pkl_path, expected=None, use_llm=True):
     x, y, w, h = bounds
     crop = frame[y:y + h, x:x + w].copy()
 
-    # What production does today for these foods.
-    baseline = ["small cut up " + s + " piece" for s in solids]
+    # What production does today for these foods (read from the live source).
+    baseline = production_phrases(solids, categories)
     b_counts, b_confs = count_per_class(dino, crop, baseline, 0.30, 0.20, 0.40)
     print(f"  production : {dict(zip(solids, baseline))}")
     print(f"               counts={dict(zip(solids, b_counts))} conf={dict(zip(solids, b_confs))}")

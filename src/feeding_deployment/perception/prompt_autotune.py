@@ -196,11 +196,12 @@ def propose_with_llm(
 # MAX_AREA_THRESHOLD convention already used in detect_items.
 UNION_AREA_DIVISOR = 15.0
 
-# Where the recall term saturates: a served plate at the start of a meal holds
-# roughly this many pieces across all its foods (measured across the logged
-# meals: 8-27). Finding this many is "found the plate"; finding more is not
-# scored as better, so the score cannot be farmed by over-segmenting.
-TYPICAL_PIECES_PER_PLATE = 12
+# Where the per-food recall term saturates: at the start of a meal each food on
+# the plate is present in roughly this many pieces (measured on the logged
+# frames: strawberry 15, pancake 16, sausage 8, steak 20, mozzarella 7).
+# Finding this many of a food is "found that food"; finding more is not scored
+# as better, so the score cannot be farmed by over-segmenting.
+PIECES_PER_FOOD = 8
 
 
 def _median_lab(crop, box) -> np.ndarray:
@@ -264,12 +265,13 @@ def score_detection(
     ``conf``   mean confidence of the surviving boxes. The single best predictor
                of a good phrase -- a well-grounded wording clears the threshold
                with margin instead of scraping it.
-    ``recall`` how much of the plate was found, saturating at TYPICAL_PIECES.
-               Without this the other three terms are all maximised by finding
-               *few* very clean boxes: on a real steak plate an early version of
-               this function preferred a wording that found 1 piece over one
-               that found 20, because the single box was tidier. Detection has
-               to see the food that is there, so quantity is scored explicitly.
+    ``recall`` how much of the WORST-found food was found, saturating per food.
+               Without any recall term the other terms are all maximised by
+               finding *few* very clean boxes -- on a real steak plate an early
+               version of this function preferred a wording that found 1 piece
+               over one that found 20, because the single box was tidier. Taking
+               the worst food rather than the total is the second half of that
+               lesson: see the comment at the computation below.
     ``sep``    colour separability between classes (multi-class only), which is
                what distinguishes a real split from a mislabelled one.
     ``size``   size consistency, penalising a mix of pieces and clumps.
@@ -299,10 +301,13 @@ def score_detection(
 
     union_rate = (n_union_boxes / n_raw_boxes) if n_raw_boxes else 0.0
 
-    # Saturating so a wording is not rewarded without limit for shattering food
-    # into ever more boxes -- past a plateful, extra boxes are over-segmentation,
-    # and `size` is what pushes back on that.
-    recall = min(1.0, sum(counts) / float(TYPICAL_PIECES_PER_PLATE))
+    # Per-food, and the WORST food decides -- every food on the plate has to be
+    # found. Scoring recall on the total instead lets one abundant food mask
+    # another's collapse: on a real pancake+sausage plate, 16 pancakes alone
+    # saturated a total-based term, so dropping sausage from 8 pieces to 3 cost
+    # the score nothing while gaining on separability. Saturating per food also
+    # keeps over-segmentation from farming the term.
+    recall = min(min(1.0, c / float(PIECES_PER_FOOD)) for c in counts)
 
     score = (1.0 * conf + 0.6 * recall + 0.35 * sep + 0.15 * size
              - 0.5 * union_rate)
