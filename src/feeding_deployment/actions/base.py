@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import abc
+import os
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -20,6 +21,7 @@ import uuid
 
 import yaml
 
+import cv2
 import numpy as np
 import time
 
@@ -635,27 +637,110 @@ class HighLevelAction(abc.ABC):
         if self.robot_interface is not None:
             time.sleep(seconds)
 
-    def log_camera_image(self, name: str, settle_s: float = 0.0, **metadata: Any) -> None:
+    def log_camera_image(self, name: str, settle_s: float = 0.0, **metadata: Any):
         """Capture the current RealSense color frame and save it via the data logger.
 
         ``settle_s`` waits before grabbing the frame so auto-exposure can settle
         after a large viewpoint change. No-op in simulation (no robot) or when
         the data logger is absent; never raises -- logging must not abort a skill.
+
+        Returns the captured frame (or None), so a caller that also wants to
+        *use* the picture can reuse this one rather than moving and grabbing a
+        second, slightly different frame.
         """
         if self.robot_interface is None or self.perception_interface is None:
-            return
+            return None
         try:
             if settle_s > 0:
                 time.sleep(settle_s)
             color_image, _, _ = self.perception_interface.get_camera_data()
             if color_image is None:
                 print(f"No camera frame available to log image '{name}'.")
-                return
+                return None
             data_logger = getattr(self.perception_interface, "data_logger", None)
             if data_logger is not None:
                 data_logger.log_image(name, color_image, **metadata)
+            return color_image
         except Exception as e:  # noqa: BLE001
             print(f"Failed to log camera image '{name}': {e}")
+            return None
+
+    def autotune_food_prompts(self, plate_image) -> None:
+        """Search for the Grounding DINO wording that best finds this meal's foods.
+
+        Called once, on the picture taken right after the plate is set on the
+        table (place_plate.py). The result is installed on the inference server's
+        PROMPT_OVERRIDES, which detect_items consults ahead of its hardcoded
+        rules -- so every bite of this meal is detected with wording chosen
+        against this plate, this lighting, and this portioning.
+
+        Never raises and never blocks the meal: any failure (no models loaded,
+        no plate found, search error) leaves PROMPT_OVERRIDES empty and
+        detection behaves exactly as it does today. Set FEEDING_PROMPT_AUTOTUNE=0
+        to skip it entirely.
+        """
+        if plate_image is None or self.flair is None:
+            return
+        if os.environ.get("FEEDING_PROMPT_AUTOTUNE", "1").strip().lower() in ("0", "false", "no"):
+            print("[prompt_autotune] disabled via FEEDING_PROMPT_AUTOTUNE")
+            return
+        try:
+            from feeding_deployment.actions.flair.vision_utils import detect_plate
+            from feeding_deployment.perception.prompt_autotune import (
+                PromptAutoTuner, load_prompt_cache, save_prompt_cache,
+            )
+
+            inference = self.flair.inference_server
+            if not getattr(inference, "FOOD_CLASSES", None):
+                print("[prompt_autotune] no food items configured yet; skipping")
+                return
+            if getattr(inference, "grounding_dino_model", None) is None:
+                print("[prompt_autotune] Grounding DINO not loaded; skipping")
+                return
+
+            # Reuse whatever was learned for these foods on a previous day first,
+            # so even a failed search here leaves the meal better off than the
+            # hardcoded defaults.
+            cache_path = None
+            data_logger = getattr(self.perception_interface, "data_logger", None)
+            log_dir = getattr(data_logger, "user_dir", None) or getattr(data_logger, "log_dir", None)
+            if log_dir is not None:
+                cache_path = Path(log_dir) / "food_prompts.json"
+                cached = load_prompt_cache(cache_path)
+                inference.PROMPT_OVERRIDES.update(
+                    {k: v for k, v in cached.items() if k in inference.FOOD_CLASSES}
+                )
+
+            plate_mask = detect_plate(plate_image, multiplier=2.0)
+            if plate_mask is None:
+                print("[prompt_autotune] no plate detected in the picture; skipping")
+                return
+            x, y, w, h = cv2.boundingRect(cv2.findNonZero(plate_mask))
+
+            # The phrases production would use right now, so the search only
+            # accepts a wording that beat the status quo on this very plate.
+            current_phrases, _ = inference.build_detection_phrases()
+
+            tuner = PromptAutoTuner(
+                inference.grounding_dino_model,
+                box_threshold=inference.BOX_THRESHOLD,
+                text_threshold=inference.TEXT_THRESHOLD,
+                nms_threshold=inference.NMS_THRESHOLD,
+                llm_call=lambda prompt, image: inference.ask_claude_about_image(prompt, image),
+            )
+            best = tuner.tune(
+                plate_image, [x, y, w, h],
+                inference.FOOD_CLASSES, inference.FOOD_CATEGORIES,
+                current_phrases=current_phrases,
+                report=self.report_activity,
+            )
+            if best:
+                inference.PROMPT_OVERRIDES.update(best)
+                if cache_path is not None:
+                    save_prompt_cache(cache_path, best)
+        except Exception as e:  # noqa: BLE001
+            print(f"[prompt_autotune] skipped ({type(e).__name__}: {e}); "
+                  "using the hardcoded detection prompts")
 
     def wait_for_gesture(self, gesture_fn_name: str) -> None:
         static_gestures = inspect.getmembers(static_gesture_detectors, inspect.isfunction)

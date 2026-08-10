@@ -1,3 +1,4 @@
+import base64
 import cv2
 import time
 import os
@@ -159,6 +160,13 @@ class BiteAcquisitionInference:
         self.mode = mode
         self.allow_dip = True
 
+        # {food label -> Grounding DINO phrase}, filled in by the prompt
+        # auto-tuner (perception/prompt_autotune.py) from the picture taken once
+        # the plate is on the table. Empty by default, and detect_items only
+        # consults it for labels it contains, so with no tuner in the loop the
+        # hardcoded prompts below are used exactly as before.
+        self.PROMPT_OVERRIDES: dict[str, str] = {}
+
         # Counts dips this session, to walk the dip point around the circle. Not
         # per-container: with one sauce per meal the distinction never shows up, and
         # a shared counter still spreads dips evenly if a second one appears.
@@ -184,6 +192,44 @@ class BiteAcquisitionInference:
                   )
         chatbot_response = "".join(b.text for b in response.content if b.type == "text")
         return chatbot_response.strip()
+
+    def ask_claude_about_image(self, prompt, image, max_tokens=2048):
+        """Send `prompt` together with `image` (a BGR numpy array) to Claude.
+
+        Used by the prompt auto-tuner to have a vision model look at the actual
+        plate and propose Grounding DINO phrases from what the food really looks
+        like, rather than from its name alone. Returns the reply text.
+
+        Sibling of chat_with_openai, which is text-only. Model comes from the
+        shared DEFAULT_CLAUDE_MODEL so it upgrades with the rest of the stack.
+        """
+        if getattr(self, "client", None) is None:
+            self.client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
+
+        ok, buf = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 85])
+        if not ok:
+            raise ValueError("Could not JPEG-encode the image for Claude")
+        image_b64 = base64.b64encode(buf).decode("ascii")
+
+        response = self.client.messages.create(
+            model=DEFAULT_CLAUDE_MODEL,
+            max_tokens=max_tokens,
+            messages=[{
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/jpeg",
+                            "data": image_b64,
+                        },
+                    },
+                    {"type": "text", "text": prompt},
+                ],
+            }],
+        )
+        return "".join(b.text for b in response.content if b.type == "text").strip()
 
     def run_minispanet_inference(self, u, v, cv_img, crop_dim=15):
 
@@ -646,44 +692,28 @@ class BiteAcquisitionInference:
 
         return cropped_image
 
-    def detect_items(self, image, log_path = None, report = None):
-        # ``report`` is an optional callback(str) used to surface live detection
-        # progress to the user-facing web app (counts of regions found/filtered).
-        # It is None for callers that don't want UI updates (behavior unchanged).
+    def build_detection_phrases(self):
+        """Grounding DINO phrase for each configured food.
 
-        assert FOOD_MODELS_IMPORTS, "Food detection imports (Grounding DINO, Segment Anything, Depth Anything) required to run this function"
-        assert self.FOOD_CLASSES is not None, "Food classes not initialized"
-        assert self.FOOD_CATEGORIES is not None, "Food categories not initialized"
-        
-        plate_mask = detect_plate(image, multiplier=2.0)
-        plate_mask_vis = np.repeat(plate_mask[:,:,np.newaxis], 3, axis=2)
+        Returns ``(phrases, replacement_dict)`` where ``phrases[i]`` is the query
+        for ``FOOD_CLASSES[i]`` and ``replacement_dict`` maps each food label to
+        its phrase, so detection labels can be mapped back to food names.
 
-        # get bounding box of the plate
-        non_zero_points = cv2.findNonZero(plate_mask)
-        x, y, w, h = cv2.boundingRect(non_zero_points)
-        plate_bounds = [x, y, w, h]
-
-        cropped_image = image.copy()[y:y+h, x:x+w]
-        # print("Cropped Image Shape: ", cropped_image.shape)
-
-        # cropped_image = image.copy()[0:440, 550:990]
-
-        # cv2.imshow('img', cropped_image)
-        # cv2.waitKey(0)
-
-        # k = input("Visualizing cropped image, is it correct?")
-        # if k == 'n':
-        #     cv2.destroyAllWindows()
-        #     exit(1)
-
-        # self.FOOD_CLASSES = [f.replace('fettuccine', 'noodles') for f in self.FOOD_CLASSES]
-        # self.FOOD_CLASSES = [f.replace('spaghetti', 'noodles') for f in self.FOOD_CLASSES]
-        # self.FOOD_CLASSES.append('blue plate')
-
+        Order of precedence: a phrase tuned for this meal (PROMPT_OVERRIDES, from
+        perception/prompt_autotune.py) wins; otherwise the hardcoded rules below;
+        otherwise the generic fallback. Split out of detect_items so the tuner can
+        ask what production *would* use and only accept a phrase that beats it.
+        """
         food_classes_being_detected = []
         replacement_dict = {}
         for i, category in enumerate(self.FOOD_CATEGORIES):
-            if category == 'solid': # append "piece to solid items"
+            # Checked first, and only for labels present in the dict, so an empty
+            # PROMPT_OVERRIDES leaves every branch below exactly as it was.
+            tuned = self.PROMPT_OVERRIDES.get(self.FOOD_CLASSES[i])
+            if tuned:
+                replacement_dict[self.FOOD_CLASSES[i]] = tuned
+                food_classes_being_detected.append(tuned)
+            elif category == 'solid': # append "piece to solid items"
                 # if "steak" in self.FOOD_CLASSES[i]:
                 #     replacement_dict[self.FOOD_CLASSES[i]] = "small cut brown steak piece"
                 #     food_classes_being_detected.append("small cut brown steak piece")
@@ -735,6 +765,43 @@ class BiteAcquisitionInference:
             else: # append "dip" to dip items
                 replacement_dict[self.FOOD_CLASSES[i]] = self.FOOD_CLASSES[i] + " dip"
                 food_classes_being_detected.append(self.FOOD_CLASSES[i] + " dip")
+        return food_classes_being_detected, replacement_dict
+
+    def detect_items(self, image, log_path = None, report = None):
+        # ``report`` is an optional callback(str) used to surface live detection
+        # progress to the user-facing web app (counts of regions found/filtered).
+        # It is None for callers that don't want UI updates (behavior unchanged).
+
+        assert FOOD_MODELS_IMPORTS, "Food detection imports (Grounding DINO, Segment Anything, Depth Anything) required to run this function"
+        assert self.FOOD_CLASSES is not None, "Food classes not initialized"
+        assert self.FOOD_CATEGORIES is not None, "Food categories not initialized"
+        
+        plate_mask = detect_plate(image, multiplier=2.0)
+        plate_mask_vis = np.repeat(plate_mask[:,:,np.newaxis], 3, axis=2)
+
+        # get bounding box of the plate
+        non_zero_points = cv2.findNonZero(plate_mask)
+        x, y, w, h = cv2.boundingRect(non_zero_points)
+        plate_bounds = [x, y, w, h]
+
+        cropped_image = image.copy()[y:y+h, x:x+w]
+        # print("Cropped Image Shape: ", cropped_image.shape)
+
+        # cropped_image = image.copy()[0:440, 550:990]
+
+        # cv2.imshow('img', cropped_image)
+        # cv2.waitKey(0)
+
+        # k = input("Visualizing cropped image, is it correct?")
+        # if k == 'n':
+        #     cv2.destroyAllWindows()
+        #     exit(1)
+
+        # self.FOOD_CLASSES = [f.replace('fettuccine', 'noodles') for f in self.FOOD_CLASSES]
+        # self.FOOD_CLASSES = [f.replace('spaghetti', 'noodles') for f in self.FOOD_CLASSES]
+        # self.FOOD_CLASSES.append('blue plate')
+
+        food_classes_being_detected, replacement_dict = self.build_detection_phrases()
 
         # # add blue plate to the list of classes so that we can remove it later
         # food_classes_being_detected.append('blue plate')
