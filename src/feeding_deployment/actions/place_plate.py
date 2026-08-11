@@ -316,5 +316,7 @@ class PlacePlateOnTableHLA(HighLevelAction):
         # This is the only moment where the plate is full, settled, and nothing
         # is waiting on us. Never raises -- a failed search just leaves the
         # hardcoded prompts in place.
-        self.autotune_food_prompts(plate_image)
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+        print("Searching for Grounding DINO prompts for the plate image ...")
+        self.autotune_food_prompts(plate_image)
+        print("Finished searching for Grounding DINO prompts for the plate image.")

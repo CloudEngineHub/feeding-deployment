@@ -11,7 +11,11 @@ MEM = ("/home/isacc/deployment_ws/src/feeding-deployment/src/feeding_deployment/
        "integration/log/aimee/preference_learning/aimee/full_history_memory")
 OUT = ("/home/isacc/deployment_ws/src/feeding-deployment/docs/feeding-deployment-docs/"
        "tables/preference_matrix.tex")
-NDAYS = 16
+# Every finalized day on disk, so a new meal needs no edit here beyond its PLATE
+# label. Days must be contiguous from 1 -- the deployment runs sequentially and
+# PreferenceSession.validate_sequential_day already rejects gaps.
+NDAYS = max((d for d in range(1, 100)
+             if os.path.exists(os.path.join(MEM, f"day_{d:04d}.json"))), default=0)
 
 days = [json.load(open(os.path.join(MEM, f"day_{d:04d}.json"))) for d in range(1, NDAYS + 1)]
 
@@ -26,7 +30,7 @@ PLATE = {
     7: "chicken nuggets + ketchup", 8: "orange chicken", 9: "teriyaki chicken",
     10: "hash brown", 11: "hash brown, sausage", 12: "hash brown + ranch",
     13: "orange chicken", 14: "chicken kebab", 15: "pancake, sausage + syrup",
-    16: "steak, mozzarella sticks",
+    16: "steak, mozzarella sticks", 17: "chicken popcorn, potato wedges",
 }
 
 # value -> (short code, legend gloss). Codes are unique across the whole table.
@@ -126,6 +130,8 @@ for title, rows in SECTIONS:
 
 daynums = " & ".join("\\pmday{%d}" % d["day"] for d in days)
 setrow  = " & ".join("\\pmhead{%s}" % setting(d) for d in days)
+_missing = [d["day"] for d in days if d["day"] not in PLATE]
+assert not _missing, f"add a PLATE label for day(s) {_missing}"
 foodrow = " & ".join("\\pmhead{%s}" % PLATE[d["day"]] for d in days)
 
 # Legend, ordered by the sections so related codes sit together.
