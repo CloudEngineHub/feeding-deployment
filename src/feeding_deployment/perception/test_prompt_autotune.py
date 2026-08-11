@@ -71,7 +71,8 @@ def test_phrases():
         "sausage": "dark brown cylindrical sausage link",
         "chicken nugget": "chicken nugget piece",
         "broccoli": "green broccoli floret piece",
-        "potato": "yellow potato wedge piece",
+        "potato wedge": "fried potato wedge",
+        "chicken popcorn": "round popcorn chicken nugget",
         "hash brown": "round hash brown piece",
         "apple": "cut white apple slice piece",
         "cantaloupe": "small cut up cantaloupe piece",   # generic fallback
@@ -255,6 +256,63 @@ def test_candidates_and_cache(tmp: Path):
     check("corrupt cache -> {}", load_prompt_cache(tmp / "bad.json") == {})
 
 
+# ---------------------------------------------------------------------------
+# 4. the tuner must query in the SAME class order production uses
+# ---------------------------------------------------------------------------
+
+class _RecordingModel:
+    """Stands in for Grounding DINO; records the class order it was handed."""
+
+    def __init__(self):
+        self.seen: list[list[str]] = []
+
+    def predict_with_classes(self, image, classes, box_threshold, text_threshold):
+        self.seen.append(list(classes))
+        import types
+        # One tiny box per class, so scoring runs without a collapse.
+        n = len(classes)
+        return types.SimpleNamespace(
+            xyxy=np.array([[10 * i, 10 * i, 10 * i + 8, 10 * i + 8] for i in range(n)], dtype=np.float32),
+            confidence=np.full(n, 0.4, dtype=np.float32),
+            class_id=np.arange(n),
+        )
+
+
+def test_query_order():
+    """Regression: Grounding DINO's attribution depends on class ORDER.
+
+    Measured on a potato-wedge + popcorn-chicken plate: the identical phrase
+    pair split 3/7 when queried [potato, popcorn] and collapsed to 10/0 when
+    queried [popcorn, potato] -- and production queries in FOOD_CLASSES order.
+    A tuner that searched in a different order would recommend prompts that
+    fail live, which is exactly what happened when tuning this by hand.
+    """
+    from feeding_deployment.perception.prompt_autotune import PromptAutoTuner
+
+    model = _RecordingModel()
+    tuner = PromptAutoTuner(model, passes=1, max_candidates_per_food=2)
+    # Deliberately NOT alphabetical, and a dip in the middle to check filtering.
+    foods = ["chicken popcorn", "ranch dressing", "potato wedge"]
+    cats = ["solid", "dip", "solid"]
+    crop = np.full((200, 200, 3), 60, np.uint8)
+    tuner.tune(crop, [0, 0, 200, 200], foods, cats,
+               current_phrases=["round popcorn chicken nugget", "ranch dressing dip",
+                                "fried potato wedge"])
+
+    check("tuner queried at least once", len(model.seen) > 0)
+    # Every query must keep solids in their FOOD_CLASSES order: popcorn before
+    # potato, with the dip excluded entirely.
+    bad = [q for q in model.seen if len(q) != 2]
+    check("dips are excluded from the solid query", not bad,
+          f"queries with wrong arity: {bad[:2]}")
+    seed = model.seen[0]
+    check("solids keep production order (popcorn before potato)",
+          "popcorn" in seed[0] and "potato" in seed[1], str(seed))
+    swapped = [q for q in model.seen if "potato" in q[0]]
+    check("no query ever reverses the class order", not swapped,
+          f"reversed queries: {swapped[:2]}")
+
+
 if __name__ == "__main__":
     import tempfile
     print("== build_detection_phrases ==")
@@ -264,5 +322,7 @@ if __name__ == "__main__":
     print("\n== candidates / cache ==")
     with tempfile.TemporaryDirectory() as d:
         test_candidates_and_cache(Path(d))
+    print("\n== query order ==")
+    test_query_order()
     print(f"\n{'FAILED: ' + ', '.join(FAILURES) if FAILURES else 'ALL TESTS PASSED'}")
     sys.exit(1 if FAILURES else 0)
