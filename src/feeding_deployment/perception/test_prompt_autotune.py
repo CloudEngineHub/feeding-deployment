@@ -32,9 +32,19 @@ FAILURES: list[str] = []
 
 
 def check(name: str, ok: bool, detail: str = "") -> None:
+    """Record and enforce one assertion.
+
+    The `assert` is load-bearing: without it these functions pass under pytest
+    no matter what they measure, because pytest only fails a test that raises.
+    An earlier version only appended to FAILURES, so `pytest` reported "3
+    passed" on a suite whose checks were failing -- green and meaningless.
+    Running the module as a script still reports every failure at the end,
+    because __main__ catches the AssertionError per section (see below).
+    """
     print(f"{'PASS' if ok else 'FAIL'}  {name}{(' -- ' + detail) if detail and not ok else ''}")
     if not ok:
         FAILURES.append(name)
+        raise AssertionError(f"{name}{': ' + detail if detail else ''}")
 
 
 # ---------------------------------------------------------------------------
@@ -211,7 +221,11 @@ def test_scoring():
 # 3. candidate generation, conflict guard, cache
 # ---------------------------------------------------------------------------
 
-def test_candidates_and_cache(tmp: Path):
+def test_candidates_and_cache(tmp_path: Path):
+    # Parameter must be named tmp_path -- it is pytest's built-in temp-dir
+    # fixture. Naming it `tmp` made pytest look for a fixture called "tmp",
+    # which does not exist, and the whole test errored at setup.
+    tmp = tmp_path
     cand = _template_candidates("strawberry", "solid")
     check("candidates include the bare name", "strawberry" in cand, str(cand))
     check("candidates include the current production form",
@@ -315,14 +329,20 @@ def test_query_order():
 
 if __name__ == "__main__":
     import tempfile
-    print("== build_detection_phrases ==")
-    test_phrases()
-    print("\n== scoring ==")
-    test_scoring()
-    print("\n== candidates / cache ==")
+
+    def section(title, fn, *args):
+        """Run one section; keep going after a failure so the run reports all of
+        them. check() has already printed and recorded the FAIL by this point."""
+        print(f"\n== {title} ==")
+        try:
+            fn(*args)
+        except AssertionError:
+            pass
+
+    section("build_detection_phrases", test_phrases)
+    section("scoring", test_scoring)
     with tempfile.TemporaryDirectory() as d:
-        test_candidates_and_cache(Path(d))
-    print("\n== query order ==")
-    test_query_order()
+        section("candidates / cache", test_candidates_and_cache, Path(d))
+    section("query order", test_query_order)
     print(f"\n{'FAILED: ' + ', '.join(FAILURES) if FAILURES else 'ALL TESTS PASSED'}")
     sys.exit(1 if FAILURES else 0)
