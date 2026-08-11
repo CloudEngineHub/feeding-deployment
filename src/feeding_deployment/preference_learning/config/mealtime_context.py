@@ -56,6 +56,13 @@ class MealContents:
 
 MEAL_CONTENTS: List[MealContents] = [
     MealContents(
+        label="chicken popcorn and potato wedges",
+        dippable_items=["chicken popcorn", "potato wedges"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
         label="steak and mozzarella sticks",
         dippable_items=["steak", "mozzarella sticks"],
         sauces=[],

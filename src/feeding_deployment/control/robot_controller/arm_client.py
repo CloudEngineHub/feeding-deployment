@@ -218,7 +218,12 @@ if __name__ == "__main__":
 
     # arm_client_interface.execute_command(JointCommand(config.left_back_retract_pos))
     # arm_client_interface.execute_command(JointCommand(config.back_retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
     # arm_client_interface.execute_command(JointCommand(config.above_plate_pos))
+    # arm_client_interface.execute_command(JointCommand(config.retract_pos))
+    # arm_client_interface.execute_command(JointCommand(config.above_plate_pos))
+    # arm_client_interface.execute_command(JointCommand(config.before_transfer_pos))
+    # arm_client_interface.execute_command(CartesianCommand(config.above_plate_pose[:3], config.above_plate_pose[3:]))
 
     # before_transfer_pos = [-3.0854968936528, -1.483771146589941, -2.4555141535696507, -1.3825566440970434, 1.3751202993852156, -0.8903261777143525, 1.7401439441938908]
     # acq_pos = [-3.0854968936528, -1.483771146589941, -2.4555141535696507, -1.3825566440970434, 1.3751202993852156, -0.8903261777143525, -3.008976818683771]

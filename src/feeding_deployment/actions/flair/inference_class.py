@@ -717,9 +717,15 @@ class BiteAcquisitionInference:
                 # if "steak" in self.FOOD_CLASSES[i]:
                 #     replacement_dict[self.FOOD_CLASSES[i]] = "small cut brown steak piece"
                 #     food_classes_being_detected.append("small cut brown steak piece")
+                # if "potato" in self.FOOD_CLASSES[i]:
+                #     replacement_dict[self.FOOD_CLASSES[i]] = "yellow potato wedge piece"
+                #     food_classes_being_detected.append("yellow potato wedge piece")
                 if "potato" in self.FOOD_CLASSES[i]:
-                    replacement_dict[self.FOOD_CLASSES[i]] = "yellow potato wedge piece"
-                    food_classes_being_detected.append("yellow potato wedge piece")
+                    replacement_dict[self.FOOD_CLASSES[i]] = "fried potato wedge"
+                    food_classes_being_detected.append("fried potato wedge")
+                elif "chicken popcorn" in self.FOOD_CLASSES[i]:
+                    replacement_dict[self.FOOD_CLASSES[i]] = "round popcorn chicken nugget"
+                    food_classes_being_detected.append("round popcorn chicken nugget")
                 elif "steak" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "red cooked steak piece"
                     food_classes_being_detected.append("red cooked steak piece")
@@ -738,9 +744,9 @@ class BiteAcquisitionInference:
                 elif "chicken nugget" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
                     food_classes_being_detected.append("chicken nugget piece")
-                elif "chicken popcorn" in self.FOOD_CLASSES[i]:
-                    replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
-                    food_classes_being_detected.append("chicken nugget piece")
+                # elif "chicken popcorn" in self.FOOD_CLASSES[i]:
+                #     replacement_dict[self.FOOD_CLASSES[i]] = "chicken nugget piece"
+                #     food_classes_being_detected.append("chicken nugget piece")
                 elif "chicken kebab" in self.FOOD_CLASSES[i]:
                     replacement_dict[self.FOOD_CLASSES[i]] = "cubed chicken piece"
                     food_classes_being_detected.append("cubed chicken piece")

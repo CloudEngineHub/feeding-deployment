@@ -10,10 +10,10 @@
     "detect_user_completed_transfer_drinking": "button",
     "detect_user_completed_transfer_feeding": "perception",
     "detect_user_completed_transfer_wiping": "button",
-    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
     "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
     "detect_user_ready_for_initiating_transfer_wiping": "button",
-    "microwave_time": "no microwave",
+    "microwave_time": "30 secs",
     "nav_offset_dining_table": {
       "dx": 0.0,
       "dy": 0.0,
@@ -43,8 +43,8 @@
     "plate_color_dining_table": {
       "h": 11,
       "range": 0.18,
-      "s": 200,
-      "v": 140
+      "s": 195,
+      "v": 150
     },
     "plate_color_fridge": {
       "h": 9,
@@ -72,21 +72,14 @@
     "wait_before_autocontinue_task_selection": "countdown (60 sec)"
   },
   "context": {
-    "meal": "steak and mozzarella sticks",
+    "meal": "chicken popcorn and potato wedges",
     "setting": "Social",
     "time_of_day": "night"
   },
   "corrected": {
-    "detect_user_ready_for_initiating_transfer_drinking": "button",
+    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
     "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
-    "microwave_time": "no microwave",
-    "plate_color_dining_table": {
-      "h": 11,
-      "range": 0.18,
-      "s": 200,
-      "v": 140
-    },
-    "retract_between_bites": "no",
+    "detect_user_ready_for_initiating_transfer_wiping": "button",
     "wait_before_autocontinue_task_selection": "countdown (60 sec)"
   },
   "finalized": [

@@ -215,6 +215,7 @@ above_plate_pos:
   description: "Above plate configuration"
   type: "joint_positions"
   values: [-2.9162916222140707, -1.2999182228396666, -2.094591377365534, -1.3888449000629386, 0.9010541229544912, -0.586933540010345, -2.801091795572731]
+  # values: [-3.098742657966527, -1.165253884423156, -2.1684032838220615, -0.9433710203065502, 0.8243911028139524, -0.8363891761569775, -2.6650303628483645]
 before_transfer_pos: 
   description: "Ready to transfer configuration, the user's face should be visible from this configuration"
   type: "joint_positions"
