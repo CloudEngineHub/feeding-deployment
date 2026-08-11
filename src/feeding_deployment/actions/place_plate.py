@@ -310,5 +310,13 @@ class PlacePlateOnTableHLA(HighLevelAction):
 
         self.report_activity("Recording a picture of the plate before feeding")
         self.move_to_joint_positions(self.sim.scene_description.above_plate_pos)
-        self.log_camera_image("plate_before_feeding", settle_s=5.0)
+        plate_image = self.log_camera_image("plate_before_feeding", settle_s=5.0)
+        # Same picture, used a second way: search for the Grounding DINO wording
+        # that best picks out this meal's foods, before any bite is attempted.
+        # This is the only moment where the plate is full, settled, and nothing
+        # is waiting on us. Never raises -- a failed search just leaves the
+        # hardcoded prompts in place.
         self.move_to_joint_positions(self.sim.scene_description.retract_pos)
+        print("Searching for Grounding DINO prompts for the plate image ...")
+        self.autotune_food_prompts(plate_image)
+        print("Finished searching for Grounding DINO prompts for the plate image.")

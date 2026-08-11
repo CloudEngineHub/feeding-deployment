@@ -11,7 +11,7 @@ Two contamination sources are excluded, both confirmed against the logs:
     the webapp on the CR's iPad, `/shared_autonomy_teleop` is the Xbox. Only the
     former is counted. Across the deployment the Xbox accounts for more base
     driving than the CR does, so merging them roughly doubles the count.
-  * 42 of the 56 logged arm sessions contain zero `command_received` events. The
+  * 48 of the 62 logged arm sessions contain zero `command_received` events. The
     CR used the arm-teleop screen as an escape hatch -- open it, press Done, then
     Next or Redo -- to skip past a skill without ever jogging the arm. Only
     sessions that actually commanded motion count as teleoperation here.
