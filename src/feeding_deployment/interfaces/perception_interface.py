@@ -183,17 +183,28 @@ class PerceptionInterface:
         self.transfer_button = False
         return True
     
-    def detect_force_trigger(self):
+    def detect_force_trigger(self, termination_event=None):
+        """Block until the user bites down on the fork (force-torque threshold).
+
+        This wait is unbounded -- there is no timeout, because there is no
+        autonomous recovery from "the user has not taken the bite yet". Pass
+        ``termination_event`` (the takeover flag) so a mid-wait "Take Over" can
+        end it: without one, the fork sits at the user's mouth and the
+        arm-control screen is inert until they bite. Returns True if the trigger
+        fired, False if the caller's event stopped us first.
+        """
         print("Waiting for force torque threshold to be exceeded")
         if self.simulation:
             return True
-        
+
         self.ft_threshold_exceeded = False
         # wait for force torque threshold to be exceeded
-        while not rospy.is_shutdown() and not self.ft_threshold_exceeded:
+        while (not rospy.is_shutdown() and not self.ft_threshold_exceeded
+               and (termination_event is None or not termination_event.is_set())):
             time.sleep(0.05)
+        triggered = self.ft_threshold_exceeded
         self.ft_threshold_exceeded = False
-        return True
+        return triggered
 
     def ft_callback(self, msg):
 

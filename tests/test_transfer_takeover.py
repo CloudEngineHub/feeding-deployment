@@ -136,6 +136,215 @@ class _FakeTransferController:
         self.move_to_ee_pose(pose)
 
 
+class _FakeGestureDetector:
+    """Mirrors the real detectors' loop contract (mouth_open line 424,
+    poll_until_detected line 365): poll until detected, until the caller's
+    termination_event is set, or until the timeout. Returns whether it fired."""
+
+    def __init__(self, fires_after=None):
+        self.fires_after = fires_after   # poll count at which the gesture fires
+        self.polls = 0
+
+    def __call__(self, perception_interface, termination_event, timeout, **kw):
+        deadline = timeout
+        while self.polls < deadline and (
+            termination_event is None or not termination_event.is_set()
+        ):
+            self.polls += 1
+            if self.fires_after is not None and self.polls >= self.fires_after:
+                return True
+        return False
+
+
+class _FakeHLA:
+    """The two helpers added to HighLevelAction, transcribed."""
+
+    def __init__(self, web_interface):
+        self.web_interface = web_interface
+
+    def takeover_termination_event(self):
+        return self.web_interface.takeover_event if self.web_interface is not None else None
+
+    def raise_if_takeover(self):
+        if self.web_interface is not None and self.web_interface.takeover_event.is_set():
+            raise WebInterfaceTakeoverInterrupt()
+
+
+class GestureWaitTest(unittest.TestCase):
+    """A takeover must end a gesture wait. Before this, mouth_open/head_nod were
+    called with termination_event=None, so the executive sat in the wait for up
+    to 10 minutes with no teleop session running -- the arm-control screen was
+    inert until the user performed the very gesture they were interrupting."""
+
+    def setUp(self):
+        self.web = _FakeWebInterface()
+        self.hla = _FakeHLA(self.web)
+
+    def _wait(self, detector):
+        detector(None, self.hla.takeover_termination_event(), 600)
+        self.hla.raise_if_takeover()
+
+    def test_gesture_detected_proceeds(self):
+        detector = _FakeGestureDetector(fires_after=3)
+        self._wait(detector)          # no raise
+        self.assertEqual(detector.polls, 3)
+
+    def test_takeover_ends_the_wait_and_raises(self):
+        detector = _FakeGestureDetector(fires_after=None)  # user never signals
+        self.web.takeover_event.set()
+        with self.assertRaises(WebInterfaceTakeoverInterrupt):
+            self._wait(detector)
+        self.assertEqual(detector.polls, 0, "wait should end immediately, not run to timeout")
+
+    def test_takeover_midway_ends_the_wait(self):
+        detector = _FakeGestureDetector(fires_after=None)
+        web = self.web
+
+        class _Detector(_FakeGestureDetector):
+            def __call__(inner, pi, ev, timeout, **kw):
+                # the press lands after a few polls
+                for _ in range(5):
+                    inner.polls += 1
+                web.takeover_event.set()
+                return super().__call__(pi, ev, timeout, **kw)
+
+        with self.assertRaises(WebInterfaceTakeoverInterrupt):
+            self._wait(_Detector(fires_after=None))
+
+    def test_timeout_does_not_raise(self):
+        # The Fix-1/Fix-3 boundary, pinned deliberately: a plain timeout is NOT a
+        # takeover. What should happen when the user never signals at all is a
+        # separate question; this change must not silently start aborting there.
+        detector = _FakeGestureDetector(fires_after=None)
+        self._wait(detector)          # runs to timeout, no raise
+        self.assertEqual(detector.polls, 600)
+
+    def test_sim_path_unchanged(self):
+        hla = _FakeHLA(None)
+        self.assertIsNone(hla.takeover_termination_event())
+        hla.raise_if_takeover()       # no web interface -> never raises
+
+
+class ForceTriggerTest(unittest.TestCase):
+    """detect_force_trigger is the fork-at-the-mouth wait. It has no timeout at
+    all, so without a termination event a takeover could not end it: the user had
+    to bite the fork to get control back."""
+
+    @staticmethod
+    def _force_trigger(exceeded_after, termination_event=None, simulation=False,
+                       max_polls=1000):
+        """The loop from perception_interface.detect_force_trigger."""
+        if simulation:
+            return True, 0
+        polls = 0
+        exceeded = False
+        while (polls < max_polls and not exceeded
+               and (termination_event is None or not termination_event.is_set())):
+            polls += 1
+            if exceeded_after is not None and polls >= exceeded_after:
+                exceeded = True
+        return exceeded, polls
+
+    def test_bite_detected_returns_true(self):
+        triggered, polls = self._force_trigger(exceeded_after=10)
+        self.assertTrue(triggered)
+        self.assertEqual(polls, 10)
+
+    def test_takeover_ends_the_unbounded_wait(self):
+        web = _FakeWebInterface()
+        web.takeover_event.set()
+        triggered, polls = self._force_trigger(
+            exceeded_after=None, termination_event=web.takeover_event)
+        self.assertFalse(triggered, "must report it did not fire, not a false bite")
+        self.assertEqual(polls, 0)
+
+    def test_without_event_it_still_blocks(self):
+        # Documents why the event is needed: no termination_event -> runs forever
+        # (bounded here by max_polls only).
+        triggered, polls = self._force_trigger(exceeded_after=None, max_polls=500)
+        self.assertFalse(triggered)
+        self.assertEqual(polls, 500)
+
+    def test_simulation_short_circuits(self):
+        triggered, _ = self._force_trigger(exceeded_after=None, simulation=True)
+        self.assertTrue(triggered)
+
+
+class WaitCoverageTest(unittest.TestCase):
+    """Every blocking user-wait in transfer_tool must pass a real termination
+    event and immediately surface a takeover. This is the guard that matters:
+    the failure mode is someone adding a sixth wait and forgetting."""
+
+    GUARDED = {"mouth_open", "head_nod", "gesture_fn", "detect_force_trigger"}
+
+    def _wait_calls(self):
+        import ast
+        import pathlib
+
+        src = pathlib.Path(__file__).resolve().parents[1] / (
+            "src/feeding_deployment/actions/transfer_tool.py"
+        )
+        tree = ast.parse(src.read_text())
+        found = []
+        for node in ast.walk(tree):
+            body = getattr(node, "body", None)
+            if not isinstance(body, list):
+                continue
+            for i, stmt in enumerate(body):
+                if not isinstance(stmt, ast.Expr) or not isinstance(stmt.value, ast.Call):
+                    continue
+                call = stmt.value
+                func = call.func
+                name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", "")
+                if name not in self.GUARDED:
+                    continue
+                nxt = body[i + 1] if i + 1 < len(body) else None
+                found.append((name, call, nxt))
+        return found
+
+    def test_every_wait_is_guarded(self):
+        import ast
+
+        calls = self._wait_calls()
+        self.assertGreaterEqual(len(calls), 6, f"expected the known waits, found {len(calls)}")
+        for name, call, nxt in calls:
+            kwargs = {k.arg: k.value for k in call.keywords}
+            self.assertIn("termination_event", kwargs,
+                          f"{name}() must pass termination_event")
+            value = kwargs["termination_event"]
+            self.assertFalse(
+                isinstance(value, ast.Constant) and value.value is None,
+                f"{name}() passes termination_event=None -- takeover cannot end this wait",
+            )
+            self.assertTrue(
+                isinstance(nxt, ast.Expr) and isinstance(nxt.value, ast.Call)
+                and getattr(nxt.value.func, "attr", "") == "raise_if_takeover",
+                f"{name}() must be followed immediately by self.raise_if_takeover()",
+            )
+
+    def test_force_trigger_loop_honours_the_event(self):
+        import ast
+        import pathlib
+
+        src = pathlib.Path(__file__).resolve().parents[1] / (
+            "src/feeding_deployment/interfaces/perception_interface.py"
+        )
+        fn = next(
+            (n for n in ast.walk(ast.parse(src.read_text()))
+             if isinstance(n, ast.FunctionDef) and n.name == "detect_force_trigger"),
+            None,
+        )
+        self.assertIsNotNone(fn, "detect_force_trigger not found")
+        self.assertIn("termination_event", [a.arg for a in fn.args.args],
+                      "detect_force_trigger must accept termination_event")
+        loops = [n for n in ast.walk(fn) if isinstance(n, ast.While)]
+        self.assertTrue(loops, "expected a wait loop")
+        self.assertTrue(
+            any("termination_event" in ast.unparse(loop.test) for loop in loops),
+            "the wait loop must test termination_event, or a takeover cannot end it",
+        )
+
+
 class TakeoverProxyTest(unittest.TestCase):
     def setUp(self):
         self.arm = _FakeArm()

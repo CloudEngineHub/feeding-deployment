@@ -804,6 +804,30 @@ class HighLevelAction(abc.ABC):
             print(f"[prompt_autotune] skipped ({type(e).__name__}: {e}); "
                   "using the hardcoded detection prompts")
 
+    def takeover_termination_event(self):
+        """The takeover flag, to hand to a blocking wait as its ``termination_event``.
+
+        The gesture detectors and detect_force_trigger poll this every cycle and
+        stop when it is set, so a mid-wait "Take Over" ends the wait instead of
+        stranding the executive in it -- with no teleop session running, the
+        arm-control screen is inert until the wait returns. Returns None where
+        takeover cannot apply (sim / no web interface), leaving those waits
+        exactly as before. Pair every such call with raise_if_takeover below.
+        """
+        return self.web_interface.takeover_event if self.web_interface is not None else None
+
+    def raise_if_takeover(self) -> None:
+        """Surface a takeover that ended a wait started with the event above.
+
+        Keyed on the flag, NOT on the wait's return value: a detector returns
+        False for both a takeover and a plain timeout, and what should happen on
+        a timeout (the user never signalled at all) is a separate question this
+        deliberately does not touch. Only peeks -- execute_action owns the
+        consume + teleop recovery, like every other takeover path.
+        """
+        if self.web_interface is not None and self.web_interface.takeover_event.is_set():
+            raise WebInterfaceTakeoverInterrupt()
+
     def wait_for_gesture(self, gesture_fn_name: str) -> None:
         static_gestures = inspect.getmembers(static_gesture_detectors, inspect.isfunction)
         gestures = dict(static_gestures + self.load_synthesized_gestures())

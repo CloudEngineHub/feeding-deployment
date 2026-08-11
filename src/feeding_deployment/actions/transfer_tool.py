@@ -94,7 +94,13 @@ class TransferToolHLA(HighLevelAction):
         elif initiate_transfer_interaction == "open_mouth":
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Please open your mouth to initiate transfer")
-            mouth_open(self.perception_interface, termination_event=None, timeout=600) # 10 minutes
+            # termination_event lets "Take Over" end this wait; see
+            # HighLevelAction.takeover_termination_event. Without it the robot
+            # waits here for up to 10 minutes with arm control inert.
+            mouth_open(self.perception_interface,
+                       termination_event=self.takeover_termination_event(),
+                       timeout=600) # 10 minutes
+            self.raise_if_takeover()
         elif initiate_transfer_interaction == "auto_timeout":
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Please wait for the transfer to initiate in 5 seconds")
@@ -110,7 +116,10 @@ class TransferToolHLA(HighLevelAction):
             if initiate_transfer_interaction in gestures:
                 self.web_interface.fix_explanation(f"Please do a {synthesized_gesture_function_name_to_label[initiate_transfer_interaction]} to initiate transfer")
                 gesture_fn = gestures[initiate_transfer_interaction]
-                gesture_fn(self.perception_interface, termination_event=None, timeout=600) # 10 minutes
+                gesture_fn(self.perception_interface,
+                           termination_event=self.takeover_termination_event(),
+                           timeout=600) # 10 minutes
+                self.raise_if_takeover()
             else:
                 raise NotImplementedError
         print("Initiating transfer")
@@ -133,17 +142,27 @@ class TransferToolHLA(HighLevelAction):
             if self.tool == "fork":
                 if self.web_interface is not None:
                     self.web_interface.fix_explanation("Please bite down on the fork to complete transfer")
-                self.perception_interface.detect_force_trigger()
+                # Unbounded wait with the fork at the user's mouth -- the single
+                # most important place for "Take Over" to be responsive.
+                self.perception_interface.detect_force_trigger(
+                    termination_event=self.takeover_termination_event())
+                self.raise_if_takeover()
             elif self.tool == "drink":
                 if self.web_interface is not None:
                     self.web_interface.fix_explanation("Please do a head nod to complete transfer")
                 time.sleep(10.0) # wait for the robot to stabilize
-                head_nod(self.perception_interface, termination_event=None, timeout=600, debug=True) # 10 minutes
+                head_nod(self.perception_interface,
+                         termination_event=self.takeover_termination_event(),
+                         timeout=600, debug=True) # 10 minutes
+                self.raise_if_takeover()
             elif self.tool == "wipe":
                 if self.web_interface is not None:
                     self.web_interface.fix_explanation("Please do a head nod to complete transfer")
                 time.sleep(10.0) # wait for the robot to stabilize
-                head_nod(self.perception_interface, termination_event=None, timeout=600, debug=True) # 10 minutes
+                head_nod(self.perception_interface,
+                         termination_event=self.takeover_termination_event(),
+                         timeout=600, debug=True) # 10 minutes
+                self.raise_if_takeover()
         elif transfer_complete_interaction == "auto_timeout":
             if self.web_interface is not None:
                 self.web_interface.fix_explanation("Please wait for the transfer to complete in 5 seconds")
@@ -159,7 +178,10 @@ class TransferToolHLA(HighLevelAction):
             if transfer_complete_interaction in gestures:
                 self.web_interface.fix_explanation(f"Please do a {synthesized_gesture_function_name_to_label[transfer_complete_interaction]} to complete transfer")
                 gesture_fn = gestures[transfer_complete_interaction]
-                gesture_fn(self.perception_interface, termination_event=None, timeout=600) # 10 minutes
+                gesture_fn(self.perception_interface,
+                           termination_event=self.takeover_termination_event(),
+                           timeout=600) # 10 minutes
+                self.raise_if_takeover()
             else:
                 raise NotImplementedError
         print("Detected transfer completion")
