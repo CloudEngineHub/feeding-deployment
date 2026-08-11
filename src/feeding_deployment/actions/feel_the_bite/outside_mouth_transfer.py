@@ -27,9 +27,21 @@ class OutsideMouthTransfer(Transfer):
         self.log_dir = log_dir
 
     def move_to_transfer_state(self, outside_mouth_distance, maintain_position_at_goal = False):
-
+        # The noisy-readings filter is a sticky flag on the head-perception node,
+        # so it must be cleared on every exit -- including a mid-skill takeover
+        # raised out of move_to_ee_pose below. Left latched on, every later
+        # transfer's wait_for_head_perception_data (unbounded by design) can
+        # block on rejected readings, which looks like head perception breaking
+        # rather than a leaked flag.
         if self.robot_interface is not None:
             self.set_filter_noisy_readings_pub.publish(Bool(data=True))
+        try:
+            self._move_to_transfer_state(outside_mouth_distance, maintain_position_at_goal)
+        finally:
+            if self.robot_interface is not None:
+                self.set_filter_noisy_readings_pub.publish(Bool(data=False))
+
+    def _move_to_transfer_state(self, outside_mouth_distance, maintain_position_at_goal = False):
 
         # move to infront of mouth. A DECA frame can be None (no face detected,
         # too few depth landmarks, or a reading rejected as noisy by the filter
@@ -86,9 +98,6 @@ class OutsideMouthTransfer(Transfer):
         target_pose = Pose.from_matrix(tool_frame_target)
 
         self.move_to_ee_pose(target_pose)
-
-        if self.robot_interface is not None:
-            self.set_filter_noisy_readings_pub.publish(Bool(data=False))
 
     def move_to_before_transfer_state(self):
         self.move_to_ee_pose(self.sim.scene_description.before_transfer_pose)

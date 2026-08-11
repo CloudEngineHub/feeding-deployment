@@ -84,6 +84,68 @@ import feeding_deployment.perception.gestures_perception.static_gesture_detector
 # still works, just at the next move boundary. Set False to disable entirely.
 MID_SKILL_TAKEOVER_ENABLED = True
 
+
+class TakeoverAwareArmInterface:
+    """Wraps an arm interface so a mid-skill takeover preempts motion commanded
+    outside HighLevelAction.execute_robot_command.
+
+    Both FLAIR (bite acquisition) and the feel_the_bite transfer controllers
+    command the arm directly through execute_command, bypassing the takeover
+    polling in execute_robot_command (which checks the flag before and after
+    every move). Without this, a takeover pressed mid-motion only aborts the one
+    in-flight waypoint; the caller, unaware, commands the next one and finishes
+    the skill, so redo/next only takes effect afterward -- or, when no further
+    waypoint follows, not at all.
+
+    This proxy re-adds that polling at the single chokepoint every such motion
+    funnels through -- execute_command -- raising WebInterfaceTakeoverInterrupt,
+    which execute_action (below) converts into the TeleopTakeoverException the
+    executive already handles. It only peeks the event (never consumes it);
+    execute_action owns the consume + teleop recovery, exactly like the
+    webapp-wait path in web_interface.
+
+    Every other attribute/method is delegated unchanged. Note that attribute
+    *writes* are not delegated (no __setattr__ override): they would land on the
+    proxy and silently diverge from the wrapped object. No caller assigns to an
+    arm-interface attribute today; keep it that way.
+    """
+
+    def __init__(self, inner, web_interface):
+        self._inner = inner
+        self._web_interface = web_interface
+
+    def _raise_if_takeover(self):
+        web = self._web_interface
+        if web is not None and web.takeover_event.is_set():
+            raise WebInterfaceTakeoverInterrupt()
+
+    def execute_command(self, *args, **kwargs):
+        self._raise_if_takeover()  # takeover requested before this move
+        result = self._inner.execute_command(*args, **kwargs)
+        # A takeover during the move fires stop_action, which aborts it; the move
+        # returns here early, so we catch the still-latched event before the
+        # caller can command the next waypoint.
+        self._raise_if_takeover()
+        return result
+
+    def __getattr__(self, name):
+        # Only reached for attributes not defined on the proxy itself.
+        return getattr(self._inner, name)
+
+
+def takeover_aware_arm_interface(robot_interface, web_interface):
+    """Return ``robot_interface`` wrapped for mid-skill takeover, or unwrapped
+    where takeover cannot apply (sim / no web interface / feature disabled) so
+    those paths stay exactly as before."""
+    if (
+        MID_SKILL_TAKEOVER_ENABLED
+        and robot_interface is not None
+        and web_interface is not None
+    ):
+        return TakeoverAwareArmInterface(robot_interface, web_interface)
+    return robot_interface
+
+
 # Wait after the last arm move to a perception config before capturing, so the
 # RealSense auto-exposure / auto-white-balance settles on the new scene (the
 # first frames after a large viewpoint change are often mis-lit).

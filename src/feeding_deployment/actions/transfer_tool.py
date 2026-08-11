@@ -26,6 +26,7 @@ from relational_structs import (
 )
 from feeding_deployment.actions.base import (
     HighLevelAction,
+    takeover_aware_arm_interface,
     tool_type,
     table_type,
     GripperFree,
@@ -51,10 +52,23 @@ class TransferToolHLA(HighLevelAction):
         self.head_perception_log_dir = self.log_dir / "head_perception_log"
         self.head_perception_log_dir.mkdir(exist_ok=True)
 
+        # The feel_the_bite transfer controllers command the arm directly through
+        # execute_command (move_to_ee_pose), bypassing the takeover polling in
+        # HighLevelAction.execute_robot_command -- so a takeover pressed during
+        # the approach to the mouth, or during the retract after the bite, was
+        # never surfaced and the executive fell through to the idle handler with
+        # no skill left to redo. Wrap the interface handed to the controller so
+        # those moves preempt like every other skill. Only the controller's copy
+        # is wrapped: self.robot_interface stays raw, so the compliant-mode
+        # teardown in execute_transfer can never raise mid-cleanup.
+        transfer_robot_interface = takeover_aware_arm_interface(
+            self.robot_interface, self.web_interface
+        )
+
         if self.sim.scene_description.transfer_type == "inside":
-            self.transfer = InsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir)
+            self.transfer = InsideMouthTransfer(self.sim, transfer_robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir)
         elif self.sim.scene_description.transfer_type == "outside":
-            self.transfer = OutsideMouthTransfer(self.sim, self.robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir, web_interface=self.web_interface)
+            self.transfer = OutsideMouthTransfer(self.sim, transfer_robot_interface, self.perception_interface, self.rviz_interface, self.no_waits, self.head_perception_log_dir, web_interface=self.web_interface)
         else:
             raise ValueError("Bite transfer type not recognized")
 
