@@ -344,7 +344,7 @@ class WebInterface:
             self.current_page = "task_selection"
             
             self.task_selection_queue.put(task_selected)
-        else:
+        elif msg_dict.get("state") != "button_press":  # iPad button path retired; compute-side /transfer_button only
             self.received_web_interface_messages.put(msg_dict)
 
     def _on_base_takeover(self, _msg: "Empty") -> None:

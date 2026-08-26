@@ -743,7 +743,7 @@ class HighLevelAction(abc.ABC):
         """
         if plate_image is None or self.flair is None:
             return
-        if os.environ.get("FEEDING_PROMPT_AUTOTUNE", "1").strip().lower() in ("0", "false", "no"):
+        if os.environ.get("FEEDING_PROMPT_AUTOTUNE", "0").strip().lower() in ("0", "false", "no"):
             print("[prompt_autotune] disabled via FEEDING_PROMPT_AUTOTUNE")
             return
         try:

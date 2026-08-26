@@ -56,6 +56,34 @@ class MealContents:
 
 MEAL_CONTENTS: List[MealContents] = [
     MealContents(
+        label="watermelon, cantaloupe and strawberries",
+        dippable_items=["watermelon", "cantaloupe", "strawberries"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="cold",
+    ),
+    MealContents(
+        label="kielbasa and carrots",
+        dippable_items=["kielbasa", "carrots"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
+        label="chicken kebabs and grilled pineapple",
+        dippable_items=["chicken kebabs", "grilled pineapple"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="hot",
+    ),
+    MealContents(
+        label="peanut butter and jelly sandwich",
+        dippable_items=["peanut butter and jelly sandwich"],
+        sauces=[],
+        storage_condition="refrigerated_leftover",
+        intended_serving_temp="cold",
+    ),
+    MealContents(
         label="chicken popcorn and potato wedges",
         dippable_items=["chicken popcorn", "potato wedges"],
         sauces=[],

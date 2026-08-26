@@ -123,6 +123,19 @@ def collect(user_dir):
                     "corrected": e.get("value"),
                 })
                 bundle[dim] = e.get("value")
+            elif cat == "preference_color_recorded" and e.get("changed"):
+                # The plate-handle colour is re-observed at each pickup, and the
+                # CR can correct it on the detection page. She supplies it by
+                # picking off the image rather than from a list of options, so it
+                # is a different kind of input from the other two channels and is
+                # drawn as its own series rather than folded into them.
+                dim = e.get("field")
+                corrections.append({
+                    "channel": "colour",
+                    "dim": dim,
+                    "predicted": bundle.get(dim),
+                    "corrected": e.get("offset") or e.get("color") or e.get("value"),
+                })
 
         days.append({"n": i, "date": date, "context": context,
                      "corrections": corrections})
@@ -140,8 +153,9 @@ def render_appendix(days):
          r"\caption{Every preference correction the CR made, by day. \emph{Ask} "
           r"corrections are overrides on the pre-meal preferences page; "
           r"\emph{Set} corrections are mid-meal changes from the settings "
-          r"page. \emph{Predicted} is the value the system held for that "
-          r"dimension immediately before the override.}",
+          r"page; \emph{Col} corrections are plate-handle colours she "
+          r"re-picked on a detection page. \emph{Predicted} is the value the "
+          r"system held for that dimension immediately before the override.}",
          r"\label{tab:correction_ledger}",
          r"\vspace{-0.2cm}",
          r"{\centering\footnotesize",
@@ -165,7 +179,7 @@ def render_appendix(days):
             day_cell = rf"\multirow{{{len(d['corrections'])}}}{{*}}{{{d['n']}}}" if k == 0 else ""
             L.append(" & ".join([
                 day_cell,
-                "Ask" if c["channel"] == "ask" else "Set",
+                {"ask": "Ask", "settings": "Set", "colour": "Col"}[c["channel"]],
                 tex_escape(DIM_LABELS.get(c["dim"], c["dim"])),
                 tex_escape(c["predicted"] if c["predicted"] is not None else "--", VALUE_CLIP),
                 tex_escape(c["corrected"] if c["corrected"] is not None else "--", VALUE_CLIP),
@@ -194,6 +208,7 @@ logged = [d for d in days if d["corrections"] is not None]
 xs   = [d["n"] for d in logged]
 ask  = [sum(1 for c in d["corrections"] if c["channel"] == "ask") for d in logged]
 sett = [sum(1 for c in d["corrections"] if c["channel"] == "settings") for d in logged]
+col  = [sum(1 for c in d["corrections"] if c["channel"] == "colour") for d in logged]
 n    = len(days)
 
 plt.rcParams.update({"font.size": 8, "font.family": "serif"})
@@ -211,10 +226,12 @@ ax = fig.add_axes([cal["axes_left"], 0.09, cal["axes_width"], 0.87])
 ax.bar(xs, ask, color="#C0504D", width=cal["bar_width"], label="Pre-meal (ask flow)")
 ax.bar(xs, sett, bottom=ask, color="#E8A33D", width=cal["bar_width"],
        label="Mid-meal (settings)")
+ax.bar(xs, col, bottom=[a + s for a, s in zip(ask, sett)], color="#4E79A7",
+       width=cal["bar_width"], label="Plate colour")
 
 ax.set_ylabel("Corrections", fontsize=7.5, labelpad=2)
 ax.set_xlim(0.5, n + 0.5)
-ax.set_ylim(0, max([a + s for a, s in zip(ask, sett)] + [1]) + 0.5)
+ax.set_ylim(0, max([a + s + c for a, s, c in zip(ask, sett, col)] + [1]) + 0.5)
 ax.set_xticks(range(1, n + 1))
 ax.set_xticklabels([])          # the table's Day/Date rows below label this axis
 ax.tick_params(axis="x", length=2, width=0.5)
@@ -237,7 +254,7 @@ for spine in ("left", "bottom"):
     ax.spines[spine].set_linewidth(0.5)
 ax.grid(axis="y", color="0.9", lw=0.5)
 ax.set_axisbelow(True)
-ax.legend(fontsize=6.5, frameon=False, ncol=2, loc="upper right",
+ax.legend(fontsize=6.5, frameon=False, ncol=3, loc="upper right",
           handlelength=1.1, columnspacing=1.0, borderpad=0.1, handletextpad=0.4)
 fig.savefig(out)
 print("wrote", out)
@@ -292,7 +309,8 @@ def main():
             chan[c["channel"]] += 1
     total = sum(chan.values())
     print(f"  {total} corrections "
-          f"({chan['ask']} ask-flow, {chan['settings']} settings) "
+          f"({chan['ask']} ask-flow, {chan['settings']} settings, "
+          f"{chan['colour']} plate colour) "
           f"over {sum(1 for d in days if d['corrections'] is not None)} meals")
     print("  per day:", dict(sorted(per_day.items())))
 

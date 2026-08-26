@@ -28,7 +28,7 @@ INTEGRATION_DIR="$HOME/deployment_ws/src/feeding-deployment/src/feeding_deployme
 DATASET_ROOT="${DATASET_ROOT:-/data/feeding_dataset}"
 BAG_ROOT="${BAG_ROOT:-$DATASET_ROOT/bags}"
 SVO_DIR="${SVO_DIR:-$DATASET_ROOT/svo}"
-MIN_FREE_GB="${MIN_FREE_GB:-100}"
+MIN_FREE_GB="${MIN_FREE_GB:-50}"
 STATUS_PERIOD="${STATUS_PERIOD:-10}"     # seconds between status lines
 ACTIVE_WAIT_S="${ACTIVE_WAIT_S:-30}"     # max wait for .active finalization
 

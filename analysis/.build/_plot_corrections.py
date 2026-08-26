@@ -11,6 +11,7 @@ logged = [d for d in days if d["corrections"] is not None]
 xs   = [d["n"] for d in logged]
 ask  = [sum(1 for c in d["corrections"] if c["channel"] == "ask") for d in logged]
 sett = [sum(1 for c in d["corrections"] if c["channel"] == "settings") for d in logged]
+col  = [sum(1 for c in d["corrections"] if c["channel"] == "colour") for d in logged]
 n    = len(days)
 
 plt.rcParams.update({"font.size": 8, "font.family": "serif"})
@@ -28,10 +29,12 @@ ax = fig.add_axes([cal["axes_left"], 0.09, cal["axes_width"], 0.87])
 ax.bar(xs, ask, color="#C0504D", width=cal["bar_width"], label="Pre-meal (ask flow)")
 ax.bar(xs, sett, bottom=ask, color="#E8A33D", width=cal["bar_width"],
        label="Mid-meal (settings)")
+ax.bar(xs, col, bottom=[a + s for a, s in zip(ask, sett)], color="#4E79A7",
+       width=cal["bar_width"], label="Plate colour")
 
 ax.set_ylabel("Corrections", fontsize=7.5, labelpad=2)
 ax.set_xlim(0.5, n + 0.5)
-ax.set_ylim(0, max([a + s for a, s in zip(ask, sett)] + [1]) + 0.5)
+ax.set_ylim(0, max([a + s + c for a, s, c in zip(ask, sett, col)] + [1]) + 0.5)
 ax.set_xticks(range(1, n + 1))
 ax.set_xticklabels([])          # the table's Day/Date rows below label this axis
 ax.tick_params(axis="x", length=2, width=0.5)
@@ -54,7 +57,7 @@ for spine in ("left", "bottom"):
     ax.spines[spine].set_linewidth(0.5)
 ax.grid(axis="y", color="0.9", lw=0.5)
 ax.set_axisbelow(True)
-ax.legend(fontsize=6.5, frameon=False, ncol=2, loc="upper right",
+ax.legend(fontsize=6.5, frameon=False, ncol=3, loc="upper right",
           handlelength=1.1, columnspacing=1.0, borderpad=0.1, handletextpad=0.4)
 fig.savefig(out)
 print("wrote", out)

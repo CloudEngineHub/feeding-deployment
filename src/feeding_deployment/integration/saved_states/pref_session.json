@@ -5,15 +5,15 @@
     "confirm_feeding_pickup": "skip",
     "confirm_manipulation": "countdown (15 sec)",
     "confirm_navigation_arrival": "skip",
-    "convey_robot_ready_for_completing_transfer": "LED",
-    "convey_robot_ready_for_initiating_transfer": "LED",
+    "convey_robot_ready_for_completing_transfer": "speech",
+    "convey_robot_ready_for_initiating_transfer": "speech",
     "detect_user_completed_transfer_drinking": "button",
     "detect_user_completed_transfer_feeding": "perception",
     "detect_user_completed_transfer_wiping": "button",
     "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
     "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
     "detect_user_ready_for_initiating_transfer_wiping": "button",
-    "microwave_time": "30 secs",
+    "microwave_time": "no microwave",
     "nav_offset_dining_table": {
       "dx": 0.0,
       "dy": 0.0,
@@ -59,28 +59,25 @@
       "v": 210
     },
     "plate_color_movable_table": {
-      "h": 4,
-      "range": 0.3,
-      "s": 52,
-      "v": 118
+      "h": 10,
+      "range": 0.09,
+      "s": 181,
+      "v": 192
     },
     "retract_between_bites": "no",
     "robot_speed": "fast",
     "skewering_axis": "perpendicular to major axis",
     "transfer_mode": "outside mouth transfer",
     "wait_before_autocontinue_bite_selection": "countdown (15 sec)",
-    "wait_before_autocontinue_task_selection": "countdown (60 sec)"
+    "wait_before_autocontinue_task_selection": "countdown (30 sec)"
   },
   "context": {
-    "meal": "chicken popcorn and potato wedges",
+    "meal": "peanut butter and jelly sandwich",
     "setting": "Social",
-    "time_of_day": "night"
+    "time_of_day": "evening"
   },
   "corrected": {
-    "detect_user_ready_for_initiating_transfer_drinking": "open mouth",
-    "detect_user_ready_for_initiating_transfer_feeding": "open mouth",
-    "detect_user_ready_for_initiating_transfer_wiping": "button",
-    "wait_before_autocontinue_task_selection": "countdown (60 sec)"
+    "convey_robot_ready_for_initiating_transfer": "speech"
   },
   "finalized": [
     "bite_dipping_preference",

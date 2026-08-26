@@ -4,6 +4,11 @@ navigation (she drove the base) and manipulation (she drove the arm).
 
 Two contamination sources are excluded, both confirmed against the logs:
 
+  * Researcher-driven base episodes. A researcher intervening drives from the
+    CR's own iPad, so the callerid is identical to hers and nothing separates
+    them automatically; the ones the researcher has confirmed are listed in
+    RESEARCHER_BASE_EPISODES and excluded by hand. Every remaining episode is
+    attributed to the CR, which is an assumption, not a measurement.
   * The researcher's Xbox controller publishes to `/cmd_vel_teleop` too
     (launch/shared_autonomy.launch:50), and is used to place the base during
     setup, teardown, and some mid-meal resets. The bag connection records carry
@@ -11,7 +16,7 @@ Two contamination sources are excluded, both confirmed against the logs:
     the webapp on the CR's iPad, `/shared_autonomy_teleop` is the Xbox. Only the
     former is counted. Across the deployment the Xbox accounts for more base
     driving than the CR does, so merging them roughly doubles the count.
-  * 48 of the 62 logged arm sessions contain zero `command_received` events. The
+  * 51 of the 66 logged arm sessions contain zero `command_received` events. The
     CR used the arm-teleop screen as an escape hatch -- open it, press Done, then
     Next or Redo -- to skip past a skill without ever jogging the arm. Only
     sessions that actually commanded motion count as teleoperation here.
@@ -20,7 +25,7 @@ Two contamination sources are excluded, both confirmed against the logs:
     base" button that appears after Done (the base series already records the
     drive that follows), a researcher does the same to adjust hardware, and once
     she nudged an idle arm between bites. `failure_context` separates these
-    exactly -- see COUNTED_CONTEXTS below -- leaving 6 counted manipulation
+    exactly -- see COUNTED_CONTEXTS below -- leaving 7 counted manipulation
     sessions, all of them joint-limit rescues.
 
 The base series comes from the rosbags, not the jsonl logs. No jsonl file
@@ -65,12 +70,25 @@ WEBAPP_CALLERID = "/rosbridge_websocket"
 #   user_initiated_idle  -- she opened the screen with the robot idle between
 #                           bites and nudged it; not a response to a failure.
 #
-# Verified against every motion-commanding session in the deployment: the six
-# joint-limit sessions are exactly the six the CR and researcher confirmed as
-# genuine arm rescues, and the eight others are exactly the ones they identified
-# as red herrings. This also subsumes the feeding-loop exclusion -- no
+# Verified against every motion-commanding session in the deployment: the
+# joint-limit sessions are exactly the ones the CR and researcher confirmed as
+# genuine arm rescues, and the others are exactly the ones they identified as
+# red herrings. This also subsumes the feeding-loop exclusion -- no
 # joint-limit session ever occurred inside acquire_bite or a transfer.
 COUNTED_CONTEXTS = {"joint_limit_failure"}
+
+# Base-driving episodes that were the RESEARCHER, not the CR.
+#
+# The callerid filter separates the Xbox from the webapp, but not the two pairs
+# of hands that can use the webapp: a researcher intervening picks up the CR's
+# iPad and drives from the same interface, publishing the same callerid. Nothing
+# in the bags or the jsonl logs distinguishes them, so the only honest mechanism
+# is an explicit, reviewable list confirmed against what the researcher recalls
+# of each meal. Keyed by (day, episode start as HH:MM:SS local).
+RESEARCHER_BASE_EPISODES = {
+    (21, "17:17:10"): "researcher intervention during the aborted navigate_to_sink; "
+                      "the CR did not drive",
+}
 
 from make_survey_table import CALENDAR
 
@@ -157,7 +175,16 @@ def base_episodes(bag_dir, cache, meal_window, verbose=True):
                 covered += b - edge
                 edge = b
         eps = bag_teleop.episodes(sorted(set(stamps)))
-        out[day] = (len(eps), sum(b - a for a, b in eps), covered / (hi - lo))
+        kept = []
+        for a, b in eps:
+            key = (day, datetime.datetime.fromtimestamp(a).strftime("%H:%M:%S"))
+            if key in RESEARCHER_BASE_EPISODES:
+                if verbose:
+                    print(f"  [excluded] day {day} base episode at {key[1]}: "
+                          f"{RESEARCHER_BASE_EPISODES[key]}")
+                continue
+            kept.append((a, b))
+        out[day] = (len(kept), sum(b - a for a, b in kept), covered / (hi - lo))
     return out
 
 

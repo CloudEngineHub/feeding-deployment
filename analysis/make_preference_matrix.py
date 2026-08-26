@@ -31,6 +31,9 @@ PLATE = {
     10: "hash brown", 11: "hash brown, sausage", 12: "hash brown + ranch",
     13: "orange chicken", 14: "chicken kebab", 15: "pancake, sausage + syrup",
     16: "steak, mozzarella sticks", 17: "chicken popcorn, potato wedges",
+    18: "PB\\&J sandwich", 19: "chicken kebab, pineapple",
+    20: "kielbasa, carrots", 21: "watermelon, cantaloupe, strawberry",
+    22: "PB\\&J sandwich",
 }
 
 # value -> (short code, legend gloss). Codes are unique across the whole table.
@@ -153,7 +156,8 @@ corr_total = sum(1 for d in days for _t, rs in SECTIONS for k, _l in rs
 # The deployment-wide count reported in the body table (ask-flow overrides +
 # settings-page edits, read from events.jsonl) uses a different unit: it counts
 # every override event, so a dimension corrected twice in one meal counts twice,
-# and it includes bite_ordering, which has no row in this matrix. Compute it here
+# and it includes bite_ordering and the plate-handle colours, neither of which
+# has a row in this matrix. Compute it here
 # so the caption can reconcile the two numbers instead of appearing to contradict.
 def _paper_correction_count():
     log_root = os.path.dirname(os.path.dirname(os.path.dirname(MEM)))
@@ -169,6 +173,8 @@ def _paper_correction_count():
             e = json.loads(line)
             if e.get("category") == "preference_asked":
                 n += len(e.get("corrected") or [])
+            elif e.get("category") == "preference_color_recorded" and e.get("changed"):
+                n += 1
             elif e.get("category") == "preference_settings_edit" and e.get("changed"):
                 n += 1
     return n

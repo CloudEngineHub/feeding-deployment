@@ -182,8 +182,9 @@ def render(days):
     # generators and belong in an appendix, not in the caption.
     L.append(r"\caption{The deployment day by day, on a shared horizontal axis. "
              r"\textbf{Top:} preference corrections per meal, split into "
-             r"pre-meal overrides on the preferences page and mid-meal changes "
-             r"from the settings page; the individual corrections are "
+             r"pre-meal overrides on the preferences page, mid-meal changes from "
+             r"the settings page, and plate-handle colours re-picked on a "
+             r"detection page; the individual corrections are "
              r"enumerated in \cref{sec:appendix_corrections}, and the bundle "
              r"the system finally held each meal is given dimension by "
              r"dimension in \cref{tab:preference_matrix}. "
@@ -194,8 +195,12 @@ def render(days):
              r"always the favorable end}: the five NASA-TLX workload items "
              r"($\downarrow$) are reverse-shaded, the remaining six "
              r"($\uparrow$) shaded directly; the free-text item is omitted. "
-             rf"Days 1--{n_logged} are logged; the final {n_planned} columns "
-             r"are scheduled meals not yet run.}")
+             + (r"All " + str(n_logged) + r" meals of the deployment are shown.}"
+                if not n_planned else
+                rf"Days 1--{n_logged} are logged; the final {n_planned} "
+                + ("column is a scheduled meal" if n_planned == 1
+                   else "columns are scheduled meals")
+                + r" not yet run.}"))
     L.append(r"\label{tab:deployment_timeline}")
     L.append(r"\vspace{-0.2cm}")
     L.append(r"{\centering")
